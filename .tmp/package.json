@@ -1,0 +1,28 @@
+{
+  "name": "@fs/api",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Firestitch/fs-api"
+  },
+  "author": {
+    "name": "Maksim Sergeev",
+    "email": "sergeev.maxs@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Firestitch/fs-api/issues"
+  },
+  "main": "fs-api.umd.js",
+  "module": "fs-api.js",
+  "jsnext:main": "fs-api.js",
+  "typings": "fs-api.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}
