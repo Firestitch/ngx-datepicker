@@ -1,9 +1,9 @@
+import { FsUtil } from '@firestitch/common';
 import { FsIsscrollDirective } from './fsisscroll.directive';
 import { FsDatepickerDialogFactory } from './fsdatepickerdialogfactory.service';
 import { FsDatepickerDialogComponent } from './fsdatepickerdialog.component';
 import { FsDatepickerDirective } from './fsdatepicker.directive';
 import { HttpClientModule } from '@angular/common/http';
-import { FsApiConfig } from './../.tmp/fsapi.service';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -44,7 +44,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export * from './fsapi.service';
+
+export * from './fsisscroll.directive';
+export * from './fsdatepickerdialogfactory.service';
+export * from './fsdatepickerdialog.component';
+export * from './fsdatepicker.directive';
+
 @NgModule({
   imports: [
     CommonModule,

@@ -1,9 +1,9 @@
 {
-  "name": "@fs/api",
+  "name": "@firestitch/datepicker",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/fs-api"
+    "url": "https://github.com/Firestitch/fs-datepicker"
   },
   "author": {
     "name": "Maksim Sergeev",
@@ -14,12 +14,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Firestitch/fs-api/issues"
+    "url": "https://github.com/Firestitch/fs-datepicker/issues"
   },
-  "main": "fs-api.umd.js",
-  "module": "fs-api.js",
-  "jsnext:main": "fs-api.js",
-  "typings": "fs-api.d.ts",
+  "main": "fs-datepicker.umd.js",
+  "module": "fs-datepicker.js",
+  "jsnext:main": "fs-datepicker.js",
+  "typings": "fs-datepicker.d.ts",
   "peerDependencies": {
     "@angular/core": "^4.0.0",
     "rxjs": "^5.1.0",

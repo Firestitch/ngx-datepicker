@@ -1,6 +1,6 @@
 import { Component, Inject, Input, HostListener, ElementRef, IterableDiffers, OnInit, DoCheck, OnDestroy } from '@angular/core';
-import { FsUtil } from './../common/fsutil.service';
-import * as moment from 'moment-timezone';
+import { FsUtil } from '@firestitch/common';
+import moment from 'moment-timezone';
 
 @Component({
     selector: 'fs-datepicker-dialog',

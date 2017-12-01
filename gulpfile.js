@@ -125,7 +125,7 @@ gulp.task('rollup:umd', function () {
       // The name to use for the module for UMD/IIFE bundles
       // (required for bundles with exports)
       // See "name" in https://rollupjs.org/#core-functionality
-      name: 'fs-address',
+      name: 'fs-datepicker',
 
       // See "globals" in https://rollupjs.org/#core-functionality
       globals: {
@@ -133,7 +133,7 @@ gulp.task('rollup:umd', function () {
       }
 
     }))
-    .pipe(rename('fs-address.umd.js'))
+    .pipe(rename('fs-datepicker.umd.js'))
     .pipe(gulp.dest(distFolder));
 });
 

@@ -3,8 +3,8 @@ import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolve
 import { DATEPICKER_VALUE_ACCESSOR } from './fsdatepicker.value-accessor';
 import { FsDatepickerDialogComponent } from './fsdatepickerdialog.component';
 import { FsDatepickerDialogFactory } from './fsdatepickerdialogfactory.service';
-import { FsUtil } from './../common/fsutil.service';
-import * as moment from 'moment-timezone';
+import { FsUtil } from '@firestitch/common';
+import moment from 'moment-timezone';
 
 @Directive({
     host: {
