@@ -17,21 +17,22 @@ import { FsIsscrollDirective  } from './fsisscroll.directive';
     FormsModule,
     MatButtonModule,
     MatIconModule
-],
-declarations: [
-  FsDatepickerDirective,
-  FsDatepickerDialogComponent,
-  FsIsscrollDirective
-],
-providers: [
-  FsDatepickerDialogFactory,
-  FsUtil
-],
-entryComponents: [
-  FsDatepickerDialogComponent
-],
-exports: [
-  FsDatepickerDirective
+  ],
+  declarations: [
+    FsDatepickerDirective,
+    FsDatepickerDialogComponent,
+    FsIsscrollDirective
+  ],
+  providers: [
+    FsDatepickerDialogFactory,
+    FsUtil
+  ],
+  entryComponents: [
+    FsDatepickerDialogComponent
+  ],
+  exports: [
+      FsDatepickerDirective
+  ]
 })
 export class FsDatepickerModule {
   static forRoot(): ModuleWithProviders {
