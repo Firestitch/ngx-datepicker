@@ -1,14 +1,14 @@
 <div class="fs-datetime-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
 
-<div class="fs-datetime-dialog" tabindex="0" [ngClass]="{ opened: parentInstance.opened, 'has-date': hasDate, 'has-time': parentInstance.hasTime, 'has-calendar': parentInstance.hasCalendar, 'view-year': parentInstance.view=='year', 'view-month': parentInstance.view=='month', 'view-date': parentInstance.view=='date' }">
-  <div class="wrap" layout="column">
+<div class="fs-datetime-dialog" tabindex="0" [ngClass]="{ opened: parentInstance.opened, 'has-date': parentInstance.hasDate, 'has-time': parentInstance.hasTime, 'has-calendar': parentInstance.hasCalendar, 'view-year': parentInstance.view=='year', 'view-month': parentInstance.view=='month', 'view-date': parentInstance.view=='date' }">
+  <div class="wrap" fxLayout="column">
 
     <!--<fs-tabnav fs-selected="tab" ng-show="hasDate && parentInstance.hasTime">
           <fs-tabnav-item fs-name="date">Date</fs-tabnav-item>
           <fs-tabnav-item fs-name="time">Time</fs-tabnav-item>
     </fs-tabnav>-->
-    <div fsLayout="row" class="date-time" fxFlex>
-      <div class="date" *ngIf="tab == 'date'" fxFlex>
+    <div fxLayout="row" class="date-time" fxFlexFill>
+      <div class="date" *ngIf="parentInstance.hasDate" fxFlex>
         <div class="months" *ngIf="parentInstance.view == 'month'">
           <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: parentInstance.selected.month == month.value }">{{ month.abr }}</div>
         </div>
@@ -52,9 +52,40 @@
           </table>
         </div>
       </div>
+
+      <div class="time" *ngIf="parentInstance.hasTime">
+        <div fxLayout="row" fxLayoutALign="start start">
+          <div class="hours">
+            <div class="lbl">Hour</div>
+              <table>
+                <tr *ngFor="let hours of timeHours">
+                    <td *ngFor="let hour of hours" class="hour" (click)="hourClick(hour)" [ngClass]="{ disabled: disabledTimeHours[hour], selected: hour == parentInstance.selected.hour }">
+                      <div class="number">
+                        <span *ngIf="hour < 12">{{ hour ? hour : 12 }}<span class="am-pm">am</span></span>
+                        <span *ngIf="hour >= 12">{{ hour==12 ? 12 : hour-12 }}<span class="am-pm">pm</span></span>
+                      </div>
+                    </td>
+                </tr>
+              </table>
+            </div>
+            <div class="minutes">
+
+              <div class="lbl">Minute</div>
+              <table>
+                <tr *ngFor="let minutes of timeMinutes">
+                  <td *ngFor="let minute of minutes" class="minute" [ngClass]="{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[parentInstance.selected.hour] && disabledGroupedMinutes[parentInstance.selected.hour][minute]), selected: minute == parentInstance.selected.minute }" (click)="minuteClick(minute)">
+                    <div class="number">{{ minute }}</div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+        </div>
+      </div>
+
     </div>
     <div fxLayout="row" fxLayoutAlign="end start" *ngIf="parentInstance.hasTime" class="done">
-      <mat-button (click)="close($event)">Done</mat-button>
+      <button mat-button color="accent" (click)="close($event)">Done</button>
     </div>
   </div>
 </div>
+

@@ -7,6 +7,7 @@
     "stripInternal": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "outDir": "../build",
     "rootDir": ".",
@@ -21,8 +22,8 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "fs-datepicker.js",
-    "flatModuleId": "fs-datepicker"
+    "flatModuleOutFile": "form.js",
+    "flatModuleId": "form"
   },
   "files": [
     "./index.ts"

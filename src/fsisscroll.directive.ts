@@ -1,5 +1,5 @@
 import { Directive, Input, Inject, Renderer, ElementRef, Pipe, OnInit, OnDestroy } from '@angular/core';
-import * as IScroll from 'iscroll';
+import IScroll from 'iscroll';
 
 @Directive({
     selector: '[fsIscroll]'

@@ -25,8 +25,13 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
     @Input('hasTime') hasTime = false;
     @Input('view') view = 'calendar';
     @Input('disabledDays') disabledDays = null;
+    @Input() disabledMinutes = [];
+    @Input() disabledHours = [];
+    @Input() disabledTimes = [];
 
     @Output('change') change$ = new EventEmitter<any>();
+
+    private _model = null;
 
     opened = false;
 
@@ -38,7 +43,7 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
 
     private rootViewContainer = null;
 
-    //event hooks for VALUE_ACCESSOR. those are used to imitate real input behavior and emit events outside the directive, e.g. "touched"
+    // event hooks for VALUE_ACCESSOR. those are used to imitate real input behavior and emit events outside the directive, e.g. "touched"
     _onTouched = () => { };
     _onChange = (value: any) => { };
     onFocused = (event: any) => { };
@@ -69,21 +74,21 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
     }
 
     writeValue(value: any): void {
-
       if (value && moment(value).isValid()) {
         value = moment(value);
-      }else {
+      } else {
         value = undefined;
       }
 
-      this.renderer.setElementProperty(this._elementRef.nativeElement, 'value', value);
+      this._model = value;
+
       this._onChange(value);
       this.render(this._elementRef);
       this.change$.emit(value);
     }
 
     getValue() {
-      return moment(this._elementRef.nativeElement.value);
+      return this._model ? moment(this._model) : this._model;
     }
 
     private open() {

@@ -5,7 +5,7 @@
     "build": "gulp build",
     "build:watch": "gulp",
     "docs": "npm run docs:build",
-    "docs:build": "compodoc -p tsconfig.json -n fs-datepicker -d docs --hideGenerator",
+    "docs:build": "compodoc -p tsconfig.json -n fs-form -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/fs-datepicker"
+    "url": "https://github.com/Firestitch/fs-form"
   },
   "author": {
     "name": "Maksim Sergeev",
@@ -27,23 +27,30 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Firestitch/fs-datepicker/issues"
+    "url": "https://github.com/Firestitch/fs-form/issues"
+  },
+  "dependencies": {
+    "@angular/material": "^5.0.0"
   },
   "devDependencies": {
-    "@angular/common": "^5.0.0",
-    "@angular/compiler": "^5.0.0",
-    "@angular/compiler-cli": "^5.0.0",
-    "@angular/core": "^5.0.0",
-    "@angular/flex-layout": "^2.0.0-beta.10-4905443",
-    "@angular/forms": "^5.0.3",
+    "@angular/common": ">=5.0.0",
+    "@angular/core": ">=5.0.0",
+    "@angular/cdk": ">=5.0.0",
+    "@angular/compiler": ">=5.0.0",
+    "@angular/compiler-cli": ">=5.0.0",
+    "@angular/material": ">=5.0.0",
+    "@angular/animations": ">=5.0.0",
+    "@angular/forms": "~5.0.0",
     "@angular/http": "^5.0.3",
-    "@angular/material": "^5.0.0-rc.1",
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@compodoc/compodoc": "^1.0.0-beta.10",
-    "@firestitch/common": "^0.1.7",
     "@types/jasmine": "2.5.53",
     "@types/node": "~6.0.60",
+    "@firestitch/common": "^0.1.7",
+    "@angular/flex-layout": "^2.0.0-beta.10-4905443",
+    "iscroll": "^5.2.0",
+    "moment-timezone": "^0.5.14",
     "angular-in-memory-web-api": "^0.3.2",
     "codelyzer": "~3.2.0",
     "concurrently": "^3.4.0",
@@ -52,7 +59,6 @@
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-rollup": "^2.15.0",
-    "iscroll": "^5.2.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
@@ -62,7 +68,6 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "lite-server": "^2.3.0",
-    "moment-timezone": "^0.5.14",
     "node-sass": "^4.5.2",
     "node-sass-tilde-importer": "^1.0.0",
     "node-watch": "^0.5.2",

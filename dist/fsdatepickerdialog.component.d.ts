@@ -6,12 +6,17 @@ export declare class FsDatepickerDialogComponent implements OnInit, DoCheck, OnD
     private _iterableDiffers;
     month: any;
     years: any[];
-    tab: string;
     parentInstance: any;
     hasDate: boolean;
     iscrollOptions: any;
     iscrollInstance: any;
+    disabledTimeMinutes: {};
+    disabledTimeHours: {};
+    disabledGroupedMinutes: {};
     private disabledDaysDiffer;
+    private disabledMinutesDiffer;
+    private disabledHoursDiffer;
+    private disabledTimesDiffer;
     today: {
         date: any;
         month: any;
@@ -29,6 +34,14 @@ export declare class FsDatepickerDialogComponent implements OnInit, DoCheck, OnD
     constructor(element: ElementRef, FsUtil: FsUtil, _iterableDiffers: IterableDiffers);
     ngOnInit(): void;
     ngDoCheck(): void;
+    checkDisabledTime(): void;
+    addDisabledMinutes(range: any): void;
+    addDisabledHours(range: any): void;
+    updateDateDays(): any[];
+    monthDateViewChange(): void;
+    dayDateViewChange(): void;
+    yearDateViewChange(): void;
+    updateDate(): void;
     close($event?: any): void;
     onMouseWheel($event: any): void;
     onTouchMove($event: any): void;
@@ -61,6 +74,8 @@ export declare class FsDatepickerDialogComponent implements OnInit, DoCheck, OnD
     dayClick(day: any): void;
     yearViewChange(year: any): void;
     yearChange(year: any): void;
+    hourClick(hour: any): void;
+    minuteClick(minute: any): void;
     previousMonth(month: any): void;
     nextMonth(month: any): void;
     ngOnDestroy(): void;

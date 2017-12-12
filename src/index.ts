@@ -1,94 +1,22 @@
-import { FsUtil } from '@firestitch/common';
-import { FsIsscrollDirective } from './fsisscroll.directive';
-import { FsDatepickerDialogFactory } from './fsdatepickerdialogfactory.service';
-import { FsDatepickerDialogComponent } from './fsdatepickerdialog.component';
-import { FsDatepickerDirective } from './fsdatepicker.directive';
-import { HttpClientModule } from '@angular/common/http';
-import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatStepperModule
-} from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { JsonpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-export * from './fsisscroll.directive';
-export * from './fsdatepickerdialogfactory.service';
-export * from './fsdatepickerdialog.component';
-export * from './fsdatepicker.directive';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatIconModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FsDatepickerDirective } from './fsdatepicker.directive';
+import { FsDatepickerDialogComponent } from './fsdatepickerdialog.component';
+import { FsDatepickerDialogFactory } from './fsdatepickerdialogfactory.service';
+import { FsUtil } from '@firestitch/common';
+import { FsIsscrollDirective  } from './fsisscroll.directive';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
-
-    //MATERIAL
-    MatAutocompleteModule,
+    FlexLayoutModule,
+    FormsModule,
     MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    FlexLayoutModule
-    //MATERIAL END
+    MatIconModule
 ],
 declarations: [
   FsDatepickerDirective,
@@ -104,16 +32,13 @@ entryComponents: [
 ],
 exports: [
   FsDatepickerDirective
-],
-schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class FsDatepickerModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsDatepickerModule,
       providers: [
-        FsDatepickerDialogFactory,
-        FsUtil
+        FsDatepickerDirective
       ]
     };
   }

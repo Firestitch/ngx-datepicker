@@ -15,13 +15,20 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
 
   month = null;
   years = [];
-  tab = 'date';
-  parentInstance:any = null;
+  // tab = 'date';
+  parentInstance: any = null;
   hasDate: boolean;
   iscrollOptions = null;
   iscrollInstance = null;
 
+  disabledTimeMinutes = {};
+  disabledTimeHours = {};
+  disabledGroupedMinutes = {};
+
   private disabledDaysDiffer = null;
+  private disabledMinutesDiffer = null;
+  private disabledHoursDiffer = null;
+  private disabledTimesDiffer = null;
 
   today = {
     date: moment().format('YYYY-MM-DD'),
@@ -68,19 +75,26 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
 
   constructor(public element: ElementRef, private FsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
     this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
+    this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
+    this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
+    this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
   }
 
   ngOnInit() {
-    this.tab = this.parentInstance.hasDate ? 'date' : 'time';
+    // this.tab = this.parentInstance.hasDate ? 'date' : 'time';
 
     for (let y: any = this.parentInstance.minYear; y < this.parentInstance.maxYear; y++) {
       this.years.push(y);
     }
 
-    setTimeout(() => {
-      const $date = this.element.nativeElement.querySelector('.date');
-      $date.addEventListener('mousewheel', this.dateScroll);
-    });
+    if (this.parentInstance.hasDate) {
+      setTimeout(() => {
+        const $date = this.element.nativeElement.querySelector('.date');
+        $date.addEventListener('mousewheel', this.dateScroll);
+      });
+    }
+
+    this.checkDisabledTime();
   }
 
   ngDoCheck() {
@@ -92,6 +106,134 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
           }
         }
       }
+    }
+
+    if (this.disabledHoursDiffer.diff(this.parentInstance.disabledHours) ||
+        this.disabledMinutesDiffer.diff(this.parentInstance.disabledMinutes) ||
+        this.disabledTimesDiffer.diff(this.parentInstance.disabledTimes)
+    ) {
+      this.checkDisabledTime();
+    }
+  }
+
+  checkDisabledTime() {
+
+    this.disabledTimeMinutes = {};
+    this.disabledTimeHours = {};
+    this.disabledGroupedMinutes = {};
+
+    if (this.parentInstance.disabledMinutes !== undefined) {
+      for (let range of this.parentInstance.disabledMinutes) {
+        this.addDisabledMinutes(range);
+      };
+    }
+
+    if (this.parentInstance.disabledHours !== undefined) {
+      for (let range of this.parentInstance.disabledHours) {
+        this.addDisabledHours(range);
+      };
+    }
+
+    if (this.parentInstance.disabledTimes !== undefined) {
+      for (let range of this.parentInstance.disabledTimes) {
+
+        let min = Math.min(range[0], range[1]);
+        let max = Math.max(range[0], range[1]);
+        let minMinutes = min % 60;
+        let maxMinutes = max % 60;
+
+        let minHour = Math.floor(min / 60);
+        let maxHour = Math.floor(max / 60);
+
+        for (let h = 0; h <= 24; h++) {
+
+          this.disabledGroupedMinutes[h] = {};
+
+          if (h > minHour && h < maxHour)  {
+            this.addDisabledHours([h, h]);
+          } else if (h == minHour && !minMinutes) {
+            this.addDisabledHours([h, h]);
+          }
+
+          if (h == minHour) {
+            for (let m = minMinutes; m < 60; m++) {
+              this.disabledGroupedMinutes[h][m] = true;
+            }
+          }
+
+          if (h == maxHour) {
+            for (let m = 0; m < maxMinutes; m++) {
+              this.disabledGroupedMinutes[h][m] = true;
+            }
+          }
+        }
+      };
+    }
+  }
+
+  addDisabledMinutes(range) {
+    let min = Math.min(range[0], range[1]);
+    let max = Math.max(range[0], range[1]);
+    if (this.FsUtil.isArray(range)) {
+      for (let i = min; i <= max; i++) {
+        this.disabledTimeMinutes[i] = true;
+      }
+    } else {
+      this.disabledTimeMinutes[range] = true;
+    }
+  }
+
+  addDisabledHours(range) {
+    let min = Math.min(range[0], range[1]);
+    let max = Math.max(range[0], range[1]);
+    if (this.FsUtil.isArray(range)) {
+      for (let i = min; i <= max; i++) {
+        this.disabledTimeHours[i] = true;
+      }
+    } else {
+      this.disabledTimeHours[range] = true;
+    }
+  }
+
+  updateDateDays() {
+    let year = this.parentInstance.selected.year || 1904;
+    let month = this.parentInstance.selected.month || 1;
+    let max = new Date(year, month, 0).getDate();
+    this.dateDays = [];
+    for (let d = 1; d <= max; d++) {
+      this.dateDays.push(d);
+    }
+
+    return this.dateDays;
+  }
+
+  monthDateViewChange() {
+    this.updateDateDays();
+    this.updateDate();
+  }
+
+  dayDateViewChange() {
+    this.updateDateDays();
+    this.updateDate();
+
+  }
+
+  yearDateViewChange() {
+    this.updateDateDays();
+    this.updateDate();
+  }
+
+  updateDate() {
+
+    const m = moment([this.parentInstance.selected.year, this.parentInstance.selected.month - 1, this.parentInstance.selected.day]);
+    const max = new Date(this.parentInstance.selected.year || 1904, this.parentInstance.selected.month, 0).getDate();
+
+    if (max < this.parentInstance.selected.day) {
+      this.parentInstance.selected.day = undefined;
+    }
+
+    if (m.isValid()) {
+      this.setDate(m);
     }
   }
 
@@ -271,6 +413,32 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
     this.setDate(this.parentInstance.getValue().clone().year(year));
   }
 
+  hourClick(hour) {
+
+    if (this.disabledTimeHours[hour]) {
+      return;
+    }
+
+    if (!this.parentInstance.getValue()) {
+      this.createModel();
+    }
+
+    this.setDate(this.parentInstance.getValue().clone().hour(hour));
+  }
+
+  minuteClick(minute) {
+
+    if (this.disabledTimeMinutes[minute]) {
+      return;
+    }
+
+    if (!this.parentInstance.getValue()) {
+      this.createModel();
+    }
+
+    this.setDate(this.parentInstance.getValue().clone().minute(minute));
+  }
+
   previousMonth(month) {
     this.drawMonths(month.moment.subtract(1, 'months'));
   }
@@ -280,8 +448,11 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   ngOnDestroy() {
-    const $date = this.element.nativeElement.querySelector('.date');
-    $date.removeEventListener('mousewheel', this.dateScroll);
+
+    if (this.parentInstance.hasDate) {
+      const $date = this.element.nativeElement.querySelector('.date');
+      $date.removeEventListener('mousewheel', this.dateScroll);
+    }
   }
 
 }

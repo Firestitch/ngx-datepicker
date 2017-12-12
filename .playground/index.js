@@ -10,17 +10,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * This is only for local test
  */
 var platform_browser_1 = require("@angular/platform-browser");
+var animations_1 = require("@angular/platform-browser/animations");
 var core_1 = require("@angular/core");
-var core_2 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var platform_browser_dynamic_1 = require("@angular/platform-browser-dynamic");
-var fs_address_1 = require("fs-address");
+var material_1 = require("@firestitch/material");
+var datepicker_1 = require("@firestitch/datepicker");
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
-        core_2.Component({
-            selector: 'app',
-            template: "<sample-component></sample-component>"
+        core_1.Component({
+            selector: 'app-root',
+            styleUrls: [
+                'styles.scss'
+            ],
+            encapsulation: core_1.ViewEncapsulation.None,
+            templateUrl: 'template.html'
         })
     ], AppComponent);
     return AppComponent;
@@ -32,7 +38,13 @@ var AppModule = (function () {
         core_1.NgModule({
             bootstrap: [AppComponent],
             declarations: [AppComponent],
-            imports: [platform_browser_1.BrowserModule, fs_address_1.SampleModule]
+            imports: [
+                platform_browser_1.BrowserModule,
+                animations_1.BrowserAnimationsModule,
+                datepicker_1.FsDatepickerModule,
+                forms_1.FormsModule,
+                material_1.FsMaterialModule
+            ]
         })
     ], AppModule);
     return AppModule;

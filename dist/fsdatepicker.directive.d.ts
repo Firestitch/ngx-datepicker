@@ -15,7 +15,11 @@ export declare class FsDatepickerDirective implements OnInit, OnDestroy {
     hasTime: boolean;
     view: string;
     disabledDays: any;
+    disabledMinutes: any[];
+    disabledHours: any[];
+    disabledTimes: any[];
     change$: EventEmitter<any>;
+    private _model;
     opened: boolean;
     selected: {};
     yearList: any[];

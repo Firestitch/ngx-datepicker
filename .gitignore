@@ -32,4 +32,7 @@ Desktop.ini
 # dist/*
 
 # Playground tmp files
-playground/*
+/build
+/dist
+/.playground
+/dist

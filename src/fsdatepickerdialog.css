@@ -74,6 +74,7 @@ fs-datetime md-input-container.md-block .md-input {
     background: #fff;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     width: 372px;
+    padding: 0 !important;
 }
 
 .fs-datetime-dialog.has-time.has-date .wrap {
@@ -87,14 +88,14 @@ fs-datetime md-input-container.md-block .md-input {
 .fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:after,
 .fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {
 	border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 19px solid #fff;
-    top: -19px;
-    content: '';
-    left: 50%;
-    position: absolute;
-    transform: rotate(180deg);
-    left: 23px;
+  border-right: 20px solid transparent;
+  border-top: 19px solid #fff;
+  top: -19px;
+  content: '';
+  left: 50%;
+  position: absolute;
+  transform: rotate(180deg);
+  left: 23px;
 }
 
 .fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {
@@ -442,6 +443,13 @@ fs-datetime-range .datetime-block .datetime-to {
     background: #fff;
     width: 100%;
     border-top: 1px solid #E1E1E1;
+}
+
+.fs-datetime-dialog .done button {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding: 0 6px;
+  margin: 6px 8px;
 }
 
 .fs-datetime-dialog fs-tabnav {
