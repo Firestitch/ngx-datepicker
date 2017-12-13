@@ -70,7 +70,7 @@
         defaultExtension: 'js'
       },
       '@firestitch/datepicker': {
-        main: 'form.umd.js',
+        main: 'fs-datepicker.umd.js',
         defaultExtension: 'js'
       }
     }

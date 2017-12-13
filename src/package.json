@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-form"
@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Firestitch/fs-form/issues"
   },
-  "main": "form.umd.js",
+  "main": "fs-datepicker.umd.js",
   "module": "form.js",
   "jsnext:main": "form.js",
   "typings": "form.d.ts",

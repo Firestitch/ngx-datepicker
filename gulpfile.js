@@ -133,7 +133,7 @@ gulp.task('rollup:umd', function () {
       }
 
     }))
-    .pipe(rename('form.umd.js'))
+    .pipe(rename('fs-datepicker.umd.js'))
     .pipe(gulp.dest(distFolder));
 });
 
