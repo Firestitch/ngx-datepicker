@@ -74,17 +74,20 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
     }
 
     writeValue(value: any): void {
-      if (value && moment(value).isValid()) {
-        value = moment(value);
-      } else {
-        value = undefined;
+      if (value) {
+
+        if (moment(value).isValid()) {
+          value = moment(value);
+        }else {
+          value = undefined;
+        }
+
+        this._model = value;
+
+        this._onChange(value);
+        this.render(this._elementRef);
+        this.change$.emit(value);
       }
-
-      this._model = value;
-
-      this._onChange(value);
-      this.render(this._elementRef);
-      this.change$.emit(value);
     }
 
     getValue() {
