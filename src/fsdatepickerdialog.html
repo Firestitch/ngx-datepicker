@@ -1,14 +1,14 @@
 <div class="fs-datetime-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
 
 <div class="fs-datetime-dialog" tabindex="0" [ngClass]="{ opened: parentInstance.opened, 'has-date': parentInstance.hasDate, 'has-time': parentInstance.hasTime, 'has-calendar': parentInstance.hasCalendar, 'view-year': parentInstance.view=='year', 'view-month': parentInstance.view=='month', 'view-date': parentInstance.view=='date' }">
-  <div class="wrap" fxLayout="column">
+  <div class="wrap">
 
     <!--<fs-tabnav fs-selected="tab" ng-show="hasDate && parentInstance.hasTime">
           <fs-tabnav-item fs-name="date">Date</fs-tabnav-item>
           <fs-tabnav-item fs-name="time">Time</fs-tabnav-item>
     </fs-tabnav>-->
-    <div fxLayout="row" class="date-time" fxFlexFill>
-      <div class="date" *ngIf="parentInstance.hasDate" fxFlex>
+    <div class="date-time">
+      <div class="date" *ngIf="parentInstance.hasDate">
         <div class="months" *ngIf="parentInstance.view == 'month'">
           <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: parentInstance.selected.month == month.value }">{{ month.abr }}</div>
         </div>
@@ -21,11 +21,11 @@
           </div>
         </div>
         <div *ngIf="parentInstance.hasCalendar && parentInstance.view=='calendar'" class="calendar">
-          <div class="month-year" fxLayout="row" fxLayoutAlign="start center">
+          <div class="month-year">
             <a class="month-name" (click)="monthView(month)">{{month.name}}</a>
             <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>
             <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a>
-            <div fxFlex class="actions">
+            <div class="actions">
               <a (click)="previousMonth(month)"><mat-icon>navigate_before</mat-icon></a>
               <a (click)="nextMonth(month)"><mat-icon>navigate_next</mat-icon></a>
             </div>
@@ -54,7 +54,7 @@
       </div>
 
       <div class="time" *ngIf="parentInstance.hasTime">
-        <div fxLayout="row" fxLayoutALign="start start">
+        <div>
           <div class="hours">
             <div class="lbl">Hour</div>
               <table>
@@ -83,7 +83,7 @@
       </div>
 
     </div>
-    <div fxLayout="row" fxLayoutAlign="end start" *ngIf="parentInstance.hasTime" class="done">
+    <div *ngIf="parentInstance.hasTime" class="done">
       <button mat-button color="accent" (click)="close($event)">Done</button>
     </div>
   </div>
