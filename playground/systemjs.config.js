@@ -45,7 +45,6 @@
       '@angular/cdk/coercion': 'npm:@angular/cdk/bundles/cdk-coercion.umd.js',
       'tslib': 'npm:tslib/tslib.js',
       '@angular/flex-layout': 'npm:@angular/flex-layout/bundles/flex-layout.umd.js',
-      // other libraries
       
       '@firestitch/common': 'npm:@firestitch/common/fs-common.umd.js',
       'iscroll': 'npm:iscroll/build/iscroll.js',
@@ -53,7 +52,8 @@
       'moment-timezone': 'npm:moment-timezone/moment-timezone.js',
       rxjs: 'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      '@firestitch/datepicker': '../dist',
+      '@firestitch/datepicker': '../dist/datepicker.umd.js',
+      '@firestitch/common': 'npm:@firestitch/common/common.umd.js',
       '@firestitch/material': './.playground/material.module.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
@@ -67,10 +67,6 @@
         }
       },
       rxjs: {
-        defaultExtension: 'js'
-      },
-      '@firestitch/datepicker': {
-        main: 'fs-datepicker.umd.js',
         defaultExtension: 'js'
       }
     }

@@ -1,9 +1,9 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/fs-form"
+    "url": "https://github.com/Firestitch/fs-datepicker"
   },
   "author": {
     "name": "Firestitch",
@@ -14,16 +14,19 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Firestitch/fs-form/issues"
+    "url": "https://github.com/Firestitch/fs-datepicker/issues"
   },
   "main": "fs-datepicker.umd.js",
-  "module": "form.js",
-  "jsnext:main": "form.js",
-  "typings": "form.d.ts",
+  "module": "datepicker.js",
+  "jsnext:main": "datepicker.js",
+  "typings": "datepicker.d.ts",
   "peerDependencies": {
     "@angular/core": "^5.0.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4",
     "@angular/material": "^5.0.0"
+  },
+  "dependencies": {
+    "@firestitch/common": "^0.1.24"
   }
 }

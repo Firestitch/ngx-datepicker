@@ -133,7 +133,10 @@ fs-datetime md-input-container.md-block .md-input {
 .fs-datetime-dialog .month-year {
 	height: 60px;
     font-size: 17px;
-    padding: 0 10px;
+	padding: 0 10px;
+	display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .fs-datetime-dialog .year-name,
@@ -220,11 +223,22 @@ fs-datetime .lbl {
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    min-height: 350px;
+	min-height: 350px;
+	flex: 1 1 1e-09px;
 }
 
 .fs-datetime-dialog .time {
 	padding: 12px 15px;
+}
+
+.fs-datetime-dialog .time {
+	padding: 12px 15px;
+}
+
+.fs-datetime-dialog .time .wraper {
+	flex-direction: row;
+	display: flex;
+	align-items: center;
 }
 
 .fs-datetime-dialog .time .hours table {
@@ -323,7 +337,9 @@ fs-datetime .lbl {
 }*/
 
 .fs-datetime-dialog .date-time {
-    overflow: auto;
+	overflow: auto;
+	flex-direction: row;
+	display: flex;
 }
 
 .fs-datetime-dialog .months {

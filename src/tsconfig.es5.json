@@ -22,8 +22,8 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "form.js",
-    "flatModuleId": "form"
+    "flatModuleOutFile": "datepicker.js",
+    "flatModuleId": "datepicker"
   },
   "files": [
     "./index.ts"
