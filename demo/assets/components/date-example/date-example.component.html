@@ -1,0 +1,12 @@
+<form>
+  <mat-form-field>
+    <input matInput fsDatePicker [(ngModel)]="model" (change)="onChange($event)" [disabledDays]="disabledDays" name="datepicker" placeholder="Date">
+  </mat-form-field>
+  <fieldset>
+      <button mat-raised-button color="primary" (click)="disableCurrentDay()">Disable Selected Day</button>
+      <button mat-raised-button color="primary" (click)="addDay()">Add 1 Day</button>
+  </fieldset>
+</form>
+
+
+
