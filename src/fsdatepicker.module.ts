@@ -6,6 +6,7 @@ import { MatButtonModule, MatIconModule } from '@angular/material';
 import { FsDatepickerDirective } from './directives/fsdatepicker.directive';
 import { FsDatepickerDialogComponent } from './components/fsdatepickerdialog/fsdatepickerdialog.component';
 import { FsDateComponent } from './components/fsdate/fsdate.component';
+import { FsTimeComponent } from './components/fstime/fstime.component';
 import { FsDatepickerDialogFactory } from './services/fsdatepickerdialogfactory.service';
 import { FsDatepicker } from './services/fsdatepicker.service';
 import { FsCommonModule } from '@firestitch/common';
@@ -29,7 +30,8 @@ import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
     FsDatepickerDirective,
     FsDatepickerDialogComponent,
     FsIsscrollDirective,
-    FsDateComponent
+    FsDateComponent,
+    FsTimeComponent
   ],
   providers: [
     FsDatepickerDialogFactory,

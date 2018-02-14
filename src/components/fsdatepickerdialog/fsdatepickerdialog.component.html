@@ -18,85 +18,16 @@
         [maxYear]="parentInstance.maxYear"
         (onChange)="setDate($event)"
       ></fs-date>
-      <!--
-      <div class="date" *ngIf="parentInstance.hasDate">
-        <div class="months" *ngIf="parentInstance.view == 'month'">
-          <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: parentInstance.selected.month == month.value }">{{ month.abr }}</div>
-        </div>
-        <div class="years" *ngIf="parentInstance.view=='year'" fsIscroll fsOptions="iscrollOptions" fsInstance="iscrollInstance">
-          <div class="iscroll-scroller">
-            <div *ngFor="let year of years" class="year" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: parentInstance.selected.year==year }" (click)="yearViewChange(year)">
-                {{year}}
-            </div>
-            <div class="clear"></div>
-          </div>
-        </div>
-        <div *ngIf="parentInstance.hasCalendar && parentInstance.view=='calendar'" class="calendar">
-          <div class="month-year">
-            <a class="month-name" (click)="monthView(month)">{{month.name}}</a>
-            <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>
-            <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a>
-            <div class="actions">
-              <a (click)="previousMonth(month)"><mat-icon>navigate_before</mat-icon></a>
-              <a (click)="nextMonth(month)"><mat-icon>navigate_next</mat-icon></a>
-            </div>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tues</th>
-                <th>Wed</th>
-                <th>Thurs</th>
-                <th>Fri</th>
-                <th>Sat</th>
-              </tr>
-            </thead>
-            <tbody class="calendar calendar-{{month.date}}">
-              <tr class="week" *ngFor="let week of month.weeks">
-                <td *ngFor="let day of week" class="day" [ngClass]="{ today: today.date==day.date, mute: day.mute, selected: day.date==parentInstance.selected.date && !day.mute, disabled: day.disabled }" (click)="dayClick(day)">
-                  <span>{{day.number}}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>-->
 
-      <div class="time" *ngIf="parentInstance.hasTime">
-        <div class="wraper">
-          <div class="hours">
-            <div class="lbl">Hour</div>
-              <table>
-                <tr *ngFor="let hours of timeHours">
-                    <td *ngFor="let hour of hours" class="hour" (click)="hourClick(hour)" [ngClass]="{ disabled: disabledTimeHours[hour], selected: hour == parentInstance.selected.hour }">
-                      <div class="number">
-                        <span *ngIf="hour < 12">{{ hour ? hour : 12 }}<span class="am-pm">am</span></span>
-                        <span *ngIf="hour >= 12">{{ hour==12 ? 12 : hour-12 }}<span class="am-pm">pm</span></span>
-                      </div>
-                    </td>
-                </tr>
-              </table>
-            </div>
-            <div class="minutes">
-
-              <div class="lbl">Minute</div>
-              <table>
-                <tr *ngFor="let minutes of timeMinutes">
-                  <td *ngFor="let minute of minutes" class="minute" [ngClass]="{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[parentInstance.selected.hour] && disabledGroupedMinutes[parentInstance.selected.hour][minute]), selected: minute == parentInstance.selected.minute }" (click)="minuteClick(minute)">
-                    <div class="number">{{ minute }}</div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-        </div>
-      </div>
+      <fs-time
+        [date]="model"
+        [hasTime]="parentInstance.hasTime"
+        (onChange)="setDate($event)"
+      ></fs-time>
 
     </div>
     <div *ngIf="parentInstance.hasTime" class="done">
-      <button mat-button color="accent" (click)="close($event)">Done</button>
+      <button mat-raised-button color="primary" (click)="close($event)">Done</button>
     </div>
   </div>
 </div>
-

@@ -1,0 +1,28 @@
+<div class="time" *ngIf="hasTime">
+  <div class="wraper">
+    <div class="hours">
+      <div class="lbl">Hour</div>
+        <table>
+          <tr *ngFor="let hours of timeHours">
+              <td *ngFor="let hour of hours" class="hour" (click)="hourClick(hour)" [ngClass]="{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }">
+                <div class="number">
+                  <span *ngIf="hour < 12">{{ hour ? hour : 12 }}<span class="am-pm">am</span></span>
+                  <span *ngIf="hour >= 12">{{ hour==12 ? 12 : hour-12 }}<span class="am-pm">pm</span></span>
+                </div>
+              </td>
+          </tr>
+        </table>
+      </div>
+      <div class="minutes">
+
+        <div class="lbl">Minute</div>
+        <table>
+          <tr *ngFor="let minutes of timeMinutes">
+            <td *ngFor="let minute of minutes" class="minute" [ngClass]="{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }" (click)="minuteClick(minute)">
+              <div class="number">{{ minute }}</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+  </div>
+</div>
