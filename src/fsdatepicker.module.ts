@@ -5,7 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { FsDatepickerDirective } from './directives/fsdatepicker.directive';
 import { FsDatepickerDialogComponent } from './components/fsdatepickerdialog/fsdatepickerdialog.component';
+import { FsDateComponent } from './components/fsdate/fsdate.component';
 import { FsDatepickerDialogFactory } from './services/fsdatepickerdialogfactory.service';
+import { FsDatepicker } from './services/fsdatepicker.service';
 import { FsCommonModule } from '@firestitch/common';
 import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
 
@@ -26,17 +28,19 @@ import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
   declarations: [
     FsDatepickerDirective,
     FsDatepickerDialogComponent,
-    FsIsscrollDirective
+    FsIsscrollDirective,
+    FsDateComponent
   ],
   providers: [
-    FsDatepickerDialogFactory
+    FsDatepickerDialogFactory,
+    FsDatepicker
   ],
 })
 export class FsDatepickerModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsDatepickerModule,
-      providers: [FsDatepickerDialogFactory]
+      providers: [FsDatepickerDialogFactory, FsDatepicker]
     };
   }
 }

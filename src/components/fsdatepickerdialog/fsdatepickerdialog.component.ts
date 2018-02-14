@@ -1,44 +1,52 @@
 import { Component, Inject, Input, HostListener, ElementRef,
-  IterableDiffers, OnInit, DoCheck, OnDestroy } from '@angular/core';
+  IterableDiffers, ViewEncapsulation, OnInit, DoCheck, OnDestroy } from '@angular/core';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
+import { FsDatepicker } from './../../services/fsdatepicker.service';
 
 @Component({
     selector: 'fs-datepicker-dialog',
     templateUrl: './fsdatepickerdialog.component.html',
-    styleUrls: ['./fsdatepickerdialog.component.css'],
+    styleUrls: ['./fsdatepickerdialog.component.scss'],
+    encapsulation: ViewEncapsulation.None
+    /*
     host: {
       '(mousewheel)': 'onMouseWheel($event)',
       '(touchmove)': 'onTouchMove($event)'
     }
+    */
 })
 export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
 
-  month = null;
-  years = [];
+  // month = null;
+  // years = [];
   // tab = 'date';
   parentInstance: any = null;
-  hasDate: boolean;
-  iscrollOptions = null;
-  iscrollInstance = null;
+  model = null;
+  // hasDate: boolean;
+  // iscrollOptions = null;
+  // iscrollInstance = null;
 
   disabledTimeMinutes = {};
   disabledTimeHours = {};
   disabledGroupedMinutes = {};
 
-  private disabledDaysDiffer = null;
+  // private disabledDaysDiffer = null;
   private disabledMinutesDiffer = null;
   private disabledHoursDiffer = null;
   private disabledTimesDiffer = null;
 
+  /*
   today = {
     date: moment().format('YYYY-MM-DD'),
     month: moment().format('M'),
     year: parseInt(moment().format('YYYY'))
   };
+  */
 
-  dateDays = [];
+  // dateDays = [];
 
+  /*
   monthList = [{ value: 1, name: 'January', abr: 'Jan' },
   { value: 2, name: 'February', abr: 'Feb' },
   { value: 3, name: 'March', abr: 'Mar' },
@@ -51,6 +59,7 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
   { value: 10, name: 'October', abr: 'Oct' },
   { value: 11, name: 'November', abr: 'Nov' },
   { value: 12, name: 'December', abr: 'Dec' }];
+  */
 
   timeHours = [[0,12],[1,13],[2,14],[3,15],[4,16],[5,17],[6,18],[7,19],[8,20],[9,21],[10,22],[11,23]];
   timeMinutes = [	[0,1,2,3,4],
@@ -66,6 +75,7 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
               [50,51,52,53,54],
               [55,56,57,58,59]];
 
+  /*
   private dateScroll = this.FsUtil.throttle((e) => {
     if (e.wheelDelta > 0) {
       this.nextMonth(this.month);
@@ -73,17 +83,21 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
       this.previousMonth(this.month);
     }
   }, 50);
+  */
 
-  constructor(public element: ElementRef, private FsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
-    this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
+  constructor(public element: ElementRef, private fsDatepicker: FsDatepicker,
+    private FsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
+    // this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
     this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
     this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
     this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
   }
 
   ngOnInit() {
+    // console.log(this.parentInstance);
     // this.tab = this.parentInstance.hasDate ? 'date' : 'time';
 
+    /*
     for (let y: any = this.parentInstance.minYear; y < this.parentInstance.maxYear; y++) {
       this.years.push(y);
     }
@@ -94,11 +108,20 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
         $date.addEventListener('mousewheel', this.dateScroll);
       });
     }
+    */
+    this.model = this.parentInstance.getValue();
+    // console.log(this.model);
 
     this.checkDisabledTime();
   }
 
+  setDate(date) {
+    this.model = date;
+    this.parentInstance.writeValue(date);
+  }
+
   ngDoCheck() {
+    /*
     if (this.parentInstance.disabledDays && this.disabledDaysDiffer.diff(this.parentInstance.disabledDays)) {
       if (this.parentInstance.disabledDays !== undefined && this.month) {
         for (let week of this.month.weeks) {
@@ -108,6 +131,7 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
         }
       }
     }
+    */
 
     if (this.disabledHoursDiffer.diff(this.parentInstance.disabledHours) ||
         this.disabledMinutesDiffer.diff(this.parentInstance.disabledMinutes) ||
@@ -196,6 +220,7 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
+  /*
   updateDateDays() {
     let year = this.parentInstance.selected.year || 1904;
     let month = this.parentInstance.selected.month || 1;
@@ -207,7 +232,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
 
     return this.dateDays;
   }
+  */
 
+  /*
   monthDateViewChange() {
     this.updateDateDays();
     this.updateDate();
@@ -223,7 +250,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
     this.updateDateDays();
     this.updateDate();
   }
+  */
 
+  /*
   updateDate() {
 
     const m = moment([this.parentInstance.selected.year, this.parentInstance.selected.month - 1, this.parentInstance.selected.day]);
@@ -237,11 +266,13 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
       this.setDate(m);
     }
   }
+  */
 
   close($event?) {
     this.parentInstance.opened = false;
   }
 
+  /*
   onMouseWheel($event) {
     $event.preventDefault();
   }
@@ -249,7 +280,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
   onTouchMove($event) {
     $event.preventDefault();
   }
+  */
 
+  /*
   drawMonths(date) {
 
     if (!date) {
@@ -258,21 +291,22 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
 
     this.month = this.createMonth(date);
   }
-
+  */
+  /*
   createModel() {
     if (!this.parentInstance.getValue()) {
       this.parentInstance.writeValue(this.createMoment());
     }
   }
+  */
 
-  setDate(date) {
-    this.parentInstance.writeValue(date);
-  }
-
+  /*
   createMoment() {
     return moment().startOf('day');
   }
+  */
 
+  /*
   createMonth(date) {
     date = date.clone().date(1);
 
@@ -311,7 +345,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
         months: [{ name: date.format('MMMM'), value: date.format('M')}],
         years: [date.format('YYYY')] }
   }
+  */
 
+  /*
   isDayDisabled(md) {
     if (!this.parentInstance.disabledDays) {
       return false;
@@ -332,7 +368,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
     }
     return false;
   }
+  */
 
+  /*
   calendarView() {
     this.parentInstance.view = 'calendar';
   }
@@ -345,29 +383,35 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
     this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
     this.parentInstance.view = 'year';
   }
+  */
 
   @HostListener('document:keydown', ['$event'])
   documentKeydown(e) {
     if (e.keyCode === 27) {
-        //Be careful with preventing default events. Breaking page refresh functional
+        // Be careful with preventing default events. Breaking page refresh functional
         e.preventDefault();
         this.close(e);
       }
   }
-
+  /*
   monthClick(month) {
     Object.assign(month.months, this.monthList);
   }
-
+  */
+  /*
   yearClick(month) {
     Object.assign(month.years, this.parentInstance.yearList);
   }
+  */
 
+  /*
   monthViewChange(month) {
     this.monthChange(month);
     this.calendarView();
   }
+  */
 
+  /*
   monthChange(month) {
 
     if (!this.parentInstance.getValue()) {
@@ -376,7 +420,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
 
     this.setDate(this.parentInstance.getValue().clone().month(month - 1));
   }
+  */
 
+  /*
   dayClick(day) {
 
     if (day.disabled) {
@@ -399,7 +445,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
       this.close();
     }
   }
+  */
 
+  /*
   yearViewChange(year) {
     this.yearChange(year);
     this.calendarView();
@@ -413,6 +461,9 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
 
     this.setDate(this.parentInstance.getValue().clone().year(year));
   }
+  */
+
+  createModel() {}
 
   hourClick(hour) {
 
@@ -440,6 +491,7 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
     this.setDate(this.parentInstance.getValue().clone().minute(minute));
   }
 
+  /*
   previousMonth(month) {
     this.drawMonths(month.moment.subtract(1, 'months'));
   }
@@ -447,13 +499,16 @@ export class FsDatepickerDialogComponent implements OnInit, DoCheck, OnDestroy {
   nextMonth(month) {
     this.drawMonths(month.moment.add(1, 'months'));
   }
+  */
 
   ngOnDestroy() {
 
+    /*
     if (this.parentInstance.hasDate) {
       const $date = this.element.nativeElement.querySelector('.date');
       $date.removeEventListener('mousewheel', this.dateScroll);
     }
+    */
   }
 
 }

@@ -3,6 +3,7 @@ import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolve
 import { DATEPICKER_VALUE_ACCESSOR } from './../fsdatepicker.value-accessor';
 import { FsDatepickerDialogComponent } from './../components/fsdatepickerdialog/fsdatepickerdialog.component';
 import { FsDatepickerDialogFactory } from './../services/fsdatepickerdialogfactory.service';
+import { FsDatepicker } from './../services/fsdatepicker.service';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 
@@ -24,7 +25,7 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
     @Input('maxYear') maxYear;
     @Input('hasTime') hasTime = false;
     @Input('view') view = 'calendar';
-    @Input('disabledDays') disabledDays = null;
+    // @Input('disabledDays') disabledDays = null;
     @Input() disabledMinutes = [];
     @Input() disabledHours = [];
     @Input() disabledTimes = [];
@@ -56,6 +57,7 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
         @Inject(Renderer) private renderer: Renderer,
         @Inject(ComponentFactoryResolver) private factoryResolver,
         @Inject(ViewContainerRef) private viewContainerRef,
+        private fsDatepicker: FsDatepicker,
         private FsDatepickerDialogFactory: FsDatepickerDialogFactory,
         private FsUtil: FsUtil
     ) { }
@@ -102,14 +104,14 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
       }
 
       if (this.$dialog) {
-        this.$dialog.instance.drawMonths(this.getValue());
+        // this.$dialog.instance.drawMonths(this.getValue());
         return;
       }
 
       this.FsDatepickerDialogFactory.setRootViewContainerRef(this.viewContainerRef);
       this.$dialog = this.FsDatepickerDialogFactory.addDynamicComponent();
       this.$dialog.instance.parentInstance = this;
-      this.$dialog.instance.drawMonths(this.getValue());
+      // this.$dialog.instance.drawMonths(this.getValue());
       setTimeout(() => {
         this.positionDialog();
       });
@@ -230,7 +232,7 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
         input.nativeElement.value = value.format(format.join(' '));
 
         if (this.$dialog) {
-          this.$dialog.instance.drawMonths(value);
+          // this.$dialog.instance.drawMonths(value);
         }
 
         let year = parseInt(value.format('YYYY'));
@@ -241,24 +243,11 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
             this.yearList.push(y);
           }
         }
-
-        this.selected['date'] = value.format('YYYY-MM-DD');
-        this.selected['hour'] = parseInt(value.format('H'));
-        this.selected['minute'] = parseInt(value.format('m'));
-        this.selected['year'] = parseInt(value.format('YYYY'));
-        this.selected['month'] = parseInt(value.format('M'));
-        this.selected['day'] = parseInt(value.format('D'));
-
       } else {
         input.nativeElement.value = '';
-
-        this.selected['date'] = undefined;
-        this.selected['hour'] = undefined;
-        this.selected['minute'] = undefined;
-        this.selected['year'] = undefined;
-        this.selected['month'] = undefined;
-        this.selected['day'] = undefined;
       }
+
+      this.selected = this.fsDatepicker.getSelected(value);
     }
 
     ngOnDestroy() {

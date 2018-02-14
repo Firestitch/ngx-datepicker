@@ -8,6 +8,17 @@
           <fs-tabnav-item fs-name="time">Time</fs-tabnav-item>
     </fs-tabnav>-->
     <div class="date-time">
+      <fs-date
+        [date]="model"
+        [hasDate]="parentInstance.hasDate"
+        [hasCalendar]="parentInstance.hasCalendar"
+        [view]="parentInstance.view"
+        [yearList]="parentInstance.yearList"
+        [minYear]="parentInstance.minYear"
+        [maxYear]="parentInstance.maxYear"
+        (onChange)="setDate($event)"
+      ></fs-date>
+      <!--
       <div class="date" *ngIf="parentInstance.hasDate">
         <div class="months" *ngIf="parentInstance.view == 'month'">
           <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: parentInstance.selected.month == month.value }">{{ month.abr }}</div>
@@ -51,7 +62,7 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div>-->
 
       <div class="time" *ngIf="parentInstance.hasTime">
         <div class="wraper">
