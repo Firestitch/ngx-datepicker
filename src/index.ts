@@ -1,7 +1,6 @@
 export * from './fsdatepicker.module';
-export * from './fsdatepicker.directive';
+export * from './directives/fsdatepicker.directive';
 export * from './fsdatepicker.value-accessor';
-export * from './fsdatepickerdialog.component';
-export * from './fsdatepickerdialogfactory.service';
-export * from './fsisscroll.directive';
-
+export * from './components/fsdatepickerdialog/fsdatepickerdialog.component';
+export * from './services/fsdatepickerdialogfactory.service';
+export * from './directives/fsisscroll.directive';

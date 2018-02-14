@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, Injectable, Inject, ReflectiveInjector } from '@angular/core';
-import { FsDatepickerDialogComponent } from './fsdatepickerdialog.component';
+import { FsDatepickerDialogComponent } from './../components/fsdatepickerdialog/fsdatepickerdialog.component';
 
 @Injectable()
 export class FsDatepickerDialogFactory {

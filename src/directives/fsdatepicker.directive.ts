@@ -1,8 +1,8 @@
 import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
    Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy } from '@angular/core';
-import { DATEPICKER_VALUE_ACCESSOR } from './fsdatepicker.value-accessor';
-import { FsDatepickerDialogComponent } from './fsdatepickerdialog.component';
-import { FsDatepickerDialogFactory } from './fsdatepickerdialogfactory.service';
+import { DATEPICKER_VALUE_ACCESSOR } from './../fsdatepicker.value-accessor';
+import { FsDatepickerDialogComponent } from './../components/fsdatepickerdialog/fsdatepickerdialog.component';
+import { FsDatepickerDialogFactory } from './../services/fsdatepickerdialogfactory.service';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 
@@ -43,7 +43,6 @@ export class FsDatepickerDirective implements OnInit, OnDestroy {
 
     private rootViewContainer = null;
 
-    // event hooks for VALUE_ACCESSOR. those are used to imitate real input behavior and emit events outside the directive, e.g. "touched"
     _onTouched = () => { };
     _onChange = (value: any) => { };
     onFocused = (event: any) => { };

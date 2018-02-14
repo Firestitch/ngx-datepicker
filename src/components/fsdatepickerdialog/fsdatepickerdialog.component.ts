@@ -1,11 +1,12 @@
-import { Component, Inject, Input, HostListener, ElementRef, IterableDiffers, OnInit, DoCheck, OnDestroy } from '@angular/core';
+import { Component, Inject, Input, HostListener, ElementRef,
+  IterableDiffers, OnInit, DoCheck, OnDestroy } from '@angular/core';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 
 @Component({
     selector: 'fs-datepicker-dialog',
-    templateUrl: './fsdatepickerdialog.html',
-    styleUrls: ['./fsdatepickerdialog.css'],
+    templateUrl: './fsdatepickerdialog.component.html',
+    styleUrls: ['./fsdatepickerdialog.component.css'],
     host: {
       '(mousewheel)': 'onMouseWheel($event)',
       '(touchmove)': 'onTouchMove($event)'

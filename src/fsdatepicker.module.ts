@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule } from '@angular/material';
-import { FsDatepickerDirective } from './fsdatepicker.directive';
-import { FsDatepickerDialogComponent } from './fsdatepickerdialog.component';
-import { FsDatepickerDialogFactory } from './fsdatepickerdialogfactory.service';
+import { FsDatepickerDirective } from './directives/fsdatepicker.directive';
+import { FsDatepickerDialogComponent } from './components/fsdatepickerdialog/fsdatepickerdialog.component';
+import { FsDatepickerDialogFactory } from './services/fsdatepickerdialogfactory.service';
 import { FsCommonModule } from '@firestitch/common';
-import { FsIsscrollDirective  } from './fsisscroll.directive';
+import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
 
 @NgModule({
   imports: [
