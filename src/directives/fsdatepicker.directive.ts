@@ -14,10 +14,10 @@ import * as moment from 'moment-timezone';
       '(keyup)': 'inputKeyup($event)',
       '(blur)': 'inputBlur($event)',
     },
-    selector: '[fsDatepicker]',
+    selector: '[fsDatePicker]',
     providers: [DATEPICKER_VALUE_ACCESSOR]
 })
-export class FsDatepickerDirective implements OnInit, OnDestroy {
+export class FsDatePickerDirective implements OnInit, OnDestroy {
 
     @Input('hasCalendar') hasCalendar: boolean;
     @Input('hasDate') hasDate: boolean;

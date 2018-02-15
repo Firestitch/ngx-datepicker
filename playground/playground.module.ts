@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FsDatepickerModule } from '../src';
+import { FsDatePickerModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FirstExampleComponent } from './app/components/first-example/first-example.component';
@@ -14,7 +14,7 @@ import { FsExampleModule } from '@firestitch/example';
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsDatepickerModule,
+    FsDatePickerModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
