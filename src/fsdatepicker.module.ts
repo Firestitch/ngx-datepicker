@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule } from '@angular/material';
-import { FsDatePickerDirective } from './directives/fsdatepicker.directive';
+import { FsCommonModule } from '@firestitch/common';
+
+import { FsDatePickDirective } from './directives/fsdatepick.directive';
+import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
+
 import { FsDatepickerDialogComponent } from './components/fsdatepickerdialog/fsdatepickerdialog.component';
 import { FsDateComponent } from './components/fsdate/fsdate.component';
 import { FsTimeComponent } from './components/fstime/fstime.component';
+
 import { FsDatepickerDialogFactory } from './services/fsdatepickerdialogfactory.service';
-import { FsDatePickerModel } from './services/fsdatepickermodel.service';
-import { FsCommonModule } from '@firestitch/common';
-import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
+import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
 
 @NgModule({
   imports: [
@@ -21,13 +24,13 @@ import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
     MatIconModule
   ],
   exports: [
-    FsDatePickerDirective
+    FsDatePickDirective
   ],
   entryComponents: [
     FsDatepickerDialogComponent
   ],
   declarations: [
-    FsDatePickerDirective,
+    FsDatePickDirective,
     FsDatepickerDialogComponent,
     FsIsscrollDirective,
     FsDateComponent,
@@ -35,14 +38,14 @@ import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
   ],
   providers: [
     FsDatepickerDialogFactory,
-    FsDatePickerModel
+    FsDatePickerCommon
   ],
 })
 export class FsDatePickerModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsDatePickerModule,
-      providers: [FsDatepickerDialogFactory, FsDatePickerModel]
+      providers: [FsDatepickerDialogFactory, FsDatePickerCommon]
     };
   }
 }

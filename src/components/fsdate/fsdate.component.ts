@@ -2,7 +2,7 @@ import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRe
   IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
-import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
+import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 
 @Component({
     selector: 'fs-date',
@@ -54,7 +54,7 @@ export class FsDateComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
     year: parseInt(moment().format('YYYY'))
   };
 
-  constructor(public element: ElementRef, private fsDatePickerModel: FsDatePickerModel,
+  constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
     private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
       this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
     }
@@ -79,7 +79,7 @@ export class FsDateComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
   ngOnChanges(changes) {
     if (changes && changes.date) {
       this.drawMonths(this.date);
-      this.selected = this.fsDatePickerModel.getSelected(this.date);
+      this.selected = this.fsDatePickerCommon.getSelected(this.date);
     }
   }
 
@@ -144,7 +144,7 @@ export class FsDateComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
   createModel() {
     if (!this.date) {
-      this.setDate(this.fsDatePickerModel.createMoment());
+      this.setDate(this.fsDatePickerCommon.createMoment());
     }
   }
 
@@ -214,7 +214,7 @@ export class FsDateComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
   drawMonths(date) {
 
     if (!date) {
-      date = this.fsDatePickerModel.createMoment();
+      date = this.fsDatePickerCommon.createMoment();
     }
 
     this.month = this.createMonth(date);
