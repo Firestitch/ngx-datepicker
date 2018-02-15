@@ -18,7 +18,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   @Input() date;
 
-  @Input() yearList = null;
   @Output() onChange = new EventEmitter<any>();
   selected = {};
   iscrollOptions = null;
@@ -57,9 +56,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     }
 
   ngOnInit() {
-    // this.selected = this.fsDatepicker.getSelected(this.date);
-
-    // this.drawMonths(this.date);
 
     for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
       this.years.push(y);
@@ -151,7 +147,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   calendarView() {
-    // this.fsDatePickerModel.dateMode = 'calendar';
     this.fsDatePickerModel.dateMode = 'date';
   }
 
@@ -162,10 +157,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   yearView(year) {
     this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
     this.fsDatePickerModel.dateMode = 'year';
-  }
-
-  yearClick(month) {
-    Object.assign(month.years, this.yearList);
   }
 
   dayClick(day) {
