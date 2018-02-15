@@ -1,8 +1,8 @@
 import { ComponentFactoryResolver, Injectable, Inject, ReflectiveInjector } from '@angular/core';
-import { FsDatepickerDialogComponent } from './../components/fsdatepickerdialog/fsdatepickerdialog.component';
+import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 
 @Injectable()
-export class FsDatepickerDialogFactory {
+export class FsDatepickerFactory {
 
   private factoryResolver = null;
   private rootViewContainer = null;
@@ -17,7 +17,7 @@ export class FsDatepickerDialogFactory {
 
   addDynamicComponent() {
     const factory = this.factoryResolver
-                        .resolveComponentFactory(FsDatepickerDialogComponent);
+                        .resolveComponentFactory(FsDatepickerComponent);
 
     const component = factory
       .create(this.rootViewContainer.parentInjector);

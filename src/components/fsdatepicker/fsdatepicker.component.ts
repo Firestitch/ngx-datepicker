@@ -1,18 +1,19 @@
 import { Component, Input, HostListener, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
+import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 @Component({
-    selector: 'fs-datepicker-dialog',
-    templateUrl: './fsdatepickerdialog.component.html',
-    styleUrls: ['./fsdatepickerdialog.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    selector: 'fsDatePicker',
+    templateUrl: './fsdatepicker.component.html',
+    styleUrls: ['./../../styles.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [FsDatePickerModel]
 })
-export class FsDatepickerDialogComponent implements OnInit {
+export class FsDatepickerComponent implements OnInit {
 
-  // tab = 'date';
   parentInstance: any = null;
   model = null;
 
-  constructor(public element: ElementRef) { }
+  constructor(public fsDatePickerModel: FsDatePickerModel, public element: ElementRef) { }
 
   ngOnInit() {
     this.model = this.parentInstance.getValue();

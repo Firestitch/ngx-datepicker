@@ -3,6 +3,7 @@ import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRe
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
+import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 @Component({
     selector: 'fs-time',
@@ -42,6 +43,7 @@ export class FsTimeComponent implements OnInit, OnChanges, DoCheck {
 
 
   constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
+    public fsDatePickerModel: FsDatePickerModel,
     private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
       this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
       this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);

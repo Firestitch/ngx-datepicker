@@ -1,8 +1,8 @@
 import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
    Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy } from '@angular/core';
 import { DATEPICKER_VALUE_ACCESSOR } from './../value-accessors';
-import { FsDatepickerDialogComponent } from './../components/fsdatepickerdialog/fsdatepickerdialog.component';
-import { FsDatepickerDialogFactory } from './../services/fsdatepickerdialogfactory.service';
+import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
+import { FsDatepickerFactory } from './../services/fsdatepickerfactory.service';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
@@ -58,7 +58,7 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
         @Inject(ComponentFactoryResolver) private factoryResolver,
         @Inject(ViewContainerRef) private viewContainerRef,
         private fsDatePickerCommon: FsDatePickerCommon,
-        private FsDatepickerDialogFactory: FsDatepickerDialogFactory,
+        private fsDatepickerFactory: FsDatepickerFactory,
         private FsUtil: FsUtil
     ) { }
 
@@ -108,9 +108,11 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
         return;
       }
 
-      this.FsDatepickerDialogFactory.setRootViewContainerRef(this.viewContainerRef);
-      this.$dialog = this.FsDatepickerDialogFactory.addDynamicComponent();
+      this.fsDatepickerFactory.setRootViewContainerRef(this.viewContainerRef);
+      this.$dialog = this.fsDatepickerFactory.addDynamicComponent();
       this.$dialog.instance.parentInstance = this;
+      // @TODO provide input values into model service
+      // console.log(this.$dialog.instance);
       // this.$dialog.instance.fsDatePickerModel = this.fsDatePickerModel;
       // this.$dialog.instance.drawMonths(this.getValue());
       setTimeout(() => {
