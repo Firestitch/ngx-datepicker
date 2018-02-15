@@ -8,7 +8,7 @@ import { FsDatepickerDialogComponent } from './components/fsdatepickerdialog/fsd
 import { FsDateComponent } from './components/fsdate/fsdate.component';
 import { FsTimeComponent } from './components/fstime/fstime.component';
 import { FsDatepickerDialogFactory } from './services/fsdatepickerdialogfactory.service';
-import { FsDatepicker } from './services/fsdatepicker.service';
+import { FsDatePickerModel } from './services/fsdatepickermodel.service';
 import { FsCommonModule } from '@firestitch/common';
 import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
 
@@ -35,14 +35,14 @@ import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
   ],
   providers: [
     FsDatepickerDialogFactory,
-    FsDatepicker
+    FsDatePickerModel
   ],
 })
 export class FsDatePickerModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsDatePickerModule,
-      providers: [FsDatepickerDialogFactory, FsDatepicker]
+      providers: [FsDatepickerDialogFactory, FsDatePickerModel]
     };
   }
 }

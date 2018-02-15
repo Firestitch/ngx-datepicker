@@ -3,7 +3,7 @@ import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolve
 import { DATEPICKER_VALUE_ACCESSOR } from './../fsdatepicker.value-accessor';
 import { FsDatepickerDialogComponent } from './../components/fsdatepickerdialog/fsdatepickerdialog.component';
 import { FsDatepickerDialogFactory } from './../services/fsdatepickerdialogfactory.service';
-import { FsDatepicker } from './../services/fsdatepicker.service';
+import { FsDatePickerModel } from './../services/fsdatepickermodel.service';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 
@@ -57,7 +57,7 @@ export class FsDatePickerDirective implements OnInit, OnDestroy {
         @Inject(Renderer) private renderer: Renderer,
         @Inject(ComponentFactoryResolver) private factoryResolver,
         @Inject(ViewContainerRef) private viewContainerRef,
-        private fsDatepicker: FsDatepicker,
+        private fsDatePickerModel: FsDatePickerModel,
         private FsDatepickerDialogFactory: FsDatepickerDialogFactory,
         private FsUtil: FsUtil
     ) { }
@@ -247,7 +247,7 @@ export class FsDatePickerDirective implements OnInit, OnDestroy {
         input.nativeElement.value = '';
       }
 
-      this.selected = this.fsDatepicker.getSelected(value);
+      this.selected = this.fsDatePickerModel.getSelected(value);
     }
 
     ngOnDestroy() {

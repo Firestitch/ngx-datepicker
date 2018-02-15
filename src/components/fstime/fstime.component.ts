@@ -2,7 +2,7 @@ import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRe
   IterableDiffers, OnInit, OnChanges, DoCheck } from '@angular/core';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
-import { FsDatepicker } from './../../services/fsdatepicker.service';
+import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 @Component({
     selector: 'fs-time',
@@ -41,7 +41,7 @@ export class FsTimeComponent implements OnInit, OnChanges, DoCheck {
               [55,56,57,58,59]];
 
 
-  constructor(public element: ElementRef, private fsDatepicker: FsDatepicker,
+  constructor(public element: ElementRef, private fsDatePickerModel: FsDatePickerModel,
     private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
       this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
       this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
@@ -54,7 +54,7 @@ export class FsTimeComponent implements OnInit, OnChanges, DoCheck {
 
   ngOnChanges(changes) {
     if (changes && changes.date) {
-      this.selected = this.fsDatepicker.getSelected(this.date);
+      this.selected = this.fsDatePickerModel.getSelected(this.date);
     }
   }
 
@@ -148,7 +148,7 @@ export class FsTimeComponent implements OnInit, OnChanges, DoCheck {
 
   createModel() {
     if (!this.date) {
-      this.setDate(this.fsDatepicker.createMoment());
+      this.setDate(this.fsDatePickerModel.createMoment());
     }
   }
 
