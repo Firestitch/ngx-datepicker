@@ -6,15 +6,15 @@ import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service'
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 @Component({
-    selector: 'fs-date',
-    templateUrl: './fsdate.component.html',
-    styleUrls: ['./fsdate.component.scss'],
+    selector: 'fsDatePickerCalendar',
+    templateUrl: './fsdatepickercalendar.component.html',
+    styleUrls: ['./fsdatepickercalendar.component.scss'],
     host: {
       '(mousewheel)': 'onMouseWheel($event)',
       '(touchmove)': 'onTouchMove($event)'
     }
 })
-export class FsDateComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
+export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
   @Input() date;
 

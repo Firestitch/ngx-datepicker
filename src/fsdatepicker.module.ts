@@ -9,8 +9,8 @@ import { FsDatePickDirective } from './directives/fsdatepick.directive';
 import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
 
 import { FsDatepickerComponent } from './components/fsdatepicker/fsdatepicker.component';
-import { FsDateComponent } from './components/fsdate/fsdate.component';
-import { FsTimeComponent } from './components/fstime/fstime.component';
+import { FsDatePickerCalendarComponent } from './components/fsdatepickercalendar/fsdatepickercalendar.component';
+import { FsDatePickerTimeComponent } from './components/fsdatepickertime/fsdatepickertime.component';
 
 import { FsDatepickerFactory } from './services/fsdatepickerfactory.service';
 import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
@@ -33,8 +33,8 @@ import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
     FsDatePickDirective,
     FsDatepickerComponent,
     FsIsscrollDirective,
-    FsDateComponent,
-    FsTimeComponent
+    FsDatePickerCalendarComponent,
+    FsDatePickerTimeComponent
   ],
   providers: [
     FsDatepickerFactory,

@@ -8,7 +8,7 @@
           <fs-tabnav-item fs-name="time">Time</fs-tabnav-item>
     </fs-tabnav>-->
     <div class="date-time">
-      <fs-date
+      <fsDatePickerCalendar
         [date]="model"
         [hasDate]="parentInstance.hasDate"
         [hasCalendar]="parentInstance.hasCalendar"
@@ -17,13 +17,13 @@
         [minYear]="parentInstance.minYear"
         [maxYear]="parentInstance.maxYear"
         (onChange)="setDate($event)"
-      ></fs-date>
+      ></fsDatePickerCalendar>
 
-      <fs-time
+      <fsDatePickerTime
         [date]="model"
         [hasTime]="parentInstance.hasTime"
         (onChange)="setDate($event)"
-      ></fs-time>
+      ></fsDatePickerTime>
 
     </div>
     <div *ngIf="parentInstance.hasTime" class="done">

@@ -6,11 +6,11 @@ import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service'
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 @Component({
-    selector: 'fs-time',
-    templateUrl: './fstime.component.html',
-    styleUrls: ['./fstime.component.scss']
+    selector: 'fsDatePickerTime',
+    templateUrl: './fsdatepickertime.component.html',
+    styleUrls: ['./fsdatepickertime.component.scss']
 })
-export class FsTimeComponent implements OnInit, OnChanges, DoCheck {
+export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
   @Input() date;
   @Input() hasTime;
