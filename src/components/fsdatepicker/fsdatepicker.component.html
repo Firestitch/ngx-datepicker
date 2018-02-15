@@ -1,32 +1,28 @@
 <div class="fs-datetime-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
 
-<div class="fs-datetime-dialog" tabindex="0" [ngClass]="{ opened: parentInstance.opened, 'has-date': parentInstance.hasDate, 'has-time': parentInstance.hasTime, 'has-calendar': parentInstance.hasCalendar, 'view-year': parentInstance.view=='year', 'view-month': parentInstance.view=='month', 'view-date': parentInstance.view=='date' }">
+<div class="fs-datetime-dialog" tabindex="0"
+[ngClass]="{ opened: parentInstance.opened,
+  'has-date': ['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,
+  'has-time': ['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,
+  'view-year': fsDatePickerModel.dateMode=='year',
+  'view-month': fsDatePickerModel.dateMode=='month',
+  'view-date': fsDatePickerModel.dateMode=='date' }">
   <div class="wrap">
 
-    <!--<fs-tabnav fs-selected="tab" ng-show="hasDate && parentInstance.hasTime">
-          <fs-tabnav-item fs-name="date">Date</fs-tabnav-item>
-          <fs-tabnav-item fs-name="time">Time</fs-tabnav-item>
-    </fs-tabnav>-->
     <div class="date-time">
       <fsDatePickerCalendar
         [date]="model"
-        [hasDate]="parentInstance.hasDate"
-        [hasCalendar]="parentInstance.hasCalendar"
-        [view]="parentInstance.view"
         [yearList]="parentInstance.yearList"
-        [minYear]="parentInstance.minYear"
-        [maxYear]="parentInstance.maxYear"
         (onChange)="setDate($event)"
       ></fsDatePickerCalendar>
 
       <fsDatePickerTime
         [date]="model"
-        [hasTime]="parentInstance.hasTime"
         (onChange)="setDate($event)"
       ></fsDatePickerTime>
 
     </div>
-    <div *ngIf="parentInstance.hasTime" class="done">
+    <div *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1" class="done">
       <button mat-raised-button color="primary" (click)="close($event)">Done</button>
     </div>
   </div>

@@ -19,16 +19,17 @@ import * as moment from 'moment-timezone';
 })
 export class FsDatePickDirective implements OnInit, OnDestroy {
 
-    @Input('hasCalendar') hasCalendar: boolean;
-    @Input('hasDate') hasDate: boolean;
-    @Input('minYear') minYear;
-    @Input('maxYear') maxYear;
-    @Input('hasTime') hasTime = false;
-    @Input('view') view = 'calendar';
-    // @Input('disabledDays') disabledDays = null;
-    @Input() disabledMinutes = [];
-    @Input() disabledHours = [];
-    @Input() disabledTimes = [];
+    // @Input('hasCalendar') hasCalendar: boolean;
+    // @Input('hasDate') hasDate: boolean;
+    @Input() minYear;
+    @Input() maxYear;
+    // @Input('hasTime') hasTime = false;
+    @Input() view = 'date';
+
+    // @Input() disabledDays = null;
+    // @Input() disabledMinutes = [];
+    // @Input() disabledHours = [];
+    // @Input() disabledTimes = [];
 
     @Output('change') change$ = new EventEmitter<any>();
 
@@ -36,8 +37,10 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
 
     opened = false;
 
+    // @TODO
     selected = {};
 
+    // @TODO I don't like this variable. Try to kill it.
     yearList = [];
 
     private $dialog = null;
@@ -63,11 +66,6 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-      this.hasDate = this.hasDate === undefined ? true : this.hasDate;
-      this.hasCalendar = this.hasCalendar === undefined ? true : this.hasCalendar;
-      this.minYear = this.minYear || (parseInt(moment().format('YYYY')) - 100);
-      this.maxYear = this.maxYear || (parseInt(moment().format('YYYY')) + 100);
-      this.hasTime = this.hasTime;
     }
 
     onChangeInterceptor($event) {
@@ -97,11 +95,6 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
 
     private open() {
       this.opened = true;
-      this.view = 'calendar';
-
-      if (!this.hasCalendar) {
-        this.view = 'date';
-      }
 
       if (this.$dialog) {
         // this.$dialog.instance.drawMonths(this.getValue());
@@ -111,6 +104,10 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
       this.fsDatepickerFactory.setRootViewContainerRef(this.viewContainerRef);
       this.$dialog = this.fsDatepickerFactory.addDynamicComponent();
       this.$dialog.instance.parentInstance = this;
+
+      this.$dialog.instance.fsDatePickerModel.view = this.view;
+      this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
+      this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
       // @TODO provide input values into model service
       // console.log(this.$dialog.instance);
       // this.$dialog.instance.fsDatePickerModel = this.fsDatePickerModel;
@@ -224,22 +221,19 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
 
       if (value && moment(value).isValid()) {
 
-        if (this.hasDate) {
+        if (['date', 'datetime'].indexOf(this.view) != -1) {
           format.push('MMM D, YYYY');
         }
 
-        if (this.hasTime) {
+        if (['time', 'datetime'].indexOf(this.view) != -1) {
           format.push('h:mm a');
         }
 
         input.nativeElement.value = value.format(format.join(' '));
 
-        if (this.$dialog) {
-          // this.$dialog.instance.drawMonths(value);
-        }
-
         let year = parseInt(value.format('YYYY'));
 
+        // @TODO do something with this code
         if (parseInt(this.selected['year']) != year) {
           this.yearList = [];
           for (let y = year + 100; y > (year - 100); y--) {

@@ -13,7 +13,6 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
   @Input() date;
-  @Input() hasTime;
   @Input() disabledMinutes = [];
   @Input() disabledHours = [];
   @Input() disabledTimes = [];

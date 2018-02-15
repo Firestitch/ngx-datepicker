@@ -7,7 +7,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FsDatePickerModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
-import { FirstExampleComponent } from './app/components/first-example/first-example.component';
+import { DateExampleComponent } from './app/components/date-example/date-example.component';
+import { TimeExampleComponent } from './app/components/time-example/time-example.component';
+import { DateTimeExampleComponent } from './app/components/datetime-example/datetime-example.component';
 import { FsExampleModule } from '@firestitch/example';
 
 @NgModule({
@@ -24,7 +26,9 @@ import { FsExampleModule } from '@firestitch/example';
   ],
   declarations: [
     AppComponent,
-    FirstExampleComponent
+    DateExampleComponent,
+    TimeExampleComponent,
+    DateTimeExampleComponent
   ],
   providers: [
   ],

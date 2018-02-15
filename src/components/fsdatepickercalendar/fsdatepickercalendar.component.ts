@@ -18,12 +18,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   @Input() date;
 
-  @Input() hasDate;
-  @Input() hasCalendar;
-  @Input() view = 'calendar';
   @Input() yearList = null;
-  @Input() minYear = null;
-  @Input() maxYear = null;
   @Output() onChange = new EventEmitter<any>();
   selected = {};
   iscrollOptions = null;
@@ -66,11 +61,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
     // this.drawMonths(this.date);
 
-    for (let y: any = this.minYear; y < this.maxYear; y++) {
+    for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
       this.years.push(y);
     }
 
-    if (this.hasDate) {
+    if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       setTimeout(() => {
         const $date = this.element.nativeElement.querySelector('.date');
         $date.addEventListener('mousewheel', this.dateScroll);
@@ -156,16 +151,17 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   calendarView() {
-    this.view = 'calendar';
+    // this.fsDatePickerModel.dateMode = 'calendar';
+    this.fsDatePickerModel.dateMode = 'date';
   }
 
   monthView(month) {
-    this.view = 'month';
+    this.fsDatePickerModel.dateMode = 'month';
   }
 
   yearView(year) {
     this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
-    this.view = 'year';
+    this.fsDatePickerModel.dateMode = 'year';
   }
 
   yearClick(month) {
@@ -312,7 +308,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   ngOnDestroy() {
-    if (this.hasDate) {
+    if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       const $date = this.element.nativeElement.querySelector('.date');
       $date.removeEventListener('mousewheel', this.dateScroll);
     }
