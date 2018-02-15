@@ -1,6 +1,8 @@
 export * from './fsdatepicker.module';
 export * from './value-accessors';
 
+export * from './interfaces/fsdatepicker.interface';
+
 export * from './directives/fsdatepick.directive';
 export * from './directives/fsisscroll.directive';
 
