@@ -12,7 +12,9 @@
     <div class="date-time">
       <fsDatePickerCalendar
         [date]="model"
+        [dateMode]="fsDatePickerModel.dateMode"
         (onChange)="setDate($event)"
+        (onDateModeChange)="setDateMode($event)"
       ></fsDatePickerCalendar>
 
       <fsDatePickerTime

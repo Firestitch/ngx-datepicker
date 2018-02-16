@@ -31,7 +31,7 @@ import {
     MatTooltipModule,
     MatStepperModule
   } from '@angular/material';
-  //import { FlexLayoutModule } from '@angular/flex-layout';
+  import { FlexLayoutModule } from '@angular/flex-layout';
   import {NgModule} from '@angular/core';
   import {CdkTableModule} from '@angular/cdk/table';
 
@@ -69,7 +69,7 @@ import {
       MatTabsModule,
       MatToolbarModule,
       MatTooltipModule,
-      //FlexLayoutModule
+      FlexLayoutModule
     ]
   })
   export class AppMaterialModule {}

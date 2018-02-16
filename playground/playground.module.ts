@@ -10,6 +10,7 @@ import { AppMaterialModule } from './app/material.module';
 import { DateExampleComponent } from './app/components/date-example/date-example.component';
 import { TimeExampleComponent } from './app/components/time-example/time-example.component';
 import { DateTimeExampleComponent } from './app/components/datetime-example/datetime-example.component';
+import { DateTimeRangeExampleComponent } from './app/components/datetimerange-example/datetimerange-example.component';
 import { FsExampleModule } from '@firestitch/example';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FsExampleModule } from '@firestitch/example';
     AppComponent,
     DateExampleComponent,
     TimeExampleComponent,
-    DateTimeExampleComponent
+    DateTimeExampleComponent,
+    DateTimeRangeExampleComponent
   ],
   providers: [
   ],

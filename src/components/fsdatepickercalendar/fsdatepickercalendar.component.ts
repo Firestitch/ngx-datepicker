@@ -17,8 +17,9 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
   @Input() date;
-
+  @Input() dateMode;
   @Output() onChange = new EventEmitter<any>();
+  @Output() onDateModeChange = new EventEmitter<any>();
   selected = {};
   iscrollOptions = null;
   iscrollInstance = null;
@@ -147,16 +148,19 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   calendarView() {
-    this.fsDatePickerModel.dateMode = 'date';
+    this.onDateModeChange.emit('date');
+    // this.fsDatePickerModel.dateMode = 'date';
   }
 
   monthView(month) {
-    this.fsDatePickerModel.dateMode = 'month';
+    // this.fsDatePickerModel.dateMode = 'month';
+    this.onDateModeChange.emit('month');
   }
 
   yearView(year) {
     this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
-    this.fsDatePickerModel.dateMode = 'year';
+    // this.fsDatePickerModel.dateMode = 'year';
+    this.onDateModeChange.emit('year');
   }
 
   dayClick(day) {

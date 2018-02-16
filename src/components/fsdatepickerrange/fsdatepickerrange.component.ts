@@ -2,13 +2,13 @@ import { Component, Input, HostListener, ElementRef, ViewEncapsulation, OnInit }
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 @Component({
-    selector: 'fsDatePicker',
-    templateUrl: './fsdatepicker.component.html',
+    selector: 'fsDatePickerRange',
+    templateUrl: './fsdatepickerrange.component.html',
     styleUrls: ['./../../styles.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [FsDatePickerModel]
 })
-export class FsDatepickerComponent implements OnInit {
+export class FsDatepickerRangeComponent implements OnInit {
 
   parentInstance: any = null;
   model = null;
@@ -19,13 +19,22 @@ export class FsDatepickerComponent implements OnInit {
     this.model = this.parentInstance.getValue();
   }
 
-  setDate(date) {
-    this.model = date;
-    this.parentInstance.writeValue(date);
+  setStartDate(date) {
+    this.model.start_date = date;
+    this.parentInstance.writeValue(this.model);
   }
 
-  setDateMode(mode) {
-    this.fsDatePickerModel.dateMode = mode;
+  setEndDate(date) {
+    this.model.end_date = date;
+    this.parentInstance.writeValue(this.model);
+  }
+
+  setDateModeStart(mode) {
+    this.fsDatePickerModel.dateMode.start_date = mode;
+  }
+
+  setDateModeEnd(mode) {
+    this.fsDatePickerModel.dateMode.end_date = mode;
   }
 
   close($event?) {

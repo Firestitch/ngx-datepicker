@@ -10,7 +10,7 @@ export class FsDatePickerModel implements FsDatePicker {
   // date | datetime | time | inline
   private _view = 'date';
   // year | month | date
-  public dateMode = 'date';
+  public dateMode = null;
 
   set minYear(minYear) {
 

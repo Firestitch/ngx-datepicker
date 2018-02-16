@@ -1,8 +1,8 @@
 <div class="date" *ngIf="['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1">
-  <div class="months" *ngIf="fsDatePickerModel.dateMode == 'month'">
+  <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>
   </div>
-  <div class="years" *ngIf="fsDatePickerModel.dateMode == 'year'" fsIscroll fsOptions="iscrollOptions" fsInstance="iscrollInstance">
+  <div class="years" *ngIf="dateMode == 'year'" fsIscroll fsOptions="iscrollOptions" fsInstance="iscrollInstance">
     <div class="iscroll-scroller">
       <div *ngFor="let year of years" class="year" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }" (click)="yearViewChange(year)">
           {{year}}
@@ -10,7 +10,7 @@
       <div class="clear"></div>
     </div>
   </div>
-  <div *ngIf="fsDatePickerModel.dateMode == 'date'" class="calendar">
+  <div *ngIf="dateMode == 'date'" class="calendar">
     <div class="month-year">
       <a class="month-name" (click)="monthView(month)">{{month.name}}</a>
       <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>

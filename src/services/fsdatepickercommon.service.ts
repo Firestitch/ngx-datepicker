@@ -80,10 +80,25 @@ export class FsDatePickerCommon {
     }
   }
 
-  renderDateTime(input, value, view = 'date') {
+  formatDateTimeRange(value, view = 'date') {
+    const format = [];
+    const startDate = this.formatDateTime(value.start_date, view);
+    const endDate = this.formatDateTime(value.end_date, view);
 
-    const format = [],
-        options = {};
+    if (startDate) {
+      format.push(startDate);
+    }
+
+    if (endDate) {
+      format.push(endDate);
+    }
+
+    return format.join(' - ');
+  }
+
+  formatDateTime(value, view = 'date') {
+    let result = '';
+    const format = [];
 
     if (this.fsUtil.isInt(value)) {
       value = moment(new Date(value));
@@ -105,11 +120,10 @@ export class FsDatePickerCommon {
         format.push('h:mm a');
       }
 
-      input.nativeElement.value = value.format(format.join(' '));
-
-    } else {
-      input.nativeElement.value = '';
+      result = value.format(format.join(' '));
     }
+
+    return result;
   }
 
   inputClick(e, callback) {

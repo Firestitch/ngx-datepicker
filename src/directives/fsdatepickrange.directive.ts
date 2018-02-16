@@ -1,8 +1,8 @@
 import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
    Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy } from '@angular/core';
-import { DATEPICKER_VALUE_ACCESSOR } from './../value-accessors/fsdatepicker.value-accessor';
+import { DATEPICKER_RANGE_VALUE_ACCESSOR } from './../value-accessors/fsdatepickerrange.value-accessors';
 import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
-import { FsDatepickerFactory } from './../services/fsdatepickerfactory.service';
+import { FsDatepickerRangeFactory } from './../services/fsdatepickerrangefactory.service';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 import * as moment from 'moment-timezone';
 
@@ -13,10 +13,10 @@ import * as moment from 'moment-timezone';
       '(keyup)': 'inputKeyup($event)',
       '(blur)': 'inputBlur($event)',
     },
-    selector: '[fsDatePicker]',
-    providers: [DATEPICKER_VALUE_ACCESSOR]
+    selector: '[fsDatePickerRange]',
+    providers: [DATEPICKER_RANGE_VALUE_ACCESSOR]
 })
-export class FsDatePickDirective implements OnInit, OnDestroy {
+export class FsDatePickRangeDirective implements OnInit, OnDestroy {
 
     @Input() minYear;
     @Input() maxYear;
@@ -45,7 +45,7 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
         @Inject(ComponentFactoryResolver) private factoryResolver,
         @Inject(ViewContainerRef) private viewContainerRef,
         private fsDatePickerCommon: FsDatePickerCommon,
-        private fsDatepickerFactory: FsDatepickerFactory
+        private fsDatepickerRangeFactory: FsDatepickerRangeFactory
     ) { }
 
     ngOnInit() {
@@ -56,24 +56,27 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
     }
 
     writeValue(value: any): void {
-      if (value) {
+      console.log(value);
 
-        if (moment(value).isValid()) {
-          value = moment(value);
-        }else {
-          value = undefined;
+        value = Object.assign({ start_date: null, end_date: null }, value);
+
+        if (moment(value.start_date).isValid()) {
+          value.start_date = moment(value.start_date);
+        }
+
+        if (moment(value.end_date).isValid()) {
+          value.end_date = moment(value.end_date);
         }
 
         this._model = value;
 
         this._onChange(value);
-        this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
+        this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(value, this.view);
         this.change$.emit(value);
-      }
     }
 
     getValue() {
-      return this._model ? moment(this._model) : this._model;
+      return this._model;
     }
 
     private open() {
@@ -83,14 +86,14 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
         return;
       }
 
-      this.fsDatepickerFactory.setRootViewContainerRef(this.viewContainerRef);
-      this.$dialog = this.fsDatepickerFactory.addDynamicComponent();
+      this.fsDatepickerRangeFactory.setRootViewContainerRef(this.viewContainerRef);
+      this.$dialog = this.fsDatepickerRangeFactory.addDynamicComponent();
       this.$dialog.instance.parentInstance = this;
 
       this.$dialog.instance.fsDatePickerModel.view = this.view;
       this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
-      this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
+      this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
 
       setTimeout(() => {
         this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);

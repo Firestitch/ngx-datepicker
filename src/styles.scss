@@ -94,6 +94,43 @@ fs-datetime md-input-container.md-block .md-input {
     width: 255px;
 }
 
+.fs-datetime-dialog.fs-datetime-range .wrap {
+  width: 744px;
+}
+
+.fs-datetime-dialog.fs-datetime-range.has-time.has-date .wrap {
+  width: 1015px;
+}
+
+.fs-datetime-dialog.fs-datetime-range .wrap {
+  width: 255px;
+}
+
+.fs-datetime-dialog.fs-datetime-range .date-range {
+  display: flex;
+}
+
+.fs-datetime-dialog.fs-datetime-range .date-range {
+  display: flex;
+  flex: 1;
+}
+
+.fs-datetime-dialog.fs-datetime-range .date-range fsdatepickercalendar:first-child {
+  margin-right: 5px;
+}
+
+.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-header {
+  margin: 0 15px;
+}
+
+.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-label {
+  min-width: 115px;
+}
+
+.fs-datetime-dialog.fs-datetime-range .time-range .mat-ink-bar {
+  visibility: inherit !important;
+}
+
 .fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:after,
 .fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {
 	border-left: 20px solid transparent;
@@ -193,7 +230,7 @@ fs-datetime md-input-container.md-block .md-input {
 }
 
 .fs-datetime-dialog .date tr td:first-child {
-	border-left: 1px solid transparent;
+	// border-left: 1px solid transparent;
 }
 
 .fs-datetime-dialog .day span {
