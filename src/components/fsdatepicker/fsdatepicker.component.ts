@@ -22,6 +22,10 @@ export class FsDatepickerComponent implements OnInit {
   setDate(date) {
     this.model = date;
     this.parentInstance.writeValue(date);
+
+    if (this.fsDatePickerModel.view === 'date') {
+      this.close();
+    }
   }
 
   setDateMode(mode) {

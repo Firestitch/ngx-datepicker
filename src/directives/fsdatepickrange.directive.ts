@@ -1,5 +1,5 @@
 import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
-   Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy } from '@angular/core';
+   Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { DATEPICKER_RANGE_VALUE_ACCESSOR } from './../value-accessors/fsdatepickerrange.value-accessors';
 import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerRangeFactory } from './../services/fsdatepickerrangefactory.service';
@@ -16,15 +16,17 @@ import * as moment from 'moment-timezone';
     selector: '[fsDatePickerRange]',
     providers: [DATEPICKER_RANGE_VALUE_ACCESSOR]
 })
-export class FsDatePickRangeDirective implements OnInit, OnDestroy {
+export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
     @Input() minYear;
     @Input() maxYear;
     @Input() view = 'date';
+    @Input() public ngModelStart = null;
+    @Input() public ngModelEnd = null;
+    @Output() ngModelStartChange = new EventEmitter<any>();
+    @Output() ngModelEndChange = new EventEmitter<any>();
 
     @Output('change') change$ = new EventEmitter<any>();
-
-    private _model = null;
 
     opened = false;
 
@@ -51,32 +53,37 @@ export class FsDatePickRangeDirective implements OnInit, OnDestroy {
     ngOnInit() {
     }
 
-    onChangeInterceptor($event) {
-      this.writeValue($event.target.value);
-    }
+    ngOnChanges(changes) {
+      if (!changes) {
+        return;
+      }
 
-    writeValue(value: any): void {
-      console.log(value);
+      if (changes.ngModelStart || changes.ngModelEnd) {
 
-        value = Object.assign({ start_date: null, end_date: null }, value);
-
-        if (moment(value.start_date).isValid()) {
-          value.start_date = moment(value.start_date);
+        if (typeof this.ngModelStart === 'string' || typeof this.ngModelEnd === 'string') {
+          setTimeout(() => {
+            this.writeValue(this.ngModelStart, this.ngModelEnd);
+          });
+          return;
         }
 
-        if (moment(value.end_date).isValid()) {
-          value.end_date = moment(value.end_date);
-        }
+        const viewData = { start_date: this.ngModelStart, end_date: this.ngModelEnd };
 
-        this._model = value;
-
-        this._onChange(value);
-        this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(value, this.view);
-        this.change$.emit(value);
+        this._onChange(viewData);
+        this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(viewData, this.view);
+        this.change$.emit(viewData);
+      }
     }
 
-    getValue() {
-      return this._model;
+    writeValue(startDate, endDate): void {
+
+      if (moment(startDate).isValid()) {
+        this.ngModelStartChange.emit(moment(startDate));
+      }
+
+      if (moment(endDate).isValid()) {
+        this.ngModelEndChange.emit(moment(endDate));
+      }
     }
 
     private open() {

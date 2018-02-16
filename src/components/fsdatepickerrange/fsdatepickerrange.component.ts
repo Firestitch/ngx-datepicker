@@ -11,22 +11,18 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 export class FsDatepickerRangeComponent implements OnInit {
 
   parentInstance: any = null;
-  model = null;
 
   constructor(public fsDatePickerModel: FsDatePickerModel, public element: ElementRef) { }
 
   ngOnInit() {
-    this.model = this.parentInstance.getValue();
   }
 
   setStartDate(date) {
-    this.model.start_date = date;
-    this.parentInstance.writeValue(this.model);
+    this.parentInstance.writeValue(date, this.parentInstance.ngModelEnd);
   }
 
   setEndDate(date) {
-    this.model.end_date = date;
-    this.parentInstance.writeValue(this.model);
+    this.parentInstance.writeValue(this.parentInstance.ngModelStart, date);
   }
 
   setDateModeStart(mode) {

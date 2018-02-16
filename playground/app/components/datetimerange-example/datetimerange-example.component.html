@@ -1,6 +1,9 @@
 <form>
   <mat-form-field fxFlex>
-    <input matInput fsDatePickerRange [(ngModel)]="model" view="datetime" readonly name="datetimerangepicker" placeholder="Date Time Range">
+    <input matInput fsDatePickerRange
+    [(ngModelStart)]="event.start_date"
+    [(ngModelEnd)]="event.end_date"
+    view="datetime" readonly name="datetimerangepicker" placeholder="Date Time Range">
   </mat-form-field>
 </form>
 

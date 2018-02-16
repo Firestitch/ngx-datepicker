@@ -9,14 +9,14 @@
     <div class="date-time">
       <div class="date-range">
           <fsDatePickerCalendar
-          [date]="model.start_date"
+          [date]="parentInstance.ngModelStart"
           [dateMode]="fsDatePickerModel.dateMode.start_date"
           (onChange)="setStartDate($event)"
           (onDateModeChange)="setDateModeStart($event)"
           ></fsDatePickerCalendar>
 
           <fsDatePickerCalendar
-          [date]="model.end_date"
+          [date]="parentInstance.ngModelEnd"
           [dateMode]="fsDatePickerModel.dateMode.end_date"
           (onChange)="setEndDate($event)"
           (onDateModeChange)="setDateModeEnd($event)"
@@ -26,13 +26,13 @@
       <mat-tab-group class="time-range">
         <mat-tab label="START TIME">
           <fsDatePickerTime
-            [date]="model.start_date"
+            [date]="parentInstance.ngModelStart"
             (onChange)="setStartDate($event)"
           ></fsDatePickerTime>
         </mat-tab>
         <mat-tab label="END TIME">
           <fsDatePickerTime
-            [date]="model.end_date"
+            [date]="parentInstance.ngModelEnd"
             (onChange)="setEndDate($event)"
           ></fsDatePickerTime>
         </mat-tab>

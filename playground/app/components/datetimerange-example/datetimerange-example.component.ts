@@ -10,13 +10,10 @@ export class DateTimeRangeExampleComponent {
 
   event = {
     id: 999,
-    start_date: moment(),
+    start_date: moment().format(),
     end_date: moment()
   };
 
-  model;
-
   constructor() {
-    this.model = { start_date: this.event.start_date, end_date: this.event.end_date };
   }
 }
