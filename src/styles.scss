@@ -13,7 +13,7 @@
 .fs-datetime-backdrop[hidden] { display: none !important; }
 
 a {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /*
@@ -89,6 +89,11 @@ fs-datetime md-input-container.md-block .md-input {
 .fs-datetime-dialog.has-time.has-date .wrap {
     width: 645px;
 }
+.fs-datetime-dialog .wrap:focus,
+.fs-datetime-dialog .wrap:active,
+.fs-datetime-dialog:focus, .fs-datetime-dialog:active {
+  outline: none;
+}
 
 .fs-datetime-dialog.has-time:not(.has-date) .wrap {
     width: 255px;
@@ -161,6 +166,11 @@ fs-datetime md-input-container.md-block .md-input {
 .fs-datetime-dialog .inline-date {
 	padding: 10px;
 	width: 100%;
+}
+
+.fs-datetime-dialog .gap {
+  display: flex;
+  flex: 1;
 }
 
 .fs-datetime-dialog .month-year .actions {
