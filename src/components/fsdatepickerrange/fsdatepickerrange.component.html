@@ -18,6 +18,7 @@
           <fsDatePickerCalendar
           [date]="parentInstance.ngModelEnd"
           [dateMode]="fsDatePickerModel.dateMode.end_date"
+          [disabledDays]="toDisabledDays"
           (onChange)="setEndDate($event)"
           (onDateModeChange)="setDateModeEnd($event)"
           ></fsDatePickerCalendar>
@@ -33,6 +34,7 @@
         <mat-tab label="END TIME">
           <fsDatePickerTime
             [date]="parentInstance.ngModelEnd"
+            [disabledTimes]="toDisabledTimes"
             (onChange)="setEndDate($event)"
           ></fsDatePickerTime>
         </mat-tab>

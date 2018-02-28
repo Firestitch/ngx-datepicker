@@ -54,6 +54,7 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes) {
+
       if (!changes) {
         return;
       }
@@ -76,14 +77,8 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     writeValue(startDate, endDate): void {
-
-      if (moment(startDate).isValid()) {
-        this.ngModelStartChange.emit(moment(startDate));
-      }
-
-      if (moment(endDate).isValid()) {
-        this.ngModelEndChange.emit(moment(endDate));
-      }
+      this.ngModelStartChange.emit(startDate && moment(startDate).isValid() ? moment(startDate) : startDate);
+      this.ngModelEndChange.emit(endDate && moment(endDate).isValid() ? moment(endDate) : endDate);
     }
 
     private open() {
