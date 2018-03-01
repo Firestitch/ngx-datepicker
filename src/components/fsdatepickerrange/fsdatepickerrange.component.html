@@ -24,7 +24,7 @@
           ></fsDatePickerCalendar>
       </div>
 
-      <mat-tab-group class="time-range">
+      <mat-tab-group class="time-range" *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1">
         <mat-tab label="START TIME">
           <fsDatePickerTime
             [date]="parentInstance.ngModelStart"
@@ -41,8 +41,19 @@
       </mat-tab-group>
 
     </div>
+
     <div *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1" class="done">
       <button mat-raised-button color="primary" (click)="close($event)">Done</button>
+
+      <div class="ranges" *ngIf="['datetime'].indexOf(fsDatePickerModel.view) !== -1">
+        <div>Today</div>
+        <div>Yesterday</div>
+        <div>Last 7 Days</div>
+        <div>Last 30 Days</div>
+        <div>This Month</div>
+        <div>Last Month</div>
+      </div>
     </div>
+
   </div>
 </div>

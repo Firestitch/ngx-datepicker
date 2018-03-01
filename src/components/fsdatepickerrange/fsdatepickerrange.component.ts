@@ -1,4 +1,5 @@
-import { Component, Input, HostListener, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, HostListener, ElementRef, IterableDiffers,
+  ViewEncapsulation, OnInit, DoCheck } from '@angular/core';
 import { FsUtil } from '@firestitch/common';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 import * as moment from 'moment-timezone';
@@ -10,37 +11,49 @@ import * as moment from 'moment-timezone';
     encapsulation: ViewEncapsulation.None,
     providers: [FsDatePickerModel]
 })
-export class FsDatepickerRangeComponent implements OnInit {
+export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   parentInstance: any = null;
 
   toDisabledDays = [];
   toDisabledTimes = [];
 
-  constructor(public fsDatePickerModel: FsDatePickerModel, public element: ElementRef, public fsUtil: FsUtil) { }
+  private modelDiffer = null;
 
-  ngOnInit() {
-    this.toDisabledDaysUpdate(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd);
-    this.toDisabledTimesUpdate(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd);
+  constructor(public fsDatePickerModel: FsDatePickerModel,
+    public element: ElementRef, public fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
+      this.modelDiffer = this._iterableDiffers.find([]).create(null);
+    }
+
+  ngOnInit() { }
+
+  ngDoCheck() {
+    if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
+
+      const startDate = this.parentInstance.ngModelStart;
+      const endDate = this.parentInstance.ngModelEnd;
+
+      if (startDate && endDate && endDate.isBefore(startDate)) {
+        setTimeout(() => {
+          if (startDate.isSame(endDate, 'day')) {
+            this.setEndDate(startDate);
+          } else {
+            this.setEndDate(undefined);
+          }
+        });
+      } else {
+        this.toDisabledDaysUpdate(startDate, endDate);
+        this.toDisabledTimesUpdate(startDate, endDate);
+      }
+    }
   }
 
   setStartDate(date) {
-    const startDate = date;
-    let endDate = this.parentInstance.ngModelEnd;
-
-    if (startDate && endDate && endDate.isBefore(startDate)) {
-      endDate = undefined;
-    }
-
-    this.parentInstance.writeValue(startDate, endDate);
-
-    this.toDisabledDaysUpdate(startDate, endDate);
-    this.toDisabledTimesUpdate(startDate, endDate);
+    this.parentInstance.writeValue(date, this.parentInstance.ngModelEnd);
   }
 
   setEndDate(date) {
     this.parentInstance.writeValue(this.parentInstance.ngModelStart, date);
-    this.toDisabledTimesUpdate(this.parentInstance.ngModelStart, date);
   }
 
   toDisabledDaysUpdate(startDate, endDate) {

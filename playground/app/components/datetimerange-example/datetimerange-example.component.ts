@@ -10,8 +10,8 @@ export class DateTimeRangeExampleComponent {
 
   event = {
     id: 999,
-    start_date: moment().format(),
-    end_date: moment()
+    start_date: moment().startOf('day'),
+    end_date: moment().startOf('day')
   };
 
   constructor() {
