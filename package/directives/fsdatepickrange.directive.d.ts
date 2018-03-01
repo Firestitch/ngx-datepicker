@@ -1,0 +1,37 @@
+import { Renderer, ElementRef, EventEmitter, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { FsDatepickerRangeFactory } from './../services/fsdatepickerrangefactory.service';
+import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
+export declare class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
+    private _elementRef;
+    private renderer;
+    private factoryResolver;
+    private viewContainerRef;
+    private fsDatePickerCommon;
+    private fsDatepickerRangeFactory;
+    minYear: any;
+    maxYear: any;
+    view: string;
+    ngModelStart: any;
+    ngModelEnd: any;
+    ngModelStartChange: EventEmitter<any>;
+    ngModelEndChange: EventEmitter<any>;
+    change$: EventEmitter<any>;
+    opened: boolean;
+    private $dialog;
+    private rootViewContainer;
+    _onTouched: () => void;
+    _onChange: (value: any) => void;
+    onFocused: (event: any) => void;
+    registerOnChange(fn: (value: any) => any): void;
+    registerOnTouched(fn: () => any): void;
+    constructor(_elementRef: ElementRef, renderer: Renderer, factoryResolver: any, viewContainerRef: any, fsDatePickerCommon: FsDatePickerCommon, fsDatepickerRangeFactory: FsDatepickerRangeFactory);
+    ngOnInit(): void;
+    ngOnChanges(changes: any): void;
+    writeValue(startDate: any, endDate: any): void;
+    private open();
+    private inputClick(e);
+    inputKeyup(e: any): void;
+    inputBlur(event: any): void;
+    onWindowResize(event: any): void;
+    ngOnDestroy(): void;
+}

@@ -1,0 +1,35 @@
+import { Renderer, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { FsDatepickerFactory } from './../services/fsdatepickerfactory.service';
+import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
+export declare class FsDatePickDirective implements OnInit, OnDestroy {
+    private _elementRef;
+    private renderer;
+    private factoryResolver;
+    private viewContainerRef;
+    private fsDatePickerCommon;
+    private fsDatepickerFactory;
+    minYear: any;
+    maxYear: any;
+    view: string;
+    change$: EventEmitter<any>;
+    private _model;
+    opened: boolean;
+    private $dialog;
+    private rootViewContainer;
+    _onTouched: () => void;
+    _onChange: (value: any) => void;
+    onFocused: (event: any) => void;
+    registerOnChange(fn: (value: any) => any): void;
+    registerOnTouched(fn: () => any): void;
+    constructor(_elementRef: ElementRef, renderer: Renderer, factoryResolver: any, viewContainerRef: any, fsDatePickerCommon: FsDatePickerCommon, fsDatepickerFactory: FsDatepickerFactory);
+    ngOnInit(): void;
+    onChangeInterceptor($event: any): void;
+    writeValue(value: any): void;
+    getValue(): any;
+    private open();
+    private inputClick(e);
+    inputKeyup(e: any): void;
+    inputBlur(event: any): void;
+    onWindowResize(event: any): void;
+    ngOnDestroy(): void;
+}

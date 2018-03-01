@@ -1,0 +1,59 @@
+<div class="fs-datetime-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
+
+<div class="fs-datetime-dialog fs-datetime-range" tabindex="0"
+[ngClass]="{ opened: parentInstance.opened,
+  'has-date': ['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,
+  'has-time': ['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1 }">
+  <div class="wrap">
+
+    <div class="date-time">
+      <div class="date-range">
+          <fsDatePickerCalendar
+          [date]="parentInstance.ngModelStart"
+          [dateMode]="fsDatePickerModel.dateMode.start_date"
+          (onChange)="setStartDate($event)"
+          (onDateModeChange)="setDateModeStart($event)"
+          ></fsDatePickerCalendar>
+
+          <fsDatePickerCalendar
+          [date]="parentInstance.ngModelEnd"
+          [dateMode]="fsDatePickerModel.dateMode.end_date"
+          [disabledDays]="toDisabledDays"
+          (onChange)="setEndDate($event)"
+          (onDateModeChange)="setDateModeEnd($event)"
+          ></fsDatePickerCalendar>
+      </div>
+
+      <mat-tab-group class="time-range" *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1">
+        <mat-tab label="START TIME">
+          <fsDatePickerTime
+            [date]="parentInstance.ngModelStart"
+            (onChange)="setStartDate($event)"
+          ></fsDatePickerTime>
+        </mat-tab>
+        <mat-tab label="END TIME">
+          <fsDatePickerTime
+            [date]="parentInstance.ngModelEnd"
+            [disabledTimes]="toDisabledTimes"
+            (onChange)="setEndDate($event)"
+          ></fsDatePickerTime>
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+
+    <div *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1" class="done">
+      <button mat-raised-button color="primary" (click)="close($event)">Done</button>
+
+      <div class="ranges" *ngIf="['datetime'].indexOf(fsDatePickerModel.view) !== -1">
+        <div>Today</div>
+        <div>Yesterday</div>
+        <div>Last 7 Days</div>
+        <div>Last 30 Days</div>
+        <div>This Month</div>
+        <div>Last Month</div>
+      </div>
+    </div>
+
+  </div>
+</div>

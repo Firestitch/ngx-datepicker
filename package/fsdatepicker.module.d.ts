@@ -1,4 +1,4 @@
 import { ModuleWithProviders } from '@angular/core';
-export declare class FsDatepickerModule {
+export declare class FsDatePickerModule {
     static forRoot(): ModuleWithProviders;
 }

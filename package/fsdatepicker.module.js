@@ -10,48 +10,64 @@ var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var material_1 = require("@angular/material");
-var fsdatepicker_directive_1 = require("./fsdatepicker.directive");
-var fsdatepickerdialog_component_1 = require("./fsdatepickerdialog.component");
-var fsdatepickerdialogfactory_service_1 = require("./fsdatepickerdialogfactory.service");
+var material_2 = require("@angular/material");
 var common_2 = require("@firestitch/common");
-var fsisscroll_directive_1 = require("./fsisscroll.directive");
-var FsDatepickerModule = (function () {
-    function FsDatepickerModule() {
+var fsdatepick_directive_1 = require("./directives/fsdatepick.directive");
+var fsdatepickrange_directive_1 = require("./directives/fsdatepickrange.directive");
+var fsisscroll_directive_1 = require("./directives/fsisscroll.directive");
+var fsdatepicker_component_1 = require("./components/fsdatepicker/fsdatepicker.component");
+var fsdatepickerrange_component_1 = require("./components/fsdatepickerrange/fsdatepickerrange.component");
+var fsdatepickercalendar_component_1 = require("./components/fsdatepickercalendar/fsdatepickercalendar.component");
+var fsdatepickertime_component_1 = require("./components/fsdatepickertime/fsdatepickertime.component");
+var fsdatepickerfactory_service_1 = require("./services/fsdatepickerfactory.service");
+var fsdatepickerrangefactory_service_1 = require("./services/fsdatepickerrangefactory.service");
+var fsdatepickercommon_service_1 = require("./services/fsdatepickercommon.service");
+var FsDatePickerModule = (function () {
+    function FsDatePickerModule() {
     }
-    FsDatepickerModule_1 = FsDatepickerModule;
-    FsDatepickerModule.forRoot = function () {
+    FsDatePickerModule_1 = FsDatePickerModule;
+    FsDatePickerModule.forRoot = function () {
         return {
-            ngModule: FsDatepickerModule_1,
-            providers: [fsdatepickerdialogfactory_service_1.FsDatepickerDialogFactory]
+            ngModule: FsDatePickerModule_1,
+            providers: [fsdatepickerfactory_service_1.FsDatepickerFactory, fsdatepickerrangefactory_service_1.FsDatepickerRangeFactory, fsdatepickercommon_service_1.FsDatePickerCommon]
         };
     };
-    FsDatepickerModule = FsDatepickerModule_1 = __decorate([
+    FsDatePickerModule = FsDatePickerModule_1 = __decorate([
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 common_2.FsCommonModule,
                 material_1.MatButtonModule,
+                material_2.MatTabsModule,
                 material_1.MatIconModule
             ],
             exports: [
-                fsdatepicker_directive_1.FsDatepickerDirective
+                fsdatepick_directive_1.FsDatePickDirective,
+                fsdatepickrange_directive_1.FsDatePickRangeDirective
             ],
             entryComponents: [
-                fsdatepickerdialog_component_1.FsDatepickerDialogComponent
+                fsdatepicker_component_1.FsDatepickerComponent,
+                fsdatepickerrange_component_1.FsDatepickerRangeComponent
             ],
             declarations: [
-                fsdatepicker_directive_1.FsDatepickerDirective,
-                fsdatepickerdialog_component_1.FsDatepickerDialogComponent,
-                fsisscroll_directive_1.FsIsscrollDirective
+                fsdatepick_directive_1.FsDatePickDirective,
+                fsdatepickrange_directive_1.FsDatePickRangeDirective,
+                fsdatepicker_component_1.FsDatepickerComponent,
+                fsdatepickerrange_component_1.FsDatepickerRangeComponent,
+                fsisscroll_directive_1.FsIsscrollDirective,
+                fsdatepickercalendar_component_1.FsDatePickerCalendarComponent,
+                fsdatepickertime_component_1.FsDatePickerTimeComponent
             ],
             providers: [
-                fsdatepickerdialogfactory_service_1.FsDatepickerDialogFactory
+                fsdatepickerfactory_service_1.FsDatepickerFactory,
+                fsdatepickerrangefactory_service_1.FsDatepickerRangeFactory,
+                fsdatepickercommon_service_1.FsDatePickerCommon
             ],
         })
-    ], FsDatepickerModule);
-    return FsDatepickerModule;
-    var FsDatepickerModule_1;
+    ], FsDatePickerModule);
+    return FsDatePickerModule;
+    var FsDatePickerModule_1;
 }());
-exports.FsDatepickerModule = FsDatepickerModule;
+exports.FsDatePickerModule = FsDatePickerModule;
 //# sourceMappingURL=fsdatepicker.module.js.map
