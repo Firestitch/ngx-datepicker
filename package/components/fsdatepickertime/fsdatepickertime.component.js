@@ -93,19 +93,17 @@ var FsDatePickerTimeComponent = (function () {
                 for (var h = 0; h <= 24; h++) {
                     this.disabledGroupedMinutes[h] = {};
                     if (h > minHour && h < maxHour) {
-                        this.addDisabledHours([h, h]);
+                        this.addDisabledHours(h);
                     }
-                    else if (h == minHour && !minMinutes) {
-                        this.addDisabledHours([h, h]);
+                    else if (h == minHour && !minMinutes && minHour != maxHour) {
+                        this.addDisabledHours(h);
                     }
-                    if (h == minHour) {
-                        for (var m = minMinutes; m < 60; m++) {
-                            this.disabledGroupedMinutes[h][m] = true;
-                        }
-                    }
-                    if (h == maxHour) {
-                        for (var m = 0; m < maxMinutes; m++) {
-                            this.disabledGroupedMinutes[h][m] = true;
+                    if (h >= minHour && h <= maxHour) {
+                        for (var m = minMinutes; m < maxMinutes; m++) {
+                            var minute = h * m;
+                            if (minute >= range[0] && minute <= range[1]) {
+                                this.disabledGroupedMinutes[h][m] = true;
+                            }
                         }
                     }
                 }

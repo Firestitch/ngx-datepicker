@@ -29,22 +29,16 @@ var FsDatepickerRangeComponent = (function () {
     FsDatepickerRangeComponent.prototype.ngDoCheck = function () {
         var _this = this;
         if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
-            var startDate_1 = this.parentInstance.ngModelStart;
+            var startDate = this.parentInstance.ngModelStart;
             var endDate_1 = this.parentInstance.ngModelEnd;
-            if (startDate_1 && endDate_1 && endDate_1.isBefore(startDate_1)) {
+            if (startDate && endDate_1 && endDate_1.isBefore(startDate)) {
+                endDate_1 = startDate.isSame(endDate_1, 'day') ? startDate : undefined;
                 setTimeout(function () {
-                    if (startDate_1.isSame(endDate_1, 'day')) {
-                        _this.setEndDate(startDate_1);
-                    }
-                    else {
-                        _this.setEndDate(undefined);
-                    }
+                    _this.setEndDate(endDate_1);
                 });
             }
-            else {
-                this.toDisabledDaysUpdate(startDate_1, endDate_1);
-                this.toDisabledTimesUpdate(startDate_1, endDate_1);
-            }
+            this.toDisabledDaysUpdate(startDate, endDate_1);
+            this.toDisabledTimesUpdate(startDate, endDate_1);
         }
     };
     FsDatepickerRangeComponent.prototype.setStartDate = function (date) {

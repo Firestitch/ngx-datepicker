@@ -840,22 +840,16 @@ var FsDatepickerRangeComponent = (function () {
     FsDatepickerRangeComponent.prototype.ngDoCheck = function () {
         var _this = this;
         if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
-            var startDate_1 = this.parentInstance.ngModelStart;
+            var startDate = this.parentInstance.ngModelStart;
             var endDate_1 = this.parentInstance.ngModelEnd;
-            if (startDate_1 && endDate_1 && endDate_1.isBefore(startDate_1)) {
+            if (startDate && endDate_1 && endDate_1.isBefore(startDate)) {
+                endDate_1 = startDate.isSame(endDate_1, 'day') ? startDate : undefined;
                 setTimeout(function () {
-                    if (startDate_1.isSame(endDate_1, 'day')) {
-                        _this.setEndDate(startDate_1);
-                    }
-                    else {
-                        _this.setEndDate(undefined);
-                    }
+                    _this.setEndDate(endDate_1);
                 });
             }
-            else {
-                this.toDisabledDaysUpdate(startDate_1, endDate_1);
-                this.toDisabledTimesUpdate(startDate_1, endDate_1);
-            }
+            this.toDisabledDaysUpdate(startDate, endDate_1);
+            this.toDisabledTimesUpdate(startDate, endDate_1);
         }
     };
     FsDatepickerRangeComponent.prototype.setStartDate = function (date) {
@@ -920,7 +914,7 @@ exports.FsDatepickerRangeComponent = FsDatepickerRangeComponent;
 /***/ "../src/components/fsdatepickertime/fsdatepickertime.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"time\" *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n  <div class=\"wraper\">\n    <div class=\"hours\">\n      <div class=\"lbl\">Hour</div>\n        <table>\n          <tr *ngFor=\"let hours of timeHours\">\n              <td *ngFor=\"let hour of hours\" class=\"hour\" (click)=\"hourClick(hour)\" [ngClass]=\"{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }\">\n                <div class=\"number\">\n                  <span *ngIf=\"hour < 12\">{{ hour ? hour : 12 }}<span class=\"am-pm\">am</span></span>\n                  <span *ngIf=\"hour >= 12\">{{ hour==12 ? 12 : hour-12 }}<span class=\"am-pm\">pm</span></span>\n                </div>\n              </td>\n          </tr>\n        </table>\n      </div>\n      <div class=\"minutes\">\n\n        <div class=\"lbl\">Minute</div>\n        <table>\n          <tr *ngFor=\"let minutes of timeMinutes\">\n            <td *ngFor=\"let minute of minutes\" class=\"minute\" [ngClass]=\"{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }\" (click)=\"minuteClick(minute)\">\n              <div class=\"number\">{{ minute }}</div>\n            </td>\n          </tr>\n        </table>\n      </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"time\" *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n  <div class=\"wraper\">\n    <div class=\"hours\">\n      <div class=\"lbl\">Hour</div>\n        <table>\n          <tr *ngFor=\"let hours of timeHours\">\n              <td *ngFor=\"let hour of hours\" class=\"hour\" (click)=\"hourClick(hour)\" [ngClass]=\"{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }\">\n                <div class=\"number\">\n                  <span *ngIf=\"hour < 12\">{{ hour ? hour : 12 }}<span class=\"am-pm\">am</span></span>\n                  <span *ngIf=\"hour >= 12\">{{ hour==12 ? 12 : hour-12 }}<span class=\"am-pm\">pm</span></span>\n                </div>\n              </td>\n          </tr>\n        </table>\n      </div>\n      <div class=\"minutes\">\n\n        <div class=\"lbl\">Minute</div>\n        <table>\n          <tr *ngFor=\"let minutes of timeMinutes\">\n            <td *ngFor=\"let minute of minutes\" class=\"minute\"\n            [ngClass]=\"{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }\"\n            (click)=\"minuteClick(minute)\">\n              <div class=\"number\">{{ minute }}</div>\n            </td>\n          </tr>\n        </table>\n      </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1038,19 +1032,17 @@ var FsDatePickerTimeComponent = (function () {
                 for (var h = 0; h <= 24; h++) {
                     this.disabledGroupedMinutes[h] = {};
                     if (h > minHour && h < maxHour) {
-                        this.addDisabledHours([h, h]);
+                        this.addDisabledHours(h);
                     }
-                    else if (h == minHour && !minMinutes) {
-                        this.addDisabledHours([h, h]);
+                    else if (h == minHour && !minMinutes && minHour != maxHour) {
+                        this.addDisabledHours(h);
                     }
-                    if (h == minHour) {
-                        for (var m = minMinutes; m < 60; m++) {
-                            this.disabledGroupedMinutes[h][m] = true;
-                        }
-                    }
-                    if (h == maxHour) {
-                        for (var m = 0; m < maxMinutes; m++) {
-                            this.disabledGroupedMinutes[h][m] = true;
+                    if (h >= minHour && h <= maxHour) {
+                        for (var m = minMinutes; m < maxMinutes; m++) {
+                            var minute = h * m;
+                            if (minute >= range[0] && minute <= range[1]) {
+                                this.disabledGroupedMinutes[h][m] = true;
+                            }
                         }
                     }
                 }
