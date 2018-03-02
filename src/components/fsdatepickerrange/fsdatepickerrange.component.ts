@@ -31,20 +31,16 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
 
       const startDate = this.parentInstance.ngModelStart;
-      const endDate = this.parentInstance.ngModelEnd;
+      let endDate = this.parentInstance.ngModelEnd;
 
       if (startDate && endDate && endDate.isBefore(startDate)) {
+        endDate = startDate.isSame(endDate, 'day') ? startDate : undefined;
         setTimeout(() => {
-          if (startDate.isSame(endDate, 'day')) {
-            this.setEndDate(startDate);
-          } else {
-            this.setEndDate(undefined);
-          }
+          this.setEndDate(endDate);
         });
-      } else {
-        this.toDisabledDaysUpdate(startDate, endDate);
-        this.toDisabledTimesUpdate(startDate, endDate);
       }
+      this.toDisabledDaysUpdate(startDate, endDate);
+      this.toDisabledTimesUpdate(startDate, endDate);
     }
   }
 

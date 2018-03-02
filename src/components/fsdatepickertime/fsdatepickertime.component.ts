@@ -91,6 +91,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
         let min = Math.min(range[0], range[1]);
         let max = Math.max(range[0], range[1]);
+
         let minMinutes = min % 60;
         let maxMinutes = max % 60;
 
@@ -102,20 +103,17 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
           this.disabledGroupedMinutes[h] = {};
 
           if (h > minHour && h < maxHour)  {
-            this.addDisabledHours([h, h]);
-          } else if (h == minHour && !minMinutes) {
-            this.addDisabledHours([h, h]);
+            this.addDisabledHours(h);
+          } else if (h == minHour && !minMinutes && minHour != maxHour) {
+            this.addDisabledHours(h);
           }
 
-          if (h == minHour) {
-            for (let m = minMinutes; m < 60; m++) {
-              this.disabledGroupedMinutes[h][m] = true;
-            }
-          }
-
-          if (h == maxHour) {
-            for (let m = 0; m < maxMinutes; m++) {
-              this.disabledGroupedMinutes[h][m] = true;
+          if (h >= minHour && h <= maxHour) {
+            for (let m = minMinutes; m < maxMinutes; m++) {
+              const minute = h * m;
+              if (minute >= range[0] && minute <= range[1]) {
+                this.disabledGroupedMinutes[h][m] = true;
+              }
             }
           }
         }

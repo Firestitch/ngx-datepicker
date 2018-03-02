@@ -18,7 +18,9 @@
         <div class="lbl">Minute</div>
         <table>
           <tr *ngFor="let minutes of timeMinutes">
-            <td *ngFor="let minute of minutes" class="minute" [ngClass]="{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }" (click)="minuteClick(minute)">
+            <td *ngFor="let minute of minutes" class="minute"
+            [ngClass]="{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }"
+            (click)="minuteClick(minute)">
               <div class="number">{{ minute }}</div>
             </td>
           </tr>
