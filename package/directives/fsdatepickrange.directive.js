@@ -41,6 +41,10 @@ var FsDatePickRangeDirective = (function () {
     FsDatePickRangeDirective.prototype.registerOnChange = function (fn) { this._onChange = fn; };
     FsDatePickRangeDirective.prototype.registerOnTouched = function (fn) { this._onTouched = fn; };
     FsDatePickRangeDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this._elementRef.nativeElement.setAttribute('readonly', true);
+        });
     };
     FsDatePickRangeDirective.prototype.ngOnChanges = function (changes) {
         var _this = this;

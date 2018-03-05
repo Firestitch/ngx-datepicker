@@ -38,6 +38,10 @@ var FsDatePickDirective = (function () {
     FsDatePickDirective.prototype.registerOnChange = function (fn) { this._onChange = fn; };
     FsDatePickDirective.prototype.registerOnTouched = function (fn) { this._onTouched = fn; };
     FsDatePickDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this._elementRef.nativeElement.setAttribute('readonly', true);
+        });
     };
     FsDatePickDirective.prototype.onChangeInterceptor = function ($event) {
         this.writeValue($event.target.value);

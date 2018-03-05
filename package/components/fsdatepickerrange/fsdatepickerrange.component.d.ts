@@ -15,10 +15,12 @@ export declare class FsDatepickerRangeComponent implements OnInit, DoCheck {
     ngDoCheck(): void;
     setStartDate(date: any): void;
     setEndDate(date: any): void;
+    setDates(startDate: any, endDate: any): void;
     toDisabledDaysUpdate(startDate: any, endDate: any): void;
     toDisabledTimesUpdate(startDate: any, endDate: any): void;
     setDateModeStart(mode: any): void;
     setDateModeEnd(mode: any): void;
     close($event?: any): void;
     documentKeydown(e: any): void;
+    range(type: any): void;
 }

@@ -42,10 +42,13 @@ var FsDatepickerRangeComponent = (function () {
         }
     };
     FsDatepickerRangeComponent.prototype.setStartDate = function (date) {
-        this.parentInstance.writeValue(date, this.parentInstance.ngModelEnd);
+        this.setDates(date, this.parentInstance.ngModelEnd);
     };
     FsDatepickerRangeComponent.prototype.setEndDate = function (date) {
-        this.parentInstance.writeValue(this.parentInstance.ngModelStart, date);
+        this.setDates(this.parentInstance.ngModelStart, date);
+    };
+    FsDatepickerRangeComponent.prototype.setDates = function (startDate, endDate) {
+        this.parentInstance.writeValue(startDate, endDate);
     };
     FsDatepickerRangeComponent.prototype.toDisabledDaysUpdate = function (startDate, endDate) {
         this.toDisabledDays = startDate ? [[moment().subtract(99, 'year'), startDate.clone()]] : [];
@@ -75,6 +78,33 @@ var FsDatepickerRangeComponent = (function () {
             e.preventDefault();
             this.close(e);
         }
+    };
+    FsDatepickerRangeComponent.prototype.range = function (type) {
+        var startDate = moment();
+        var endDate = moment();
+        if (type == 'today') {
+            startDate = startDate.startOf('day');
+            endDate = endDate.endOf('day');
+        }
+        else if (type == 'yesterday') {
+            startDate = startDate.subtract(1, 'day').startOf('day');
+            endDate = endDate.subtract(1, 'day').endOf('day');
+        }
+        else if (type == 'last_7') {
+            startDate = startDate.subtract(7, 'days');
+        }
+        else if (type == 'last_30') {
+            startDate = startDate.subtract(30, 'days');
+        }
+        else if (type == 'current_month') {
+            startDate = startDate.startOf('month');
+            endDate = endDate.endOf('month');
+        }
+        else if (type == 'last_month') {
+            startDate = startDate.subtract(1, 'month').startOf('month');
+            endDate = endDate.subtract(1, 'month').endOf('month');
+        }
+        this.setDates(startDate, endDate);
     };
     __decorate([
         core_1.HostListener('document:keydown', ['$event']),

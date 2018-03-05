@@ -801,7 +801,7 @@ exports.FsDatePickerCalendarComponent = FsDatePickerCalendarComponent;
 /***/ "../src/components/fsdatepickerrange/fsdatepickerrange.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"fs-datetime-backdrop\" [hidden]=\"!parentInstance.opened\" (click)=\"close($event)\"></div>\n\n<div class=\"fs-datetime-dialog fs-datetime-range\" tabindex=\"0\"\n[ngClass]=\"{ opened: parentInstance.opened,\n  'has-date': ['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,\n  'has-time': ['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1 }\">\n  <div class=\"wrap\">\n\n    <div class=\"date-time\">\n      <div class=\"date-range\">\n          <fsDatePickerCalendar\n          [date]=\"parentInstance.ngModelStart\"\n          [dateMode]=\"fsDatePickerModel.dateMode.start_date\"\n          (onChange)=\"setStartDate($event)\"\n          (onDateModeChange)=\"setDateModeStart($event)\"\n          ></fsDatePickerCalendar>\n\n          <fsDatePickerCalendar\n          [date]=\"parentInstance.ngModelEnd\"\n          [dateMode]=\"fsDatePickerModel.dateMode.end_date\"\n          [disabledDays]=\"toDisabledDays\"\n          (onChange)=\"setEndDate($event)\"\n          (onDateModeChange)=\"setDateModeEnd($event)\"\n          ></fsDatePickerCalendar>\n      </div>\n\n      <mat-tab-group class=\"time-range\" *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n        <mat-tab label=\"START TIME\">\n          <fsDatePickerTime\n            [date]=\"parentInstance.ngModelStart\"\n            (onChange)=\"setStartDate($event)\"\n          ></fsDatePickerTime>\n        </mat-tab>\n        <mat-tab label=\"END TIME\">\n          <fsDatePickerTime\n            [date]=\"parentInstance.ngModelEnd\"\n            [disabledTimes]=\"toDisabledTimes\"\n            (onChange)=\"setEndDate($event)\"\n          ></fsDatePickerTime>\n        </mat-tab>\n      </mat-tab-group>\n\n    </div>\n\n    <div *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\" class=\"done\">\n      <button mat-raised-button color=\"primary\" (click)=\"close($event)\">Done</button>\n\n      <div class=\"ranges\" *ngIf=\"['datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n        <div>Today</div>\n        <div>Yesterday</div>\n        <div>Last 7 Days</div>\n        <div>Last 30 Days</div>\n        <div>This Month</div>\n        <div>Last Month</div>\n      </div>\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"fs-datetime-backdrop\" [hidden]=\"!parentInstance.opened\" (click)=\"close($event)\"></div>\n\n<div class=\"fs-datetime-dialog fs-datetime-range\" tabindex=\"0\"\n[ngClass]=\"{ opened: parentInstance.opened,\n  'has-date': ['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,\n  'has-time': ['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1 }\">\n  <div class=\"wrap\">\n\n    <div class=\"date-time\">\n      <div class=\"date-range\">\n          <fsDatePickerCalendar\n          [date]=\"parentInstance.ngModelStart\"\n          [dateMode]=\"fsDatePickerModel.dateMode.start_date\"\n          (onChange)=\"setStartDate($event)\"\n          (onDateModeChange)=\"setDateModeStart($event)\"\n          ></fsDatePickerCalendar>\n\n          <fsDatePickerCalendar\n          [date]=\"parentInstance.ngModelEnd\"\n          [dateMode]=\"fsDatePickerModel.dateMode.end_date\"\n          [disabledDays]=\"toDisabledDays\"\n          (onChange)=\"setEndDate($event)\"\n          (onDateModeChange)=\"setDateModeEnd($event)\"\n          ></fsDatePickerCalendar>\n      </div>\n\n      <mat-tab-group class=\"time-range\" *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n        <mat-tab label=\"START TIME\">\n          <fsDatePickerTime\n            [date]=\"parentInstance.ngModelStart\"\n            (onChange)=\"setStartDate($event)\"\n          ></fsDatePickerTime>\n        </mat-tab>\n        <mat-tab label=\"END TIME\">\n          <fsDatePickerTime\n            [date]=\"parentInstance.ngModelEnd\"\n            [disabledTimes]=\"toDisabledTimes\"\n            (onChange)=\"setEndDate($event)\"\n          ></fsDatePickerTime>\n        </mat-tab>\n      </mat-tab-group>\n\n    </div>\n\n    <div *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\" class=\"done\">\n      <button mat-raised-button color=\"primary\" (click)=\"close($event)\">Done</button>\n\n      <div class=\"ranges\" *ngIf=\"['datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n        <div (click)=\"range('today')\">Today</div>\n        <div (click)=\"range('yesterday')\">Yesterday</div>\n        <div (click)=\"range('last_7')\">Last 7 Days</div>\n        <div (click)=\"range('last_30')\">Last 30 Days</div>\n        <div (click)=\"range('current_month')\">This Month</div>\n        <div (click)=\"range('last_month')\">Last Month</div>\n      </div>\n    </div>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -853,10 +853,13 @@ var FsDatepickerRangeComponent = (function () {
         }
     };
     FsDatepickerRangeComponent.prototype.setStartDate = function (date) {
-        this.parentInstance.writeValue(date, this.parentInstance.ngModelEnd);
+        this.setDates(date, this.parentInstance.ngModelEnd);
     };
     FsDatepickerRangeComponent.prototype.setEndDate = function (date) {
-        this.parentInstance.writeValue(this.parentInstance.ngModelStart, date);
+        this.setDates(this.parentInstance.ngModelStart, date);
+    };
+    FsDatepickerRangeComponent.prototype.setDates = function (startDate, endDate) {
+        this.parentInstance.writeValue(startDate, endDate);
     };
     FsDatepickerRangeComponent.prototype.toDisabledDaysUpdate = function (startDate, endDate) {
         this.toDisabledDays = startDate ? [[moment().subtract(99, 'year'), startDate.clone()]] : [];
@@ -886,6 +889,33 @@ var FsDatepickerRangeComponent = (function () {
             e.preventDefault();
             this.close(e);
         }
+    };
+    FsDatepickerRangeComponent.prototype.range = function (type) {
+        var startDate = moment();
+        var endDate = moment();
+        if (type == 'today') {
+            startDate = startDate.startOf('day');
+            endDate = endDate.endOf('day');
+        }
+        else if (type == 'yesterday') {
+            startDate = startDate.subtract(1, 'day').startOf('day');
+            endDate = endDate.subtract(1, 'day').endOf('day');
+        }
+        else if (type == 'last_7') {
+            startDate = startDate.subtract(7, 'days');
+        }
+        else if (type == 'last_30') {
+            startDate = startDate.subtract(30, 'days');
+        }
+        else if (type == 'current_month') {
+            startDate = startDate.startOf('month');
+            endDate = endDate.endOf('month');
+        }
+        else if (type == 'last_month') {
+            startDate = startDate.subtract(1, 'month').startOf('month');
+            endDate = endDate.subtract(1, 'month').endOf('month');
+        }
+        this.setDates(startDate, endDate);
     };
     __decorate([
         core_1.HostListener('document:keydown', ['$event']),
@@ -1182,6 +1212,10 @@ var FsDatePickDirective = (function () {
     FsDatePickDirective.prototype.registerOnChange = function (fn) { this._onChange = fn; };
     FsDatePickDirective.prototype.registerOnTouched = function (fn) { this._onTouched = fn; };
     FsDatePickDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this._elementRef.nativeElement.setAttribute('readonly', true);
+        });
     };
     FsDatePickDirective.prototype.onChangeInterceptor = function ($event) {
         this.writeValue($event.target.value);
@@ -1335,6 +1369,10 @@ var FsDatePickRangeDirective = (function () {
     FsDatePickRangeDirective.prototype.registerOnChange = function (fn) { this._onChange = fn; };
     FsDatePickRangeDirective.prototype.registerOnTouched = function (fn) { this._onTouched = fn; };
     FsDatePickRangeDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this._elementRef.nativeElement.setAttribute('readonly', true);
+        });
     };
     FsDatePickRangeDirective.prototype.ngOnChanges = function (changes) {
         var _this = this;
@@ -2091,7 +2129,7 @@ exports.AppComponent = AppComponent;
 /***/ "./app/components/date-example/date-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" readonly name=\"datepicker\" placeholder=\"Date\">\n  </mat-form-field>\n</form>\n"
+module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" name=\"datepicker\" placeholder=\"Date\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
@@ -2143,7 +2181,7 @@ exports.DateExampleComponent = DateExampleComponent;
 /***/ "./app/components/daterange-example/daterange-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"start_date\"\n    [(ngModelEnd)]=\"end_date\"\n    view=\"date\" readonly name=\"daterangepicker\" placeholder=\"Date Range\">\n  </mat-form-field>\n</form>\n"
+module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"start_date\"\n    [(ngModelEnd)]=\"end_date\"\n    view=\"date\" name=\"daterangepicker\" placeholder=\"Date Range\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
@@ -2201,7 +2239,7 @@ exports.DateRangeExampleComponent = DateRangeExampleComponent;
 /***/ "./app/components/datetime-example/datetime-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" view=\"datetime\" readonly name=\"datetimepicker\" placeholder=\"Date Time\">\n  </mat-form-field>\n</form>\n"
+module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" view=\"datetime\" name=\"datetimepicker\" placeholder=\"Date Time\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
@@ -2253,7 +2291,7 @@ exports.DateTimeExampleComponent = DateTimeExampleComponent;
 /***/ "./app/components/datetimerange-example/datetimerange-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"event.start_date\"\n    [(ngModelEnd)]=\"event.end_date\"\n    view=\"datetime\" readonly name=\"datetimerangepicker\" placeholder=\"Date Time Range\">\n  </mat-form-field>\n</form>\n\n{{ event | json }}\n"
+module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"event.start_date\"\n    [(ngModelEnd)]=\"event.end_date\"\n    view=\"datetime\" name=\"datetimerangepicker\" placeholder=\"Date Time Range\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
@@ -2315,7 +2353,7 @@ exports.DateTimeRangeExampleComponent = DateTimeRangeExampleComponent;
 /***/ "./app/components/time-example/time-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" view=\"time\" readonly name=\"timepicker\" placeholder=\"Time\">\n  </mat-form-field>\n</form>\n"
+module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" view=\"time\" name=\"timepicker\" placeholder=\"Time\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
@@ -2367,7 +2405,7 @@ exports.TimeExampleComponent = TimeExampleComponent;
 /***/ "./app/components/timerange-example/timerange-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"start_date\"\n    [(ngModelEnd)]=\"end_date\"\n    view=\"time\" readonly name=\"timerangepicker\" placeholder=\"Time Range\">\n  </mat-form-field>\n</form>\n"
+module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"start_date\"\n    [(ngModelEnd)]=\"end_date\"\n    view=\"time\" name=\"timerangepicker\" placeholder=\"Time Range\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
