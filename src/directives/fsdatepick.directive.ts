@@ -49,6 +49,9 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+      setTimeout(() => {
+        this._elementRef.nativeElement.setAttribute('readonly', true);
+      });
     }
 
     onChangeInterceptor($event) {

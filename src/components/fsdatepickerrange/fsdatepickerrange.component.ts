@@ -45,11 +45,15 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   setStartDate(date) {
-    this.parentInstance.writeValue(date, this.parentInstance.ngModelEnd);
+    this.setDates(date, this.parentInstance.ngModelEnd);
   }
 
   setEndDate(date) {
-    this.parentInstance.writeValue(this.parentInstance.ngModelStart, date);
+    this.setDates(this.parentInstance.ngModelStart, date);
+  }
+
+  setDates(startDate, endDate) {
+    this.parentInstance.writeValue(startDate, endDate);
   }
 
   toDisabledDaysUpdate(startDate, endDate) {
@@ -89,5 +93,31 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
         e.preventDefault();
         this.close(e);
       }
+  }
+
+  range(type) {
+
+    let startDate = moment();
+    let endDate = moment();
+
+    if (type == 'today') {
+      startDate = startDate.startOf('day');
+      endDate = endDate.endOf('day');
+    } else if (type == 'yesterday') {
+      startDate = startDate.subtract(1, 'day').startOf('day');
+      endDate = endDate.subtract(1, 'day').endOf('day');
+    } else if (type == 'last_7') {
+      startDate = startDate.subtract(7, 'days');
+    } else if (type == 'last_30') {
+      startDate = startDate.subtract(30, 'days');
+    } else if (type == 'current_month') {
+      startDate = startDate.startOf('month');
+      endDate = endDate.endOf('month');
+    } else if (type == 'last_month') {
+      startDate = startDate.subtract(1, 'month').startOf('month');
+      endDate = endDate.subtract(1, 'month').endOf('month');
+    }
+
+    this.setDates(startDate, endDate);
   }
 }

@@ -46,12 +46,12 @@
       <button mat-raised-button color="primary" (click)="close($event)">Done</button>
 
       <div class="ranges" *ngIf="['datetime'].indexOf(fsDatePickerModel.view) !== -1">
-        <div>Today</div>
-        <div>Yesterday</div>
-        <div>Last 7 Days</div>
-        <div>Last 30 Days</div>
-        <div>This Month</div>
-        <div>Last Month</div>
+        <div (click)="range('today')">Today</div>
+        <div (click)="range('yesterday')">Yesterday</div>
+        <div (click)="range('last_7')">Last 7 Days</div>
+        <div (click)="range('last_30')">Last 30 Days</div>
+        <div (click)="range('current_month')">This Month</div>
+        <div (click)="range('last_month')">Last Month</div>
       </div>
     </div>
 

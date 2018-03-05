@@ -3,8 +3,6 @@
     <input matInput fsDatePickerRange
     [(ngModelStart)]="event.start_date"
     [(ngModelEnd)]="event.end_date"
-    view="datetime" readonly name="datetimerangepicker" placeholder="Date Time Range">
+    view="datetime" name="datetimerangepicker" placeholder="Date Time Range">
   </mat-form-field>
 </form>
-
-{{ event | json }}

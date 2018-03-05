@@ -51,6 +51,9 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
     ) { }
 
     ngOnInit() {
+      setTimeout(() => {
+        this._elementRef.nativeElement.setAttribute('readonly', true);
+      });
     }
 
     ngOnChanges(changes) {
