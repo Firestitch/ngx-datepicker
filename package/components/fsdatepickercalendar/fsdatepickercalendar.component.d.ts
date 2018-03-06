@@ -9,7 +9,9 @@ export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges,
     private fsUtil;
     private _iterableDiffers;
     date: any;
+    dateToHighlight: any;
     dateMode: any;
+    disabledDays: any;
     onChange: EventEmitter<any>;
     onDateModeChange: EventEmitter<any>;
     selected: {};
@@ -18,7 +20,7 @@ export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges,
     month: any;
     years: any[];
     dateDays: any[];
-    disabledDays: any;
+    private highlightedRangeDays;
     private disabledDaysDiffer;
     monthList: {
         value: number;
@@ -33,6 +35,7 @@ export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges,
     constructor(element: ElementRef, fsDatePickerCommon: FsDatePickerCommon, fsDatePickerModel: FsDatePickerModel, fsUtil: FsUtil, _iterableDiffers: IterableDiffers);
     ngOnInit(): void;
     ngOnChanges(changes: any): void;
+    updateDaysHighlighted(): void;
     ngDoCheck(): void;
     private dateScroll;
     isDayDisabled(md: any): boolean;

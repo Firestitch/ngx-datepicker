@@ -35,7 +35,11 @@
       </thead>
       <tbody class="calendar calendar-{{month.date}}">
         <tr class="week" *ngFor="let week of month.weeks">
-          <td *ngFor="let day of week" class="day" [ngClass]="{ today: today.date==day.date, mute: day.mute, selected: day.date==selected.date && !day.mute, disabled: day.disabled }" (click)="dayClick(day)">
+          <td *ngFor="let day of week" class="day" [ngClass]="{
+            today: today.date==day.date,
+            mute: day.mute,
+            selected: (day.date==selected.date || highlightedRangeDays.indexOf(day.date) !== -1) && !day.mute,
+            disabled: day.disabled }" (click)="dayClick(day)">
             <span>{{day.number}}</span>
           </td>
         </tr>

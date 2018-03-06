@@ -10,6 +10,7 @@
       <div class="date-range">
           <fsDatePickerCalendar
           [date]="parentInstance.ngModelStart"
+          [dateToHighlight]="parentInstance.ngModelEnd"
           [dateMode]="fsDatePickerModel.dateMode.start_date"
           (onChange)="setStartDate($event)"
           (onDateModeChange)="setDateModeStart($event)"
@@ -17,6 +18,7 @@
 
           <fsDatePickerCalendar
           [date]="parentInstance.ngModelEnd"
+          [dateToHighlight]="parentInstance.ngModelStart"
           [dateMode]="fsDatePickerModel.dateMode.end_date"
           [disabledDays]="toDisabledDays"
           (onChange)="setEndDate($event)"
@@ -24,7 +26,7 @@
           ></fsDatePickerCalendar>
       </div>
 
-      <mat-tab-group class="time-range" *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1">
+      <mat-tab-group #rangeTimeTabGroup class="time-range" *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1">
         <mat-tab label="START TIME">
           <fsDatePickerTime
             [date]="parentInstance.ngModelStart"
@@ -46,12 +48,12 @@
       <button mat-raised-button color="primary" (click)="close($event)">Done</button>
 
       <div class="ranges" *ngIf="['datetime'].indexOf(fsDatePickerModel.view) !== -1">
-        <div (click)="range('today')">Today</div>
-        <div (click)="range('yesterday')">Yesterday</div>
-        <div (click)="range('last_7')">Last 7 Days</div>
-        <div (click)="range('last_30')">Last 30 Days</div>
-        <div (click)="range('current_month')">This Month</div>
-        <div (click)="range('last_month')">Last Month</div>
+        <button mat-button (click)="range('today')">Today</button>
+        <button mat-button (click)="range('yesterday')">Yesterday</button>
+        <button mat-button (click)="range('last_7')">Last 7 Days</button>
+        <button mat-button (click)="range('last_30')">Last 30 Days</button>
+        <button mat-button (click)="range('current_month')">This Month</button>
+        <button mat-button (click)="range('last_month')">Last Month</button>
       </div>
     </div>
 

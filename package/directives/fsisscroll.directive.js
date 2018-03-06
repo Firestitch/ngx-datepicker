@@ -19,13 +19,16 @@ var FsIsscrollDirective = (function () {
     }
     FsIsscrollDirective.prototype.ngOnInit = function () {
         var _this = this;
-        this.fsOptions = Object.assign({
-            momentum: false,
-            hScrollbar: false,
-            mouseWheel: true,
-            click: true
-        }, this.fsOptions);
         setTimeout(function () {
+            _this.fsOptions = Object.assign({
+                momentum: false,
+                hScrollbar: false,
+                mouseWheel: true,
+                click: true,
+                scrollToElement: _this.element.nativeElement
+                    .getElementsByClassName('iscroll-scroller')[0]
+                    .getElementsByClassName('year today selected')[0]
+            }, _this.fsOptions);
             var instance = new IScroll(_this.element.nativeElement, _this.fsOptions);
             if (_this.fsOptions['scrollToElement']) {
                 instance.scrollToElement(_this.fsOptions['scrollToElement'], 0);

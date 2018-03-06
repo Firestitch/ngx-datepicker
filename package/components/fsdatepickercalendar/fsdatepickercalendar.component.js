@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@firestitch/common");
 var moment = require("moment-timezone");
+var moment_range_1 = require("moment-range");
 var fsdatepickercommon_service_1 = require("./../../services/fsdatepickercommon.service");
 var fsdatepickermodel_service_1 = require("./../../services/fsdatepickermodel.service");
 var FsDatePickerCalendarComponent = (function () {
@@ -22,6 +23,8 @@ var FsDatePickerCalendarComponent = (function () {
         this.fsDatePickerModel = fsDatePickerModel;
         this.fsUtil = fsUtil;
         this._iterableDiffers = _iterableDiffers;
+        this.dateToHighlight = null;
+        this.disabledDays = null;
         this.onChange = new core_1.EventEmitter();
         this.onDateModeChange = new core_1.EventEmitter();
         this.selected = {};
@@ -30,7 +33,7 @@ var FsDatePickerCalendarComponent = (function () {
         this.month = null;
         this.years = [];
         this.dateDays = [];
-        this.disabledDays = null;
+        this.highlightedRangeDays = [];
         this.disabledDaysDiffer = null;
         this.monthList = [{ value: 1, name: 'January', abr: 'Jan' },
             { value: 2, name: 'February', abr: 'Feb' },
@@ -58,6 +61,7 @@ var FsDatePickerCalendarComponent = (function () {
             }
         }, 50);
         this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
+        moment_range_1.extendMoment(moment);
     }
     FsDatePickerCalendarComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -72,9 +76,35 @@ var FsDatePickerCalendarComponent = (function () {
         }
     };
     FsDatePickerCalendarComponent.prototype.ngOnChanges = function (changes) {
-        if (changes && changes.date) {
-            this.drawMonths(this.date);
-            this.selected = this.fsDatePickerCommon.getSelected(this.date);
+        if (changes) {
+            if (changes.date) {
+                this.drawMonths(this.date);
+                this.selected = this.fsDatePickerCommon.getSelected(this.date);
+                this.updateDaysHighlighted();
+            }
+            else if (changes.dateToHighlight) {
+                this.updateDaysHighlighted();
+            }
+        }
+    };
+    FsDatePickerCalendarComponent.prototype.updateDaysHighlighted = function () {
+        this.highlightedRangeDays = [];
+        var start = null;
+        var end = null;
+        if (this.date && this.dateToHighlight) {
+            if (moment(this.date).isAfter(this.dateToHighlight)) {
+                start = this.dateToHighlight;
+                end = this.date;
+            }
+            else {
+                start = this.date;
+                end = this.dateToHighlight;
+            }
+            var range = moment.range(start, end);
+            for (var _i = 0, _a = Array.from(range.by('days')); _i < _a.length; _i++) {
+                var day = _a[_i];
+                this.highlightedRangeDays.push(moment(day).format('YYYY-MM-DD'));
+            }
         }
     };
     FsDatePickerCalendarComponent.prototype.ngDoCheck = function () {
@@ -263,7 +293,15 @@ var FsDatePickerCalendarComponent = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "dateToHighlight", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "dateMode", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "disabledDays", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
@@ -272,10 +310,6 @@ var FsDatePickerCalendarComponent = (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "onDateModeChange", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], FsDatePickerCalendarComponent.prototype, "disabledDays", void 0);
     FsDatePickerCalendarComponent = __decorate([
         core_1.Component({
             selector: 'fsDatePickerCalendar',

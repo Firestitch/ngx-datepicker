@@ -2,6 +2,7 @@ import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRe
   IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
 import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
+import { extendMoment } from 'moment-range';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
@@ -17,7 +18,9 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
   @Input() date;
+  @Input() dateToHighlight = null;
   @Input() dateMode;
+  @Input() disabledDays = null;
   @Output() onChange = new EventEmitter<any>();
   @Output() onDateModeChange = new EventEmitter<any>();
   selected = {};
@@ -27,7 +30,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   years = [];
   dateDays = [];
 
-  @Input() disabledDays = null;
+  private highlightedRangeDays = [];
 
   private disabledDaysDiffer = null;
 
@@ -54,10 +57,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     public fsDatePickerModel: FsDatePickerModel,
     private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
       this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
+      extendMoment(moment);
     }
 
   ngOnInit() {
-
     for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
       this.years.push(y);
     }
@@ -71,9 +74,38 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   ngOnChanges(changes) {
-    if (changes && changes.date) {
-      this.drawMonths(this.date);
-      this.selected = this.fsDatePickerCommon.getSelected(this.date);
+    if (changes) {
+
+      if (changes.date) {
+        this.drawMonths(this.date);
+        this.selected = this.fsDatePickerCommon.getSelected(this.date);
+        this.updateDaysHighlighted();
+      }else if (changes.dateToHighlight) {
+        this.updateDaysHighlighted();
+      }
+    }
+  }
+
+  updateDaysHighlighted() {
+    this.highlightedRangeDays = [];
+    let start = null;
+    let end = null;
+
+    if (this.date && this.dateToHighlight) {
+
+      if (moment(this.date).isAfter(this.dateToHighlight)) {
+        start = this.dateToHighlight;
+        end = this.date;
+      } else {
+        start = this.date;
+        end = this.dateToHighlight;
+      }
+
+      let range = moment.range(start, end);
+
+      for (let day of Array.from(range.by('days'))) {
+        this.highlightedRangeDays.push(moment(day).format('YYYY-MM-DD'));
+      }
     }
   }
 

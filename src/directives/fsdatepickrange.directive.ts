@@ -88,6 +88,11 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
       this.opened = true;
 
       if (this.$dialog) {
+
+        // Set first time tab as active
+        if (this.$dialog.instance.rangeTimeTabGroup) {
+          this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
+        }
         return;
       }
 

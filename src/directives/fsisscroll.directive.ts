@@ -15,14 +15,18 @@ export class FsIsscrollDirective implements OnInit, OnDestroy {
     constructor(private element: ElementRef) {}
 
     ngOnInit() {
-      this.fsOptions = Object.assign({
-        momentum: false,
-        hScrollbar: false,
-        mouseWheel: true,
-        click: true
-      }, this.fsOptions);
 
       setTimeout(() => {
+
+        this.fsOptions = Object.assign({
+          momentum: false,
+          hScrollbar: false,
+          mouseWheel: true,
+          click: true,
+          scrollToElement: this.element.nativeElement
+            .getElementsByClassName('iscroll-scroller')[0]
+            .getElementsByClassName('year today selected')[0]
+        }, this.fsOptions);
 
         let instance = new IScroll(this.element.nativeElement, this.fsOptions);
 

@@ -72,6 +72,10 @@ var FsDatePickRangeDirective = (function () {
         var _this = this;
         this.opened = true;
         if (this.$dialog) {
+            // Set first time tab as active
+            if (this.$dialog.instance.rangeTimeTabGroup) {
+                this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
+            }
             return;
         }
         this.fsDatepickerRangeFactory.setRootViewContainerRef(this.viewContainerRef);

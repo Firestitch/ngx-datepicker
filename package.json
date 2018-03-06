@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-datepicker"
@@ -126,7 +126,8 @@
     "zone.js": "^0.8.4"
   },
   "dependencies": {
-    "tsmodels": "^0.2.7",
-    "iscroll": "^5.2.0"
+    "iscroll": "^5.2.0",
+    "moment-range": "^3.1.1",
+    "tsmodels": "^0.2.7"
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, ElementRef, IterableDiffers,
+import { Component, Input, HostListener, ViewChild, ElementRef, IterableDiffers,
   ViewEncapsulation, OnInit, DoCheck } from '@angular/core';
 import { FsUtil } from '@firestitch/common';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
@@ -19,6 +19,8 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   toDisabledTimes = [];
 
   private modelDiffer = null;
+
+  @ViewChild('rangeTimeTabGroup') rangeTimeTabGroup;
 
   constructor(public fsDatePickerModel: FsDatePickerModel,
     public element: ElementRef, public fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {

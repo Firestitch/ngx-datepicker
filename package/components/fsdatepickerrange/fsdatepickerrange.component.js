@@ -107,6 +107,10 @@ var FsDatepickerRangeComponent = (function () {
         this.setDates(startDate, endDate);
     };
     __decorate([
+        core_1.ViewChild('rangeTimeTabGroup'),
+        __metadata("design:type", Object)
+    ], FsDatepickerRangeComponent.prototype, "rangeTimeTabGroup", void 0);
+    __decorate([
         core_1.HostListener('document:keydown', ['$event']),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),

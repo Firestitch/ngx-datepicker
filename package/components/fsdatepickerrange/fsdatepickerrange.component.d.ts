@@ -10,6 +10,7 @@ export declare class FsDatepickerRangeComponent implements OnInit, DoCheck {
     toDisabledDays: any[];
     toDisabledTimes: any[];
     private modelDiffer;
+    rangeTimeTabGroup: any;
     constructor(fsDatePickerModel: FsDatePickerModel, element: ElementRef, fsUtil: FsUtil, _iterableDiffers: IterableDiffers);
     ngOnInit(): void;
     ngDoCheck(): void;
