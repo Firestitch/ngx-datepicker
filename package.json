@@ -26,16 +26,19 @@
     "copy:build": "cpx -v \"src/**/*\" \"build\"",
     "copy:styles": "cpx -v \"build/**/*.css\" \"package\"",
     "copy:templates": "cpx -v \"build/**/*.html\" \"package\"",
-    "package": "npm-run-all -s clean:build clean:package copy:build build:sass package:replace-scss package:aot build:package copy:styles copy:templates package:minify clean:build",
+    "package": "npm-run-all -s clean:build clean:package copy:build build:sass package:replace-scss package:aot package:build copy:styles copy:templates package:minify clean:build",
     "package:aot": "ngc -p tsconfig.aot.json",
     "package:replace-scss": "node ./tools/replace-scss.js",
     "package:dev": "webpack --config=tools/webpack.dev.js --progress --profile --watch",
     "package:minify": "uglifyjs package/index.js --source-map --compress --mangle --screw-ie8 --output package/index.min.js",
-    "build:package": "webpack --config=tools/webpack.package.js --progress --profile",
-    "demo": "npm run clean:demo && webpack --config=tools/webpack.demo.js --progress --profile",
+    "package:build": "webpack --config=tools/webpack.package.js --progress --profile",
+    "demo:build": "npm-run-all -s clean:demo compodoc demo:webpack",
+    "demo:webpack": "webpack --config=tools/webpack.demo.js --progress --profile",
+    "demo:serve": "http-server ./demo",
     "build:sass": "node-sass -r build/ -o build/ || true",
     "serve": "webpack-dev-server --config=tools/webpack.playground.js --progress --profile --watch",
-    "lint": "tslint 'src/**/*.ts' -p ./tslint.json"
+    "lint": "tslint 'src/**/*.ts' -p ./tslint.json",
+    "compodoc": "./node_modules/.bin/compodoc src --disableInternal --disablePrivate --disableGraph --disableSourceCode --hideGenerator --output docs --tsconfig tsconfig.compodoc.json"
   },
   "devDependencies": {
     "@angular/cdk": ">=5.0.0",
