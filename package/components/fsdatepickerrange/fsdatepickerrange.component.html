@@ -45,15 +45,15 @@
     </div>
 
     <div *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1" class="done">
-      <button mat-raised-button color="primary" (click)="close($event)">Done</button>
+      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
 
       <div class="ranges" *ngIf="['datetime'].indexOf(fsDatePickerModel.view) !== -1">
-        <button mat-button (click)="range('today')">Today</button>
-        <button mat-button (click)="range('yesterday')">Yesterday</button>
-        <button mat-button (click)="range('last_7')">Last 7 Days</button>
-        <button mat-button (click)="range('last_30')">Last 30 Days</button>
-        <button mat-button (click)="range('current_month')">This Month</button>
-        <button mat-button (click)="range('last_month')">Last Month</button>
+        <button type="button" mat-button (click)="range('today')">Today</button>
+        <button type="button" mat-button (click)="range('yesterday')">Yesterday</button>
+        <button type="button" mat-button (click)="range('last_7')">Last 7 Days</button>
+        <button type="button" mat-button (click)="range('last_30')">Last 30 Days</button>
+        <button type="button" mat-button (click)="range('current_month')">This Month</button>
+        <button type="button" mat-button (click)="range('last_month')">Last Month</button>
       </div>
     </div>
 
