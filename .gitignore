@@ -40,3 +40,4 @@ dist/*
 /.playground
 /dll
 /package-lock.json
+/*.code-workspace

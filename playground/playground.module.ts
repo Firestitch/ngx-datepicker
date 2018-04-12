@@ -14,6 +14,7 @@ import { DateTimeRangeExampleComponent } from './app/components/datetimerange-ex
 import { DateRangeExampleComponent } from './app/components/daterange-example/daterange-example.component';
 import { TimeRangeExampleComponent } from './app/components/timerange-example/timerange-example.component';
 import { FsExampleModule } from '@firestitch/example';
+import { FsExamplesComponent } from './../tools/components/examples/examples.component';
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -34,7 +35,8 @@ import { FsExampleModule } from '@firestitch/example';
     DateTimeExampleComponent,
     DateTimeRangeExampleComponent,
     DateRangeExampleComponent,
-    TimeRangeExampleComponent
+    TimeRangeExampleComponent,
+    FsExamplesComponent
   ],
   providers: [
   ],
