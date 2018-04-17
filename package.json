@@ -68,8 +68,9 @@
     "gulp-rollup": "^2.15.0",
     "gulp-replace": "^0.6.1",
     "inquirer": "^4.0.1",
-    "@firestitch/common": "^0.1.27",
+    "@firestitch/common": "^0.2.19",
     "@firestitch/example": "^0.1.3",
+    "lodash": "^4.17.5",
     "moment-timezone": "^0.5.14",
     "ucfirst": "^1.0.0",
     "gulp-regex-rename": "^0.1.0",
@@ -133,6 +134,7 @@
     "rxjs": ">=5.1.0",
     "zone.js": ">=0.8.4",
     "iscroll": ">=5.2.0",
+    "lodash": "^4.17.5",
     "moment-range": ">=3.1.1",
     "tsmodels": ">=0.2.7"
   },

@@ -1,8 +1,8 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
   IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
-import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 import { extendMoment } from 'moment-range';
+import { throttle } from '@firestitch/common/util';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
@@ -55,7 +55,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
     public fsDatePickerModel: FsDatePickerModel,
-    private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
+    private _iterableDiffers: IterableDiffers) {
       this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
       extendMoment(moment);
     }
@@ -65,12 +65,15 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
       this.years.push(y);
     }
 
+    /*
+    @TODO
     if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       setTimeout(() => {
         const $date = this.element.nativeElement.querySelector('.date');
         $date.addEventListener('mousewheel', this.dateScroll);
       });
     }
+    */
   }
 
   ngOnChanges(changes) {
@@ -121,7 +124,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     }
   }
 
-  private dateScroll = this.fsUtil.throttle((e) => {
+  private dateScroll = throttle((e) => {
     if (e.wheelDelta > 0) {
       this.nextMonth(this.month);
     } else {
@@ -335,9 +338,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   ngOnDestroy() {
+    /*
+    @TODO
     if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       const $date = this.element.nativeElement.querySelector('.date');
       $date.removeEventListener('mousewheel', this.dateScroll);
     }
+    */
   }
 }

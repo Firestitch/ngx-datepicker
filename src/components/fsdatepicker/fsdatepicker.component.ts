@@ -23,13 +23,20 @@ export class FsDatepickerComponent implements OnInit {
     this.model = date;
     this.parentInstance.writeValue(date);
 
+    /*
+    @TODO
     if (this.fsDatePickerModel.view === 'date') {
       this.close();
     }
+    */
   }
 
   setDateMode(mode) {
     this.fsDatePickerModel.dateMode = mode;
+  }
+
+  setComponents(data) {
+    this.fsDatePickerModel.components = data;
   }
 
   close($event?) {

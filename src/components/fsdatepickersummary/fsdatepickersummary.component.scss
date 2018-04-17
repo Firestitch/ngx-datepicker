@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  .summary {
+    > div {
+      cursor: pointer;
+      margin-top: 20px;
+      padding-bottom: 4px;
+      display: inline-block;
+      &:first-child {
+        margin-left: 15px;
+      }
+      &:last-child {
+        margin-right: 15px;
+      }
+
+      border-bottom: 2px solid #fff;
+
+      &.active {
+        border-bottom: 2px solid #6689b4;
+      }
+      &:hover:not(.active) {
+        border-bottom: 2px solid #d2d2d2;
+      }
+    }
+  }
+}

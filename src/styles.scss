@@ -18,7 +18,7 @@
   display: none;
   visibility: hidden;
   display: block;
-  margin-top: 20px;
+  // margin-top: 20px;
 
   a {
     text-decoration: none;
@@ -101,7 +101,8 @@
         margin-right: 5px;
       }
     }
-
+    /*
+    @TODO remove this
     .time-range {
       .mat-tab-header {
         margin: 0 15px;
@@ -115,6 +116,7 @@
         visibility: inherit !important;
       }
     }
+    */
 
     .done {
       .ranges {
@@ -134,7 +136,8 @@
       margin: 6px 8px;
     }
   }
-
+  /* triangle above dialog */
+  /*
   &:not(.vertical-reposition) {
     &:not(.horizontal-reposition) {
       .wrap {
@@ -160,6 +163,7 @@
       }
     }
   }
+  */
 
   .date::-webkit-scrollbar,
   .years::-webkit-scrollbar {

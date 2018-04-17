@@ -2,15 +2,21 @@
 
 <div class="fs-datetime-dialog" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
-  'has-date': ['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,
-  'has-time': ['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,
+  'has-date': fsDatePickerModel.components.indexOf('calendar-start') !== -1,
+  'has-time': fsDatePickerModel.components.indexOf('time-start') !== -1,
   'view-year': fsDatePickerModel.dateMode=='year',
   'view-month': fsDatePickerModel.dateMode=='month',
   'view-date': fsDatePickerModel.dateMode=='date' }">
   <div class="wrap">
 
+    <fsDatePickerSummary
+    [startDate]="model"
+    (componentsChange)="setComponents($event)"
+    ></fsDatePickerSummary>
+
     <div class="date-time">
       <fsDatePickerCalendar
+        *ngIf="fsDatePickerModel.components.indexOf('calendar-start') !== -1"
         [date]="model"
         [dateMode]="fsDatePickerModel.dateMode"
         (onChange)="setDate($event)"
@@ -18,12 +24,13 @@
       ></fsDatePickerCalendar>
 
       <fsDatePickerTime
+        *ngIf="fsDatePickerModel.components.indexOf('time-start') !== -1"
         [date]="model"
         (onChange)="setDate($event)"
       ></fsDatePickerTime>
 
     </div>
-    <div *ngIf="['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1" class="done">
+    <div class="done">
       <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
     </div>
   </div>

@@ -1,6 +1,5 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
   IterableDiffers, OnInit, OnChanges, DoCheck } from '@angular/core';
-import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
@@ -43,7 +42,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
   constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
     public fsDatePickerModel: FsDatePickerModel,
-    private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
+    private _iterableDiffers: IterableDiffers) {
       this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
       this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
       this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
@@ -124,7 +123,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   addDisabledMinutes(range) {
     let min = Math.min(range[0], range[1]);
     let max = Math.max(range[0], range[1]);
-    if (this.fsUtil.isArray(range)) {
+    if (Array.isArray(range)) {
       for (let i = min; i <= max; i++) {
         this.disabledTimeMinutes[i] = true;
       }
@@ -136,7 +135,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   addDisabledHours(range) {
     let min = Math.min(range[0], range[1]);
     let max = Math.max(range[0], range[1]);
-    if (this.fsUtil.isArray(range)) {
+    if (Array.isArray(range)) {
       for (let i = min; i <= max; i++) {
         this.disabledTimeHours[i] = true;
       }

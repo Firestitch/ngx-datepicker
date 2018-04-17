@@ -89,10 +89,11 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
       if (this.$dialog) {
 
+        // @TODO remove this
         // Set first time tab as active
-        if (this.$dialog.instance.rangeTimeTabGroup) {
-          this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
-        }
+        // if (this.$dialog.instance.rangeTimeTabGroup) {
+        //  this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
+        // }
         return;
       }
 
@@ -104,6 +105,12 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
       this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
+
+      if (this.view === 'time') {
+        this.$dialog.instance.fsDatePickerModel.components = ['time-start'];
+      } else {
+        this.$dialog.instance.fsDatePickerModel.components = ['calendar-start', 'calendar-end'];
+      }
 
       setTimeout(() => {
         this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);

@@ -95,6 +95,12 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
       this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
 
+      if (this.view === 'time') {
+        this.$dialog.instance.fsDatePickerModel.components = ['time-start'];
+      } else {
+        this.$dialog.instance.fsDatePickerModel.components = ['calendar-start'];
+      }
+
       setTimeout(() => {
         this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);
       });

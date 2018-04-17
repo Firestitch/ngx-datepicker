@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
-import { FsCommonModule } from '@firestitch/common';
 
 import { FsDatePickDirective } from './directives/fsdatepick.directive';
 import { FsDatePickRangeDirective } from './directives/fsdatepickrange.directive';
@@ -12,6 +11,7 @@ import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
 
 import { FsDatepickerComponent } from './components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerRangeComponent } from './components/fsdatepickerrange/fsdatepickerrange.component';
+import { FsDatepickerSummaryComponent } from './components/fsdatepickersummary/fsdatepickersummary.component';
 import { FsDatePickerCalendarComponent } from './components/fsdatepickercalendar/fsdatepickercalendar.component';
 import { FsDatePickerTimeComponent } from './components/fsdatepickertime/fsdatepickertime.component';
 
@@ -23,7 +23,6 @@ import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
   imports: [
     CommonModule,
     FormsModule,
-    FsCommonModule,
     MatButtonModule,
     MatTabsModule,
     MatIconModule
@@ -39,6 +38,7 @@ import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
   declarations: [
     FsDatePickDirective,
     FsDatePickRangeDirective,
+    FsDatepickerSummaryComponent,
     FsDatepickerComponent,
     FsDatepickerRangeComponent,
     FsIsscrollDirective,

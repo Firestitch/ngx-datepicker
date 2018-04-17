@@ -1,6 +1,5 @@
 import { Component, Input, HostListener, ViewChild, ElementRef, IterableDiffers,
   ViewEncapsulation, OnInit, DoCheck } from '@angular/core';
-import { FsUtil } from '@firestitch/common';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 import * as moment from 'moment-timezone';
 
@@ -20,12 +19,13 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   private modelDiffer = null;
 
-  @ViewChild('rangeTimeTabGroup') rangeTimeTabGroup;
-
-  constructor(public fsDatePickerModel: FsDatePickerModel,
-    public element: ElementRef, public fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
-      this.modelDiffer = this._iterableDiffers.find([]).create(null);
-    }
+  constructor(
+    public fsDatePickerModel: FsDatePickerModel,
+    public element: ElementRef,
+    private _iterableDiffers: IterableDiffers
+  ) {
+    this.modelDiffer = this._iterableDiffers.find([]).create(null);
+  }
 
   ngOnInit() { }
 
@@ -67,8 +67,8 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
     if (startDate && endDate && startDate.isSame(endDate, 'day')) {
 
-      const from = this.fsUtil.int(startDate.format('m')) + (this.fsUtil.int(startDate.format('H')) * 60);
-      const to = this.fsUtil.int(endDate.format('m')) + (this.fsUtil.int(endDate.format('H')) * 60);
+      const from = parseInt(startDate.format('m')) + (parseInt(startDate.format('H')) * 60);
+      const to = parseInt(endDate.format('m')) + (parseInt(endDate.format('H')) * 60);
 
       if (startDate) {
         this.toDisabledTimes.push([0, from]);
@@ -82,6 +82,10 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   setDateModeEnd(mode) {
     this.fsDatePickerModel.dateMode.end_date = mode;
+  }
+
+  setComponents(data) {
+    this.fsDatePickerModel.components = data;
   }
 
   close($event?) {

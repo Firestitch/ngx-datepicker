@@ -1,4 +1,4 @@
-<div class="date" *ngIf="['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1">
+<div class="date">
   <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>
   </div>
