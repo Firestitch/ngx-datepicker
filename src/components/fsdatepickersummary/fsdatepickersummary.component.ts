@@ -14,6 +14,7 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
   @Input() public endDate = null;
 
   @Output() componentsChange = new EventEmitter<any>();
+  @Output() viewChange = new EventEmitter<any>();
 
   public formattedStartDate = null;
   public formattedEndDate = null;
@@ -32,23 +33,21 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
     this.formattedStartDate = null;
     this.formattedEndDate = null;
 
-    if (!changes) {
-      return;
-    }
-
-    if (changes.startDate && changes.startDate.currentValue) {
+    if (changes && changes.startDate && changes.startDate.currentValue) {
       this.formattedStartDate = {
         date: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue),
         time: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue, 'time')
       };
     }
 
-    if (changes.endDate && changes.endDate.currentValue) {
+    if (changes && changes.endDate && changes.endDate.currentValue) {
       this.formattedEndDate = {
         date: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue),
         time: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue, 'time')
       };
     }
+
+    this.viewChange.emit(this.formattedStartDate || this.formattedEndDate ? true : false);
   }
 
   onComponentsChange(view) {

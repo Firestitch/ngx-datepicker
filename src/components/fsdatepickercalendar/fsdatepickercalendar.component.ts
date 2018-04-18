@@ -1,5 +1,9 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
   IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
+  import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import 'hammerjs';
+import { FsHammerConfig } from './../../configs/fshammer.config';
+
 import * as moment from 'moment-timezone';
 import { extendMoment } from 'moment-range';
 import { throttle } from '@firestitch/common/util';
@@ -13,7 +17,13 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
     host: {
       '(mousewheel)': 'onMouseWheel($event)',
       '(touchmove)': 'onTouchMove($event)'
-    }
+    },
+    providers: [
+      {
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: FsHammerConfig
+      }
+    ]
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
@@ -33,6 +43,8 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   private highlightedRangeDays = [];
 
   private disabledDaysDiffer = null;
+
+  private SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   monthList = [{ value: 1, name: 'January', abr: 'Jan' },
   { value: 2, name: 'February', abr: 'Feb' },
@@ -65,15 +77,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
       this.years.push(y);
     }
 
-    /*
-    @TODO
     if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       setTimeout(() => {
         const $date = this.element.nativeElement.querySelector('.date');
         $date.addEventListener('mousewheel', this.dateScroll);
       });
     }
-    */
   }
 
   ngOnChanges(changes) {
@@ -125,6 +134,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   private dateScroll = throttle((e) => {
+
+    // @TODO need better way to detect mobile devices
+    if (window.innerWidth <= 499) {
+      return;
+    }
+
     if (e.wheelDelta > 0) {
       this.nextMonth(this.month);
     } else {
@@ -330,20 +345,25 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   onMouseWheel($event) {
-    $event.preventDefault();
+    // $event.preventDefault();
   }
 
   onTouchMove($event) {
     $event.preventDefault();
   }
 
+  swipe(action = this.SWIPE_ACTION.RIGHT) {
+    if (action === this.SWIPE_ACTION.RIGHT) {
+      this.previousMonth(this.month);
+    } else if (action === this.SWIPE_ACTION.LEFT) {
+      this.nextMonth(this.month);
+    }
+  }
+
   ngOnDestroy() {
-    /*
-    @TODO
     if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       const $date = this.element.nativeElement.querySelector('.date');
       $date.removeEventListener('mousewheel', this.dateScroll);
     }
-    */
   }
 }

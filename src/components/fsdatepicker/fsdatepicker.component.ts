@@ -10,8 +10,8 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 })
 export class FsDatepickerComponent implements OnInit {
 
-  parentInstance: any = null;
-  model = null;
+  public parentInstance: any = null;
+  public model = null;
 
   constructor(public fsDatePickerModel: FsDatePickerModel, public element: ElementRef) { }
 
@@ -23,12 +23,9 @@ export class FsDatepickerComponent implements OnInit {
     this.model = date;
     this.parentInstance.writeValue(date);
 
-    /*
-    @TODO
     if (this.fsDatePickerModel.view === 'date') {
       this.close();
     }
-    */
   }
 
   setDateMode(mode) {

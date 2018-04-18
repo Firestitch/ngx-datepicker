@@ -18,6 +18,8 @@
   display: none;
   visibility: hidden;
   display: block;
+  height: 100%;
+  max-height: 451px;
   // margin-top: 20px;
 
   a {
@@ -48,6 +50,9 @@
   }
 
   .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     background: #fff;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     width: 372px;
@@ -61,36 +66,15 @@
   }
 
   &.has-time {
-    &.has-date {
-      .wrap {
-        width: 645px;
-      }
-    }
-    &:not(.has-date) {
-      .wrap {
-        width: 255px;
-      }
+    .wrap {
+      width: 353px;
     }
   }
 
   &.fs-datetime-range {
     &.has-date {
-      &:not(.has-time) {
-        .wrap {
-          width: 744px;
-        }
-      }
-    }
-    &.has-time {
-      &:not(.has-date) {
-        .wrap {
-          width: 276px;
-        }
-      }
-      &.has-date {
-        .wrap {
-          width: 1015px;
-        }
+      .wrap {
+        width: 744px;
       }
     }
 
@@ -102,33 +86,19 @@
       }
     }
     /*
-    @TODO remove this
-    .time-range {
-      .mat-tab-header {
-        margin: 0 15px;
-      }
-
-      .mat-tab-label {
-        min-width: 115px;
-      }
-
-      .mat-ink-bar {
-        visibility: inherit !important;
-      }
-    }
-    */
-
     .done {
       .ranges {
         float: right;
       }
     }
+    */
   }
 
   .done {
     background: #fff;
     width: 100%;
     border-top: 1px solid #E1E1E1;
+    margin-top: auto;
     button {
       padding-left: 10px;
       padding-right: 10px;
@@ -277,6 +247,9 @@
     }
   }
 
+  fsdatepickercalendar {
+    min-height: 350px;
+  }
   .date {
     overflow-y: auto;
     overflow-x: hidden;
@@ -284,78 +257,6 @@
     position: relative;
 	  min-height: 350px;
 	  flex: 1 1 45%;
-  }
-
-  .time {
-    padding: 12px 15px;
-
-    .wraper {
-      flex-direction: row;
-      display: flex;
-      align-items: center;
-    }
-
-    .hours {
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-    }
-
-    .hour {
-      .number {
-        font-size: 12px;
-        &.textual {
-          font-size: 11px;
-        }
-      }
-
-      .am-pm {
-        font-size: 9px;
-        margin-left: 1px;
-      }
-    }
-
-    .minutes {
-      margin-left: 15px;
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-    }
-
-    .lbl {
-      margin-bottom: 2px;
-      font-size: 12px;
-    }
-
-    .midnight {
-      line-height: 8px;
-      display: block;
-      div {
-        line-height: 16px;
-      }
-    }
-
-    .midnight, .noon {
-      font-size: 10px;
-    }
-
-    .hour, .minute {
-      width: 31px;
-      height: 31px;
-      text-align: center;
-      border: 1px	solid #efefef;
-      padding: 0;
-      cursor: pointer;
-      .number {
-        border: 1px solid transparent;
-        border-radius: 50%;
-        line-height: 28px;
-        height: 28px;
-      }
-    }
   }
 
   .day.selected,
@@ -412,6 +313,7 @@
     overflow: auto;
     flex-direction: row;
     display: flex;
+    // height: calc(100% - 50px);
   }
 
   .months {
@@ -484,7 +386,7 @@
 @media only screen and (min-width: 500px) {
 
   .fs-datetime-dialog {
-    .time, .date {
+    .date {
       display: flex !important;
     }
 
@@ -508,10 +410,20 @@
     bottom: 0px !important;
     margin: 0px;
     height: 100vh;
+    max-height: initial;
+    &.fs-datetime-range {
+      .date-range {
+        flex-direction: column;
+        height: 100%;
+      }
+    }
     .wrap {
     	margin: 0px;
     	width: 100% !important;
-    	height: 100vh;
+      height: 100vh;
+      .date-time {
+        height: calc(100% - 50px);
+      }
     }
     .day {
     	width: 14.28%;
@@ -537,9 +449,6 @@
     fs-tabnav {
       display: block;
     }
-    .time {
-	    margin: 0 auto;
-	  }
   }
 }
 

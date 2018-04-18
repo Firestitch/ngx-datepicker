@@ -38,13 +38,13 @@
         <fsDatePickerTime
           *ngIf="fsDatePickerModel.components.indexOf('time-start') !== -1"
           [date]="parentInstance.ngModelStart"
-          (onChange)="setStartDate($event)"
+          (onChange)="setStartTime($event)"
         ></fsDatePickerTime>
         <fsDatePickerTime
           *ngIf="fsDatePickerModel.components.indexOf('time-end') !== -1"
           [date]="parentInstance.ngModelEnd"
           [disabledTimes]="toDisabledTimes"
-          (onChange)="setEndDate($event)"
+          (onChange)="setEndTime($event)"
         ></fsDatePickerTime>
       </div>
 
@@ -52,7 +52,7 @@
 
     <div class="done">
       <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
-
+      <!--
       <div class="ranges">
         <button type="button" mat-button (click)="range('today')">Today</button>
         <button type="button" mat-button (click)="range('yesterday')">Yesterday</button>
@@ -61,6 +61,7 @@
         <button type="button" mat-button (click)="range('current_month')">This Month</button>
         <button type="button" mat-button (click)="range('last_month')">Last Month</button>
       </div>
+      -->
     </div>
 
   </div>

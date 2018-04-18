@@ -29,6 +29,10 @@ export class FsDatePickerCommon {
     return result;
   }
 
+  isSameDay(startDate, endDate) {
+    return moment(startDate).format('YYYY-MM-DD') === moment(endDate).format('YYYY-MM-DD');
+  }
+
   createMoment() {
     return moment().startOf('day');
   }
