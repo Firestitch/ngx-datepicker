@@ -251,8 +251,8 @@
     min-height: 350px;
   }
   .date {
-    overflow-y: auto;
-    overflow-x: hidden;
+    // overflow-y: auto;
+    // overflow-x: hidden;
     width: 100%;
     position: relative;
 	  min-height: 350px;
@@ -426,7 +426,9 @@
       }
     }
     .day {
-    	width: 14.28%;
+      width: 14.28%;
+      height: 40px;
+    	line-height: 40px;
     }
     table {
 	    width: 100%;
@@ -452,16 +454,3 @@
   }
 }
 
-@media only screen and (max-width: 400px) {
-	.fs-datetime-dialog {
-    .day {
-    	height: 40px;
-    	line-height: 40px;
-	  }
-  }
-}
-/*
-.pointer-events-none {
-	pointer-events: none !important;
-}
-*/
