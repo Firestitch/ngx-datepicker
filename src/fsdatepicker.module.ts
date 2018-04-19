@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 
 import { FsDatePickDirective } from './directives/fsdatepick.directive';
@@ -12,6 +12,7 @@ import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
 import { FsDatepickerComponent } from './components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerRangeComponent } from './components/fsdatepickerrange/fsdatepickerrange.component';
 import { FsDatepickerSummaryComponent } from './components/fsdatepickersummary/fsdatepickersummary.component';
+import { FsDatepickerPresetsComponent } from './components/fsdatepickerpresets/fsdatepickerpresets.component';
 import { FsDatePickerCalendarComponent } from './components/fsdatepickercalendar/fsdatepickercalendar.component';
 import { FsDatePickerTimeComponent } from './components/fsdatepickertime/fsdatepickertime.component';
 
@@ -25,7 +26,8 @@ import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
     FormsModule,
     MatButtonModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     FsDatePickDirective,
@@ -39,6 +41,7 @@ import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
     FsDatePickDirective,
     FsDatePickRangeDirective,
     FsDatepickerSummaryComponent,
+    FsDatepickerPresetsComponent,
     FsDatepickerComponent,
     FsDatepickerRangeComponent,
     FsIsscrollDirective,

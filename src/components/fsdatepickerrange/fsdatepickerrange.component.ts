@@ -48,25 +48,25 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     }
   }
 
-  /**
-   * It is possible to set all range from one calendar.
-   * 1. If start date selected and end date not yet, then updating end date
-   *    but only if this date is valid (not before start date)
-   * 2. If both selected and dates not in the same day - reset values.
-   * 3. In all other cases default behaviour
-   */
   setStartDate(date) {
-    if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd &&
-        moment(this.parentInstance.ngModelStart).isBefore(date)
-    ) {
-      this.setDates(this.parentInstance.ngModelStart, date);
-    } else if (this.parentInstance.ngModelStart &&
-              this.parentInstance.ngModelEnd &&
-              !this.fsDatePickerCommon.isSameDay(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd)) {
-      this.setDates(null, null);
-    } else {
-      this.setDates(date, this.parentInstance.ngModelEnd);
+
+    let startDate = date;
+    let endDate = this.parentInstance.ngModelEnd;
+
+    if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
+      startDate = this.parentInstance.ngModelStart;
+      endDate = date;
+    } else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
+      startDate = null;
+      endDate = null;
     }
+
+    if (moment(startDate).isAfter(endDate)) {
+      startDate = endDate;
+      endDate = null;
+    }
+
+    this.setDates(startDate, endDate);
   }
 
   setEndDate(date) {
@@ -88,6 +88,10 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   setDates(startDate, endDate) {
     this.parentInstance.writeValue(startDate, endDate);
+  }
+
+  onDatesChange(data) {
+    this.setDates(data.startDate, data.endDate);
   }
 
   toDisabledDaysUpdate(startDate, endDate) {
@@ -131,31 +135,5 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
         e.preventDefault();
         this.close(e);
       }
-  }
-
-  range(type) {
-
-    let startDate = moment();
-    let endDate = moment();
-
-    if (type == 'today') {
-      startDate = startDate.startOf('day');
-      endDate = endDate.endOf('day');
-    } else if (type == 'yesterday') {
-      startDate = startDate.subtract(1, 'day').startOf('day');
-      endDate = endDate.subtract(1, 'day').endOf('day');
-    } else if (type == 'last_7') {
-      startDate = startDate.subtract(7, 'days');
-    } else if (type == 'last_30') {
-      startDate = startDate.subtract(30, 'days');
-    } else if (type == 'current_month') {
-      startDate = startDate.startOf('month');
-      endDate = endDate.endOf('month');
-    } else if (type == 'last_month') {
-      startDate = startDate.subtract(1, 'month').startOf('month');
-      endDate = endDate.subtract(1, 'month').endOf('month');
-    }
-
-    this.setDates(startDate, endDate);
   }
 }

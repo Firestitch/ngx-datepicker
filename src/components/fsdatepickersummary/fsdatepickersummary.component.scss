@@ -1,18 +1,13 @@
 :host {
   display: block;
+  float: left;
   .summary {
     font-size: 14px;
+    margin-top: 20px;
     > div {
       cursor: pointer;
-      margin-top: 20px;
       padding-bottom: 4px;
       display: inline-block;
-      &:first-child {
-        margin-left: 15px;
-      }
-      &:last-child {
-        margin-right: 15px;
-      }
 
       border-bottom: 2px solid #fff;
 

@@ -9,10 +9,16 @@
   'view-date': fsDatePickerModel.dateMode=='date' }">
   <div class="wrap">
 
-    <fsDatePickerSummary
-    [startDate]="model"
-    (componentsChange)="setComponents($event)"
-    ></fsDatePickerSummary>
+    <div class="header">
+      <fsDatePickerSummary
+      [startDate]="model"
+      (componentsChange)="setComponents($event)"
+      ></fsDatePickerSummary>
+
+      <fsDatePickerPresets
+      *ngIf="fsDatePickerModel.components.indexOf('time-start') === -1"
+      ></fsDatePickerPresets>
+    </div>
 
     <div class="date-time">
       <fsDatePickerCalendar
@@ -30,7 +36,7 @@
       ></fsDatePickerTime>
 
     </div>
-    <div class="done">
+    <div class="done" *ngIf="fsDatePickerModel.components.indexOf('time-start') !== -1">
       <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
     </div>
   </div>

@@ -10,8 +10,8 @@
       [ngClass]="{ active: fsDatePickerModel.components.indexOf('time-start') !== -1 }">{{ formattedStartDate.time }}
     </div>
   </ng-container>
+  <ng-container *ngIf="formattedStartDate && formattedEndDate">&nbsp;-&nbsp;</ng-container>
   <ng-container *ngIf="formattedEndDate">
-    &nbsp;-&nbsp;
     <div
       (click)="onComponentsChange(['calendar-start', 'calendar-end'])"
       [ngClass]="{ active: fsDatePickerModel.components.indexOf('calendar-end') !== -1 }">{{ formattedEndDate.date }}

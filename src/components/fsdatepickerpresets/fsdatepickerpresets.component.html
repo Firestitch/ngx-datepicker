@@ -1,0 +1,13 @@
+<div class="presets">
+  <a (click)="range('today')">Today</a>
+  <a (click)="range('yesterday')">Yesterday</a>
+  <a (click)="range('last_7')">Last 7 Days</a>
+  <a (click)="range('last_30')">Last 30 Days</a>
+  <button mat-icon-button [matMenuTriggerFor]="presetsMenu">
+    <mat-icon>more_horiz</mat-icon>
+  </button>
+  <mat-menu #presetsMenu="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item (click)="range('current_month')">This Month</button>
+    <button mat-menu-item (click)="range('last_month')">Last Month</button>
+  </mat-menu>
+</div>

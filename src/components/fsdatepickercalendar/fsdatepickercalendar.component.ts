@@ -1,6 +1,6 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
   IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
-  import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import 'hammerjs';
 import { FsHammerConfig } from './../../configs/fshammer.config';
 
@@ -173,7 +173,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   monthViewChange(month) {
-    this.monthChange(month);
+    // Changing date
+    // this.monthChange(month);
+    // Changing calendar view
+    this.setMonth(month);
     this.calendarView();
   }
 
@@ -199,17 +202,14 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   calendarView() {
     this.onDateModeChange.emit('date');
-    // this.fsDatePickerModel.dateMode = 'date';
   }
 
   monthView(month) {
-    // this.fsDatePickerModel.dateMode = 'month';
     this.onDateModeChange.emit('month');
   }
 
   yearView(year) {
     this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
-    // this.fsDatePickerModel.dateMode = 'year';
     this.onDateModeChange.emit('year');
   }
 
@@ -233,8 +233,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   yearViewChange(year) {
-    this.yearChange(year);
-    this.calendarView();
+    // For some reason for mobile devices click event fired for both year/day modes. setTimeout fix this problem
+    setTimeout(() => {
+      this.setYear(year);
+      this.calendarView();
+    });
   }
 
   yearChange(year) {
@@ -252,6 +255,16 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   nextMonth(month) {
     this.drawMonths(month.moment.add(1, 'months'));
+  }
+
+  setMonth(monthNumber) {
+    const date = this.month.moment || this.fsDatePickerCommon.createMoment();
+    this.drawMonths(moment(date).set('month', monthNumber - 1));
+  }
+
+  setYear(yearNumber) {
+    const date = this.month.moment || this.fsDatePickerCommon.createMoment();
+    this.drawMonths(moment(date).set('year', yearNumber));
   }
 
   drawMonths(date) {
