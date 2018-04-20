@@ -1,6 +1,7 @@
 import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
    Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy } from '@angular/core';
 import { DATEPICKER_VALUE_ACCESSOR } from './../value-accessors/fsdatepicker.value-accessor';
+import { FsPreset } from './../interfaces/fspreset.interface';
 import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerFactory } from './../services/fsdatepickerfactory.service';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
@@ -18,15 +19,16 @@ import * as moment from 'moment-timezone';
 })
 export class FsDatePickDirective implements OnInit, OnDestroy {
 
-    @Input() minYear;
-    @Input() maxYear;
-    @Input() view = 'date';
+    @Input() public minYear = null;
+    @Input() public maxYear = null;
+    @Input() public view = 'date';
+    @Input() public presets: FsPreset[] = [];
 
     @Output('change') change$ = new EventEmitter<any>();
 
     private _model = null;
 
-    opened = false;
+    public opened = false;
 
     private $dialog = null;
 
@@ -93,6 +95,7 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.view = this.view;
       this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+      this.$dialog.instance.fsDatePickerModel.presets = this.presets;
       this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
 
       if (this.view === 'time') {

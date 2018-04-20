@@ -3,6 +3,7 @@ import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolve
 import { DATEPICKER_RANGE_VALUE_ACCESSOR } from './../value-accessors/fsdatepickerrange.value-accessors';
 import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerRangeFactory } from './../services/fsdatepickerrangefactory.service';
+import { FsPreset } from './../interfaces/fspreset.interface';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 import * as moment from 'moment-timezone';
 
@@ -18,17 +19,19 @@ import * as moment from 'moment-timezone';
 })
 export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
-    @Input() minYear;
-    @Input() maxYear;
-    @Input() view = 'date';
+    @Input() public minYear = null;
+    @Input() public maxYear = null;
+    @Input() public view = 'date';
     @Input() public ngModelStart = null;
     @Input() public ngModelEnd = null;
-    @Output() ngModelStartChange = new EventEmitter<any>();
-    @Output() ngModelEndChange = new EventEmitter<any>();
+    @Input() public presets: FsPreset[] = [];
 
-    @Output('change') change$ = new EventEmitter<any>();
+    @Output() public ngModelStartChange = new EventEmitter<any>();
+    @Output() public ngModelEndChange = new EventEmitter<any>();
 
-    opened = false;
+    @Output('change') public change$ = new EventEmitter<any>();
+
+    public opened = false;
 
     private $dialog = null;
 
@@ -104,6 +107,7 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.view = this.view;
       this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+      this.$dialog.instance.fsDatePickerModel.presets = this.presets;
       this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
 
       if (this.view === 'time') {

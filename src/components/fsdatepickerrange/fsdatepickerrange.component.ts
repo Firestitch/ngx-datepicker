@@ -91,7 +91,7 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   onDatesChange(data) {
-    this.setDates(data.startDate, data.endDate);
+    this.setDates(data.start, data.end);
   }
 
   toDisabledDaysUpdate(startDate, endDate) {

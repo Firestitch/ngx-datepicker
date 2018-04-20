@@ -1,4 +1,4 @@
-<div class="summary">
+<div *ngIf="formattedStartDate || formattedEndDate" class="summary">
   <ng-container *ngIf="formattedStartDate">
     <div
       (click)="onComponentsChange(['calendar-start', 'calendar-end'])"

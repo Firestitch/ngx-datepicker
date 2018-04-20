@@ -1,6 +1,6 @@
 <div class="fs-datetime-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
 
-<div class="fs-datetime-dialog fs-datetime-range" tabindex="0"
+<div class="fs-datetime-dialog fs-datetime-range dialog-view-{{ fsDatePickerModel.view }}" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
   'has-date': (fsDatePickerModel.components.indexOf('calendar-start') !== -1 || fsDatePickerModel.components.indexOf('calendar-end') !== -1),
   'has-time': (fsDatePickerModel.components.indexOf('time-start') !== -1 || fsDatePickerModel.components.indexOf('time-end') !== -1) }">
@@ -59,6 +59,5 @@
     <div class="done">
       <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
     </div>
-
   </div>
 </div>

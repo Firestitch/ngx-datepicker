@@ -81,7 +81,7 @@
       .wrap {
         width: 744px;
         .header {
-          fsdatepickerpresets {
+          fsdatepickerpresets .presets {
             float: right;
           }
         }
@@ -101,18 +101,6 @@
     }
   }
 
-  .done {
-    background: #fff;
-    width: 100%;
-    border-top: 1px solid #E1E1E1;
-    margin-top: auto;
-    button {
-      padding-left: 10px;
-      padding-right: 10px;
-      padding: 0 6px;
-      margin: 6px 8px;
-    }
-  }
   /* triangle above dialog */
   /*
   &:not(.vertical-reposition) {
@@ -321,7 +309,6 @@
     overflow: auto;
     flex-direction: row;
     display: flex;
-    // height: calc(100% - 50px);
   }
 
   .months {
@@ -366,18 +353,6 @@
     clear: both;
   }
 
-  .view-year {
-    .date {
-      overflow-y: visible;
-    }
-  }
-
-  &.view-date {
-    .date {
-      min-height: auto;
-    }
-  }
-
   .close {
     padding: 5px;
     display: none;
@@ -387,6 +362,19 @@
     display: none;
     .md-tabs a {
       width: 50%;
+    }
+  }
+
+  .done {
+    background: #fff;
+    width: 100%;
+    border-top: 1px solid #E1E1E1;
+    margin-top: auto;
+    button {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding: 0 6px;
+      margin: 6px 8px;
     }
   }
 }
@@ -418,7 +406,7 @@
     bottom: 0px !important;
     margin: 0px;
     height: 100vh;
-    max-height: initial;
+    max-height: initial !important;
     &.fs-datetime-range {
       &.has-date {
         .date-range {
@@ -430,6 +418,29 @@
         }
       }
     }
+
+    // 2 cases when Done button is hidden and dialog height increasing
+    &:not(.fs-datetime-range) {
+      &.dialog-view-date {
+        .wrap {
+          height: 100% !important;
+          .date-time {
+            height: 100% !important;
+          }
+        }
+      }
+      &.dialog-view-datetime {
+        &:not(.date-mode-date) {
+          .wrap {
+            height: 100% !important;
+            .date-time {
+              height: 100% !important;
+            }
+          }
+        }
+      }
+    }
+
     .wrap {
     	margin: 0px;
     	width: 100% !important;
@@ -438,6 +449,7 @@
         height: calc(100% - 50px);
       }
     }
+
     .day {
       width: 14.28%;
       height: 40px;
@@ -448,14 +460,6 @@
     }
     .close {
       display: flex;
-    }
-    .view-year .done,
-    .view-month .done {
-      display: none !important;
-    }
-
-    .view-date .done {
-      display: flex !important;
     }
     .done {
       position: fixed;

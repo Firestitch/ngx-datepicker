@@ -1,7 +1,7 @@
 :host {
-  display: block;
-  float: left;
   .presets {
+    display: block;
+    float: left;
     margin: 8px 0 0;
     color: #a9acae;
     a {
@@ -19,6 +19,8 @@
 
 @media only screen and (max-width: 499px) {
   :host {
-    float: left !important;
+    .presets {
+      float: left !important;
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment-timezone';
 import { isEqual } from 'lodash';
 import { FsDatePicker } from './../interfaces/fsdatepicker.interface';
+import { FsPreset } from './../interfaces/fspreset.interface';
 
 @Injectable()
 export class FsDatePickerModel implements FsDatePicker {
@@ -28,6 +29,8 @@ export class FsDatePickerModel implements FsDatePicker {
    * Current mode of calendar. For ranges consist values for both: start and end date
    */
   public dateMode = null;
+
+  public presets: FsPreset[] = [];
 
   set components(value) {
 

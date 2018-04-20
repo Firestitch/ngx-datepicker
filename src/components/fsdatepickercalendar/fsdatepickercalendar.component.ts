@@ -29,7 +29,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   @Input() date;
   @Input() dateToHighlight = null;
-  @Input() dateMode;
+  @Input() dateMode = null;
   @Input() disabledDays = null;
   @Output() onChange = new EventEmitter<any>();
   @Output() onDateModeChange = new EventEmitter<any>();

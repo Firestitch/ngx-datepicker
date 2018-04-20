@@ -14,7 +14,7 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
   @Input() public endDate = null;
 
   @Output() componentsChange = new EventEmitter<any>();
-  @Output() viewChange = new EventEmitter<any>();
+  // @Output() viewChange = new EventEmitter<any>();
 
   public formattedStartDate = null;
   public formattedEndDate = null;
@@ -47,7 +47,7 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
       };
     }
 
-    this.viewChange.emit(this.formattedStartDate || this.formattedEndDate ? true : false);
+    // this.viewChange.emit(this.formattedStartDate || this.formattedEndDate ? true : false);
   }
 
   onComponentsChange(view) {

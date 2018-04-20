@@ -1,15 +1,16 @@
 <div class="fs-datetime-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
 
-<div class="fs-datetime-dialog" tabindex="0"
+<div class="fs-datetime-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
   'has-date': fsDatePickerModel.components.indexOf('calendar-start') !== -1,
   'has-time': fsDatePickerModel.components.indexOf('time-start') !== -1,
-  'view-year': fsDatePickerModel.dateMode=='year',
-  'view-month': fsDatePickerModel.dateMode=='month',
-  'view-date': fsDatePickerModel.dateMode=='date' }">
+  'date-mode-date': fsDatePickerModel.dateMode === 'date',
+  'date-mode-month': fsDatePickerModel.dateMode === 'month',
+  'date-mode-year': fsDatePickerModel.dateMode === 'year'
+ }">
   <div class="wrap">
 
-    <div class="header">
+    <div *ngIf="fsDatePickerModel.dateMode === 'date'" class="header">
       <fsDatePickerSummary
       [startDate]="model"
       (componentsChange)="setComponents($event)"
@@ -17,6 +18,7 @@
 
       <fsDatePickerPresets
       *ngIf="fsDatePickerModel.components.indexOf('time-start') === -1"
+      (datesChange)="setDate($event)"
       ></fsDatePickerPresets>
     </div>
 
@@ -36,7 +38,11 @@
       ></fsDatePickerTime>
 
     </div>
-    <div class="done" *ngIf="fsDatePickerModel.components.indexOf('time-start') !== -1">
+
+    <!-- Done button showing on Time Picker or Date Time picker on calendar mode -->
+    <div class="done"
+    *ngIf="fsDatePickerModel.view === 'time' ||
+          (fsDatePickerModel.view === 'datetime' && fsDatePickerModel.dateMode === 'date')">
       <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
     </div>
   </div>
