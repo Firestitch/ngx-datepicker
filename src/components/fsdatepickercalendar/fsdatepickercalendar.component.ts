@@ -209,7 +209,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   yearView(year) {
-    this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
+    this.iscrollOptions = { scrollToElement: `.years .data-year-${ year }` };
     this.onDateModeChange.emit('year');
   }
 

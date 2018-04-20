@@ -2,10 +2,10 @@
   <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>
   </div>
-  <div class="years" *ngIf="dateMode == 'year'" fsIscroll fsOptions="iscrollOptions" fsInstance="iscrollInstance">
+  <div class="years" *ngIf="dateMode == 'year'" fsIscroll [fsOptions]="iscrollOptions" fsInstance="iscrollInstance">
     <div class="iscroll-scroller">
-      <div *ngFor="let year of years" class="year" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }" (click)="yearViewChange(year)">
-          {{year}}
+      <div *ngFor="let year of years" class="year data-year-{{ year }}" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }" (click)="yearViewChange(year)">
+          {{ year }}
       </div>
       <div class="clear"></div>
     </div>

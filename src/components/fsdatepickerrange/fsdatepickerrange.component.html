@@ -2,8 +2,8 @@
 
 <div class="fs-datetime-dialog fs-datetime-range dialog-view-{{ fsDatePickerModel.view }}" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
-  'has-date': (fsDatePickerModel.components.indexOf('calendar-start') !== -1 || fsDatePickerModel.components.indexOf('calendar-end') !== -1),
-  'has-time': (fsDatePickerModel.components.indexOf('time-start') !== -1 || fsDatePickerModel.components.indexOf('time-end') !== -1) }">
+  'has-date': (fsDatePickerModel.components.calendarStart || fsDatePickerModel.components.calendarEnd),
+  'has-time': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd) }">
   <div class="wrap">
 
     <div class="header">
@@ -13,7 +13,7 @@
       (componentsChange)="setComponents($event)"
       ></fsDatePickerSummary>
       <fsDatePickerPresets
-      *ngIf="fsDatePickerModel.components.indexOf('time-start') === -1 && fsDatePickerModel.components.indexOf('time-end') === -1"
+      *ngIf="!fsDatePickerModel.components.timeStart && !fsDatePickerModel.components.timeEnd"
       (datesChange)="onDatesChange($event)"
       ></fsDatePickerPresets>
     </div>
@@ -21,7 +21,7 @@
     <div class="date-time">
       <div class="date-range">
           <fsDatePickerCalendar
-          *ngIf="fsDatePickerModel.components.indexOf('calendar-start') !== -1"
+          *ngIf="fsDatePickerModel.components.calendarStart"
           [date]="parentInstance.ngModelStart"
           [dateToHighlight]="parentInstance.ngModelEnd"
           [dateMode]="fsDatePickerModel.dateMode.start_date"
@@ -30,7 +30,7 @@
           ></fsDatePickerCalendar>
 
           <fsDatePickerCalendar
-          *ngIf="fsDatePickerModel.components.indexOf('calendar-end') !== -1"
+          *ngIf="fsDatePickerModel.components.calendarEnd"
           [date]="parentInstance.ngModelEnd"
           [dateToHighlight]="parentInstance.ngModelStart"
           [dateMode]="fsDatePickerModel.dateMode.end_date"
@@ -42,12 +42,12 @@
 
       <div class="time-range">
         <fsDatePickerTime
-          *ngIf="fsDatePickerModel.components.indexOf('time-start') !== -1"
+          *ngIf="fsDatePickerModel.components.timeStart"
           [date]="parentInstance.ngModelStart"
           (onChange)="setStartTime($event)"
         ></fsDatePickerTime>
         <fsDatePickerTime
-          *ngIf="fsDatePickerModel.components.indexOf('time-end') !== -1"
+          *ngIf="fsDatePickerModel.components.timeEnd"
           [date]="parentInstance.ngModelEnd"
           [disabledTimes]="toDisabledTimes"
           (onChange)="setEndTime($event)"

@@ -111,9 +111,9 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
 
       if (this.view === 'time') {
-        this.$dialog.instance.fsDatePickerModel.components = ['time-start'];
+        this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
       } else {
-        this.$dialog.instance.fsDatePickerModel.components = ['calendar-start', 'calendar-end'];
+        this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true, calendarEnd: true };
       }
 
       setTimeout(() => {
