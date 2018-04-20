@@ -27,12 +27,14 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
-  @Input() date;
+  @Input() date = null;
   @Input() dateToHighlight = null;
   @Input() dateMode = null;
   @Input() disabledDays = null;
+  @Input() drawMonth = null;
   @Output() onChange = new EventEmitter<any>();
   @Output() onDateModeChange = new EventEmitter<any>();
+  @Output() onDrawMonth = new EventEmitter<any>();
   selected = {};
   iscrollOptions = null;
   iscrollInstance = null;
@@ -89,11 +91,19 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     if (changes) {
 
       if (changes.date) {
-        this.drawMonths(this.date);
+        // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
         this.selected = this.fsDatePickerCommon.getSelected(this.date);
         this.updateDaysHighlighted();
       }else if (changes.dateToHighlight) {
         this.updateDaysHighlighted();
+      }
+
+      if (changes.drawMonth) {
+        if (changes.drawMonth.currentValue) {
+          this.drawMonths(changes.drawMonth.currentValue);
+        } else {
+          this.onDrawMonth.emit(this.fsDatePickerCommon.createMoment());
+        }
       }
     }
   }
@@ -191,7 +201,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   createModel() {
     if (!this.date) {
-      this.setDate(this.fsDatePickerCommon.createMoment());
+      // @TODO remove this if possible
+      this.date = this.fsDatePickerCommon.createMoment();
+      // this.setDate(this.fsDatePickerCommon.createMoment());
     }
   }
 
@@ -219,11 +231,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
       return;
     }
 
-    if ( !this.date) {
+    if (!this.date) {
       this.createModel();
     }
 
-    let date = this.date
+    const date = this.date
           .clone()
           .year(day.year)
           .month(day.month - 1)
@@ -250,29 +262,28 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   previousMonth(month) {
-    this.drawMonths(month.moment.subtract(1, 'months'));
+    // this.drawMonths(month.moment.subtract(1, 'months'));
+    this.onDrawMonth.emit(month.moment.subtract(1, 'months'));
   }
 
   nextMonth(month) {
-    this.drawMonths(month.moment.add(1, 'months'));
+    // this.drawMonths(month.moment.add(1, 'months'));
+    this.onDrawMonth.emit(month.moment.add(1, 'months'));
   }
 
   setMonth(monthNumber) {
-    const date = this.month.moment || this.fsDatePickerCommon.createMoment();
-    this.drawMonths(moment(date).set('month', monthNumber - 1));
+    // this.drawMonths(moment(this.month.moment).set('month', monthNumber - 1));
+    this.onDrawMonth.emit(moment(this.month.moment).set('month', monthNumber - 1));
+
   }
 
   setYear(yearNumber) {
-    const date = this.month.moment || this.fsDatePickerCommon.createMoment();
-    this.drawMonths(moment(date).set('year', yearNumber));
+    // this.drawMonths(moment(this.month.moment).set('year', yearNumber));
+    this.onDrawMonth.emit(moment(this.month.moment).set('year', yearNumber));
   }
 
   drawMonths(date) {
-
-    if (!date) {
-      date = this.fsDatePickerCommon.createMoment();
-    }
-
+    this.onDrawMonth.emit(date);
     this.month = this.createMonth(date);
   }
 

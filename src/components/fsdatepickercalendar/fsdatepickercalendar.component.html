@@ -10,7 +10,7 @@
       <div class="clear"></div>
     </div>
   </div>
-  <div *ngIf="dateMode == 'date'" class="calendar">
+  <div *ngIf="dateMode == 'date' && month" class="calendar">
     <div class="month-year">
       <a class="month-name" (click)="monthView(month)">{{month.name}}</a>
       <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>

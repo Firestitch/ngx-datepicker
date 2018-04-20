@@ -15,10 +15,13 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   parentInstance: any = null;
 
-  toDisabledDays = [];
-  toDisabledTimes = [];
+  public toDisabledDays = [];
+  public toDisabledTimes = [];
 
   private modelDiffer = null;
+
+  public startCalendarMonth = null;
+  public endCalendarMonth = null;
 
   constructor(
     public fsDatePickerModel: FsDatePickerModel,
@@ -29,7 +32,10 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     this.modelDiffer = this._iterableDiffers.find([]).create(null);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.endCalendarDrawMonth(this.parentInstance.ngModelEnd);
+    this.startCalendarDrawMonth(this.parentInstance.ngModelStart);
+  }
 
   ngDoCheck() {
     if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
@@ -67,10 +73,26 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     }
 
     this.setDates(startDate, endDate);
+
+    if (startDate && endDate) {
+      if (moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM')) {
+        this.endCalendarDrawMonth(moment(endDate).add(1, 'month'));
+      } else {
+        this.endCalendarDrawMonth(endDate);
+      }
+    }
+
+    if (startDate) {
+      this.startCalendarDrawMonth(startDate);
+    }
   }
 
   setEndDate(date) {
     this.setDates(this.parentInstance.ngModelStart, date);
+
+    if (date) {
+      this.endCalendarDrawMonth(date);
+    }
   }
 
   setStartTime(date) {
@@ -92,6 +114,8 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   onDatesChange(data) {
     this.setDates(data.start, data.end);
+    this.endCalendarDrawMonth(data.end);
+    this.startCalendarDrawMonth(data.start);
   }
 
   toDisabledDaysUpdate(startDate, endDate) {
@@ -122,6 +146,27 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   setComponents(data) {
     this.fsDatePickerModel.components = data;
+  }
+
+  startCalendarDrawMonth(date) {
+    this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+
+    if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
+      this.endCalendarMonth = moment(this.startCalendarMonth).add(1, 'month');
+    }
+  }
+
+  endCalendarDrawMonth(date) {
+    this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+
+    if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
+      this.startCalendarMonth = moment(this.endCalendarMonth).subtract(1, 'month');
+    }
+  }
+
+  private rangeCalendarsConflict(startDate, endDate): boolean {
+    return moment(startDate).isAfter(endDate) ||
+          moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM');
   }
 
   close($event?) {

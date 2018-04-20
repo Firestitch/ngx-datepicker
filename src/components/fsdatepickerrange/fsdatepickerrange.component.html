@@ -25,8 +25,10 @@
           [date]="parentInstance.ngModelStart"
           [dateToHighlight]="parentInstance.ngModelEnd"
           [dateMode]="fsDatePickerModel.dateMode.start_date"
+          [drawMonth]="startCalendarMonth"
           (onChange)="setStartDate($event)"
           (onDateModeChange)="setDateModeStart($event)"
+          (onDrawMonth)="startCalendarDrawMonth($event)"
           ></fsDatePickerCalendar>
 
           <fsDatePickerCalendar
@@ -35,8 +37,10 @@
           [dateToHighlight]="parentInstance.ngModelStart"
           [dateMode]="fsDatePickerModel.dateMode.end_date"
           [disabledDays]="toDisabledDays"
+          [drawMonth]="endCalendarMonth"
           (onChange)="setEndDate($event)"
           (onDateModeChange)="setDateModeEnd($event)"
+          (onDrawMonth)="endCalendarDrawMonth($event)"
           ></fsDatePickerCalendar>
       </div>
 

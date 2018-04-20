@@ -37,6 +37,10 @@ export class FsDatePickerCommon {
     return moment().startOf('day');
   }
 
+  getMomentSafe(date) {
+    return moment(date).isValid() ? date : this.createMoment();
+  }
+
   positionDialog(dialog, elementRef) {
 
     if (!dialog || window.innerWidth < 500) {
