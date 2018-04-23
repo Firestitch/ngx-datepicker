@@ -1,0 +1,26 @@
+:host {
+  .presets {
+    display: block;
+    float: left;
+    margin: 8px 0 0;
+    color: #a9acae;
+    a {
+      font-size: 13px;
+      margin: 0 5px;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 499px) {
+  :host {
+    .presets {
+      float: left !important;
+    }
+  }
+}

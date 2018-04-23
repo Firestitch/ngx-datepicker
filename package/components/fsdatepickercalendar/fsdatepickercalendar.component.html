@@ -1,20 +1,20 @@
-<div class="date" *ngIf="['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1">
+<div class="date" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" (mouseleave)="onMouseLeaveCalendar()">
   <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>
   </div>
-  <div class="years" *ngIf="dateMode == 'year'" fsIscroll fsOptions="iscrollOptions" fsInstance="iscrollInstance">
+  <div class="years" *ngIf="dateMode == 'year'" fsIscroll [fsOptions]="iscrollOptions" fsInstance="iscrollInstance">
     <div class="iscroll-scroller">
-      <div *ngFor="let year of years" class="year" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }" (click)="yearViewChange(year)">
-          {{year}}
+      <div *ngFor="let year of years" class="year data-year-{{ year }}" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }" (click)="yearViewChange(year)">
+          {{ year }}
       </div>
       <div class="clear"></div>
     </div>
   </div>
-  <div *ngIf="dateMode == 'date'" class="calendar">
+  <div *ngIf="dateMode == 'date' && month" class="calendar">
     <div class="month-year">
       <a class="month-name" (click)="monthView(month)">{{month.name}}</a>
       <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>
-      <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a>
+      <!-- <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a> -->
       <div class="gap"></div>
       <div class="actions">
         <a (click)="previousMonth(month)"><mat-icon>navigate_before</mat-icon></a>
@@ -33,14 +33,16 @@
           <th>Sat</th>
         </tr>
       </thead>
-      <tbody class="calendar calendar-{{month.date}}">
+      <tbody class="calendar calendar-{{ month.date }}">
         <tr class="week" *ngFor="let week of month.weeks">
           <td *ngFor="let day of week" class="day" [ngClass]="{
             today: today.date==day.date,
             mute: day.mute,
-            selected: (day.date==selected.date || highlightedRangeDays.indexOf(day.date) !== -1) && !day.mute,
-            disabled: day.disabled }" (click)="dayClick(day)">
-            <span>{{day.number}}</span>
+            selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,
+            'min-date': day.date === highlightedRangeDays.min,
+            'max-date': day.date === highlightedRangeDays.max,
+            disabled: day.disabled }" (click)="dayClick(day)" (mouseenter)="onMouseEnterDay(day)">
+            <span>{{ day.number }}</span>
           </td>
         </tr>
       </tbody>

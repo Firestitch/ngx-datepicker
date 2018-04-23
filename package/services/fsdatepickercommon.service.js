@@ -10,11 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var common_1 = require("@firestitch/common");
+var util_1 = require("@firestitch/common/util");
 var moment = require("moment-timezone");
 var FsDatePickerCommon = (function () {
-    function FsDatePickerCommon(fsUtil) {
-        this.fsUtil = fsUtil;
+    function FsDatePickerCommon() {
     }
     FsDatePickerCommon.prototype.getSelected = function (date) {
         var result = {};
@@ -36,23 +35,36 @@ var FsDatePickerCommon = (function () {
         }
         return result;
     };
+    FsDatePickerCommon.prototype.isSameDay = function (startDate, endDate) {
+        return moment(startDate).format('YYYY-MM-DD') === moment(endDate).format('YYYY-MM-DD');
+    };
     FsDatePickerCommon.prototype.createMoment = function () {
         return moment().startOf('day');
+    };
+    FsDatePickerCommon.prototype.getMomentSafe = function (date) {
+        return moment(date).isValid() ? date : this.createMoment();
     };
     FsDatePickerCommon.prototype.positionDialog = function (dialog, elementRef) {
         if (!dialog || window.innerWidth < 500) {
             return;
         }
         var input = elementRef.nativeElement;
+        var parent = input.parentElement.parentElement;
         var dialogContainer = dialog.instance.element.nativeElement.querySelector('.fs-datetime-dialog');
         var dialogContainerStyles = window.getComputedStyle(dialogContainer);
         var inputBound = input.getBoundingClientRect();
+        var parentBound = parent.getBoundingClientRect();
         var dialogBound = dialog.instance.element.nativeElement.getBoundingClientRect();
         var dialogContainerBound = dialogContainer.getBoundingClientRect();
-        var top = parseInt(inputBound.top) + inputBound.height;
+        var top = 0;
+        if (parent.className.match(/mat-input-flex/)) {
+            top = parseInt(parentBound.top);
+        }
+        else {
+            top = parseInt(inputBound.top) + inputBound.height;
+        }
         var css = { top: '', bottom: '', left: '', right: '' };
-        if ((top + this.fsUtil.int(dialogContainer.style.marginTop) +
-            this.fsUtil.int(dialogContainerStyles.height)) > window.innerHeight) {
+        if ((top + parseInt(dialogContainerStyles.height)) > window.innerHeight) {
             css.bottom = '10px';
             dialogContainer.classList.add('vertical-reposition');
         }
@@ -61,7 +73,7 @@ var FsDatePickerCommon = (function () {
             dialogContainer.classList.remove('vertical-reposition');
         }
         var left = parseInt(inputBound.left);
-        if ((left + this.fsUtil.int(dialogContainerStyles.width)) > window.innerWidth) {
+        if ((left + parseInt(dialogContainerStyles.width)) > window.innerWidth) {
             css.right = '10px';
             css.left = '';
             dialogContainer.classList.add('horizontal-reposition');
@@ -95,10 +107,10 @@ var FsDatePickerCommon = (function () {
         if (view === void 0) { view = 'date'; }
         var result = '';
         var format = [];
-        if (this.fsUtil.isInt(value)) {
+        if (util_1.isNumeric(value)) {
             value = moment(new Date(value));
         }
-        else if (this.fsUtil.isString(value)) {
+        else if (typeof value === 'string') {
             if (moment(value).isValid()) {
                 value = moment(value);
             }
@@ -116,6 +128,15 @@ var FsDatePickerCommon = (function () {
             result = value.format(format.join(' '));
         }
         return result;
+    };
+    FsDatePickerCommon.prototype.formatSummary = function (date, view) {
+        if (view === void 0) { view = 'date'; }
+        if (view === 'date') {
+            return moment(date).format('MMM D, YYYY');
+        }
+        if (view === 'time') {
+            return moment(date).format('h:mm a');
+        }
     };
     FsDatePickerCommon.prototype.inputClick = function (e, callback) {
         var x = e.clientX, y = e.clientY, stack = [];
@@ -142,7 +163,7 @@ var FsDatePickerCommon = (function () {
     };
     FsDatePickerCommon = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [common_1.FsUtil])
+        __metadata("design:paramtypes", [])
     ], FsDatePickerCommon);
     return FsDatePickerCommon;
 }());

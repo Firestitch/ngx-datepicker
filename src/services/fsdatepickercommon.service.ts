@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FsUtil } from '@firestitch/common';
+import { isNumeric } from '@firestitch/common/util';
 import * as moment from 'moment-timezone';
 
 @Injectable()
 export class FsDatePickerCommon {
 
-  constructor(private fsUtil: FsUtil) { }
+  constructor() { }
 
   getSelected(date) {
     const result = {};
@@ -29,8 +29,16 @@ export class FsDatePickerCommon {
     return result;
   }
 
+  isSameDay(startDate, endDate) {
+    return moment(startDate).format('YYYY-MM-DD') === moment(endDate).format('YYYY-MM-DD');
+  }
+
   createMoment() {
     return moment().startOf('day');
+  }
+
+  getMomentSafe(date) {
+    return moment(date).isValid() ? date : this.createMoment();
   }
 
   positionDialog(dialog, elementRef) {
@@ -40,17 +48,25 @@ export class FsDatePickerCommon {
     }
 
     const input = elementRef.nativeElement;
+    const parent = input.parentElement.parentElement;
     const dialogContainer = dialog.instance.element.nativeElement.querySelector('.fs-datetime-dialog');
     const dialogContainerStyles = window.getComputedStyle(dialogContainer);
+
     const inputBound = input.getBoundingClientRect();
+    const parentBound = parent.getBoundingClientRect();
     const dialogBound = dialog.instance.element.nativeElement.getBoundingClientRect();
     const dialogContainerBound = dialogContainer.getBoundingClientRect();
-    const top = parseInt(inputBound.top) + inputBound.height;
+
+    let top = 0;
+    if (parent.className.match(/mat-input-flex/)) {
+      top = parseInt(parentBound.top);
+    } else {
+      top = parseInt(inputBound.top) + inputBound.height;
+    }
 
     const css = { top: '', bottom: '', left: '', right: '' };
 
-    if ((top + this.fsUtil.int(dialogContainer.style.marginTop) +
-        this.fsUtil.int(dialogContainerStyles.height)) > window.innerHeight) {
+    if ((top + parseInt(dialogContainerStyles.height)) > window.innerHeight) {
       css.bottom = '10px';
       dialogContainer.classList.add('vertical-reposition');
     } else {
@@ -60,7 +76,7 @@ export class FsDatePickerCommon {
 
     const left = parseInt(inputBound.left);
 
-    if ((left + this.fsUtil.int(dialogContainerStyles.width)) > window.innerWidth) {
+    if ((left + parseInt(dialogContainerStyles.width)) > window.innerWidth) {
       css.right = '10px';
       css.left = '';
       dialogContainer.classList.add('horizontal-reposition');
@@ -100,9 +116,9 @@ export class FsDatePickerCommon {
     let result = '';
     const format = [];
 
-    if (this.fsUtil.isInt(value)) {
+    if (isNumeric(value)) {
       value = moment(new Date(value));
-    } else if (this.fsUtil.isString(value)) {
+    } else if (typeof value === 'string') {
       if (moment(value).isValid()) {
         value = moment(value);
       } else {
@@ -124,6 +140,17 @@ export class FsDatePickerCommon {
     }
 
     return result;
+  }
+
+  formatSummary(date, view = 'date') {
+
+    if (view === 'date') {
+      return moment(date).format('MMM D, YYYY');
+    }
+
+    if (view === 'time') {
+      return moment(date).format('h:mm a');
+    }
   }
 
   inputClick(e, callback) {

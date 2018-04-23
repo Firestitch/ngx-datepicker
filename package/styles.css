@@ -8,476 +8,292 @@
   outline: none;
   overflow: visible;
   background: none !important; }
+  .fs-datetime-backdrop[hidden] {
+    display: none !important; }
 
-.fs-datetime-backdrop[hidden] {
-  display: none !important; }
-
-a {
-  text-decoration: none;
-  cursor: pointer; }
-
-/*
-fs-datetime {
-	position: relative;
-}
-
-fs-datetime-range md-input-container .hint {
-    top: 33px;
-    white-space: nowrap;
-    overflow: visible;
-    clear: left;
-    position: absolute;
-}
-
-fs-datetime .md-input {
-	min-width: 100px;
-	z-index: 51;
-	position: relative;
-	cursor: pointer;
-}
-
-fs-datetime.has-time .md-input {
-	min-width: 150px;
-}
-
-fs-datetime.has-time:not(.has-date) .md-input {
-	min-width: 70px;
-}
-
-fs-datetime.has-time .md-input {
-	width: auto;
-}
-
-fs-datetime md-input-container.md-block .md-input {
-	width: 100%;
-}
-*/
 .fs-datetime-dialog {
   position: fixed;
   z-index: 80;
   display: none;
   visibility: hidden;
   display: block;
-  margin-top: 20px; }
-
-.fs-datetime-dialog.opened {
-  visibility: visible; }
-
-.fs-datetime-dialog * {
-  user-select: none; }
-
-.fs-datetime-dialog fsDatePickerCalendar {
-  /* Need for year view */
-  display: flex;
-  flex: 1; }
-
-.fs-datetime-dialog .wrap {
-  background: #fff;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  width: 372px;
-  padding: 0 !important; }
-
-.fs-datetime-dialog.has-time.has-date .wrap {
-  width: 645px; }
-
-.fs-datetime-dialog .wrap:focus,
-.fs-datetime-dialog .wrap:active,
-.fs-datetime-dialog:focus, .fs-datetime-dialog:active {
-  outline: none; }
-
-.fs-datetime-dialog.has-time:not(.has-date) .wrap {
-  width: 255px; }
-
-.fs-datetime-dialog.fs-datetime-range.has-date:not(.has-time) .wrap {
-  width: 744px; }
-
-.fs-datetime-dialog.fs-datetime-range.has-time:not(.has-date) .wrap {
-  width: 276px; }
-
-.fs-datetime-dialog.fs-datetime-range.has-time.has-date .wrap {
-  width: 1015px; }
-
-.fs-datetime-dialog.fs-datetime-range .date-range {
-  display: flex; }
-
-.fs-datetime-dialog.fs-datetime-range .date-range {
-  display: flex;
-  flex: 1; }
-
-.fs-datetime-dialog.fs-datetime-range .date-range fsdatepickercalendar:first-child {
-  margin-right: 5px; }
-
-.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-header {
-  margin: 0 15px; }
-
-.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-label {
-  min-width: 115px; }
-
-.fs-datetime-dialog.fs-datetime-range .time-range .mat-ink-bar {
-  visibility: inherit !important; }
-
-.fs-datetime-dialog.fs-datetime-range .done .ranges {
-  float: right;
+  /* triangle above dialog */
   /*
-        div {
-          background-color: #d4d4d4;
-          display: inline-block;
-          padding: 9px 16px;
-          margin: 0 2px;
-          border-radius: 18px;
-          cursor: pointer;
+  &:not(.vertical-reposition) {
+    &:not(.horizontal-reposition) {
+      .wrap {
+        &:after, &:before {
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          border-top: 19px solid #fff;
+          top: -19px;
+          content: '';
+          left: 50%;
+          position: absolute;
+          transform: rotate(180deg);
+          left: 23px;
         }
-        */ }
-
-.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:after,
-.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 19px solid #fff;
-  top: -19px;
-  content: '';
-  left: 50%;
-  position: absolute;
-  transform: rotate(180deg);
-  left: 23px; }
-
-.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {
-  border-left: 23px solid transparent;
-  border-right: 23px solid transparent;
-  border-top: 21px solid transparent;
-  border-top-color: #efefef;
-  top: -21px;
-  left: 20px; }
-
-.fs-datetime-dialog .date::-webkit-scrollbar,
-.fs-datetime-dialog .years::-webkit-scrollbar {
-  display: none; }
-
-.fs-datetime-dialog .inline-date {
-  padding: 10px;
-  width: 100%; }
-
-.fs-datetime-dialog .gap {
-  display: flex;
-  flex: 1; }
-
-.fs-datetime-dialog .month-year .actions {
-  text-align: right;
-  margin-right: -12px; }
-
-.fs-datetime-dialog .month-year .actions a {
-  padding: 6px; }
-
-.fs-datetime-dialog .month-year .more {
-  padding: 1px; }
-
-.fs-datetime-dialog .month-year {
-  height: 60px;
-  font-size: 17px;
-  padding: 0 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center; }
-
-.fs-datetime-dialog .year-name,
-.fs-datetime-dialog .month-name {
-  color: inherit;
-  padding: 5px;
-  border-radius: 3px;
-  float: left; }
-
-.fs-datetime-dialog .month-year .md-select-value .md-select-icon {
-  visibility: hidden;
-  width: 15px;
-  display: none; }
-
-.fs-datetime-dialog .month-year .md-select-value {
-  border-color: transparent;
-  border-width: 1px;
-  min-width: auto;
-  padding: 0; }
-
-.fs-datetime-dialog .month-year:hover .md-select-value .md-select-icon {
-  visibility: visible; }
-
-.fs-datetime-dialog .month-year:hover .md-select-value {
-  border-width: 1px;
-  border-color: #e1e1e1; }
-
-.fs-datetime-dialog table {
-  border-collapse: collapse; }
-
-.fs-datetime-dialog .day {
-  position: relative;
-  text-align: center;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  border: 1px solid #efefef;
-  cursor: pointer;
-  outline: none; }
-
-.fs-datetime-dialog .day span {
-  width: 100%;
-  height: 100%;
-  display: block; }
-
-.fs-datetime-dialog .day.mute {
-  color: #d7d7d7; }
-
-.fs-datetime-dialog thead th {
-  width: 50px;
-  vertical-align: top;
-  padding-bottom: 20px;
-  text-align: center;
-  border: 1px solid transparent;
-  background: #fff;
-  border-bottom: 1px solid #efefef;
-  border-top: 1px solid #fff; }
-
-.fs-datetime-dialog thead th,
-fs-datetime .lbl {
-  font-weight: normal;
-  font-size: 12px;
-  color: #4d4d4d; }
-
-.fs-datetime-dialog .date {
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
-  position: relative;
-  min-height: 350px;
-  flex: 1 1 45%; }
-
-.fs-datetime-dialog .time {
-  padding: 12px 15px; }
-
-.fs-datetime-dialog .time {
-  padding: 12px 15px; }
-
-.fs-datetime-dialog .time .wraper {
-  flex-direction: row;
-  display: flex;
-  align-items: center; }
-
-.fs-datetime-dialog .time .hours table {
-  border-collapse: collapse;
-  width: 100%; }
-
-.fs-datetime-dialog .time .hour,
-.fs-datetime-dialog .time .minute {
-  width: 31px;
-  height: 31px;
-  text-align: center;
-  border: 1px	solid #efefef;
-  padding: 0;
-  cursor: pointer; }
-
-.fs-datetime-dialog .time .hour .number,
-.fs-datetime-dialog .time .minute .number {
-  border: 1px solid transparent;
-  border-radius: 50%;
-  line-height: 28px;
-  height: 28px; }
-
-.fs-datetime-dialog .time .hour .number {
-  font-size: 12px; }
-
-.fs-datetime-dialog .day.selected,
-.fs-datetime-dialog .years .year.selected,
-.fs-datetime-dialog .months .month.selected,
-.fs-datetime-dialog .time .hour.selected,
-.fs-datetime-dialog .time .minute.selected {
-  background: #4678AE;
-  color: #fff; }
-
-/*
-.fs-datetime-dialog .day.today {
-    border: 1px solid #4678AE;
-    border-style: double;
-}
-*/
-.fs-datetime-dialog .day.today:after {
-  content: 'TODAY';
-  color: #555555;
-  font-size: 9px;
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  width: 100%;
-  height: auto;
-  line-height: normal; }
-
-.fs-datetime-dialog .day.today.selected:after {
-  color: #fff; }
-
-.fs-datetime-dialog .years .year.today {
-  border: 1px solid #4678AE;
-  border-style: double; }
-
-.fs-datetime-dialog .time .minutes {
-  margin-left: 15px; }
-
-.fs-datetime-dialog .time .minutes table {
-  border-collapse: collapse;
-  width: 100%; }
-
-.fs-datetime-dialog .time .hour.disabled,
-.fs-datetime-dialog .time .minute.disabled,
-.fs-datetime-dialog .day.disabled {
-  color: #a6a5a5;
-  cursor: initial;
-  background: #efefef; }
-
-.fs-datetime-dialog .time .lbl {
-  margin-bottom: 2px;
-  font-size: 12px; }
-
-.fs-datetime-dialog .time .midnight {
-  line-height: 8px;
-  display: block; }
-
-.fs-datetime-dialog .time .midnight div {
-  line-height: 16px; }
-
-.fs-datetime-dialog .time .midnight,
-.fs-datetime-dialog .time .noon {
-  font-size: 10px; }
-
-.fs-datetime-dialog .time .hour .am-pm {
-  font-size: 9px;
-  margin-left: 1px; }
-
-.fs-datetime-dialog .time .hour .number.textual {
-  font-size: 11px; }
-
-/*
-.fs-datetime-dialog . {
-	font-size: 11px;
-}*/
-.fs-datetime-dialog .date-time {
-  overflow: auto;
-  flex-direction: row;
-  display: flex; }
-
-.fs-datetime-dialog .months {
-  width: 100%;
-  height: 100%;
-  position: absolute; }
-
-.fs-datetime-dialog .months .month {
-  height: 25%;
-  width: 33.33%;
-  float: left;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  border-left: 1px solid #efefef;
-  border-top: 1px solid #efefef;
-  cursor: pointer;
-  outline: none;
-  border-bottom: 0;
-  border-right: 0;
-  min-height: 80px;
-  box-sizing: border-box; }
-
-.fs-datetime-dialog .months .month:nth-child(-n+3) {
-  border-top: 0; }
-
-.fs-datetime-dialog .months .month:nth-child(3n+0) {
-  border-right: 1px solid #efefef; }
-
-.fs-datetime-dialog .months .month.today {
-  border: 1px solid #4678AE;
-  border-style: double; }
-
-.fs-datetime-dialog .years {
-  position: absolute;
-  width: 100%;
-  max-height: 100%;
-  height: 100vh;
-  overflow: hidden; }
-
-.iscroll-scroller {
-  position: absolute;
-  width: 100%; }
-
-.fs-datetime-dialog .years .year {
-  float: left;
-  width: 25%;
-  text-align: center;
-  height: 65px;
-  border-left: 1px solid #efefef;
-  border-bottom: 1px solid #efefef;
-  line-height: 65px;
-  outline: none;
-  cursor: pointer;
-  box-sizing: border-box; }
-
-.fs-datetime-dialog .years .year:nth-last-child(-n+4) {
-  border-bottom: 1px solid #efefef; }
-
-.fs-datetime-dialog .years .year:nth-child(4n+0) {
-  border-right: 1px solid #efefef; }
-
-.clear {
-  clear: both; }
-
-.fs-datetime-dialog .years .year.row {
-  clear: both; }
-
-.fs-datetime-dialog .view-year .date {
-  overflow-y: visible; }
-
-.fs-datetime-dialog .view-year .date {
-  overflow-y: visible; }
-
-.fs-datetime-dialog.view-date .date {
-  min-height: auto; }
-
-/*
-fs-datetime-range {
-	display: inline;
-}
-
-fs-datetime-range .to {
-	padding: 0 4px;
-	padding-top: 26px;
-}
-
-fs-datetime-range.md-no-label .to {
-	padding-top: 8px;
-}
-
-fs-datetime-range .datetime-block .datetime-from,
-fs-datetime-range .datetime-block .datetime-to {
-	width: 50%;
-}
-*/
-.fs-datetime-dialog .close {
-  padding: 5px;
-  display: none; }
-
-.fs-datetime-dialog .done {
-  background: #fff;
-  width: 100%;
-  border-top: 1px solid #E1E1E1; }
-
-.fs-datetime-dialog .done button {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding: 0 6px;
-  margin: 6px 8px; }
-
-.fs-datetime-dialog fs-tabnav {
-  display: none; }
-
-.fs-datetime-dialog fs-tabnav .md-tabs a {
-  width: 50%; }
+        &:before {
+          border-left: 23px solid transparent;
+          border-right: 23px solid transparent;
+          border-top: 21px solid transparent;
+          border-top-color: #efefef;
+          top: -21px;
+          left: 20px;
+        }
+      }
+    }
+  }
+  */ }
+  .fs-datetime-dialog a {
+    text-decoration: none;
+    cursor: pointer; }
+  .fs-datetime-dialog.opened {
+    visibility: visible; }
+  .fs-datetime-dialog * {
+    user-select: none; }
+  .fs-datetime-dialog:focus {
+    outline: none; }
+  .fs-datetime-dialog:active {
+    outline: none; }
+  .fs-datetime-dialog fsDatePickerCalendar {
+    /* Need for year view */
+    display: flex;
+    flex: 1; }
+  .fs-datetime-dialog .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    width: 372px;
+    padding: 0 !important; }
+    .fs-datetime-dialog .wrap:focus {
+      outline: none; }
+    .fs-datetime-dialog .wrap:active {
+      outline: none; }
+    .fs-datetime-dialog .wrap .header {
+      padding: 0 15px;
+      /* Don't use flex. Strange behaviour of scroll */
+      display: table;
+      width: 100%;
+      box-sizing: border-box; }
+  .fs-datetime-dialog.has-time {
+    height: 100%;
+    max-height: 472px; }
+    .fs-datetime-dialog.has-time .wrap {
+      width: 353px; }
+  .fs-datetime-dialog.fs-datetime-range.has-date .wrap {
+    width: 744px; }
+    .fs-datetime-dialog.fs-datetime-range.has-date .wrap .header fsdatepickerpresets .presets {
+      float: right; }
+    .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range {
+      display: flex;
+      flex: 1; }
+      .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range fsdatepickercalendar:first-child {
+        margin-right: 5px; }
+      .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).min-date:not(.max-date)::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 0.5em;
+        border-left-color: #fff;
+        border-top-color: #fff; }
+      .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).max-date:not(.min-date)::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 0.5em;
+        border-left-color: #fff;
+        border-top-color: #fff;
+        -moz-transform: scale(-1, -1);
+        -webkit-transform: scale(-1, -1);
+        -o-transform: scale(-1, -1);
+        -ms-transform: scale(-1, -1);
+        transform: scale(-1, -1); }
+  .fs-datetime-dialog.fs-datetime-range:not(.has-date) .date-range {
+    display: none; }
+  .fs-datetime-dialog .date::-webkit-scrollbar,
+  .fs-datetime-dialog .years::-webkit-scrollbar {
+    display: none; }
+  .fs-datetime-dialog .inline-date {
+    padding: 10px;
+    width: 100%; }
+  .fs-datetime-dialog .gap {
+    display: flex;
+    flex: 1; }
+  .fs-datetime-dialog .month-year {
+    font-weight: 600;
+    height: 60px;
+    font-size: 17px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .fs-datetime-dialog .month-year .actions {
+      text-align: right;
+      margin-right: -12px; }
+      .fs-datetime-dialog .month-year .actions a {
+        padding: 6px; }
+    .fs-datetime-dialog .month-year .more {
+      padding: 1px; }
+  .fs-datetime-dialog .year-name, .fs-datetime-dialog .month-name {
+    color: inherit;
+    padding: 5px;
+    border-radius: 3px;
+    float: left; }
+  .fs-datetime-dialog .day {
+    position: relative;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #efefef;
+    cursor: pointer;
+    outline: none; }
+    .fs-datetime-dialog .day.today:after {
+      content: 'TODAY';
+      color: #555555;
+      font-size: 9px;
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      height: auto;
+      line-height: normal; }
+    .fs-datetime-dialog .day.today.selected:after {
+      color: #fff; }
+    .fs-datetime-dialog .day.mute {
+      color: #d7d7d7; }
+    .fs-datetime-dialog .day span {
+      width: 100%;
+      height: 100%;
+      display: block; }
+  .fs-datetime-dialog table {
+    border-collapse: collapse; }
+    .fs-datetime-dialog table thead th {
+      width: 50px;
+      vertical-align: top;
+      padding-bottom: 20px;
+      text-align: center;
+      border: 1px solid transparent;
+      background: #fff;
+      border-bottom: 1px solid #efefef;
+      border-top: 1px solid #fff;
+      font-weight: normal;
+      font-size: 12px;
+      color: #4d4d4d; }
+  .fs-datetime-dialog fs-datetime .lbl {
+    font-weight: normal;
+    font-size: 12px;
+    color: #4d4d4d; }
+  .fs-datetime-dialog fsdatepickercalendar {
+    min-height: 350px; }
+  .fs-datetime-dialog .date {
+    width: 100%;
+    position: relative;
+    min-height: 350px;
+    flex: 1 1 45%; }
+  .fs-datetime-dialog .day.selected,
+  .fs-datetime-dialog .years .year.selected,
+  .fs-datetime-dialog .months .month.selected,
+  .fs-datetime-dialog .time .hour.selected,
+  .fs-datetime-dialog .time .minute.selected {
+    background: #4678AE;
+    color: #fff; }
+  .fs-datetime-dialog .time .hour.disabled,
+  .fs-datetime-dialog .time .minute.disabled,
+  .fs-datetime-dialog .day.disabled {
+    color: #a6a5a5;
+    cursor: initial;
+    background: #efefef; }
+  .fs-datetime-dialog .years {
+    position: absolute;
+    width: 100%;
+    max-height: 100%;
+    height: 100vh;
+    overflow: hidden; }
+    .fs-datetime-dialog .years .year {
+      float: left;
+      width: 25%;
+      text-align: center;
+      height: 65px;
+      border-left: 1px solid #efefef;
+      border-bottom: 1px solid #efefef;
+      line-height: 65px;
+      outline: none;
+      cursor: pointer;
+      box-sizing: border-box; }
+      .fs-datetime-dialog .years .year.row {
+        clear: both; }
+      .fs-datetime-dialog .years .year.today {
+        border: 1px solid #4678AE;
+        border-style: double; }
+      .fs-datetime-dialog .years .year:nth-last-child(-n+4) {
+        border-bottom: 1px solid #efefef; }
+      .fs-datetime-dialog .years .year:nth-child(4n+0) {
+        border-right: 1px solid #efefef; }
+  .fs-datetime-dialog .date-time {
+    overflow: auto;
+    flex-direction: row;
+    display: flex; }
+  .fs-datetime-dialog .months {
+    width: 100%;
+    height: 100%;
+    position: absolute; }
+    .fs-datetime-dialog .months .month {
+      height: 25%;
+      width: 33.33%;
+      float: left;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      border-left: 1px solid #efefef;
+      border-top: 1px solid #efefef;
+      cursor: pointer;
+      outline: none;
+      border-bottom: 0;
+      border-right: 0;
+      min-height: 80px;
+      box-sizing: border-box; }
+      .fs-datetime-dialog .months .month:nth-child(-n+3) {
+        border-top: 0; }
+      .fs-datetime-dialog .months .month:nth-child(3n+0) {
+        border-right: 1px solid #efefef; }
+      .fs-datetime-dialog .months .month.today {
+        border: 1px solid #4678AE;
+        border-style: double; }
+  .fs-datetime-dialog .iscroll-scroller {
+    position: absolute;
+    width: 100%; }
+  .fs-datetime-dialog .clear {
+    clear: both; }
+  .fs-datetime-dialog .close {
+    padding: 5px;
+    display: none; }
+  .fs-datetime-dialog fs-tabnav {
+    display: none; }
+    .fs-datetime-dialog fs-tabnav .md-tabs a {
+      width: 50%; }
+  .fs-datetime-dialog .done {
+    background: #fff;
+    width: 100%;
+    border-top: 1px solid #E1E1E1;
+    margin-top: auto; }
+    .fs-datetime-dialog .done button {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding: 0 6px;
+      margin: 6px 8px; }
 
 @media only screen and (min-width: 500px) {
-  .fs-datetime-dialog .time,
   .fs-datetime-dialog .date {
     display: flex !important; }
   .fs-datetime-dialog .time .hour:hover:not(.disabled):not(.selected),
@@ -496,34 +312,37 @@ fs-datetime-range .datetime-block .datetime-to {
     top: 0 !important;
     bottom: 0px !important;
     margin: 0px;
-    height: 100vh; }
-  .fs-datetime-dialog .wrap {
-    margin: 0px;
-    width: 100% !important;
-    height: 100vh; }
-  .fs-datetime-dialog .day {
-    width: 14.28%; }
-  .fs-datetime-dialog table {
-    width: 100%; }
-  .fs-datetime-dialog .close {
-    display: flex; }
-  .fs-datetime-dialog.view-year .done,
-  .fs-datetime-dialog.view-month .done {
-    display: none !important; }
-  .fs-datetime-dialog.view-date .done {
-    display: flex !important; }
-  .fs-datetime-dialog .done {
-    position: fixed;
-    bottom: 0; }
-  .fs-datetime-dialog fs-tabnav {
-    display: block; }
-  .fs-datetime-dialog .time {
-    margin: 0 auto; } }
-
-@media only screen and (max-width: 400px) {
-  .fs-datetime-dialog .day {
-    height: 40px;
-    line-height: 40px; } }
-
-.pointer-events-none {
-  pointer-events: none !important; }
+    height: 100vh;
+    max-height: initial !important; }
+    .fs-datetime-dialog.fs-datetime-range.has-date .date-range {
+      flex-direction: column;
+      height: 100%; }
+      .fs-datetime-dialog.fs-datetime-range.has-date .date-range fsdatepickercalendar:first-child {
+        margin-right: 0 !important; }
+    .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap {
+      height: 100% !important; }
+      .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap .date-time {
+        height: 100% !important; }
+    .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-datetime:not(.date-mode-date) .wrap {
+      height: 100% !important; }
+      .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-datetime:not(.date-mode-date) .wrap .date-time {
+        height: 100% !important; }
+    .fs-datetime-dialog .wrap {
+      margin: 0px;
+      width: 100% !important;
+      height: calc(100vh - 50px); }
+      .fs-datetime-dialog .wrap .date-time {
+        height: calc(100% - 50px); }
+    .fs-datetime-dialog .day {
+      width: 14.28%;
+      height: 40px;
+      line-height: 40px; }
+    .fs-datetime-dialog table {
+      width: 100%; }
+    .fs-datetime-dialog .close {
+      display: flex; }
+    .fs-datetime-dialog .done {
+      position: fixed;
+      bottom: 0; }
+    .fs-datetime-dialog fs-tabnav {
+      display: block; } }

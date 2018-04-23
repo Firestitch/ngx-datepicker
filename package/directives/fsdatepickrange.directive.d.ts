@@ -1,5 +1,6 @@
 import { Renderer, ElementRef, EventEmitter, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { FsDatepickerRangeFactory } from './../services/fsdatepickerrangefactory.service';
+import { FsPreset } from './../interfaces/fspreset.interface';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 export declare class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
     private _elementRef;
@@ -13,6 +14,7 @@ export declare class FsDatePickRangeDirective implements OnInit, OnChanges, OnDe
     view: string;
     ngModelStart: any;
     ngModelEnd: any;
+    presets: FsPreset[];
     ngModelStartChange: EventEmitter<any>;
     ngModelEndChange: EventEmitter<any>;
     change$: EventEmitter<any>;

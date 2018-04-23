@@ -1,6 +1,5 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
   IterableDiffers, OnInit, OnChanges, DoCheck } from '@angular/core';
-import { FsUtil } from '@firestitch/common';
 import * as moment from 'moment-timezone';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
@@ -12,22 +11,39 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 })
 export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
-  @Input() date;
-  @Input() disabledMinutes = [];
-  @Input() disabledHours = [];
-  @Input() disabledTimes = [];
-  @Output() onChange = new EventEmitter<any>();
-  selected = {};
+  @Input() public date = null;
+  @Input() public disabledMinutes = [];
+  @Input() public disabledHours = [];
+  @Input() public disabledTimes = [];
+  @Output() public onChange = new EventEmitter<any>();
 
-  disabledTimeMinutes = {};
-  disabledTimeHours = {};
-  disabledGroupedMinutes = {};
+  public selected = {};
+  public expanded = false;
+
+  public disabledTimeMinutes = {};
+  public disabledTimeHours = {};
+  public disabledGroupedMinutes = {};
   private disabledMinutesDiffer = null;
   private disabledHoursDiffer = null;
   private disabledTimesDiffer = null;
 
-  timeHours = [[0,12],[1,13],[2,14],[3,15],[4,16],[5,17],[6,18],[7,19],[8,20],[9,21],[10,22],[11,23]];
-  timeMinutes = [	[0,1,2,3,4],
+  public timeHoursCollapsed = [
+    [
+      [0, 1, 2, 3],
+      [4, 5, 6, 7],
+      [8, 9, 10, 11]
+    ],
+    [
+      [12, 13, 14, 15],
+      [16, 17, 18, 19],
+      [20, 21, 22, 23]
+    ]
+  ];
+  public timeMinutesCollapsed = [[0,5],[10,15],[20,25],[30,35],[40,45],[50,55]];
+
+  public timeHoursExpanded = [[0,12],[1,13],[2,14],[3,15],[4,16],[5,17],[6,18],[7,19],[8,20],[9,21],[10,22],[11,23]];
+  public timeMinutesExpanded = [
+              [0,1,2,3,4],
               [5,6,7,8,9],
               [10,11,12,13,14],
               [15,16,17,18,19],
@@ -38,12 +54,13 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
               [40,41,42,43,44],
               [45,46,47,48,49],
               [50,51,52,53,54],
-              [55,56,57,58,59]];
+              [55,56,57,58,59]
+            ];
 
 
   constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
     public fsDatePickerModel: FsDatePickerModel,
-    private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
+    private _iterableDiffers: IterableDiffers) {
       this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
       this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
       this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
@@ -124,7 +141,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   addDisabledMinutes(range) {
     let min = Math.min(range[0], range[1]);
     let max = Math.max(range[0], range[1]);
-    if (this.fsUtil.isArray(range)) {
+    if (Array.isArray(range)) {
       for (let i = min; i <= max; i++) {
         this.disabledTimeMinutes[i] = true;
       }
@@ -136,7 +153,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   addDisabledHours(range) {
     let min = Math.min(range[0], range[1]);
     let max = Math.max(range[0], range[1]);
-    if (this.fsUtil.isArray(range)) {
+    if (Array.isArray(range)) {
       for (let i = min; i <= max; i++) {
         this.disabledTimeHours[i] = true;
       }

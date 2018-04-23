@@ -1,8 +1,12 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
   IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
-import { FsUtil } from '@firestitch/common';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import 'hammerjs';
+import { FsHammerConfig } from './../../configs/fshammer.config';
+
 import * as moment from 'moment-timezone';
 import { extendMoment } from 'moment-range';
+import { throttle } from '@firestitch/common/util';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
@@ -13,16 +17,30 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
     host: {
       '(mousewheel)': 'onMouseWheel($event)',
       '(touchmove)': 'onTouchMove($event)'
-    }
+    },
+    providers: [
+      {
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: FsHammerConfig
+      }
+    ]
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
-  @Input() date;
-  @Input() dateToHighlight = null;
-  @Input() dateMode;
+  @Input() date = null;
+
+  @Input() highlightStartDate = null;
+  @Input() highlightEndDate = null;
+
+  @Input() dateMode = null;
   @Input() disabledDays = null;
+  @Input() drawMonth = null;
   @Output() onChange = new EventEmitter<any>();
   @Output() onDateModeChange = new EventEmitter<any>();
+  @Output() onDrawMonth = new EventEmitter<any>();
+  @Output() hoverDay = new EventEmitter<any>();
+  @Output() mouseLeaveCalendar = new EventEmitter<any>();
+
   selected = {};
   iscrollOptions = null;
   iscrollInstance = null;
@@ -30,9 +48,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   years = [];
   dateDays = [];
 
-  private highlightedRangeDays = [];
+  private highlightedRangeDays = null;
 
   private disabledDaysDiffer = null;
+
+  private SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   monthList = [{ value: 1, name: 'January', abr: 'Jan' },
   { value: 2, name: 'February', abr: 'Feb' },
@@ -55,7 +75,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
     public fsDatePickerModel: FsDatePickerModel,
-    private fsUtil: FsUtil, private _iterableDiffers: IterableDiffers) {
+    private _iterableDiffers: IterableDiffers) {
       this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
       extendMoment(moment);
     }
@@ -77,35 +97,64 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     if (changes) {
 
       if (changes.date) {
-        this.drawMonths(this.date);
+        // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
         this.selected = this.fsDatePickerCommon.getSelected(this.date);
         this.updateDaysHighlighted();
-      }else if (changes.dateToHighlight) {
+      }else if (changes.highlightStartDate || changes.highlightEndDate) {
         this.updateDaysHighlighted();
+      }
+
+      if (changes.drawMonth) {
+        if (changes.drawMonth.currentValue) {
+          this.drawMonths(changes.drawMonth.currentValue);
+        } else {
+          this.onDrawMonth.emit(this.fsDatePickerCommon.createMoment());
+        }
       }
     }
   }
 
+  onMouseEnterDay(day) {
+    this.hoverDay.emit(day);
+  }
+
+  onMouseLeaveCalendar() {
+    this.mouseLeaveCalendar.emit();
+  }
+
   updateDaysHighlighted() {
-    this.highlightedRangeDays = [];
+
+    this.highlightedRangeDays = {
+      data: {},
+      min: null,
+      max: null
+    };
+
     let start = null;
     let end = null;
 
-    if (this.date && this.dateToHighlight) {
+    if (this.highlightStartDate && this.highlightEndDate) {
 
-      if (moment(this.date).isAfter(this.dateToHighlight)) {
-        start = this.dateToHighlight;
-        end = this.date;
+      if (moment(this.highlightStartDate).isAfter(this.highlightEndDate)) {
+        start = this.highlightEndDate;
+        end = this.highlightStartDate;
       } else {
-        start = this.date;
-        end = this.dateToHighlight;
+        start = this.highlightStartDate;
+        end = this.highlightEndDate;
       }
 
-      let range = moment.range(start, end);
+      const range = Array.from(moment.range(start, end).by('days'));
 
-      for (let day of Array.from(range.by('days'))) {
-        this.highlightedRangeDays.push(moment(day).format('YYYY-MM-DD'));
+      if (!range.length) {
+        return;
       }
+
+      for (const day of range) {
+        this.highlightedRangeDays.data[moment(day).format('YYYY-MM-DD')] = true;
+      }
+
+      this.highlightedRangeDays.min = moment(range[0]).format('YYYY-MM-DD');
+      this.highlightedRangeDays.max = moment(range[range.length - 1]).format('YYYY-MM-DD');
     }
   }
 
@@ -121,7 +170,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     }
   }
 
-  private dateScroll = this.fsUtil.throttle((e) => {
+  private dateScroll = throttle((e) => {
+
+    // @TODO need better way to detect mobile devices
+    if (window.innerWidth <= 499) {
+      return;
+    }
+
     if (e.wheelDelta > 0) {
       this.nextMonth(this.month);
     } else {
@@ -155,7 +210,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   monthViewChange(month) {
-    this.monthChange(month);
+    // Changing date
+    // this.monthChange(month);
+    // Changing calendar view
+    this.setMonth(month);
     this.calendarView();
   }
 
@@ -170,7 +228,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   createModel() {
     if (!this.date) {
-      this.setDate(this.fsDatePickerCommon.createMoment());
+      this.date = this.fsDatePickerCommon.createMoment();
     }
   }
 
@@ -181,17 +239,14 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   calendarView() {
     this.onDateModeChange.emit('date');
-    // this.fsDatePickerModel.dateMode = 'date';
   }
 
   monthView(month) {
-    // this.fsDatePickerModel.dateMode = 'month';
     this.onDateModeChange.emit('month');
   }
 
   yearView(year) {
-    this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
-    // this.fsDatePickerModel.dateMode = 'year';
+    this.iscrollOptions = { scrollToElement: `.years .data-year-${ year }` };
     this.onDateModeChange.emit('year');
   }
 
@@ -201,11 +256,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
       return;
     }
 
-    if ( !this.date) {
+    if (!this.date) {
       this.createModel();
     }
 
-    let date = this.date
+    const date = this.date
           .clone()
           .year(day.year)
           .month(day.month - 1)
@@ -215,8 +270,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   yearViewChange(year) {
-    this.yearChange(year);
-    this.calendarView();
+    // For some reason for mobile devices click event fired for both year/day modes. setTimeout fix this problem
+    setTimeout(() => {
+      this.setYear(year);
+      this.calendarView();
+    });
   }
 
   yearChange(year) {
@@ -229,19 +287,28 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   previousMonth(month) {
-    this.drawMonths(month.moment.subtract(1, 'months'));
+    // this.drawMonths(month.moment.subtract(1, 'months'));
+    this.onDrawMonth.emit(month.moment.subtract(1, 'months'));
   }
 
   nextMonth(month) {
-    this.drawMonths(month.moment.add(1, 'months'));
+    // this.drawMonths(month.moment.add(1, 'months'));
+    this.onDrawMonth.emit(month.moment.add(1, 'months'));
+  }
+
+  setMonth(monthNumber) {
+    // this.drawMonths(moment(this.month.moment).set('month', monthNumber - 1));
+    this.onDrawMonth.emit(moment(this.month.moment).set('month', monthNumber - 1));
+
+  }
+
+  setYear(yearNumber) {
+    // this.drawMonths(moment(this.month.moment).set('year', yearNumber));
+    this.onDrawMonth.emit(moment(this.month.moment).set('year', yearNumber));
   }
 
   drawMonths(date) {
-
-    if (!date) {
-      date = this.fsDatePickerCommon.createMoment();
-    }
-
+    this.onDrawMonth.emit(date);
     this.month = this.createMonth(date);
   }
 
@@ -327,11 +394,19 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   onMouseWheel($event) {
-    $event.preventDefault();
+    // $event.preventDefault();
   }
 
   onTouchMove($event) {
     $event.preventDefault();
+  }
+
+  swipe(action = this.SWIPE_ACTION.RIGHT) {
+    if (action === this.SWIPE_ACTION.RIGHT) {
+      this.previousMonth(this.month);
+    } else if (action === this.SWIPE_ACTION.LEFT) {
+      this.nextMonth(this.month);
+    }
   }
 
   ngOnDestroy() {

@@ -11,25 +11,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var fsdatepickermodel_service_1 = require("./../../services/fsdatepickermodel.service");
+var fsdatepickercommon_service_1 = require("./../../services/fsdatepickercommon.service");
 var FsDatepickerComponent = (function () {
-    function FsDatepickerComponent(fsDatePickerModel, element) {
+    function FsDatepickerComponent(fsDatePickerModel, fsDatePickerCommon, element) {
         this.fsDatePickerModel = fsDatePickerModel;
+        this.fsDatePickerCommon = fsDatePickerCommon;
         this.element = element;
         this.parentInstance = null;
         this.model = null;
+        this.calendarMonth = null;
     }
     FsDatepickerComponent.prototype.ngOnInit = function () {
         this.model = this.parentInstance.getValue();
+        this.calendarDrawMonth(this.model);
     };
     FsDatepickerComponent.prototype.setDate = function (date) {
         this.model = date;
         this.parentInstance.writeValue(date);
+        this.calendarDrawMonth(this.model);
         if (this.fsDatePickerModel.view === 'date') {
             this.close();
         }
     };
     FsDatepickerComponent.prototype.setDateMode = function (mode) {
         this.fsDatePickerModel.dateMode = mode;
+    };
+    FsDatepickerComponent.prototype.setComponents = function (data) {
+        this.fsDatePickerModel.components = data;
+    };
+    FsDatepickerComponent.prototype.calendarDrawMonth = function (date) {
+        this.calendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
     };
     FsDatepickerComponent.prototype.close = function ($event) {
         this.parentInstance.opened = false;
@@ -55,7 +66,9 @@ var FsDatepickerComponent = (function () {
             encapsulation: core_1.ViewEncapsulation.None,
             providers: [fsdatepickermodel_service_1.FsDatePickerModel]
         }),
-        __metadata("design:paramtypes", [fsdatepickermodel_service_1.FsDatePickerModel, core_1.ElementRef])
+        __metadata("design:paramtypes", [fsdatepickermodel_service_1.FsDatePickerModel,
+            fsdatepickercommon_service_1.FsDatePickerCommon,
+            core_1.ElementRef])
     ], FsDatepickerComponent);
     return FsDatepickerComponent;
 }());

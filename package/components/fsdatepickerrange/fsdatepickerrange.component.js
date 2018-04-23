@@ -10,45 +10,89 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var common_1 = require("@firestitch/common");
 var fsdatepickermodel_service_1 = require("./../../services/fsdatepickermodel.service");
+var fsdatepickercommon_service_1 = require("./../../services/fsdatepickercommon.service");
 var moment = require("moment-timezone");
 var FsDatepickerRangeComponent = (function () {
-    function FsDatepickerRangeComponent(fsDatePickerModel, element, fsUtil, _iterableDiffers) {
+    function FsDatepickerRangeComponent(fsDatePickerModel, fsDatePickerCommon, element, _iterableDiffers) {
         this.fsDatePickerModel = fsDatePickerModel;
+        this.fsDatePickerCommon = fsDatePickerCommon;
         this.element = element;
-        this.fsUtil = fsUtil;
         this._iterableDiffers = _iterableDiffers;
         this.parentInstance = null;
         this.toDisabledDays = [];
         this.toDisabledTimes = [];
+        this.startCalendarMonth = null;
+        this.endCalendarMonth = null;
+        this.highlightStartDate = null;
+        this.highlightEndDate = null;
         this.modelDiffer = null;
         this.modelDiffer = this._iterableDiffers.find([]).create(null);
     }
-    FsDatepickerRangeComponent.prototype.ngOnInit = function () { };
+    FsDatepickerRangeComponent.prototype.ngOnInit = function () {
+        this.calendarsDrawMonth(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd);
+    };
     FsDatepickerRangeComponent.prototype.ngDoCheck = function () {
-        var _this = this;
         if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
             var startDate = this.parentInstance.ngModelStart;
-            var endDate_1 = this.parentInstance.ngModelEnd;
-            if (startDate && endDate_1 && endDate_1.isBefore(startDate)) {
-                endDate_1 = startDate.isSame(endDate_1, 'day') ? startDate : undefined;
-                setTimeout(function () {
-                    _this.setEndDate(endDate_1);
-                });
-            }
-            this.toDisabledDaysUpdate(startDate, endDate_1);
-            this.toDisabledTimesUpdate(startDate, endDate_1);
+            var endDate = this.parentInstance.ngModelEnd;
+            this.toDisabledDaysUpdate(startDate, endDate);
+            this.toDisabledTimesUpdate(startDate, endDate);
+            this.highlightStartDate = startDate;
+            this.highlightEndDate = endDate;
         }
     };
     FsDatepickerRangeComponent.prototype.setStartDate = function (date) {
-        this.setDates(date, this.parentInstance.ngModelEnd);
+        var startDate = date;
+        var endDate = this.parentInstance.ngModelEnd;
+        if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
+            startDate = this.parentInstance.ngModelStart;
+            endDate = date;
+        }
+        else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
+            startDate = null;
+            endDate = null;
+        }
+        this.setDates(startDate, endDate);
+        if (startDate && endDate) {
+            if (moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM')) {
+                this.endCalendarDrawMonth(moment(endDate).add(1, 'month'));
+            }
+            else {
+                this.endCalendarDrawMonth(endDate);
+            }
+        }
+        if (startDate) {
+            this.startCalendarDrawMonth(startDate);
+        }
     };
     FsDatepickerRangeComponent.prototype.setEndDate = function (date) {
         this.setDates(this.parentInstance.ngModelStart, date);
+        if (date) {
+            this.endCalendarDrawMonth(date);
+        }
+    };
+    FsDatepickerRangeComponent.prototype.setStartTime = function (date) {
+        var endDate = this.parentInstance.ngModelEnd;
+        // In time mode, if end date is empty - user not able switch to end time picker
+        if (this.fsDatePickerModel.view === 'time' && !this.parentInstance.ngModelEnd) {
+            endDate = date;
+        }
+        this.setDates(date, endDate);
+    };
+    FsDatepickerRangeComponent.prototype.setEndTime = function (date) {
+        this.setDates(this.parentInstance.ngModelStart, date);
     };
     FsDatepickerRangeComponent.prototype.setDates = function (startDate, endDate) {
+        if (startDate && endDate && startDate.isAfter(endDate)) {
+            startDate = endDate;
+            endDate = null;
+        }
         this.parentInstance.writeValue(startDate, endDate);
+    };
+    FsDatepickerRangeComponent.prototype.onDatesChange = function (data) {
+        this.setDates(data.start, data.end);
+        this.calendarsDrawMonth(data.start, data.end);
     };
     FsDatepickerRangeComponent.prototype.toDisabledDaysUpdate = function (startDate, endDate) {
         this.toDisabledDays = startDate ? [[moment().subtract(99, 'year'), startDate.clone()]] : [];
@@ -56,8 +100,8 @@ var FsDatepickerRangeComponent = (function () {
     FsDatepickerRangeComponent.prototype.toDisabledTimesUpdate = function (startDate, endDate) {
         this.toDisabledTimes = [];
         if (startDate && endDate && startDate.isSame(endDate, 'day')) {
-            var from = this.fsUtil.int(startDate.format('m')) + (this.fsUtil.int(startDate.format('H')) * 60);
-            var to = this.fsUtil.int(endDate.format('m')) + (this.fsUtil.int(endDate.format('H')) * 60);
+            var from = parseInt(startDate.format('m')) + (parseInt(startDate.format('H')) * 60);
+            var to = parseInt(endDate.format('m')) + (parseInt(endDate.format('H')) * 60);
             if (startDate) {
                 this.toDisabledTimes.push([0, from]);
             }
@@ -69,6 +113,43 @@ var FsDatepickerRangeComponent = (function () {
     FsDatepickerRangeComponent.prototype.setDateModeEnd = function (mode) {
         this.fsDatePickerModel.dateMode.end_date = mode;
     };
+    FsDatepickerRangeComponent.prototype.setComponents = function (data) {
+        this.fsDatePickerModel.components = data;
+    };
+    FsDatepickerRangeComponent.prototype.calendarsDrawMonth = function (startDate, endDate) {
+        this.endCalendarDrawMonth(endDate);
+        this.startCalendarDrawMonth(startDate);
+    };
+    FsDatepickerRangeComponent.prototype.startCalendarDrawMonth = function (date) {
+        this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+        if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
+            this.endCalendarMonth = moment(this.startCalendarMonth).add(1, 'month');
+        }
+    };
+    FsDatepickerRangeComponent.prototype.endCalendarDrawMonth = function (date) {
+        this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+        if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
+            this.startCalendarMonth = moment(this.endCalendarMonth).subtract(1, 'month');
+        }
+    };
+    FsDatepickerRangeComponent.prototype.rangeCalendarsConflict = function (startDate, endDate) {
+        return moment(startDate).isAfter(endDate) ||
+            moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM');
+    };
+    FsDatepickerRangeComponent.prototype.hoverCalendar = function (day) {
+        var date = moment(day.date);
+        if (this.parentInstance.ngModelStart &&
+            !this.parentInstance.ngModelEnd &&
+            moment(this.parentInstance.ngModelStart).isBefore(date)) {
+            this.highlightEndDate = date;
+        }
+        else {
+            this.highlightEndDate = this.parentInstance.ngModelEnd;
+        }
+    };
+    FsDatepickerRangeComponent.prototype.onMouseLeaveCalendar = function () {
+        this.highlightEndDate = this.parentInstance.ngModelEnd;
+    };
     FsDatepickerRangeComponent.prototype.close = function ($event) {
         this.parentInstance.opened = false;
     };
@@ -79,37 +160,6 @@ var FsDatepickerRangeComponent = (function () {
             this.close(e);
         }
     };
-    FsDatepickerRangeComponent.prototype.range = function (type) {
-        var startDate = moment();
-        var endDate = moment();
-        if (type == 'today') {
-            startDate = startDate.startOf('day');
-            endDate = endDate.endOf('day');
-        }
-        else if (type == 'yesterday') {
-            startDate = startDate.subtract(1, 'day').startOf('day');
-            endDate = endDate.subtract(1, 'day').endOf('day');
-        }
-        else if (type == 'last_7') {
-            startDate = startDate.subtract(7, 'days');
-        }
-        else if (type == 'last_30') {
-            startDate = startDate.subtract(30, 'days');
-        }
-        else if (type == 'current_month') {
-            startDate = startDate.startOf('month');
-            endDate = endDate.endOf('month');
-        }
-        else if (type == 'last_month') {
-            startDate = startDate.subtract(1, 'month').startOf('month');
-            endDate = endDate.subtract(1, 'month').endOf('month');
-        }
-        this.setDates(startDate, endDate);
-    };
-    __decorate([
-        core_1.ViewChild('rangeTimeTabGroup'),
-        __metadata("design:type", Object)
-    ], FsDatepickerRangeComponent.prototype, "rangeTimeTabGroup", void 0);
     __decorate([
         core_1.HostListener('document:keydown', ['$event']),
         __metadata("design:type", Function),
@@ -125,7 +175,9 @@ var FsDatepickerRangeComponent = (function () {
             providers: [fsdatepickermodel_service_1.FsDatePickerModel]
         }),
         __metadata("design:paramtypes", [fsdatepickermodel_service_1.FsDatePickerModel,
-            core_1.ElementRef, common_1.FsUtil, core_1.IterableDiffers])
+            fsdatepickercommon_service_1.FsDatePickerCommon,
+            core_1.ElementRef,
+            core_1.IterableDiffers])
     ], FsDatepickerRangeComponent);
     return FsDatepickerRangeComponent;
 }());
