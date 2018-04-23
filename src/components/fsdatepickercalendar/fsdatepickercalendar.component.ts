@@ -28,13 +28,19 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
   @Input() date = null;
-  @Input() dateToHighlight = null;
+
+  @Input() highlightStartDate = null;
+  @Input() highlightEndDate = null;
+
   @Input() dateMode = null;
   @Input() disabledDays = null;
   @Input() drawMonth = null;
   @Output() onChange = new EventEmitter<any>();
   @Output() onDateModeChange = new EventEmitter<any>();
   @Output() onDrawMonth = new EventEmitter<any>();
+  @Output() hoverDay = new EventEmitter<any>();
+  @Output() mouseLeaveCalendar = new EventEmitter<any>();
+
   selected = {};
   iscrollOptions = null;
   iscrollInstance = null;
@@ -94,7 +100,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
         // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
         this.selected = this.fsDatePickerCommon.getSelected(this.date);
         this.updateDaysHighlighted();
-      }else if (changes.dateToHighlight) {
+      }else if (changes.highlightStartDate || changes.highlightEndDate) {
         this.updateDaysHighlighted();
       }
 
@@ -108,23 +114,33 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     }
   }
 
+  onMouseEnterDay(day) {
+    this.hoverDay.emit(day);
+  }
+
+  onMouseLeaveCalendar() {
+    this.mouseLeaveCalendar.emit();
+  }
+
   updateDaysHighlighted() {
+
     this.highlightedRangeDays = {
       data: {},
       min: null,
       max: null
     };
+
     let start = null;
     let end = null;
 
-    if (this.date && this.dateToHighlight) {
+    if (this.highlightStartDate && this.highlightEndDate) {
 
-      if (moment(this.date).isAfter(this.dateToHighlight)) {
-        start = this.dateToHighlight;
-        end = this.date;
+      if (moment(this.highlightStartDate).isAfter(this.highlightEndDate)) {
+        start = this.highlightEndDate;
+        end = this.highlightStartDate;
       } else {
-        start = this.date;
-        end = this.dateToHighlight;
+        start = this.highlightStartDate;
+        end = this.highlightEndDate;
       }
 
       const range = Array.from(moment.range(start, end).by('days'));

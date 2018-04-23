@@ -23,24 +23,30 @@
           <fsDatePickerCalendar
           *ngIf="fsDatePickerModel.components.calendarStart"
           [date]="parentInstance.ngModelStart"
-          [dateToHighlight]="parentInstance.ngModelEnd"
+          [highlightStartDate]="highlightStartDate"
+          [highlightEndDate]="highlightEndDate"
           [dateMode]="fsDatePickerModel.dateMode.start_date"
           [drawMonth]="startCalendarMonth"
           (onChange)="setStartDate($event)"
           (onDateModeChange)="setDateModeStart($event)"
           (onDrawMonth)="startCalendarDrawMonth($event)"
+          (hoverDay)="hoverCalendar($event)"
+          (mouseLeaveCalendar)="onMouseLeaveCalendar($event)"
           ></fsDatePickerCalendar>
 
           <fsDatePickerCalendar
           *ngIf="fsDatePickerModel.components.calendarEnd"
           [date]="parentInstance.ngModelEnd"
-          [dateToHighlight]="parentInstance.ngModelStart"
+          [highlightStartDate]="highlightStartDate"
+          [highlightEndDate]="highlightEndDate"
           [dateMode]="fsDatePickerModel.dateMode.end_date"
           [disabledDays]="toDisabledDays"
           [drawMonth]="endCalendarMonth"
           (onChange)="setEndDate($event)"
           (onDateModeChange)="setDateModeEnd($event)"
           (onDrawMonth)="endCalendarDrawMonth($event)"
+          (hoverDay)="hoverCalendar($event)"
+          (mouseLeaveCalendar)="onMouseLeaveCalendar($event)"
           ></fsDatePickerCalendar>
       </div>
 

@@ -93,7 +93,7 @@
           fsdatepickercalendar:first-child {
             margin-right: 5px;
           }
-          td.day {
+          td.day:not(.disabled):not(.mute) {
             &.min-date:not(.max-date) {
               &::before {
                 content: '';

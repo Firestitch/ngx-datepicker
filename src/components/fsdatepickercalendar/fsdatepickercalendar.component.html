@@ -1,4 +1,4 @@
-<div class="date" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
+<div class="date" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" (mouseleave)="onMouseLeaveCalendar()">
   <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>
   </div>
@@ -41,7 +41,7 @@
             selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,
             'min-date': day.date === highlightedRangeDays.min,
             'max-date': day.date === highlightedRangeDays.max,
-            disabled: day.disabled }" (click)="dayClick(day)">
+            disabled: day.disabled }" (click)="dayClick(day)" (mouseenter)="onMouseEnterDay(day)">
             <span>{{ day.number }}</span>
           </td>
         </tr>

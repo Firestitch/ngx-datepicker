@@ -18,10 +18,13 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   public toDisabledDays = [];
   public toDisabledTimes = [];
 
-  private modelDiffer = null;
-
   public startCalendarMonth = null;
   public endCalendarMonth = null;
+
+  public highlightStartDate = null;
+  public highlightEndDate = null;
+
+  private modelDiffer = null;
 
   constructor(
     public fsDatePickerModel: FsDatePickerModel,
@@ -44,6 +47,9 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
       this.toDisabledDaysUpdate(startDate, endDate);
       this.toDisabledTimesUpdate(startDate, endDate);
+
+      this.highlightStartDate = startDate;
+      this.highlightEndDate = endDate;
     }
   }
 
@@ -165,6 +171,24 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   private rangeCalendarsConflict(startDate, endDate): boolean {
     return moment(startDate).isAfter(endDate) ||
           moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM');
+  }
+
+  hoverCalendar(day) {
+    const date = moment(day.date);
+
+    if (
+      this.parentInstance.ngModelStart &&
+      !this.parentInstance.ngModelEnd &&
+      moment(this.parentInstance.ngModelStart).isBefore(date)
+    ) {
+      this.highlightEndDate = date;
+    } else {
+      this.highlightEndDate = this.parentInstance.ngModelEnd;
+    }
+  }
+
+  onMouseLeaveCalendar() {
+    this.highlightEndDate = this.parentInstance.ngModelEnd;
   }
 
   close($event?) {

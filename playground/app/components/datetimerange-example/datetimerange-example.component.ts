@@ -13,7 +13,7 @@ export class DateTimeRangeExampleComponent {
   public event = {
     id: 999,
     start_date: moment().startOf('day'),
-    end_date: moment().startOf('day')
+    end_date: moment().startOf('day').add(1, 'days')
   };
 
   constructor() {
