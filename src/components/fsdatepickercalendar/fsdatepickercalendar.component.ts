@@ -201,9 +201,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   createModel() {
     if (!this.date) {
-      // @TODO remove this if possible
       this.date = this.fsDatePickerCommon.createMoment();
-      // this.setDate(this.fsDatePickerCommon.createMoment());
     }
   }
 

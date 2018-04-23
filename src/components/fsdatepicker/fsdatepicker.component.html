@@ -26,9 +26,11 @@
       <fsDatePickerCalendar
         *ngIf="fsDatePickerModel.components.calendarStart"
         [date]="model"
+        [drawMonth]="calendarMonth"
         [dateMode]="fsDatePickerModel.dateMode"
         (onChange)="setDate($event)"
         (onDateModeChange)="setDateMode($event)"
+        (onDrawMonth)="calendarDrawMonth($event)"
       ></fsDatePickerCalendar>
 
       <fsDatePickerTime
