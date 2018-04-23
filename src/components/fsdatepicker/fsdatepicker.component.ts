@@ -1,5 +1,6 @@
 import { Component, Input, HostListener, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
+import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 
 @Component({
     selector: 'fsDatePicker',
@@ -10,18 +11,25 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 })
 export class FsDatepickerComponent implements OnInit {
 
-  parentInstance: any = null;
-  model = null;
+  public parentInstance: any = null;
+  public model = null;
 
-  constructor(public fsDatePickerModel: FsDatePickerModel, public element: ElementRef) { }
+  public calendarMonth = null;
+
+  constructor(
+    public fsDatePickerModel: FsDatePickerModel,
+    private fsDatePickerCommon: FsDatePickerCommon,
+    public element: ElementRef) { }
 
   ngOnInit() {
     this.model = this.parentInstance.getValue();
+    this.calendarDrawMonth(this.model);
   }
 
   setDate(date) {
     this.model = date;
     this.parentInstance.writeValue(date);
+    this.calendarDrawMonth(this.model);
 
     if (this.fsDatePickerModel.view === 'date') {
       this.close();
@@ -30,6 +38,14 @@ export class FsDatepickerComponent implements OnInit {
 
   setDateMode(mode) {
     this.fsDatePickerModel.dateMode = mode;
+  }
+
+  setComponents(data) {
+    this.fsDatePickerModel.components = data;
+  }
+
+  calendarDrawMonth(date) {
+    this.calendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
   }
 
   close($event?) {
