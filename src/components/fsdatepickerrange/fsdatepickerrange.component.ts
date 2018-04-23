@@ -39,23 +39,9 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
 
-      let startDate = this.parentInstance.ngModelStart;
-      let endDate = this.parentInstance.ngModelEnd;
+      const startDate = this.parentInstance.ngModelStart;
+      const endDate = this.parentInstance.ngModelEnd;
 
-      if (startDate && endDate && startDate.isAfter(endDate)) {
-        startDate = endDate;
-        endDate = null;
-        setTimeout(() => {
-          this.setDates(startDate, endDate);
-          this.calendarsDrawMonth(startDate, endDate);
-        });
-        /*
-        endDate = startDate.isSame(endDate, 'day') ? startDate : null;
-        setTimeout(() => {
-          this.setEndDate(endDate);
-        });
-        */
-      }
       this.toDisabledDaysUpdate(startDate, endDate);
       this.toDisabledTimesUpdate(startDate, endDate);
     }
@@ -111,6 +97,12 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   setDates(startDate, endDate) {
+
+    if (startDate && endDate && startDate.isAfter(endDate)) {
+      startDate = endDate;
+      endDate = null;
+    }
+
     this.parentInstance.writeValue(startDate, endDate);
   }
 

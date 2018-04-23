@@ -62,9 +62,11 @@
       outline: none;
     }
     .header {
-      margin: 0 15px;
+      padding: 0 15px;
       /* Don't use flex. Strange behaviour of scroll */
       display: table;
+      width: 100%;
+      box-sizing: border-box;
     }
   }
 
@@ -90,6 +92,39 @@
           flex: 1;
           fsdatepickercalendar:first-child {
             margin-right: 5px;
+          }
+          td.day {
+            &.min-date:not(.max-date) {
+              &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-width: 0.5em;
+                border-left-color: #fff;
+                border-top-color: #fff;
+              }
+            }
+            &.max-date:not(.min-date) {
+              &::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-width: 0.5em;
+                border-left-color: #fff;
+                border-top-color: #fff;
+                -moz-transform: scale(-1, -1);
+                -webkit-transform: scale(-1, -1);
+                -o-transform: scale(-1, -1);
+                -ms-transform: scale(-1, -1);
+                transform: scale(-1, -1);
+              }
+            }
           }
         }
       }

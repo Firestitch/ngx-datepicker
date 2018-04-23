@@ -42,7 +42,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   years = [];
   dateDays = [];
 
-  private highlightedRangeDays = [];
+  private highlightedRangeDays = null;
 
   private disabledDaysDiffer = null;
 
@@ -109,7 +109,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   updateDaysHighlighted() {
-    this.highlightedRangeDays = [];
+    this.highlightedRangeDays = {
+      data: {},
+      min: null,
+      max: null
+    };
     let start = null;
     let end = null;
 
@@ -123,11 +127,18 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
         end = this.dateToHighlight;
       }
 
-      let range = moment.range(start, end);
+      const range = Array.from(moment.range(start, end).by('days'));
 
-      for (let day of Array.from(range.by('days'))) {
-        this.highlightedRangeDays.push(moment(day).format('YYYY-MM-DD'));
+      if (!range.length) {
+        return;
       }
+
+      for (const day of range) {
+        this.highlightedRangeDays.data[moment(day).format('YYYY-MM-DD')] = true;
+      }
+
+      this.highlightedRangeDays.min = moment(range[0]).format('YYYY-MM-DD');
+      this.highlightedRangeDays.max = moment(range[range.length - 1]).format('YYYY-MM-DD');
     }
   }
 
