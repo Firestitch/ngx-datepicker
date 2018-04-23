@@ -10,29 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var common_1 = require("@firestitch/common");
 var fsdatepickercommon_service_1 = require("./../../services/fsdatepickercommon.service");
 var fsdatepickermodel_service_1 = require("./../../services/fsdatepickermodel.service");
 var FsDatePickerTimeComponent = (function () {
-    function FsDatePickerTimeComponent(element, fsDatePickerCommon, fsDatePickerModel, fsUtil, _iterableDiffers) {
+    function FsDatePickerTimeComponent(element, fsDatePickerCommon, fsDatePickerModel, _iterableDiffers) {
         this.element = element;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatePickerModel = fsDatePickerModel;
-        this.fsUtil = fsUtil;
         this._iterableDiffers = _iterableDiffers;
+        this.date = null;
         this.disabledMinutes = [];
         this.disabledHours = [];
         this.disabledTimes = [];
         this.onChange = new core_1.EventEmitter();
         this.selected = {};
+        this.expanded = false;
         this.disabledTimeMinutes = {};
         this.disabledTimeHours = {};
         this.disabledGroupedMinutes = {};
         this.disabledMinutesDiffer = null;
         this.disabledHoursDiffer = null;
         this.disabledTimesDiffer = null;
-        this.timeHours = [[0, 12], [1, 13], [2, 14], [3, 15], [4, 16], [5, 17], [6, 18], [7, 19], [8, 20], [9, 21], [10, 22], [11, 23]];
-        this.timeMinutes = [[0, 1, 2, 3, 4],
+        this.timeHoursCollapsed = [
+            [
+                [0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9, 10, 11]
+            ],
+            [
+                [12, 13, 14, 15],
+                [16, 17, 18, 19],
+                [20, 21, 22, 23]
+            ]
+        ];
+        this.timeMinutesCollapsed = [[0, 5], [10, 15], [20, 25], [30, 35], [40, 45], [50, 55]];
+        this.timeHoursExpanded = [[0, 12], [1, 13], [2, 14], [3, 15], [4, 16], [5, 17], [6, 18], [7, 19], [8, 20], [9, 21], [10, 22], [11, 23]];
+        this.timeMinutesExpanded = [
+            [0, 1, 2, 3, 4],
             [5, 6, 7, 8, 9],
             [10, 11, 12, 13, 14],
             [15, 16, 17, 18, 19],
@@ -43,7 +57,8 @@ var FsDatePickerTimeComponent = (function () {
             [40, 41, 42, 43, 44],
             [45, 46, 47, 48, 49],
             [50, 51, 52, 53, 54],
-            [55, 56, 57, 58, 59]];
+            [55, 56, 57, 58, 59]
+        ];
         this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
         this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
         this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
@@ -114,7 +129,7 @@ var FsDatePickerTimeComponent = (function () {
     FsDatePickerTimeComponent.prototype.addDisabledMinutes = function (range) {
         var min = Math.min(range[0], range[1]);
         var max = Math.max(range[0], range[1]);
-        if (this.fsUtil.isArray(range)) {
+        if (Array.isArray(range)) {
             for (var i = min; i <= max; i++) {
                 this.disabledTimeMinutes[i] = true;
             }
@@ -126,7 +141,7 @@ var FsDatePickerTimeComponent = (function () {
     FsDatePickerTimeComponent.prototype.addDisabledHours = function (range) {
         var min = Math.min(range[0], range[1]);
         var max = Math.max(range[0], range[1]);
-        if (this.fsUtil.isArray(range)) {
+        if (Array.isArray(range)) {
             for (var i = min; i <= max; i++) {
                 this.disabledTimeHours[i] = true;
             }
@@ -190,7 +205,7 @@ var FsDatePickerTimeComponent = (function () {
         }),
         __metadata("design:paramtypes", [core_1.ElementRef, fsdatepickercommon_service_1.FsDatePickerCommon,
             fsdatepickermodel_service_1.FsDatePickerModel,
-            common_1.FsUtil, core_1.IterableDiffers])
+            core_1.IterableDiffers])
     ], FsDatePickerTimeComponent);
     return FsDatePickerTimeComponent;
 }());

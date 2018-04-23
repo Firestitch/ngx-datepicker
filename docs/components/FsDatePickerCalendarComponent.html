@@ -98,7 +98,13 @@
                                     <a href="../components/FsDatepickerComponent.html" >FsDatepickerComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/FsDatepickerPresetsComponent.html" >FsDatepickerPresetsComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/FsDatepickerRangeComponent.html" >FsDatepickerRangeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FsDatepickerSummaryComponent.html" >FsDatepickerSummaryComponent</a>
                                 </li>
                         </ul>
                     </li>
@@ -126,6 +132,22 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-classes-links"
+                            >
+                            <span class="fa fa-fw fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="../classes/FsHammerConfig.html" >FsHammerConfig</a>
+                                </li>
+                        </ul>
+                    </li>
             
                     <li class="chapter">
                         <div class="simple menu-toggler" data-toggle="collapse"
@@ -166,7 +188,13 @@
                                 id="xs-interfaces-links"
                             >
                                 <li class="link">
+                                    <a href="../interfaces/FsComponents.html" >FsComponents</a>
+                                </li>
+                                <li class="link">
                                     <a href="../interfaces/FsDatePicker.html" >FsDatePicker</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FsPreset.html" >FsPreset</a>
                                 </li>
                         </ul>
                     </li>
@@ -283,7 +311,13 @@
                                            <a href="../components/FsDatepickerComponent.html" >FsDatepickerComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/FsDatepickerPresetsComponent.html" >FsDatepickerPresetsComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/FsDatepickerRangeComponent.html" >FsDatepickerRangeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FsDatepickerSummaryComponent.html" >FsDatepickerSummaryComponent</a>
                                        </li>
                                </ul>
                            </li>
@@ -311,6 +345,22 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#classes-links"
+                   >
+                                   <span class="fa fa-fw fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../classes/FsHammerConfig.html" >FsHammerConfig</a>
+                                       </li>
+                               </ul>
+                           </li>
                    
                            <li class="chapter">
                                <div class="simple menu-toggler" data-toggle="collapse"
@@ -351,7 +401,13 @@
                                        id="interfaces-links"
                    >
                                        <li class="link">
+                                           <a href="../interfaces/FsComponents.html" >FsComponents</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../interfaces/FsDatePicker.html" >FsDatePicker</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FsPreset.html" >FsPreset</a>
                                        </li>
                                </ul>
                            </li>
@@ -448,6 +504,16 @@
 
 
 
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                    <code>
+                        {
+    : , : 
+}
+                    </code>
+                </td>
+            </tr>
 
 
             <tr>
@@ -579,6 +645,12 @@
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
+                                <a href="#onMouseEnterDay">onMouseEnterDay</a>
+                            </li>
+                            <li>
+                                <a href="#onMouseLeaveCalendar">onMouseLeaveCalendar</a>
+                            </li>
+                            <li>
                                 <a href="#onMouseWheel">onMouseWheel</a>
                             </li>
                             <li>
@@ -589,6 +661,15 @@
                             </li>
                             <li>
                                 <a href="#setDate">setDate</a>
+                            </li>
+                            <li>
+                                <a href="#setMonth">setMonth</a>
+                            </li>
+                            <li>
+                                <a href="#setYear">setYear</a>
+                            </li>
+                            <li>
+                                <a href="#swipe">swipe</a>
                             </li>
                             <li>
                                 <a href="#updateDate">updateDate</a>
@@ -629,10 +710,16 @@
                                 <a href="#dateMode">dateMode</a>
                             </li>
                             <li>
-                                <a href="#dateToHighlight">dateToHighlight</a>
+                                <a href="#disabledDays">disabledDays</a>
                             </li>
                             <li>
-                                <a href="#disabledDays">disabledDays</a>
+                                <a href="#drawMonth">drawMonth</a>
+                            </li>
+                            <li>
+                                <a href="#highlightEndDate">highlightEndDate</a>
+                            </li>
+                            <li>
+                                <a href="#highlightStartDate">highlightStartDate</a>
                             </li>
                         </ul>
                     </td>
@@ -646,10 +733,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#hoverDay">hoverDay</a>
+                            </li>
+                            <li>
+                                <a href="#mouseLeaveCalendar">mouseLeaveCalendar</a>
+                            </li>
+                            <li>
                                 <a href="#onChange">onChange</a>
                             </li>
                             <li>
                                 <a href="#onDateModeChange">onDateModeChange</a>
+                            </li>
+                            <li>
+                                <a href="#onDrawMonth">onDrawMonth</a>
                             </li>
                         </ul>
                     </td>
@@ -664,7 +760,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-    <code>constructor(element: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, fsDatePickerCommon: <a href="../injectables/FsDatePickerCommon.html">FsDatePickerCommon</a>, fsDatePickerModel: <a href="../injectables/FsDatePickerModel.html">FsDatePickerModel</a>, fsUtil: FsUtil, _iterableDiffers: <a href="https://angular.io/api/core/IterableDiffers" target="_blank">IterableDiffers</a>)</code>
+    <code>constructor(element: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, fsDatePickerCommon: <a href="../injectables/FsDatePickerCommon.html">FsDatePickerCommon</a>, fsDatePickerModel: <a href="../injectables/FsDatePickerModel.html">FsDatePickerModel</a>, _iterableDiffers: <a href="https://angular.io/api/core/IterableDiffers" target="_blank">IterableDiffers</a>)</code>
                         </td>
                     </tr>
     
@@ -713,16 +809,6 @@
                                                       <td></td>
                                                     </tr>
                                                     <tr>
-                                                      <td>fsUtil</td>
-                                                      <td>
-                                                                <code>FsUtil</code>
-                                                      </td>
-                                                      <td>
-                                                            no
-                                                      </td>
-                                                      <td></td>
-                                                    </tr>
-                                                    <tr>
                                                       <td>_iterableDiffers</td>
                                                       <td>
                                                                 <code><a href="https://angular.io/api/core/IterableDiffers" target="_blank" >IterableDiffers</a></code>
@@ -751,6 +837,9 @@
                             <code>date</code>
                         </td>
                         <td class="col-md-10">
+                            <p>
+                              <em>Default value: </em><code>null</code>
+                            </p>
                         </td>
                     </tr>
                 </tbody>
@@ -761,18 +850,6 @@
                         <td class="col-md-2">
                             <a name="dateMode"></a>
                             <code>dateMode</code>
-                        </td>
-                        <td class="col-md-10">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-2">
-                            <a name="dateToHighlight"></a>
-                            <code>dateToHighlight</code>
                         </td>
                         <td class="col-md-10">
                             <p>
@@ -797,10 +874,83 @@
                     </tr>
                 </tbody>
             </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="drawMonth"></a>
+                            <code>drawMonth</code>
+                        </td>
+                        <td class="col-md-10">
+                            <p>
+                              <em>Default value: </em><code>null</code>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="highlightEndDate"></a>
+                            <code>highlightEndDate</code>
+                        </td>
+                        <td class="col-md-10">
+                            <p>
+                              <em>Default value: </em><code>null</code>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="highlightStartDate"></a>
+                            <code>highlightStartDate</code>
+                        </td>
+                        <td class="col-md-10">
+                            <p>
+                              <em>Default value: </em><code>null</code>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
     </section>
 
     <section>
         <h3 id="outputs">Outputs</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="hoverDay"></a>
+                            <code>hoverDay</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="mouseLeaveCalendar"></a>
+                            <code>mouseLeaveCalendar</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <table class="table table-sm table-bordered">
                 <tbody>
                     <tr>
@@ -821,6 +971,20 @@
                         <td class="col-md-2">
                             <a name="onDateModeChange"></a>
                             <code>onDateModeChange</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="onDrawMonth"></a>
+                            <code>onDrawMonth</code>
                         </td>
                         <td class="col-md-10">
                             <em><code>$event</code> type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
@@ -1716,6 +1880,103 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
+                            <a name="onMouseEnterDay"></a>
+                            <span class="name">
+                                <b>
+                                onMouseEnterDay
+                                </b>
+                                <a href="#onMouseEnterDay"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>onMouseEnterDay(day: )</code>
+                        </td>
+                    </tr>
+    
+    
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Default value</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>day</td>
+                                                      <td>
+                                                      </td>
+                                                      <td>
+                                                          no
+                                                      </td>
+                                                      <td>
+                                                          <code></code>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="onMouseLeaveCalendar"></a>
+                            <span class="name">
+                                <b>
+                                onMouseLeaveCalendar
+                                </b>
+                                <a href="#onMouseLeaveCalendar"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>onMouseLeaveCalendar()</code>
+                        </td>
+                    </tr>
+    
+    
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
                             <a name="onMouseWheel"></a>
                             <span class="name">
                                 <b>
@@ -1953,6 +2214,201 @@
                                                       </td>
                                                       <td>
                                                           <code></code>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="setMonth"></a>
+                            <span class="name">
+                                <b>
+                                setMonth
+                                </b>
+                                <a href="#setMonth"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>setMonth(monthNumber: )</code>
+                        </td>
+                    </tr>
+    
+    
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Default value</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>monthNumber</td>
+                                                      <td>
+                                                      </td>
+                                                      <td>
+                                                          no
+                                                      </td>
+                                                      <td>
+                                                          <code></code>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="setYear"></a>
+                            <span class="name">
+                                <b>
+                                setYear
+                                </b>
+                                <a href="#setYear"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>setYear(yearNumber: )</code>
+                        </td>
+                    </tr>
+    
+    
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Default value</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>yearNumber</td>
+                                                      <td>
+                                                      </td>
+                                                      <td>
+                                                          no
+                                                      </td>
+                                                      <td>
+                                                          <code></code>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="swipe"></a>
+                            <span class="name">
+                                <b>
+                                swipe
+                                </b>
+                                <a href="#swipe"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>swipe(action: )</code>
+                        </td>
+                    </tr>
+    
+    
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Default value</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>action</td>
+                                                      <td>
+                                                      </td>
+                                                      <td>
+                                                          no
+                                                      </td>
+                                                      <td>
+                                                          <code>this.SWIPE_ACTION.RIGHT</code>
                                                       </td>
                                                       <td></td>
                                                     </tr>
@@ -2656,23 +3112,23 @@
 
 
     <div class="tab-pane fade" id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;date&quot; *ngIf&#x3D;&quot;[&#x27;date&#x27;, &#x27;datetime&#x27;].indexOf(fsDatePickerModel.view) !&#x3D;&#x3D; -1&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;date&quot; (swipeleft)&#x3D;&quot;swipe($event.type)&quot; (swiperight)&#x3D;&quot;swipe($event.type)&quot; (mouseleave)&#x3D;&quot;onMouseLeaveCalendar()&quot;&gt;
   &lt;div class&#x3D;&quot;months&quot; *ngIf&#x3D;&quot;dateMode &#x3D;&#x3D; &#x27;month&#x27;&quot;&gt;
     &lt;div *ngFor&#x3D;&quot;let month of monthList&quot; (click)&#x3D;&quot;monthViewChange(month.value)&quot; class&#x3D;&quot;month&quot; [ngClass]&#x3D;&quot;{ today: today.month &#x3D;&#x3D; month.value, selected: selected.month &#x3D;&#x3D; month.value }&quot;&gt;{{ month.abr }}&lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class&#x3D;&quot;years&quot; *ngIf&#x3D;&quot;dateMode &#x3D;&#x3D; &#x27;year&#x27;&quot; fsIscroll fsOptions&#x3D;&quot;iscrollOptions&quot; fsInstance&#x3D;&quot;iscrollInstance&quot;&gt;
+  &lt;div class&#x3D;&quot;years&quot; *ngIf&#x3D;&quot;dateMode &#x3D;&#x3D; &#x27;year&#x27;&quot; fsIscroll [fsOptions]&#x3D;&quot;iscrollOptions&quot; fsInstance&#x3D;&quot;iscrollInstance&quot;&gt;
     &lt;div class&#x3D;&quot;iscroll-scroller&quot;&gt;
-      &lt;div *ngFor&#x3D;&quot;let year of years&quot; class&#x3D;&quot;year&quot; [ngClass]&#x3D;&quot;{ today: today.year&#x3D;&#x3D;year, row : ($index % 4 &#x3D;&#x3D; 0), selected: selected.year&#x3D;&#x3D;year }&quot; (click)&#x3D;&quot;yearViewChange(year)&quot;&gt;
-          {{year}}
+      &lt;div *ngFor&#x3D;&quot;let year of years&quot; class&#x3D;&quot;year data-year-{{ year }}&quot; [ngClass]&#x3D;&quot;{ today: today.year&#x3D;&#x3D;year, row : ($index % 4 &#x3D;&#x3D; 0), selected: selected.year&#x3D;&#x3D;year }&quot; (click)&#x3D;&quot;yearViewChange(year)&quot;&gt;
+          {{ year }}
       &lt;/div&gt;
       &lt;div class&#x3D;&quot;clear&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div *ngIf&#x3D;&quot;dateMode &#x3D;&#x3D; &#x27;date&#x27;&quot; class&#x3D;&quot;calendar&quot;&gt;
+  &lt;div *ngIf&#x3D;&quot;dateMode &#x3D;&#x3D; &#x27;date&#x27; &amp;&amp; month&quot; class&#x3D;&quot;calendar&quot;&gt;
     &lt;div class&#x3D;&quot;month-year&quot;&gt;
       &lt;a class&#x3D;&quot;month-name&quot; (click)&#x3D;&quot;monthView(month)&quot;&gt;{{month.name}}&lt;/a&gt;
       &lt;a class&#x3D;&quot;year-name&quot; (click)&#x3D;&quot;yearView(month.year)&quot;&gt;{{month.year}}&lt;/a&gt;
-      &lt;a (click)&#x3D;&quot;yearView(month.year)&quot; class&#x3D;&quot;more&quot;&gt;&lt;mat-icon&gt;arrow_drop_down&lt;/mat-icon&gt;&lt;/a&gt;
+      &lt;!-- &lt;a (click)&#x3D;&quot;yearView(month.year)&quot; class&#x3D;&quot;more&quot;&gt;&lt;mat-icon&gt;arrow_drop_down&lt;/mat-icon&gt;&lt;/a&gt; --&gt;
       &lt;div class&#x3D;&quot;gap&quot;&gt;&lt;/div&gt;
       &lt;div class&#x3D;&quot;actions&quot;&gt;
         &lt;a (click)&#x3D;&quot;previousMonth(month)&quot;&gt;&lt;mat-icon&gt;navigate_before&lt;/mat-icon&gt;&lt;/a&gt;
@@ -2691,14 +3147,16 @@
           &lt;th&gt;Sat&lt;/th&gt;
         &lt;/tr&gt;
       &lt;/thead&gt;
-      &lt;tbody class&#x3D;&quot;calendar calendar-{{month.date}}&quot;&gt;
+      &lt;tbody class&#x3D;&quot;calendar calendar-{{ month.date }}&quot;&gt;
         &lt;tr class&#x3D;&quot;week&quot; *ngFor&#x3D;&quot;let week of month.weeks&quot;&gt;
           &lt;td *ngFor&#x3D;&quot;let day of week&quot; class&#x3D;&quot;day&quot; [ngClass]&#x3D;&quot;{
             today: today.date&#x3D;&#x3D;day.date,
             mute: day.mute,
-            selected: (day.date&#x3D;&#x3D;selected.date || highlightedRangeDays.indexOf(day.date) !&#x3D;&#x3D; -1) &amp;&amp; !day.mute,
-            disabled: day.disabled }&quot; (click)&#x3D;&quot;dayClick(day)&quot;&gt;
-            &lt;span&gt;{{day.number}}&lt;/span&gt;
+            selected: (day.date&#x3D;&#x3D;selected.date || highlightedRangeDays.data[day.date]) &amp;&amp; !day.mute,
+            &#x27;min-date&#x27;: day.date &#x3D;&#x3D;&#x3D; highlightedRangeDays.min,
+            &#x27;max-date&#x27;: day.date &#x3D;&#x3D;&#x3D; highlightedRangeDays.max,
+            disabled: day.disabled }&quot; (click)&#x3D;&quot;dayClick(day)&quot; (mouseenter)&#x3D;&quot;onMouseEnterDay(day)&quot;&gt;
+            &lt;span&gt;{{ day.number }}&lt;/span&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/tbody&gt;
@@ -2731,8 +3189,8 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="date" *ngIf="[\'date\', \'datetime\'].indexOf(fsDatePickerModel.view) !== -1">  <div class="months" *ngIf="dateMode == \'month\'">    <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>  </div>  <div class="years" *ngIf="dateMode == \'year\'" fsIscroll fsOptions="iscrollOptions" fsInstance="iscrollInstance">    <div class="iscroll-scroller">      <div *ngFor="let year of years" class="year" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }" (click)="yearViewChange(year)">          {{year}}      </div>      <div class="clear"></div>    </div>  </div>  <div *ngIf="dateMode == \'date\'" class="calendar">    <div class="month-year">      <a class="month-name" (click)="monthView(month)">{{month.name}}</a>      <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>      <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a>      <div class="gap"></div>      <div class="actions">        <a (click)="previousMonth(month)"><mat-icon>navigate_before</mat-icon></a>        <a (click)="nextMonth(month)"><mat-icon>navigate_next</mat-icon></a>      </div>    </div>    <table>      <thead>        <tr>          <th>Sun</th>          <th>Mon</th>          <th>Tues</th>          <th>Wed</th>          <th>Thurs</th>          <th>Fri</th>          <th>Sat</th>        </tr>      </thead>      <tbody class="calendar calendar-{{month.date}}">        <tr class="week" *ngFor="let week of month.weeks">          <td *ngFor="let day of week" class="day" [ngClass]="{            today: today.date==day.date,            mute: day.mute,            selected: (day.date==selected.date || highlightedRangeDays.indexOf(day.date) !== -1) && !day.mute,            disabled: day.disabled }" (click)="dayClick(day)">            <span>{{day.number}}</span>          </td>        </tr>      </tbody>    </table>  </div></div></div>'
-    var COMPONENTS = [{'name': 'FsDatePickerCalendarComponent', 'selector': 'fsDatePickerCalendar'},{'name': 'FsDatePickerTimeComponent', 'selector': 'fsDatePickerTime'},{'name': 'FsDatepickerComponent', 'selector': 'fsDatePicker'},{'name': 'FsDatepickerRangeComponent', 'selector': 'fsDatePickerRange'}];
+        var COMPONENT_TEMPLATE = '<div><div class="date" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" (mouseleave)="onMouseLeaveCalendar()">  <div class="months" *ngIf="dateMode == \'month\'">    <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>  </div>  <div class="years" *ngIf="dateMode == \'year\'" fsIscroll [fsOptions]="iscrollOptions" fsInstance="iscrollInstance">    <div class="iscroll-scroller">      <div *ngFor="let year of years" class="year data-year-{{ year }}" [ngClass]="{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }" (click)="yearViewChange(year)">          {{ year }}      </div>      <div class="clear"></div>    </div>  </div>  <div *ngIf="dateMode == \'date\' && month" class="calendar">    <div class="month-year">      <a class="month-name" (click)="monthView(month)">{{month.name}}</a>      <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>      <!-- <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a> -->      <div class="gap"></div>      <div class="actions">        <a (click)="previousMonth(month)"><mat-icon>navigate_before</mat-icon></a>        <a (click)="nextMonth(month)"><mat-icon>navigate_next</mat-icon></a>      </div>    </div>    <table>      <thead>        <tr>          <th>Sun</th>          <th>Mon</th>          <th>Tues</th>          <th>Wed</th>          <th>Thurs</th>          <th>Fri</th>          <th>Sat</th>        </tr>      </thead>      <tbody class="calendar calendar-{{ month.date }}">        <tr class="week" *ngFor="let week of month.weeks">          <td *ngFor="let day of week" class="day" [ngClass]="{            today: today.date==day.date,            mute: day.mute,            selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,            \'min-date\': day.date === highlightedRangeDays.min,            \'max-date\': day.date === highlightedRangeDays.max,            disabled: day.disabled }" (click)="dayClick(day)" (mouseenter)="onMouseEnterDay(day)">            <span>{{ day.number }}</span>          </td>        </tr>      </tbody>    </table>  </div></div></div>'
+    var COMPONENTS = [{'name': 'FsDatePickerCalendarComponent', 'selector': 'fsDatePickerCalendar'},{'name': 'FsDatePickerTimeComponent', 'selector': 'fsDatePickerTime'},{'name': 'FsDatepickerComponent', 'selector': 'fsDatePicker'},{'name': 'FsDatepickerPresetsComponent', 'selector': 'fsDatePickerPresets'},{'name': 'FsDatepickerRangeComponent', 'selector': 'fsDatePickerRange'},{'name': 'FsDatepickerSummaryComponent', 'selector': 'fsDatePickerSummary'}];
     var DIRECTIVES = [{'name': 'FsDatePickDirective', 'selector': '[fsDatePicker]'},{'name': 'FsDatePickRangeDirective', 'selector': '[fsDatePickerRange]'},{'name': 'FsIsscrollDirective', 'selector': '[fsIscroll]'}];
     var ACTUAL_COMPONENT = {'name': 'FsDatePickerCalendarComponent'};
 </script>

@@ -1,4 +1,5 @@
 import { Renderer, ElementRef, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { FsPreset } from './../interfaces/fspreset.interface';
 import { FsDatepickerFactory } from './../services/fsdatepickerfactory.service';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 export declare class FsDatePickDirective implements OnInit, OnDestroy {
@@ -11,6 +12,7 @@ export declare class FsDatePickDirective implements OnInit, OnDestroy {
     minYear: any;
     maxYear: any;
     view: string;
+    presets: FsPreset[];
     change$: EventEmitter<any>;
     private _model;
     opened: boolean;

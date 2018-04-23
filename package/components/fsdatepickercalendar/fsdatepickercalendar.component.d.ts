@@ -1,19 +1,23 @@
 import { EventEmitter, ElementRef, IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
-import { FsUtil } from '@firestitch/common';
+import 'hammerjs';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
     element: ElementRef;
     private fsDatePickerCommon;
     fsDatePickerModel: FsDatePickerModel;
-    private fsUtil;
     private _iterableDiffers;
     date: any;
-    dateToHighlight: any;
+    highlightStartDate: any;
+    highlightEndDate: any;
     dateMode: any;
     disabledDays: any;
+    drawMonth: any;
     onChange: EventEmitter<any>;
     onDateModeChange: EventEmitter<any>;
+    onDrawMonth: EventEmitter<any>;
+    hoverDay: EventEmitter<any>;
+    mouseLeaveCalendar: EventEmitter<any>;
     selected: {};
     iscrollOptions: any;
     iscrollInstance: any;
@@ -22,6 +26,7 @@ export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges,
     dateDays: any[];
     private highlightedRangeDays;
     private disabledDaysDiffer;
+    private SWIPE_ACTION;
     monthList: {
         value: number;
         name: string;
@@ -32,9 +37,11 @@ export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges,
         month: any;
         year: number;
     };
-    constructor(element: ElementRef, fsDatePickerCommon: FsDatePickerCommon, fsDatePickerModel: FsDatePickerModel, fsUtil: FsUtil, _iterableDiffers: IterableDiffers);
+    constructor(element: ElementRef, fsDatePickerCommon: FsDatePickerCommon, fsDatePickerModel: FsDatePickerModel, _iterableDiffers: IterableDiffers);
     ngOnInit(): void;
     ngOnChanges(changes: any): void;
+    onMouseEnterDay(day: any): void;
+    onMouseLeaveCalendar(): void;
     updateDaysHighlighted(): void;
     ngDoCheck(): void;
     private dateScroll;
@@ -52,6 +59,8 @@ export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges,
     yearChange(year: any): void;
     previousMonth(month: any): void;
     nextMonth(month: any): void;
+    setMonth(monthNumber: any): void;
+    setYear(yearNumber: any): void;
     drawMonths(date: any): void;
     createMonth(date: any): {
         name: any;
@@ -73,5 +82,6 @@ export declare class FsDatePickerCalendarComponent implements OnInit, OnChanges,
     updateDate(): void;
     onMouseWheel($event: any): void;
     onTouchMove($event: any): void;
+    swipe(action?: string): void;
     ngOnDestroy(): void;
 }

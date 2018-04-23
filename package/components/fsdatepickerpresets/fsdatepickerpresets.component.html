@@ -1,0 +1,15 @@
+<div *ngIf="presets.length" class="presets">
+  <ng-container *ngFor="let item of presets; let i = index">
+    <a (click)="setPreset(item)" *ngIf="i < 4">{{ item.name }}</a>
+  </ng-container>
+  <ng-container *ngIf="presets.length > 4">
+    <button mat-icon-button [matMenuTriggerFor]="presetsMenu">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+    <mat-menu #presetsMenu="matMenu" [overlapTrigger]="false">
+      <ng-container *ngFor="let item of presets; let i = index">
+        <button mat-menu-item (click)="setPreset(item)" *ngIf="i >= 4">{{ item.name }}</button>
+      </ng-container>
+    </mat-menu>
+  </ng-container>
+</div>

@@ -11,12 +11,13 @@ var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var material_1 = require("@angular/material");
 var material_2 = require("@angular/material");
-var common_2 = require("@firestitch/common");
 var fsdatepick_directive_1 = require("./directives/fsdatepick.directive");
 var fsdatepickrange_directive_1 = require("./directives/fsdatepickrange.directive");
 var fsisscroll_directive_1 = require("./directives/fsisscroll.directive");
 var fsdatepicker_component_1 = require("./components/fsdatepicker/fsdatepicker.component");
 var fsdatepickerrange_component_1 = require("./components/fsdatepickerrange/fsdatepickerrange.component");
+var fsdatepickersummary_component_1 = require("./components/fsdatepickersummary/fsdatepickersummary.component");
+var fsdatepickerpresets_component_1 = require("./components/fsdatepickerpresets/fsdatepickerpresets.component");
 var fsdatepickercalendar_component_1 = require("./components/fsdatepickercalendar/fsdatepickercalendar.component");
 var fsdatepickertime_component_1 = require("./components/fsdatepickertime/fsdatepickertime.component");
 var fsdatepickerfactory_service_1 = require("./services/fsdatepickerfactory.service");
@@ -37,10 +38,10 @@ var FsDatePickerModule = (function () {
             imports: [
                 common_1.CommonModule,
                 forms_1.FormsModule,
-                common_2.FsCommonModule,
                 material_1.MatButtonModule,
                 material_2.MatTabsModule,
-                material_1.MatIconModule
+                material_1.MatIconModule,
+                material_1.MatMenuModule
             ],
             exports: [
                 fsdatepick_directive_1.FsDatePickDirective,
@@ -53,6 +54,8 @@ var FsDatePickerModule = (function () {
             declarations: [
                 fsdatepick_directive_1.FsDatePickDirective,
                 fsdatepickrange_directive_1.FsDatePickRangeDirective,
+                fsdatepickersummary_component_1.FsDatepickerSummaryComponent,
+                fsdatepickerpresets_component_1.FsDatepickerPresetsComponent,
                 fsdatepicker_component_1.FsDatepickerComponent,
                 fsdatepickerrange_component_1.FsDatepickerRangeComponent,
                 fsisscroll_directive_1.FsIsscrollDirective,

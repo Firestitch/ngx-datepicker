@@ -25,7 +25,10 @@ var FsDatePickDirective = (function () {
         this.viewContainerRef = viewContainerRef;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatepickerFactory = fsDatepickerFactory;
+        this.minYear = null;
+        this.maxYear = null;
         this.view = 'date';
+        this.presets = [];
         this.change$ = new core_1.EventEmitter();
         this._model = null;
         this.opened = false;
@@ -75,7 +78,14 @@ var FsDatePickDirective = (function () {
         this.$dialog.instance.fsDatePickerModel.view = this.view;
         this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
         this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+        this.$dialog.instance.fsDatePickerModel.presets = this.presets;
         this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
+        if (this.view === 'time') {
+            this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
+        }
+        else {
+            this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true };
+        }
         setTimeout(function () {
             _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
         });
@@ -112,6 +122,10 @@ var FsDatePickDirective = (function () {
         core_1.Input(),
         __metadata("design:type", Object)
     ], FsDatePickDirective.prototype, "view", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], FsDatePickDirective.prototype, "presets", void 0);
     __decorate([
         core_1.Output('change'),
         __metadata("design:type", Object)

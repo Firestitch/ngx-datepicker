@@ -105,6 +105,36 @@ exports.push([module.i, "", "", {"version":3,"sources":[],"names":[],"mappings":
 
 /***/ }),
 
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fsdatepickerpresets/fsdatepickerpresets.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ":host .presets {\n  display: block;\n  float: left;\n  margin: 8px 0 0;\n  color: #a9acae;\n}\n\n:host .presets a {\n  font-size: 13px;\n  margin: 0 5px;\n}\n\n:host .presets a:first-child {\n  margin-left: 0;\n}\n\n:host .presets a:last-child {\n  margin-right: 0;\n}\n\n@media only screen and (max-width: 499px) {\n  :host .presets {\n    float: left !important;\n  }\n}\n\n", "", {"version":3,"sources":["/Users/mendor/work/fs-datepicker/src/components/fsdatepickerpresets/src/components/fsdatepickerpresets/fsdatepickerpresets.component.scss","/Users/mendor/work/fs-datepicker/fsdatepickerpresets.component.scss"],"names":[],"mappings":"AACE;EACE,eAAA;EACA,YAAA;EACA,gBAAA;EACA,eAAA;CCAH;;ADLD;EAOM,gBAAA;EACA,cAAA;CCEL;;ADJG;EAII,eAAA;CCIP;;ADdD;EAaQ,gBAAA;CCKP;;ADCD;EACE;IAEI,uBAAA;GCCH;CACF","file":"fsdatepickerpresets.component.scss","sourcesContent":[":host {\n  .presets {\n    display: block;\n    float: left;\n    margin: 8px 0 0;\n    color: #a9acae;\n    a {\n      font-size: 13px;\n      margin: 0 5px;\n      &:first-child {\n        margin-left: 0;\n      }\n      &:last-child {\n        margin-right: 0;\n      }\n    }\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  :host {\n    .presets {\n      float: left !important;\n    }\n  }\n}\n",":host .presets {\n  display: block;\n  float: left;\n  margin: 8px 0 0;\n  color: #a9acae;\n}\n\n:host .presets a {\n  font-size: 13px;\n  margin: 0 5px;\n}\n\n:host .presets a:first-child {\n  margin-left: 0;\n}\n\n:host .presets a:last-child {\n  margin-right: 0;\n}\n\n@media only screen and (max-width: 499px) {\n  :host .presets {\n    float: left !important;\n  }\n}\n\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fsdatepickersummary/fsdatepickersummary.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ":host .summary {\n  display: block;\n  float: left;\n  font-size: 14px;\n  margin-top: 20px;\n}\n\n:host .summary > div {\n  cursor: pointer;\n  padding-bottom: 4px;\n  display: inline-block;\n  border-bottom: 2px solid #fff;\n}\n\n:host .summary > div.active {\n  border-bottom: 2px solid #6689b4;\n}\n\n:host .summary > div:hover:not(.active) {\n  border-bottom: 2px solid #d2d2d2;\n}\n\n@media only screen and (max-width: 499px) {\n  .summary {\n    font-size: 13px !important;\n  }\n}\n\n", "", {"version":3,"sources":["/Users/mendor/work/fs-datepicker/src/components/fsdatepickersummary/src/components/fsdatepickersummary/fsdatepickersummary.component.scss","/Users/mendor/work/fs-datepicker/fsdatepickersummary.component.scss"],"names":[],"mappings":"AAAA;EAEI,eAAA;EACA,YAAA;EACA,gBAAA;EACA,iBAAA;CCAH;;ADCK;EACA,gBAAA;EACA,oBAAA;EACA,sBAAA;EAEA,8BAAA;CCCL;;ADNK;EAQE,iCAAA;CCEP;;ADVK;EAWE,iCAAA;CCGP;;ADGD;EACE;IACE,2BAAA;GCAD;CACF","file":"fsdatepickersummary.component.scss","sourcesContent":[":host {\n  .summary {\n    display: block;\n    float: left;\n    font-size: 14px;\n    margin-top: 20px;\n    > div {\n      cursor: pointer;\n      padding-bottom: 4px;\n      display: inline-block;\n\n      border-bottom: 2px solid #fff;\n\n      &.active {\n        border-bottom: 2px solid #6689b4;\n      }\n      &:hover:not(.active) {\n        border-bottom: 2px solid #d2d2d2;\n      }\n    }\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .summary {\n    font-size: 13px !important;\n  }\n}\n",":host .summary {\n  display: block;\n  float: left;\n  font-size: 14px;\n  margin-top: 20px;\n}\n\n:host .summary > div {\n  cursor: pointer;\n  padding-bottom: 4px;\n  display: inline-block;\n  border-bottom: 2px solid #fff;\n}\n\n:host .summary > div.active {\n  border-bottom: 2px solid #6689b4;\n}\n\n:host .summary > div:hover:not(.active) {\n  border-bottom: 2px solid #d2d2d2;\n}\n\n@media only screen and (max-width: 499px) {\n  .summary {\n    font-size: 13px !important;\n  }\n}\n\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fsdatepickertime/fsdatepickertime.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -113,7 +143,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, "", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"fsdatepickertime.component.scss","sourceRoot":""}]);
+exports.push([module.i, ".time {\n  padding: 12px 15px;\n}\n\n.time .wraper {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n}\n\n.time .hours-group {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n.time .hours-group .hours {\n  margin-bottom: 10px;\n}\n\n.time .hours {\n  height: 100%;\n}\n\n.time .hours table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.time .hour .number.textual {\n  font-size: 11px;\n}\n\n.time .hour .am-pm {\n  font-size: 9px;\n  margin-left: 1px;\n}\n\n.time .minutes {\n  height: 100%;\n  margin-left: 15px;\n}\n\n.time .minutes table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.time .minutes .button-expand {\n  display: block;\n  text-align: center;\n  color: #4678AE;\n  margin-top: 5px;\n}\n\n.time .lbl {\n  margin-bottom: 2px;\n  font-size: 12px;\n}\n\n.time .hour,\n.time .minute {\n  width: 50px;\n  height: 50px;\n  text-align: center;\n  border: 1px\tsolid #efefef;\n  padding: 0;\n  cursor: pointer;\n}\n\n.time .hour .number,\n.time .minute .number {\n  border: 1px solid transparent;\n  border-radius: 50%;\n  line-height: 28px;\n  height: 28px;\n}\n\n@media only screen and (min-width: 500px) {\n  .time {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important;\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .time {\n    margin: 0 auto;\n  }\n}\n\n", "", {"version":3,"sources":["/Users/mendor/work/fs-datepicker/src/components/fsdatepickertime/src/components/fsdatepickertime/fsdatepickertime.component.scss","/Users/mendor/work/fs-datepicker/fsdatepickertime.component.scss"],"names":[],"mappings":"AAAA;EACE,mBAAA;CCCD;;ADCC;EACE,+BAAA;EAAA,8BAAA;MAAA,wBAAA;UAAA,oBAAA;EACA,qBAAA;EAAA,qBAAA;EAAA,cAAA;EACA,yBAAA;MAAA,sBAAA;UAAA,mBAAA;CCEH;;ADRD;EAUI,qBAAA;EAAA,qBAAA;EAAA,cAAA;EACA,6BAAA;EAAA,8BAAA;MAAA,2BAAA;UAAA,uBAAA;CCEH;;ADDG;EACE,oBAAA;CCIL;;ADAC;EACE,aAAA;CCGH;;ADFG;EACE,0BAAA;EACA,YAAA;CCKL;;AD1BD;EA6BQ,gBAAA;CCCP;;ADGG;EACE,eAAA;EACA,iBAAA;CCAL;;ADnCD;EAwCI,aAAA;EACA,kBAAA;CCDH;;ADxCD;EA4CM,0BAAA;EACA,YAAA;CCAL;;AD7CD;EAiDM,eAAA;EACA,mBAAA;EACA,eAAA;EACA,gBAAA;CCAL;;ADpDD;EAyDI,mBAAA;EACA,gBAAA;CCDH;;ADIC;;EAGE,YAAA;EACA,aAAA;EACA,mBAAA;EACA,0BAAA;EACA,WAAA;EACA,gBAAA;CCFH;;ADnED;;EAuEM,8BAAA;EACA,mBAAA;EACA,kBAAA;EACA,aAAA;CCCL;;ADID;EACE;IACE,gCAAA;IAAA,gCAAA;IAAA,yBAAA;GCDD;CACF;;ADID;EACE;IACE,eAAA;GCDD;CACF","file":"fsdatepickertime.component.scss","sourcesContent":[".time {\n  padding: 12px 15px;\n\n  .wraper {\n    flex-direction: row;\n    display: flex;\n    align-items: start;\n  }\n\n  .hours-group {\n    display: flex;\n    flex-direction: column;\n    .hours {\n      margin-bottom: 10px;\n    }\n  }\n\n  .hours {\n    height: 100%;\n    table {\n      border-collapse: collapse;\n      width: 100%;\n    }\n  }\n\n  .hour {\n    .number {\n      // font-size: 12px;\n      &.textual {\n        font-size: 11px;\n      }\n    }\n\n    .am-pm {\n      font-size: 9px;\n      margin-left: 1px;\n    }\n  }\n\n  .minutes {\n    height: 100%;\n    margin-left: 15px;\n\n    table {\n      border-collapse: collapse;\n      width: 100%;\n    }\n\n    .button-expand {\n      display: block;\n      text-align: center;\n      color: #4678AE;\n      margin-top: 5px;\n    }\n  }\n\n  .lbl {\n    margin-bottom: 2px;\n    font-size: 12px;\n  }\n\n  .hour, .minute {\n    // width: 31px;\n    // height: 31px;\n    width: 50px;\n    height: 50px;\n    text-align: center;\n    border: 1px\tsolid #efefef;\n    padding: 0;\n    cursor: pointer;\n    .number {\n      border: 1px solid transparent;\n      border-radius: 50%;\n      line-height: 28px;\n      height: 28px;\n    }\n  }\n}\n\n@media only screen and (min-width: 500px) {\n  .time {\n    display: flex !important;\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .time {\n    margin: 0 auto;\n  }\n}\n",".time {\n  padding: 12px 15px;\n}\n\n.time .wraper {\n  flex-direction: row;\n  display: flex;\n  align-items: start;\n}\n\n.time .hours-group {\n  display: flex;\n  flex-direction: column;\n}\n\n.time .hours-group .hours {\n  margin-bottom: 10px;\n}\n\n.time .hours {\n  height: 100%;\n}\n\n.time .hours table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.time .hour .number.textual {\n  font-size: 11px;\n}\n\n.time .hour .am-pm {\n  font-size: 9px;\n  margin-left: 1px;\n}\n\n.time .minutes {\n  height: 100%;\n  margin-left: 15px;\n}\n\n.time .minutes table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.time .minutes .button-expand {\n  display: block;\n  text-align: center;\n  color: #4678AE;\n  margin-top: 5px;\n}\n\n.time .lbl {\n  margin-bottom: 2px;\n  font-size: 12px;\n}\n\n.time .hour,\n.time .minute {\n  width: 50px;\n  height: 50px;\n  text-align: center;\n  border: 1px\tsolid #efefef;\n  padding: 0;\n  cursor: pointer;\n}\n\n.time .hour .number,\n.time .minute .number {\n  border: 1px solid transparent;\n  border-radius: 50%;\n  line-height: 28px;\n  height: 28px;\n}\n\n@media only screen and (min-width: 500px) {\n  .time {\n    display: flex !important;\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .time {\n    margin: 0 auto;\n  }\n}\n\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -128,7 +158,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".fs-datetime-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 50;\n  outline: none;\n  overflow: visible;\n  background: none !important;\n}\n\n.fs-datetime-backdrop[hidden] {\n  display: none !important;\n}\n\na {\n  text-decoration: none;\n  cursor: pointer;\n}\n\n/*\nfs-datetime {\n\tposition: relative;\n}\n\nfs-datetime-range md-input-container .hint {\n    top: 33px;\n    white-space: nowrap;\n    overflow: visible;\n    clear: left;\n    position: absolute;\n}\n\nfs-datetime .md-input {\n\tmin-width: 100px;\n\tz-index: 51;\n\tposition: relative;\n\tcursor: pointer;\n}\n\nfs-datetime.has-time .md-input {\n\tmin-width: 150px;\n}\n\nfs-datetime.has-time:not(.has-date) .md-input {\n\tmin-width: 70px;\n}\n\nfs-datetime.has-time .md-input {\n\twidth: auto;\n}\n\nfs-datetime md-input-container.md-block .md-input {\n\twidth: 100%;\n}\n*/\n\n.fs-datetime-dialog {\n  position: fixed;\n  z-index: 80;\n  display: none;\n  visibility: hidden;\n  display: block;\n  margin-top: 20px;\n}\n\n.fs-datetime-dialog.opened {\n  visibility: visible;\n}\n\n.fs-datetime-dialog * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.fs-datetime-dialog fsDatePickerCalendar {\n  /* Need for year view */\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1 1 0%;\n}\n\n.fs-datetime-dialog .wrap {\n  background: #fff;\n  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, .2), 0px 4px 5px 0px rgba(0, 0, 0, .14), 0px 1px 10px 0px rgba(0, 0, 0, .12);\n          box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, .2), 0px 4px 5px 0px rgba(0, 0, 0, .14), 0px 1px 10px 0px rgba(0, 0, 0, .12);\n  width: 372px;\n  padding: 0 !important;\n}\n\n.fs-datetime-dialog.has-time.has-date .wrap {\n  width: 645px;\n}\n\n.fs-datetime-dialog .wrap:focus,\n.fs-datetime-dialog .wrap:active,\n.fs-datetime-dialog:focus,\n.fs-datetime-dialog:active {\n  outline: none;\n}\n\n.fs-datetime-dialog.has-time:not(.has-date) .wrap {\n  width: 255px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date:not(.has-time) .wrap {\n  width: 744px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-time:not(.has-date) .wrap {\n  width: 276px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-time.has-date .wrap {\n  width: 1015px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1 1 0%;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range fsdatepickercalendar:first-child {\n  margin-right: 5px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-header {\n  margin: 0 15px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-label {\n  min-width: 115px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-ink-bar {\n  visibility: inherit !important;\n}\n\n.fs-datetime-dialog.fs-datetime-range .done .ranges {\n  float: right;\n  /*\n        div {\n          background-color: #d4d4d4;\n          display: inline-block;\n          padding: 9px 16px;\n          margin: 0 2px;\n          border-radius: 18px;\n          cursor: pointer;\n        }\n        */\n}\n\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:after,\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {\n  border-left: 20px solid transparent;\n  border-right: 20px solid transparent;\n  border-top: 19px solid #fff;\n  top: -19px;\n  content: '';\n  left: 50%;\n  position: absolute;\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg);\n  left: 23px;\n}\n\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {\n  border-left: 23px solid transparent;\n  border-right: 23px solid transparent;\n  border-top: 21px solid transparent;\n  border-top-color: #efefef;\n  top: -21px;\n  left: 20px;\n}\n\n.fs-datetime-dialog .date::-webkit-scrollbar,\n.fs-datetime-dialog .years::-webkit-scrollbar {\n  display: none;\n}\n\n.fs-datetime-dialog .inline-date {\n  padding: 10px;\n  width: 100%;\n}\n\n.fs-datetime-dialog .gap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1 1 0%;\n}\n\n.fs-datetime-dialog .month-year .actions {\n  text-align: right;\n  margin-right: -12px;\n}\n\n.fs-datetime-dialog .month-year .actions a {\n  padding: 6px;\n}\n\n.fs-datetime-dialog .month-year .more {\n  padding: 1px;\n}\n\n.fs-datetime-dialog .month-year {\n  height: 60px;\n  font-size: 17px;\n  padding: 0 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.fs-datetime-dialog .year-name,\n.fs-datetime-dialog .month-name {\n  color: inherit;\n  padding: 5px;\n  border-radius: 3px;\n  float: left;\n}\n\n.fs-datetime-dialog .month-year .md-select-value .md-select-icon {\n  visibility: hidden;\n  width: 15px;\n  display: none;\n}\n\n.fs-datetime-dialog .month-year .md-select-value {\n  border-color: transparent;\n  border-width: 1px;\n  min-width: auto;\n  padding: 0;\n}\n\n.fs-datetime-dialog .month-year:hover .md-select-value .md-select-icon {\n  visibility: visible;\n}\n\n.fs-datetime-dialog .month-year:hover .md-select-value {\n  border-width: 1px;\n  border-color: #e1e1e1;\n}\n\n.fs-datetime-dialog table {\n  border-collapse: collapse;\n}\n\n.fs-datetime-dialog .day {\n  position: relative;\n  text-align: center;\n  width: 50px;\n  height: 50px;\n  line-height: 50px;\n  border: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n}\n\n.fs-datetime-dialog .day span {\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n\n.fs-datetime-dialog .day.mute {\n  color: #d7d7d7;\n}\n\n.fs-datetime-dialog thead th {\n  width: 50px;\n  vertical-align: top;\n  padding-bottom: 20px;\n  text-align: center;\n  border: 1px solid transparent;\n  background: #fff;\n  border-bottom: 1px solid #efefef;\n  border-top: 1px solid #fff;\n}\n\n.fs-datetime-dialog thead th,\nfs-datetime .lbl {\n  font-weight: normal;\n  font-size: 12px;\n  color: #4d4d4d;\n}\n\n.fs-datetime-dialog .date {\n  overflow-y: auto;\n  overflow-x: hidden;\n  width: 100%;\n  position: relative;\n  min-height: 350px;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 45%;\n          flex: 1 1 45%;\n}\n\n.fs-datetime-dialog .time {\n  padding: 12px 15px;\n}\n\n.fs-datetime-dialog .time {\n  padding: 12px 15px;\n}\n\n.fs-datetime-dialog .time .wraper {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.fs-datetime-dialog .time .hours table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.fs-datetime-dialog .time .hour,\n.fs-datetime-dialog .time .minute {\n  width: 31px;\n  height: 31px;\n  text-align: center;\n  border: 1px\tsolid #efefef;\n  padding: 0;\n  cursor: pointer;\n}\n\n.fs-datetime-dialog .time .hour .number,\n.fs-datetime-dialog .time .minute .number {\n  border: 1px solid transparent;\n  border-radius: 50%;\n  line-height: 28px;\n  height: 28px;\n}\n\n.fs-datetime-dialog .time .hour .number {\n  font-size: 12px;\n}\n\n.fs-datetime-dialog .day.selected,\n.fs-datetime-dialog .years .year.selected,\n.fs-datetime-dialog .months .month.selected,\n.fs-datetime-dialog .time .hour.selected,\n.fs-datetime-dialog .time .minute.selected {\n  background: #4678AE;\n  color: #fff;\n}\n\n/*\n.fs-datetime-dialog .day.today {\n    border: 1px solid #4678AE;\n    border-style: double;\n}\n*/\n\n.fs-datetime-dialog .day.today:after {\n  content: 'TODAY';\n  color: #555555;\n  font-size: 9px;\n  position: absolute;\n  bottom: 5px;\n  left: 0;\n  width: 100%;\n  height: auto;\n  line-height: normal;\n}\n\n.fs-datetime-dialog .day.today.selected:after {\n  color: #fff;\n}\n\n.fs-datetime-dialog .years .year.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .time .minutes {\n  margin-left: 15px;\n}\n\n.fs-datetime-dialog .time .minutes table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.fs-datetime-dialog .time .hour.disabled,\n.fs-datetime-dialog .time .minute.disabled,\n.fs-datetime-dialog .day.disabled {\n  color: #a6a5a5;\n  cursor: auto;\n  cursor: initial;\n  background: #efefef;\n}\n\n.fs-datetime-dialog .time .lbl {\n  margin-bottom: 2px;\n  font-size: 12px;\n}\n\n.fs-datetime-dialog .time .midnight {\n  line-height: 8px;\n  display: block;\n}\n\n.fs-datetime-dialog .time .midnight div {\n  line-height: 16px;\n}\n\n.fs-datetime-dialog .time .midnight,\n.fs-datetime-dialog .time .noon {\n  font-size: 10px;\n}\n\n.fs-datetime-dialog .time .hour .am-pm {\n  font-size: 9px;\n  margin-left: 1px;\n}\n\n.fs-datetime-dialog .time .hour .number.textual {\n  font-size: 11px;\n}\n\n/*\n.fs-datetime-dialog . {\n\tfont-size: 11px;\n}*/\n\n.fs-datetime-dialog .date-time {\n  overflow: auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.fs-datetime-dialog .months {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\n.fs-datetime-dialog .months .month {\n  height: 25%;\n  width: 33.33%;\n  float: left;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  border-left: 1px solid #efefef;\n  border-top: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n  border-bottom: 0;\n  border-right: 0;\n  min-height: 80px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.fs-datetime-dialog .months .month:nth-child(-n+3) {\n  border-top: 0;\n}\n\n.fs-datetime-dialog .months .month:nth-child(3n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .months .month.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .years {\n  position: absolute;\n  width: 100%;\n  max-height: 100%;\n  height: 100vh;\n  overflow: hidden;\n}\n\n.iscroll-scroller {\n  position: absolute;\n  width: 100%;\n}\n\n.fs-datetime-dialog .years .year {\n  float: left;\n  width: 25%;\n  text-align: center;\n  height: 65px;\n  border-left: 1px solid #efefef;\n  border-bottom: 1px solid #efefef;\n  line-height: 65px;\n  outline: none;\n  cursor: pointer;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.fs-datetime-dialog .years .year:nth-last-child(-n+4) {\n  border-bottom: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .years .year:nth-child(4n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.clear {\n  clear: both;\n}\n\n.fs-datetime-dialog .years .year.row {\n  clear: both;\n}\n\n.fs-datetime-dialog .view-year .date {\n  overflow-y: visible;\n}\n\n.fs-datetime-dialog .view-year .date {\n  overflow-y: visible;\n}\n\n.fs-datetime-dialog.view-date .date {\n  min-height: auto;\n}\n\n/*\nfs-datetime-range {\n\tdisplay: inline;\n}\n\nfs-datetime-range .to {\n\tpadding: 0 4px;\n\tpadding-top: 26px;\n}\n\nfs-datetime-range.md-no-label .to {\n\tpadding-top: 8px;\n}\n\nfs-datetime-range .datetime-block .datetime-from,\nfs-datetime-range .datetime-block .datetime-to {\n\twidth: 50%;\n}\n*/\n\n.fs-datetime-dialog .close {\n  padding: 5px;\n  display: none;\n}\n\n.fs-datetime-dialog .done {\n  background: #fff;\n  width: 100%;\n  border-top: 1px solid #E1E1E1;\n}\n\n.fs-datetime-dialog .done button {\n  padding-left: 10px;\n  padding-right: 10px;\n  padding: 0 6px;\n  margin: 6px 8px;\n}\n\n.fs-datetime-dialog fs-tabnav {\n  display: none;\n}\n\n.fs-datetime-dialog fs-tabnav .md-tabs a {\n  width: 50%;\n}\n\n@media only screen and (min-width: 500px) {\n  .fs-datetime-dialog .time,\n  .fs-datetime-dialog .date {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important;\n  }\n\n  .fs-datetime-dialog .time .hour:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .time .minute:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .day:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .years .year:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .months .month:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .year-name:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .month-name:hover:not(.disabled):not(.selected) {\n    background: rgba(70, 120, 174, .15);\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .fs-datetime-dialog {\n    left: 0 !important;\n    right: 0 !important;\n    top: 0 !important;\n    bottom: 0px !important;\n    margin: 0px;\n    height: 100vh;\n  }\n\n  .fs-datetime-dialog .wrap {\n    margin: 0px;\n    width: 100% !important;\n    height: 100vh;\n  }\n\n  .fs-datetime-dialog .day {\n    width: 14.28%;\n  }\n\n  .fs-datetime-dialog table {\n    width: 100%;\n  }\n\n  .fs-datetime-dialog .close {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n  }\n\n  .fs-datetime-dialog.view-year .done,\n  .fs-datetime-dialog.view-month .done {\n    display: none !important;\n  }\n\n  .fs-datetime-dialog.view-date .done {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important;\n  }\n\n  .fs-datetime-dialog .done {\n    position: fixed;\n    bottom: 0;\n  }\n\n  .fs-datetime-dialog fs-tabnav {\n    display: block;\n  }\n\n  .fs-datetime-dialog .time {\n    margin: 0 auto;\n  }\n}\n\n@media only screen and (max-width: 400px) {\n  .fs-datetime-dialog .day {\n    height: 40px;\n    line-height: 40px;\n  }\n}\n\n.pointer-events-none {\n  pointer-events: none !important;\n}\n\n", "", {"version":3,"sources":["/Users/mendor/work/fs-datepicker/src/src/styles.scss","/Users/mendor/work/fs-datepicker/styles.scss"],"names":[],"mappings":"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","file":"styles.scss","sourcesContent":[".fs-datetime-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 50;\n  outline: none;\n  overflow:visible;\n  background:none !important;\n}\n\n.fs-datetime-backdrop[hidden] { display: none !important; }\n\na {\n  text-decoration: none;\n  cursor: pointer;\n}\n\n/*\nfs-datetime {\n\tposition: relative;\n}\n\nfs-datetime-range md-input-container .hint {\n    top: 33px;\n    white-space: nowrap;\n    overflow: visible;\n    clear: left;\n    position: absolute;\n}\n\nfs-datetime .md-input {\n\tmin-width: 100px;\n\tz-index: 51;\n\tposition: relative;\n\tcursor: pointer;\n}\n\nfs-datetime.has-time .md-input {\n\tmin-width: 150px;\n}\n\nfs-datetime.has-time:not(.has-date) .md-input {\n\tmin-width: 70px;\n}\n\nfs-datetime.has-time .md-input {\n\twidth: auto;\n}\n\nfs-datetime md-input-container.md-block .md-input {\n\twidth: 100%;\n}\n*/\n\n.fs-datetime-dialog {\n\tposition: fixed;\n  z-index: 80;\n  display: none;\n  visibility: hidden;\n  display: block;\n  margin-top: 20px;\n}\n\n.fs-datetime-dialog.opened {\n\tvisibility: visible;\n}\n\n.fs-datetime-dialog * {\n\tuser-select: none;\n}\n\n.fs-datetime-dialog {\n  fsDatePickerCalendar {\n    /* Need for year view */\n    // width: 100%;\n    display: flex;\n    flex: 1;\n  }\n}\n\n.fs-datetime-dialog .wrap {\n    background: #fff;\n    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);\n    width: 372px;\n    padding: 0 !important;\n}\n\n.fs-datetime-dialog.has-time.has-date .wrap {\n    width: 645px;\n}\n.fs-datetime-dialog .wrap:focus,\n.fs-datetime-dialog .wrap:active,\n.fs-datetime-dialog:focus, .fs-datetime-dialog:active {\n  outline: none;\n}\n\n.fs-datetime-dialog.has-time:not(.has-date) .wrap {\n    width: 255px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date:not(.has-time) .wrap {\n  width: 744px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-time:not(.has-date) .wrap {\n  width: 276px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-time.has-date .wrap {\n  width: 1015px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range {\n  display: flex;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range {\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range fsdatepickercalendar:first-child {\n  margin-right: 5px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-header {\n  margin: 0 15px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-label {\n  min-width: 115px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-ink-bar {\n  visibility: inherit !important;\n}\n\n.fs-datetime-dialog {\n  &.fs-datetime-range {\n    .done {\n      .ranges {\n        float: right;\n        /*\n        div {\n          background-color: #d4d4d4;\n          display: inline-block;\n          padding: 9px 16px;\n          margin: 0 2px;\n          border-radius: 18px;\n          cursor: pointer;\n        }\n        */\n      }\n    }\n  }\n}\n\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:after,\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {\n\tborder-left: 20px solid transparent;\n  border-right: 20px solid transparent;\n  border-top: 19px solid #fff;\n  top: -19px;\n  content: '';\n  left: 50%;\n  position: absolute;\n  transform: rotate(180deg);\n  left: 23px;\n}\n\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {\n    border-left: 23px solid transparent;\n    border-right: 23px solid transparent;\n    border-top: 21px solid transparent;\n    border-top-color: #efefef;\n    top: -21px;\n    left: 20px;\n}\n\n.fs-datetime-dialog .date::-webkit-scrollbar,\n.fs-datetime-dialog .years::-webkit-scrollbar {\n    display: none;\n}\n\n.fs-datetime-dialog .inline-date {\n\tpadding: 10px;\n\twidth: 100%;\n}\n\n.fs-datetime-dialog .gap {\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog .month-year .actions {\n\ttext-align: right;\n\tmargin-right: -12px;\n}\n\n.fs-datetime-dialog .month-year .actions a {\n\tpadding: 6px;\n}\n\n.fs-datetime-dialog .month-year .more {\n\tpadding: 1px;\n}\n\n.fs-datetime-dialog .month-year {\n\theight: 60px;\n    font-size: 17px;\n\tpadding: 0 10px;\n\tdisplay: flex;\n    flex-direction: row;\n    align-items: center;\n}\n\n.fs-datetime-dialog .year-name,\n.fs-datetime-dialog .month-name {\n    color: inherit;\n    padding: 5px;\n    border-radius: 3px;\n    float: left;\n}\n\n.fs-datetime-dialog .month-year .md-select-value .md-select-icon {\n\tvisibility: hidden;\n\twidth: 15px;\n\tdisplay: none;\n}\n\n.fs-datetime-dialog .month-year .md-select-value {\n\tborder-color: transparent;\n\tborder-width: 1px;\n\tmin-width: auto;\n\tpadding: 0;\n}\n\n.fs-datetime-dialog .month-year:hover .md-select-value .md-select-icon {\n\tvisibility: visible;\n}\n\n.fs-datetime-dialog .month-year:hover .md-select-value {\n\tborder-width: 1px;\n\tborder-color: #e1e1e1;\n}\n\n.fs-datetime-dialog table {\n\tborder-collapse: collapse;\n}\n\n.fs-datetime-dialog .day {\n  position: relative;\n\ttext-align: center;\n\twidth: 50px;\n\theight: 50px;\n\tline-height: 50px;\n\tborder: 1px solid #efefef;\n\tcursor: pointer;\n\toutline: none;\n}\n\n.fs-datetime-dialog .date tr td:first-child {\n\t// border-left: 1px solid transparent;\n}\n\n.fs-datetime-dialog .day span {\n    width: 100%;\n    height: 100%;\n    display: block;\n}\n\n.fs-datetime-dialog .day.mute {\n\tcolor: #d7d7d7;\n}\n\n.fs-datetime-dialog thead {\n}\n\n.fs-datetime-dialog thead th {\n\twidth: 50px;\n\tvertical-align: top;\n\tpadding-bottom: 20px;\n\ttext-align: center;\n\tborder: 1px solid transparent;\n\tbackground: #fff;\n\tborder-bottom: 1px solid #efefef;\n\tborder-top: 1px solid #fff;\n}\n\n.fs-datetime-dialog thead th,\nfs-datetime .lbl {\n\tfont-weight: normal;\n\tfont-size: 12px;\n\tcolor: #4d4d4d;\n}\n\n.fs-datetime-dialog .date {\n    overflow-y: auto;\n    overflow-x: hidden;\n    width: 100%;\n    position: relative;\n\tmin-height: 350px;\n\tflex: 1 1 45%;\n}\n\n.fs-datetime-dialog .time {\n\tpadding: 12px 15px;\n}\n\n.fs-datetime-dialog .time {\n\tpadding: 12px 15px;\n}\n\n.fs-datetime-dialog .time .wraper {\n\tflex-direction: row;\n\tdisplay: flex;\n\talign-items: center;\n}\n\n.fs-datetime-dialog .time .hours table {\n\tborder-collapse: collapse;\n\twidth: 100%;\n}\n\n.fs-datetime-dialog .time .hour,\n.fs-datetime-dialog .time .minute {\n    width: 31px;\n    height: 31px;\n    text-align: center;\n    border: 1px\tsolid #efefef;\n    padding: 0;\n    cursor: pointer;\n}\n\n.fs-datetime-dialog .time .hour .number,\n.fs-datetime-dialog .time .minute .number {\n    border: 1px solid transparent;\n\tborder-radius: 50%;\n    line-height: 28px;\n    height: 28px;\n}\n\n.fs-datetime-dialog .time .hour .number {\n\tfont-size: 12px;\n}\n\n.fs-datetime-dialog .day.selected,\n.fs-datetime-dialog .years .year.selected,\n.fs-datetime-dialog .months .month.selected,\n.fs-datetime-dialog .time .hour.selected,\n.fs-datetime-dialog .time .minute.selected {\n    background: #4678AE;\n\tcolor: #fff;\n}\n\n/*\n.fs-datetime-dialog .day.today {\n    border: 1px solid #4678AE;\n    border-style: double;\n}\n*/\n\n.fs-datetime-dialog .day.today:after {\n  content: 'TODAY';\n  color: #555555;\n  font-size: 9px;\n  position: absolute;\n  bottom: 5px;\n  left: 0;\n  width: 100%;\n  height: auto;\n  line-height: normal;\n}\n\n.fs-datetime-dialog .day.today.selected:after {\n  color: #fff;\n}\n\n.fs-datetime-dialog .years .year.today {\n    border: 1px solid #4678AE;\n    border-style: double;\n}\n\n.fs-datetime-dialog .time .minutes {\n\tmargin-left: 15px;\n}\n\n.fs-datetime-dialog .time .minutes table {\n\tborder-collapse: collapse;\n\twidth: 100%;\n}\n\n.fs-datetime-dialog .time .hour.disabled,\n.fs-datetime-dialog .time .minute.disabled,\n.fs-datetime-dialog .day.disabled {\n\tcolor: #a6a5a5;\n\tcursor: initial;\n\tbackground: #efefef;\n}\n\n.fs-datetime-dialog .time .lbl {\n    margin-bottom: 2px;\n    font-size: 12px;\n}\n\n.fs-datetime-dialog .time .midnight {\n    line-height: 8px;\n    display: block;\n}\n\n.fs-datetime-dialog .time .midnight div {\n    line-height: 16px;\n}\n\n.fs-datetime-dialog .time .midnight,\n.fs-datetime-dialog .time .noon {\n\tfont-size: 10px;\n}\n\n.fs-datetime-dialog .time .hour .am-pm {\n\tfont-size: 9px;\n    margin-left: 1px;\n}\n\n.fs-datetime-dialog .time .hour .number.textual {\n\tfont-size: 11px;\n}\n/*\n.fs-datetime-dialog . {\n\tfont-size: 11px;\n}*/\n\n.fs-datetime-dialog .date-time {\n\toverflow: auto;\n\tflex-direction: row;\n\tdisplay: flex;\n}\n\n.fs-datetime-dialog .months {\n    width: 100%;\n    height: 100%;\n    position: absolute;\n}\n\n.fs-datetime-dialog .months .month {\n    height: 25%;\n    width: 33.33%;\n    float: left;\n    text-align: center;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n\tborder-left: 1px solid #efefef;\n\tborder-top: 1px solid #efefef;\n\tcursor: pointer;\n    outline: none;\n    border-bottom: 0;\n    border-right: 0;\n    min-height: 80px;\n    box-sizing: border-box;\n}\n\n.fs-datetime-dialog .months .month:nth-child(-n+3) {\n\tborder-top: 0;\n}\n.fs-datetime-dialog .months .month:nth-child(3n+0) {\n\tborder-right: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .months .month.today {\n    border: 1px solid #4678AE;\n    border-style: double;\n}\n\n.fs-datetime-dialog .years {\n\tposition: absolute;\n\twidth: 100%;\n\tmax-height: 100%;\n\theight: 100vh;\n\toverflow: hidden;\n}\n\n.iscroll-scroller {\n\tposition: absolute;\n\twidth: 100%;\n}\n\n.fs-datetime-dialog .years .year {\n\tfloat: left;\n    width: 25%;\n    text-align: center;\n    height: 65px;\n    border-left: 1px solid #efefef;\n    border-bottom: 1px solid #efefef;\n    line-height: 65px;\n    outline: none;\n    cursor: pointer;\n    box-sizing: border-box;\n}\n\n.fs-datetime-dialog .years .year:nth-last-child(-n+4) {\n\tborder-bottom: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .years .year:nth-child(4n+0) {\n\tborder-right: 1px solid #efefef;\n}\n\n.clear {\n\tclear: both;\n}\n\n.fs-datetime-dialog .years .year.row {\n\tclear: both;\n}\n\n.fs-datetime-dialog .view-year .date {\n    overflow-y: visible;\n}\n\n.fs-datetime-dialog .view-year .date {\n    overflow-y: visible;\n}\n\n.fs-datetime-dialog.view-date .date {\n\tmin-height: auto;\n}\n/*\nfs-datetime-range {\n\tdisplay: inline;\n}\n\nfs-datetime-range .to {\n\tpadding: 0 4px;\n\tpadding-top: 26px;\n}\n\nfs-datetime-range.md-no-label .to {\n\tpadding-top: 8px;\n}\n\nfs-datetime-range .datetime-block .datetime-from,\nfs-datetime-range .datetime-block .datetime-to {\n\twidth: 50%;\n}\n*/\n.fs-datetime-dialog .close {\n\tpadding: 5px;\n\tdisplay: none;\n}\n\n.fs-datetime-dialog .done {\n    background: #fff;\n    width: 100%;\n    border-top: 1px solid #E1E1E1;\n}\n\n.fs-datetime-dialog .done button {\n  padding-left: 10px;\n  padding-right: 10px;\n  padding: 0 6px;\n  margin: 6px 8px;\n}\n\n.fs-datetime-dialog fs-tabnav {\n\tdisplay: none;\n}\n\n.fs-datetime-dialog fs-tabnav .md-tabs a {\n    width: 50%;\n}\n\n@media only screen and (min-width: 500px) {\n\n\t.fs-datetime-dialog .time,\n\t.fs-datetime-dialog .date {\n\t\tdisplay: flex !important;\n\t}\n\n\t.fs-datetime-dialog .time .hour:hover:not(.disabled):not(.selected),\n\t.fs-datetime-dialog .time .minute:hover:not(.disabled):not(.selected),\n\t.fs-datetime-dialog .day:hover:not(.disabled):not(.selected),\n\t.fs-datetime-dialog .years .year:hover:not(.disabled):not(.selected),\n\t.fs-datetime-dialog .months .month:hover:not(.disabled):not(.selected),\n\t.fs-datetime-dialog .year-name:hover:not(.disabled):not(.selected),\n\t.fs-datetime-dialog .month-name:hover:not(.disabled):not(.selected) {\n\t    background: rgba(70,120,174,.15);\n\t}\n\n}\n\n@media only screen and (max-width: 499px) {\n    .fs-datetime-dialog {\n    \tleft: 0 !important;\n    \tright: 0 !important;\n    \ttop: 0 !important;\n    \tbottom: 0px !important;\n    \tmargin: 0px;\n    \theight: 100vh;\n    }\n\n    .fs-datetime-dialog .wrap {\n    \tmargin: 0px;\n    \twidth: 100% !important;\n    \theight: 100vh;\n    }\n\n    .fs-datetime-dialog .day {\n    \twidth: 14.28%;\n    }\n\n\t.fs-datetime-dialog table {\n\t    width: 100%;\n\t}\n\n\t.fs-datetime-dialog .close {\n\t\tdisplay: flex;\n\t}\n\n\t.fs-datetime-dialog.view-year .done,\n\t.fs-datetime-dialog.view-month .done {\n\t\tdisplay: none !important;\n\t}\n\n\t.fs-datetime-dialog.view-date .done {\n\t\tdisplay: flex !important;\n\t}\n\n\t.fs-datetime-dialog .done {\n\t\tposition: fixed;\n\t\tbottom: 0;\n\t}\n\n\t.fs-datetime-dialog fs-tabnav {\n\t\tdisplay: block;\n\t}\n\n\t.fs-datetime-dialog .time {\n\t    margin: 0 auto;\n\t}\n}\n\n@media only screen and (max-width: 400px) {\n\t.fs-datetime-dialog .day {\n    \theight: 40px;\n    \tline-height: 40px;\n\t}\n}\n\n.pointer-events-none {\n\tpointer-events: none !important;\n}\n",".fs-datetime-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 50;\n  outline: none;\n  overflow: visible;\n  background: none !important;\n}\n\n.fs-datetime-backdrop[hidden] {\n  display: none !important;\n}\n\na {\n  text-decoration: none;\n  cursor: pointer;\n}\n\n/*\nfs-datetime {\n\tposition: relative;\n}\n\nfs-datetime-range md-input-container .hint {\n    top: 33px;\n    white-space: nowrap;\n    overflow: visible;\n    clear: left;\n    position: absolute;\n}\n\nfs-datetime .md-input {\n\tmin-width: 100px;\n\tz-index: 51;\n\tposition: relative;\n\tcursor: pointer;\n}\n\nfs-datetime.has-time .md-input {\n\tmin-width: 150px;\n}\n\nfs-datetime.has-time:not(.has-date) .md-input {\n\tmin-width: 70px;\n}\n\nfs-datetime.has-time .md-input {\n\twidth: auto;\n}\n\nfs-datetime md-input-container.md-block .md-input {\n\twidth: 100%;\n}\n*/\n\n.fs-datetime-dialog {\n  position: fixed;\n  z-index: 80;\n  display: none;\n  visibility: hidden;\n  display: block;\n  margin-top: 20px;\n}\n\n.fs-datetime-dialog.opened {\n  visibility: visible;\n}\n\n.fs-datetime-dialog * {\n  user-select: none;\n}\n\n.fs-datetime-dialog fsDatePickerCalendar {\n  /* Need for year view */\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog .wrap {\n  background: #fff;\n  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);\n  width: 372px;\n  padding: 0 !important;\n}\n\n.fs-datetime-dialog.has-time.has-date .wrap {\n  width: 645px;\n}\n\n.fs-datetime-dialog .wrap:focus,\n.fs-datetime-dialog .wrap:active,\n.fs-datetime-dialog:focus,\n.fs-datetime-dialog:active {\n  outline: none;\n}\n\n.fs-datetime-dialog.has-time:not(.has-date) .wrap {\n  width: 255px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date:not(.has-time) .wrap {\n  width: 744px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-time:not(.has-date) .wrap {\n  width: 276px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-time.has-date .wrap {\n  width: 1015px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range {\n  display: flex;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range {\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog.fs-datetime-range .date-range fsdatepickercalendar:first-child {\n  margin-right: 5px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-header {\n  margin: 0 15px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-tab-label {\n  min-width: 115px;\n}\n\n.fs-datetime-dialog.fs-datetime-range .time-range .mat-ink-bar {\n  visibility: inherit !important;\n}\n\n.fs-datetime-dialog.fs-datetime-range .done .ranges {\n  float: right;\n  /*\n        div {\n          background-color: #d4d4d4;\n          display: inline-block;\n          padding: 9px 16px;\n          margin: 0 2px;\n          border-radius: 18px;\n          cursor: pointer;\n        }\n        */\n}\n\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:after,\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {\n  border-left: 20px solid transparent;\n  border-right: 20px solid transparent;\n  border-top: 19px solid #fff;\n  top: -19px;\n  content: '';\n  left: 50%;\n  position: absolute;\n  transform: rotate(180deg);\n  left: 23px;\n}\n\n.fs-datetime-dialog:not(.vertical-reposition):not(.horizontal-reposition) .wrap:before {\n  border-left: 23px solid transparent;\n  border-right: 23px solid transparent;\n  border-top: 21px solid transparent;\n  border-top-color: #efefef;\n  top: -21px;\n  left: 20px;\n}\n\n.fs-datetime-dialog .date::-webkit-scrollbar,\n.fs-datetime-dialog .years::-webkit-scrollbar {\n  display: none;\n}\n\n.fs-datetime-dialog .inline-date {\n  padding: 10px;\n  width: 100%;\n}\n\n.fs-datetime-dialog .gap {\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog .month-year .actions {\n  text-align: right;\n  margin-right: -12px;\n}\n\n.fs-datetime-dialog .month-year .actions a {\n  padding: 6px;\n}\n\n.fs-datetime-dialog .month-year .more {\n  padding: 1px;\n}\n\n.fs-datetime-dialog .month-year {\n  height: 60px;\n  font-size: 17px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n\n.fs-datetime-dialog .year-name,\n.fs-datetime-dialog .month-name {\n  color: inherit;\n  padding: 5px;\n  border-radius: 3px;\n  float: left;\n}\n\n.fs-datetime-dialog .month-year .md-select-value .md-select-icon {\n  visibility: hidden;\n  width: 15px;\n  display: none;\n}\n\n.fs-datetime-dialog .month-year .md-select-value {\n  border-color: transparent;\n  border-width: 1px;\n  min-width: auto;\n  padding: 0;\n}\n\n.fs-datetime-dialog .month-year:hover .md-select-value .md-select-icon {\n  visibility: visible;\n}\n\n.fs-datetime-dialog .month-year:hover .md-select-value {\n  border-width: 1px;\n  border-color: #e1e1e1;\n}\n\n.fs-datetime-dialog table {\n  border-collapse: collapse;\n}\n\n.fs-datetime-dialog .day {\n  position: relative;\n  text-align: center;\n  width: 50px;\n  height: 50px;\n  line-height: 50px;\n  border: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n}\n\n.fs-datetime-dialog .day span {\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n\n.fs-datetime-dialog .day.mute {\n  color: #d7d7d7;\n}\n\n.fs-datetime-dialog thead th {\n  width: 50px;\n  vertical-align: top;\n  padding-bottom: 20px;\n  text-align: center;\n  border: 1px solid transparent;\n  background: #fff;\n  border-bottom: 1px solid #efefef;\n  border-top: 1px solid #fff;\n}\n\n.fs-datetime-dialog thead th,\nfs-datetime .lbl {\n  font-weight: normal;\n  font-size: 12px;\n  color: #4d4d4d;\n}\n\n.fs-datetime-dialog .date {\n  overflow-y: auto;\n  overflow-x: hidden;\n  width: 100%;\n  position: relative;\n  min-height: 350px;\n  flex: 1 1 45%;\n}\n\n.fs-datetime-dialog .time {\n  padding: 12px 15px;\n}\n\n.fs-datetime-dialog .time {\n  padding: 12px 15px;\n}\n\n.fs-datetime-dialog .time .wraper {\n  flex-direction: row;\n  display: flex;\n  align-items: center;\n}\n\n.fs-datetime-dialog .time .hours table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.fs-datetime-dialog .time .hour,\n.fs-datetime-dialog .time .minute {\n  width: 31px;\n  height: 31px;\n  text-align: center;\n  border: 1px\tsolid #efefef;\n  padding: 0;\n  cursor: pointer;\n}\n\n.fs-datetime-dialog .time .hour .number,\n.fs-datetime-dialog .time .minute .number {\n  border: 1px solid transparent;\n  border-radius: 50%;\n  line-height: 28px;\n  height: 28px;\n}\n\n.fs-datetime-dialog .time .hour .number {\n  font-size: 12px;\n}\n\n.fs-datetime-dialog .day.selected,\n.fs-datetime-dialog .years .year.selected,\n.fs-datetime-dialog .months .month.selected,\n.fs-datetime-dialog .time .hour.selected,\n.fs-datetime-dialog .time .minute.selected {\n  background: #4678AE;\n  color: #fff;\n}\n\n/*\n.fs-datetime-dialog .day.today {\n    border: 1px solid #4678AE;\n    border-style: double;\n}\n*/\n\n.fs-datetime-dialog .day.today:after {\n  content: 'TODAY';\n  color: #555555;\n  font-size: 9px;\n  position: absolute;\n  bottom: 5px;\n  left: 0;\n  width: 100%;\n  height: auto;\n  line-height: normal;\n}\n\n.fs-datetime-dialog .day.today.selected:after {\n  color: #fff;\n}\n\n.fs-datetime-dialog .years .year.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .time .minutes {\n  margin-left: 15px;\n}\n\n.fs-datetime-dialog .time .minutes table {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.fs-datetime-dialog .time .hour.disabled,\n.fs-datetime-dialog .time .minute.disabled,\n.fs-datetime-dialog .day.disabled {\n  color: #a6a5a5;\n  cursor: initial;\n  background: #efefef;\n}\n\n.fs-datetime-dialog .time .lbl {\n  margin-bottom: 2px;\n  font-size: 12px;\n}\n\n.fs-datetime-dialog .time .midnight {\n  line-height: 8px;\n  display: block;\n}\n\n.fs-datetime-dialog .time .midnight div {\n  line-height: 16px;\n}\n\n.fs-datetime-dialog .time .midnight,\n.fs-datetime-dialog .time .noon {\n  font-size: 10px;\n}\n\n.fs-datetime-dialog .time .hour .am-pm {\n  font-size: 9px;\n  margin-left: 1px;\n}\n\n.fs-datetime-dialog .time .hour .number.textual {\n  font-size: 11px;\n}\n\n/*\n.fs-datetime-dialog . {\n\tfont-size: 11px;\n}*/\n\n.fs-datetime-dialog .date-time {\n  overflow: auto;\n  flex-direction: row;\n  display: flex;\n}\n\n.fs-datetime-dialog .months {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\n.fs-datetime-dialog .months .month {\n  height: 25%;\n  width: 33.33%;\n  float: left;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n  border-left: 1px solid #efefef;\n  border-top: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n  border-bottom: 0;\n  border-right: 0;\n  min-height: 80px;\n  box-sizing: border-box;\n}\n\n.fs-datetime-dialog .months .month:nth-child(-n+3) {\n  border-top: 0;\n}\n\n.fs-datetime-dialog .months .month:nth-child(3n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .months .month.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .years {\n  position: absolute;\n  width: 100%;\n  max-height: 100%;\n  height: 100vh;\n  overflow: hidden;\n}\n\n.iscroll-scroller {\n  position: absolute;\n  width: 100%;\n}\n\n.fs-datetime-dialog .years .year {\n  float: left;\n  width: 25%;\n  text-align: center;\n  height: 65px;\n  border-left: 1px solid #efefef;\n  border-bottom: 1px solid #efefef;\n  line-height: 65px;\n  outline: none;\n  cursor: pointer;\n  box-sizing: border-box;\n}\n\n.fs-datetime-dialog .years .year:nth-last-child(-n+4) {\n  border-bottom: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .years .year:nth-child(4n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.clear {\n  clear: both;\n}\n\n.fs-datetime-dialog .years .year.row {\n  clear: both;\n}\n\n.fs-datetime-dialog .view-year .date {\n  overflow-y: visible;\n}\n\n.fs-datetime-dialog .view-year .date {\n  overflow-y: visible;\n}\n\n.fs-datetime-dialog.view-date .date {\n  min-height: auto;\n}\n\n/*\nfs-datetime-range {\n\tdisplay: inline;\n}\n\nfs-datetime-range .to {\n\tpadding: 0 4px;\n\tpadding-top: 26px;\n}\n\nfs-datetime-range.md-no-label .to {\n\tpadding-top: 8px;\n}\n\nfs-datetime-range .datetime-block .datetime-from,\nfs-datetime-range .datetime-block .datetime-to {\n\twidth: 50%;\n}\n*/\n\n.fs-datetime-dialog .close {\n  padding: 5px;\n  display: none;\n}\n\n.fs-datetime-dialog .done {\n  background: #fff;\n  width: 100%;\n  border-top: 1px solid #E1E1E1;\n}\n\n.fs-datetime-dialog .done button {\n  padding-left: 10px;\n  padding-right: 10px;\n  padding: 0 6px;\n  margin: 6px 8px;\n}\n\n.fs-datetime-dialog fs-tabnav {\n  display: none;\n}\n\n.fs-datetime-dialog fs-tabnav .md-tabs a {\n  width: 50%;\n}\n\n@media only screen and (min-width: 500px) {\n  .fs-datetime-dialog .time,\n  .fs-datetime-dialog .date {\n    display: flex !important;\n  }\n\n  .fs-datetime-dialog .time .hour:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .time .minute:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .day:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .years .year:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .months .month:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .year-name:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .month-name:hover:not(.disabled):not(.selected) {\n    background: rgba(70, 120, 174, 0.15);\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .fs-datetime-dialog {\n    left: 0 !important;\n    right: 0 !important;\n    top: 0 !important;\n    bottom: 0px !important;\n    margin: 0px;\n    height: 100vh;\n  }\n\n  .fs-datetime-dialog .wrap {\n    margin: 0px;\n    width: 100% !important;\n    height: 100vh;\n  }\n\n  .fs-datetime-dialog .day {\n    width: 14.28%;\n  }\n\n  .fs-datetime-dialog table {\n    width: 100%;\n  }\n\n  .fs-datetime-dialog .close {\n    display: flex;\n  }\n\n  .fs-datetime-dialog.view-year .done,\n  .fs-datetime-dialog.view-month .done {\n    display: none !important;\n  }\n\n  .fs-datetime-dialog.view-date .done {\n    display: flex !important;\n  }\n\n  .fs-datetime-dialog .done {\n    position: fixed;\n    bottom: 0;\n  }\n\n  .fs-datetime-dialog fs-tabnav {\n    display: block;\n  }\n\n  .fs-datetime-dialog .time {\n    margin: 0 auto;\n  }\n}\n\n@media only screen and (max-width: 400px) {\n  .fs-datetime-dialog .day {\n    height: 40px;\n    line-height: 40px;\n  }\n}\n\n.pointer-events-none {\n  pointer-events: none !important;\n}\n\n"],"sourceRoot":""}]);
+exports.push([module.i, ".fs-datetime-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 50;\n  outline: none;\n  overflow: visible;\n  background: none !important;\n}\n\n.fs-datetime-backdrop[hidden] {\n  display: none !important;\n}\n\n.fs-datetime-dialog {\n  position: fixed;\n  z-index: 80;\n  display: none;\n  visibility: hidden;\n  display: block;\n  /* triangle above dialog */\n  /*\n  &:not(.vertical-reposition) {\n    &:not(.horizontal-reposition) {\n      .wrap {\n        &:after, &:before {\n          border-left: 20px solid transparent;\n          border-right: 20px solid transparent;\n          border-top: 19px solid #fff;\n          top: -19px;\n          content: '';\n          left: 50%;\n          position: absolute;\n          transform: rotate(180deg);\n          left: 23px;\n        }\n        &:before {\n          border-left: 23px solid transparent;\n          border-right: 23px solid transparent;\n          border-top: 21px solid transparent;\n          border-top-color: #efefef;\n          top: -21px;\n          left: 20px;\n        }\n      }\n    }\n  }\n  */\n}\n\n.fs-datetime-dialog a {\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.fs-datetime-dialog.opened {\n  visibility: visible;\n}\n\n.fs-datetime-dialog * {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.fs-datetime-dialog:focus {\n  outline: none;\n}\n\n.fs-datetime-dialog:active {\n  outline: none;\n}\n\n.fs-datetime-dialog fsDatePickerCalendar {\n  /* Need for year view */\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1 1 0%;\n}\n\n.fs-datetime-dialog .wrap {\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  background: #fff;\n  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, .2), 0px 4px 5px 0px rgba(0, 0, 0, .14), 0px 1px 10px 0px rgba(0, 0, 0, .12);\n          box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, .2), 0px 4px 5px 0px rgba(0, 0, 0, .14), 0px 1px 10px 0px rgba(0, 0, 0, .12);\n  width: 372px;\n  padding: 0 !important;\n}\n\n.fs-datetime-dialog .wrap:focus {\n  outline: none;\n}\n\n.fs-datetime-dialog .wrap:active {\n  outline: none;\n}\n\n.fs-datetime-dialog .wrap .header {\n  padding: 0 15px;\n  /* Don't use flex. Strange behaviour of scroll */\n  display: table;\n  width: 100%;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.fs-datetime-dialog.has-time {\n  height: 100%;\n  max-height: 472px;\n}\n\n.fs-datetime-dialog.has-time .wrap {\n  width: 353px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap {\n  width: 744px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .header fsdatepickerpresets .presets {\n  float: right;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1 1 0%;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range fsdatepickercalendar:first-child {\n  margin-right: 5px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).min-date:not(.max-date)::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  border-color: transparent;\n  border-style: solid;\n  border-width: 0.5em;\n  border-left-color: #fff;\n  border-top-color: #fff;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).max-date:not(.min-date)::before {\n  content: '';\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  border-color: transparent;\n  border-style: solid;\n  border-width: 0.5em;\n  border-left-color: #fff;\n  border-top-color: #fff;\n  -webkit-transform: scale(-1, -1);\n  transform: scale(-1, -1);\n}\n\n.fs-datetime-dialog.fs-datetime-range:not(.has-date) .date-range {\n  display: none;\n}\n\n.fs-datetime-dialog .date::-webkit-scrollbar,\n.fs-datetime-dialog .years::-webkit-scrollbar {\n  display: none;\n}\n\n.fs-datetime-dialog .inline-date {\n  padding: 10px;\n  width: 100%;\n}\n\n.fs-datetime-dialog .gap {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1 1 0%;\n}\n\n.fs-datetime-dialog .month-year {\n  font-weight: 600;\n  height: 60px;\n  font-size: 17px;\n  padding: 0 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.fs-datetime-dialog .month-year .actions {\n  text-align: right;\n  margin-right: -12px;\n}\n\n.fs-datetime-dialog .month-year .actions a {\n  padding: 6px;\n}\n\n.fs-datetime-dialog .month-year .more {\n  padding: 1px;\n}\n\n.fs-datetime-dialog .year-name,\n.fs-datetime-dialog .month-name {\n  color: inherit;\n  padding: 5px;\n  border-radius: 3px;\n  float: left;\n}\n\n.fs-datetime-dialog .day {\n  position: relative;\n  text-align: center;\n  width: 50px;\n  height: 50px;\n  line-height: 50px;\n  border: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n}\n\n.fs-datetime-dialog .day.today:after {\n  content: 'TODAY';\n  color: #555555;\n  font-size: 9px;\n  position: absolute;\n  bottom: 5px;\n  left: 0;\n  width: 100%;\n  height: auto;\n  line-height: normal;\n}\n\n.fs-datetime-dialog .day.today.selected:after {\n  color: #fff;\n}\n\n.fs-datetime-dialog .day.mute {\n  color: #d7d7d7;\n}\n\n.fs-datetime-dialog .day span {\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n\n.fs-datetime-dialog table {\n  border-collapse: collapse;\n}\n\n.fs-datetime-dialog table thead th {\n  width: 50px;\n  vertical-align: top;\n  padding-bottom: 20px;\n  text-align: center;\n  border: 1px solid transparent;\n  background: #fff;\n  border-bottom: 1px solid #efefef;\n  border-top: 1px solid #fff;\n  font-weight: normal;\n  font-size: 12px;\n  color: #4d4d4d;\n}\n\n.fs-datetime-dialog fs-datetime .lbl {\n  font-weight: normal;\n  font-size: 12px;\n  color: #4d4d4d;\n}\n\n.fs-datetime-dialog fsdatepickercalendar {\n  min-height: 350px;\n}\n\n.fs-datetime-dialog .date {\n  width: 100%;\n  position: relative;\n  min-height: 350px;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 45%;\n          flex: 1 1 45%;\n}\n\n.fs-datetime-dialog .day.selected,\n.fs-datetime-dialog .years .year.selected,\n.fs-datetime-dialog .months .month.selected,\n.fs-datetime-dialog .time .hour.selected,\n.fs-datetime-dialog .time .minute.selected {\n  background: #4678AE;\n  color: #fff;\n}\n\n.fs-datetime-dialog .time .hour.disabled,\n.fs-datetime-dialog .time .minute.disabled,\n.fs-datetime-dialog .day.disabled {\n  color: #a6a5a5;\n  cursor: auto;\n  cursor: initial;\n  background: #efefef;\n}\n\n.fs-datetime-dialog .years {\n  position: absolute;\n  width: 100%;\n  max-height: 100%;\n  height: 100vh;\n  overflow: hidden;\n}\n\n.fs-datetime-dialog .years .year {\n  float: left;\n  width: 25%;\n  text-align: center;\n  height: 65px;\n  border-left: 1px solid #efefef;\n  border-bottom: 1px solid #efefef;\n  line-height: 65px;\n  outline: none;\n  cursor: pointer;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.fs-datetime-dialog .years .year.row {\n  clear: both;\n}\n\n.fs-datetime-dialog .years .year.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .years .year:nth-last-child(-n+4) {\n  border-bottom: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .years .year:nth-child(4n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .date-time {\n  overflow: auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n.fs-datetime-dialog .months {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\n.fs-datetime-dialog .months .month {\n  height: 25%;\n  width: 33.33%;\n  float: left;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  border-left: 1px solid #efefef;\n  border-top: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n  border-bottom: 0;\n  border-right: 0;\n  min-height: 80px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.fs-datetime-dialog .months .month:nth-child(-n+3) {\n  border-top: 0;\n}\n\n.fs-datetime-dialog .months .month:nth-child(3n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .months .month.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .iscroll-scroller {\n  position: absolute;\n  width: 100%;\n}\n\n.fs-datetime-dialog .clear {\n  clear: both;\n}\n\n.fs-datetime-dialog .close {\n  padding: 5px;\n  display: none;\n}\n\n.fs-datetime-dialog fs-tabnav {\n  display: none;\n}\n\n.fs-datetime-dialog fs-tabnav .md-tabs a {\n  width: 50%;\n}\n\n.fs-datetime-dialog .done {\n  background: #fff;\n  width: 100%;\n  border-top: 1px solid #E1E1E1;\n  margin-top: auto;\n}\n\n.fs-datetime-dialog .done button {\n  padding-left: 10px;\n  padding-right: 10px;\n  padding: 0 6px;\n  margin: 6px 8px;\n}\n\n@media only screen and (min-width: 500px) {\n  .fs-datetime-dialog .date {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important;\n  }\n\n  .fs-datetime-dialog .time .hour:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .time .minute:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .day:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .years .year:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .months .month:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .year-name:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .month-name:hover:not(.disabled):not(.selected) {\n    background: rgba(70, 120, 174, .15);\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .fs-datetime-dialog {\n    left: 0 !important;\n    right: 0 !important;\n    top: 0 !important;\n    bottom: 0px !important;\n    margin: 0px;\n    height: 100vh;\n    max-height: none !important;\n    max-height: initial !important;\n  }\n\n  .fs-datetime-dialog.fs-datetime-range.has-date .date-range {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n  }\n\n  .fs-datetime-dialog.fs-datetime-range.has-date .date-range fsdatepickercalendar:first-child {\n    margin-right: 0 !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap .date-time {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-datetime:not(.date-mode-date) .wrap {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-datetime:not(.date-mode-date) .wrap .date-time {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog .wrap {\n    margin: 0px;\n    width: 100% !important;\n    height: calc(100vh - 50px);\n  }\n\n  .fs-datetime-dialog .wrap .date-time {\n    height: calc(100% - 50px);\n  }\n\n  .fs-datetime-dialog .day {\n    width: 14.28%;\n    height: 40px;\n    line-height: 40px;\n  }\n\n  .fs-datetime-dialog table {\n    width: 100%;\n  }\n\n  .fs-datetime-dialog .close {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n  }\n\n  .fs-datetime-dialog .done {\n    position: fixed;\n    bottom: 0;\n  }\n\n  .fs-datetime-dialog fs-tabnav {\n    display: block;\n  }\n}\n\n", "", {"version":3,"sources":["/Users/mendor/work/fs-datepicker/src/src/styles.scss","/Users/mendor/work/fs-datepicker/styles.scss"],"names":[],"mappings":"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","file":"styles.scss","sourcesContent":[".fs-datetime-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 50;\n  outline: none;\n  overflow: visible;\n  background: none !important;\n\n  &[hidden] { display: none !important; }\n}\n\n.fs-datetime-dialog {\n\tposition: fixed;\n  z-index: 80;\n  display: none;\n  visibility: hidden;\n  display: block;\n  // margin-top: 20px;\n\n  a {\n    text-decoration: none;\n    cursor: pointer;\n  }\n\n  &.opened {\n    visibility: visible;\n  }\n\n  * {\n    user-select: none;\n  }\n\n  &:focus {\n    outline: none;\n  }\n  &:active {\n    outline: none;\n  }\n\n  fsDatePickerCalendar {\n    /* Need for year view */\n    // width: 100%;\n    display: flex;\n    flex: 1;\n  }\n\n  .wrap {\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    background: #fff;\n    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);\n    width: 372px;\n    padding: 0 !important;\n    &:focus {\n      outline: none;\n    }\n    &:active {\n      outline: none;\n    }\n    .header {\n      padding: 0 15px;\n      /* Don't use flex. Strange behaviour of scroll */\n      display: table;\n      width: 100%;\n      box-sizing: border-box;\n    }\n  }\n\n  &.has-time {\n    height: 100%;\n    max-height: 472px;\n    .wrap {\n      width: 353px;\n    }\n  }\n\n  &.fs-datetime-range {\n    &.has-date {\n      .wrap {\n        width: 744px;\n        .header {\n          fsdatepickerpresets .presets {\n            float: right;\n          }\n        }\n        .date-range {\n          display: flex;\n          flex: 1;\n          fsdatepickercalendar:first-child {\n            margin-right: 5px;\n          }\n          td.day:not(.disabled):not(.mute) {\n            &.min-date:not(.max-date) {\n              &::before {\n                content: '';\n                position: absolute;\n                top: 0;\n                left: 0;\n                border-color: transparent;\n                border-style: solid;\n                border-width: 0.5em;\n                border-left-color: #fff;\n                border-top-color: #fff;\n              }\n            }\n            &.max-date:not(.min-date) {\n              &::before {\n                content: '';\n                position: absolute;\n                bottom: 0;\n                right: 0;\n                border-color: transparent;\n                border-style: solid;\n                border-width: 0.5em;\n                border-left-color: #fff;\n                border-top-color: #fff;\n                -moz-transform: scale(-1, -1);\n                -webkit-transform: scale(-1, -1);\n                -o-transform: scale(-1, -1);\n                -ms-transform: scale(-1, -1);\n                transform: scale(-1, -1);\n              }\n            }\n          }\n        }\n      }\n    }\n    &:not(.has-date) {\n      .date-range {\n        display: none;\n      }\n    }\n  }\n\n  /* triangle above dialog */\n  /*\n  &:not(.vertical-reposition) {\n    &:not(.horizontal-reposition) {\n      .wrap {\n        &:after, &:before {\n          border-left: 20px solid transparent;\n          border-right: 20px solid transparent;\n          border-top: 19px solid #fff;\n          top: -19px;\n          content: '';\n          left: 50%;\n          position: absolute;\n          transform: rotate(180deg);\n          left: 23px;\n        }\n        &:before {\n          border-left: 23px solid transparent;\n          border-right: 23px solid transparent;\n          border-top: 21px solid transparent;\n          border-top-color: #efefef;\n          top: -21px;\n          left: 20px;\n        }\n      }\n    }\n  }\n  */\n\n  .date::-webkit-scrollbar,\n  .years::-webkit-scrollbar {\n    display: none;\n  }\n\n  .inline-date {\n    padding: 10px;\n    width: 100%;\n  }\n\n  .gap {\n    display: flex;\n    flex: 1;\n  }\n\n  .month-year {\n    font-weight: 600;\n    height: 60px;\n    font-size: 17px;\n\t  padding: 0 10px;\n\t  display: flex;\n    flex-direction: row;\n    align-items: center;\n\n    .actions {\n      text-align: right;\n      margin-right: -12px;\n      a {\n        padding: 6px;\n      }\n    }\n\n    .more {\n      padding: 1px;\n    }\n  }\n\n  .year-name, .month-name {\n    color: inherit;\n    padding: 5px;\n    border-radius: 3px;\n    float: left;\n  }\n\n  .day {\n    position: relative;\n    text-align: center;\n    width: 50px;\n    height: 50px;\n    line-height: 50px;\n    border: 1px solid #efefef;\n    cursor: pointer;\n    outline: none;\n\n    &.today {\n      &:after {\n        content: 'TODAY';\n        color: #555555;\n        font-size: 9px;\n        position: absolute;\n        bottom: 5px;\n        left: 0;\n        width: 100%;\n        height: auto;\n        line-height: normal;\n      }\n\n      &.selected {\n        &:after {\n          color: #fff;\n        }\n      }\n    }\n\n    &.mute {\n      color: #d7d7d7;\n    }\n\n    span {\n      width: 100%;\n      height: 100%;\n      display: block;\n    }\n  }\n\n  table {\n    border-collapse: collapse;\n    thead {\n      th {\n        width: 50px;\n        vertical-align: top;\n        padding-bottom: 20px;\n        text-align: center;\n        border: 1px solid transparent;\n        background: #fff;\n        border-bottom: 1px solid #efefef;\n        border-top: 1px solid #fff;\n\n        font-weight: normal;\n        font-size: 12px;\n        color: #4d4d4d;\n      }\n    }\n  }\n\n  fs-datetime {\n    .lbl {\n      font-weight: normal;\n      font-size: 12px;\n      color: #4d4d4d;\n    }\n  }\n\n  fsdatepickercalendar {\n    min-height: 350px;\n  }\n  .date {\n    // overflow-y: auto;\n    // overflow-x: hidden;\n    width: 100%;\n    position: relative;\n\t  min-height: 350px;\n\t  flex: 1 1 45%;\n  }\n\n  .day.selected,\n  .years .year.selected,\n  .months .month.selected,\n  .time .hour.selected,\n  .time .minute.selected {\n    background: #4678AE;\n\t  color: #fff;\n  }\n\n  .time .hour.disabled,\n  .time .minute.disabled,\n  .day.disabled {\n    color: #a6a5a5;\n    cursor: initial;\n    background: #efefef;\n  }\n\n  .years {\n    position: absolute;\n    width: 100%;\n    max-height: 100%;\n    height: 100vh;\n    overflow: hidden;\n    .year {\n      float: left;\n      width: 25%;\n      text-align: center;\n      height: 65px;\n      border-left: 1px solid #efefef;\n      border-bottom: 1px solid #efefef;\n      line-height: 65px;\n      outline: none;\n      cursor: pointer;\n      box-sizing: border-box;\n      &.row {\n        clear: both;\n      }\n      &.today {\n        border: 1px solid #4678AE;\n        border-style: double;\n      }\n      &:nth-last-child(-n+4) {\n        border-bottom: 1px solid #efefef;\n      }\n      &:nth-child(4n+0) {\n        border-right: 1px solid #efefef;\n      }\n    }\n  }\n\n  .date-time {\n    overflow: auto;\n    flex-direction: row;\n    display: flex;\n  }\n\n  .months {\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    .month {\n      height: 25%;\n      width: 33.33%;\n      float: left;\n      text-align: center;\n      display: flex;\n      justify-content: center;\n      flex-direction: column;\n      border-left: 1px solid #efefef;\n      border-top: 1px solid #efefef;\n      cursor: pointer;\n      outline: none;\n      border-bottom: 0;\n      border-right: 0;\n      min-height: 80px;\n      box-sizing: border-box;\n      &:nth-child(-n+3) {\n        border-top: 0;\n      }\n      &:nth-child(3n+0) {\n        border-right: 1px solid #efefef;\n      }\n      &.today {\n        border: 1px solid #4678AE;\n        border-style: double;\n      }\n    }\n  }\n\n  .iscroll-scroller {\n    position: absolute;\n    width: 100%;\n  }\n\n  .clear {\n    clear: both;\n  }\n\n  .close {\n    padding: 5px;\n    display: none;\n  }\n\n  fs-tabnav {\n    display: none;\n    .md-tabs a {\n      width: 50%;\n    }\n  }\n\n  .done {\n    background: #fff;\n    width: 100%;\n    border-top: 1px solid #E1E1E1;\n    margin-top: auto;\n    button {\n      padding-left: 10px;\n      padding-right: 10px;\n      padding: 0 6px;\n      margin: 6px 8px;\n    }\n  }\n}\n\n@media only screen and (min-width: 500px) {\n\n  .fs-datetime-dialog {\n    .date {\n      display: flex !important;\n    }\n\n    .time .hour:hover:not(.disabled):not(.selected),\n    .time .minute:hover:not(.disabled):not(.selected),\n    .day:hover:not(.disabled):not(.selected),\n    .years .year:hover:not(.disabled):not(.selected),\n    .months .month:hover:not(.disabled):not(.selected),\n    .year-name:hover:not(.disabled):not(.selected),\n    .month-name:hover:not(.disabled):not(.selected) {\n      background: rgba(70,120,174,.15);\n    }\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .fs-datetime-dialog {\n    left: 0 !important;\n    right: 0 !important;\n    top: 0 !important;\n    bottom: 0px !important;\n    margin: 0px;\n    height: 100vh;\n    max-height: initial !important;\n    &.fs-datetime-range {\n      &.has-date {\n        .date-range {\n          flex-direction: column;\n          height: 100%;\n          fsdatepickercalendar:first-child {\n            margin-right: 0 !important;\n          }\n        }\n      }\n    }\n\n    // 2 cases when Done button is hidden and dialog height increasing\n    &:not(.fs-datetime-range) {\n      &.dialog-view-date {\n        .wrap {\n          height: 100% !important;\n          .date-time {\n            height: 100% !important;\n          }\n        }\n      }\n      &.dialog-view-datetime {\n        &:not(.date-mode-date) {\n          .wrap {\n            height: 100% !important;\n            .date-time {\n              height: 100% !important;\n            }\n          }\n        }\n      }\n    }\n\n    .wrap {\n    \tmargin: 0px;\n    \twidth: 100% !important;\n      height: calc(100vh - 50px);\n      .date-time {\n        height: calc(100% - 50px);\n      }\n    }\n\n    .day {\n      width: 14.28%;\n      height: 40px;\n    \tline-height: 40px;\n    }\n    table {\n\t    width: 100%;\n    }\n    .close {\n      display: flex;\n    }\n    .done {\n      position: fixed;\n      bottom: 0;\n    }\n    fs-tabnav {\n      display: block;\n    }\n  }\n}\n\n",".fs-datetime-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 50;\n  outline: none;\n  overflow: visible;\n  background: none !important;\n}\n\n.fs-datetime-backdrop[hidden] {\n  display: none !important;\n}\n\n.fs-datetime-dialog {\n  position: fixed;\n  z-index: 80;\n  display: none;\n  visibility: hidden;\n  display: block;\n  /* triangle above dialog */\n  /*\n  &:not(.vertical-reposition) {\n    &:not(.horizontal-reposition) {\n      .wrap {\n        &:after, &:before {\n          border-left: 20px solid transparent;\n          border-right: 20px solid transparent;\n          border-top: 19px solid #fff;\n          top: -19px;\n          content: '';\n          left: 50%;\n          position: absolute;\n          transform: rotate(180deg);\n          left: 23px;\n        }\n        &:before {\n          border-left: 23px solid transparent;\n          border-right: 23px solid transparent;\n          border-top: 21px solid transparent;\n          border-top-color: #efefef;\n          top: -21px;\n          left: 20px;\n        }\n      }\n    }\n  }\n  */\n}\n\n.fs-datetime-dialog a {\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.fs-datetime-dialog.opened {\n  visibility: visible;\n}\n\n.fs-datetime-dialog * {\n  user-select: none;\n}\n\n.fs-datetime-dialog:focus {\n  outline: none;\n}\n\n.fs-datetime-dialog:active {\n  outline: none;\n}\n\n.fs-datetime-dialog fsDatePickerCalendar {\n  /* Need for year view */\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog .wrap {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  background: #fff;\n  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);\n  width: 372px;\n  padding: 0 !important;\n}\n\n.fs-datetime-dialog .wrap:focus {\n  outline: none;\n}\n\n.fs-datetime-dialog .wrap:active {\n  outline: none;\n}\n\n.fs-datetime-dialog .wrap .header {\n  padding: 0 15px;\n  /* Don't use flex. Strange behaviour of scroll */\n  display: table;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.fs-datetime-dialog.has-time {\n  height: 100%;\n  max-height: 472px;\n}\n\n.fs-datetime-dialog.has-time .wrap {\n  width: 353px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap {\n  width: 744px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .header fsdatepickerpresets .presets {\n  float: right;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range {\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range fsdatepickercalendar:first-child {\n  margin-right: 5px;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).min-date:not(.max-date)::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  border-color: transparent;\n  border-style: solid;\n  border-width: 0.5em;\n  border-left-color: #fff;\n  border-top-color: #fff;\n}\n\n.fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).max-date:not(.min-date)::before {\n  content: '';\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  border-color: transparent;\n  border-style: solid;\n  border-width: 0.5em;\n  border-left-color: #fff;\n  border-top-color: #fff;\n  -moz-transform: scale(-1, -1);\n  -webkit-transform: scale(-1, -1);\n  -o-transform: scale(-1, -1);\n  -ms-transform: scale(-1, -1);\n  transform: scale(-1, -1);\n}\n\n.fs-datetime-dialog.fs-datetime-range:not(.has-date) .date-range {\n  display: none;\n}\n\n.fs-datetime-dialog .date::-webkit-scrollbar,\n.fs-datetime-dialog .years::-webkit-scrollbar {\n  display: none;\n}\n\n.fs-datetime-dialog .inline-date {\n  padding: 10px;\n  width: 100%;\n}\n\n.fs-datetime-dialog .gap {\n  display: flex;\n  flex: 1;\n}\n\n.fs-datetime-dialog .month-year {\n  font-weight: 600;\n  height: 60px;\n  font-size: 17px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n\n.fs-datetime-dialog .month-year .actions {\n  text-align: right;\n  margin-right: -12px;\n}\n\n.fs-datetime-dialog .month-year .actions a {\n  padding: 6px;\n}\n\n.fs-datetime-dialog .month-year .more {\n  padding: 1px;\n}\n\n.fs-datetime-dialog .year-name,\n.fs-datetime-dialog .month-name {\n  color: inherit;\n  padding: 5px;\n  border-radius: 3px;\n  float: left;\n}\n\n.fs-datetime-dialog .day {\n  position: relative;\n  text-align: center;\n  width: 50px;\n  height: 50px;\n  line-height: 50px;\n  border: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n}\n\n.fs-datetime-dialog .day.today:after {\n  content: 'TODAY';\n  color: #555555;\n  font-size: 9px;\n  position: absolute;\n  bottom: 5px;\n  left: 0;\n  width: 100%;\n  height: auto;\n  line-height: normal;\n}\n\n.fs-datetime-dialog .day.today.selected:after {\n  color: #fff;\n}\n\n.fs-datetime-dialog .day.mute {\n  color: #d7d7d7;\n}\n\n.fs-datetime-dialog .day span {\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n\n.fs-datetime-dialog table {\n  border-collapse: collapse;\n}\n\n.fs-datetime-dialog table thead th {\n  width: 50px;\n  vertical-align: top;\n  padding-bottom: 20px;\n  text-align: center;\n  border: 1px solid transparent;\n  background: #fff;\n  border-bottom: 1px solid #efefef;\n  border-top: 1px solid #fff;\n  font-weight: normal;\n  font-size: 12px;\n  color: #4d4d4d;\n}\n\n.fs-datetime-dialog fs-datetime .lbl {\n  font-weight: normal;\n  font-size: 12px;\n  color: #4d4d4d;\n}\n\n.fs-datetime-dialog fsdatepickercalendar {\n  min-height: 350px;\n}\n\n.fs-datetime-dialog .date {\n  width: 100%;\n  position: relative;\n  min-height: 350px;\n  flex: 1 1 45%;\n}\n\n.fs-datetime-dialog .day.selected,\n.fs-datetime-dialog .years .year.selected,\n.fs-datetime-dialog .months .month.selected,\n.fs-datetime-dialog .time .hour.selected,\n.fs-datetime-dialog .time .minute.selected {\n  background: #4678AE;\n  color: #fff;\n}\n\n.fs-datetime-dialog .time .hour.disabled,\n.fs-datetime-dialog .time .minute.disabled,\n.fs-datetime-dialog .day.disabled {\n  color: #a6a5a5;\n  cursor: initial;\n  background: #efefef;\n}\n\n.fs-datetime-dialog .years {\n  position: absolute;\n  width: 100%;\n  max-height: 100%;\n  height: 100vh;\n  overflow: hidden;\n}\n\n.fs-datetime-dialog .years .year {\n  float: left;\n  width: 25%;\n  text-align: center;\n  height: 65px;\n  border-left: 1px solid #efefef;\n  border-bottom: 1px solid #efefef;\n  line-height: 65px;\n  outline: none;\n  cursor: pointer;\n  box-sizing: border-box;\n}\n\n.fs-datetime-dialog .years .year.row {\n  clear: both;\n}\n\n.fs-datetime-dialog .years .year.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .years .year:nth-last-child(-n+4) {\n  border-bottom: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .years .year:nth-child(4n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .date-time {\n  overflow: auto;\n  flex-direction: row;\n  display: flex;\n}\n\n.fs-datetime-dialog .months {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\n.fs-datetime-dialog .months .month {\n  height: 25%;\n  width: 33.33%;\n  float: left;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n  border-left: 1px solid #efefef;\n  border-top: 1px solid #efefef;\n  cursor: pointer;\n  outline: none;\n  border-bottom: 0;\n  border-right: 0;\n  min-height: 80px;\n  box-sizing: border-box;\n}\n\n.fs-datetime-dialog .months .month:nth-child(-n+3) {\n  border-top: 0;\n}\n\n.fs-datetime-dialog .months .month:nth-child(3n+0) {\n  border-right: 1px solid #efefef;\n}\n\n.fs-datetime-dialog .months .month.today {\n  border: 1px solid #4678AE;\n  border-style: double;\n}\n\n.fs-datetime-dialog .iscroll-scroller {\n  position: absolute;\n  width: 100%;\n}\n\n.fs-datetime-dialog .clear {\n  clear: both;\n}\n\n.fs-datetime-dialog .close {\n  padding: 5px;\n  display: none;\n}\n\n.fs-datetime-dialog fs-tabnav {\n  display: none;\n}\n\n.fs-datetime-dialog fs-tabnav .md-tabs a {\n  width: 50%;\n}\n\n.fs-datetime-dialog .done {\n  background: #fff;\n  width: 100%;\n  border-top: 1px solid #E1E1E1;\n  margin-top: auto;\n}\n\n.fs-datetime-dialog .done button {\n  padding-left: 10px;\n  padding-right: 10px;\n  padding: 0 6px;\n  margin: 6px 8px;\n}\n\n@media only screen and (min-width: 500px) {\n  .fs-datetime-dialog .date {\n    display: flex !important;\n  }\n\n  .fs-datetime-dialog .time .hour:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .time .minute:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .day:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .years .year:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .months .month:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .year-name:hover:not(.disabled):not(.selected),\n  .fs-datetime-dialog .month-name:hover:not(.disabled):not(.selected) {\n    background: rgba(70, 120, 174, 0.15);\n  }\n}\n\n@media only screen and (max-width: 499px) {\n  .fs-datetime-dialog {\n    left: 0 !important;\n    right: 0 !important;\n    top: 0 !important;\n    bottom: 0px !important;\n    margin: 0px;\n    height: 100vh;\n    max-height: initial !important;\n  }\n\n  .fs-datetime-dialog.fs-datetime-range.has-date .date-range {\n    flex-direction: column;\n    height: 100%;\n  }\n\n  .fs-datetime-dialog.fs-datetime-range.has-date .date-range fsdatepickercalendar:first-child {\n    margin-right: 0 !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap .date-time {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-datetime:not(.date-mode-date) .wrap {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-datetime:not(.date-mode-date) .wrap .date-time {\n    height: 100% !important;\n  }\n\n  .fs-datetime-dialog .wrap {\n    margin: 0px;\n    width: 100% !important;\n    height: calc(100vh - 50px);\n  }\n\n  .fs-datetime-dialog .wrap .date-time {\n    height: calc(100% - 50px);\n  }\n\n  .fs-datetime-dialog .day {\n    width: 14.28%;\n    height: 40px;\n    line-height: 40px;\n  }\n\n  .fs-datetime-dialog table {\n    width: 100%;\n  }\n\n  .fs-datetime-dialog .close {\n    display: flex;\n  }\n\n  .fs-datetime-dialog .done {\n    position: fixed;\n    bottom: 0;\n  }\n\n  .fs-datetime-dialog fs-tabnav {\n    display: block;\n  }\n}\n\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -399,7 +429,7 @@ webpackContext.id = "../node_modules/moment/locale recursive ^\\.\\/.*$";
 /***/ "../src/components/fsdatepicker/fsdatepicker.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"fs-datetime-backdrop\" [hidden]=\"!parentInstance.opened\" (click)=\"close($event)\"></div>\n\n<div class=\"fs-datetime-dialog\" tabindex=\"0\"\n[ngClass]=\"{ opened: parentInstance.opened,\n  'has-date': ['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,\n  'has-time': ['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,\n  'view-year': fsDatePickerModel.dateMode=='year',\n  'view-month': fsDatePickerModel.dateMode=='month',\n  'view-date': fsDatePickerModel.dateMode=='date' }\">\n  <div class=\"wrap\">\n\n    <div class=\"date-time\">\n      <fsDatePickerCalendar\n        [date]=\"model\"\n        [dateMode]=\"fsDatePickerModel.dateMode\"\n        (onChange)=\"setDate($event)\"\n        (onDateModeChange)=\"setDateMode($event)\"\n      ></fsDatePickerCalendar>\n\n      <fsDatePickerTime\n        [date]=\"model\"\n        (onChange)=\"setDate($event)\"\n      ></fsDatePickerTime>\n\n    </div>\n    <div *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\" class=\"done\">\n      <button type=\"button\" mat-raised-button color=\"primary\" (click)=\"close($event)\">Done</button>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"fs-datetime-backdrop\" [hidden]=\"!parentInstance.opened\" (click)=\"close($event)\"></div>\n\n<div class=\"fs-datetime-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}\" tabindex=\"0\"\n[ngClass]=\"{ opened: parentInstance.opened,\n  'has-date': fsDatePickerModel.components.calendarStart,\n  'has-time': fsDatePickerModel.components.timeStart,\n  'date-mode-date': fsDatePickerModel.dateMode === 'date',\n  'date-mode-month': fsDatePickerModel.dateMode === 'month',\n  'date-mode-year': fsDatePickerModel.dateMode === 'year'\n }\">\n  <div class=\"wrap\">\n\n    <div *ngIf=\"fsDatePickerModel.dateMode === 'date'\" class=\"header\">\n      <fsDatePickerSummary\n      [startDate]=\"model\"\n      (componentsChange)=\"setComponents($event)\"\n      ></fsDatePickerSummary>\n\n      <fsDatePickerPresets\n      *ngIf=\"!fsDatePickerModel.components.timeStart\"\n      (datesChange)=\"setDate($event)\"\n      ></fsDatePickerPresets>\n    </div>\n\n    <div class=\"date-time\">\n      <fsDatePickerCalendar\n        *ngIf=\"fsDatePickerModel.components.calendarStart\"\n        [date]=\"model\"\n        [drawMonth]=\"calendarMonth\"\n        [dateMode]=\"fsDatePickerModel.dateMode\"\n        (onChange)=\"setDate($event)\"\n        (onDateModeChange)=\"setDateMode($event)\"\n        (onDrawMonth)=\"calendarDrawMonth($event)\"\n      ></fsDatePickerCalendar>\n\n      <fsDatePickerTime\n        *ngIf=\"fsDatePickerModel.components.timeStart\"\n        [date]=\"model\"\n        (onChange)=\"setDate($event)\"\n      ></fsDatePickerTime>\n\n    </div>\n\n    <!-- Done button showing on Time Picker or Date Time picker on calendar mode -->\n    <div class=\"done\"\n    *ngIf=\"fsDatePickerModel.view === 'time' ||\n          (fsDatePickerModel.view === 'datetime' && fsDatePickerModel.dateMode === 'date')\">\n      <button type=\"button\" mat-raised-button color=\"primary\" (click)=\"close($event)\">Done</button>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -420,25 +450,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
 var fsdatepickermodel_service_1 = __webpack_require__("../src/services/fsdatepickermodel.service.ts");
+var fsdatepickercommon_service_1 = __webpack_require__("../src/services/fsdatepickercommon.service.ts");
 var FsDatepickerComponent = (function () {
-    function FsDatepickerComponent(fsDatePickerModel, element) {
+    function FsDatepickerComponent(fsDatePickerModel, fsDatePickerCommon, element) {
         this.fsDatePickerModel = fsDatePickerModel;
+        this.fsDatePickerCommon = fsDatePickerCommon;
         this.element = element;
         this.parentInstance = null;
         this.model = null;
+        this.calendarMonth = null;
     }
     FsDatepickerComponent.prototype.ngOnInit = function () {
         this.model = this.parentInstance.getValue();
+        this.calendarDrawMonth(this.model);
     };
     FsDatepickerComponent.prototype.setDate = function (date) {
         this.model = date;
         this.parentInstance.writeValue(date);
+        this.calendarDrawMonth(this.model);
         if (this.fsDatePickerModel.view === 'date') {
             this.close();
         }
     };
     FsDatepickerComponent.prototype.setDateMode = function (mode) {
         this.fsDatePickerModel.dateMode = mode;
+    };
+    FsDatepickerComponent.prototype.setComponents = function (data) {
+        this.fsDatePickerModel.components = data;
+    };
+    FsDatepickerComponent.prototype.calendarDrawMonth = function (date) {
+        this.calendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
     };
     FsDatepickerComponent.prototype.close = function ($event) {
         this.parentInstance.opened = false;
@@ -464,7 +505,9 @@ var FsDatepickerComponent = (function () {
             encapsulation: core_1.ViewEncapsulation.None,
             providers: [fsdatepickermodel_service_1.FsDatePickerModel]
         }),
-        __metadata("design:paramtypes", [fsdatepickermodel_service_1.FsDatePickerModel, core_1.ElementRef])
+        __metadata("design:paramtypes", [fsdatepickermodel_service_1.FsDatePickerModel,
+            fsdatepickercommon_service_1.FsDatePickerCommon,
+            core_1.ElementRef])
     ], FsDatepickerComponent);
     return FsDatepickerComponent;
 }());
@@ -476,7 +519,7 @@ exports.FsDatepickerComponent = FsDatepickerComponent;
 /***/ "../src/components/fsdatepickercalendar/fsdatepickercalendar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"date\" *ngIf=\"['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n  <div class=\"months\" *ngIf=\"dateMode == 'month'\">\n    <div *ngFor=\"let month of monthList\" (click)=\"monthViewChange(month.value)\" class=\"month\" [ngClass]=\"{ today: today.month == month.value, selected: selected.month == month.value }\">{{ month.abr }}</div>\n  </div>\n  <div class=\"years\" *ngIf=\"dateMode == 'year'\" fsIscroll fsOptions=\"iscrollOptions\" fsInstance=\"iscrollInstance\">\n    <div class=\"iscroll-scroller\">\n      <div *ngFor=\"let year of years\" class=\"year\" [ngClass]=\"{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }\" (click)=\"yearViewChange(year)\">\n          {{year}}\n      </div>\n      <div class=\"clear\"></div>\n    </div>\n  </div>\n  <div *ngIf=\"dateMode == 'date'\" class=\"calendar\">\n    <div class=\"month-year\">\n      <a class=\"month-name\" (click)=\"monthView(month)\">{{month.name}}</a>\n      <a class=\"year-name\" (click)=\"yearView(month.year)\">{{month.year}}</a>\n      <a (click)=\"yearView(month.year)\" class=\"more\"><mat-icon>arrow_drop_down</mat-icon></a>\n      <div class=\"gap\"></div>\n      <div class=\"actions\">\n        <a (click)=\"previousMonth(month)\"><mat-icon>navigate_before</mat-icon></a>\n        <a (click)=\"nextMonth(month)\"><mat-icon>navigate_next</mat-icon></a>\n      </div>\n    </div>\n    <table>\n      <thead>\n        <tr>\n          <th>Sun</th>\n          <th>Mon</th>\n          <th>Tues</th>\n          <th>Wed</th>\n          <th>Thurs</th>\n          <th>Fri</th>\n          <th>Sat</th>\n        </tr>\n      </thead>\n      <tbody class=\"calendar calendar-{{month.date}}\">\n        <tr class=\"week\" *ngFor=\"let week of month.weeks\">\n          <td *ngFor=\"let day of week\" class=\"day\" [ngClass]=\"{\n            today: today.date==day.date,\n            mute: day.mute,\n            selected: (day.date==selected.date || highlightedRangeDays.indexOf(day.date) !== -1) && !day.mute,\n            disabled: day.disabled }\" (click)=\"dayClick(day)\">\n            <span>{{day.number}}</span>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"date\" (swipeleft)=\"swipe($event.type)\" (swiperight)=\"swipe($event.type)\" (mouseleave)=\"onMouseLeaveCalendar()\">\n  <div class=\"months\" *ngIf=\"dateMode == 'month'\">\n    <div *ngFor=\"let month of monthList\" (click)=\"monthViewChange(month.value)\" class=\"month\" [ngClass]=\"{ today: today.month == month.value, selected: selected.month == month.value }\">{{ month.abr }}</div>\n  </div>\n  <div class=\"years\" *ngIf=\"dateMode == 'year'\" fsIscroll [fsOptions]=\"iscrollOptions\" fsInstance=\"iscrollInstance\">\n    <div class=\"iscroll-scroller\">\n      <div *ngFor=\"let year of years\" class=\"year data-year-{{ year }}\" [ngClass]=\"{ today: today.year==year, row : ($index % 4 == 0), selected: selected.year==year }\" (click)=\"yearViewChange(year)\">\n          {{ year }}\n      </div>\n      <div class=\"clear\"></div>\n    </div>\n  </div>\n  <div *ngIf=\"dateMode == 'date' && month\" class=\"calendar\">\n    <div class=\"month-year\">\n      <a class=\"month-name\" (click)=\"monthView(month)\">{{month.name}}</a>\n      <a class=\"year-name\" (click)=\"yearView(month.year)\">{{month.year}}</a>\n      <!-- <a (click)=\"yearView(month.year)\" class=\"more\"><mat-icon>arrow_drop_down</mat-icon></a> -->\n      <div class=\"gap\"></div>\n      <div class=\"actions\">\n        <a (click)=\"previousMonth(month)\"><mat-icon>navigate_before</mat-icon></a>\n        <a (click)=\"nextMonth(month)\"><mat-icon>navigate_next</mat-icon></a>\n      </div>\n    </div>\n    <table>\n      <thead>\n        <tr>\n          <th>Sun</th>\n          <th>Mon</th>\n          <th>Tues</th>\n          <th>Wed</th>\n          <th>Thurs</th>\n          <th>Fri</th>\n          <th>Sat</th>\n        </tr>\n      </thead>\n      <tbody class=\"calendar calendar-{{ month.date }}\">\n        <tr class=\"week\" *ngFor=\"let week of month.weeks\">\n          <td *ngFor=\"let day of week\" class=\"day\" [ngClass]=\"{\n            today: today.date==day.date,\n            mute: day.mute,\n            selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,\n            'min-date': day.date === highlightedRangeDays.min,\n            'max-date': day.date === highlightedRangeDays.max,\n            disabled: day.disabled }\" (click)=\"dayClick(day)\" (mouseenter)=\"onMouseEnterDay(day)\">\n            <span>{{ day.number }}</span>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -511,31 +554,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
-var common_1 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
+var platform_browser_1 = __webpack_require__("../node_modules/@angular/platform-browser/esm2015/platform-browser.js");
+__webpack_require__("../node_modules/hammerjs/hammer.js");
+var fshammer_config_1 = __webpack_require__("../src/configs/fshammer.config.ts");
 var moment = __webpack_require__("../node_modules/moment-timezone/index.js");
 var moment_range_1 = __webpack_require__("../node_modules/moment-range/dist/moment-range.js");
+var util_1 = __webpack_require__("../node_modules/@firestitch/common/util/index.js");
 var fsdatepickercommon_service_1 = __webpack_require__("../src/services/fsdatepickercommon.service.ts");
 var fsdatepickermodel_service_1 = __webpack_require__("../src/services/fsdatepickermodel.service.ts");
 var FsDatePickerCalendarComponent = (function () {
-    function FsDatePickerCalendarComponent(element, fsDatePickerCommon, fsDatePickerModel, fsUtil, _iterableDiffers) {
+    function FsDatePickerCalendarComponent(element, fsDatePickerCommon, fsDatePickerModel, _iterableDiffers) {
         var _this = this;
         this.element = element;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatePickerModel = fsDatePickerModel;
-        this.fsUtil = fsUtil;
         this._iterableDiffers = _iterableDiffers;
-        this.dateToHighlight = null;
+        this.date = null;
+        this.highlightStartDate = null;
+        this.highlightEndDate = null;
+        this.dateMode = null;
         this.disabledDays = null;
+        this.drawMonth = null;
         this.onChange = new core_1.EventEmitter();
         this.onDateModeChange = new core_1.EventEmitter();
+        this.onDrawMonth = new core_1.EventEmitter();
+        this.hoverDay = new core_1.EventEmitter();
+        this.mouseLeaveCalendar = new core_1.EventEmitter();
         this.selected = {};
         this.iscrollOptions = null;
         this.iscrollInstance = null;
         this.month = null;
         this.years = [];
         this.dateDays = [];
-        this.highlightedRangeDays = [];
+        this.highlightedRangeDays = null;
         this.disabledDaysDiffer = null;
+        this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
         this.monthList = [{ value: 1, name: 'January', abr: 'Jan' },
             { value: 2, name: 'February', abr: 'Feb' },
             { value: 3, name: 'March', abr: 'Mar' },
@@ -553,7 +606,11 @@ var FsDatePickerCalendarComponent = (function () {
             month: moment().format('M'),
             year: parseInt(moment().format('YYYY'))
         };
-        this.dateScroll = this.fsUtil.throttle(function (e) {
+        this.dateScroll = util_1.throttle(function (e) {
+            // @TODO need better way to detect mobile devices
+            if (window.innerWidth <= 499) {
+                return;
+            }
             if (e.wheelDelta > 0) {
                 _this.nextMonth(_this.month);
             }
@@ -579,33 +636,56 @@ var FsDatePickerCalendarComponent = (function () {
     FsDatePickerCalendarComponent.prototype.ngOnChanges = function (changes) {
         if (changes) {
             if (changes.date) {
-                this.drawMonths(this.date);
+                // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
                 this.selected = this.fsDatePickerCommon.getSelected(this.date);
                 this.updateDaysHighlighted();
             }
-            else if (changes.dateToHighlight) {
+            else if (changes.highlightStartDate || changes.highlightEndDate) {
                 this.updateDaysHighlighted();
+            }
+            if (changes.drawMonth) {
+                if (changes.drawMonth.currentValue) {
+                    this.drawMonths(changes.drawMonth.currentValue);
+                }
+                else {
+                    this.onDrawMonth.emit(this.fsDatePickerCommon.createMoment());
+                }
             }
         }
     };
+    FsDatePickerCalendarComponent.prototype.onMouseEnterDay = function (day) {
+        this.hoverDay.emit(day);
+    };
+    FsDatePickerCalendarComponent.prototype.onMouseLeaveCalendar = function () {
+        this.mouseLeaveCalendar.emit();
+    };
     FsDatePickerCalendarComponent.prototype.updateDaysHighlighted = function () {
-        this.highlightedRangeDays = [];
+        this.highlightedRangeDays = {
+            data: {},
+            min: null,
+            max: null
+        };
         var start = null;
         var end = null;
-        if (this.date && this.dateToHighlight) {
-            if (moment(this.date).isAfter(this.dateToHighlight)) {
-                start = this.dateToHighlight;
-                end = this.date;
+        if (this.highlightStartDate && this.highlightEndDate) {
+            if (moment(this.highlightStartDate).isAfter(this.highlightEndDate)) {
+                start = this.highlightEndDate;
+                end = this.highlightStartDate;
             }
             else {
-                start = this.date;
-                end = this.dateToHighlight;
+                start = this.highlightStartDate;
+                end = this.highlightEndDate;
             }
-            var range = moment.range(start, end);
-            for (var _i = 0, _a = Array.from(range.by('days')); _i < _a.length; _i++) {
-                var day = _a[_i];
-                this.highlightedRangeDays.push(moment(day).format('YYYY-MM-DD'));
+            var range = Array.from(moment.range(start, end).by('days'));
+            if (!range.length) {
+                return;
             }
+            for (var _i = 0, range_1 = range; _i < range_1.length; _i++) {
+                var day = range_1[_i];
+                this.highlightedRangeDays.data[moment(day).format('YYYY-MM-DD')] = true;
+            }
+            this.highlightedRangeDays.min = moment(range[0]).format('YYYY-MM-DD');
+            this.highlightedRangeDays.max = moment(range[range.length - 1]).format('YYYY-MM-DD');
         }
     };
     FsDatePickerCalendarComponent.prototype.ngDoCheck = function () {
@@ -645,7 +725,10 @@ var FsDatePickerCalendarComponent = (function () {
         Object.assign(month.months, this.monthList);
     };
     FsDatePickerCalendarComponent.prototype.monthViewChange = function (month) {
-        this.monthChange(month);
+        // Changing date
+        // this.monthChange(month);
+        // Changing calendar view
+        this.setMonth(month);
         this.calendarView();
     };
     FsDatePickerCalendarComponent.prototype.monthChange = function (month) {
@@ -656,7 +739,7 @@ var FsDatePickerCalendarComponent = (function () {
     };
     FsDatePickerCalendarComponent.prototype.createModel = function () {
         if (!this.date) {
-            this.setDate(this.fsDatePickerCommon.createMoment());
+            this.date = this.fsDatePickerCommon.createMoment();
         }
     };
     FsDatePickerCalendarComponent.prototype.setDate = function (date) {
@@ -665,15 +748,12 @@ var FsDatePickerCalendarComponent = (function () {
     };
     FsDatePickerCalendarComponent.prototype.calendarView = function () {
         this.onDateModeChange.emit('date');
-        // this.fsDatePickerModel.dateMode = 'date';
     };
     FsDatePickerCalendarComponent.prototype.monthView = function (month) {
-        // this.fsDatePickerModel.dateMode = 'month';
         this.onDateModeChange.emit('month');
     };
     FsDatePickerCalendarComponent.prototype.yearView = function (year) {
-        this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
-        // this.fsDatePickerModel.dateMode = 'year';
+        this.iscrollOptions = { scrollToElement: ".years .data-year-" + year };
         this.onDateModeChange.emit('year');
     };
     FsDatePickerCalendarComponent.prototype.dayClick = function (day) {
@@ -691,8 +771,12 @@ var FsDatePickerCalendarComponent = (function () {
         this.setDate(date);
     };
     FsDatePickerCalendarComponent.prototype.yearViewChange = function (year) {
-        this.yearChange(year);
-        this.calendarView();
+        var _this = this;
+        // For some reason for mobile devices click event fired for both year/day modes. setTimeout fix this problem
+        setTimeout(function () {
+            _this.setYear(year);
+            _this.calendarView();
+        });
     };
     FsDatePickerCalendarComponent.prototype.yearChange = function (year) {
         if (!this.date) {
@@ -701,15 +785,23 @@ var FsDatePickerCalendarComponent = (function () {
         this.setDate(this.date.clone().year(year));
     };
     FsDatePickerCalendarComponent.prototype.previousMonth = function (month) {
-        this.drawMonths(month.moment.subtract(1, 'months'));
+        // this.drawMonths(month.moment.subtract(1, 'months'));
+        this.onDrawMonth.emit(month.moment.subtract(1, 'months'));
     };
     FsDatePickerCalendarComponent.prototype.nextMonth = function (month) {
-        this.drawMonths(month.moment.add(1, 'months'));
+        // this.drawMonths(month.moment.add(1, 'months'));
+        this.onDrawMonth.emit(month.moment.add(1, 'months'));
+    };
+    FsDatePickerCalendarComponent.prototype.setMonth = function (monthNumber) {
+        // this.drawMonths(moment(this.month.moment).set('month', monthNumber - 1));
+        this.onDrawMonth.emit(moment(this.month.moment).set('month', monthNumber - 1));
+    };
+    FsDatePickerCalendarComponent.prototype.setYear = function (yearNumber) {
+        // this.drawMonths(moment(this.month.moment).set('year', yearNumber));
+        this.onDrawMonth.emit(moment(this.month.moment).set('year', yearNumber));
     };
     FsDatePickerCalendarComponent.prototype.drawMonths = function (date) {
-        if (!date) {
-            date = this.fsDatePickerCommon.createMoment();
-        }
+        this.onDrawMonth.emit(date);
         this.month = this.createMonth(date);
     };
     FsDatePickerCalendarComponent.prototype.createMonth = function (date) {
@@ -776,10 +868,19 @@ var FsDatePickerCalendarComponent = (function () {
         }
     };
     FsDatePickerCalendarComponent.prototype.onMouseWheel = function ($event) {
-        $event.preventDefault();
+        // $event.preventDefault();
     };
     FsDatePickerCalendarComponent.prototype.onTouchMove = function ($event) {
         $event.preventDefault();
+    };
+    FsDatePickerCalendarComponent.prototype.swipe = function (action) {
+        if (action === void 0) { action = this.SWIPE_ACTION.RIGHT; }
+        if (action === this.SWIPE_ACTION.RIGHT) {
+            this.previousMonth(this.month);
+        }
+        else if (action === this.SWIPE_ACTION.LEFT) {
+            this.nextMonth(this.month);
+        }
     };
     FsDatePickerCalendarComponent.prototype.ngOnDestroy = function () {
         if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
@@ -794,7 +895,11 @@ var FsDatePickerCalendarComponent = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsDatePickerCalendarComponent.prototype, "dateToHighlight", void 0);
+    ], FsDatePickerCalendarComponent.prototype, "highlightStartDate", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "highlightEndDate", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
@@ -804,6 +909,10 @@ var FsDatePickerCalendarComponent = (function () {
         __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "disabledDays", void 0);
     __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "drawMonth", void 0);
+    __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "onChange", void 0);
@@ -811,6 +920,18 @@ var FsDatePickerCalendarComponent = (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "onDateModeChange", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "onDrawMonth", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "hoverDay", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "mouseLeaveCalendar", void 0);
     FsDatePickerCalendarComponent = __decorate([
         core_1.Component({
             selector: 'fsDatePickerCalendar',
@@ -819,11 +940,17 @@ var FsDatePickerCalendarComponent = (function () {
             host: {
                 '(mousewheel)': 'onMouseWheel($event)',
                 '(touchmove)': 'onTouchMove($event)'
-            }
+            },
+            providers: [
+                {
+                    provide: platform_browser_1.HAMMER_GESTURE_CONFIG,
+                    useClass: fshammer_config_1.FsHammerConfig
+                }
+            ]
         }),
         __metadata("design:paramtypes", [core_1.ElementRef, fsdatepickercommon_service_1.FsDatePickerCommon,
             fsdatepickermodel_service_1.FsDatePickerModel,
-            common_1.FsUtil, core_1.IterableDiffers])
+            core_1.IterableDiffers])
     ], FsDatePickerCalendarComponent);
     return FsDatePickerCalendarComponent;
 }());
@@ -832,10 +959,80 @@ exports.FsDatePickerCalendarComponent = FsDatePickerCalendarComponent;
 
 /***/ }),
 
+/***/ "../src/components/fsdatepickerpresets/fsdatepickerpresets.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"presets.length\" class=\"presets\">\n  <ng-container *ngFor=\"let item of presets; let i = index\">\n    <a (click)=\"setPreset(item)\" *ngIf=\"i < 4\">{{ item.name }}</a>\n  </ng-container>\n  <ng-container *ngIf=\"presets.length > 4\">\n    <button mat-icon-button [matMenuTriggerFor]=\"presetsMenu\">\n      <mat-icon>more_horiz</mat-icon>\n    </button>\n    <mat-menu #presetsMenu=\"matMenu\" [overlapTrigger]=\"false\">\n      <ng-container *ngFor=\"let item of presets; let i = index\">\n        <button mat-menu-item (click)=\"setPreset(item)\" *ngIf=\"i >= 4\">{{ item.name }}</button>\n      </ng-container>\n    </mat-menu>\n  </ng-container>\n</div>\n"
+
+/***/ }),
+
+/***/ "../src/components/fsdatepickerpresets/fsdatepickerpresets.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fsdatepickerpresets/fsdatepickerpresets.component.scss");
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+
+/***/ "../src/components/fsdatepickerpresets/fsdatepickerpresets.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var fsdatepickermodel_service_1 = __webpack_require__("../src/services/fsdatepickermodel.service.ts");
+var FsDatepickerPresetsComponent = (function () {
+    function FsDatepickerPresetsComponent(fsDatePickerModel) {
+        this.fsDatePickerModel = fsDatePickerModel;
+        this.datesChange = new core_1.EventEmitter();
+        this.presets = [];
+    }
+    FsDatepickerPresetsComponent.prototype.ngOnInit = function () {
+        this.presets = this.fsDatePickerModel.presets;
+    };
+    FsDatepickerPresetsComponent.prototype.setPreset = function (preset) {
+        this.datesChange.emit(preset.value);
+    };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatepickerPresetsComponent.prototype, "datesChange", void 0);
+    FsDatepickerPresetsComponent = __decorate([
+        core_1.Component({
+            selector: 'fsDatePickerPresets',
+            template: __webpack_require__("../src/components/fsdatepickerpresets/fsdatepickerpresets.component.html"),
+            styles: [__webpack_require__("../src/components/fsdatepickerpresets/fsdatepickerpresets.component.scss")]
+        }),
+        __metadata("design:paramtypes", [fsdatepickermodel_service_1.FsDatePickerModel])
+    ], FsDatepickerPresetsComponent);
+    return FsDatepickerPresetsComponent;
+}());
+exports.FsDatepickerPresetsComponent = FsDatepickerPresetsComponent;
+
+
+/***/ }),
+
 /***/ "../src/components/fsdatepickerrange/fsdatepickerrange.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"fs-datetime-backdrop\" [hidden]=\"!parentInstance.opened\" (click)=\"close($event)\"></div>\n\n<div class=\"fs-datetime-dialog fs-datetime-range\" tabindex=\"0\"\n[ngClass]=\"{ opened: parentInstance.opened,\n  'has-date': ['date', 'datetime'].indexOf(fsDatePickerModel.view) !== -1,\n  'has-time': ['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1 }\">\n  <div class=\"wrap\">\n\n    <div class=\"date-time\">\n      <div class=\"date-range\">\n          <fsDatePickerCalendar\n          [date]=\"parentInstance.ngModelStart\"\n          [dateToHighlight]=\"parentInstance.ngModelEnd\"\n          [dateMode]=\"fsDatePickerModel.dateMode.start_date\"\n          (onChange)=\"setStartDate($event)\"\n          (onDateModeChange)=\"setDateModeStart($event)\"\n          ></fsDatePickerCalendar>\n\n          <fsDatePickerCalendar\n          [date]=\"parentInstance.ngModelEnd\"\n          [dateToHighlight]=\"parentInstance.ngModelStart\"\n          [dateMode]=\"fsDatePickerModel.dateMode.end_date\"\n          [disabledDays]=\"toDisabledDays\"\n          (onChange)=\"setEndDate($event)\"\n          (onDateModeChange)=\"setDateModeEnd($event)\"\n          ></fsDatePickerCalendar>\n      </div>\n\n      <mat-tab-group #rangeTimeTabGroup class=\"time-range\" *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n        <mat-tab label=\"START TIME\">\n          <fsDatePickerTime\n            [date]=\"parentInstance.ngModelStart\"\n            (onChange)=\"setStartDate($event)\"\n          ></fsDatePickerTime>\n        </mat-tab>\n        <mat-tab label=\"END TIME\">\n          <fsDatePickerTime\n            [date]=\"parentInstance.ngModelEnd\"\n            [disabledTimes]=\"toDisabledTimes\"\n            (onChange)=\"setEndDate($event)\"\n          ></fsDatePickerTime>\n        </mat-tab>\n      </mat-tab-group>\n\n    </div>\n\n    <div *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\" class=\"done\">\n      <button type=\"button\" mat-raised-button color=\"primary\" (click)=\"close($event)\">Done</button>\n\n      <div class=\"ranges\" *ngIf=\"['datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n        <button type=\"button\" mat-button (click)=\"range('today')\">Today</button>\n        <button type=\"button\" mat-button (click)=\"range('yesterday')\">Yesterday</button>\n        <button type=\"button\" mat-button (click)=\"range('last_7')\">Last 7 Days</button>\n        <button type=\"button\" mat-button (click)=\"range('last_30')\">Last 30 Days</button>\n        <button type=\"button\" mat-button (click)=\"range('current_month')\">This Month</button>\n        <button type=\"button\" mat-button (click)=\"range('last_month')\">Last Month</button>\n      </div>\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"fs-datetime-backdrop\" [hidden]=\"!parentInstance.opened\" (click)=\"close($event)\"></div>\n\n<div class=\"fs-datetime-dialog fs-datetime-range dialog-view-{{ fsDatePickerModel.view }}\" tabindex=\"0\"\n[ngClass]=\"{ opened: parentInstance.opened,\n  'has-date': (fsDatePickerModel.components.calendarStart || fsDatePickerModel.components.calendarEnd),\n  'has-time': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd) }\">\n  <div class=\"wrap\">\n\n    <div class=\"header\">\n      <fsDatePickerSummary\n      [startDate]=\"parentInstance.ngModelStart\"\n      [endDate]=\"parentInstance.ngModelEnd\"\n      (componentsChange)=\"setComponents($event)\"\n      ></fsDatePickerSummary>\n      <fsDatePickerPresets\n      *ngIf=\"!fsDatePickerModel.components.timeStart && !fsDatePickerModel.components.timeEnd\"\n      (datesChange)=\"onDatesChange($event)\"\n      ></fsDatePickerPresets>\n    </div>\n\n    <div class=\"date-time\">\n      <div class=\"date-range\">\n          <fsDatePickerCalendar\n          *ngIf=\"fsDatePickerModel.components.calendarStart\"\n          [date]=\"parentInstance.ngModelStart\"\n          [highlightStartDate]=\"highlightStartDate\"\n          [highlightEndDate]=\"highlightEndDate\"\n          [dateMode]=\"fsDatePickerModel.dateMode.start_date\"\n          [drawMonth]=\"startCalendarMonth\"\n          (onChange)=\"setStartDate($event)\"\n          (onDateModeChange)=\"setDateModeStart($event)\"\n          (onDrawMonth)=\"startCalendarDrawMonth($event)\"\n          (hoverDay)=\"hoverCalendar($event)\"\n          (mouseLeaveCalendar)=\"onMouseLeaveCalendar($event)\"\n          ></fsDatePickerCalendar>\n\n          <fsDatePickerCalendar\n          *ngIf=\"fsDatePickerModel.components.calendarEnd\"\n          [date]=\"parentInstance.ngModelEnd\"\n          [highlightStartDate]=\"highlightStartDate\"\n          [highlightEndDate]=\"highlightEndDate\"\n          [dateMode]=\"fsDatePickerModel.dateMode.end_date\"\n          [disabledDays]=\"toDisabledDays\"\n          [drawMonth]=\"endCalendarMonth\"\n          (onChange)=\"setEndDate($event)\"\n          (onDateModeChange)=\"setDateModeEnd($event)\"\n          (onDrawMonth)=\"endCalendarDrawMonth($event)\"\n          (hoverDay)=\"hoverCalendar($event)\"\n          (mouseLeaveCalendar)=\"onMouseLeaveCalendar($event)\"\n          ></fsDatePickerCalendar>\n      </div>\n\n      <div class=\"time-range\">\n        <fsDatePickerTime\n          *ngIf=\"fsDatePickerModel.components.timeStart\"\n          [date]=\"parentInstance.ngModelStart\"\n          (onChange)=\"setStartTime($event)\"\n        ></fsDatePickerTime>\n        <fsDatePickerTime\n          *ngIf=\"fsDatePickerModel.components.timeEnd\"\n          [date]=\"parentInstance.ngModelEnd\"\n          [disabledTimes]=\"toDisabledTimes\"\n          (onChange)=\"setEndTime($event)\"\n        ></fsDatePickerTime>\n      </div>\n\n    </div>\n\n    <div class=\"done\">\n      <button type=\"button\" mat-raised-button color=\"primary\" (click)=\"close($event)\">Done</button>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -855,45 +1052,89 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
-var common_1 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
 var fsdatepickermodel_service_1 = __webpack_require__("../src/services/fsdatepickermodel.service.ts");
+var fsdatepickercommon_service_1 = __webpack_require__("../src/services/fsdatepickercommon.service.ts");
 var moment = __webpack_require__("../node_modules/moment-timezone/index.js");
 var FsDatepickerRangeComponent = (function () {
-    function FsDatepickerRangeComponent(fsDatePickerModel, element, fsUtil, _iterableDiffers) {
+    function FsDatepickerRangeComponent(fsDatePickerModel, fsDatePickerCommon, element, _iterableDiffers) {
         this.fsDatePickerModel = fsDatePickerModel;
+        this.fsDatePickerCommon = fsDatePickerCommon;
         this.element = element;
-        this.fsUtil = fsUtil;
         this._iterableDiffers = _iterableDiffers;
         this.parentInstance = null;
         this.toDisabledDays = [];
         this.toDisabledTimes = [];
+        this.startCalendarMonth = null;
+        this.endCalendarMonth = null;
+        this.highlightStartDate = null;
+        this.highlightEndDate = null;
         this.modelDiffer = null;
         this.modelDiffer = this._iterableDiffers.find([]).create(null);
     }
-    FsDatepickerRangeComponent.prototype.ngOnInit = function () { };
+    FsDatepickerRangeComponent.prototype.ngOnInit = function () {
+        this.calendarsDrawMonth(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd);
+    };
     FsDatepickerRangeComponent.prototype.ngDoCheck = function () {
-        var _this = this;
         if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
             var startDate = this.parentInstance.ngModelStart;
-            var endDate_1 = this.parentInstance.ngModelEnd;
-            if (startDate && endDate_1 && endDate_1.isBefore(startDate)) {
-                endDate_1 = startDate.isSame(endDate_1, 'day') ? startDate : undefined;
-                setTimeout(function () {
-                    _this.setEndDate(endDate_1);
-                });
-            }
-            this.toDisabledDaysUpdate(startDate, endDate_1);
-            this.toDisabledTimesUpdate(startDate, endDate_1);
+            var endDate = this.parentInstance.ngModelEnd;
+            this.toDisabledDaysUpdate(startDate, endDate);
+            this.toDisabledTimesUpdate(startDate, endDate);
+            this.highlightStartDate = startDate;
+            this.highlightEndDate = endDate;
         }
     };
     FsDatepickerRangeComponent.prototype.setStartDate = function (date) {
-        this.setDates(date, this.parentInstance.ngModelEnd);
+        var startDate = date;
+        var endDate = this.parentInstance.ngModelEnd;
+        if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
+            startDate = this.parentInstance.ngModelStart;
+            endDate = date;
+        }
+        else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
+            startDate = null;
+            endDate = null;
+        }
+        this.setDates(startDate, endDate);
+        if (startDate && endDate) {
+            if (moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM')) {
+                this.endCalendarDrawMonth(moment(endDate).add(1, 'month'));
+            }
+            else {
+                this.endCalendarDrawMonth(endDate);
+            }
+        }
+        if (startDate) {
+            this.startCalendarDrawMonth(startDate);
+        }
     };
     FsDatepickerRangeComponent.prototype.setEndDate = function (date) {
         this.setDates(this.parentInstance.ngModelStart, date);
+        if (date) {
+            this.endCalendarDrawMonth(date);
+        }
+    };
+    FsDatepickerRangeComponent.prototype.setStartTime = function (date) {
+        var endDate = this.parentInstance.ngModelEnd;
+        // In time mode, if end date is empty - user not able switch to end time picker
+        if (this.fsDatePickerModel.view === 'time' && !this.parentInstance.ngModelEnd) {
+            endDate = date;
+        }
+        this.setDates(date, endDate);
+    };
+    FsDatepickerRangeComponent.prototype.setEndTime = function (date) {
+        this.setDates(this.parentInstance.ngModelStart, date);
     };
     FsDatepickerRangeComponent.prototype.setDates = function (startDate, endDate) {
+        if (startDate && endDate && startDate.isAfter(endDate)) {
+            startDate = endDate;
+            endDate = null;
+        }
         this.parentInstance.writeValue(startDate, endDate);
+    };
+    FsDatepickerRangeComponent.prototype.onDatesChange = function (data) {
+        this.setDates(data.start, data.end);
+        this.calendarsDrawMonth(data.start, data.end);
     };
     FsDatepickerRangeComponent.prototype.toDisabledDaysUpdate = function (startDate, endDate) {
         this.toDisabledDays = startDate ? [[moment().subtract(99, 'year'), startDate.clone()]] : [];
@@ -901,8 +1142,8 @@ var FsDatepickerRangeComponent = (function () {
     FsDatepickerRangeComponent.prototype.toDisabledTimesUpdate = function (startDate, endDate) {
         this.toDisabledTimes = [];
         if (startDate && endDate && startDate.isSame(endDate, 'day')) {
-            var from = this.fsUtil.int(startDate.format('m')) + (this.fsUtil.int(startDate.format('H')) * 60);
-            var to = this.fsUtil.int(endDate.format('m')) + (this.fsUtil.int(endDate.format('H')) * 60);
+            var from = parseInt(startDate.format('m')) + (parseInt(startDate.format('H')) * 60);
+            var to = parseInt(endDate.format('m')) + (parseInt(endDate.format('H')) * 60);
             if (startDate) {
                 this.toDisabledTimes.push([0, from]);
             }
@@ -914,6 +1155,43 @@ var FsDatepickerRangeComponent = (function () {
     FsDatepickerRangeComponent.prototype.setDateModeEnd = function (mode) {
         this.fsDatePickerModel.dateMode.end_date = mode;
     };
+    FsDatepickerRangeComponent.prototype.setComponents = function (data) {
+        this.fsDatePickerModel.components = data;
+    };
+    FsDatepickerRangeComponent.prototype.calendarsDrawMonth = function (startDate, endDate) {
+        this.endCalendarDrawMonth(endDate);
+        this.startCalendarDrawMonth(startDate);
+    };
+    FsDatepickerRangeComponent.prototype.startCalendarDrawMonth = function (date) {
+        this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+        if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
+            this.endCalendarMonth = moment(this.startCalendarMonth).add(1, 'month');
+        }
+    };
+    FsDatepickerRangeComponent.prototype.endCalendarDrawMonth = function (date) {
+        this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+        if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
+            this.startCalendarMonth = moment(this.endCalendarMonth).subtract(1, 'month');
+        }
+    };
+    FsDatepickerRangeComponent.prototype.rangeCalendarsConflict = function (startDate, endDate) {
+        return moment(startDate).isAfter(endDate) ||
+            moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM');
+    };
+    FsDatepickerRangeComponent.prototype.hoverCalendar = function (day) {
+        var date = moment(day.date);
+        if (this.parentInstance.ngModelStart &&
+            !this.parentInstance.ngModelEnd &&
+            moment(this.parentInstance.ngModelStart).isBefore(date)) {
+            this.highlightEndDate = date;
+        }
+        else {
+            this.highlightEndDate = this.parentInstance.ngModelEnd;
+        }
+    };
+    FsDatepickerRangeComponent.prototype.onMouseLeaveCalendar = function () {
+        this.highlightEndDate = this.parentInstance.ngModelEnd;
+    };
     FsDatepickerRangeComponent.prototype.close = function ($event) {
         this.parentInstance.opened = false;
     };
@@ -924,37 +1202,6 @@ var FsDatepickerRangeComponent = (function () {
             this.close(e);
         }
     };
-    FsDatepickerRangeComponent.prototype.range = function (type) {
-        var startDate = moment();
-        var endDate = moment();
-        if (type == 'today') {
-            startDate = startDate.startOf('day');
-            endDate = endDate.endOf('day');
-        }
-        else if (type == 'yesterday') {
-            startDate = startDate.subtract(1, 'day').startOf('day');
-            endDate = endDate.subtract(1, 'day').endOf('day');
-        }
-        else if (type == 'last_7') {
-            startDate = startDate.subtract(7, 'days');
-        }
-        else if (type == 'last_30') {
-            startDate = startDate.subtract(30, 'days');
-        }
-        else if (type == 'current_month') {
-            startDate = startDate.startOf('month');
-            endDate = endDate.endOf('month');
-        }
-        else if (type == 'last_month') {
-            startDate = startDate.subtract(1, 'month').startOf('month');
-            endDate = endDate.subtract(1, 'month').endOf('month');
-        }
-        this.setDates(startDate, endDate);
-    };
-    __decorate([
-        core_1.ViewChild('rangeTimeTabGroup'),
-        __metadata("design:type", Object)
-    ], FsDatepickerRangeComponent.prototype, "rangeTimeTabGroup", void 0);
     __decorate([
         core_1.HostListener('document:keydown', ['$event']),
         __metadata("design:type", Function),
@@ -970,7 +1217,9 @@ var FsDatepickerRangeComponent = (function () {
             providers: [fsdatepickermodel_service_1.FsDatePickerModel]
         }),
         __metadata("design:paramtypes", [fsdatepickermodel_service_1.FsDatePickerModel,
-            core_1.ElementRef, common_1.FsUtil, core_1.IterableDiffers])
+            fsdatepickercommon_service_1.FsDatePickerCommon,
+            core_1.ElementRef,
+            core_1.IterableDiffers])
     ], FsDatepickerRangeComponent);
     return FsDatepickerRangeComponent;
 }());
@@ -979,10 +1228,111 @@ exports.FsDatepickerRangeComponent = FsDatepickerRangeComponent;
 
 /***/ }),
 
+/***/ "../src/components/fsdatepickersummary/fsdatepickersummary.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"formattedStartDate || formattedEndDate\" class=\"summary\">\n  <ng-container *ngIf=\"formattedStartDate\">\n    <div\n      (click)=\"onComponentsChange({ calendarStart: true, calendarEnd: true })\"\n      [ngClass]=\"{ active: fsDatePickerModel.components.calendarStart }\">{{ formattedStartDate.date }}\n    </div>\n    &nbsp;\n    <div\n      (click)=\"onComponentsChange({ timeStart: true })\"\n      [ngClass]=\"{ active: fsDatePickerModel.components.timeStart }\">{{ formattedStartDate.time }}\n    </div>\n  </ng-container>\n  <ng-container *ngIf=\"formattedStartDate && formattedEndDate\">&nbsp;-&nbsp;</ng-container>\n  <ng-container *ngIf=\"formattedEndDate\">\n    <div\n      (click)=\"onComponentsChange({ calendarStart: true, calendarEnd: true })\"\n      [ngClass]=\"{ active: fsDatePickerModel.components.calendarEnd }\">{{ formattedEndDate.date }}\n    </div>\n    &nbsp;\n    <div\n      (click)=\"onComponentsChange({ timeEnd: true })\"\n      [ngClass]=\"{ active: fsDatePickerModel.components.timeEnd }\">{{ formattedEndDate.time }}\n    </div>\n  </ng-container>\n</div>\n"
+
+/***/ }),
+
+/***/ "../src/components/fsdatepickersummary/fsdatepickersummary.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fsdatepickersummary/fsdatepickersummary.component.scss");
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+
+/***/ "../src/components/fsdatepickersummary/fsdatepickersummary.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var fsdatepickercommon_service_1 = __webpack_require__("../src/services/fsdatepickercommon.service.ts");
+var fsdatepickermodel_service_1 = __webpack_require__("../src/services/fsdatepickermodel.service.ts");
+var FsDatepickerSummaryComponent = (function () {
+    function FsDatepickerSummaryComponent(fsDatePickerCommon, fsDatePickerModel) {
+        this.fsDatePickerCommon = fsDatePickerCommon;
+        this.fsDatePickerModel = fsDatePickerModel;
+        this.startDate = null;
+        this.endDate = null;
+        this.componentsChange = new core_1.EventEmitter();
+        // @Output() viewChange = new EventEmitter<any>();
+        this.formattedStartDate = null;
+        this.formattedEndDate = null;
+    }
+    FsDatepickerSummaryComponent.prototype.ngOnInit = function () {
+    };
+    FsDatepickerSummaryComponent.prototype.ngOnChanges = function (changes) {
+        this.formattedStartDate = null;
+        this.formattedEndDate = null;
+        if (changes && changes.startDate && changes.startDate.currentValue) {
+            this.formattedStartDate = {
+                date: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue),
+                time: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue, 'time')
+            };
+        }
+        if (changes && changes.endDate && changes.endDate.currentValue) {
+            this.formattedEndDate = {
+                date: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue),
+                time: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue, 'time')
+            };
+        }
+        // this.viewChange.emit(this.formattedStartDate || this.formattedEndDate ? true : false);
+    };
+    FsDatepickerSummaryComponent.prototype.onComponentsChange = function (view) {
+        this.componentsChange.emit(view);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsDatepickerSummaryComponent.prototype, "startDate", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsDatepickerSummaryComponent.prototype, "endDate", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatepickerSummaryComponent.prototype, "componentsChange", void 0);
+    FsDatepickerSummaryComponent = __decorate([
+        core_1.Component({
+            selector: 'fsDatePickerSummary',
+            template: __webpack_require__("../src/components/fsdatepickersummary/fsdatepickersummary.component.html"),
+            styles: [__webpack_require__("../src/components/fsdatepickersummary/fsdatepickersummary.component.scss")],
+        }),
+        __metadata("design:paramtypes", [fsdatepickercommon_service_1.FsDatePickerCommon,
+            fsdatepickermodel_service_1.FsDatePickerModel])
+    ], FsDatepickerSummaryComponent);
+    return FsDatepickerSummaryComponent;
+}());
+exports.FsDatepickerSummaryComponent = FsDatepickerSummaryComponent;
+
+
+/***/ }),
+
 /***/ "../src/components/fsdatepickertime/fsdatepickertime.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"time\" *ngIf=\"['time', 'datetime'].indexOf(fsDatePickerModel.view) !== -1\">\n  <div class=\"wraper\">\n    <div class=\"hours\">\n      <div class=\"lbl\">Hour</div>\n        <table>\n          <tr *ngFor=\"let hours of timeHours\">\n              <td *ngFor=\"let hour of hours\" class=\"hour\" (click)=\"hourClick(hour)\" [ngClass]=\"{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }\">\n                <div class=\"number\">\n                  <span *ngIf=\"hour < 12\">{{ hour ? hour : 12 }}<span class=\"am-pm\">am</span></span>\n                  <span *ngIf=\"hour >= 12\">{{ hour==12 ? 12 : hour-12 }}<span class=\"am-pm\">pm</span></span>\n                </div>\n              </td>\n          </tr>\n        </table>\n      </div>\n      <div class=\"minutes\">\n\n        <div class=\"lbl\">Minute</div>\n        <table>\n          <tr *ngFor=\"let minutes of timeMinutes\">\n            <td *ngFor=\"let minute of minutes\" class=\"minute\"\n            [ngClass]=\"{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }\"\n            (click)=\"minuteClick(minute)\">\n              <div class=\"number\">{{ minute }}</div>\n            </td>\n          </tr>\n        </table>\n      </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"time\">\n  <div class=\"wraper\">\n    <ng-container *ngIf=\"!expanded\">\n      <div class=\"hours-group\">\n        <div class=\"hours\" *ngFor=\"let group of timeHoursCollapsed; let i = index\">\n          <div class=\"lbl\">Hour {{ i ? 'PM' : 'AM' }}</div>\n            <table>\n              <tr *ngFor=\"let hours of group\">\n                <td *ngFor=\"let hour of hours\" class=\"hour\" (click)=\"hourClick(hour)\" [ngClass]=\"{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }\">\n                  <div class=\"number\">\n                    <span *ngIf=\"hour < 12\">{{ hour ? hour : 12 }}<span class=\"am-pm\">am</span></span>\n                    <span *ngIf=\"hour >= 12\">{{ hour==12 ? 12 : hour-12 }}<span class=\"am-pm\">pm</span></span>\n                  </div>\n                </td>\n            </tr>\n          </table>\n        </div>\n      </div>\n      <div class=\"minutes\">\n        <div class=\"lbl\">Minute</div>\n        <table>\n          <tr *ngFor=\"let minutes of timeMinutesCollapsed\">\n            <td *ngFor=\"let minute of minutes\" class=\"minute\"\n            [ngClass]=\"{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }\"\n            (click)=\"minuteClick(minute)\">\n              <div class=\"number\">{{ minute }}</div>\n            </td>\n          </tr>\n        </table>\n        <a (click)=\"expanded = true\" class=\"button-expand\">More</a>\n      </div>\n    </ng-container>\n    <ng-container *ngIf=\"expanded\">\n      <div class=\"hours\">\n        <div class=\"lbl\">Hour</div>\n          <table>\n            <tr *ngFor=\"let hours of timeHoursExpanded\">\n              <td *ngFor=\"let hour of hours\" class=\"hour\" (click)=\"hourClick(hour)\" [ngClass]=\"{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }\">\n                <div class=\"number\">\n                  <span *ngIf=\"hour < 12\">{{ hour ? hour : 12 }}<span class=\"am-pm\">am</span></span>\n                  <span *ngIf=\"hour >= 12\">{{ hour==12 ? 12 : hour-12 }}<span class=\"am-pm\">pm</span></span>\n                </div>\n              </td>\n          </tr>\n        </table>\n      </div>\n      <div class=\"minutes\">\n\n        <div class=\"lbl\">Minute</div>\n        <table>\n          <tr *ngFor=\"let minutes of timeMinutesExpanded\">\n            <td *ngFor=\"let minute of minutes\" class=\"minute\"\n            [ngClass]=\"{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }\"\n            (click)=\"minuteClick(minute)\">\n              <div class=\"number\">{{ minute }}</div>\n            </td>\n          </tr>\n        </table>\n        <a (click)=\"expanded = false\" class=\"button-expand\">Less</a>\n      </div>\n    </ng-container>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1017,29 +1367,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
-var common_1 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
 var fsdatepickercommon_service_1 = __webpack_require__("../src/services/fsdatepickercommon.service.ts");
 var fsdatepickermodel_service_1 = __webpack_require__("../src/services/fsdatepickermodel.service.ts");
 var FsDatePickerTimeComponent = (function () {
-    function FsDatePickerTimeComponent(element, fsDatePickerCommon, fsDatePickerModel, fsUtil, _iterableDiffers) {
+    function FsDatePickerTimeComponent(element, fsDatePickerCommon, fsDatePickerModel, _iterableDiffers) {
         this.element = element;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatePickerModel = fsDatePickerModel;
-        this.fsUtil = fsUtil;
         this._iterableDiffers = _iterableDiffers;
+        this.date = null;
         this.disabledMinutes = [];
         this.disabledHours = [];
         this.disabledTimes = [];
         this.onChange = new core_1.EventEmitter();
         this.selected = {};
+        this.expanded = false;
         this.disabledTimeMinutes = {};
         this.disabledTimeHours = {};
         this.disabledGroupedMinutes = {};
         this.disabledMinutesDiffer = null;
         this.disabledHoursDiffer = null;
         this.disabledTimesDiffer = null;
-        this.timeHours = [[0, 12], [1, 13], [2, 14], [3, 15], [4, 16], [5, 17], [6, 18], [7, 19], [8, 20], [9, 21], [10, 22], [11, 23]];
-        this.timeMinutes = [[0, 1, 2, 3, 4],
+        this.timeHoursCollapsed = [
+            [
+                [0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9, 10, 11]
+            ],
+            [
+                [12, 13, 14, 15],
+                [16, 17, 18, 19],
+                [20, 21, 22, 23]
+            ]
+        ];
+        this.timeMinutesCollapsed = [[0, 5], [10, 15], [20, 25], [30, 35], [40, 45], [50, 55]];
+        this.timeHoursExpanded = [[0, 12], [1, 13], [2, 14], [3, 15], [4, 16], [5, 17], [6, 18], [7, 19], [8, 20], [9, 21], [10, 22], [11, 23]];
+        this.timeMinutesExpanded = [
+            [0, 1, 2, 3, 4],
             [5, 6, 7, 8, 9],
             [10, 11, 12, 13, 14],
             [15, 16, 17, 18, 19],
@@ -1050,7 +1414,8 @@ var FsDatePickerTimeComponent = (function () {
             [40, 41, 42, 43, 44],
             [45, 46, 47, 48, 49],
             [50, 51, 52, 53, 54],
-            [55, 56, 57, 58, 59]];
+            [55, 56, 57, 58, 59]
+        ];
         this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
         this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
         this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
@@ -1121,7 +1486,7 @@ var FsDatePickerTimeComponent = (function () {
     FsDatePickerTimeComponent.prototype.addDisabledMinutes = function (range) {
         var min = Math.min(range[0], range[1]);
         var max = Math.max(range[0], range[1]);
-        if (this.fsUtil.isArray(range)) {
+        if (Array.isArray(range)) {
             for (var i = min; i <= max; i++) {
                 this.disabledTimeMinutes[i] = true;
             }
@@ -1133,7 +1498,7 @@ var FsDatePickerTimeComponent = (function () {
     FsDatePickerTimeComponent.prototype.addDisabledHours = function (range) {
         var min = Math.min(range[0], range[1]);
         var max = Math.max(range[0], range[1]);
-        if (this.fsUtil.isArray(range)) {
+        if (Array.isArray(range)) {
             for (var i = min; i <= max; i++) {
                 this.disabledTimeHours[i] = true;
             }
@@ -1197,11 +1562,44 @@ var FsDatePickerTimeComponent = (function () {
         }),
         __metadata("design:paramtypes", [core_1.ElementRef, fsdatepickercommon_service_1.FsDatePickerCommon,
             fsdatepickermodel_service_1.FsDatePickerModel,
-            common_1.FsUtil, core_1.IterableDiffers])
+            core_1.IterableDiffers])
     ], FsDatePickerTimeComponent);
     return FsDatePickerTimeComponent;
 }());
 exports.FsDatePickerTimeComponent = FsDatePickerTimeComponent;
+
+
+/***/ }),
+
+/***/ "../src/configs/fshammer.config.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var platform_browser_1 = __webpack_require__("../node_modules/@angular/platform-browser/esm2015/platform-browser.js");
+var FsHammerConfig = (function (_super) {
+    __extends(FsHammerConfig, _super);
+    function FsHammerConfig() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.overrides = {
+            swipe: { velocity: 0.4, threshold: 20 }
+        };
+        return _this;
+    }
+    return FsHammerConfig;
+}(platform_browser_1.HammerGestureConfig));
+exports.FsHammerConfig = FsHammerConfig;
 
 
 /***/ }),
@@ -1237,7 +1635,10 @@ var FsDatePickDirective = (function () {
         this.viewContainerRef = viewContainerRef;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatepickerFactory = fsDatepickerFactory;
+        this.minYear = null;
+        this.maxYear = null;
         this.view = 'date';
+        this.presets = [];
         this.change$ = new core_1.EventEmitter();
         this._model = null;
         this.opened = false;
@@ -1287,7 +1688,14 @@ var FsDatePickDirective = (function () {
         this.$dialog.instance.fsDatePickerModel.view = this.view;
         this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
         this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+        this.$dialog.instance.fsDatePickerModel.presets = this.presets;
         this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
+        if (this.view === 'time') {
+            this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
+        }
+        else {
+            this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true };
+        }
         setTimeout(function () {
             _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
         });
@@ -1324,6 +1732,10 @@ var FsDatePickDirective = (function () {
         core_1.Input(),
         __metadata("design:type", Object)
     ], FsDatePickDirective.prototype, "view", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], FsDatePickDirective.prototype, "presets", void 0);
     __decorate([
         core_1.Output('change'),
         __metadata("design:type", Object)
@@ -1391,9 +1803,12 @@ var FsDatePickRangeDirective = (function () {
         this.viewContainerRef = viewContainerRef;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatepickerRangeFactory = fsDatepickerRangeFactory;
+        this.minYear = null;
+        this.maxYear = null;
         this.view = 'date';
         this.ngModelStart = null;
         this.ngModelEnd = null;
+        this.presets = [];
         this.ngModelStartChange = new core_1.EventEmitter();
         this.ngModelEndChange = new core_1.EventEmitter();
         this.change$ = new core_1.EventEmitter();
@@ -1438,10 +1853,11 @@ var FsDatePickRangeDirective = (function () {
         var _this = this;
         this.opened = true;
         if (this.$dialog) {
+            // @TODO remove this
             // Set first time tab as active
-            if (this.$dialog.instance.rangeTimeTabGroup) {
-                this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
-            }
+            // if (this.$dialog.instance.rangeTimeTabGroup) {
+            //  this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
+            // }
             return;
         }
         this.fsDatepickerRangeFactory.setRootViewContainerRef(this.viewContainerRef);
@@ -1450,7 +1866,14 @@ var FsDatePickRangeDirective = (function () {
         this.$dialog.instance.fsDatePickerModel.view = this.view;
         this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
         this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+        this.$dialog.instance.fsDatePickerModel.presets = this.presets;
         this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
+        if (this.view === 'time') {
+            this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
+        }
+        else {
+            this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true, calendarEnd: true };
+        }
         setTimeout(function () {
             _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
         });
@@ -1495,6 +1918,10 @@ var FsDatePickRangeDirective = (function () {
         core_1.Input(),
         __metadata("design:type", Object)
     ], FsDatePickRangeDirective.prototype, "ngModelEnd", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], FsDatePickRangeDirective.prototype, "presets", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
@@ -1630,12 +2057,13 @@ var common_1 = __webpack_require__("../node_modules/@angular/common/esm2015/comm
 var forms_1 = __webpack_require__("../node_modules/@angular/forms/esm2015/forms.js");
 var material_1 = __webpack_require__("../node_modules/@angular/material/esm2015/material.js");
 var material_2 = __webpack_require__("../node_modules/@angular/material/esm2015/material.js");
-var common_2 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
 var fsdatepick_directive_1 = __webpack_require__("../src/directives/fsdatepick.directive.ts");
 var fsdatepickrange_directive_1 = __webpack_require__("../src/directives/fsdatepickrange.directive.ts");
 var fsisscroll_directive_1 = __webpack_require__("../src/directives/fsisscroll.directive.ts");
 var fsdatepicker_component_1 = __webpack_require__("../src/components/fsdatepicker/fsdatepicker.component.ts");
 var fsdatepickerrange_component_1 = __webpack_require__("../src/components/fsdatepickerrange/fsdatepickerrange.component.ts");
+var fsdatepickersummary_component_1 = __webpack_require__("../src/components/fsdatepickersummary/fsdatepickersummary.component.ts");
+var fsdatepickerpresets_component_1 = __webpack_require__("../src/components/fsdatepickerpresets/fsdatepickerpresets.component.ts");
 var fsdatepickercalendar_component_1 = __webpack_require__("../src/components/fsdatepickercalendar/fsdatepickercalendar.component.ts");
 var fsdatepickertime_component_1 = __webpack_require__("../src/components/fsdatepickertime/fsdatepickertime.component.ts");
 var fsdatepickerfactory_service_1 = __webpack_require__("../src/services/fsdatepickerfactory.service.ts");
@@ -1656,10 +2084,10 @@ var FsDatePickerModule = (function () {
             imports: [
                 common_1.CommonModule,
                 forms_1.FormsModule,
-                common_2.FsCommonModule,
                 material_1.MatButtonModule,
                 material_2.MatTabsModule,
-                material_1.MatIconModule
+                material_1.MatIconModule,
+                material_1.MatMenuModule
             ],
             exports: [
                 fsdatepick_directive_1.FsDatePickDirective,
@@ -1672,6 +2100,8 @@ var FsDatePickerModule = (function () {
             declarations: [
                 fsdatepick_directive_1.FsDatePickDirective,
                 fsdatepickrange_directive_1.FsDatePickRangeDirective,
+                fsdatepickersummary_component_1.FsDatepickerSummaryComponent,
+                fsdatepickerpresets_component_1.FsDatepickerPresetsComponent,
                 fsdatepicker_component_1.FsDatepickerComponent,
                 fsdatepickerrange_component_1.FsDatepickerRangeComponent,
                 fsisscroll_directive_1.FsIsscrollDirective,
@@ -1710,6 +2140,8 @@ __export(__webpack_require__("../src/directives/fsdatepickrange.directive.ts"));
 __export(__webpack_require__("../src/directives/fsisscroll.directive.ts"));
 __export(__webpack_require__("../src/components/fsdatepicker/fsdatepicker.component.ts"));
 __export(__webpack_require__("../src/components/fsdatepickerrange/fsdatepickerrange.component.ts"));
+__export(__webpack_require__("../src/components/fsdatepickersummary/fsdatepickersummary.component.ts"));
+__export(__webpack_require__("../src/components/fsdatepickerpresets/fsdatepickerpresets.component.ts"));
 __export(__webpack_require__("../src/components/fsdatepickercalendar/fsdatepickercalendar.component.ts"));
 __export(__webpack_require__("../src/components/fsdatepickertime/fsdatepickertime.component.ts"));
 __export(__webpack_require__("../src/services/fsdatepickerfactory.service.ts"));
@@ -1736,11 +2168,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
-var common_1 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
+var util_1 = __webpack_require__("../node_modules/@firestitch/common/util/index.js");
 var moment = __webpack_require__("../node_modules/moment-timezone/index.js");
 var FsDatePickerCommon = (function () {
-    function FsDatePickerCommon(fsUtil) {
-        this.fsUtil = fsUtil;
+    function FsDatePickerCommon() {
     }
     FsDatePickerCommon.prototype.getSelected = function (date) {
         var result = {};
@@ -1762,23 +2193,36 @@ var FsDatePickerCommon = (function () {
         }
         return result;
     };
+    FsDatePickerCommon.prototype.isSameDay = function (startDate, endDate) {
+        return moment(startDate).format('YYYY-MM-DD') === moment(endDate).format('YYYY-MM-DD');
+    };
     FsDatePickerCommon.prototype.createMoment = function () {
         return moment().startOf('day');
+    };
+    FsDatePickerCommon.prototype.getMomentSafe = function (date) {
+        return moment(date).isValid() ? date : this.createMoment();
     };
     FsDatePickerCommon.prototype.positionDialog = function (dialog, elementRef) {
         if (!dialog || window.innerWidth < 500) {
             return;
         }
         var input = elementRef.nativeElement;
+        var parent = input.parentElement.parentElement;
         var dialogContainer = dialog.instance.element.nativeElement.querySelector('.fs-datetime-dialog');
         var dialogContainerStyles = window.getComputedStyle(dialogContainer);
         var inputBound = input.getBoundingClientRect();
+        var parentBound = parent.getBoundingClientRect();
         var dialogBound = dialog.instance.element.nativeElement.getBoundingClientRect();
         var dialogContainerBound = dialogContainer.getBoundingClientRect();
-        var top = parseInt(inputBound.top) + inputBound.height;
+        var top = 0;
+        if (parent.className.match(/mat-input-flex/)) {
+            top = parseInt(parentBound.top);
+        }
+        else {
+            top = parseInt(inputBound.top) + inputBound.height;
+        }
         var css = { top: '', bottom: '', left: '', right: '' };
-        if ((top + this.fsUtil.int(dialogContainer.style.marginTop) +
-            this.fsUtil.int(dialogContainerStyles.height)) > window.innerHeight) {
+        if ((top + parseInt(dialogContainerStyles.height)) > window.innerHeight) {
             css.bottom = '10px';
             dialogContainer.classList.add('vertical-reposition');
         }
@@ -1787,7 +2231,7 @@ var FsDatePickerCommon = (function () {
             dialogContainer.classList.remove('vertical-reposition');
         }
         var left = parseInt(inputBound.left);
-        if ((left + this.fsUtil.int(dialogContainerStyles.width)) > window.innerWidth) {
+        if ((left + parseInt(dialogContainerStyles.width)) > window.innerWidth) {
             css.right = '10px';
             css.left = '';
             dialogContainer.classList.add('horizontal-reposition');
@@ -1821,10 +2265,10 @@ var FsDatePickerCommon = (function () {
         if (view === void 0) { view = 'date'; }
         var result = '';
         var format = [];
-        if (this.fsUtil.isInt(value)) {
+        if (util_1.isNumeric(value)) {
             value = moment(new Date(value));
         }
-        else if (this.fsUtil.isString(value)) {
+        else if (typeof value === 'string') {
             if (moment(value).isValid()) {
                 value = moment(value);
             }
@@ -1842,6 +2286,15 @@ var FsDatePickerCommon = (function () {
             result = value.format(format.join(' '));
         }
         return result;
+    };
+    FsDatePickerCommon.prototype.formatSummary = function (date, view) {
+        if (view === void 0) { view = 'date'; }
+        if (view === 'date') {
+            return moment(date).format('MMM D, YYYY');
+        }
+        if (view === 'time') {
+            return moment(date).format('h:mm a');
+        }
     };
     FsDatePickerCommon.prototype.inputClick = function (e, callback) {
         var x = e.clientX, y = e.clientY, stack = [];
@@ -1868,7 +2321,7 @@ var FsDatePickerCommon = (function () {
     };
     FsDatePickerCommon = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [common_1.FsUtil])
+        __metadata("design:paramtypes", [])
     ], FsDatePickerCommon);
     return FsDatePickerCommon;
 }());
@@ -1943,15 +2396,62 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
 var moment = __webpack_require__("../node_modules/moment-timezone/index.js");
+var lodash_1 = __webpack_require__("../node_modules/lodash/lodash.js");
 var FsDatePickerModel = (function () {
     function FsDatePickerModel() {
         this._minYear = null;
         this._maxYear = null;
-        // date | datetime | time | inline
+        // @TODO create interfaces for all values
+        /**
+         * date | datetime | time
+         * View is options selected on init. Can't be changed manually
+         */
         this._view = 'date';
-        // year | month | date
+        /**
+         * Visual components. Can be changed by summary widget but only if _view allowed to do this.
+         */
+        this._componentsDefault = {
+            calendarStart: false,
+            calendarEnd: false,
+            timeStart: false,
+            timeEnd: false
+        };
+        this._components = null;
+        /**
+         * year | month | date
+         *
+         * Current mode of calendar. For ranges consist values for both: start and end date
+         */
         this.dateMode = null;
+        this.presets = [];
     }
+    Object.defineProperty(FsDatePickerModel.prototype, "components", {
+        get: function () {
+            return this._components;
+        },
+        set: function (value) {
+            value = Object.assign({}, this._componentsDefault, value);
+            var tempData = Object.assign({}, value);
+            var allowable = [];
+            if (['date', 'datetime'].indexOf(this._view) !== -1) {
+                allowable.push('calendarStart');
+                allowable.push('calendarEnd');
+            }
+            if (['time', 'datetime'].indexOf(this._view) !== -1) {
+                allowable.push('timeStart');
+                allowable.push('timeEnd');
+            }
+            lodash_1.forEach(tempData, function (item, index) {
+                tempData[index] = allowable.indexOf(index) !== -1 ? item : false;
+            });
+            // Updating components only if all value object is valid
+            if (lodash_1.isEqual(value, tempData)) {
+                this._components = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(FsDatePickerModel.prototype, "minYear", {
         get: function () {
             return this._minYear;
@@ -2120,10 +2620,97 @@ webpackEmptyAsyncContext.id = "../tools lazy recursive";
 
 /***/ }),
 
+/***/ "../tools/components/examples/examples.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"example-title\">{{title}}</div>\n<mat-tab-group>\n  <mat-tab label=\"Examples\">\n    <div class=\"example-container\">\n      <ul class=\"examples-list\" *ngIf=\"examples.length > 1\">\n        <li *ngFor=\"let example of examples\" (click)=\"scrollTo(example)\">\n          {{example.title}}\n        </li>\n      </ul>\n      <div class=\"examples-body\" #body>\n        <ng-content></ng-content>\n      </div>\n    </div>\n  </mat-tab>\n  <mat-tab label=\"Docs\" *ngIf=\"loaded\">\n    <div class=\"iframe-container\">\n      <iframe class=\"iframe-example ng-star-inserted\" [src]=\"submoduleUrl\"></iframe>\n    </div>\n  </mat-tab>\n</mat-tab-group>\n"
+
+/***/ }),
+
+/***/ "../tools/components/examples/examples.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var platform_browser_1 = __webpack_require__("../node_modules/@angular/platform-browser/esm2015/platform-browser.js");
+var FsExamplesComponent = (function () {
+    function FsExamplesComponent(el, sanitizer) {
+        this.el = el;
+        this.sanitizer = sanitizer;
+        this.examples = [];
+        this.loaded = false;
+    }
+    FsExamplesComponent.prototype.ngOnInit = function () {
+        this._submoduleUrl = this.sanitizer
+            .bypassSecurityTrustResourceUrl("https://" + this.submoduleName + ".components.firestitch.com/docs");
+        this.loaded = true;
+    };
+    FsExamplesComponent.prototype.ngAfterContentChecked = function () {
+        this.getExampleElements();
+    };
+    Object.defineProperty(FsExamplesComponent.prototype, "submoduleUrl", {
+        get: function () {
+            return this._submoduleUrl;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    FsExamplesComponent.prototype.scrollTo = function (example) {
+        if (this.bodyRef && this.bodyRef.nativeElement && example && example.el) {
+            this.bodyRef.nativeElement.scrollTo(0, example.el.offsetTop);
+        }
+    };
+    FsExamplesComponent.prototype.getExampleElements = function () {
+        this.examples = Array.from(this.el.nativeElement.querySelectorAll('fs-example')).reduce(function (acc, rowElement, index) {
+            var title = rowElement.getAttribute('title');
+            if (title) {
+                acc.push({ el: rowElement, title: title });
+            }
+            return acc;
+        }, []);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], FsExamplesComponent.prototype, "title", void 0);
+    __decorate([
+        core_1.Input('name'),
+        __metadata("design:type", String)
+    ], FsExamplesComponent.prototype, "submoduleName", void 0);
+    __decorate([
+        core_1.ViewChild('body', { read: core_1.ElementRef }),
+        __metadata("design:type", Object)
+    ], FsExamplesComponent.prototype, "bodyRef", void 0);
+    FsExamplesComponent = __decorate([
+        core_1.Component({
+            selector: 'fs-examples',
+            template: __webpack_require__("../tools/components/examples/examples.component.html")
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef,
+            platform_browser_1.DomSanitizer])
+    ], FsExamplesComponent);
+    return FsExamplesComponent;
+}());
+exports.FsExamplesComponent = FsExamplesComponent;
+
+
+/***/ }),
+
 /***/ "./app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>FsDatepicker Examples</h1>\n<div class=\"example\">\n    <fs-example title=\"Date Picker Example\" componentName=\"date-example\">\n        <date-example></date-example>\n    </fs-example>\n</div>\n<div class=\"example\">\n    <fs-example title=\"Time Picker Example\" componentName=\"time-example\">\n        <time-example></time-example>\n    </fs-example>\n</div>\n<div class=\"example\">\n    <fs-example title=\"Date Time Picker Example\" componentName=\"datetime-example\">\n        <datetime-example></datetime-example>\n    </fs-example>\n</div>\n<div class=\"example\">\n  <fs-example title=\"Date Range Picker Example\" componentName=\"daterange-example\">\n      <daterange-example></daterange-example>\n  </fs-example>\n</div>\n<div class=\"example\">\n  <fs-example title=\"Time Range Picker Example\" componentName=\"timerange-example\">\n      <timerange-example></timerange-example>\n  </fs-example>\n</div>\n<div class=\"example\">\n  <fs-example title=\"Date Time Range Picker Example\" componentName=\"datetimerange-example\">\n      <datetimerange-example></datetimerange-example>\n  </fs-example>\n</div>\n"
+module.exports = "<fs-examples title=\"Date Picker Component\">\n  <fs-example title=\"Date Picker Example\" componentName=\"date-example\">\n      <date-example></date-example>\n  </fs-example>\n  <fs-example title=\"Time Picker Example\" componentName=\"time-example\">\n      <time-example></time-example>\n  </fs-example>\n  <fs-example title=\"Date Time Picker Example\" componentName=\"datetime-example\">\n      <datetime-example></datetime-example>\n  </fs-example>\n  <fs-example title=\"Date Range Picker Example\" componentName=\"daterange-example\">\n    <daterange-example></daterange-example>\n  </fs-example>\n  <fs-example title=\"Time Range Picker Example\" componentName=\"timerange-example\">\n    <timerange-example></timerange-example>\n  </fs-example>\n  <fs-example title=\"Date Time Range Picker Example\" componentName=\"datetimerange-example\">\n    <datetimerange-example></datetimerange-example>\n  </fs-example>\n</fs-examples>\n"
 
 /***/ }),
 
@@ -2174,7 +2761,7 @@ exports.AppComponent = AppComponent;
 /***/ "./app/components/date-example/date-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" name=\"datepicker\" placeholder=\"Date\">\n  </mat-form-field>\n</form>\n"
+module.exports = "<form>\n  <mat-form-field>\n    <input matInput fsDatePicker [(ngModel)]=\"model\" [presets]=\"presets\" name=\"datepicker\" placeholder=\"Date\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
@@ -2189,17 +2776,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var moment = __webpack_require__("../node_modules/moment-timezone/index.js");
 var DateExampleComponent = (function () {
     function DateExampleComponent() {
+        this.model = null;
+        this.presets = [];
+        this.presets = [
+            { name: 'Today', value: moment() },
+            { name: 'Yesterday', value: moment().subtract(1, 'days') },
+            { name: 'Start of Week', value: moment().startOf('week') },
+            { name: 'Last Week', value: moment().subtract(1, 'week').startOf('week') },
+            { name: 'Start of Month', value: moment().startOf('month') }
+        ];
     }
     DateExampleComponent = __decorate([
         core_1.Component({
             selector: 'date-example',
             template: __webpack_require__("./app/components/date-example/date-example.component.html"),
             styles: [__webpack_require__("./app/components/date-example/date-example.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [])
     ], DateExampleComponent);
     return DateExampleComponent;
 }());
@@ -2336,7 +2937,7 @@ exports.DateTimeExampleComponent = DateTimeExampleComponent;
 /***/ "./app/components/datetimerange-example/datetimerange-example.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"event.start_date\"\n    [(ngModelEnd)]=\"event.end_date\"\n    view=\"datetime\" name=\"datetimerangepicker\" placeholder=\"Date Time Range\">\n  </mat-form-field>\n</form>\n"
+module.exports = "<form>\n  <mat-form-field fxFlex>\n    <input matInput fsDatePickerRange\n    [(ngModelStart)]=\"event.start_date\"\n    [(ngModelEnd)]=\"event.end_date\"\n    [presets]=\"presets\"\n    view=\"datetime\" name=\"datetimerangepicker\" placeholder=\"Date Time Range\">\n  </mat-form-field>\n</form>\n"
 
 /***/ }),
 
@@ -2359,11 +2960,20 @@ var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js"
 var moment = __webpack_require__("../node_modules/moment-timezone/index.js");
 var DateTimeRangeExampleComponent = (function () {
     function DateTimeRangeExampleComponent() {
+        this.presets = [];
         this.event = {
             id: 999,
             start_date: moment().startOf('day'),
-            end_date: moment().startOf('day')
+            end_date: moment().startOf('day').add(1, 'days')
         };
+        this.presets = [
+            { name: 'Today', value: { start: moment().startOf('days'), end: moment().startOf('days') } },
+            { name: 'Yesterday', value: { start: moment().subtract(1, 'day').startOf('day'), end: moment().subtract(1, 'day').endOf('day') } },
+            { name: 'Last 7 Days', value: { start: moment().subtract(7, 'days'), end: moment() } },
+            { name: 'Last 30 Days', value: { start: moment().subtract(30, 'days'), end: moment() } },
+            { name: 'Current Month', value: { start: moment().startOf('month'), end: moment().endOf('month') } },
+            { name: 'Last Month', value: { start: moment().subtract(1, 'month').startOf('month'), end: moment().subtract(1, 'month').endOf('month') } }
+        ];
     }
     DateTimeRangeExampleComponent = __decorate([
         core_1.Component({
@@ -2632,6 +3242,7 @@ var datetimerange_example_component_1 = __webpack_require__("./app/components/da
 var daterange_example_component_1 = __webpack_require__("./app/components/daterange-example/daterange-example.component.ts");
 var timerange_example_component_1 = __webpack_require__("./app/components/timerange-example/timerange-example.component.ts");
 var example_1 = __webpack_require__("../node_modules/@firestitch/example/package/index.js");
+var examples_component_1 = __webpack_require__("../tools/components/examples/examples.component.ts");
 var PlaygroundModule = (function () {
     function PlaygroundModule() {
     }
@@ -2654,7 +3265,8 @@ var PlaygroundModule = (function () {
                 datetime_example_component_1.DateTimeExampleComponent,
                 datetimerange_example_component_1.DateTimeRangeExampleComponent,
                 daterange_example_component_1.DateRangeExampleComponent,
-                timerange_example_component_1.TimeRangeExampleComponent
+                timerange_example_component_1.TimeRangeExampleComponent,
+                examples_component_1.FsExamplesComponent
             ],
             providers: [],
         })
