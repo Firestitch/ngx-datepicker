@@ -4,7 +4,6 @@
       (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"
       [ngClass]="{ active: fsDatePickerModel.components.calendarStart }">{{ formattedStartDate.date }}
     </div>
-    &nbsp;
     <div
       (click)="onComponentsChange({ timeStart: true })"
       [ngClass]="{ active: fsDatePickerModel.components.timeStart }">{{ formattedStartDate.time }}
@@ -16,7 +15,6 @@
       (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"
       [ngClass]="{ active: fsDatePickerModel.components.calendarEnd }">{{ formattedEndDate.date }}
     </div>
-    &nbsp;
     <div
       (click)="onComponentsChange({ timeEnd: true })"
       [ngClass]="{ active: fsDatePickerModel.components.timeEnd }">{{ formattedEndDate.time }}

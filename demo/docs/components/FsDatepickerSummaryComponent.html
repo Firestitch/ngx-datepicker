@@ -998,7 +998,6 @@
       (click)&#x3D;&quot;onComponentsChange({ calendarStart: true, calendarEnd: true })&quot;
       [ngClass]&#x3D;&quot;{ active: fsDatePickerModel.components.calendarStart }&quot;&gt;{{ formattedStartDate.date }}
     &lt;/div&gt;
-    &amp;nbsp;
     &lt;div
       (click)&#x3D;&quot;onComponentsChange({ timeStart: true })&quot;
       [ngClass]&#x3D;&quot;{ active: fsDatePickerModel.components.timeStart }&quot;&gt;{{ formattedStartDate.time }}
@@ -1010,7 +1009,6 @@
       (click)&#x3D;&quot;onComponentsChange({ calendarStart: true, calendarEnd: true })&quot;
       [ngClass]&#x3D;&quot;{ active: fsDatePickerModel.components.calendarEnd }&quot;&gt;{{ formattedEndDate.date }}
     &lt;/div&gt;
-    &amp;nbsp;
     &lt;div
       (click)&#x3D;&quot;onComponentsChange({ timeEnd: true })&quot;
       [ngClass]&#x3D;&quot;{ active: fsDatePickerModel.components.timeEnd }&quot;&gt;{{ formattedEndDate.time }}
@@ -1043,7 +1041,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div *ngIf="formattedStartDate || formattedEndDate" class="summary">  <ng-container *ngIf="formattedStartDate">    <div      (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"      [ngClass]="{ active: fsDatePickerModel.components.calendarStart }">{{ formattedStartDate.date }}    </div>    &nbsp;    <div      (click)="onComponentsChange({ timeStart: true })"      [ngClass]="{ active: fsDatePickerModel.components.timeStart }">{{ formattedStartDate.time }}    </div>  </ng-container>  <ng-container *ngIf="formattedStartDate && formattedEndDate">&nbsp;-&nbsp;</ng-container>  <ng-container *ngIf="formattedEndDate">    <div      (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"      [ngClass]="{ active: fsDatePickerModel.components.calendarEnd }">{{ formattedEndDate.date }}    </div>    &nbsp;    <div      (click)="onComponentsChange({ timeEnd: true })"      [ngClass]="{ active: fsDatePickerModel.components.timeEnd }">{{ formattedEndDate.time }}    </div>  </ng-container></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="formattedStartDate || formattedEndDate" class="summary">  <ng-container *ngIf="formattedStartDate">    <div      (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"      [ngClass]="{ active: fsDatePickerModel.components.calendarStart }">{{ formattedStartDate.date }}    </div>    <div      (click)="onComponentsChange({ timeStart: true })"      [ngClass]="{ active: fsDatePickerModel.components.timeStart }">{{ formattedStartDate.time }}    </div>  </ng-container>  <ng-container *ngIf="formattedStartDate && formattedEndDate">&nbsp;-&nbsp;</ng-container>  <ng-container *ngIf="formattedEndDate">    <div      (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"      [ngClass]="{ active: fsDatePickerModel.components.calendarEnd }">{{ formattedEndDate.date }}    </div>    <div      (click)="onComponentsChange({ timeEnd: true })"      [ngClass]="{ active: fsDatePickerModel.components.timeEnd }">{{ formattedEndDate.time }}    </div>  </ng-container></div></div>'
     var COMPONENTS = [{'name': 'FsDatePickerCalendarComponent', 'selector': 'fsDatePickerCalendar'},{'name': 'FsDatePickerTimeComponent', 'selector': 'fsDatePickerTime'},{'name': 'FsDatepickerComponent', 'selector': 'fsDatePicker'},{'name': 'FsDatepickerPresetsComponent', 'selector': 'fsDatePickerPresets'},{'name': 'FsDatepickerRangeComponent', 'selector': 'fsDatePickerRange'},{'name': 'FsDatepickerSummaryComponent', 'selector': 'fsDatePickerSummary'}];
     var DIRECTIVES = [{'name': 'FsDatePickDirective', 'selector': '[fsDatePicker]'},{'name': 'FsDatePickRangeDirective', 'selector': '[fsDatePickerRange]'},{'name': 'FsIsscrollDirective', 'selector': '[fsIscroll]'}];
     var ACTUAL_COMPONENT = {'name': 'FsDatepickerSummaryComponent'};
