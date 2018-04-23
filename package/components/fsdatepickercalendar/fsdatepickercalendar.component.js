@@ -10,31 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var common_1 = require("@firestitch/common");
+var platform_browser_1 = require("@angular/platform-browser");
+require("hammerjs");
+var fshammer_config_1 = require("./../../configs/fshammer.config");
 var moment = require("moment-timezone");
 var moment_range_1 = require("moment-range");
+var util_1 = require("@firestitch/common/util");
 var fsdatepickercommon_service_1 = require("./../../services/fsdatepickercommon.service");
 var fsdatepickermodel_service_1 = require("./../../services/fsdatepickermodel.service");
 var FsDatePickerCalendarComponent = (function () {
-    function FsDatePickerCalendarComponent(element, fsDatePickerCommon, fsDatePickerModel, fsUtil, _iterableDiffers) {
+    function FsDatePickerCalendarComponent(element, fsDatePickerCommon, fsDatePickerModel, _iterableDiffers) {
         var _this = this;
         this.element = element;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatePickerModel = fsDatePickerModel;
-        this.fsUtil = fsUtil;
         this._iterableDiffers = _iterableDiffers;
-        this.dateToHighlight = null;
+        this.date = null;
+        this.highlightStartDate = null;
+        this.highlightEndDate = null;
+        this.dateMode = null;
         this.disabledDays = null;
+        this.drawMonth = null;
         this.onChange = new core_1.EventEmitter();
         this.onDateModeChange = new core_1.EventEmitter();
+        this.onDrawMonth = new core_1.EventEmitter();
+        this.hoverDay = new core_1.EventEmitter();
+        this.mouseLeaveCalendar = new core_1.EventEmitter();
         this.selected = {};
         this.iscrollOptions = null;
         this.iscrollInstance = null;
         this.month = null;
         this.years = [];
         this.dateDays = [];
-        this.highlightedRangeDays = [];
+        this.highlightedRangeDays = null;
         this.disabledDaysDiffer = null;
+        this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
         this.monthList = [{ value: 1, name: 'January', abr: 'Jan' },
             { value: 2, name: 'February', abr: 'Feb' },
             { value: 3, name: 'March', abr: 'Mar' },
@@ -52,7 +62,11 @@ var FsDatePickerCalendarComponent = (function () {
             month: moment().format('M'),
             year: parseInt(moment().format('YYYY'))
         };
-        this.dateScroll = this.fsUtil.throttle(function (e) {
+        this.dateScroll = util_1.throttle(function (e) {
+            // @TODO need better way to detect mobile devices
+            if (window.innerWidth <= 499) {
+                return;
+            }
             if (e.wheelDelta > 0) {
                 _this.nextMonth(_this.month);
             }
@@ -78,33 +92,56 @@ var FsDatePickerCalendarComponent = (function () {
     FsDatePickerCalendarComponent.prototype.ngOnChanges = function (changes) {
         if (changes) {
             if (changes.date) {
-                this.drawMonths(this.date);
+                // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
                 this.selected = this.fsDatePickerCommon.getSelected(this.date);
                 this.updateDaysHighlighted();
             }
-            else if (changes.dateToHighlight) {
+            else if (changes.highlightStartDate || changes.highlightEndDate) {
                 this.updateDaysHighlighted();
+            }
+            if (changes.drawMonth) {
+                if (changes.drawMonth.currentValue) {
+                    this.drawMonths(changes.drawMonth.currentValue);
+                }
+                else {
+                    this.onDrawMonth.emit(this.fsDatePickerCommon.createMoment());
+                }
             }
         }
     };
+    FsDatePickerCalendarComponent.prototype.onMouseEnterDay = function (day) {
+        this.hoverDay.emit(day);
+    };
+    FsDatePickerCalendarComponent.prototype.onMouseLeaveCalendar = function () {
+        this.mouseLeaveCalendar.emit();
+    };
     FsDatePickerCalendarComponent.prototype.updateDaysHighlighted = function () {
-        this.highlightedRangeDays = [];
+        this.highlightedRangeDays = {
+            data: {},
+            min: null,
+            max: null
+        };
         var start = null;
         var end = null;
-        if (this.date && this.dateToHighlight) {
-            if (moment(this.date).isAfter(this.dateToHighlight)) {
-                start = this.dateToHighlight;
-                end = this.date;
+        if (this.highlightStartDate && this.highlightEndDate) {
+            if (moment(this.highlightStartDate).isAfter(this.highlightEndDate)) {
+                start = this.highlightEndDate;
+                end = this.highlightStartDate;
             }
             else {
-                start = this.date;
-                end = this.dateToHighlight;
+                start = this.highlightStartDate;
+                end = this.highlightEndDate;
             }
-            var range = moment.range(start, end);
-            for (var _i = 0, _a = Array.from(range.by('days')); _i < _a.length; _i++) {
-                var day = _a[_i];
-                this.highlightedRangeDays.push(moment(day).format('YYYY-MM-DD'));
+            var range = Array.from(moment.range(start, end).by('days'));
+            if (!range.length) {
+                return;
             }
+            for (var _i = 0, range_1 = range; _i < range_1.length; _i++) {
+                var day = range_1[_i];
+                this.highlightedRangeDays.data[moment(day).format('YYYY-MM-DD')] = true;
+            }
+            this.highlightedRangeDays.min = moment(range[0]).format('YYYY-MM-DD');
+            this.highlightedRangeDays.max = moment(range[range.length - 1]).format('YYYY-MM-DD');
         }
     };
     FsDatePickerCalendarComponent.prototype.ngDoCheck = function () {
@@ -144,7 +181,10 @@ var FsDatePickerCalendarComponent = (function () {
         Object.assign(month.months, this.monthList);
     };
     FsDatePickerCalendarComponent.prototype.monthViewChange = function (month) {
-        this.monthChange(month);
+        // Changing date
+        // this.monthChange(month);
+        // Changing calendar view
+        this.setMonth(month);
         this.calendarView();
     };
     FsDatePickerCalendarComponent.prototype.monthChange = function (month) {
@@ -155,7 +195,7 @@ var FsDatePickerCalendarComponent = (function () {
     };
     FsDatePickerCalendarComponent.prototype.createModel = function () {
         if (!this.date) {
-            this.setDate(this.fsDatePickerCommon.createMoment());
+            this.date = this.fsDatePickerCommon.createMoment();
         }
     };
     FsDatePickerCalendarComponent.prototype.setDate = function (date) {
@@ -164,15 +204,12 @@ var FsDatePickerCalendarComponent = (function () {
     };
     FsDatePickerCalendarComponent.prototype.calendarView = function () {
         this.onDateModeChange.emit('date');
-        // this.fsDatePickerModel.dateMode = 'date';
     };
     FsDatePickerCalendarComponent.prototype.monthView = function (month) {
-        // this.fsDatePickerModel.dateMode = 'month';
         this.onDateModeChange.emit('month');
     };
     FsDatePickerCalendarComponent.prototype.yearView = function (year) {
-        this.iscrollOptions = { scrollToElement: '.years [data-year="' + year + '"]' };
-        // this.fsDatePickerModel.dateMode = 'year';
+        this.iscrollOptions = { scrollToElement: ".years .data-year-" + year };
         this.onDateModeChange.emit('year');
     };
     FsDatePickerCalendarComponent.prototype.dayClick = function (day) {
@@ -190,8 +227,12 @@ var FsDatePickerCalendarComponent = (function () {
         this.setDate(date);
     };
     FsDatePickerCalendarComponent.prototype.yearViewChange = function (year) {
-        this.yearChange(year);
-        this.calendarView();
+        var _this = this;
+        // For some reason for mobile devices click event fired for both year/day modes. setTimeout fix this problem
+        setTimeout(function () {
+            _this.setYear(year);
+            _this.calendarView();
+        });
     };
     FsDatePickerCalendarComponent.prototype.yearChange = function (year) {
         if (!this.date) {
@@ -200,15 +241,23 @@ var FsDatePickerCalendarComponent = (function () {
         this.setDate(this.date.clone().year(year));
     };
     FsDatePickerCalendarComponent.prototype.previousMonth = function (month) {
-        this.drawMonths(month.moment.subtract(1, 'months'));
+        // this.drawMonths(month.moment.subtract(1, 'months'));
+        this.onDrawMonth.emit(month.moment.subtract(1, 'months'));
     };
     FsDatePickerCalendarComponent.prototype.nextMonth = function (month) {
-        this.drawMonths(month.moment.add(1, 'months'));
+        // this.drawMonths(month.moment.add(1, 'months'));
+        this.onDrawMonth.emit(month.moment.add(1, 'months'));
+    };
+    FsDatePickerCalendarComponent.prototype.setMonth = function (monthNumber) {
+        // this.drawMonths(moment(this.month.moment).set('month', monthNumber - 1));
+        this.onDrawMonth.emit(moment(this.month.moment).set('month', monthNumber - 1));
+    };
+    FsDatePickerCalendarComponent.prototype.setYear = function (yearNumber) {
+        // this.drawMonths(moment(this.month.moment).set('year', yearNumber));
+        this.onDrawMonth.emit(moment(this.month.moment).set('year', yearNumber));
     };
     FsDatePickerCalendarComponent.prototype.drawMonths = function (date) {
-        if (!date) {
-            date = this.fsDatePickerCommon.createMoment();
-        }
+        this.onDrawMonth.emit(date);
         this.month = this.createMonth(date);
     };
     FsDatePickerCalendarComponent.prototype.createMonth = function (date) {
@@ -275,10 +324,19 @@ var FsDatePickerCalendarComponent = (function () {
         }
     };
     FsDatePickerCalendarComponent.prototype.onMouseWheel = function ($event) {
-        $event.preventDefault();
+        // $event.preventDefault();
     };
     FsDatePickerCalendarComponent.prototype.onTouchMove = function ($event) {
         $event.preventDefault();
+    };
+    FsDatePickerCalendarComponent.prototype.swipe = function (action) {
+        if (action === void 0) { action = this.SWIPE_ACTION.RIGHT; }
+        if (action === this.SWIPE_ACTION.RIGHT) {
+            this.previousMonth(this.month);
+        }
+        else if (action === this.SWIPE_ACTION.LEFT) {
+            this.nextMonth(this.month);
+        }
     };
     FsDatePickerCalendarComponent.prototype.ngOnDestroy = function () {
         if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
@@ -293,7 +351,11 @@ var FsDatePickerCalendarComponent = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsDatePickerCalendarComponent.prototype, "dateToHighlight", void 0);
+    ], FsDatePickerCalendarComponent.prototype, "highlightStartDate", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "highlightEndDate", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
@@ -303,6 +365,10 @@ var FsDatePickerCalendarComponent = (function () {
         __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "disabledDays", void 0);
     __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "drawMonth", void 0);
+    __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "onChange", void 0);
@@ -310,6 +376,18 @@ var FsDatePickerCalendarComponent = (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], FsDatePickerCalendarComponent.prototype, "onDateModeChange", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "onDrawMonth", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "hoverDay", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsDatePickerCalendarComponent.prototype, "mouseLeaveCalendar", void 0);
     FsDatePickerCalendarComponent = __decorate([
         core_1.Component({
             selector: 'fsDatePickerCalendar',
@@ -318,11 +396,17 @@ var FsDatePickerCalendarComponent = (function () {
             host: {
                 '(mousewheel)': 'onMouseWheel($event)',
                 '(touchmove)': 'onTouchMove($event)'
-            }
+            },
+            providers: [
+                {
+                    provide: platform_browser_1.HAMMER_GESTURE_CONFIG,
+                    useClass: fshammer_config_1.FsHammerConfig
+                }
+            ]
         }),
         __metadata("design:paramtypes", [core_1.ElementRef, fsdatepickercommon_service_1.FsDatePickerCommon,
             fsdatepickermodel_service_1.FsDatePickerModel,
-            common_1.FsUtil, core_1.IterableDiffers])
+            core_1.IterableDiffers])
     ], FsDatePickerCalendarComponent);
     return FsDatePickerCalendarComponent;
 }());

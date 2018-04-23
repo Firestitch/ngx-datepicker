@@ -1,0 +1,55 @@
+.time {
+  padding: 12px 15px; }
+  .time .wraper {
+    flex-direction: row;
+    display: flex;
+    align-items: start; }
+  .time .hours-group {
+    display: flex;
+    flex-direction: column; }
+    .time .hours-group .hours {
+      margin-bottom: 10px; }
+  .time .hours {
+    height: 100%; }
+    .time .hours table {
+      border-collapse: collapse;
+      width: 100%; }
+  .time .hour .number.textual {
+    font-size: 11px; }
+  .time .hour .am-pm {
+    font-size: 9px;
+    margin-left: 1px; }
+  .time .minutes {
+    height: 100%;
+    margin-left: 15px; }
+    .time .minutes table {
+      border-collapse: collapse;
+      width: 100%; }
+    .time .minutes .button-expand {
+      display: block;
+      text-align: center;
+      color: #4678AE;
+      margin-top: 5px; }
+  .time .lbl {
+    margin-bottom: 2px;
+    font-size: 12px; }
+  .time .hour, .time .minute {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border: 1px	solid #efefef;
+    padding: 0;
+    cursor: pointer; }
+    .time .hour .number, .time .minute .number {
+      border: 1px solid transparent;
+      border-radius: 50%;
+      line-height: 28px;
+      height: 28px; }
+
+@media only screen and (min-width: 500px) {
+  .time {
+    display: flex !important; } }
+
+@media only screen and (max-width: 499px) {
+  .time {
+    margin: 0 auto; } }

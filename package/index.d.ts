@@ -7,6 +7,8 @@ export * from './directives/fsdatepickrange.directive';
 export * from './directives/fsisscroll.directive';
 export * from './components/fsdatepicker/fsdatepicker.component';
 export * from './components/fsdatepickerrange/fsdatepickerrange.component';
+export * from './components/fsdatepickersummary/fsdatepickersummary.component';
+export * from './components/fsdatepickerpresets/fsdatepickerpresets.component';
 export * from './components/fsdatepickercalendar/fsdatepickercalendar.component';
 export * from './components/fsdatepickertime/fsdatepickertime.component';
 export * from './services/fsdatepickerfactory.service';

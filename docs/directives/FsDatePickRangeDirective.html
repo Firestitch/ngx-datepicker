@@ -98,7 +98,13 @@
                                     <a href="../components/FsDatepickerComponent.html" >FsDatepickerComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/FsDatepickerPresetsComponent.html" >FsDatepickerPresetsComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/FsDatepickerRangeComponent.html" >FsDatepickerRangeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FsDatepickerSummaryComponent.html" >FsDatepickerSummaryComponent</a>
                                 </li>
                         </ul>
                     </li>
@@ -126,6 +132,22 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-classes-links"
+                            >
+                            <span class="fa fa-fw fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="../classes/FsHammerConfig.html" >FsHammerConfig</a>
+                                </li>
+                        </ul>
+                    </li>
             
                     <li class="chapter">
                         <div class="simple menu-toggler" data-toggle="collapse"
@@ -166,7 +188,13 @@
                                 id="xs-interfaces-links"
                             >
                                 <li class="link">
+                                    <a href="../interfaces/FsComponents.html" >FsComponents</a>
+                                </li>
+                                <li class="link">
                                     <a href="../interfaces/FsDatePicker.html" >FsDatePicker</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FsPreset.html" >FsPreset</a>
                                 </li>
                         </ul>
                     </li>
@@ -283,7 +311,13 @@
                                            <a href="../components/FsDatepickerComponent.html" >FsDatepickerComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/FsDatepickerPresetsComponent.html" >FsDatepickerPresetsComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/FsDatepickerRangeComponent.html" >FsDatepickerRangeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FsDatepickerSummaryComponent.html" >FsDatepickerSummaryComponent</a>
                                        </li>
                                </ul>
                            </li>
@@ -311,6 +345,22 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#classes-links"
+                   >
+                                   <span class="fa fa-fw fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../classes/FsHammerConfig.html" >FsHammerConfig</a>
+                                       </li>
+                               </ul>
+                           </li>
                    
                            <li class="chapter">
                                <div class="simple menu-toggler" data-toggle="collapse"
@@ -351,7 +401,13 @@
                                        id="interfaces-links"
                    >
                                        <li class="link">
+                                           <a href="../interfaces/FsComponents.html" >FsComponents</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../interfaces/FsDatePicker.html" >FsDatePicker</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FsPreset.html" >FsPreset</a>
                                        </li>
                                </ul>
                            </li>
@@ -469,6 +525,7 @@
                                         <a href="#onFocused">onFocused</a>
                                     </li>
                                     <li>
+                                            <span class="modifier">Public</span>
                                         <a href="#opened">opened</a>
                                     </li>
                                 </ul>
@@ -528,6 +585,9 @@
                                     </li>
                                     <li>
                                         <a href="#ngModelStart">ngModelStart</a>
+                                    </li>
+                                    <li>
+                                        <a href="#presets">presets</a>
                                     </li>
                                     <li>
                                         <a href="#view">view</a>
@@ -674,6 +734,9 @@
                                     <code>maxYear</code>
                                 </td>
                                 <td class="col-md-10">
+                                    <p>
+                                      <em>Default value: </em><code>null</code>
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
@@ -686,6 +749,9 @@
                                     <code>minYear</code>
                                 </td>
                                 <td class="col-md-10">
+                                    <p>
+                                      <em>Default value: </em><code>null</code>
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
@@ -715,6 +781,25 @@
                                 <td class="col-md-10">
                                     <p>
                                       <em>Default value: </em><code>null</code>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <a name="presets"></a>
+                                    <code>presets</code>
+                                </td>
+                                <td class="col-md-10">
+                                      <p>
+                                        <em>Type:</em>    <code><a href="../interfaces/FsPreset.html" target="_self" >FsPreset[]</a></code>
+
+                                      </p>
+                                    <p>
+                                      <em>Default value: </em><code>[]</code>
                                     </p>
                                 </td>
                             </tr>
@@ -1386,6 +1471,7 @@
                                     <a name="opened"></a>
                                     <span class="name">
                                         <b>
+                                            <span class="modifier">Public</span>
                                         opened
                                         </b>
                                         <a href="#opened"><span class="fa fa-link"></span></a>
@@ -1394,7 +1480,7 @@
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <code>opened:     <code></code>
+                                    <span class="modifier-icon fa fa-reset"></span><code>opened:     <code></code>
             </code>
                                 </td>
                             </tr>

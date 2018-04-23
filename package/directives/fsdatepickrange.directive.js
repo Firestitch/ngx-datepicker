@@ -25,9 +25,12 @@ var FsDatePickRangeDirective = (function () {
         this.viewContainerRef = viewContainerRef;
         this.fsDatePickerCommon = fsDatePickerCommon;
         this.fsDatepickerRangeFactory = fsDatepickerRangeFactory;
+        this.minYear = null;
+        this.maxYear = null;
         this.view = 'date';
         this.ngModelStart = null;
         this.ngModelEnd = null;
+        this.presets = [];
         this.ngModelStartChange = new core_1.EventEmitter();
         this.ngModelEndChange = new core_1.EventEmitter();
         this.change$ = new core_1.EventEmitter();
@@ -72,10 +75,11 @@ var FsDatePickRangeDirective = (function () {
         var _this = this;
         this.opened = true;
         if (this.$dialog) {
+            // @TODO remove this
             // Set first time tab as active
-            if (this.$dialog.instance.rangeTimeTabGroup) {
-                this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
-            }
+            // if (this.$dialog.instance.rangeTimeTabGroup) {
+            //  this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
+            // }
             return;
         }
         this.fsDatepickerRangeFactory.setRootViewContainerRef(this.viewContainerRef);
@@ -84,7 +88,14 @@ var FsDatePickRangeDirective = (function () {
         this.$dialog.instance.fsDatePickerModel.view = this.view;
         this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
         this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+        this.$dialog.instance.fsDatePickerModel.presets = this.presets;
         this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
+        if (this.view === 'time') {
+            this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
+        }
+        else {
+            this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true, calendarEnd: true };
+        }
         setTimeout(function () {
             _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
         });
@@ -129,6 +140,10 @@ var FsDatePickRangeDirective = (function () {
         core_1.Input(),
         __metadata("design:type", Object)
     ], FsDatePickRangeDirective.prototype, "ngModelEnd", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], FsDatePickRangeDirective.prototype, "presets", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
