@@ -3,7 +3,7 @@
 <div class="fs-datetime-dialog fs-datetime-range dialog-view-{{ fsDatePickerModel.view }}" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
   'has-date': (fsDatePickerModel.components.calendarStart || fsDatePickerModel.components.calendarEnd),
-  'has-time': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd) }">
+  'has-time': fsDatePickerModel.components.time }">
   <div class="wrap">
 
     <div class="header">
@@ -14,7 +14,7 @@
       ></fsDatePickerSummary>
       <!--
       <fsDatePickerPresets
-      *ngIf="!fsDatePickerModel.components.timeStart && !fsDatePickerModel.components.timeEnd"
+      *ngIf="!fsDatePickerModel.components.time"
       (datesChange)="onDatesChange($event)"
       ></fsDatePickerPresets>
       -->
@@ -54,15 +54,9 @@
 
       <div class="time-range">
         <fsDatePickerTime
-          *ngIf="fsDatePickerModel.components.timeStart"
+          *ngIf="fsDatePickerModel.components.time"
           [date]="parentInstance.ngModelStart"
           (onChange)="setStartTime($event)"
-        ></fsDatePickerTime>
-        <fsDatePickerTime
-          *ngIf="fsDatePickerModel.components.timeEnd"
-          [date]="parentInstance.ngModelEnd"
-          [disabledTimes]="toDisabledTimes"
-          (onChange)="setEndTime($event)"
         ></fsDatePickerTime>
       </div>
 

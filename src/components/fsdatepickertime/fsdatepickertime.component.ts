@@ -11,21 +11,28 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 })
 export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
-  @Input() public date = null;
-  @Input() public disabledMinutes = [];
-  @Input() public disabledHours = [];
-  @Input() public disabledTimes = [];
-  @Output() public onChange = new EventEmitter<any>();
+  @Input() public startDate = null;
+  @Input() public endDate = null;
 
-  public selected = {};
+  // @Input() public disabledMinutes = [];
+  // @Input() public disabledHours = [];
+  // @Input() public disabledTimes = [];
+  @Output() public onChangeStartDate = new EventEmitter<any>();
+  @Output() public onChangeEndDate = new EventEmitter<any>();
+
+  public selectedStart = {};
+  public selectedEnd = {};
+
   public expanded = false;
 
+  /*
   public disabledTimeMinutes = {};
   public disabledTimeHours = {};
   public disabledGroupedMinutes = {};
   private disabledMinutesDiffer = null;
   private disabledHoursDiffer = null;
   private disabledTimesDiffer = null;
+  */
 
   public timeHoursCollapsed = [
     [
@@ -61,30 +68,37 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
     public fsDatePickerModel: FsDatePickerModel,
     private _iterableDiffers: IterableDiffers) {
-      this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
-      this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
-      this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
+      // this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
+      // this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
+      // this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);
     }
 
   ngOnInit() {
-    this.checkDisabledTime();
+    // this.checkDisabledTime();
   }
 
   ngOnChanges(changes) {
-    if (changes && changes.date) {
-      this.selected = this.fsDatePickerCommon.getSelected(this.date);
+    if (changes && changes.startDate) {
+      this.selectedStart = this.fsDatePickerCommon.getSelected(this.startDate);
+    }
+
+    if (changes && changes.endDate) {
+      this.selectedEnd = this.fsDatePickerCommon.getSelected(this.selectedEnd);
     }
   }
 
   ngDoCheck() {
+    /*
     if (this.disabledHoursDiffer.diff(this.disabledHours) ||
     this.disabledMinutesDiffer.diff(this.disabledMinutes) ||
     this.disabledTimesDiffer.diff(this.disabledTimes)
     ) {
       this.checkDisabledTime();
     }
+    */
   }
 
+  /*
   checkDisabledTime() {
 
     this.disabledTimeMinutes = {};
@@ -161,42 +175,56 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
       this.disabledTimeHours[range] = true;
     }
   }
+  */
 
-  createModel() {
-    if (!this.date) {
-      this.setDate(this.fsDatePickerCommon.createMoment());
+  createModelStart() {
+    if (!this.startDate) {
+      this.setStartDate(this.fsDatePickerCommon.createMoment());
     }
   }
 
-  setDate(date) {
-    this.date = date;
-    this.onChange.emit(date);
+  createModelEnd() {
+    if (!this.endDate) {
+      this.setEndDate(this.fsDatePickerCommon.createMoment());
+    }
+  }
+
+  setStartDate(date) {
+    this.startDate = date;
+    this.onChangeStartDate.emit(date);
+  }
+
+  setEndDate(date) {
+    this.endDate = date;
+    this.onChangeEndDate.emit(date);
   }
 
   hourClick(hour) {
-
+    /*
     if (this.disabledTimeHours[hour]) {
       return;
     }
+    */
 
-    if (!this.date) {
+    if (!this.startDate) {
       this.createModel();
     }
 
-    this.setDate(this.date.clone().hour(hour));
+    this.setDate(this.startDate.clone().hour(hour));
   }
 
   minuteClick(minute) {
-
+    /*
     if (this.disabledTimeMinutes[minute]) {
       return;
     }
+    */
 
-    if (!this.date) {
+    if (!this.startDate) {
       this.createModel();
     }
 
-    this.setDate(this.date.clone().minute(minute));
+    this.setDate(this.startDate.clone().minute(minute));
   }
 
 }

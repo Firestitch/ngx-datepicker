@@ -25,8 +25,7 @@ export class FsDatePickerModel implements FsDatePicker {
   private _componentsDefault: FsComponents = {
     calendarStart: false,
     calendarEnd: false,
-    timeStart: false,
-    timeEnd: false
+    time: false
   };
 
   private _components: FsComponents = null;
@@ -51,8 +50,7 @@ export class FsDatePickerModel implements FsDatePicker {
     }
 
     if (['time', 'datetime'].indexOf(this._view) !== -1) {
-      allowable.push('timeStart');
-      allowable.push('timeEnd');
+      allowable.push('time');
     }
 
     forEach(tempData, (item, index) => {

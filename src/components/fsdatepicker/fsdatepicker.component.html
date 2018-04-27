@@ -3,7 +3,7 @@
 <div class="fs-datetime-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
   'has-date': fsDatePickerModel.components.calendarStart,
-  'has-time': fsDatePickerModel.components.timeStart,
+  'has-time': fsDatePickerModel.components.time,
   'date-mode-date': fsDatePickerModel.dateMode === 'date',
   'date-mode-month': fsDatePickerModel.dateMode === 'month',
   'date-mode-year': fsDatePickerModel.dateMode === 'year'
@@ -18,7 +18,7 @@
 
       <!--
       <fsDatePickerPresets
-      *ngIf="!fsDatePickerModel.components.timeStart"
+      *ngIf="!fsDatePickerModel.components.time"
       (datesChange)="setDate($event)"
       ></fsDatePickerPresets>
       -->
@@ -36,7 +36,7 @@
       ></fsDatePickerCalendar>
 
       <fsDatePickerTime
-        *ngIf="fsDatePickerModel.components.timeStart"
+        *ngIf="fsDatePickerModel.components.time"
         [date]="model"
         (onChange)="setDate($event)"
       ></fsDatePickerTime>
