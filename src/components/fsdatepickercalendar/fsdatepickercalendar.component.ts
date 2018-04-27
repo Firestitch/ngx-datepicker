@@ -133,7 +133,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     let start = null;
     let end = null;
 
-    if (this.highlightStartDate && this.highlightEndDate) {
+    if (this.highlightStartDate) {
+
+      this.highlightEndDate = this.highlightEndDate || this.highlightStartDate;
 
       if (moment(this.highlightStartDate).isAfter(this.highlightEndDate)) {
         start = this.highlightEndDate;
@@ -142,6 +144,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
         start = this.highlightStartDate;
         end = this.highlightEndDate;
       }
+
+      start = moment(start).startOf('day');
+      end = moment(end).startOf('day');
 
       const range = Array.from(moment.range(start, end).by('days'));
 

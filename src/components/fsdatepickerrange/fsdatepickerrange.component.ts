@@ -45,26 +45,19 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
       const startDate = this.parentInstance.ngModelStart;
       const endDate = this.parentInstance.ngModelEnd;
 
-      this.toDisabledDaysUpdate(startDate, endDate);
+      // Don't remove
+      // this.toDisabledDaysUpdate(startDate, endDate);
       this.toDisabledTimesUpdate(startDate, endDate);
 
       this.highlightStartDate = startDate;
-      this.highlightEndDate = endDate;
+      this.highlightEndDate = endDate || startDate;
     }
   }
 
   setStartDate(date) {
 
-    let startDate = date;
-    let endDate = this.parentInstance.ngModelEnd;
-
-    if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
-      startDate = this.parentInstance.ngModelStart;
-      endDate = date;
-    } else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
-      startDate = null;
-      endDate = null;
-    }
+    const startDate = date;
+    const endDate = this.parentInstance.ngModelEnd;
 
     this.setDates(startDate, endDate);
 
@@ -82,7 +75,11 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   setEndDate(date) {
-    this.setDates(this.parentInstance.ngModelStart, date);
+
+    const startDate = date;
+    const endDate = this.parentInstance.ngModelEnd;
+
+    this.setDates(startDate, endDate);
 
     if (date) {
       this.endCalendarDrawMonth(date);
@@ -103,6 +100,13 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   setDates(startDate, endDate) {
+
+    if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
+      endDate = startDate;
+      startDate = this.parentInstance.ngModelStart;
+    } else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
+      endDate = null;
+    }
 
     if (startDate && endDate && startDate.isAfter(endDate)) {
       startDate = endDate;

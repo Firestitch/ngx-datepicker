@@ -75,6 +75,9 @@
     max-height: 472px;
     .wrap {
       width: 353px;
+      .date-time {
+        overflow-y: auto;
+      }
     }
   }
 
@@ -181,9 +184,7 @@
   }
 
   .month-year {
-    font-weight: 600;
     height: 60px;
-    font-size: 17px;
 	  padding: 0 10px;
 	  display: flex;
     flex-direction: row;
@@ -191,9 +192,9 @@
 
     .actions {
       text-align: right;
-      margin-right: -12px;
       a {
         padding: 6px;
+        color: #757575;
       }
     }
 
@@ -216,8 +217,11 @@
     height: 50px;
     line-height: 50px;
     border: 1px solid #efefef;
-    cursor: pointer;
     outline: none;
+
+    &:not(.blank) {
+      cursor: pointer;
+    }
 
     &.today {
       &:after {
@@ -341,7 +345,6 @@
   }
 
   .date-time {
-    overflow: auto;
     flex-direction: row;
     display: flex;
   }
@@ -423,7 +426,7 @@
 
     .time .hour:hover:not(.disabled):not(.selected),
     .time .minute:hover:not(.disabled):not(.selected),
-    .day:hover:not(.disabled):not(.selected),
+    .day:hover:not(.disabled):not(.selected):not(.blank),
     .years .year:hover:not(.disabled):not(.selected),
     .months .month:hover:not(.disabled):not(.selected),
     .year-name:hover:not(.disabled):not(.selected),
@@ -450,6 +453,9 @@
           fsdatepickercalendar:first-child {
             margin-right: 0 !important;
           }
+        }
+        .date-time {
+          overflow-y: auto;
         }
       }
     }

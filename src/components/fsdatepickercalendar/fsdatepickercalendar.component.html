@@ -45,6 +45,9 @@
             <span>{{ day.number }}</span>
           </td>
         </tr>
+        <tr *ngIf="month.weeks.length < 6" class="week">
+          <td class="day blank" colspan="7"></td>
+        </tr>
       </tbody>
     </table>
   </div>

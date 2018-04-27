@@ -85,6 +85,7 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
       this.opened = true;
 
       if (this.$dialog) {
+        this.enableDefaultComponent();
         return;
       }
 
@@ -98,15 +99,19 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.presets = this.presets;
       this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
 
+      this.enableDefaultComponent();
+
+      setTimeout(() => {
+        this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);
+      });
+    }
+
+    private enableDefaultComponent() {
       if (this.view === 'time') {
         this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
       } else {
         this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true };
       }
-
-      setTimeout(() => {
-        this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);
-      });
     }
 
     private inputClick(e) {
