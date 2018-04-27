@@ -92,20 +92,22 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     if (this.fsDatePickerModel.view === 'time' && !this.parentInstance.ngModelEnd) {
       endDate = date;
     }
-    this.setDates(date, endDate);
+    this.setDates(date, endDate, false);
   }
 
   setEndTime(date) {
-    this.setDates(this.parentInstance.ngModelStart, date);
+    this.setDates(this.parentInstance.ngModelStart, date, false);
   }
 
-  setDates(startDate, endDate) {
+  setDates(startDate, endDate, allowRange = true) {
 
-    if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
-      endDate = startDate;
-      startDate = this.parentInstance.ngModelStart;
-    } else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
-      endDate = null;
+    if (allowRange) {
+      if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
+        endDate = startDate;
+        startDate = this.parentInstance.ngModelStart;
+      } else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
+        endDate = null;
+      }
     }
 
     if (startDate && endDate && startDate.isAfter(endDate)) {
