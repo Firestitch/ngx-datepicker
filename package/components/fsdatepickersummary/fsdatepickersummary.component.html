@@ -1,4 +1,4 @@
-<div *ngIf="formattedStartDate || formattedEndDate" class="summary">
+<div *ngIf="formattedStartDate || formattedEndDate" class="summary" [ngClass]="{ 'summary-time': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd) }">
   <ng-container *ngIf="formattedStartDate">
     <div
       (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"

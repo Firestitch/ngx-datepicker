@@ -8,12 +8,15 @@
     justify-content: center;
     height: 40px;
     border-bottom: 1px solid #efefef;
+    &.summary-time {
+      font-size: 15px;
+    }
     > div {
       cursor: pointer;
       display: inline-block;
       padding: 5px;
 
-      &:hover {
+      &:hover, &.active {
         background: rgba(70,120,174,.15);
       }
     }

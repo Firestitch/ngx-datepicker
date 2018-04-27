@@ -19,7 +19,6 @@ var FsDatepickerSummaryComponent = (function () {
         this.startDate = null;
         this.endDate = null;
         this.componentsChange = new core_1.EventEmitter();
-        // @Output() viewChange = new EventEmitter<any>();
         this.formattedStartDate = null;
         this.formattedEndDate = null;
     }
@@ -40,7 +39,6 @@ var FsDatepickerSummaryComponent = (function () {
                 time: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue, 'time')
             };
         }
-        // this.viewChange.emit(this.formattedStartDate || this.formattedEndDate ? true : false);
     };
     FsDatepickerSummaryComponent.prototype.onComponentsChange = function (view) {
         this.componentsChange.emit(view);
@@ -61,7 +59,7 @@ var FsDatepickerSummaryComponent = (function () {
         core_1.Component({
             selector: 'fsDatePickerSummary',
             templateUrl: './fsdatepickersummary.component.html',
-            styleUrls: ['./fsdatepickersummary.component.css'],
+            styleUrls: ['./fsdatepickersummary.component.css']
         }),
         __metadata("design:paramtypes", [fsdatepickercommon_service_1.FsDatePickerCommon,
             fsdatepickermodel_service_1.FsDatePickerModel])

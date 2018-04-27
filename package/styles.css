@@ -66,33 +66,43 @@
     flex-direction: column;
     background: #fff;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    width: 372px;
-    padding: 0 !important; }
+    width: 373px;
+    padding: 0 !important;
+    /*
+    @TODO in scope of presets
+    .header {
+      padding: 0 15px;
+      // Don't use flex. Strange behaviour of scroll
+      display: table;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    */ }
     .fs-datetime-dialog .wrap:focus {
       outline: none; }
     .fs-datetime-dialog .wrap:active {
       outline: none; }
-    .fs-datetime-dialog .wrap .header {
-      padding: 0 15px;
-      /* Don't use flex. Strange behaviour of scroll */
-      display: table;
-      width: 100%;
-      box-sizing: border-box; }
   .fs-datetime-dialog.has-time {
     height: 100%;
     max-height: 472px; }
-    .fs-datetime-dialog.has-time .wrap {
-      width: 353px; }
+    .fs-datetime-dialog.has-time .wrap .date-time {
+      overflow-y: auto; }
   .fs-datetime-dialog.fs-datetime-range.has-date .wrap {
-    width: 744px; }
-    .fs-datetime-dialog.fs-datetime-range.has-date .wrap .header fsdatepickerpresets .presets {
-      float: right; }
+    width: 744px;
+    /*
+        @TODO in scope of presets
+        .header {
+          fsdatepickerpresets .presets {
+            float: right;
+          }
+        }
+        */ }
     .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range {
       display: flex;
       flex: 1; }
       .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range fsdatepickercalendar:first-child {
         margin-right: 5px; }
-      .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).min-date:not(.max-date)::before {
+      .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).min-date::before {
         content: '';
         position: absolute;
         top: 0;
@@ -102,7 +112,7 @@
         border-width: 0.5em;
         border-left-color: #fff;
         border-top-color: #fff; }
-      .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).max-date:not(.min-date)::before {
+      .fs-datetime-dialog.fs-datetime-range.has-date .wrap .date-range td.day:not(.disabled):not(.mute).max-date::after {
         content: '';
         position: absolute;
         bottom: 0;
@@ -129,18 +139,16 @@
     display: flex;
     flex: 1; }
   .fs-datetime-dialog .month-year {
-    font-weight: 600;
     height: 60px;
-    font-size: 17px;
     padding: 0 10px;
     display: flex;
     flex-direction: row;
     align-items: center; }
     .fs-datetime-dialog .month-year .actions {
-      text-align: right;
-      margin-right: -12px; }
+      text-align: right; }
       .fs-datetime-dialog .month-year .actions a {
-        padding: 6px; }
+        padding: 6px;
+        color: #757575; }
     .fs-datetime-dialog .month-year .more {
       padding: 1px; }
   .fs-datetime-dialog .year-name, .fs-datetime-dialog .month-name {
@@ -155,19 +163,19 @@
     height: 50px;
     line-height: 50px;
     border: 1px solid #efefef;
-    cursor: pointer;
     outline: none; }
-    .fs-datetime-dialog .day.today:after {
-      content: 'TODAY';
+    .fs-datetime-dialog .day:not(.blank) {
+      cursor: pointer; }
+    .fs-datetime-dialog .day .today {
       color: #555555;
-      font-size: 9px;
+      font-size: 8px;
       position: absolute;
-      bottom: 5px;
+      bottom: 3px;
       left: 0;
       width: 100%;
       height: auto;
       line-height: normal; }
-    .fs-datetime-dialog .day.today.selected:after {
+    .fs-datetime-dialog .day.selected .today {
       color: #fff; }
     .fs-datetime-dialog .day.mute {
       color: #d7d7d7; }
@@ -229,18 +237,20 @@
       line-height: 65px;
       outline: none;
       cursor: pointer;
-      box-sizing: border-box; }
+      box-sizing: border-box;
+      /*
+      &.today {
+        border: 1px solid #4678AE;
+        border-style: double;
+      }
+      */ }
       .fs-datetime-dialog .years .year.row {
         clear: both; }
-      .fs-datetime-dialog .years .year.today {
-        border: 1px solid #4678AE;
-        border-style: double; }
       .fs-datetime-dialog .years .year:nth-last-child(-n+4) {
         border-bottom: 1px solid #efefef; }
       .fs-datetime-dialog .years .year:nth-child(4n+0) {
         border-right: 1px solid #efefef; }
   .fs-datetime-dialog .date-time {
-    overflow: auto;
     flex-direction: row;
     display: flex; }
   .fs-datetime-dialog .months {
@@ -262,14 +272,17 @@
       border-bottom: 0;
       border-right: 0;
       min-height: 80px;
-      box-sizing: border-box; }
+      box-sizing: border-box;
+      /*
+      &.today {
+        border: 1px solid #4678AE;
+        border-style: double;
+      }
+      */ }
       .fs-datetime-dialog .months .month:nth-child(-n+3) {
         border-top: 0; }
       .fs-datetime-dialog .months .month:nth-child(3n+0) {
         border-right: 1px solid #efefef; }
-      .fs-datetime-dialog .months .month.today {
-        border: 1px solid #4678AE;
-        border-style: double; }
   .fs-datetime-dialog .iscroll-scroller {
     position: absolute;
     width: 100%; }
@@ -298,7 +311,7 @@
     display: flex !important; }
   .fs-datetime-dialog .time .hour:hover:not(.disabled):not(.selected),
   .fs-datetime-dialog .time .minute:hover:not(.disabled):not(.selected),
-  .fs-datetime-dialog .day:hover:not(.disabled):not(.selected),
+  .fs-datetime-dialog .day:hover:not(.disabled):not(.selected):not(.blank),
   .fs-datetime-dialog .years .year:hover:not(.disabled):not(.selected),
   .fs-datetime-dialog .months .month:hover:not(.disabled):not(.selected),
   .fs-datetime-dialog .year-name:hover:not(.disabled):not(.selected),
@@ -319,6 +332,8 @@
       height: 100%; }
       .fs-datetime-dialog.fs-datetime-range.has-date .date-range fsdatepickercalendar:first-child {
         margin-right: 0 !important; }
+    .fs-datetime-dialog.fs-datetime-range.has-date .date-time {
+      overflow-y: auto; }
     .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap {
       height: 100% !important; }
       .fs-datetime-dialog:not(.fs-datetime-range).dialog-view-date .wrap .date-time {

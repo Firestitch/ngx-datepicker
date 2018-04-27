@@ -31,6 +31,7 @@ export declare class FsDatePickRangeDirective implements OnInit, OnChanges, OnDe
     ngOnChanges(changes: any): void;
     writeValue(startDate: any, endDate: any): void;
     private open();
+    private enableDefaultComponent();
     private inputClick(e);
     inputKeyup(e: any): void;
     inputBlur(event: any): void;

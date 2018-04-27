@@ -70,6 +70,7 @@ var FsDatePickDirective = (function () {
         var _this = this;
         this.opened = true;
         if (this.$dialog) {
+            this.enableDefaultComponent();
             return;
         }
         this.fsDatepickerFactory.setRootViewContainerRef(this.viewContainerRef);
@@ -80,15 +81,18 @@ var FsDatePickDirective = (function () {
         this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
         this.$dialog.instance.fsDatePickerModel.presets = this.presets;
         this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
+        this.enableDefaultComponent();
+        setTimeout(function () {
+            _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
+        });
+    };
+    FsDatePickDirective.prototype.enableDefaultComponent = function () {
         if (this.view === 'time') {
             this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
         }
         else {
             this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true };
         }
-        setTimeout(function () {
-            _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
-        });
     };
     FsDatePickDirective.prototype.inputClick = function (e) {
         var _this = this;

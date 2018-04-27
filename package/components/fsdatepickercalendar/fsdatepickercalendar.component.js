@@ -123,7 +123,8 @@ var FsDatePickerCalendarComponent = (function () {
         };
         var start = null;
         var end = null;
-        if (this.highlightStartDate && this.highlightEndDate) {
+        if (this.highlightStartDate) {
+            this.highlightEndDate = this.highlightEndDate || this.highlightStartDate;
             if (moment(this.highlightStartDate).isAfter(this.highlightEndDate)) {
                 start = this.highlightEndDate;
                 end = this.highlightStartDate;
@@ -132,6 +133,8 @@ var FsDatePickerCalendarComponent = (function () {
                 start = this.highlightStartDate;
                 end = this.highlightEndDate;
             }
+            start = moment(start).startOf('day');
+            end = moment(end).startOf('day');
             var range = Array.from(moment.range(start, end).by('days'));
             if (!range.length) {
                 return;

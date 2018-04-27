@@ -42,8 +42,14 @@
             'min-date': day.date === highlightedRangeDays.min,
             'max-date': day.date === highlightedRangeDays.max,
             disabled: day.disabled }" (click)="dayClick(day)" (mouseenter)="onMouseEnterDay(day)">
-            <span>{{ day.number }}</span>
+            <span>
+              {{ day.number }}
+              <span class="today" *ngIf="today.date==day.date">TODAY</span>
+            </span>
           </td>
+        </tr>
+        <tr *ngIf="month.weeks.length < 6" class="week">
+          <td class="day blank" colspan="7"></td>
         </tr>
       </tbody>
     </table>

@@ -29,6 +29,7 @@ export declare class FsDatePickDirective implements OnInit, OnDestroy {
     writeValue(value: any): void;
     getValue(): any;
     private open();
+    private enableDefaultComponent();
     private inputClick(e);
     inputKeyup(e: any): void;
     inputBlur(event: any): void;

@@ -36,23 +36,16 @@ var FsDatepickerRangeComponent = (function () {
         if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
             var startDate = this.parentInstance.ngModelStart;
             var endDate = this.parentInstance.ngModelEnd;
-            this.toDisabledDaysUpdate(startDate, endDate);
+            // Don't remove
+            // this.toDisabledDaysUpdate(startDate, endDate);
             this.toDisabledTimesUpdate(startDate, endDate);
             this.highlightStartDate = startDate;
-            this.highlightEndDate = endDate;
+            this.highlightEndDate = endDate || startDate;
         }
     };
     FsDatepickerRangeComponent.prototype.setStartDate = function (date) {
         var startDate = date;
         var endDate = this.parentInstance.ngModelEnd;
-        if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
-            startDate = this.parentInstance.ngModelStart;
-            endDate = date;
-        }
-        else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
-            startDate = null;
-            endDate = null;
-        }
         this.setDates(startDate, endDate);
         if (startDate && endDate) {
             if (moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM')) {
@@ -67,7 +60,9 @@ var FsDatepickerRangeComponent = (function () {
         }
     };
     FsDatepickerRangeComponent.prototype.setEndDate = function (date) {
-        this.setDates(this.parentInstance.ngModelStart, date);
+        var startDate = date;
+        var endDate = this.parentInstance.ngModelEnd;
+        this.setDates(startDate, endDate);
         if (date) {
             this.endCalendarDrawMonth(date);
         }
@@ -75,15 +70,25 @@ var FsDatepickerRangeComponent = (function () {
     FsDatepickerRangeComponent.prototype.setStartTime = function (date) {
         var endDate = this.parentInstance.ngModelEnd;
         // In time mode, if end date is empty - user not able switch to end time picker
-        if (this.fsDatePickerModel.view === 'time' && !this.parentInstance.ngModelEnd) {
+        if (this.fsDatePickerModel.view === 'time' && !endDate) {
             endDate = date;
         }
-        this.setDates(date, endDate);
+        if (date && endDate && date.isAfter(endDate)) {
+            endDate = date;
+        }
+        this.parentInstance.writeValue(date, endDate);
     };
     FsDatepickerRangeComponent.prototype.setEndTime = function (date) {
-        this.setDates(this.parentInstance.ngModelStart, date);
+        this.parentInstance.writeValue(this.parentInstance.ngModelStart, date);
     };
     FsDatepickerRangeComponent.prototype.setDates = function (startDate, endDate) {
+        if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
+            endDate = startDate;
+            startDate = this.parentInstance.ngModelStart;
+        }
+        else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
+            endDate = null;
+        }
         if (startDate && endDate && startDate.isAfter(endDate)) {
             startDate = endDate;
             endDate = null;

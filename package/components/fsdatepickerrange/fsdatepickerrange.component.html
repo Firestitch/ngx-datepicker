@@ -12,10 +12,12 @@
       [endDate]="parentInstance.ngModelEnd"
       (componentsChange)="setComponents($event)"
       ></fsDatePickerSummary>
+      <!--
       <fsDatePickerPresets
       *ngIf="!fsDatePickerModel.components.timeStart && !fsDatePickerModel.components.timeEnd"
       (datesChange)="onDatesChange($event)"
       ></fsDatePickerPresets>
+      -->
     </div>
 
     <div class="date-time">

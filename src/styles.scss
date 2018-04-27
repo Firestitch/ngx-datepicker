@@ -333,10 +333,12 @@
       &.row {
         clear: both;
       }
+      /*
       &.today {
         border: 1px solid #4678AE;
         border-style: double;
       }
+      */
       &:nth-last-child(-n+4) {
         border-bottom: 1px solid #efefef;
       }
@@ -377,10 +379,12 @@
       &:nth-child(3n+0) {
         border-right: 1px solid #efefef;
       }
+      /*
       &.today {
         border: 1px solid #4678AE;
         border-style: double;
       }
+      */
     }
   }
 

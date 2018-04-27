@@ -75,11 +75,7 @@ var FsDatePickRangeDirective = (function () {
         var _this = this;
         this.opened = true;
         if (this.$dialog) {
-            // @TODO remove this
-            // Set first time tab as active
-            // if (this.$dialog.instance.rangeTimeTabGroup) {
-            //  this.$dialog.instance.rangeTimeTabGroup.selectedIndex = 0;
-            // }
+            this.enableDefaultComponent();
             return;
         }
         this.fsDatepickerRangeFactory.setRootViewContainerRef(this.viewContainerRef);
@@ -90,15 +86,18 @@ var FsDatePickRangeDirective = (function () {
         this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
         this.$dialog.instance.fsDatePickerModel.presets = this.presets;
         this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
+        this.enableDefaultComponent();
+        setTimeout(function () {
+            _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
+        });
+    };
+    FsDatePickRangeDirective.prototype.enableDefaultComponent = function () {
         if (this.view === 'time') {
             this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
         }
         else {
             this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true, calendarEnd: true };
         }
-        setTimeout(function () {
-            _this.fsDatePickerCommon.positionDialog(_this.$dialog, _this._elementRef);
-        });
     };
     FsDatePickRangeDirective.prototype.inputClick = function (e) {
         var _this = this;
