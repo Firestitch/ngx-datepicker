@@ -1,12 +1,13 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnInit, OnChanges } from '@angular/core';
+
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
+
 
 @Component({
     selector: 'fsDatePickerSummary',
     templateUrl: './fsdatepickersummary.component.html',
-    styleUrls: ['./fsdatepickersummary.component.scss'],
-    // encapsulation: ViewEncapsulation.None
+    styleUrls: ['./fsdatepickersummary.component.scss']
 })
 export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
 
@@ -14,7 +15,6 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
   @Input() public endDate = null;
 
   @Output() componentsChange = new EventEmitter<any>();
-  // @Output() viewChange = new EventEmitter<any>();
 
   public formattedStartDate = null;
   public formattedEndDate = null;
@@ -25,7 +25,6 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-
   }
 
   ngOnChanges(changes) {
@@ -46,8 +45,6 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
         time: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue, 'time')
       };
     }
-
-    // this.viewChange.emit(this.formattedStartDate || this.formattedEndDate ? true : false);
   }
 
   onComponentsChange(view) {

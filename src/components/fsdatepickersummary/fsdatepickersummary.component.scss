@@ -1,21 +1,20 @@
 :host {
   .summary {
-    display: block;
-    float: left;
-    font-size: 14px;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-bottom: 1px solid #efefef;
     > div {
       cursor: pointer;
-      padding-bottom: 4px;
       display: inline-block;
+      padding: 5px;
 
-      border-bottom: 2px solid #fff;
-
-      &.active {
-        border-bottom: 2px solid #6689b4;
-      }
-      &:hover:not(.active) {
-        border-bottom: 2px solid #d2d2d2;
+      &:hover {
+        background: rgba(70,120,174,.15);
       }
     }
   }
@@ -23,6 +22,6 @@
 
 @media only screen and (max-width: 499px) {
   .summary {
-    font-size: 13px !important;
+    // font-size: 13px !important;
   }
 }

@@ -61,20 +61,23 @@
     &:active {
       outline: none;
     }
+    /*
+    @TODO in scope of presets
     .header {
       padding: 0 15px;
-      /* Don't use flex. Strange behaviour of scroll */
+      // Don't use flex. Strange behaviour of scroll
       display: table;
       width: 100%;
       box-sizing: border-box;
     }
+    */
   }
 
   &.has-time {
     height: 100%;
     max-height: 472px;
     .wrap {
-      width: 353px;
+      width: 370px;
       .date-time {
         overflow-y: auto;
       }
@@ -85,11 +88,14 @@
     &.has-date {
       .wrap {
         width: 744px;
+        /*
+        @TODO in scope of presets
         .header {
           fsdatepickerpresets .presets {
             float: right;
           }
         }
+        */
         .date-range {
           display: flex;
           flex: 1;
@@ -97,7 +103,7 @@
             margin-right: 5px;
           }
           td.day:not(.disabled):not(.mute) {
-            &.min-date:not(.max-date) {
+            &.min-date {
               &::before {
                 content: '';
                 position: absolute;
@@ -110,8 +116,8 @@
                 border-top-color: #fff;
               }
             }
-            &.max-date:not(.min-date) {
-              &::before {
+            &.max-date {
+              &::after {
                 content: '';
                 position: absolute;
                 bottom: 0;
@@ -223,23 +229,20 @@
       cursor: pointer;
     }
 
-    &.today {
-      &:after {
-        content: 'TODAY';
-        color: #555555;
-        font-size: 9px;
-        position: absolute;
-        bottom: 5px;
-        left: 0;
-        width: 100%;
-        height: auto;
-        line-height: normal;
-      }
+    .today {
+      color: #555555;
+      font-size: 8px;
+      position: absolute;
+      bottom: 3px;
+      left: 0;
+      width: 100%;
+      height: auto;
+      line-height: normal;
+    }
 
-      &.selected {
-        &:after {
-          color: #fff;
-        }
+    &.selected {
+      .today {
+        color: #fff;
       }
     }
 
