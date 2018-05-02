@@ -12,6 +12,13 @@
   &[hidden] { display: none !important; }
 }
 
+.fs-datetime-range.has-view-date.has-view-time.has-time {
+    .summary .date,
+    .summary .time {
+      font-size: 15px;
+    }
+}
+
 .fs-datetime-dialog {
 	position: fixed;
   z-index: 80;
@@ -85,6 +92,7 @@
 
   &.fs-datetime-range {
     &.has-date {
+
       .wrap {
         width: 744px;
         /*
@@ -173,7 +181,7 @@
   }
   */
 
-  .date::-webkit-scrollbar,
+  .calendar-container::-webkit-scrollbar,
   .years::-webkit-scrollbar {
     display: none;
   }
@@ -287,7 +295,7 @@
   fsdatepickercalendar {
     min-height: 350px;
   }
-  .date {
+  .calendar-container {
     // overflow-y: auto;
     // overflow-x: hidden;
     width: 100%;
@@ -296,18 +304,18 @@
 	  flex: 1 1 45%;
   }
 
-  .day.selected,
-  .years .year.selected,
-  .months .month.selected,
-  .time .hour.selected,
-  .time .minute.selected {
+  .calendar-container .day.selected,
+  .calendar-container .years .year.selected,
+  .calendar-container .months .month.selected,
+  .time-container .hour.selected,
+  .time-container .minute.selected {
     background: #4678AE;
 	  color: #fff;
   }
 
-  .time .hour.disabled,
-  .time .minute.disabled,
-  .day.disabled {
+  .time-container .hour.disabled,
+  .time-container .minute.disabled,
+  .calendar-container .day.disabled {
     color: #a6a5a5;
     cursor: initial;
     background: #efefef;
@@ -426,18 +434,27 @@
 @media only screen and (min-width: 500px) {
 
   .fs-datetime-dialog {
-    .date {
+    .calendar-container {
       display: flex !important;
     }
 
-    .time .hour:hover:not(.disabled):not(.selected),
-    .time .minute:hover:not(.disabled):not(.selected),
-    .day:hover:not(.disabled):not(.selected):not(.blank),
-    .years .year:hover:not(.disabled):not(.selected),
-    .months .month:hover:not(.disabled):not(.selected),
-    .year-name:hover:not(.disabled):not(.selected),
-    .month-name:hover:not(.disabled):not(.selected) {
+    .time-container .hour:hover:not(.disabled):not(.selected),
+    .time-container .minute:hover:not(.disabled):not(.selected),
+    .calendar-container .day:hover:not(.disabled):not(.selected):not(.blank),
+    .calendar-container .years .year:hover:not(.disabled):not(.selected),
+    .calendar-container .months .month:hover:not(.disabled):not(.selected),
+    .calendar-container .year-name:hover:not(.disabled):not(.selected),
+    .calendar-container .month-name:hover:not(.disabled):not(.selected) {
       background: rgba(70,120,174,.15);
+    }
+
+    &.has-view-time {
+      .summary .date:hover,
+      .summary .time:hover,
+      .summary .date.active,
+      .summary .time.active {
+        background: rgba(70,120,174,.15);
+      }
     }
   }
 }
@@ -453,6 +470,7 @@
     max-height: initial !important;
     &.fs-datetime-range {
       &.has-date {
+
         .date-range {
           flex-direction: column;
           height: 100%;

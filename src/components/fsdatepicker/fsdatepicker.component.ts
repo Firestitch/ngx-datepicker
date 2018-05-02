@@ -3,7 +3,7 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 
 @Component({
-    selector: 'fsDatePicker',
+    selector: 'fs-date-picker',
     templateUrl: './fsdatepicker.component.html',
     styleUrls: ['./../../styles.scss'],
     encapsulation: ViewEncapsulation.None,

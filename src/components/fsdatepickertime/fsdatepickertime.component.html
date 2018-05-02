@@ -1,10 +1,11 @@
-<div class="time">
+<div class="time-container">
   <div class="wraper">
     <ng-container *ngIf="!expanded">
       <div class="hours-group">
-        <div class="hours" *ngFor="let group of timeHoursCollapsed; let i = index">
-          <div class="lbl">Hour {{ i ? 'PM' : 'AM' }}</div>
-            <table>
+        <div class="lbl">Hour</div>
+        <div class="hours">
+          <table>
+            <tbody *ngFor="let group of timeHoursCollapsed; let i = index">
               <tr *ngFor="let hours of group">
                 <td *ngFor="let hour of hours" class="hour" (click)="hourClick(hour)" [ngClass]="{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }">
                   <div class="number">
@@ -12,7 +13,8 @@
                     <span *ngIf="hour >= 12">{{ hour==12 ? 12 : hour-12 }}<span class="am-pm">pm</span></span>
                   </div>
                 </td>
-            </tr>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

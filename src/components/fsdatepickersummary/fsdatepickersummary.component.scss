@@ -8,17 +8,21 @@
     justify-content: center;
     height: 40px;
     border-bottom: 1px solid #efefef;
-    &.summary-time {
-      font-size: 15px;
-    }
-    > div {
+
+    .date,
+    .time {
       cursor: pointer;
       display: inline-block;
       padding: 5px;
+      border-radius: 3px;
+    }
 
-      &:hover, &.active {
-        background: rgba(70,120,174,.15);
-      }
+    .time {
+      margin: 0 3px;
+    }
+
+    .hyphen {
+      margin: 0 2px;
     }
   }
 }

@@ -2,30 +2,23 @@
 
 <div class="fs-datetime-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
-  'has-date': fsDatePickerModel.components.calendarStart,
-  'has-time': fsDatePickerModel.components.timeStart,
+  'has-view-date': fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime',
+  'has-view-time': fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime',
   'date-mode-date': fsDatePickerModel.dateMode === 'date',
   'date-mode-month': fsDatePickerModel.dateMode === 'month',
   'date-mode-year': fsDatePickerModel.dateMode === 'year'
  }">
   <div class="wrap">
 
-    <div *ngIf="fsDatePickerModel.dateMode === 'date'" class="header">
-      <fsDatePickerSummary
+    <div *ngIf="fsDatePickerModel.view === 'datetime'" class="header">
+      <fs-date-picker-summary
       [startDate]="model"
       (componentsChange)="setComponents($event)"
-      ></fsDatePickerSummary>
-
-      <!--
-      <fsDatePickerPresets
-      *ngIf="!fsDatePickerModel.components.timeStart"
-      (datesChange)="setDate($event)"
-      ></fsDatePickerPresets>
-      -->
+      ></fs-date-picker-summary>
     </div>
 
     <div class="date-time">
-      <fsDatePickerCalendar
+      <fs-date-picker-calendar
         *ngIf="fsDatePickerModel.components.calendarStart"
         [date]="model"
         [drawMonth]="calendarMonth"
@@ -33,13 +26,13 @@
         (onChange)="setDate($event)"
         (onDateModeChange)="setDateMode($event)"
         (onDrawMonth)="calendarDrawMonth($event)"
-      ></fsDatePickerCalendar>
+      ></fs-date-picker-calendar>
 
-      <fsDatePickerTime
+      <fs-date-picker-time
         *ngIf="fsDatePickerModel.components.timeStart"
         [date]="model"
         (onChange)="setDate($event)"
-      ></fsDatePickerTime>
+      ></fs-date-picker-time>
 
     </div>
 

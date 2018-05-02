@@ -5,7 +5,7 @@ import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 
 @Component({
-    selector: 'fsDatePickerSummary',
+    selector: 'fs-date-picker-summary',
     templateUrl: './fsdatepickersummary.component.html',
     styleUrls: ['./fsdatepickersummary.component.scss']
 })

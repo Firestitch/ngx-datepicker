@@ -1,4 +1,4 @@
-.time {
+.time-container {
   padding: 12px 15px;
 
   .wraper {
@@ -10,9 +10,6 @@
   .hours-group {
     display: flex;
     flex-direction: column;
-    .hours {
-      margin-bottom: 10px;
-    }
   }
 
   .hours {

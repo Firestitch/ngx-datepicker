@@ -5,7 +5,7 @@ import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service'
 import * as moment from 'moment-timezone';
 
 @Component({
-    selector: 'fsDatePickerRange',
+    selector: 'fs-date-picker-range',
     templateUrl: './fsdatepickerrange.component.html',
     styleUrls: ['./../../styles.scss'],
     encapsulation: ViewEncapsulation.None,

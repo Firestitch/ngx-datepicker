@@ -11,7 +11,7 @@ import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service'
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 
 @Component({
-    selector: 'fsDatePickerCalendar',
+    selector: 'fs-date-picker-calendar',
     templateUrl: './fsdatepickercalendar.component.html',
     styleUrls: ['./fsdatepickercalendar.component.scss'],
     host: {
@@ -87,7 +87,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
     if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       setTimeout(() => {
-        const $date = this.element.nativeElement.querySelector('.date');
+        const $date = this.element.nativeElement.querySelector('.calendar-container');
         $date.addEventListener('mousewheel', this.dateScroll);
       });
     }
@@ -416,7 +416,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   ngOnDestroy() {
     if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
-      const $date = this.element.nativeElement.querySelector('.date');
+      const $date = this.element.nativeElement.querySelector('.calendar-container');
       $date.removeEventListener('mousewheel', this.dateScroll);
     }
   }

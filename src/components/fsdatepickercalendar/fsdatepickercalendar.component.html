@@ -1,4 +1,4 @@
-<div class="date" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" (mouseleave)="onMouseLeaveCalendar()">
+<div class="calendar-container" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" (mouseleave)="onMouseLeaveCalendar()">
   <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value }">{{ month.abr }}</div>
   </div>
