@@ -41,3 +41,4 @@ dist/*
 /dll
 /package-lock.json
 /*.code-workspace
+/package
