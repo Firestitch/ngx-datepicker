@@ -1,6 +1,6 @@
-<div class="fs-datetime-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
+<div class="fs-date-picker-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
 
-<div class="fs-datetime-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
+<div class="fs-date-picker-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
 [ngClass]="{ opened: parentInstance.opened,
   'has-view-date': fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime',
   'has-view-time': fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime',

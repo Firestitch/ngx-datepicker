@@ -49,7 +49,7 @@ export class FsDatePickerCommon {
 
     const input = elementRef.nativeElement;
     const parent = input.parentElement.parentElement;
-    const dialogContainer = dialog.instance.element.nativeElement.querySelector('.fs-datetime-dialog');
+    const dialogContainer = dialog.instance.element.nativeElement.querySelector('.fs-date-picker-dialog');
     const dialogContainerStyles = window.getComputedStyle(dialogContainer);
 
     const inputBound = input.getBoundingClientRect();
@@ -173,13 +173,13 @@ export class FsDatePickerCommon {
       el.classList.add('pointer-events-none');
       stack.push(el);
 
-      if (el.className.match('/fs-datetime-backdrop/')) {
+      if (el.className.match('/fs-date-picker-backdrop/')) {
         setTimeout(() => {
           el.click();
         });
         break;
       }
-    } while (el.tagName !== 'HTML' && !el.tagName.match(/^FS-DATETIME/));
+    } while (el.tagName !== 'HTML' && !el.tagName.match(/^FS-DATE-PICKER/));
 
     for (let i = 0; i < stack.length; i += 1) {
         stack[i].classList.remove('pointer-events-none');

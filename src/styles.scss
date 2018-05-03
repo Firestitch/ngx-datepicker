@@ -1,4 +1,4 @@
-.fs-datetime-backdrop {
+.fs-date-picker-backdrop {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -12,14 +12,14 @@
   &[hidden] { display: none !important; }
 }
 
-.fs-datetime-range.has-view-date.has-view-time {
+.fs-date-picker-range.has-view-date.has-view-time {
     .summary .date,
     .summary .time {
       
     }
 }
 
-.fs-datetime-dialog {
+.fs-date-picker-dialog {
 	position: fixed;
   z-index: 80;
   display: none;
@@ -47,7 +47,7 @@
     outline: none;
   }
 
-  fsDatePickerCalendar {
+  fs-date-picker-calendar {
     /* Need for year view */
     // width: 100%;
     display: flex;
@@ -90,7 +90,7 @@
     }
   }
 
-  &.fs-datetime-range {
+  &.fs-date-picker-range {
     &.has-date {
 
       .wrap {
@@ -98,7 +98,7 @@
         /*
         @TODO in scope of presets
         .header {
-          fsdatepickerpresets .presets {
+          fs-date-picker-presets .presets {
             float: right;
           }
         }
@@ -106,7 +106,7 @@
         .date-range {
           display: flex;
           flex: 1;
-          fsdatepickercalendar:first-child {
+          fs-date-picker-calendar:first-child {
             margin-right: 5px;
           }
           td.day:not(.disabled):not(.mute) {
@@ -284,7 +284,7 @@
     }
   }
 
-  fs-datetime {
+  fs-date-picker {
     .lbl {
       font-weight: normal;
       font-size: 12px;
@@ -292,7 +292,7 @@
     }
   }
 
-  fsdatepickercalendar {
+  fs-date-picker-calendar {
     min-height: 350px;
   }
   .calendar-container {
@@ -433,7 +433,7 @@
 
 @media only screen and (min-width: 500px) {
 
-  .fs-datetime-dialog {
+  .fs-date-picker-dialog {
     .calendar-container {
       display: flex !important;
     }
@@ -460,9 +460,9 @@
 }
 
 @media only screen and (max-width: 744px) {
-  .fs-datetime-dialog {
+  .fs-date-picker-dialog {
     
-    &.fs-datetime-range {
+    &.fs-date-picker-range {
       &.has-view-date {
         .wrap {
           width: 100%;
@@ -475,6 +475,7 @@
             margin-right: 0 !important;
           }
         }
+
         .date-time {
           overflow-y: auto;
         }        
@@ -486,7 +487,7 @@
  
 
 @media only screen and (max-width: 499px) {
-  .fs-datetime-dialog {
+  .fs-date-picker-dialog {
     left: 0 !important;
     right: 0 !important;
     top: 0 !important;
@@ -496,7 +497,7 @@
     max-height: initial !important;
 
     // 2 cases when Done button is hidden and dialog height increasing
-    &:not(.fs-datetime-range) {
+    &:not(.fs-date-picker-range) {
       &.dialog-view-date {
         .wrap {
           height: 100% !important;
