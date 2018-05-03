@@ -12,10 +12,10 @@
   &[hidden] { display: none !important; }
 }
 
-.fs-datetime-range.has-view-date.has-view-time.has-time {
+.fs-datetime-range.has-view-date.has-view-time {
     .summary .date,
     .summary .time {
-      font-size: 15px;
+      
     }
 }
 
@@ -459,6 +459,32 @@
   }
 }
 
+@media only screen and (max-width: 744px) {
+  .fs-datetime-dialog {
+    
+    &.fs-datetime-range {
+      &.has-view-date {
+        .wrap {
+          width: 100%;
+        }
+
+        .date-range {
+          flex-direction: column;
+          height: 100%;
+          fs-date-picker-calendar:first-child {
+            margin-right: 0 !important;
+          }
+        }
+        .date-time {
+          overflow-y: auto;
+        }        
+      }
+    }
+  }
+}
+
+ 
+
 @media only screen and (max-width: 499px) {
   .fs-datetime-dialog {
     left: 0 !important;
@@ -468,21 +494,6 @@
     margin: 0px;
     height: 100vh;
     max-height: initial !important;
-    &.fs-datetime-range {
-      &.has-date {
-
-        .date-range {
-          flex-direction: column;
-          height: 100%;
-          fsdatepickercalendar:first-child {
-            margin-right: 0 !important;
-          }
-        }
-        .date-time {
-          overflow-y: auto;
-        }
-      }
-    }
 
     // 2 cases when Done button is hidden and dialog height increasing
     &:not(.fs-datetime-range) {

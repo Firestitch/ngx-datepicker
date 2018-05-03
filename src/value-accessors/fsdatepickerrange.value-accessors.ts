@@ -1,4 +1,4 @@
-import { FsDatePickRangeDirective } from './../directives/fsdatepickrange.directive';
+import { FsDatePickRangeDirective } from './../directives';
 import { Provider, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 

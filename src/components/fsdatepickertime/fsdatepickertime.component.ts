@@ -1,8 +1,9 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
   IterableDiffers, OnInit, OnChanges, DoCheck } from '@angular/core';
 import * as moment from 'moment-timezone';
-import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
+import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
+
 
 @Component({
     selector: 'fs-date-picker-time',

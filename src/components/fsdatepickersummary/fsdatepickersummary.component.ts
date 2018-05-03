@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnInit, OnChanges } from '@angular/core';
-
-import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
+import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 
 
 @Component({

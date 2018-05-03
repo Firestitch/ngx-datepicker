@@ -5,20 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 
-import { FsDatePickDirective } from './directives/fsdatepick.directive';
-import { FsDatePickRangeDirective } from './directives/fsdatepickrange.directive';
-import { FsIsscrollDirective  } from './directives/fsisscroll.directive';
+import {  FsDatePickDirective,
+          FsDatePickRangeDirective,
+          FsIsscrollDirective } from './directives';
 
-import { FsDatepickerComponent } from './components/fsdatepicker/fsdatepicker.component';
-import { FsDatepickerRangeComponent } from './components/fsdatepickerrange/fsdatepickerrange.component';
-import { FsDatepickerSummaryComponent } from './components/fsdatepickersummary/fsdatepickersummary.component';
-import { FsDatepickerPresetsComponent } from './components/fsdatepickerpresets/fsdatepickerpresets.component';
-import { FsDatePickerCalendarComponent } from './components/fsdatepickercalendar/fsdatepickercalendar.component';
-import { FsDatePickerTimeComponent } from './components/fsdatepickertime/fsdatepickertime.component';
+import {  FsDatepickerComponent,
+          FsDatepickerRangeComponent,
+          FsDatepickerSummaryComponent,
+          FsDatepickerPresetsComponent,
+          FsDatePickerCalendarComponent,
+          FsDatePickerTimeComponent } from './components';
 
-import { FsDatepickerFactory } from './services/fsdatepickerfactory.service';
-import { FsDatepickerRangeFactory } from './services/fsdatepickerrangefactory.service';
-import { FsDatePickerCommon } from './services/fsdatepickercommon.service';
+import {  FsDatepickerFactory,
+          FsDatepickerRangeFactory,
+          FsDatePickerCommon } from './services';
 
 @NgModule({
   imports: [

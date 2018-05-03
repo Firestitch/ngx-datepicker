@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment-timezone';
 import { isEqual, forEach } from 'lodash';
-import { FsDatePicker } from './../interfaces/fsdatepicker.interface';
-import { FsPreset } from './../interfaces/fspreset.interface';
-import { FsComponents } from './../interfaces/fscomponents.interface';
+import { FsComponents, FsPreset, FsDatePicker } from './../interfaces';
 
 @Injectable()
 export class FsDatePickerModel implements FsDatePicker {

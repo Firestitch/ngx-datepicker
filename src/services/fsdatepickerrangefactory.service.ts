@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, Injectable, Inject, ReflectiveInjector } from '@angular/core';
-import { FsDatepickerRangeComponent } from './../components/fsdatepickerrange/fsdatepickerrange.component';
+import { FsDatepickerRangeComponent } from './../components';
 
 @Injectable()
 export class FsDatepickerRangeFactory {

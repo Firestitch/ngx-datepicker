@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnInit, OnChanges } from '@angular/core';
 import * as moment from 'moment-timezone';
-import { FsPreset } from './../../interfaces/fspreset.interface';
-import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
+import { FsPreset } from './../../interfaces';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
+import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
+
 
 @Component({
     selector: 'fs-date-picker-presets',
