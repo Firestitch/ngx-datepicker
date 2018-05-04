@@ -1,11 +1,12 @@
-import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
-   Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy } from '@angular/core';
+import {  Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
+          Renderer2, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { DATEPICKER_VALUE_ACCESSOR } from './../value-accessors/fsdatepicker.value-accessor';
 import { FsPreset } from './../interfaces/fspreset.interface';
 import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerFactory } from './../services/fsdatepickerfactory.service';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 import * as moment from 'moment-timezone';
+
 
 @Directive({
     host: {
@@ -17,7 +18,7 @@ import * as moment from 'moment-timezone';
     selector: '[fsDatePicker]',
     providers: [DATEPICKER_VALUE_ACCESSOR]
 })
-export class FsDatePickDirective implements OnInit, OnDestroy {
+export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
     @Input() public minYear = null;
     @Input() public maxYear = null;
@@ -43,14 +44,21 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
 
     constructor(
         @Inject(ElementRef) private _elementRef: ElementRef,
-        @Inject(Renderer) private renderer: Renderer,
+        @Inject(Renderer2) private renderer: Renderer2,
         @Inject(ComponentFactoryResolver) private factoryResolver,
         @Inject(ViewContainerRef) private viewContainerRef,
         private fsDatePickerCommon: FsDatePickerCommon,
         private fsDatepickerFactory: FsDatepickerFactory
-    ) { }
+    ) {}
 
-    ngOnInit() {
+
+    ngAfterViewInit() {
+
+      this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement, (event) => {
+          event.stopPropagation();
+          this.writeValue(null);
+      });
+
       setTimeout(() => {
         this._elementRef.nativeElement.setAttribute('readonly', true);
       });
@@ -61,11 +69,11 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
     }
 
     writeValue(value: any): void {
-      if (value) {
+      ///if (value) {
 
         if (moment(value).isValid()) {
           value = moment(value);
-        }else {
+        } else {
           value = undefined;
         }
 
@@ -74,7 +82,7 @@ export class FsDatePickDirective implements OnInit, OnDestroy {
         this._onChange(value);
         this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
         this.change$.emit(value);
-      }
+      //}
     }
 
     getValue() {

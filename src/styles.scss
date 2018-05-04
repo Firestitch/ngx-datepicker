@@ -15,7 +15,7 @@
 .fs-date-picker-range.has-view-date.has-view-time {
     .summary .date,
     .summary .time {
-      
+
     }
 }
 
@@ -461,7 +461,7 @@
 
 @media only screen and (max-width: 744px) {
   .fs-date-picker-dialog {
-    
+
     &.fs-date-picker-range {
       &.has-view-date {
         .wrap {
@@ -478,13 +478,13 @@
 
         .date-time {
           overflow-y: auto;
-        }        
+        }
       }
     }
   }
 }
 
- 
+
 
 @media only screen and (max-width: 499px) {
   .fs-date-picker-dialog {

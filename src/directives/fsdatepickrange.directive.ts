@@ -1,5 +1,5 @@
 import { Directive, Input, Output, Inject, HostListener, ComponentFactoryResolver, ViewContainerRef,
-   Renderer, ElementRef, EventEmitter, Pipe, OnInit, OnChanges, OnDestroy } from '@angular/core';
+   Renderer2, ElementRef, EventEmitter, Pipe, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { DATEPICKER_RANGE_VALUE_ACCESSOR } from './../value-accessors/fsdatepickerrange.value-accessors';
 import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerRangeFactory } from './../services/fsdatepickerrangefactory.service';
@@ -46,7 +46,7 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
     constructor(
         @Inject(ElementRef) private _elementRef: ElementRef,
-        @Inject(Renderer) private renderer: Renderer,
+        @Inject(Renderer2) private renderer: Renderer2,
         @Inject(ComponentFactoryResolver) private factoryResolver,
         @Inject(ViewContainerRef) private viewContainerRef,
         private fsDatePickerCommon: FsDatePickerCommon,
@@ -54,6 +54,12 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
     ) { }
 
     ngOnInit() {
+
+      this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement, (event) => {
+        event.stopPropagation();
+        this.writeValue(null, null);
+      });
+
       setTimeout(() => {
         this._elementRef.nativeElement.setAttribute('readonly', true);
       });

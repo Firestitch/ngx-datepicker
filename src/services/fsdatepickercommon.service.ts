@@ -1,11 +1,10 @@
+
 import { Injectable } from '@angular/core';
 import { isNumeric } from '@firestitch/common/util';
 import * as moment from 'moment-timezone';
 
 @Injectable()
 export class FsDatePickerCommon {
-
-  constructor() { }
 
   getSelected(date) {
     const result = {};
@@ -27,6 +26,35 @@ export class FsDatePickerCommon {
     }
 
     return result;
+  }
+
+  addClear(renderer, el, click) {
+
+    const parent = el.parentNode.parentNode;
+
+    const div = renderer.createElement('div');
+    renderer.addClass(div, 'mat-input-suffix');
+    renderer.addClass(div, 'mat-form-field-suffix');
+
+    const a = renderer.createElement('a');
+    renderer.setStyle(a, 'color', 'inherit');
+
+    renderer.setAttribute(a, 'href', 'javascript:;');
+    renderer.listen(a, 'click', click);
+
+    const icon = renderer.createElement('mat-icon');
+
+    renderer.addClass(icon, 'mat-icon');
+    renderer.addClass(icon, 'material-icons');
+    renderer.setStyle(icon, 'vertical-align', 'middle');
+    renderer.setStyle(icon, 'height', '24px');
+    renderer.setStyle(icon, 'font-size', '20px');
+    const text = renderer.createText('clear');
+
+    renderer.appendChild(parent, div);
+    renderer.appendChild(div, a);
+    renderer.appendChild(a, icon);
+    renderer.appendChild(icon, text);
   }
 
   isSameDay(startDate, endDate) {
