@@ -12,13 +12,6 @@
   &[hidden] { display: none !important; }
 }
 
-.fs-date-picker-range.has-view-date.has-view-time {
-    .summary .date,
-    .summary .time {
-
-    }
-}
-
 .fs-date-picker-dialog {
 	position: fixed;
   z-index: 80;
@@ -90,67 +83,7 @@
     }
   }
 
-  &.fs-date-picker-range {
-    &.has-date {
 
-      .wrap {
-        width: 744px;
-        /*
-        @TODO in scope of presets
-        .header {
-          fs-date-picker-presets .presets {
-            float: right;
-          }
-        }
-        */
-        .date-range {
-          display: flex;
-          flex: 1;
-          fs-date-picker-calendar:first-child {
-            margin-right: 5px;
-          }
-          td.day:not(.disabled):not(.mute) {
-            &.min-date {
-              &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                border-color: transparent;
-                border-style: solid;
-                border-width: 0.5em;
-                border-left-color: #fff;
-                border-top-color: #fff;
-              }
-            }
-            &.max-date {
-              &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                border-color: transparent;
-                border-style: solid;
-                border-width: 0.5em;
-                border-left-color: #fff;
-                border-top-color: #fff;
-                -moz-transform: scale(-1, -1);
-                -webkit-transform: scale(-1, -1);
-                -o-transform: scale(-1, -1);
-                -ms-transform: scale(-1, -1);
-                transform: scale(-1, -1);
-              }
-            }
-          }
-        }
-      }
-    }
-    &:not(.has-date) {
-      .date-range {
-        display: none;
-      }
-    }
-  }
 
   /* triangle above dialog */
   /*
@@ -459,33 +392,6 @@
   }
 }
 
-@media only screen and (max-width: 744px) {
-  .fs-date-picker-dialog {
-
-    &.fs-date-picker-range {
-      &.has-view-date {
-        .wrap {
-          width: 100%;
-        }
-
-        .date-range {
-          flex-direction: column;
-          height: 100%;
-          fs-date-picker-calendar:first-child {
-            margin-right: 0 !important;
-          }
-        }
-
-        .date-time {
-          overflow-y: auto;
-        }
-      }
-    }
-  }
-}
-
-
-
 @media only screen and (max-width: 499px) {
   .fs-date-picker-dialog {
     left: 0 !important;
@@ -495,28 +401,6 @@
     margin: 0px;
     height: 100vh;
     max-height: initial !important;
-
-    // 2 cases when Done button is hidden and dialog height increasing
-    &:not(.fs-date-picker-range) {
-      &.dialog-view-date {
-        .wrap {
-          height: 100% !important;
-          .date-time {
-            height: 100% !important;
-          }
-        }
-      }
-      &.dialog-view-datetime {
-        &:not(.date-mode-date) {
-          .wrap {
-            height: 100% !important;
-            .date-time {
-              height: 100% !important;
-            }
-          }
-        }
-      }
-    }
 
     .wrap {
     	margin: 0px;

@@ -8,7 +8,7 @@ import * as moment from 'moment-timezone';
 @Component({
     selector: 'fs-date-picker-range',
     templateUrl: './fsdatepickerrange.component.html',
-    styleUrls: ['./../../styles.scss'],
+    styleUrls: ['./fsdatepickerrange.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [FsDatePickerModel]
 })
