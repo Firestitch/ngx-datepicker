@@ -202,6 +202,11 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   close($event?) {
+
+    if (!this.fsDatePickerCommon.isValidRange(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd)) {
+      this.parentInstance.writeValue(null, null);
+    }
+
     this.parentInstance.opened = false;
   }
 

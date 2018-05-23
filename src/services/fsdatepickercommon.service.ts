@@ -215,4 +215,8 @@ export class FsDatePickerCommon {
 
     callback();
   }
+
+  isValidRange(startDate, endDate): boolean {
+    return moment(startDate).isValid() && moment(endDate).isValid();
+  }
 }

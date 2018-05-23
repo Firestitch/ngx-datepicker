@@ -141,6 +141,13 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
     inputBlur(event) { }
 
+    @HostListener('focus', ['$event'])
+    onFocus($event) {
+      setTimeout(() => {
+        this._elementRef.nativeElement.blur();
+      });
+    }
+
     @HostListener('window:resize', ['$event'])
     onWindowResize(event) {
       this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);

@@ -13,7 +13,7 @@ import * as moment from 'moment-timezone';
       '(input)': 'onChangeInterceptor($event)',
       '(click)': 'inputClick($event)',
       '(keyup)': 'inputKeyup($event)',
-      '(blur)': 'inputBlur($event)',
+      '(blur)': 'inputBlur($event)'
     },
     selector: '[fsDatePicker]',
     providers: [DATEPICKER_VALUE_ACCESSOR]
@@ -94,6 +94,7 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
       if (this.$dialog) {
         this.enableDefaultComponent();
+        this.$dialog.instance.initCalendar();
         return;
       }
 
@@ -135,6 +136,13 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
     }
 
     inputBlur(event) { }
+
+    @HostListener('focus', ['$event'])
+    onFocus($event) {
+      setTimeout(() => {
+        this._elementRef.nativeElement.blur();
+      });
+    }
 
     @HostListener('window:resize', ['$event'])
     onWindowResize(event) {

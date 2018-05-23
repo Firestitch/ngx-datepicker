@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, HostListener, ElementRef, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 
@@ -22,6 +22,10 @@ export class FsDatepickerComponent implements OnInit {
     public element: ElementRef) { }
 
   ngOnInit() {
+    this.initCalendar();
+  }
+
+  initCalendar() {
     this.model = this.parentInstance.getValue();
     this.calendarDrawMonth(this.model);
   }
