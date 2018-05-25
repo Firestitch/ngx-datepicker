@@ -13,7 +13,7 @@
       [ngClass]="{ active: fsDatePickerModel.components.timeStart }">{{ formattedStartDate.time }}
     </span>
   </ng-container>
-  <ng-container *ngIf="formattedStartDate && formattedEndDate"><span class="hyphen">-</span></ng-container>
+  <ng-container *ngIf="formattedStartDate && formattedEndDate"><span class="hyphen">to</span></ng-container>
   <ng-container *ngIf="formattedEndDate">
     <span
       *ngIf="(fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime')"

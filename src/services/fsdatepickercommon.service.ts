@@ -126,8 +126,8 @@ export class FsDatePickerCommon {
 
   formatDateTimeRange(value, view = 'date') {
     const format = [];
-    const startDate = this.formatDateTime(value.start_date, view);
-    const endDate = this.formatDateTime(value.end_date, view);
+    const startDate = this.formatDateTime(value.start, view);
+    const endDate = this.formatDateTime(value.end, view);
 
     if (startDate) {
       format.push(startDate);
@@ -137,7 +137,7 @@ export class FsDatePickerCommon {
       format.push(endDate);
     }
 
-    return format.join(' - ');
+    return format.join(' to ');
   }
 
   formatDateTime(value, view = 'date') {

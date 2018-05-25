@@ -4,6 +4,7 @@ import { DATEPICKER_RANGE_VALUE_ACCESSOR } from './../value-accessors/fsdatepick
 import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerRangeFactory } from './../services/fsdatepickerrangefactory.service';
 import { FsPreset } from './../interfaces/fspreset.interface';
+import { NgModel } from '@angular/forms';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 import * as moment from 'moment-timezone';
 
@@ -15,10 +16,11 @@ import * as moment from 'moment-timezone';
       '(blur)': 'inputBlur($event)',
     },
     selector: '[fsDatePickerRange]',
-    providers: [DATEPICKER_RANGE_VALUE_ACCESSOR]
+    providers: [DATEPICKER_RANGE_VALUE_ACCESSOR, NgModel]
 })
 export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
+    @Input() public ngModel = null;
     @Input() public minYear = null;
     @Input() public maxYear = null;
     @Input() public view = 'date';
@@ -28,21 +30,22 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
     @Output() public ngModelStartChange = new EventEmitter<any>();
     @Output() public ngModelEndChange = new EventEmitter<any>();
-
     @Output('change') public change$ = new EventEmitter<any>();
 
     public opened = false;
-
     private $dialog = null;
-
     private rootViewContainer = null;
 
-    _onTouched = () => { };
-    _onChange = (value: any) => { };
-    onFocused = (event: any) => { };
+    private onTouchedCallback: () => void = () => { };
+    private onChangeCallback: (_: any) => void = () => { };
 
-    registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
-    registerOnTouched(fn: () => any): void { this._onTouched = fn }
+    registerOnChange(fn: any) {
+      this.onChangeCallback = fn;
+    }
+
+    registerOnTouched(fn: any) {
+       this.onTouchedCallback = fn;
+    }
 
     constructor(
         @Inject(ElementRef) private _elementRef: ElementRef,
@@ -80,9 +83,8 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
           return;
         }
 
-        const viewData = { start_date: this.ngModelStart, end_date: this.ngModelEnd };
-
-        this._onChange(viewData);
+        const viewData = { start: this.ngModelStart, end: this.ngModelEnd };
+        this.onChangeCallback(viewData);
         this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(viewData, this.view);
         this.change$.emit(viewData);
       }
@@ -110,7 +112,7 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
       this.$dialog.instance.fsDatePickerModel.presets = this.presets;
-      this.$dialog.instance.fsDatePickerModel.dateMode = { start_date: 'date', end_date: 'date' };
+      this.$dialog.instance.fsDatePickerModel.dateMode = { start: 'date', end: 'date' };
 
       this.enableDefaultComponent();
 

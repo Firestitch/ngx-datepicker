@@ -13,7 +13,6 @@ export class FsDatepickerComponent implements OnInit {
 
   public parentInstance: any = null;
   public model = null;
-
   public calendarMonth = null;
 
   constructor(

@@ -27,13 +27,9 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
     @Output('change') change$ = new EventEmitter<any>();
 
-    private _model = null;
-
     public opened = false;
-
+    private _model = null;
     private $dialog = null;
-
-    private rootViewContainer = null;
 
     _onTouched = () => { };
     _onChange = (value: any) => { };
@@ -69,20 +65,22 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
     }
 
     writeValue(value: any): void {
-      ///if (value) {
 
+      if (value) {
         if (moment(value).isValid()) {
           value = moment(value);
         } else {
           value = undefined;
         }
+      }
 
-        this._model = value;
-
+      if (this._model !== value) {
         this._onChange(value);
-        this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
-        this.change$.emit(value);
-      //}
+      }
+
+      this._model = value;
+      this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
+      this.change$.emit(value);
     }
 
     getValue() {

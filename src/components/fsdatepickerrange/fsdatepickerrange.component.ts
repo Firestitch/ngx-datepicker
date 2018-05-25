@@ -146,11 +146,11 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   setDateModeStart(mode) {
-    this.fsDatePickerModel.dateMode.start_date = mode;
+    this.fsDatePickerModel.dateMode.start = mode;
   }
 
   setDateModeEnd(mode) {
-    this.fsDatePickerModel.dateMode.end_date = mode;
+    this.fsDatePickerModel.dateMode.end = mode;
   }
 
   setComponents(data) {
@@ -202,11 +202,6 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   close($event?) {
-
-    if (!this.fsDatePickerCommon.isValidRange(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd)) {
-      this.parentInstance.writeValue(null, null);
-    }
-
     this.parentInstance.opened = false;
   }
 
