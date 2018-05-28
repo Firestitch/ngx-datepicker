@@ -11,9 +11,8 @@ export class DateTimeRangeExampleComponent {
   public presets = [];
 
   public event = {
-    id: 999,
-    start_date: moment().startOf('day'),
-    end_date: moment().startOf('day').add(1, 'days')
+    start_date: null,
+    end_date: null
   };
 
   constructor() {

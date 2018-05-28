@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-datepicker"
@@ -113,7 +113,7 @@
     "hammerjs": "^2.0.8",
     "fastclick": "^1.0.6",
     "@firestitch/common": "^0.2.24",
-    "@firestitch/form": "^1.0.6",
+    "@firestitch/form": "^1.1.1",
     "filemanager-webpack-plugin": "^1.0.26",
     "replace-in-file": "^3.4.0"
   },
@@ -126,7 +126,6 @@
     "iscroll": ">=5.2.0",
     "lodash": "^4.17.5",
     "moment-range": ">=3.1.1",
-    "tsmodels": ">=0.2.7",
     "hammerjs": ">=2.0.8",
     "@firestitch/common": ">=0.2.24"
   },

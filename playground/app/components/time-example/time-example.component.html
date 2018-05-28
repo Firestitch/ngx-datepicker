@@ -1,5 +1,12 @@
-<form>
+<form fsForm>
   <mat-form-field>
-    <input matInput fsDatePicker [(ngModel)]="model" view="time" name="timepicker" placeholder="Time">
+    <input
+      matInput
+      fsDatePicker
+      fsFormDateRange
+      [(ngModel)]="model"
+      view="time"
+      name="timepicker"
+      placeholder="Time">
   </mat-form-field>
 </form>

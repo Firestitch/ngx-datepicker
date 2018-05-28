@@ -1,3 +1,5 @@
+import 'styles.scss';
+
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

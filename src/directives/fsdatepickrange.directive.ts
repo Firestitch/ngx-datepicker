@@ -58,6 +58,13 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
 
+      const formField = this._elementRef.nativeElement.parentElement.parentElement.parentElement.parentElement;
+
+      if (formField.className.match(/mat-form-field/)) {
+
+        this.renderer.addClass(formField, `fs-date-picker-${this.view}-range-field`);
+      }
+
       this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement, (event) => {
         event.stopPropagation();
         this.writeValue(null, null);

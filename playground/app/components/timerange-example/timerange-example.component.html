@@ -1,8 +1,14 @@
-<form>
-  <mat-form-field fxFlex>
-    <input matInput fsDatePickerRange
-    [(ngModelStart)]="start_date"
-    [(ngModelEnd)]="end_date"
-    view="time" name="timerangepicker" placeholder="Time Range">
+<form fsForm>
+  <mat-form-field>
+    <input
+      matInput
+      fsDatePickerRange
+      fsFormDateRange
+      [(ngModel)]="model"
+      [(ngModelStart)]="start_date"
+      [(ngModelEnd)]="end_date"
+      view="time"
+      name="timerangepicker"
+      placeholder="Time Range">
   </mat-form-field>
 </form>
