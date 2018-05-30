@@ -101,7 +101,9 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
         }
 
         const viewData = { start: this.ngModelStart, end: this.ngModelEnd };
-        this.onChangeCallback(viewData);
+        const ngModelData = !this.ngModelStart && !this.ngModelEnd ? null : viewData;
+
+        this.onChangeCallback(ngModelData);
         this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(viewData, this.view);
         this.change$.emit(viewData);
         this.fsDatePickerCommon.updateClearViewStatus(viewData, this.renderer, this._elementRef.nativeElement);
