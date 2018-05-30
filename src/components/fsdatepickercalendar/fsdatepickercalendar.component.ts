@@ -391,7 +391,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     const max = new Date(this.selected['year'] || 1904, this.selected['month'], 0).getDate();
 
     if (max < this.selected['day']) {
-      this.selected['day'] = undefined;
+      this.selected['day'] = null;
     }
 
     if (m.isValid()) {

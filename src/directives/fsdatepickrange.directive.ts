@@ -65,10 +65,16 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
         this.renderer.addClass(formField, `fs-date-picker-${this.view}-range-field`);
       }
 
-      this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement, (event) => {
-        event.stopPropagation();
-        this.writeValue(null, null);
-      });
+      this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement,
+        event => {
+          event.stopPropagation();
+          this.writeValue(null, null);
+        },
+        () => {
+          this.fsDatePickerCommon.updateClearViewStatus({ start: this.ngModelStart, end: this.ngModelEnd }
+          , this.renderer, this._elementRef.nativeElement);
+        }
+      );
 
       setTimeout(() => {
         this._elementRef.nativeElement.setAttribute('readonly', true);
@@ -83,6 +89,10 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
 
       if (changes.ngModelStart || changes.ngModelEnd) {
 
+        // In models shouldn't be undefined. Initial value always null.
+        this.ngModelStart = this.ngModelStart || null;
+        this.ngModelEnd = this.ngModelEnd || null;
+
         if (typeof this.ngModelStart === 'string' || typeof this.ngModelEnd === 'string') {
           setTimeout(() => {
             this.writeValue(this.ngModelStart, this.ngModelEnd);
@@ -94,10 +104,19 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
         this.onChangeCallback(viewData);
         this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(viewData, this.view);
         this.change$.emit(viewData);
+        this.fsDatePickerCommon.updateClearViewStatus(viewData, this.renderer, this._elementRef.nativeElement);
       }
     }
 
     writeValue(startDate, endDate): void {
+      // Don't remove this code. After ngModel implementation value accessor call this function on init
+      // and removing initial value of the picker.
+      // If second parameter is undefined it means that function was called by ngModel and should be
+      // ignored.
+      if (endDate === undefined) {
+        return;
+      }
+
       this.ngModelStartChange.emit(startDate && moment(startDate).isValid() ? moment(startDate) : startDate);
       this.ngModelEndChange.emit(endDate && moment(endDate).isValid() ? moment(endDate) : endDate);
     }

@@ -1,7 +1,11 @@
 
 import { Injectable } from '@angular/core';
+
 import { isNumeric } from '@firestitch/common/util';
+
 import * as moment from 'moment-timezone';
+import { isObject } from 'lodash';
+
 
 @Injectable()
 export class FsDatePickerCommon {
@@ -17,18 +21,18 @@ export class FsDatePickerCommon {
       result['month'] = parseInt(moment(date).format('M'));
       result['day'] = parseInt(moment(date).format('D'));
     } else {
-      result['date'] = undefined;
-      result['hour'] = undefined;
-      result['minute'] = undefined;
-      result['year'] = undefined;
-      result['month'] = undefined;
-      result['day'] = undefined;
+      result['date'] = null;
+      result['hour'] = null;
+      result['minute'] = null;
+      result['year'] = null;
+      result['month'] = null;
+      result['day'] = null;
     }
 
     return result;
   }
 
-  addClear(renderer, el, click) {
+  addClear(renderer, el, click, init = null) {
 
     const parent = el.parentNode.parentNode;
 
@@ -55,6 +59,46 @@ export class FsDatePickerCommon {
     renderer.appendChild(div, a);
     renderer.appendChild(a, icon);
     renderer.appendChild(icon, text);
+
+    if (init) {
+      init();
+    }
+  }
+
+  updateClearViewStatus(model, renderer, el) {
+
+    let show = false;
+
+    if ((!moment.isMoment(model) && isObject(model)) && (model.start || model.end)) {
+
+      show = true;
+    }
+
+    if ((moment.isMoment(model) || !isObject(model)) && model) {
+      show = true;
+    }
+
+    if (show) {
+      this.showClear(renderer, el);
+    } else {
+      this.hideClear(renderer, el);
+    }
+  }
+
+  showClear(renderer, el) {
+    const clearButtonEl = el.parentNode.parentNode.querySelector('.mat-input-suffix');
+
+    if (clearButtonEl) {
+      renderer.setStyle(clearButtonEl, 'display', 'block');
+    }
+  }
+
+  hideClear(renderer, el) {
+    const clearButtonEl = el.parentNode.parentNode.querySelector('.mat-input-suffix');
+
+    if (clearButtonEl) {
+      renderer.setStyle(clearButtonEl, 'display', 'none');
+    }
   }
 
   isSameDay(startDate, endDate) {

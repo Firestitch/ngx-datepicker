@@ -47,13 +47,17 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
         private fsDatepickerFactory: FsDatepickerFactory
     ) {}
 
-
     ngAfterViewInit() {
 
-      this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement, (event) => {
+      this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement,
+        event => {
           event.stopPropagation();
           this.writeValue(null);
-      });
+        },
+        () => {
+          this.fsDatePickerCommon.updateClearViewStatus(this.getValue(), this.renderer, this._elementRef.nativeElement);
+        }
+      );
 
       setTimeout(() => {
         this._elementRef.nativeElement.setAttribute('readonly', true);
@@ -70,7 +74,7 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
         if (moment(value).isValid()) {
           value = moment(value);
         } else {
-          value = undefined;
+          value = null;
         }
       }
 
@@ -81,6 +85,8 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
       this._model = value;
       this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
       this.change$.emit(value);
+
+      this.fsDatePickerCommon.updateClearViewStatus(value, this.renderer, this._elementRef.nativeElement);
     }
 
     getValue() {
