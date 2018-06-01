@@ -39,7 +39,7 @@
     "@angular/platform-browser-dynamic": "^5.1.1",
     "@compodoc/compodoc": "^1.0.5",
     "@firestitch/common": "^0.2.24",
-    "@firestitch/example": "^0.2.18",
+    "@firestitch/example": "^0.2.21",
     "@firestitch/form": "^1.1.1",
     "@firestitch/iframe": "^0.1.5",
     "@types/googlemaps": "^3.30.2",
