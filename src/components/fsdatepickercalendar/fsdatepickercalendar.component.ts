@@ -1,5 +1,5 @@
 import { Component, Inject, Input, Output, EventEmitter, HostListener, ElementRef,
-  IterableDiffers, OnInit, OnChanges, DoCheck, OnDestroy } from '@angular/core';
+  IterableDiffers, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import 'hammerjs';
 import { FsHammerConfig } from './../../configs/fshammer.config';
@@ -26,7 +26,7 @@ import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service'
       }
     ]
 })
-export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
+export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() date = null;
 
@@ -51,22 +51,22 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
 
   private highlightedRangeDays = null;
 
-  private disabledDaysDiffer = null;
-
   private SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
-  monthList = [{ value: 1, name: 'January', abr: 'Jan' },
-  { value: 2, name: 'February', abr: 'Feb' },
-  { value: 3, name: 'March', abr: 'Mar' },
-  { value: 4, name: 'April', abr: 'Apr' },
-  { value: 5, name: 'May', abr: 'May' },
-  { value: 6, name: 'June', abr: 'June' },
-  { value: 7, name: 'July', abr: 'July' },
-  { value: 8, name: 'August', abr: 'Aug' },
-  { value: 9, name: 'September', abr: 'Sept' },
-  { value: 10, name: 'October', abr: 'Oct' },
-  { value: 11, name: 'November', abr: 'Nov' },
-  { value: 12, name: 'December', abr: 'Dec' }];
+  public monthList = [
+    { value: 1, name: 'January', abr: 'Jan', disabled: false },
+    { value: 2, name: 'February', abr: 'Feb', disabled: false },
+    { value: 3, name: 'March', abr: 'Mar', disabled: false },
+    { value: 4, name: 'April', abr: 'Apr', disabled: false },
+    { value: 5, name: 'May', abr: 'May', disabled: false },
+    { value: 6, name: 'June', abr: 'June', disabled: false },
+    { value: 7, name: 'July', abr: 'July', disabled: false },
+    { value: 8, name: 'August', abr: 'Aug', disabled: false },
+    { value: 9, name: 'September', abr: 'Sept', disabled: false },
+    { value: 10, name: 'October', abr: 'Oct', disabled: false },
+    { value: 11, name: 'November', abr: 'Nov', disabled: false },
+    { value: 12, name: 'December', abr: 'Dec', disabled: false }
+  ];
 
   today = {
     date: moment().format('YYYY-MM-DD'),
@@ -77,14 +77,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   constructor(public element: ElementRef, private fsDatePickerCommon: FsDatePickerCommon,
     public fsDatePickerModel: FsDatePickerModel,
     private _iterableDiffers: IterableDiffers) {
-      this.disabledDaysDiffer = this._iterableDiffers.find([]).create(null);
       extendMoment(moment);
     }
 
   ngOnInit() {
-    for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
-      this.years.push(y);
-    }
+
+    this.createYearsList();
+    this.updateMonthsListDisabledStatus();
 
     if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
       setTimeout(() => {
@@ -164,18 +163,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     }
   }
 
-  ngDoCheck() {
-    if (this.disabledDays && this.disabledDaysDiffer.diff(this.disabledDays)) {
-      if (this.disabledDays !== undefined && this.month) {
-        for (let week of this.month.weeks) {
-          for (let day of week) {
-            day.disabled = this.isDayDisabled(moment(day.date));
-          }
-        }
-      }
-    }
-  }
-
   private dateScroll = throttle((e) => {
 
     // @TODO need better way to detect mobile devices
@@ -190,22 +177,31 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
     }
   }, 50);
 
-  isDayDisabled(md) {
+  isDayDisabled(date) {
+   return this.isRangeDisabled(moment(date).startOf('day'), moment(date).endOf('day'));
+  }
+
+  isMonthDisabled(date) {
+    return this.isRangeDisabled(moment(date).startOf('month'), moment(date).endOf('month'));
+  }
+
+  isYearDisabled(date) {
+    return this.isRangeDisabled(moment(date).startOf('year'), moment(date).endOf('year'));
+  }
+
+  isRangeDisabled(start, end) {
     if (!this.disabledDays) {
       return false;
     }
 
-    let len;
-    for (let i = 0, len = this.disabledDays.length; i < len; i++) {
-      let value = this.disabledDays[i];
-      if (moment.isMoment(value)) {
-        if (value.format('YYYY-MM-DD') == md.format('YYYY-MM-DD')) {
+    for (let i = 0; i < this.disabledDays.length; i++) {
+      const value = this.disabledDays[i];
+      if (
+        (start.isBetween(value[0].startOf('day'), value[1].endOf('day')) || start.format('YYYY-MM-DD') === value[0].format('YYYY-MM-DD'))
+      &&
+        (end.isBetween(value[0].startOf('day'), value[1].endOf('day')) || end.format('YYYY-MM-DD') === value[1].format('YYYY-MM-DD'))
+      ) {
           return true;
-        }
-      } else {
-        if (md.isBetween(value[0].startOf('day'),value[1].startOf('day')) || md.format('YYYY-MM-DD')==value[0].format('YYYY-MM-DD')) {
-          return true;
-        }
       }
     }
     return false;
@@ -216,9 +212,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   monthViewChange(month) {
-    // Changing date
-    // this.monthChange(month);
-    // Changing calendar view
+    if (this.isMonthDisabled(moment(this.month.moment).year(this.month.year).month(month - 1))) {
+      return;
+    }
     this.setMonth(month);
     this.calendarView();
   }
@@ -248,6 +244,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   monthView(month) {
+    this.updateMonthsListDisabledStatus();
     this.onDateModeChange.emit('month');
   }
 
@@ -276,6 +273,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   yearViewChange(year) {
+    if (this.isYearDisabled(moment().year(year))) {
+      return;
+    }
     // For some reason for mobile devices click event fired for both year/day modes. setTimeout fix this problem
     setTimeout(() => {
       this.setYear(year);
@@ -293,23 +293,24 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
   }
 
   previousMonth(month) {
-    // this.drawMonths(month.moment.subtract(1, 'months'));
+    if (this.isMonthDisabled(month.moment.clone().subtract(1, 'months'))) {
+      return;
+    }
     this.onDrawMonth.emit(month.moment.subtract(1, 'months'));
   }
 
   nextMonth(month) {
-    // this.drawMonths(month.moment.add(1, 'months'));
+    if (this.isMonthDisabled(month.moment.clone().add(1, 'months'))) {
+      return;
+    }
     this.onDrawMonth.emit(month.moment.add(1, 'months'));
   }
 
   setMonth(monthNumber) {
-    // this.drawMonths(moment(this.month.moment).set('month', monthNumber - 1));
     this.onDrawMonth.emit(moment(this.month.moment).set('month', monthNumber - 1));
-
   }
 
   setYear(yearNumber) {
-    // this.drawMonths(moment(this.month.moment).set('year', yearNumber));
     this.onDrawMonth.emit(moment(this.month.moment).set('year', yearNumber));
   }
 
@@ -355,6 +356,21 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, DoCheck
         weeks: weeks,
         months: [{ name: date.format('MMMM'), value: date.format('M')}],
         years: [date.format('YYYY')] }
+  }
+
+  createYearsList() {
+    this.years = [];
+    for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
+      this.years.push({ value: y, disabled: this.isYearDisabled(moment().year(y)) });
+    }
+  }
+
+  updateMonthsListDisabledStatus() {
+    const year = this.month ? this.month.year : moment().year();
+
+    for (const item of this.monthList) {
+      item.disabled = this.isMonthDisabled(moment().year(year).month(item.value - 1));
+    }
   }
 
   updateDateDays() {

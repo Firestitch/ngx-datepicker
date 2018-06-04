@@ -38,6 +38,9 @@ export class FsDatePickerModel implements FsDatePicker {
 
   public presets: FsPreset[] = [];
 
+  public minDate = null;
+  public maxDate = null;
+
   set components(value) {
     value = Object.assign({}, this._componentsDefault, value);
     const tempData = Object.assign({}, value);
@@ -96,4 +99,19 @@ export class FsDatePickerModel implements FsDatePicker {
   }
 
   constructor() { }
+
+  disabledDays() {
+
+    const result = [];
+
+    if (this.minDate) {
+      result.push([moment().subtract(this.minYear, 'year'), this.minDate.clone()]);
+    }
+
+    if (this.maxDate) {
+      result.push([this.maxDate.clone(), moment().add(this.maxYear, 'year')]);
+    }
+
+    return result;
+  }
 }

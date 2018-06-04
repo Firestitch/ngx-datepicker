@@ -13,6 +13,7 @@ import { DateTimeExampleComponent } from './app/components/datetime-example/date
 import { DateTimeRangeExampleComponent } from './app/components/datetimerange-example/datetimerange-example.component';
 import { DateRangeExampleComponent } from './app/components/daterange-example/daterange-example.component';
 import { TimeRangeExampleComponent } from './app/components/timerange-example/timerange-example.component';
+import { BirthdayExampleComponent } from './app/components/birthday-example/birthday-example.component';
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import * as fastClick from 'fastclick';
@@ -37,7 +38,8 @@ import * as fastClick from 'fastclick';
     DateTimeExampleComponent,
     DateTimeRangeExampleComponent,
     DateRangeExampleComponent,
-    TimeRangeExampleComponent
+    TimeRangeExampleComponent,
+    BirthdayExampleComponent
   ],
   providers: [
   ],

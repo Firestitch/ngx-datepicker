@@ -26,6 +26,8 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
     @Input() public view = 'date';
     @Input() public ngModelStart = null;
     @Input() public ngModelEnd = null;
+    @Input() public minDate = null;
+    @Input() public maxDate = null;
     @Input() public presets: FsPreset[] = [];
 
     @Output() public ngModelStartChange = new EventEmitter<any>();
@@ -140,6 +142,8 @@ export class FsDatePickRangeDirective implements OnInit, OnChanges, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
       this.$dialog.instance.fsDatePickerModel.presets = this.presets;
+      this.$dialog.instance.fsDatePickerModel.minDate = this.minDate;
+      this.$dialog.instance.fsDatePickerModel.maxDate = this.maxDate;
       this.$dialog.instance.fsDatePickerModel.dateMode = { start: 'date', end: 'date' };
 
       this.enableDefaultComponent();

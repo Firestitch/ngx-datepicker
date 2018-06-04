@@ -2,6 +2,8 @@ import { Component, Input, HostListener, ElementRef, ViewEncapsulation, OnInit, 
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
 
+import * as moment from 'moment-timezone';
+
 @Component({
     selector: 'fs-date-picker',
     templateUrl: './fsdatepicker.component.html',
@@ -14,6 +16,7 @@ export class FsDatepickerComponent implements OnInit {
   public parentInstance: any = null;
   public model = null;
   public calendarMonth = null;
+  public disabledDays = null;
 
   constructor(
     public fsDatePickerModel: FsDatePickerModel,
@@ -22,6 +25,7 @@ export class FsDatepickerComponent implements OnInit {
 
   ngOnInit() {
     this.initCalendar();
+    this.disabledDays = this.fsDatePickerModel.disabledDays();
   }
 
   initCalendar() {

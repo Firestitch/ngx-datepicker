@@ -16,7 +16,6 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   parentInstance: any = null;
 
-  public toDisabledDays = [];
   public toDisabledTimes = [];
 
   public startCalendarMonth = null;
@@ -24,6 +23,8 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   public highlightStartDate = null;
   public highlightEndDate = null;
+
+  public disabledDays = null;
 
   private modelDiffer = null;
 
@@ -38,6 +39,7 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.calendarsDrawMonth(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd);
+    this.disabledDays = this.fsDatePickerModel.disabledDays();
   }
 
   ngDoCheck() {
@@ -46,8 +48,6 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
       const startDate = this.parentInstance.ngModelStart;
       const endDate = this.parentInstance.ngModelEnd;
 
-      // Don't remove
-      // this.toDisabledDaysUpdate(startDate, endDate);
       this.toDisabledTimesUpdate(startDate, endDate);
 
       this.highlightStartDate = startDate;
@@ -125,10 +125,6 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   onDatesChange(data) {
     this.setDates(data.start, data.end);
     this.calendarsDrawMonth(data.start, data.end);
-  }
-
-  toDisabledDaysUpdate(startDate, endDate) {
-    this.toDisabledDays = startDate ? [[moment().subtract(99, 'year'), startDate.clone()]] : [];
   }
 
   toDisabledTimesUpdate(startDate, endDate) {

@@ -248,10 +248,12 @@
 
   .time-container .hour.disabled,
   .time-container .minute.disabled,
-  .calendar-container .day.disabled {
-    color: #a6a5a5;
+  .calendar-container .day.disabled,
+  .calendar-container .years .year.disabled,
+  .calendar-container .months .month.disabled {
+    color: #cccccc;
     cursor: initial;
-    background: #efefef;
+    background: #f9f9f9;
   }
 
   .years {

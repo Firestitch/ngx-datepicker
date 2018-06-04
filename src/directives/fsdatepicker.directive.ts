@@ -22,7 +22,10 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
     @Input() public minYear = null;
     @Input() public maxYear = null;
+    @Input() public minDate = null;
+    @Input() public maxDate = null;
     @Input() public view = 'date';
+    @Input() public birthday = false;
     @Input() public presets: FsPreset[] = [];
 
     @Output('change') change$ = new EventEmitter<any>();
@@ -45,9 +48,13 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
         @Inject(ViewContainerRef) private viewContainerRef,
         private fsDatePickerCommon: FsDatePickerCommon,
         private fsDatepickerFactory: FsDatepickerFactory
-    ) {}
+    ) { }
 
     ngAfterViewInit() {
+
+      if (this.birthday) {
+        this.maxDate = moment().add(1, 'days');
+      }
 
       this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement,
         event => {
@@ -109,6 +116,8 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
       this.$dialog.instance.fsDatePickerModel.view = this.view;
       this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
       this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+      this.$dialog.instance.fsDatePickerModel.minDate = this.minDate;
+      this.$dialog.instance.fsDatePickerModel.maxDate = this.maxDate;
       this.$dialog.instance.fsDatePickerModel.presets = this.presets;
       this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
 

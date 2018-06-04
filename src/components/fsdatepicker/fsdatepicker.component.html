@@ -23,6 +23,7 @@
         [date]="model"
         [drawMonth]="calendarMonth"
         [dateMode]="fsDatePickerModel.dateMode"
+        [disabledDays]="disabledDays"
         (onChange)="setDate($event)"
         (onDateModeChange)="setDateMode($event)"
         (onDrawMonth)="calendarDrawMonth($event)"
