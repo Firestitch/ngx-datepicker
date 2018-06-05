@@ -61,7 +61,10 @@ export class FsDatePickerCommon {
     renderer.appendChild(icon, text);
 
     if (init) {
-      init();
+      // This event should be async to correct handling of disabled condition
+      setTimeout(() => {
+        init();
+      });
     }
   }
 
@@ -69,13 +72,15 @@ export class FsDatePickerCommon {
 
     let show = false;
 
-    if ((!moment.isMoment(model) && isObject(model)) && (model.start || model.end)) {
+    if (!el.disabled) {
+      if ((!moment.isMoment(model) && isObject(model)) && (model.start || model.end)) {
 
-      show = true;
-    }
+        show = true;
+      }
 
-    if ((moment.isMoment(model) || !isObject(model)) && model) {
-      show = true;
+      if ((moment.isMoment(model) || !isObject(model)) && model) {
+        show = true;
+      }
     }
 
     if (show) {
