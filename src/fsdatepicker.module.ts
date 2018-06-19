@@ -4,22 +4,28 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
-import { MatTabsModule } from '@angular/material';
+import {  MatButtonModule,
+          MatIconModule,
+          MatMenuModule,
+          MatTabsModule,
+          MatSelectModule } from '@angular/material';
 
 import {  FsDatePickDirective,
           FsDatePickRangeDirective,
-          FsIsscrollDirective } from './directives';
+          FsIsscrollDirective,
+          FsDatePickBirthdayDirective} from './directives';
 
 import {  FsDatepickerComponent,
           FsDatepickerRangeComponent,
           FsDatepickerSummaryComponent,
           FsDatepickerPresetsComponent,
           FsDatePickerCalendarComponent,
-          FsDatePickerTimeComponent } from './components';
+          FsDatePickerTimeComponent,
+          FsDatepickerBirthdayComponent } from './components';
 
 import {  FsDatepickerFactory,
           FsDatepickerRangeFactory,
+          FsDatepickerBirthdayFactory,
           FsDatePickerCommon } from './services';
 
 @NgModule({
@@ -29,15 +35,18 @@ import {  FsDatepickerFactory,
     MatButtonModule,
     MatTabsModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
   ],
   exports: [
     FsDatePickDirective,
-    FsDatePickRangeDirective
+    FsDatePickRangeDirective,
+    FsDatePickBirthdayDirective
   ],
   entryComponents: [
     FsDatepickerComponent,
-    FsDatepickerRangeComponent
+    FsDatepickerRangeComponent,
+    FsDatepickerBirthdayComponent
   ],
   declarations: [
     FsDatePickDirective,
@@ -48,19 +57,22 @@ import {  FsDatepickerFactory,
     FsDatepickerRangeComponent,
     FsIsscrollDirective,
     FsDatePickerCalendarComponent,
-    FsDatePickerTimeComponent
+    FsDatePickerTimeComponent,
+    FsDatePickBirthdayDirective,
+    FsDatepickerBirthdayComponent,
   ],
   providers: [
     FsDatepickerFactory,
     FsDatepickerRangeFactory,
-    FsDatePickerCommon
+    FsDatePickerCommon,
+    FsDatepickerBirthdayFactory
   ],
 })
 export class FsDatePickerModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsDatePickerModule,
-      providers: [FsDatepickerFactory, FsDatepickerRangeFactory, FsDatePickerCommon]
+      providers: [FsDatepickerFactory, FsDatepickerRangeFactory, FsDatepickerBirthdayFactory, FsDatePickerCommon]
     };
   }
 }
