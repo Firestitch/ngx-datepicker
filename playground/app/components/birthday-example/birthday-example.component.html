@@ -1,8 +1,10 @@
 <form fsForm>
   <mat-form-field>
     <input matInput
-    fsDatePickerBirthday
-    name="birthday"
-    placeholder="Birthday">
+      fsDatePickerBirthday
+      [minYear]="'1992'"
+      [(ngModel)]="model"
+      name="birthday"
+      placeholder="Birthday">
   </mat-form-field>
 </form>

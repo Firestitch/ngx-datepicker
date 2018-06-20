@@ -1,6 +1,6 @@
 <div class="fs-date-picker-backdrop" [hidden]="!parentInstance.opened" (click)="close()"></div>
 
-<div class="fs-date-picker-dialog fs-date-picker-range dialog-view-datetime" tabindex="0"
+<div class="fs-date-picker-dialog fs-date-picker-range" tabindex="0"
      [ngClass]="{ opened: parentInstance.opened }">
   <div class="wrap">
     <div class="date-time panel">
@@ -15,7 +15,9 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select name="day_select" placeholder="Day" [(value)]="selectedDate.day">
+        <mat-select name="day_select" placeholder="Day"
+                    [(value)]="selectedDate.day"
+                    (selectionChange)="changedDate()">
           <mat-option *ngFor="let day of days" [value]="day">
             {{ day }}
           </mat-option>
@@ -32,6 +34,9 @@
         </mat-select>
       </mat-form-field>
     </div>
+
+    <div class="done">
+      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
+    </div>
   </div>
-  {{selectedDate | json}}
 </div>

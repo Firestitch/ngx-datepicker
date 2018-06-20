@@ -173,6 +173,29 @@ export class FsDatePickerCommon {
     }
   }
 
+  positionDialogUnderInput(dialog, elementRef) {
+    if (!dialog || window.innerWidth < 500) {
+      return;
+    }
+
+    this.positionDialog(dialog, elementRef);
+
+    // after basic position of dialog we need to set it under input
+    const input = elementRef.nativeElement;
+    const parent = input.parentElement.parentElement;
+    const dialogContainer = dialog.instance.element.nativeElement.querySelector('.fs-date-picker-dialog');
+    const parentBound = parent.getBoundingClientRect();
+    const dialogBound = dialogContainer.getBoundingClientRect();
+
+    // triangle
+    const pseudoHeight = Number(window
+      .getComputedStyle(dialogContainer.querySelector('.wrap'), ':before')
+      .getPropertyValue('border-left')
+      .substr(0, 2));
+
+    dialogContainer.style.top = dialogBound.top + parentBound.height + pseudoHeight + 'px';
+  }
+
   formatDateTimeRange(value, view = 'date') {
     const format = [];
     const startDate = this.formatDateTime(value.start, view);

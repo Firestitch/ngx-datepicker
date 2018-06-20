@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FsDatePickerModel } from '../../services/fsdatepickermodel.service';
+import { MatSelectChange } from '@angular/material';
 
 import * as moment from 'moment';
-import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'fs-date-picker-birthday',
@@ -19,15 +19,19 @@ export class FsDatepickerBirthdayComponent implements OnInit {
 
   public selectedDate = { day: null, month: null, year: null };
 
-  constructor(public element: ElementRef,
-              public fsDatePickerModel: FsDatePickerModel) {
+  constructor(public element: ElementRef) {
 
   }
 
   public ngOnInit() {
+    this.setSelectedDate();
     this.generateYearsArray();
     this.generateMonthArray();
     this.generateDaysArray();
+  }
+
+  public changedDate(event: MatSelectChange) {
+    this.updateDate();
   }
 
   public changedMonth(event: MatSelectChange) {
@@ -36,6 +40,7 @@ export class FsDatepickerBirthdayComponent implements OnInit {
     if (monthLength < this.selectedDate.day) {
       this.selectedDate.day = null;
     }
+    this.updateDate();
   }
 
   public changedYear() {
@@ -44,10 +49,38 @@ export class FsDatepickerBirthdayComponent implements OnInit {
     if (this.selectedDate.day > monthLength) {
       this.selectedDate.day = null;
     }
+    this.updateDate();
   }
 
   public close() {
     this.parentInstance.opened = false;
+  }
+
+  private setSelectedDate() {
+    const momentDate = moment(this.parentInstance.ngModel);
+
+    if (momentDate.isValid()) {
+      this.selectedDate = {
+        day: momentDate.get('date'),
+        month: moment().month(momentDate.get('month')).format('MMMM'),
+        year: momentDate.get('year')
+      };
+    }
+  }
+
+  private updateDate() {
+    const year = this.selectedDate.year;
+    const month = this.selectedDate.month;
+    const date = this.selectedDate.day;
+
+    if (year && month && date) {
+      const newDate = moment()
+        .set({ year, month, date });
+
+      this.parentInstance.setValue(newDate);
+    } else {
+      this.parentInstance.setValue(null);
+    }
   }
 
   // helpers
