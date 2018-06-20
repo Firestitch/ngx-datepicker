@@ -9,6 +9,7 @@ import * as moment from 'moment-timezone';
 export class BirthdayExampleComponent {
 
   public model = null;
+  public minYear = 1900;
 
   constructor() { }
 }
