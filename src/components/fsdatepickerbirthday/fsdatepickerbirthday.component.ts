@@ -116,11 +116,11 @@ export class FsDatepickerBirthdayComponent implements OnInit {
    * helper for generation array of years
    */
   private generateYearsArray() {
-    let minYear = this.parentInstance.minYear || new Date().getFullYear() - 100;
-    const maxYear = this.parentInstance.maxYear || new Date().getFullYear();
+    const minYear = this.parentInstance.minYear || new Date().getFullYear() - 100;
+    let maxYear = this.parentInstance.maxYear || new Date().getFullYear();
 
-     for ( minYear; minYear <= maxYear; minYear++ ) {
-       this.years.push(minYear);
+     for ( maxYear; maxYear >= minYear; maxYear-- ) {
+       this.years.push(maxYear);
      }
   }
 
