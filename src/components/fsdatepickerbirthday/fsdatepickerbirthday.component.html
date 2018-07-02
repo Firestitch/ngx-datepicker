@@ -17,7 +17,7 @@
       <mat-form-field>
         <mat-select name="day_select" placeholder="Day"
                     [(value)]="selectedDate.day"
-                    (selectionChange)="changedDate()">
+                    (selectionChange)="changedDate($event)">
           <mat-option *ngFor="let day of days" [value]="day">
             {{ day }}
           </mat-option>

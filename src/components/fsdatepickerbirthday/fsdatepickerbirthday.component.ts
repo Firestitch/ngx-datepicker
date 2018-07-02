@@ -52,7 +52,7 @@ export class FsDatepickerBirthdayComponent implements OnInit {
     this.updateDate();
   }
 
-  public close() {
+  public close($event) {
     this.parentInstance.opened = false;
   }
 
