@@ -2,10 +2,12 @@ import {
   Directive, Input, HostListener, ViewContainerRef,
   ElementRef, OnChanges, EventEmitter, Output, OnDestroy,
 } from '@angular/core';
+
+import * as moment from 'moment';
+
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 import { FsDatepickerBirthdayFactory } from '../services';
 
-import * as moment from 'moment';
 
 @Directive({
   selector: '[fsDatePickerBirthday]',

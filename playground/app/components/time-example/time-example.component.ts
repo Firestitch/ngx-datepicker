@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: [ 'time-example.component.css' ]
 })
 export class TimeExampleComponent {
-  model;
+  public model = null;
 }
