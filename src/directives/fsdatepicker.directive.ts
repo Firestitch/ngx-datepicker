@@ -77,12 +77,10 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
     writeValue(value: any): void {
 
-      if (value) {
-        if (moment(value).isValid()) {
-          value = moment(value);
-        } else {
-          value = null;
-        }
+      value = value || null;
+
+      if (value && moment(value).isValid()) {
+        value = moment(value);
       }
 
       if (this._model !== value) {
