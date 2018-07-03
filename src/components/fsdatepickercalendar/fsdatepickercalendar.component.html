@@ -1,11 +1,18 @@
-<div class="calendar-container" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" (mouseleave)="onMouseLeaveCalendar()">
+<div class="calendar-container" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)"
+     (mouseleave)="onMouseLeaveCalendar()">
   <div class="months" *ngIf="dateMode == 'month'">
-    <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month" [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value, disabled: month.disabled }">{{ month.abr }}</div>
+    <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month"
+         [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value, disabled: month.disabled }">
+      {{ month.abr }}
+    </div>
   </div>
-  <div class="years" *ngIf="dateMode == 'year'" fsIscroll [fsOptions]="iscrollOptions" fsInstance="iscrollInstance">
+  <div class="years" *ngIf="dateMode == 'year'" fsIscroll [fsOptions]="iscrollOptions"
+       fsInstance="iscrollInstance">
     <div class="iscroll-scroller">
-      <div *ngFor="let year of years" class="year data-year-{{ year.value }}" [ngClass]="{ today: today.year==year.value, row : ($index % 4 == 0), selected: selected.year==year.value, disabled: year.disabled }" (click)="yearViewChange(year.value)">
-          {{ year.value }}
+      <div *ngFor="let year of years" class="year data-year-{{ year.value }}"
+           [ngClass]="{ today: today.year==year.value, row : ($index % 4 == 0), selected: selected.year==year.value, disabled: year.disabled }"
+           (click)="yearViewChange(year.value)">
+        {{ year.value }}
       </div>
       <div class="clear"></div>
     </div>
@@ -17,40 +24,47 @@
       <!-- <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a> -->
       <div class="gap"></div>
       <div class="actions">
-        <a (click)="previousMonth(month)"><mat-icon>navigate_before</mat-icon></a>
-        <a (click)="nextMonth(month)"><mat-icon>navigate_next</mat-icon></a>
+        <a (click)="previousMonth(month)">
+          <mat-icon>navigate_before</mat-icon>
+        </a>
+        <a (click)="nextMonth(month)">
+          <mat-icon>navigate_next</mat-icon>
+        </a>
       </div>
     </div>
     <table>
       <thead>
-        <tr>
-          <th>Sun</th>
-          <th>Mon</th>
-          <th>Tues</th>
-          <th>Wed</th>
-          <th>Thurs</th>
-          <th>Fri</th>
-          <th>Sat</th>
-        </tr>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tues</th>
+        <th>Wed</th>
+        <th>Thurs</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
       </thead>
       <tbody class="calendar calendar-{{ month.date }}">
-        <tr class="week" *ngFor="let week of month.weeks">
-          <td *ngFor="let day of week" class="day" [ngClass]="{
+      <tr class="week" *ngFor="let week of month.weeks">
+        <td *ngFor="let day of week" class="day" [ngClass]="{
             today: today.date==day.date,
             mute: day.mute,
             selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,
             'min-date': day.date === highlightedRangeDays.min,
             'max-date': day.date === highlightedRangeDays.max,
-            disabled: day.disabled }" (click)="dayClick(day)" (mouseenter)="onMouseEnterDay(day)">
+            disabled: day.disabled }"
+            (click)="dayClick(day, $event)"
+            (touchstart)="dayClick(day, $event)"
+            (mouseenter)="onMouseEnterDay(day)">
             <span>
               {{ day.number }}
               <span class="today" *ngIf="today.date==day.date">TODAY</span>
             </span>
-          </td>
-        </tr>
-        <tr *ngIf="month.weeks.length < 6" class="week">
-          <td class="day blank" colspan="7"></td>
-        </tr>
+        </td>
+      </tr>
+      <tr *ngIf="month.weeks.length < 6" class="week">
+        <td class="day blank" colspan="7"></td>
+      </tr>
       </tbody>
     </table>
   </div>

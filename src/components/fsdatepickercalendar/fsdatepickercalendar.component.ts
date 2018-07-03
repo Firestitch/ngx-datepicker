@@ -253,7 +253,27 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     this.onDateModeChange.emit('year');
   }
 
-  dayClick(day) {
+  /**
+   * Process click on day
+   *
+   * We must process click & touch events
+   * because mobile safari has great bug with pseudo css elements.
+   * I didn't find good solution.
+   *
+   * Links:
+   * https://css-tricks.com/annoying-mobile-double-tap-link-issue/
+   * https://github.com/angular/material2/issues/1316
+   *
+   * Related task - GO-T1084
+   *
+   * @param day
+   * @param event
+   */
+  dayClick(day, event) {
+    if (event.type === 'touchstart') {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
     if (day.disabled) {
       return;
