@@ -1,4 +1,4 @@
-<div class="fs-date-picker-backdrop" [hidden]="!parentInstance.opened" (click)="close()"></div>
+<div class="fs-date-picker-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
 
 <div class="fs-date-picker-dialog fs-date-picker-range" tabindex="0"
      [ngClass]="{ opened: parentInstance.opened }">
@@ -17,7 +17,7 @@
       <mat-form-field>
         <mat-select name="day_select" placeholder="Day"
                     [(value)]="selectedDate.day"
-                    (selectionChange)="changedDate()">
+                    (selectionChange)="changedDate($event)">
           <mat-option *ngFor="let day of days" [value]="day">
             {{ day }}
           </mat-option>
