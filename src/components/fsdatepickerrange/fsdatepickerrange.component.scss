@@ -73,15 +73,15 @@
   .fs-date-picker-dialog {
 
     &.fs-date-picker-range {
+
+      .date-time {
+        margin-top: 41px;
+      }
+
       &.has-view-date {
         .wrap {
           width: 100%;
         }
-
-        .date-time {
-          margin-top: 41px;
-        }
-
         .date-range {
           flex-direction: column;
           height: 100%;
