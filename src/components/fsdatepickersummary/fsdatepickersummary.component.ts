@@ -12,6 +12,7 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
 
   @Input() public startDate = null;
   @Input() public endDate = null;
+  @Input() public range: Boolean = false;
 
   @Output() componentsChange = new EventEmitter<any>();
 

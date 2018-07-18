@@ -12,9 +12,9 @@
 
     <div *ngIf="fsDatePickerModel.view === 'datetime'" class="header">
       <fs-date-picker-summary
-      [startDate]="model"
-      (componentsChange)="setComponents($event)"
-      ></fs-date-picker-summary>
+        [startDate]="model"
+        [range]="false"
+        (componentsChange)="setComponents($event)"></fs-date-picker-summary>
     </div>
 
     <div class="date-time">

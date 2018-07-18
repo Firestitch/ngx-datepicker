@@ -15,10 +15,6 @@ import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service'
     selector: 'fs-date-picker-calendar',
     templateUrl: './fsdatepickercalendar.component.html',
     styleUrls: ['./fsdatepickercalendar.component.scss'],
-    host: {
-      '(mousewheel)': 'onMouseWheel($event)',
-      '(touchmove)': 'onTouchMove($event)'
-    },
     providers: [
       {
         provide: HAMMER_GESTURE_CONFIG,
@@ -85,12 +81,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     this.createYearsList();
     this.updateMonthsListDisabledStatus();
 
-    if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
-      setTimeout(() => {
-        const $date = this.element.nativeElement.querySelector('.calendar-container');
-        $date.addEventListener('mousewheel', this.dateScroll);
-      });
-    }
+    // if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
+    //   setTimeout(() => {
+    //     const $date = this.element.nativeElement.querySelector('.calendar-container');
+    //     $date.addEventListener('mousewheel', this.dateScroll);
+    //   });
+    // }
   }
 
   ngOnChanges(changes) {
@@ -435,26 +431,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     }
   }
 
-  onMouseWheel($event) {
-    // $event.preventDefault();
-  }
-
-  onTouchMove($event) {
-    $event.preventDefault();
-  }
-
-  swipe(action = this.SWIPE_ACTION.RIGHT) {
-    if (action === this.SWIPE_ACTION.RIGHT) {
-      this.previousMonth(this.month);
-    } else if (action === this.SWIPE_ACTION.LEFT) {
-      this.nextMonth(this.month);
-    }
-  }
-
   ngOnDestroy() {
-    if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
-      const $date = this.element.nativeElement.querySelector('.calendar-container');
-      $date.removeEventListener('mousewheel', this.dateScroll);
-    }
+    // if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
+    //   const $date = this.element.nativeElement.querySelector('.calendar-container');
+    //   $date.removeEventListener('mousewheel', this.dateScroll);
+    // }
   }
 }

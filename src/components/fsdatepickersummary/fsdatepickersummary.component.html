@@ -1,31 +1,45 @@
-<div *ngIf="formattedStartDate || formattedEndDate" class="summary" [ngClass]="{ 'summary-time': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd) }">
-  <ng-container *ngIf="formattedStartDate">
-    <span
-     *ngIf="(fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime')"
-      class="date"
-      (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"
-      [ngClass]="{ active: fsDatePickerModel.components.calendarStart }">{{ formattedStartDate.date }}
-    </span>
-    <span
-      *ngIf="(fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime')"
-      class="time"
-      (click)="onComponentsChange({ timeStart: true })"
-      [ngClass]="{ active: fsDatePickerModel.components.timeStart }">{{ formattedStartDate.time }}
-    </span>
-  </ng-container>
-  <ng-container *ngIf="formattedStartDate && formattedEndDate"><span class="hyphen">to</span></ng-container>
-  <ng-container *ngIf="formattedEndDate">
-    <span
-      *ngIf="(fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime')"
-      class="date"
-      (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"
-      [ngClass]="{ active: fsDatePickerModel.components.calendarEnd }">{{ formattedEndDate.date }}
-    </span>
-    <span
-      *ngIf="(fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime')"
-      class="time"
-      (click)="onComponentsChange({ timeEnd: true })"
-      [ngClass]="{ active: fsDatePickerModel.components.timeEnd }">{{ formattedEndDate.time }}
+<div class="summary" [ngClass]="{ 'summary-time': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd) }">
+  <span class="summary-start">
+    <ng-container>
+      <span *ngIf="formattedStartDate; else notSelectedStart">
+        <span
+        *ngIf="(fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime')"
+          class="date"
+          (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"
+          [ngClass]="{ active: fsDatePickerModel.components.calendarStart }">{{ formattedStartDate.date }}
+        </span>
+        <span
+          *ngIf="(fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime')"
+          class="time"
+          (click)="onComponentsChange({ timeStart: true })"
+          [ngClass]="{ active: fsDatePickerModel.components.timeStart }">{{ formattedStartDate.time }}
+        </span>
+      </span>
+      <ng-template #notSelectedStart>
+        Not Selected
+      </ng-template>
+    </ng-container>
+  </span>
+  <ng-container *ngIf="range"><span class="summary-to">to</span></ng-container>
+  <ng-container *ngIf="range">
+    <span class="summary-end">
+      <span *ngIf="formattedEndDate; else notSelectedEnd">
+        <span
+          *ngIf="(fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime')"
+          class="date"
+          (click)="onComponentsChange({ calendarStart: true, calendarEnd: true })"
+          [ngClass]="{ active: fsDatePickerModel.components.calendarEnd }">{{ formattedEndDate.date }}
+        </span>
+        <span
+          *ngIf="(fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime')"
+          class="time"
+          (click)="onComponentsChange({ timeEnd: true })"
+          [ngClass]="{ active: fsDatePickerModel.components.timeEnd }">{{ formattedEndDate.time }}
+        </span>
+      </span>
+      <ng-template #notSelectedEnd>
+        Not Selected
+      </ng-template>
     </span>
   </ng-container>
 </div>

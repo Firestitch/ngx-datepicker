@@ -1,17 +1,10 @@
 @import '../../datepicker.scss';
 
-.fs-date-picker-range.has-view-date.has-view-time {
-  .summary .date,
-  .summary .time {
-
-  }
-}
-
 .fs-date-picker-dialog.fs-date-picker-range {
   &.has-date {
 
     .wrap {
-      width: 744px;
+      width: 736px;
       /*
       @TODO in scope of presets
       .header {
@@ -35,7 +28,7 @@
               left: 0;
               border-color: transparent;
               border-style: solid;
-              border-width: 0.5em;
+              border-width: 0.35em;
               border-left-color: #fff;
               border-top-color: #fff;
             }
@@ -71,7 +64,7 @@
 
 
 
-@media only screen and (max-width: 744px) {
+@media only screen and (max-width: 736px) {
   .fs-date-picker-dialog {
 
     &.fs-date-picker-range {
@@ -83,8 +76,11 @@
         .date-range {
           flex-direction: column;
           height: 100%;
-          fs-date-picker-calendar:first-child {
-            margin-right: 0 !important;
+          fs-date-picker-calendar {
+            display: block;
+            &:first-child {
+              margin-right: 0 !important;
+            }
           }
         }
 
@@ -120,6 +116,10 @@
           }
         }
       }
+    }
+
+    .day.blank {
+      display: none;
     }
   }
 }

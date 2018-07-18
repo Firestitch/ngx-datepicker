@@ -10,10 +10,11 @@
 
     <div class="header">
       <fs-date-picker-summary
-      [startDate]="parentInstance.ngModelStart"
-      [endDate]="parentInstance.ngModelEnd"
-      (componentsChange)="setComponents($event)"
-      ></fs-date-picker-summary>
+        [startDate]="parentInstance.ngModelStart"
+        [endDate]="parentInstance.ngModelEnd"
+        (componentsChange)="setComponents($event)"
+        [range]="true">
+      </fs-date-picker-summary>
       <!--
       <fs-date-picker-presets
       *ngIf="!fsDatePickerModel.components.timeStart && !fsDatePickerModel.components.timeEnd"

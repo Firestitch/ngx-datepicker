@@ -1,11 +1,32 @@
-.mat-form-field.fs-date-picker-datetime-range-field {
-  min-width: 355px;
-}
+@import '~@angular/material/theming';
 
-.mat-form-field.fs-date-picker-date-range-field {
-  min-width: 220px;
-}
+@mixin fs-date-picker($theme) {
 
-.mat-form-field.fs-date-picker-time-range-field {
+  $primary: mat-palette($theme);
 
+  .calendar-container {
+    .day.selected,
+    .years .year.selected,
+    .months .month.selected {
+      background-color: mat-color($primary);
+    }
+  }
+
+   .time-container {
+     .hour.selected,
+     .minute.selected {
+      background-color: mat-color($primary);
+    }
+  }
+
+  .has-view-time {
+    .summary .date.active,
+    .summary .time.active {
+      color: mat-color($primary);
+    }
+  }
+
+  .time-container .minutes .button-expand {
+    color: mat-color($primary);
+  }
 }

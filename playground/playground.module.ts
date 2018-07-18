@@ -1,4 +1,4 @@
-import './../tools/assets/playground.scss';
+import './styles.scss';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
