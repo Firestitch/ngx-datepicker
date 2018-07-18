@@ -317,7 +317,7 @@
   }
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 737px) {
 
   .fs-date-picker-dialog {
     .calendar-container {
@@ -331,7 +331,7 @@
     .calendar-container .months .month:hover:not(.disabled):not(.selected),
     .calendar-container .year-name:hover:not(.disabled):not(.selected),
     .calendar-container .month-name:hover:not(.disabled):not(.selected) {
-      background: rgba(181,181,181,.15);
+      background: rgba(70,120,174,.15);
     }
 
     &.has-view-time {
@@ -343,7 +343,7 @@
   }
 }
 
-@media only screen and (max-width: 499px) {
+@media only screen and (max-width: 736px) {
   .fs-date-picker-dialog {
     left: 0 !important;
     right: 0 !important;
@@ -353,13 +353,28 @@
     height: 100vh;
     max-height: initial !important;
 
+    &.has-view-date.has-view-time {
+      .date-time {
+        margin-top: 41px;
+      }
+    }
+
     .wrap {
     	margin: 0px;
     	width: 100% !important;
-      height: calc(100vh - 50px);
+      height: 100%;
       box-shadow: none;
+
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
       .date-time {
-        height: calc(100% - 50px);
+        margin-bottom: 50px;
+        height: 100%;
+        overflow: auto;
       }
     }
 
@@ -373,6 +388,7 @@
       position: fixed;
       bottom: 0;
     }
+
     fs-tabnav {
       display: block;
     }

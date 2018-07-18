@@ -1,6 +1,11 @@
 @import '../../datepicker.scss';
 
 .fs-date-picker-dialog.fs-date-picker-range {
+
+  .time-range {
+    margin: 0 auto;
+  }
+
   &.has-date {
 
     .wrap {
@@ -73,6 +78,10 @@
           width: 100%;
         }
 
+        .date-time {
+          margin-top: 41px;
+        }
+
         .date-range {
           flex-direction: column;
           height: 100%;
@@ -82,10 +91,6 @@
               margin-right: 0 !important;
             }
           }
-        }
-
-        .date-time {
-          overflow-y: auto;
         }
       }
     }

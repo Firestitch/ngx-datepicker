@@ -201,6 +201,10 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     this.parentInstance.opened = false;
   }
 
+  clear() {
+    this.parentInstance.writeValue(null, null);
+  }
+
   @HostListener('document:keydown', ['$event'])
   documentKeydown(e) {
     if (e.keyCode === 27) {

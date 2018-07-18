@@ -30,3 +30,11 @@
     color: mat-color($primary);
   }
 }
+
+.mat-form-field.fs-date-picker-datetime-range-field {
+  min-width: 355px;
+}
+
+.mat-form-field.fs-date-picker-date-range-field {
+  min-width: 220px;
+}

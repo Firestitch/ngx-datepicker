@@ -41,7 +41,8 @@
     <div class="done"
     *ngIf="fsDatePickerModel.view === 'time' ||
           (fsDatePickerModel.view === 'datetime' && fsDatePickerModel.dateMode === 'date')">
-      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
+          <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
+          <button type="button" mat-raised-button (click)="clear($event)">Clear</button>
     </div>
   </div>
 </div>
