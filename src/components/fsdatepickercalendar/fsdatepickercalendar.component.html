@@ -53,7 +53,7 @@
             'min-date': day.date === highlightedRangeDays.min,
             'max-date': day.date === highlightedRangeDays.max,
             disabled: day.disabled }"
-            (tap)="dayClick(day, $event)"
+            (click)="dayClick(day, $event)"
             (mouseenter)="onMouseEnterDay(day)">
             <span>
               {{ day.number }}

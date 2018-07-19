@@ -47,6 +47,6 @@ import * as fastClick from 'fastclick';
 export class PlaygroundModule {
 
   construct() {
-    fastClick.attach(document.body);
+    //fastClick.attach(document.body);
   }
 }
