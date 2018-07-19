@@ -269,6 +269,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     * Related task - GO-T1084
     */
 
+
+    console.log(event);
+
     if (day.disabled) {
       return;
     }

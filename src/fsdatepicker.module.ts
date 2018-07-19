@@ -27,6 +27,8 @@ import {  FsDatepickerFactory,
           FsDatepickerRangeFactory,
           FsDatepickerBirthdayFactory,
           FsDatePickerCommon } from './services';
+import 'hammerjs'
+
 
 @NgModule({
   imports: [
