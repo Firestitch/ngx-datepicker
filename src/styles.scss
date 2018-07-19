@@ -39,3 +39,7 @@
 .mat-form-field.fs-date-picker-date-range-field {
   min-width: 220px;
 }
+
+fs-date-picker-dialog * {
+  touch-action: manipulation;
+}
