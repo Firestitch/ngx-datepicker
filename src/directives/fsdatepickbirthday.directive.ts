@@ -1,18 +1,17 @@
 import {
   Directive, Input, HostListener, ViewContainerRef,
-  ElementRef, OnChanges, EventEmitter, Output, OnDestroy,
+  ElementRef, OnChanges, EventEmitter, Output, OnDestroy, Renderer2
 } from '@angular/core';
-
 import * as moment from 'moment';
-
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
 import { FsDatepickerBirthdayFactory } from '../services';
+import { FsDatePickerBaseDirective } from './../classes/fsdatepickerbase.directive';
 
 
 @Directive({
   selector: '[fsDatePickerBirthday]',
 })
-export class FsDatePickBirthdayDirective implements OnChanges, OnDestroy {
+export class FsDatePickBirthdayDirective extends FsDatePickerBaseDirective implements OnChanges, OnDestroy {
 
   @Input() public minYear = null;
   @Input() public maxYear = null;
@@ -20,15 +19,15 @@ export class FsDatePickBirthdayDirective implements OnChanges, OnDestroy {
   @Input() public ngModel = null;
   @Output() public ngModelChange = new EventEmitter<any>();
 
-  private _dialog = null;
-  public opened = false;
-
   constructor(
     private _fsDatePickerCommon: FsDatePickerCommon,
     private _fsDatepickerBirthdayFactory: FsDatepickerBirthdayFactory,
     private _viewContainerRef: ViewContainerRef,
-    private _elementRef: ElementRef
-  ) { }
+    private _elementRef: ElementRef,
+    protected renderer: Renderer2,
+  ) {
+    super(renderer);
+  }
 
   @HostListener('focus')
   public onFocus() {
@@ -46,7 +45,7 @@ export class FsDatePickBirthdayDirective implements OnChanges, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   public onWindowResize(event) {
-    this._fsDatePickerCommon.positionDialogUnderInput(this._dialog, this._elementRef);
+    this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
   }
 
   public setValue(value: moment.Moment) {
@@ -63,25 +62,28 @@ export class FsDatePickBirthdayDirective implements OnChanges, OnDestroy {
   }
 
   public ngOnDestroy() {
-    if (this._dialog) {
-      this._dialog.remove();
+    if (this.dialog) {
+      this.dialog.remove();
     }
   }
 
-  private open() {
-    this.opened = true;
+  protected open() {
+    super.open();
 
-    if (this._dialog) {
+    if (this.dialog) {
       return;
     }
 
     this._fsDatepickerBirthdayFactory.setRootViewContainerRef(this._viewContainerRef);
-    this._dialog = this._fsDatepickerBirthdayFactory.addDynamicComponent();
-    this._dialog.instance.parentInstance = this;
+    this.dialog = this._fsDatepickerBirthdayFactory.addDynamicComponent();
+    this.dialog.instance.parentDirective = this;
 
     setTimeout(() => {
-      this._fsDatePickerCommon.positionDialogUnderInput(this._dialog, this._elementRef);
+      this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
     });
   }
 
+  protected clear() {
+    this.setValue(null);
+  }
 }

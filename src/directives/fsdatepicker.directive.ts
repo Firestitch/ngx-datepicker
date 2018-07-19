@@ -2,9 +2,9 @@ import {  Directive, Input, Output, Inject, HostListener, ComponentFactoryResolv
           Renderer2, ElementRef, EventEmitter, Pipe, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { DATEPICKER_VALUE_ACCESSOR } from './../value-accessors/fsdatepicker.value-accessor';
 import { FsPreset } from './../interfaces/fspreset.interface';
-import { FsDatepickerComponent } from './../components/fsdatepicker/fsdatepicker.component';
 import { FsDatepickerFactory } from './../services/fsdatepickerfactory.service';
 import { FsDatePickerCommon } from './../services/fsdatepickercommon.service';
+import { FsDatePickerBaseDirective } from './../classes/fsdatepickerbase.directive';
 import * as moment from 'moment-timezone';
 
 
@@ -18,7 +18,7 @@ import * as moment from 'moment-timezone';
     selector: '[fsDatePicker]',
     providers: [DATEPICKER_VALUE_ACCESSOR]
 })
-export class FsDatePickDirective implements AfterViewInit, OnDestroy {
+export class FsDatePickDirective extends FsDatePickerBaseDirective implements AfterViewInit, OnDestroy {
 
     @Input() public minYear = null;
     @Input() public maxYear = null;
@@ -30,10 +30,6 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
     @Output('change') change$ = new EventEmitter<any>();
 
-    public opened = false;
-    private _model = null;
-    private $dialog = null;
-
     _onTouched = () => { };
     _onChange = (value: any) => { };
     onFocused = (event: any) => { };
@@ -43,12 +39,14 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
     constructor(
         @Inject(ElementRef) private _elementRef: ElementRef,
-        @Inject(Renderer2) private renderer: Renderer2,
         @Inject(ComponentFactoryResolver) private factoryResolver,
         @Inject(ViewContainerRef) private viewContainerRef,
         private fsDatePickerCommon: FsDatePickerCommon,
-        private fsDatepickerFactory: FsDatepickerFactory
-    ) { }
+        private fsDatepickerFactory: FsDatepickerFactory,
+        protected renderer: Renderer2
+    ) {
+      super(renderer);
+     }
 
     ngAfterViewInit() {
 
@@ -83,11 +81,11 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
         value = moment(value);
       }
 
-      if (this._model !== value) {
+      if (this.model !== value) {
         this._onChange(value);
       }
 
-      this._model = value;
+      this.model = value;
       this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
       this.change$.emit(value);
 
@@ -95,43 +93,47 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
     }
 
     getValue() {
-      return this._model ? moment(this._model) : this._model;
+      return this.model ? moment(this.model) : this.model;
     }
 
-    private open() {
-      this.opened = true;
+    protected open() {
+      super.open();
 
-      if (this.$dialog) {
+      if (this.dialog) {
         this.enableDefaultComponent();
-        this.$dialog.instance.initCalendar();
+        this.dialog.instance.initCalendar();
         return;
       }
 
       this.fsDatepickerFactory.setRootViewContainerRef(this.viewContainerRef);
-      this.$dialog = this.fsDatepickerFactory.addDynamicComponent();
-      this.$dialog.instance.parentInstance = this;
+      this.dialog = this.fsDatepickerFactory.addDynamicComponent();
+      this.dialog.instance.parentDirective = this;
 
-      this.$dialog.instance.fsDatePickerModel.view = this.view;
-      this.$dialog.instance.fsDatePickerModel.minYear = this.minYear;
-      this.$dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
-      this.$dialog.instance.fsDatePickerModel.minDate = this.minDate;
-      this.$dialog.instance.fsDatePickerModel.maxDate = this.maxDate;
-      this.$dialog.instance.fsDatePickerModel.presets = this.presets;
-      this.$dialog.instance.fsDatePickerModel.dateMode = 'date';
+      this.dialog.instance.fsDatePickerModel.view = this.view;
+      this.dialog.instance.fsDatePickerModel.minYear = this.minYear;
+      this.dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+      this.dialog.instance.fsDatePickerModel.minDate = this.minDate;
+      this.dialog.instance.fsDatePickerModel.maxDate = this.maxDate;
+      this.dialog.instance.fsDatePickerModel.presets = this.presets;
+      this.dialog.instance.fsDatePickerModel.dateMode = 'date';
 
       this.enableDefaultComponent();
 
       setTimeout(() => {
-        this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);
+        this.fsDatePickerCommon.positionDialog(this.dialog, this._elementRef);
       });
     }
 
     private enableDefaultComponent() {
       if (this.view === 'time') {
-        this.$dialog.instance.fsDatePickerModel.components = { timeStart: true };
+        this.dialog.instance.fsDatePickerModel.components = { timeStart: true };
       } else {
-        this.$dialog.instance.fsDatePickerModel.components = { calendarStart: true };
+        this.dialog.instance.fsDatePickerModel.components = { calendarStart: true };
       }
+    }
+
+    protected clear() {
+      this.writeValue(null);
     }
 
     private inputClick(e) {
@@ -157,12 +159,12 @@ export class FsDatePickDirective implements AfterViewInit, OnDestroy {
 
     @HostListener('window:resize', ['$event'])
     onWindowResize(event) {
-      this.fsDatePickerCommon.positionDialog(this.$dialog, this._elementRef);
+      this.fsDatePickerCommon.positionDialog(this.dialog, this._elementRef);
     }
 
     ngOnDestroy() {
-      if (this.$dialog && this.$dialog.instance.element.nativeElement.parentNode) {
-        this.$dialog.instance.element.nativeElement.parentNode.removeChild(this.$dialog.instance.element.nativeElement);
+      if (this.dialog && this.dialog.instance.element.nativeElement.parentNode) {
+        this.dialog.instance.element.nativeElement.parentNode.removeChild(this.dialog.instance.element.nativeElement);
       }
     }
 }

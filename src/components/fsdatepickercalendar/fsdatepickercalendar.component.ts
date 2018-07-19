@@ -266,10 +266,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
    * @param event
    */
   dayClick(day, event) {
-    if (event.type === 'touchstart') {
-      event.preventDefault();
-      event.stopPropagation();
-    }
 
     if (day.disabled) {
       return;

@@ -1,7 +1,7 @@
-<div class="fs-date-picker-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
+<div class="fs-date-picker-backdrop" [hidden]="!parentDirective.opened" (click)="close($event)"></div>
 
 <div class="fs-date-picker-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
-[ngClass]="{ opened: parentInstance.opened,
+[ngClass]="{ opened: parentDirective.opened,
   'has-view-date': fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime',
   'has-view-time': fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime',
   'date-mode-date': fsDatePickerModel.dateMode === 'date',
@@ -42,7 +42,7 @@
     *ngIf="fsDatePickerModel.view === 'time' ||
           (fsDatePickerModel.view === 'datetime' && fsDatePickerModel.dateMode === 'date')">
           <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
-          <button type="button" mat-raised-button (click)="clear($event)">Clear</button>
+          <!-- <button type="button" mat-raised-button (click)="clear($event)">Clear</button> -->
     </div>
   </div>
 </div>

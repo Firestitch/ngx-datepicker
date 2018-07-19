@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FsDatePickerModel } from '../../services/fsdatepickermodel.service';
 import { MatSelectChange } from '@angular/material';
-
+import { FsDatePickerBaseComponent } from './../../classes/fsdatepickerbase.component';
 import * as moment from 'moment';
 
 @Component({
@@ -10,8 +10,7 @@ import * as moment from 'moment';
   styleUrls: ['./fsdatepickerbirthday.component.scss'],
   providers: [FsDatePickerModel]
 })
-export class FsDatepickerBirthdayComponent implements OnInit {
-  public parentInstance: any = null;
+export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent implements OnInit {
 
   public years: number[] = [];
   public months: string[] = [];
@@ -20,7 +19,7 @@ export class FsDatepickerBirthdayComponent implements OnInit {
   public selectedDate = { day: null, month: null, year: null };
 
   constructor(public element: ElementRef) {
-
+    super();
   }
 
   public ngOnInit() {
@@ -52,12 +51,8 @@ export class FsDatepickerBirthdayComponent implements OnInit {
     this.updateDate();
   }
 
-  public close($event) {
-    this.parentInstance.opened = false;
-  }
-
   private setSelectedDate() {
-    const momentDate = moment(this.parentInstance.ngModel);
+    const momentDate = moment(this.parentDirective.ngModel);
 
     if (momentDate.isValid()) {
       this.selectedDate = {
@@ -77,9 +72,9 @@ export class FsDatepickerBirthdayComponent implements OnInit {
       const newDate = moment()
         .set({ year, month, date });
 
-      this.parentInstance.setValue(newDate);
+      this.parentDirective.setValue(newDate);
     } else {
-      this.parentInstance.setValue(null);
+      this.parentDirective.setValue(null);
     }
   }
 
@@ -116,8 +111,8 @@ export class FsDatepickerBirthdayComponent implements OnInit {
    * helper for generation array of years
    */
   private generateYearsArray() {
-    const minYear = this.parentInstance.minYear || new Date().getFullYear() - 100;
-    let maxYear = this.parentInstance.maxYear || new Date().getFullYear();
+    const minYear = this.parentDirective.minYear || new Date().getFullYear() - 100;
+    let maxYear = this.parentDirective.maxYear || new Date().getFullYear();
 
      for ( maxYear; maxYear >= minYear; maxYear-- ) {
        this.years.push(maxYear);

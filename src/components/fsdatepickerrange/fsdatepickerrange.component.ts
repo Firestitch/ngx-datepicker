@@ -2,6 +2,7 @@ import { Component, Input, HostListener, ViewChild, ElementRef, IterableDiffers,
   ViewEncapsulation, OnInit, DoCheck } from '@angular/core';
 import { FsDatePickerModel } from './../../services/fsdatepickermodel.service';
 import { FsDatePickerCommon } from './../../services/fsdatepickercommon.service';
+import { FsDatePickerBaseComponent } from './../../classes/fsdatepickerbase.component';
 import * as moment from 'moment-timezone';
 
 
@@ -12,20 +13,14 @@ import * as moment from 'moment-timezone';
     encapsulation: ViewEncapsulation.None,
     providers: [FsDatePickerModel]
 })
-export class FsDatepickerRangeComponent implements OnInit, DoCheck {
-
-  parentInstance: any = null;
+export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implements OnInit, DoCheck {
 
   public toDisabledTimes = [];
-
   public startCalendarMonth = null;
   public endCalendarMonth = null;
-
   public highlightStartDate = null;
   public highlightEndDate = null;
-
   public disabledDays = null;
-
   private modelDiffer = null;
 
   constructor(
@@ -34,19 +29,20 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     public element: ElementRef,
     private _iterableDiffers: IterableDiffers
   ) {
+    super();
     this.modelDiffer = this._iterableDiffers.find([]).create(null);
   }
 
   ngOnInit() {
-    this.calendarsDrawMonth(this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd);
+    this.calendarsDrawMonth(this.parentDirective.ngModelStart, this.parentDirective.ngModelEnd);
     this.disabledDays = this.fsDatePickerModel.disabledDays();
   }
 
   ngDoCheck() {
-    if (this.modelDiffer.diff([this.parentInstance.ngModelStart, this.parentInstance.ngModelEnd])) {
+    if (this.modelDiffer.diff([this.parentDirective.ngModelStart, this.parentDirective.ngModelEnd])) {
 
-      const startDate = this.parentInstance.ngModelStart;
-      const endDate = this.parentInstance.ngModelEnd;
+      const startDate = this.parentDirective.ngModelStart;
+      const endDate = this.parentDirective.ngModelEnd;
 
       this.toDisabledTimesUpdate(startDate, endDate);
 
@@ -58,7 +54,7 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   setStartDate(date) {
 
     const startDate = date;
-    const endDate = this.parentInstance.ngModelEnd;
+    const endDate = this.parentDirective.ngModelEnd;
 
     this.setDates(startDate, endDate);
 
@@ -78,7 +74,7 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   setEndDate(date) {
 
     const startDate = date;
-    const endDate = this.parentInstance.ngModelEnd;
+    const endDate = this.parentDirective.ngModelEnd;
 
     this.setDates(startDate, endDate);
 
@@ -88,7 +84,7 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
   }
 
   setStartTime(date) {
-    let endDate = this.parentInstance.ngModelEnd;
+    let endDate = this.parentDirective.ngModelEnd;
     // In time mode, if end date is empty - user not able switch to end time picker
     if (this.fsDatePickerModel.view === 'time' && !endDate) {
       endDate = date;
@@ -98,19 +94,19 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
       endDate = date;
     }
 
-    this.parentInstance.writeValue(date, endDate);
+    this.parentDirective.writeValue(date, endDate);
   }
 
   setEndTime(date) {
-    this.parentInstance.writeValue(this.parentInstance.ngModelStart, date);
+    this.parentDirective.writeValue(this.parentDirective.ngModelStart, date);
   }
 
   setDates(startDate, endDate) {
 
-    if (this.parentInstance.ngModelStart && !this.parentInstance.ngModelEnd) {
+    if (this.parentDirective.ngModelStart && !this.parentDirective.ngModelEnd) {
       endDate = startDate;
-      startDate = this.parentInstance.ngModelStart;
-    } else if (this.parentInstance.ngModelStart && this.parentInstance.ngModelEnd) {
+      startDate = this.parentDirective.ngModelStart;
+    } else if (this.parentDirective.ngModelStart && this.parentDirective.ngModelEnd) {
       endDate = null;
     }
 
@@ -119,7 +115,7 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
       endDate = null;
     }
 
-    this.parentInstance.writeValue(startDate, endDate);
+    this.parentDirective.writeValue(startDate, endDate);
   }
 
   onDatesChange(data) {
@@ -183,26 +179,18 @@ export class FsDatepickerRangeComponent implements OnInit, DoCheck {
     const date = moment(day.date);
 
     if (
-      this.parentInstance.ngModelStart &&
-      !this.parentInstance.ngModelEnd &&
-      moment(this.parentInstance.ngModelStart).isBefore(date)
+      this.parentDirective.ngModelStart &&
+      !this.parentDirective.ngModelEnd &&
+      moment(this.parentDirective.ngModelStart).isBefore(date)
     ) {
       this.highlightEndDate = date;
     } else {
-      this.highlightEndDate = this.parentInstance.ngModelEnd;
+      this.highlightEndDate = this.parentDirective.ngModelEnd;
     }
   }
 
   onMouseLeaveCalendar() {
-    this.highlightEndDate = this.parentInstance.ngModelEnd;
-  }
-
-  close($event?) {
-    this.parentInstance.opened = false;
-  }
-
-  clear() {
-    this.parentInstance.writeValue(null, null);
+    this.highlightEndDate = this.parentDirective.ngModelEnd;
   }
 
   @HostListener('document:keydown', ['$event'])

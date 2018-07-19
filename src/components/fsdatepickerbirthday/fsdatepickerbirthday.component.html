@@ -1,7 +1,7 @@
-<div class="fs-date-picker-backdrop" [hidden]="!parentInstance.opened" (click)="close($event)"></div>
+<div class="fs-date-picker-backdrop" [hidden]="!parentDirective.opened" (click)="close($event)"></div>
 
 <div class="fs-date-picker-dialog fs-date-picker-range" tabindex="0"
-     [ngClass]="{ opened: parentInstance.opened }">
+     [ngClass]="{ opened: parentDirective.opened }">
   <div class="wrap">
     <div class="date-time panel">
       <mat-form-field>
