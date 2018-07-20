@@ -2,7 +2,7 @@ export class FsDatePickerBaseComponent {
 
   public parentDirective: any = null;
 
-  clear() {
+  clear($event?) {
     this.parentDirective.clear();
   }
 

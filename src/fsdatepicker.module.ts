@@ -13,7 +13,8 @@ import {  MatButtonModule,
 import {  FsDatePickDirective,
           FsDatePickRangeDirective,
           FsIsscrollDirective,
-          FsDatePickBirthdayDirective} from './directives';
+          FsDatePickBirthdayDirective,
+          ClickDirective } from './directives';
 
 import {  FsDatepickerComponent,
           FsDatepickerRangeComponent,
@@ -62,6 +63,7 @@ import 'hammerjs'
     FsDatePickerTimeComponent,
     FsDatePickBirthdayDirective,
     FsDatepickerBirthdayComponent,
+    ClickDirective
   ],
   providers: [
     FsDatepickerFactory,

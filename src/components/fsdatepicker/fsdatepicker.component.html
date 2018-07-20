@@ -34,15 +34,11 @@
         [date]="model"
         (onChange)="setDate($event)"
       ></fs-date-picker-time>
-
     </div>
 
-    <!-- Done button showing on Time Picker or Date Time picker on calendar mode -->
-    <div class="done"
-    *ngIf="fsDatePickerModel.view === 'time' ||
-          (fsDatePickerModel.view === 'datetime' && fsDatePickerModel.dateMode === 'date')">
-          <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
-          <!-- <button type="button" mat-raised-button (click)="clear($event)">Clear</button> -->
+    <div class="done">
+      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
+      <!-- <button type="button" mat-raised-button (click)="clear($event)">Clear</button> -->
     </div>
   </div>
 </div>
