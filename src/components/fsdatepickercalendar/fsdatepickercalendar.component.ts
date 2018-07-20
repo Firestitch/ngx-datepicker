@@ -111,6 +111,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
   }
 
   onMouseEnterDay(day) {
+    console.log(day,'xxxx');
     this.hoverDay.emit(day);
   }
 
@@ -255,6 +256,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
    * @param event
    */
   dayClick(day, event) {
+
+console.log(day);
+
     if (day.disabled) {
       return;
     }
