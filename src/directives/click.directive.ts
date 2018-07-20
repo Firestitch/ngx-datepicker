@@ -9,7 +9,7 @@ export class ClickDirective {
   static touch = false;
   @Output('fsClick') func = new EventEmitter();
 
-  public touchDate = null;
+  public touchEndX = 0;
   constructor() {}
 
   @HostListener('click', ['$event.target', '$event'])
@@ -22,12 +22,22 @@ export class ClickDirective {
 
   @HostListener('touchstart', ['$event.target', '$event'])
   touchstart(el, e) {
-    ClickDirective.touch = true;
+     ClickDirective.touch = true;
+  }
+
+  @HostListener('touchmove', ['$event.target', '$event'])
+  touchmove(el, e) {
+    if (e.touches[0].pageX > this.touchEndX) {
+      this.touchEndX = e.touches[0].pageX;
+    }
   }
 
   @HostListener('touchend', ['$event.target', '$event'])
   touchend(el, e) {
+
+    if (!this.touchEndX) {
       this.func.emit(e);
+    }
   }
 }
 
