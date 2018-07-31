@@ -1,4 +1,4 @@
-<div  class="calendar-container"
+<div class="calendar-container"
       (mouseleave)="onMouseLeaveCalendar()">
   <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month"

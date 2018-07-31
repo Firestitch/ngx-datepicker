@@ -198,6 +198,7 @@
     width: 100%;
     position: relative;
 	  flex: 1 1 45%;
+    min-height: 350px;
   }
 
   .calendar-container .day.selected,
@@ -308,7 +309,7 @@
     width: 100%;
     border-top: 1px solid #E1E1E1;
     margin-top: auto;
-    padding: 4px;
+    padding: 4px 0;
     button {
       padding-left: 10px;
       padding-right: 10px;
