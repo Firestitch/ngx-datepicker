@@ -53,8 +53,9 @@ export class FsDatePickBirthdayDirective extends FsDatePickerBaseDirective imple
   }
 
   public ngOnChanges(changes) {
-    if (changes.ngModel && !changes.ngModel.firstChange) {
+    if (changes.ngModel) {
       setTimeout(() => {
+        this.ngModel = moment(this.ngModel);
         const newDate = this.ngModel.isValid() ? moment(this.ngModel).format(this.format) : null;
         this._elementRef.nativeElement.value = newDate;
       }, 0);

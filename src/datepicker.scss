@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 9000;
+  z-index: 999;
   outline: none;
   overflow: visible;
   background: none !important;
@@ -15,7 +15,7 @@
 
 .fs-date-picker-dialog {
 	position: fixed;
-  z-index: 10000;
+  z-index: 1000;
   display: none;
   visibility: hidden;
   display: block;
