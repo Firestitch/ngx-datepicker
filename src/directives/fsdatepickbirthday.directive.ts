@@ -63,8 +63,8 @@ export class FsDatePickBirthdayDirective extends FsDatePickerBaseDirective imple
   }
 
   public ngOnDestroy() {
-    if (this.dialog) {
-      this.dialog.remove();
+    if (this.dialog && this.dialog.instance.element.nativeElement.parentNode) {
+      this.dialog.instance.element.nativeElement.parentNode.removeChild(this.dialog.instance.element.nativeElement);
     }
   }
 
