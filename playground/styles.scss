@@ -2,5 +2,5 @@
 
 @import './../tools/assets/playground.scss';
 @import '../src/styles.scss';
-
+@include mat-core();
 @include fs-date-picker($mat-blue);
