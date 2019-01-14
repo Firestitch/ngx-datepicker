@@ -136,7 +136,7 @@ export class FsDatePickDirective extends FsDatePickerBaseDirective implements Af
       this.writeValue(null);
     }
 
-    private inputClick(e) {
+    public inputClick(e) {
       this.fsDatePickerCommon.inputClick(e, () => {
         this.open();
       });
