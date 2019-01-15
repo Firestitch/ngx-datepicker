@@ -1,6 +1,6 @@
 @import '~@angular/material/theming';
 
 @import './../tools/assets/playground.scss';
-@import '../src/styles.scss';
+@import '../src/app/styles.scss';
 @include mat-core();
 @include fs-date-picker($mat-blue);
