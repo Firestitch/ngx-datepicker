@@ -16,7 +16,9 @@ import { TimeRangeExampleComponent } from './app/components/timerange-example/ti
 import { BirthdayExampleComponent } from './app/components/birthday-example/birthday-example.component';
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
-import * as fastClick from 'fastclick';
+import { FsMessageModule } from '@firestitch/message';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -26,8 +28,10 @@ import * as fastClick from 'fastclick';
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
-    FsExampleModule,
-    FsFormModule
+    FsExampleModule.forRoot(),
+    FsFormModule,
+    FsMessageModule.forRoot(),
+    ToastrModule.forRoot({ preventDuplicates: true }),
   ],
   entryComponents: [
   ],
@@ -44,9 +48,4 @@ import * as fastClick from 'fastclick';
   providers: [
   ],
 })
-export class PlaygroundModule {
-
-  construct() {
-    //fastClick.attach(document.body);
-  }
-}
+export class PlaygroundModule {}
