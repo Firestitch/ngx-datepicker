@@ -21,7 +21,7 @@
   "scripts": {
     "package": "cd tools && npm run cli:package",
     "package:test": "ng test fs-package",
-    "package:publish": "cd package && npm publish --access=public",
+    "package:publish": "cd tools && npm run cli:package:publish",
     "demo:build": "ng build --aot --prod",
     "serve": "ng serve"
   },
