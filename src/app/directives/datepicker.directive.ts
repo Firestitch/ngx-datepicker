@@ -110,11 +110,15 @@ export class FsDatePickDirective extends FsDatePickerBaseDirective implements Af
       value = moment(value);
     }
 
-    if (this.model !== value) {
+    if (
+      (!this.model && value)
+      || (
+        moment.isMoment(this.model) && moment.isMoment(value) && this.model.unix() !== value.unix())
+    ) {
+      this.model = value;
       this._onChange(value);
     }
 
-    this.model = value;
     this._elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
     this.change$.emit(value);
 
