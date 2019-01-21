@@ -1,6 +1,7 @@
 {
   "name": "@firestitch/datepicker",
   "version": "0.5.0",
+  "title": "Date/Time Picker",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-datepicker"
@@ -43,9 +44,8 @@
     "@angular/platform-browser-dynamic": "^7.2.1",
     "@compodoc/compodoc": "^1.1.7",
     "@firestitch/common": "^0.5.1",
-    "@firestitch/example": "^0.5.2",
+    "@firestitch/example": "^0.6.0",
     "@firestitch/form": "^1.2.0",
-    "@firestitch/iframe": "^0.2.0",
     "@firestitch/message": "^0.2.0",
     "codelyzer": "^4.5.0",
     "cpx": "^1.5.0",

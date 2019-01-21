@@ -1,7 +1,9 @@
 declare function require(moduleName: string): any;
 
+const pkg = require('../../package.json');
 
 export const baseEnvironment = {
-  githubUrl: require('../../package.json').repository.url,
-  npmUrl: 'https://www.npmjs.com/package/' + require('../../package.json').name
+  githubUrl: pkg.repository.url,
+  npmUrl: 'https://www.npmjs.com/package/' + pkg.name,
+  title: pkg.title
 };

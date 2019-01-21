@@ -7,11 +7,5 @@ import { environment } from '../environments/environment';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public environment = environment;
-  public theme = `@import '~@angular/material/theming';
-@import '~@firestitch/datepicker/styles.scss';
-
-$theme = /* Your app theme definition */
-
-@include fs-date-picker($theme);`;
+  public config = environment;
 }
