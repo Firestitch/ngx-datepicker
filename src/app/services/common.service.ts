@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { isNumeric } from '@firestitch/common/util';
+import { isNumeric } from '@firestitch/common';
 
 import * as moment_ from 'moment-timezone';
 const moment = moment_;
 
-import { isObject } from 'lodash';
+import { isObject } from 'lodash-es';
 
 
 @Injectable()

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as moment from 'moment-timezone';
+
 
 @Component({
   selector: 'timerange-example',
@@ -8,8 +8,9 @@ import * as moment from 'moment-timezone';
 })
 export class TimeRangeExampleComponent {
 
-  start_date = null;
-  end_date = null;
+  public startDate =null;
+  public endDate = null;
+  public model = null;
 
   constructor() {
   }

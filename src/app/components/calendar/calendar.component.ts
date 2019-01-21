@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { throttle } from '@firestitch/common/util';
+import { throttle } from '@firestitch/common';
 
 import 'hammerjs';
 

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment_ from 'moment-timezone';
 const moment = moment_;
 
-import { isEqual, forEach } from 'lodash';
+import { isEqual, forEach } from 'lodash-es';
 import { FsComponents, FsPreset, FsDatePicker } from '../interfaces';
 
 @Injectable()

@@ -10,6 +10,10 @@ export class DateTimeRangeExampleComponent {
 
   public presets = [];
 
+  public startDate = null;
+  public endDate = null;
+  public range = null;
+
   public event = {
     start_date: null,
     end_date: null

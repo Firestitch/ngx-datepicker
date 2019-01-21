@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as moment from 'moment-timezone';
+
 
 @Component({
   selector: 'daterange-example',
@@ -8,8 +8,9 @@ import * as moment from 'moment-timezone';
 })
 export class DateRangeExampleComponent {
 
-  start_date = null;
-  end_date = null;
+  startDate = null;
+  endDate = null;
+  range = null;
 
   constructor() {
   }
