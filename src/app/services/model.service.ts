@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import * as moment_ from 'moment-timezone';
+import * as moment_ from 'moment';
 const moment = moment_;
 
 import { isEqual, forEach } from 'lodash-es';

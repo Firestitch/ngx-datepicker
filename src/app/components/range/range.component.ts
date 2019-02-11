@@ -8,7 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import * as moment_ from 'moment-timezone';
+import * as moment_ from 'moment';
 const moment = moment_;
 
 import { FsDatePickerModel } from '../../services/model.service';

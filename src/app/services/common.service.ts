@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { isNumeric } from '@firestitch/common';
 
-import * as moment_ from 'moment-timezone';
+import * as moment_ from 'moment';
 const moment = moment_;
 
 import { isObject } from 'lodash-es';

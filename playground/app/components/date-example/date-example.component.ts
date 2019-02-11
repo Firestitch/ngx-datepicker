@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as moment from 'moment-timezone';
+import * as moment from 'moment';
 
 @Component({
   selector: 'date-example',

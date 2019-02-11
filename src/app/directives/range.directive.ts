@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
-import * as moment_ from 'moment-timezone';
+import * as moment_ from 'moment';
 const moment = moment_;
 
 import { FsDatepickerRangeFactory } from '../services/range-factory.service';

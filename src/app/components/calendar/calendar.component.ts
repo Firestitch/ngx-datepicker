@@ -14,8 +14,8 @@ import { throttle } from '@firestitch/common';
 
 import 'hammerjs';
 
-import * as moment_ from 'moment-timezone';
-const moment = moment_;
+import * as moment_ from 'moment';
+const moment = extendMoment(moment_);
 
 import { extendMoment } from 'moment-range';
 
@@ -99,9 +99,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     public element: ElementRef,
     public fsDatePickerModel: FsDatePickerModel,
     private fsDatePickerCommon: FsDatePickerCommon,
-  ) {
-    extendMoment(moment);
-  }
+  ) {}
 
   public ngOnInit() {
 
@@ -130,7 +128,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
         // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
         this.selected = this.fsDatePickerCommon.getSelected(this.date);
         this.updateDaysHighlighted();
-      }else if (changes.highlightStartDate || changes.highlightEndDate) {
+      } else if (changes.highlightStartDate || changes.highlightEndDate) {
         this.updateDaysHighlighted();
       }
 
