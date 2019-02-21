@@ -8,8 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import * as moment_ from 'moment';
-const moment = moment_;
+import { addMonths, isAfter, isBefore, isSameDay, lightFormat, subMonths } from 'date-fns';
 
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDatePickerCommon } from '../../services/common.service';
@@ -78,8 +77,8 @@ export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implem
     this.setDates(startDate, endDate);
 
     if (startDate && endDate) {
-      if (moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM')) {
-        this.endCalendarDrawMonth(moment(endDate).add(1, 'month'));
+      if (lightFormat(startDate, 'yyyy-MM') === lightFormat(endDate, 'yyyy-MM')) {
+        this.endCalendarDrawMonth(addMonths(endDate, 1));
       } else {
         this.endCalendarDrawMonth(endDate);
       }
@@ -109,7 +108,7 @@ export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implem
       endDate = date;
     }
 
-    if (date && endDate && date.isAfter(endDate)) {
+    if (date && endDate && isAfter(date, endDate)) {
       endDate = date;
     }
 
@@ -129,7 +128,7 @@ export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implem
       endDate = null;
     }
 
-    if (startDate && endDate && startDate.isAfter(endDate)) {
+    if (startDate && endDate && isAfter(startDate, endDate)) {
       startDate = endDate;
       endDate = null;
     }
@@ -142,12 +141,12 @@ export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implem
     this.calendarsDrawMonth(data.start, data.end);
   }
 
-  public toDisabledTimesUpdate(startDate, endDate) {
+  public toDisabledTimesUpdate(startDate: Date, endDate: Date) {
     this.toDisabledTimes = [];
 
-    if (startDate && endDate && startDate.isSame(endDate, 'day')) {
+    if (startDate && endDate && isSameDay(startDate, endDate)) {
 
-      const from = parseInt(startDate.format('m')) + (parseInt(startDate.format('H')) * 60);
+      const from = startDate.getMinutes() + (startDate.getHours() * 60);
 
       if (startDate) {
         this.toDisabledTimes.push([0, from]);
@@ -174,27 +173,29 @@ export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implem
 
   public startCalendarDrawMonth(date) {
     this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+    this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(this.endCalendarMonth);
 
     if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
-      this.endCalendarMonth = moment(this.startCalendarMonth).add(1, 'month');
+      this.endCalendarMonth = addMonths(this.startCalendarMonth, 1);
     }
   }
 
   public endCalendarDrawMonth(date) {
+    this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(this.startCalendarMonth);
     this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
 
     if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
-      this.startCalendarMonth = moment(this.endCalendarMonth).subtract(1, 'month');
+      this.startCalendarMonth = subMonths(this.endCalendarMonth, 1);
     }
   }
 
   public hoverCalendar(day) {
-    const date = moment(day.date);
+    const date = new Date(day.date);
 
     if (
       this.parentDirective.ngModelStart &&
       !this.parentDirective.ngModelEnd &&
-      moment(this.parentDirective.ngModelStart).isBefore(date)
+      isBefore(this.parentDirective.ngModelStart, date)
     ) {
       this.highlightEndDate = date;
     } else {
@@ -207,7 +208,7 @@ export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implem
   }
 
   private rangeCalendarsConflict(startDate, endDate): boolean {
-    return moment(startDate).isAfter(endDate) ||
-      moment(startDate).format('YYYY-MM') === moment(endDate).format('YYYY-MM');
+    return isAfter(startDate, endDate) ||
+      lightFormat(startDate, 'yyyy-MM') === lightFormat(endDate, 'yyyy-MM');
   }
 }

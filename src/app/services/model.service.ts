@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import * as moment_ from 'moment';
-const moment = moment_;
-
 import { isEqual, forEach } from 'lodash-es';
+import { addYears, subYears } from 'date-fns';
 import { FsComponents, FsPreset, FsDatePicker } from '../interfaces';
+
 
 @Injectable()
 export class FsDatePickerModel implements FsDatePicker {
@@ -74,8 +73,7 @@ export class FsDatePickerModel implements FsDatePicker {
   }
 
   set minYear(minYear) {
-
-    this._minYear = minYear || (parseInt(moment().format('YYYY')) - 100);
+    this._minYear = minYear || (new Date().getFullYear() - 100);
   }
 
   get minYear() {
@@ -83,7 +81,7 @@ export class FsDatePickerModel implements FsDatePicker {
   }
 
   set maxYear(maxYear) {
-    this._maxYear = maxYear || (parseInt(moment().format('YYYY')) + 100);
+    this._maxYear = maxYear || (new Date().getFullYear() + 100);
   }
 
   get maxYear() {
@@ -108,11 +106,11 @@ export class FsDatePickerModel implements FsDatePicker {
     const result = [];
 
     if (this.minDate) {
-      result.push([moment().subtract(this.minYear, 'year'), this.minDate.clone()]);
+      result.push([subYears(new Date(), this.minYear), new Date(this.minDate)]);
     }
 
     if (this.maxDate) {
-      result.push([this.maxDate.clone(), moment().add(this.maxYear, 'year')]);
+      result.push([new Date(this.maxDate), addYears(new Date(), this._maxYear)]);
     }
 
     return result;

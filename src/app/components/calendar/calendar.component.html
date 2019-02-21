@@ -44,7 +44,7 @@
         <th>Sat</th>
       </tr>
       </thead>
-      <tbody class="calendar calendar-{{ month.date }}" >
+      <tbody class="calendar calendar-{{ month.monthAndYear }}" >
       <tr class="week" *ngFor="let week of month.weeks">
         <td *ngFor="let day of week" class="day" [ngClass]="{
             today: today.date==day.date,

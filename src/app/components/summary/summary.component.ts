@@ -14,6 +14,7 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
   @Input() public startDate = null;
   @Input() public endDate = null;
   @Input() public range: Boolean = false;
+  @Input() public view;
 
   @Output() public componentsChange = new EventEmitter<any>();
 
@@ -29,10 +30,11 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes) {
 
-    this.formattedStartDate = null;
-    this.formattedEndDate = null;
-
     if (changes && changes.startDate && changes.startDate.currentValue) {
+      if (this.view !== 'time' && this.view !== 'datetime') {
+        this.formattedEndDate = null;
+      }
+
       this.formattedStartDate = {
         date: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue),
         time: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue, 'time')

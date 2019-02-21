@@ -2,25 +2,23 @@ import { Injectable } from '@angular/core';
 
 import { isNumeric } from '@firestitch/common';
 
-import * as moment_ from 'moment';
-const moment = moment_;
-
 import { isObject } from 'lodash-es';
+import { format, isDate, isValid, lightFormat, startOfDay } from 'date-fns';
 
 
 @Injectable()
 export class FsDatePickerCommon {
 
-  getSelected(date) {
+  getSelected(date: Date) {
     const result = {};
 
-    if (date && moment(date).isValid()) {
-      result['date'] = moment(date).format('YYYY-MM-DD');
-      result['hour'] = parseInt(moment(date).format('H'));
-      result['minute'] = parseInt(moment(date).format('m'));
-      result['year'] = parseInt(moment(date).format('YYYY'));
-      result['month'] = parseInt(moment(date).format('M'));
-      result['day'] = parseInt(moment(date).format('D'));
+    if (date && isValid(date) && isDate(date)) {
+      result['date'] = lightFormat(date, 'yyyy-MM-dd');
+      result['hour'] = date.getHours();
+      result['minute'] = date.getMinutes();
+      result['year'] = date.getFullYear();
+      result['month'] = date.getMonth();
+      result['day'] = date.getDate();
     } else {
       result['date'] = null;
       result['hour'] = null;
@@ -74,12 +72,11 @@ export class FsDatePickerCommon {
     let show = false;
 
     if (!el.disabled) {
-      if ((!moment.isMoment(model) && isObject(model)) && (model.start || model.end)) {
-
+      if (isObject(model) && (model.start || model.end)) {
         show = true;
       }
 
-      if ((moment.isMoment(model) || !isObject(model)) && model) {
+      if (!isObject(model) && model) {
         show = true;
       }
     }
@@ -108,15 +105,15 @@ export class FsDatePickerCommon {
   }
 
   public isSameDay(startDate, endDate) {
-    return moment(startDate).format('YYYY-MM-DD') === moment(endDate).format('YYYY-MM-DD');
+    return lightFormat(startDate, 'yyyy-MM-dd') === lightFormat(endDate, 'yyyy-MM-dd');
   }
 
   public createMoment() {
-    return moment().startOf('day');
+    return startOfDay(new Date());
   }
 
   public getMomentSafe(date) {
-    return moment(date).isValid() ? date : this.createMoment();
+    return isValid(date) ? date : this.createMoment();
   }
 
   public positionDialog(dialog, elementRef) {
@@ -215,29 +212,28 @@ export class FsDatePickerCommon {
 
   public formatDateTime(value, view = 'date') {
     let result = '';
-    const format = [];
+    const convertTo = [];
 
     if (isNumeric(value)) {
-      value = moment(new Date(value));
+      value = new Date(value);
     } else if (typeof value === 'string') {
-      if (moment(value).isValid()) {
-        value = moment(value);
-      } else {
-        value = moment(Date.parse(value));
+      value = new Date(value);
+      if (!isValid(value)) {
+        value = Date.parse(value);
       }
     }
 
-    if (value && moment(value).isValid()) {
+    if (value && isValid(value)) {
 
       if (['date', 'datetime'].indexOf(view) != -1) {
-        format.push('MMM D, YYYY');
+        convertTo.push('MMM d, yyyy');
       }
 
       if (['time', 'datetime'].indexOf(view) != -1) {
-        format.push('h:mm a');
+        convertTo.push('h:mm aaaa');
       }
 
-      result = value.format(format.join(' '));
+      result = format(value, convertTo.join(' '));
     }
 
     return result;
@@ -246,11 +242,11 @@ export class FsDatePickerCommon {
   public formatSummary(date, view = 'date') {
 
     if (view === 'date') {
-      return moment(date).format('MMM D, YYYY');
+      return format(date, 'MMM d, yyyy');
     }
 
     if (view === 'time') {
-      return moment(date).format('h:mm a');
+      return format(date, 'h:mm aaaa');
     }
   }
 
@@ -290,6 +286,6 @@ export class FsDatePickerCommon {
   }
 
   public isValidRange(startDate, endDate): boolean {
-    return moment(startDate).isValid() && moment(endDate).isValid();
+    return isValid(startDate) && isValid(endDate);
   }
 }

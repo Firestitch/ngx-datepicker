@@ -218,7 +218,10 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
       this.createModel();
     }
 
-    this.setDate(this.date.clone().hour(hour));
+    const newDate = new Date(this.date);
+    newDate.setHours(hour);
+
+    this.setDate(newDate);
   }
 
   public minuteClick(minute) {
@@ -231,7 +234,10 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
       this.createModel();
     }
 
-    this.setDate(this.date.clone().minute(minute));
+    const newDate = new Date(this.date);
+    newDate.setMinutes(minute);
+
+    this.setDate(newDate);
   }
 
 }

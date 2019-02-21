@@ -138,6 +138,10 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#currentDate">currentDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#dateDays">dateDays</a>
                             </li>
                             <li>
@@ -473,6 +477,10 @@
                         <code>date</code>
                     </td>
                     <td class="col-md-10">
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                            </p>
                         <p>
                             <em>Default value : </em><code>null</code>
                         </p>
@@ -723,7 +731,7 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>createMonth(date)</code>
+                        <code>createMonth(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
                     </td>
                 </tr>
 
@@ -739,12 +747,16 @@
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>date</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -758,7 +770,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/variables.html#moment" target="_self" >{ name: any; number: any; year: any; moment: any; date: string; weeks: {}; months: {}; years: {}; }</a></code>
+                                <b>Returns : </b>    <code>{ name: any; number: any; year: any; date: any; monthAndYear: string; weeks: {}; months: {}; year...</code>
 
                             </div>
                                 <div class="io-description">
@@ -2395,6 +2407,35 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="currentDate"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            currentDate
+                            </b>
+                            <a href="#currentDate"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>currentDate:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Date()</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="dateDays"></a>
                         <span class="name">
                             <b>
@@ -2738,9 +2779,9 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>{
-    date: moment().format(&#x27;YYYY-MM-DD&#x27;),
-    month: moment().format(&#x27;M&#x27;),
-    year: parseInt(moment().format(&#x27;YYYY&#x27;))
+    date: lightFormat(this.currentDate, &#x27;yyyy-MM-dd&#x27;),
+    month: this.currentDate.getMonth(),
+    year: this.currentDate.getFullYear()
   }</code>
                         </td>
                     </tr>
@@ -2836,7 +2877,7 @@
         &lt;th&gt;Sat&lt;/th&gt;
       &lt;/tr&gt;
       &lt;/thead&gt;
-      &lt;tbody class&#x3D;&quot;calendar calendar-{{ month.date }}&quot; &gt;
+      &lt;tbody class&#x3D;&quot;calendar calendar-{{ month.monthAndYear }}&quot; &gt;
       &lt;tr class&#x3D;&quot;week&quot; *ngFor&#x3D;&quot;let week of month.weeks&quot;&gt;
         &lt;td *ngFor&#x3D;&quot;let day of week&quot; class&#x3D;&quot;day&quot; [ngClass]&#x3D;&quot;{
             today: today.date&#x3D;&#x3D;day.date,
@@ -2895,7 +2936,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="calendar-container"      (mouseleave)="onMouseLeaveCalendar()">  <div class="months" *ngIf="dateMode == \'month\'">    <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month"         [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value, disabled: month.disabled }">      {{ month.abr }}    </div>  </div>  <div class="years" *ngIf="dateMode == \'year\'" fsIscroll [fsOptions]="iscrollOptions"       fsInstance="iscrollInstance">    <div class="iscroll-scroller">      <div *ngFor="let year of years; let index = i" class="year data-year-{{ year.value }}"           [ngClass]="{ today: today.year==year.value, row : (index % 4 == 0), selected: selected.year==year.value, disabled: year.disabled }"           (click)="yearViewChange(year.value)">        {{ year.value }}      </div>      <div class="clear"></div>    </div>  </div>  <div *ngIf="dateMode == \'date\' && month" class="calendar">    <div class="month-year">      <a class="month-name" (click)="monthView()">{{month.name}}</a>      <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>      <!-- <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a> -->      <div class="gap"></div>      <div class="actions">        <a (click)="previousMonth(month)">          <mat-icon>navigate_before</mat-icon>        </a>        <a (click)="nextMonth(month)">          <mat-icon>navigate_next</mat-icon>        </a>      </div>    </div>    <table>      <thead>      <tr>        <th>Sun</th>        <th>Mon</th>        <th>Tues</th>        <th>Wed</th>        <th>Thurs</th>        <th>Fri</th>        <th>Sat</th>      </tr>      </thead>      <tbody class="calendar calendar-{{ month.date }}" >      <tr class="week" *ngFor="let week of month.weeks">        <td *ngFor="let day of week" class="day" [ngClass]="{            today: today.date==day.date,            mute: day.mute,            selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,            \'min-date\': day.date === highlightedRangeDays.min,            \'max-date\': day.date === highlightedRangeDays.max,            disabled: day.disabled }"            (fsClick)="dayClick(day, $event)"            (mouseenter)="onMouseEnterDay(day)">            <span>              {{ day.number }}              <span class="today" *ngIf="today.date==day.date">TODAY</span>            </span>        </td>      </tr>      <tr *ngIf="month.weeks.length < 6" class="week">        <td class="day blank" colspan="7"></td>      </tr>      </tbody>    </table>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="calendar-container"      (mouseleave)="onMouseLeaveCalendar()">  <div class="months" *ngIf="dateMode == \'month\'">    <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month"         [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value, disabled: month.disabled }">      {{ month.abr }}    </div>  </div>  <div class="years" *ngIf="dateMode == \'year\'" fsIscroll [fsOptions]="iscrollOptions"       fsInstance="iscrollInstance">    <div class="iscroll-scroller">      <div *ngFor="let year of years; let index = i" class="year data-year-{{ year.value }}"           [ngClass]="{ today: today.year==year.value, row : (index % 4 == 0), selected: selected.year==year.value, disabled: year.disabled }"           (click)="yearViewChange(year.value)">        {{ year.value }}      </div>      <div class="clear"></div>    </div>  </div>  <div *ngIf="dateMode == \'date\' && month" class="calendar">    <div class="month-year">      <a class="month-name" (click)="monthView()">{{month.name}}</a>      <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>      <!-- <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a> -->      <div class="gap"></div>      <div class="actions">        <a (click)="previousMonth(month)">          <mat-icon>navigate_before</mat-icon>        </a>        <a (click)="nextMonth(month)">          <mat-icon>navigate_next</mat-icon>        </a>      </div>    </div>    <table>      <thead>      <tr>        <th>Sun</th>        <th>Mon</th>        <th>Tues</th>        <th>Wed</th>        <th>Thurs</th>        <th>Fri</th>        <th>Sat</th>      </tr>      </thead>      <tbody class="calendar calendar-{{ month.monthAndYear }}" >      <tr class="week" *ngFor="let week of month.weeks">        <td *ngFor="let day of week" class="day" [ngClass]="{            today: today.date==day.date,            mute: day.mute,            selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,            \'min-date\': day.date === highlightedRangeDays.min,            \'max-date\': day.date === highlightedRangeDays.max,            disabled: day.disabled }"            (fsClick)="dayClick(day, $event)"            (mouseenter)="onMouseEnterDay(day)">            <span>              {{ day.number }}              <span class="today" *ngIf="today.date==day.date">TODAY</span>            </span>        </td>      </tr>      <tr *ngIf="month.weeks.length < 6" class="week">        <td class="day blank" colspan="7"></td>      </tr>      </tbody>    </table>  </div></div></div>'
     var COMPONENTS = [{'name': 'FsDatepickerBirthdayComponent', 'selector': 'fs-date-picker-birthday'},{'name': 'FsDatePickerCalendarComponent', 'selector': 'fs-date-picker-calendar'},{'name': 'FsDatepickerComponent', 'selector': 'fs-date-picker'},{'name': 'FsDatepickerPresetsComponent', 'selector': 'fs-date-picker-presets'},{'name': 'FsDatepickerRangeComponent', 'selector': 'fs-date-picker-range'},{'name': 'FsDatepickerSummaryComponent', 'selector': 'fs-date-picker-summary'},{'name': 'FsDatePickerTimeComponent', 'selector': 'fs-date-picker-time'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'FsDatePickerCalendarComponent'};

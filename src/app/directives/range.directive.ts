@@ -15,8 +15,6 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
-import * as moment_ from 'moment';
-const moment = moment_;
 
 import { FsDatepickerRangeFactory } from '../services/range-factory.service';
 import { FsPreset } from '../interfaces/fspreset.interface';
@@ -160,8 +158,8 @@ export class FsDatePickRangeDirective extends FsDatePickerBaseDirective implemen
       return;
     }
 
-    this.ngModelStartChange.emit(startDate && moment(startDate).isValid() ? moment(startDate) : startDate);
-    this.ngModelEndChange.emit(endDate && moment(endDate).isValid() ? moment(endDate) : endDate);
+    this.ngModelStartChange.emit(startDate);
+    this.ngModelEndChange.emit(endDate);
   }
 
   public inputKeyup(e) {

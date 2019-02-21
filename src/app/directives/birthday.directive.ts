@@ -11,8 +11,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
-import * as moment_ from 'moment';
-const moment = moment_;
+import { format, isDate, isValid } from 'date-fns';
 
 import { FsDatePickerBaseDirective } from '../classes/base-directive';
 import { FsDatePickerCommon } from '../services/common.service';
@@ -26,7 +25,7 @@ export class FsDatePickBirthdayDirective extends FsDatePickerBaseDirective imple
 
   @Input() public minYear = null;
   @Input() public maxYear = null;
-  @Input() public format = 'MMM D, YYYY';
+  @Input() public format = 'MMM d, yyyy';
   @Input() public ngModel = null;
   @Output() public ngModelChange = new EventEmitter<any>();
 
@@ -59,15 +58,16 @@ export class FsDatePickBirthdayDirective extends FsDatePickerBaseDirective imple
     this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
   }
 
-  public setValue(value: moment_.Moment) {
+  public setValue(value: Date) {
     this.ngModelChange.emit(value);
   }
 
   public ngOnChanges(changes) {
     if (changes.ngModel) {
       setTimeout(() => {
-        this.ngModel = moment(this.ngModel);
-        const newDate = this.ngModel.isValid() ? moment(this.ngModel).format(this.format) : null;
+        const newDate = isValid(this.ngModel) && isDate(this.ngModel)
+          ? format(this.ngModel, this.format)
+          : null;
         this._elementRef.nativeElement.value = newDate;
       }, 0);
     }

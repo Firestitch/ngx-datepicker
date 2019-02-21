@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 @Component({
   selector: 'date-example',
@@ -12,12 +12,12 @@ export class DateExampleComponent {
   public presets = [];
 
   constructor() {
-    this.presets = [
-      { name: 'Today', value: moment() },
-      { name: 'Yesterday', value: moment().subtract(1, 'days') },
-      { name: 'Start of Week', value: moment().startOf('week') },
-      { name: 'Last Week', value: moment().subtract(1, 'week').startOf('week') },
-      { name: 'Start of Month', value: moment().startOf('month') }
-    ];
+    // this.presets = [
+    //   { name: 'Today', value: moment() },
+    //   { name: 'Yesterday', value: moment().subtract(1, 'days') },
+    //   { name: 'Start of Week', value: moment().startOf('week') },
+    //   { name: 'Last Week', value: moment().subtract(1, 'week').startOf('week') },
+    //   { name: 'Start of Month', value: moment().startOf('month') }
+    // ];
   }
 }

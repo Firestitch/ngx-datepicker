@@ -1359,7 +1359,7 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>toDisabledTimesUpdate(startDate, endDate)</code>
+                        <code>toDisabledTimesUpdate(startDate: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, endDate: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
                     </td>
                 </tr>
 
@@ -1375,12 +1375,16 @@
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
+                                                    <td>Type</td>
                                                 <td>Optional</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>startDate</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -1390,6 +1394,9 @@
                                                 </tr>
                                                 <tr>
                                                         <td>endDate</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                                        </td>
                                                     
                                                     <td>
                                                             No
@@ -1865,11 +1872,11 @@
   &#x27;has-view-date&#x27;: (fsDatePickerModel.view &#x3D;&#x3D;&#x3D; &#x27;date&#x27; || fsDatePickerModel.view &#x3D;&#x3D;&#x3D; &#x27;datetime&#x27;),
   &#x27;has-view-time&#x27;: (fsDatePickerModel.view &#x3D;&#x3D;&#x3D; &#x27;time&#x27; || fsDatePickerModel.view &#x3D;&#x3D;&#x3D; &#x27;datetime&#x27;) }&quot;&gt;
   &lt;div class&#x3D;&quot;wrap&quot;&gt;
-
     &lt;div class&#x3D;&quot;header&quot;&gt;
       &lt;fs-date-picker-summary
         [startDate]&#x3D;&quot;parentDirective.ngModelStart&quot;
         [endDate]&#x3D;&quot;parentDirective.ngModelEnd&quot;
+        [view]&#x3D;&quot;fsDatePickerModel.view&quot;
         (componentsChange)&#x3D;&quot;setComponents($event)&quot;
         [range]&#x3D;&quot;true&quot;&gt;
       &lt;/fs-date-picker-summary&gt;
@@ -2101,7 +2108,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="fs-date-picker-backdrop" [hidden]="!parentDirective.opened" (click)="close($event)"></div><div class="fs-date-picker-dialog fs-date-picker-range dialog-view-{{ fsDatePickerModel.view }}" tabindex="0"[ngClass]="{ opened: parentDirective.opened,  \'has-date\': (fsDatePickerModel.components.calendarStart || fsDatePickerModel.components.calendarEnd),  \'has-time\': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd),  \'has-view-date\': (fsDatePickerModel.view === \'date\' || fsDatePickerModel.view === \'datetime\'),  \'has-view-time\': (fsDatePickerModel.view === \'time\' || fsDatePickerModel.view === \'datetime\') }">  <div class="wrap">    <div class="header">      <fs-date-picker-summary        [startDate]="parentDirective.ngModelStart"        [endDate]="parentDirective.ngModelEnd"        (componentsChange)="setComponents($event)"        [range]="true">      </fs-date-picker-summary>      <!--      <fs-date-picker-presets      *ngIf="!fsDatePickerModel.components.timeStart && !fsDatePickerModel.components.timeEnd"      (datesChange)="onDatesChange($event)"      ></fs-date-picker-presets>      -->    </div>    <div class="date-time">      <div class="date-range">          <fs-date-picker-calendar          *ngIf="fsDatePickerModel.components.calendarStart"          [date]="parentDirective.ngModelStart"          [highlightStartDate]="highlightStartDate"          [highlightEndDate]="highlightEndDate"          [dateMode]="fsDatePickerModel.dateMode.start"          [drawMonth]="startCalendarMonth"          [disabledDays]="disabledDays"          (onChange)="setStartDate($event)"          (onDateModeChange)="setDateModeStart($event)"          (onDrawMonth)="startCalendarDrawMonth($event)"          (hoverDay)="hoverCalendar($event)"          (mouseLeaveCalendar)="onMouseLeaveCalendar()"          ></fs-date-picker-calendar>          <fs-date-picker-calendar          *ngIf="fsDatePickerModel.components.calendarEnd"          [date]="parentDirective.ngModelEnd"          [highlightStartDate]="highlightStartDate"          [highlightEndDate]="highlightEndDate"          [dateMode]="fsDatePickerModel.dateMode.end"          [drawMonth]="endCalendarMonth"          [disabledDays]="disabledDays"          (onChange)="setEndDate($event)"          (onDateModeChange)="setDateModeEnd($event)"          (onDrawMonth)="endCalendarDrawMonth($event)"          (hoverDay)="hoverCalendar($event)"          (mouseLeaveCalendar)="onMouseLeaveCalendar()"          ></fs-date-picker-calendar>      </div>      <div class="time-range">        <fs-date-picker-time          *ngIf="fsDatePickerModel.components.timeStart"          [date]="parentDirective.ngModelStart"          (onChange)="setStartTime($event)"        ></fs-date-picker-time>        <fs-date-picker-time          *ngIf="fsDatePickerModel.components.timeEnd"          [date]="parentDirective.ngModelEnd"          [disabledTimes]="toDisabledTimes"          (onChange)="setEndTime($event)"        ></fs-date-picker-time>      </div>    </div>    <div class="done">      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>      <button type="button" mat-raised-button (click)="clear($event)">Clear</button>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="fs-date-picker-backdrop" [hidden]="!parentDirective.opened" (click)="close($event)"></div><div class="fs-date-picker-dialog fs-date-picker-range dialog-view-{{ fsDatePickerModel.view }}" tabindex="0"[ngClass]="{ opened: parentDirective.opened,  \'has-date\': (fsDatePickerModel.components.calendarStart || fsDatePickerModel.components.calendarEnd),  \'has-time\': (fsDatePickerModel.components.timeStart || fsDatePickerModel.components.timeEnd),  \'has-view-date\': (fsDatePickerModel.view === \'date\' || fsDatePickerModel.view === \'datetime\'),  \'has-view-time\': (fsDatePickerModel.view === \'time\' || fsDatePickerModel.view === \'datetime\') }">  <div class="wrap">    <div class="header">      <fs-date-picker-summary        [startDate]="parentDirective.ngModelStart"        [endDate]="parentDirective.ngModelEnd"        [view]="fsDatePickerModel.view"        (componentsChange)="setComponents($event)"        [range]="true">      </fs-date-picker-summary>      <!--      <fs-date-picker-presets      *ngIf="!fsDatePickerModel.components.timeStart && !fsDatePickerModel.components.timeEnd"      (datesChange)="onDatesChange($event)"      ></fs-date-picker-presets>      -->    </div>    <div class="date-time">      <div class="date-range">          <fs-date-picker-calendar          *ngIf="fsDatePickerModel.components.calendarStart"          [date]="parentDirective.ngModelStart"          [highlightStartDate]="highlightStartDate"          [highlightEndDate]="highlightEndDate"          [dateMode]="fsDatePickerModel.dateMode.start"          [drawMonth]="startCalendarMonth"          [disabledDays]="disabledDays"          (onChange)="setStartDate($event)"          (onDateModeChange)="setDateModeStart($event)"          (onDrawMonth)="startCalendarDrawMonth($event)"          (hoverDay)="hoverCalendar($event)"          (mouseLeaveCalendar)="onMouseLeaveCalendar()"          ></fs-date-picker-calendar>          <fs-date-picker-calendar          *ngIf="fsDatePickerModel.components.calendarEnd"          [date]="parentDirective.ngModelEnd"          [highlightStartDate]="highlightStartDate"          [highlightEndDate]="highlightEndDate"          [dateMode]="fsDatePickerModel.dateMode.end"          [drawMonth]="endCalendarMonth"          [disabledDays]="disabledDays"          (onChange)="setEndDate($event)"          (onDateModeChange)="setDateModeEnd($event)"          (onDrawMonth)="endCalendarDrawMonth($event)"          (hoverDay)="hoverCalendar($event)"          (mouseLeaveCalendar)="onMouseLeaveCalendar()"          ></fs-date-picker-calendar>      </div>      <div class="time-range">        <fs-date-picker-time          *ngIf="fsDatePickerModel.components.timeStart"          [date]="parentDirective.ngModelStart"          (onChange)="setStartTime($event)"        ></fs-date-picker-time>        <fs-date-picker-time          *ngIf="fsDatePickerModel.components.timeEnd"          [date]="parentDirective.ngModelEnd"          [disabledTimes]="toDisabledTimes"          (onChange)="setEndTime($event)"        ></fs-date-picker-time>      </div>    </div>    <div class="done">      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>      <button type="button" mat-raised-button (click)="clear($event)">Clear</button>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'FsDatepickerBirthdayComponent', 'selector': 'fs-date-picker-birthday'},{'name': 'FsDatePickerCalendarComponent', 'selector': 'fs-date-picker-calendar'},{'name': 'FsDatepickerComponent', 'selector': 'fs-date-picker'},{'name': 'FsDatepickerPresetsComponent', 'selector': 'fs-date-picker-presets'},{'name': 'FsDatepickerRangeComponent', 'selector': 'fs-date-picker-range'},{'name': 'FsDatepickerSummaryComponent', 'selector': 'fs-date-picker-summary'},{'name': 'FsDatePickerTimeComponent', 'selector': 'fs-date-picker-time'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'FsDatepickerRangeComponent'};

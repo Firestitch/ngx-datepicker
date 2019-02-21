@@ -2,8 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FsDatePickerModel } from '../../services/model.service';
 import { MatSelectChange } from '@angular/material';
 
-import * as moment_ from 'moment';
-const moment = moment_
+import { addMonths, format, getDate, getDaysInMonth, isDate, isValid, setMonth } from 'date-fns';
 
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 
@@ -17,7 +16,7 @@ import { FsDatePickerBaseComponent } from '../../classes/base-component';
 export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent implements OnInit {
 
   public years: number[] = [];
-  public months: string[] = [];
+  public months: { name: string, number: number }[] = [];
   public days: number[] = [];
 
   public selectedDate = { day: null, month: null, year: null };
@@ -38,7 +37,7 @@ export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent imp
   }
 
   public changedMonth(event: MatSelectChange) {
-    const monthLength = this.daysInMonth(event.value);
+    const monthLength = this.daysInMonth(event.value.number);
     this.generateDaysArray(monthLength);
     if (monthLength < this.selectedDate.day) {
       this.selectedDate.day = null;
@@ -47,7 +46,7 @@ export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent imp
   }
 
   public changedYear() {
-    const monthLength = this.selectedDate.month ? this.daysInMonth(this.selectedDate.month) : 31;
+    const monthLength = this.selectedDate.month ? this.daysInMonth(this.selectedDate.month.number) : 31;
     this.generateDaysArray(monthLength);
     if (this.selectedDate.day > monthLength) {
       this.selectedDate.day = null;
@@ -56,25 +55,27 @@ export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent imp
   }
 
   private setSelectedDate() {
-    const momentDate = moment(this.parentDirective.ngModel);
+    const date = this.parentDirective.ngModel;
 
-    if (momentDate.isValid()) {
+    if (isValid(date) && isDate(date)) {
       this.selectedDate = {
-        day: momentDate.get('date'),
-        month: moment().month(momentDate.get('month')).format('MMMM'),
-        year: momentDate.get('year')
+        day: getDate(date),
+        month: addMonths(new Date(), date.getMonth()),
+        year: date.getFullYear()
       };
     }
   }
 
   private updateDate() {
     const year = this.selectedDate.year;
-    const month = this.selectedDate.month;
+    const month = this.selectedDate.month && this.selectedDate.month.number;
     const date = this.selectedDate.day;
 
     if (year && month && date) {
-      const newDate = moment()
-        .set({ year, month, date });
+      const newDate = new Date();
+      newDate.setFullYear(year);
+      newDate.setMonth(month);
+      newDate.setDate(date);
 
       this.parentDirective.setValue(newDate);
     } else {
@@ -89,9 +90,14 @@ export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent imp
    * @param {string} monthTitle
    * @returns {number}
    */
-  private daysInMonth(monthTitle: string): number {
-    const year = this.selectedDate.year || new Date().getFullYear();
-    return moment(`${year} ${monthTitle}`, 'YYYY MMM').daysInMonth();
+  private daysInMonth(monthTitle: number): number {
+    // const year = this.selectedDate.year || new Date().getFullYear();
+    return getDaysInMonth(
+      new Date(
+        this.selectedDate.year || new Date().getFullYear(),
+        monthTitle
+      )
+    );
   }
 
   /**
@@ -105,10 +111,17 @@ export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent imp
 
   /**
    * helper for generation array of month
-   * by default format is MMMM - January, February, March ... etc.
+   * by default format is LLLL - January, February, March ... etc.
    */
-  private generateMonthArray(format = 'MMMM') {
-    this.months = Array.from(Array(12).keys()).map((m: number) => moment().month(m).format(format));
+  private generateMonthArray(monthFormat = 'LLLL') {
+
+    this.months = Array.from(Array(12).keys())
+      .map((m: number) => {
+        return {
+          number: m,
+          name: format(setMonth(new Date(), m), monthFormat),
+        };
+      });
   }
 
   /**

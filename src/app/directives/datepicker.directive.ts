@@ -15,8 +15,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import * as moment_ from 'moment';
-const moment = moment_;
+import { addDays, getUnixTime, isDate, isValid } from 'date-fns';
 
 import { FsPreset } from '../interfaces/fspreset.interface';
 import { FsDatePickerBaseDirective } from '../classes/base-directive';
@@ -74,7 +73,7 @@ export class FsDatePickDirective extends FsDatePickerBaseDirective implements Af
   public ngAfterViewInit() {
 
     if (this.birthday) {
-      this.maxDate = moment().add(1, 'days');
+      this.maxDate = addDays(new Date(), 1);
     }
 
     this.fsDatePickerCommon.addClear(this.renderer, this._elementRef.nativeElement,
@@ -106,14 +105,15 @@ export class FsDatePickDirective extends FsDatePickerBaseDirective implements Af
 
     value = value || null;
 
-    if (value && moment(value).isValid()) {
-      value = moment(value);
+    if (value && isValid(value) && !isDate(value)) {
+      value = Date.parse(value);
     }
 
+    const modelUnix = getUnixTime(this.model);
+    const valueUnix = getUnixTime(value);
+
     if (
-      (!this.model && value)
-      || (
-        moment.isMoment(this.model) && moment.isMoment(value) && this.model.unix() !== value.unix())
+      (!this.model && value) || (modelUnix && valueUnix && getUnixTime(this.model) !== getUnixTime(value))
     ) {
       this.model = value;
       this._onChange(value);
@@ -126,7 +126,7 @@ export class FsDatePickDirective extends FsDatePickerBaseDirective implements Af
   }
 
   public getValue() {
-    return this.model ? moment(this.model) : this.model;
+    return this.model;
   }
 
   public inputClick(e) {

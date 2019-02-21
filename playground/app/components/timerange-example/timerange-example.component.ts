@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class TimeRangeExampleComponent {
 
-  public startDate =null;
+  public startDate = null;
   public endDate = null;
   public model = null;
 

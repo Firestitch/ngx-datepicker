@@ -9,7 +9,7 @@
                     [(value)]="selectedDate.month"
                     (selectionChange)="changedMonth($event)">
           <mat-option *ngFor="let month of months" [value]="month">
-            {{ month }}
+            {{ month.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>

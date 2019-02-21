@@ -7,11 +7,11 @@
   'has-view-date': (fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime'),
   'has-view-time': (fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime') }">
   <div class="wrap">
-
     <div class="header">
       <fs-date-picker-summary
         [startDate]="parentDirective.ngModelStart"
         [endDate]="parentDirective.ngModelEnd"
+        [view]="fsDatePickerModel.view"
         (componentsChange)="setComponents($event)"
         [range]="true">
       </fs-date-picker-summary>
