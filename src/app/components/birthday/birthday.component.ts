@@ -57,7 +57,7 @@ export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent imp
   private setSelectedDate() {
     const date = this.parentDirective.ngModel;
 
-    if (isValid(date) && isDate(date)) {
+    if (date && isValid(date) && isDate(date)) {
       this.selectedDate = {
         day: getDate(date),
         month: addMonths(new Date(), date.getMonth()),

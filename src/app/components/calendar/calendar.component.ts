@@ -102,7 +102,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
 
   public currentDate = new Date();
   public today: any = {
-    date: lightFormat(this.currentDate, 'yyyy-MM-dd'),
+    date: format(this.currentDate, 'yyyy-MM-dd'),
     month: this.currentDate.getMonth(),
     year: this.currentDate.getFullYear()
   };
@@ -371,7 +371,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
   }
 
   public setYear(yearNumber) {
-    const year = new Date(this.month.date).setFullYear(yearNumber);
+    const year = new Date(this.month.datelightFormat).setFullYear(yearNumber);
     this.onDrawMonth.emit(year);
   }
 
@@ -482,7 +482,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
       this.selected['day'] = null;
     }
 
-    if (isValid(m)) {
+    if (m && isValid(m)) {
       this.setDate(m);
     }
   }

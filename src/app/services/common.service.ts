@@ -113,7 +113,7 @@ export class FsDatePickerCommon {
   }
 
   public getMomentSafe(date) {
-    return isValid(date) ? date : this.createMoment();
+    return date && isValid(date) ? date : this.createMoment();
   }
 
   public positionDialog(dialog, elementRef) {
@@ -286,6 +286,6 @@ export class FsDatePickerCommon {
   }
 
   public isValidRange(startDate, endDate): boolean {
-    return isValid(startDate) && isValid(endDate);
+    return startDate && endDate && isValid(startDate) && isValid(endDate);
   }
 }

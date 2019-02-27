@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { addDays, getUnixTime, isDate, isValid } from 'date-fns';
+import { addDays, getUnixTime, isDate, isValid, parseISO } from 'date-fns';
 
 import { FsPreset } from '../interfaces/fspreset.interface';
 import { FsDatePickerBaseDirective } from '../classes/base-directive';
@@ -103,17 +103,15 @@ export class FsDatePickDirective extends FsDatePickerBaseDirective implements Af
 
   public writeValue(value: any): void {
 
-    value = value || null;
-
-    if (value && isValid(value) && !isDate(value)) {
+    if (!isDate(value)) {
       value = Date.parse(value);
     }
 
-    const modelUnix = getUnixTime(this.model);
-    const valueUnix = getUnixTime(value);
+    const modelUnix = this.model ? getUnixTime(this.model): null;
+    const valueUnix = value ? getUnixTime(value): null;
 
     if (
-      (!this.model && value) || (modelUnix && valueUnix && getUnixTime(this.model) !== getUnixTime(value))
+      (!this.model && value) || (modelUnix && valueUnix && modelUnix !== valueUnix)
     ) {
       this.model = value;
       this._onChange(value);
