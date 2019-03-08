@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "0.6.2",
+  "version": "7.0.0",
   "title": "Date/Time Picker",
   "repository": {
     "type": "git",
@@ -43,8 +43,8 @@
     "@angular/platform-browser": "^7.2.1",
     "@angular/platform-browser-dynamic": "^7.2.1",
     "@compodoc/compodoc": "^1.1.7",
-    "@firestitch/common": "^0.5.1",
-    "@firestitch/example": "^0.6.0",
+    "@firestitch/common": "^7.0.0",
+    "@firestitch/example": "^7.0.0",
     "@firestitch/form": "^1.3.0",
     "@firestitch/message": "^0.2.0",
     "codelyzer": "^4.5.0",
@@ -73,11 +73,8 @@
     "iscroll": ">=5.2.0",
     "lodash-es": "^4.17.5",
     "hammerjs": ">=2.0.8",
-    "@firestitch/common": ">=0.5.1",
+    "@firestitch/common": ">=7.0.0",
     "@angular/material": ">=7.2.1",
     "date-fns": "^2.0.0-alpha.27"
-  },
-  "dependencies": {
-    "iscroll": ">=5.2.0"
   }
 }
