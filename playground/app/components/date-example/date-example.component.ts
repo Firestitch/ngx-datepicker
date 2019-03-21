@@ -8,16 +8,12 @@ import { Component } from '@angular/core';
 })
 export class DateExampleComponent {
 
-  public model = null;
+  public model = '2015-01-05T10:11:22+00:00';
   public presets = [];
 
-  constructor() {
-    // this.presets = [
-    //   { name: 'Today', value: moment() },
-    //   { name: 'Yesterday', value: moment().subtract(1, 'days') },
-    //   { name: 'Start of Week', value: moment().startOf('week') },
-    //   { name: 'Last Week', value: moment().subtract(1, 'week').startOf('week') },
-    //   { name: 'Start of Month', value: moment().startOf('month') }
-    // ];
+  constructor() {}
+
+  change(e) {
+    console.log(e);
   }
 }

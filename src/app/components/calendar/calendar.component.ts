@@ -310,7 +310,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
    * @param event
    */
   public dayClick(day, event) {
-
     if (day.disabled) {
       return;
     }

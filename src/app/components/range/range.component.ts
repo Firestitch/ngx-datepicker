@@ -1,214 +1,150 @@
 import {
-  Component,
-  DoCheck,
+  ComponentFactoryResolver,
   ElementRef,
-  HostListener,
-  IterableDiffers,
+  EventEmitter, forwardRef,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
-  ViewEncapsulation
+  Output, Provider,
+  Renderer2,
+  ViewContainerRef,
+  Component
 } from '@angular/core';
+import { NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
-import { addMonths, isAfter, isBefore, isSameDay, lightFormat, subMonths } from 'date-fns';
-
-import { FsDatePickerModel } from '../../services/model.service';
+import { FsDatepickerRangeFactory } from '../../services/range-factory.service';
 import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 
 
-@Component({
-    selector: 'fs-date-picker-range',
-    templateUrl: './range.component.html',
-    styleUrls: ['./range.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [FsDatePickerModel]
-})
-export class FsDatepickerRangeComponent extends FsDatePickerBaseComponent implements OnInit, DoCheck {
+export const DATEPICKER_RANGE_VALUE_ACCESSOR: Provider = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => FsDatePickerRangeComponent),
+  multi: true
+};
 
-  public toDisabledTimes = [];
-  public startCalendarMonth = null;
-  public endCalendarMonth = null;
-  public highlightStartDate = null;
-  public highlightEndDate = null;
-  public disabledDays = null;
-  private modelDiffer = null;
+
+@Component({
+  selector: '[fsDatePickerRange]',
+  template: '<fs-clear [show]="ngModel" (clear)="cleared()"></fs-clear>',
+  providers: [DATEPICKER_RANGE_VALUE_ACCESSOR, NgModel]
+})
+export class FsDatePickerRangeComponent extends FsDatePickerBaseComponent implements OnInit, OnChanges, OnDestroy {
+
+  @Input() public ngModel = null;
+  @Input() public minYear = null;
+  @Input() public maxYear = null;
+  @Input() public view = 'date';
+  @Input() public ngModelStart = null;
+  @Input() public ngModelEnd = null;
+  @Input() public minDate = null;
+  @Input() public maxDate = null;
+
+  @Output() public ngModelStartChange = new EventEmitter<any>();
+  @Output() public ngModelEndChange = new EventEmitter<any>();
+  @Output('change') public change$ = new EventEmitter<any>();
+
+
+  _onChange = (value: any) => { };
+
+  registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
+  registerOnTouched(fn: () => any): void {  }
 
   constructor(
-    public fsDatePickerModel: FsDatePickerModel,
-    private fsDatePickerCommon: FsDatePickerCommon,
-    public element: ElementRef,
-    private _iterableDiffers: IterableDiffers
+    @Inject(ElementRef) protected elementRef: ElementRef,
+    @Inject(ViewContainerRef) private viewContainerRef,
+    protected fsDatePickerCommon: FsDatePickerCommon,
+    protected fsDatepickerRangeFactory: FsDatepickerRangeFactory,
+    protected renderer: Renderer2
   ) {
-    super();
-    this.modelDiffer = this._iterableDiffers.find([]).create(null);
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  public documentKeydown(e) {
-    if (e.keyCode === 27) {
-      // Be careful with preventing default events. Breaking page refresh functional
-      e.preventDefault();
-      this.close(e);
-    }
+    super(renderer, elementRef, fsDatePickerCommon);
   }
 
   public ngOnInit() {
-    this.calendarsDrawMonth(this.parentDirective.ngModelStart, this.parentDirective.ngModelEnd);
-    this.disabledDays = this.fsDatePickerModel.disabledDays();
-  }
+    // This seems a bit scary
+    const formField = this.elementRef.nativeElement.parentElement.parentElement.parentElement.parentElement;
 
-  public ngDoCheck() {
-    if (this.modelDiffer.diff([this.parentDirective.ngModelStart, this.parentDirective.ngModelEnd])) {
-
-      const startDate = this.parentDirective.ngModelStart;
-      const endDate = this.parentDirective.ngModelEnd;
-
-      this.toDisabledTimesUpdate(startDate, endDate);
-
-      this.highlightStartDate = startDate;
-      this.highlightEndDate = endDate || startDate;
+    if (formField.className.match(/mat-form-field/)) {
+      this.renderer.addClass(formField, `fs-date-picker-${this.view}-range-field`);
     }
   }
 
-  public setStartDate(date) {
-
-    const startDate = date;
-    const endDate = this.parentDirective.ngModelEnd;
-
-    this.setDates(startDate, endDate);
-
-    if (startDate && endDate) {
-      if (lightFormat(startDate, 'yyyy-MM') === lightFormat(endDate, 'yyyy-MM')) {
-        this.endCalendarDrawMonth(addMonths(endDate, 1));
-      } else {
-        this.endCalendarDrawMonth(endDate);
-      }
-    }
-
-    if (startDate) {
-      this.startCalendarDrawMonth(startDate);
-    }
+  public cleared() {
+    this.updateValue(null, null);
   }
 
-  public setEndDate(date) {
+  public ngOnChanges(changes) {
 
-    const startDate = date;
-    const endDate = this.parentDirective.ngModelEnd;
+    if (!changes) {
+      return;
+    }
 
-    this.setDates(startDate, endDate);
+    if (changes.ngModelStart || changes.ngModelEnd) {
 
-    if (date) {
-      this.endCalendarDrawMonth(date);
+      this.ngModelStart = this.fsDatePickerCommon.createDate(this.ngModelStart);
+      this.ngModelEnd = this.fsDatePickerCommon.createDate(this.ngModelEnd);
+      this.ngModel = this.getModelValue();
+
+      this.elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(this.ngModel, this.view);
     }
   }
 
-  public setStartTime(date) {
-    let endDate = this.parentDirective.ngModelEnd;
-    // In time mode, if end date is empty - user not able switch to end time picker
-    if (this.fsDatePickerModel.view === 'time' && !endDate) {
-      endDate = date;
-    }
-
-    if (date && endDate && isAfter(date, endDate)) {
-      endDate = date;
-    }
-
-    this.parentDirective.writeValue(date, endDate);
-  }
-
-  public setEndTime(date) {
-    this.parentDirective.writeValue(this.parentDirective.ngModelStart, date);
-  }
-
-  public setDates(startDate, endDate) {
-
-    if (this.parentDirective.ngModelStart && !this.parentDirective.ngModelEnd) {
-      endDate = startDate;
-      startDate = this.parentDirective.ngModelStart;
-    } else if (this.parentDirective.ngModelStart && this.parentDirective.ngModelEnd) {
-      endDate = null;
-    }
-
-    if (startDate && endDate && isAfter(startDate, endDate)) {
-      startDate = endDate;
-      endDate = null;
-    }
-
-    this.parentDirective.writeValue(startDate, endDate);
-  }
-
-  public onDatesChange(data) {
-    this.setDates(data.start, data.end);
-    this.calendarsDrawMonth(data.start, data.end);
-  }
-
-  public toDisabledTimesUpdate(startDate: Date, endDate: Date) {
-    this.toDisabledTimes = [];
-
-    if (startDate && endDate && isSameDay(startDate, endDate)) {
-
-      const from = startDate.getMinutes() + (startDate.getHours() * 60);
-
-      if (startDate) {
-        this.toDisabledTimes.push([0, from]);
-      }
+  public ngOnDestroy() {
+    if (this.dialog && this.dialog.instance.element.nativeElement.parentNode) {
+      this.dialog.instance.element.nativeElement.parentNode.removeChild(this.dialog.instance.element.nativeElement);
     }
   }
 
-  public setDateModeStart(mode) {
-    this.fsDatePickerModel.dateMode.start = mode;
+  public writeValue(value): void {}
+
+  private getModelValue() {
+    return this.ngModelStart || this.ngModelEnd ? { start: this.ngModelStart, end: this.ngModelEnd } : null;
   }
 
-  public setDateModeEnd(mode) {
-    this.fsDatePickerModel.dateMode.end = mode;
+  public updateValue(startDate, endDate) {
+
+    this.ngModelStart = startDate;
+    this.ngModelEnd = endDate;
+    this.ngModel = this.getModelValue();
+
+    this.change$.emit(this.ngModel);
+    this.ngModelStartChange.emit(startDate);
+    this.ngModelEndChange.emit(endDate);
   }
 
-  public setComponents(data) {
-    this.fsDatePickerModel.components = data;
-  }
+  protected open() {
+    super.open();
 
-  public calendarsDrawMonth(startDate, endDate) {
-    this.endCalendarDrawMonth(endDate);
-    this.startCalendarDrawMonth(startDate);
-  }
-
-  public startCalendarDrawMonth(date) {
-    this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
-    this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(this.endCalendarMonth);
-
-    if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
-      this.endCalendarMonth = addMonths(this.startCalendarMonth, 1);
+    if (this.dialog) {
+      this.enableDefaultComponent();
+      return;
     }
+
+    this.fsDatepickerRangeFactory.setRootViewContainerRef(this.viewContainerRef);
+    this.dialog = this.fsDatepickerRangeFactory.addDynamicComponent();
+    this.dialog.instance.parentDirective = this;
+
+    this.dialog.instance.fsDatePickerModel.view = this.view;
+    this.dialog.instance.fsDatePickerModel.minYear = this.minYear;
+    this.dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
+    this.dialog.instance.fsDatePickerModel.minDate = this.minDate;
+    this.dialog.instance.fsDatePickerModel.maxDate = this.maxDate;
+    this.dialog.instance.fsDatePickerModel.dateMode = { start: 'date', end: 'date' };
+
+    this.enableDefaultComponent();
+
+    setTimeout(() => {
+      this.fsDatePickerCommon.positionDialog(this.dialog, this.elementRef);
+    });
   }
 
-  public endCalendarDrawMonth(date) {
-    this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(this.startCalendarMonth);
-    this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
-
-    if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
-      this.startCalendarMonth = subMonths(this.endCalendarMonth, 1);
-    }
-  }
-
-  public hoverCalendar(day) {
-    const date = new Date(day.date);
-
-    if (
-      this.parentDirective.ngModelStart &&
-      !this.parentDirective.ngModelEnd &&
-      isBefore(this.parentDirective.ngModelStart, date)
-    ) {
-      this.highlightEndDate = date;
+  private enableDefaultComponent() {
+    if (this.view === 'time') {
+      this.dialog.instance.fsDatePickerModel.components = { timeStart: true };
     } else {
-      this.highlightEndDate = this.parentDirective.ngModelEnd;
+      this.dialog.instance.fsDatePickerModel.components = { calendarStart: true, calendarEnd: true };
     }
-  }
-
-  public onMouseLeaveCalendar() {
-    this.highlightEndDate = this.parentDirective.ngModelEnd;
-  }
-
-  private rangeCalendarsConflict(startDate, endDate): boolean {
-    return isAfter(startDate, endDate) ||
-      lightFormat(startDate, 'yyyy-MM') === lightFormat(endDate, 'yyyy-MM');
   }
 }

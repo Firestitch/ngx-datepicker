@@ -31,79 +31,6 @@ export class FsDatePickerCommon {
     return result;
   }
 
-  public addClear(renderer, el, click, init = null) {
-
-    const parent = el.parentNode.parentNode;
-
-    const div = renderer.createElement('div');
-    renderer.addClass(div, 'mat-input-suffix');
-    renderer.addClass(div, 'mat-form-field-suffix');
-
-    const a = renderer.createElement('a');
-    renderer.setStyle(a, 'color', 'inherit');
-
-    renderer.setAttribute(a, 'href', 'javascript:;');
-    renderer.listen(a, 'click', click);
-
-    const icon = renderer.createElement('mat-icon');
-
-    renderer.addClass(icon, 'mat-icon');
-    renderer.addClass(icon, 'material-icons');
-    renderer.setStyle(icon, 'vertical-align', 'middle');
-    renderer.setStyle(icon, 'height', '24px');
-    renderer.setStyle(icon, 'font-size', '20px');
-    const text = renderer.createText('clear');
-
-    renderer.appendChild(parent, div);
-    renderer.appendChild(div, a);
-    renderer.appendChild(a, icon);
-    renderer.appendChild(icon, text);
-
-    if (init) {
-      // This event should be async to correct handling of disabled condition
-      setTimeout(() => {
-        init();
-      });
-    }
-  }
-
-  public updateClearViewStatus(model, renderer, el) {
-
-    let show = false;
-
-    if (!el.disabled) {
-      if (isObject(model) && (model.start || model.end)) {
-        show = true;
-      }
-
-      if (!isObject(model) && model) {
-        show = true;
-      }
-    }
-
-    if (show) {
-      this.showClear(renderer, el);
-    } else {
-      this.hideClear(renderer, el);
-    }
-  }
-
-  public showClear(renderer, el) {
-    const clearButtonEl = el.parentNode.parentNode.querySelector('.mat-input-suffix');
-
-    if (clearButtonEl) {
-      renderer.setStyle(clearButtonEl, 'display', 'block');
-    }
-  }
-
-  public hideClear(renderer, el) {
-    const clearButtonEl = el.parentNode.parentNode.querySelector('.mat-input-suffix');
-
-    if (clearButtonEl) {
-      renderer.setStyle(clearButtonEl, 'display', 'none');
-    }
-  }
-
   public isSameDay(startDate, endDate) {
     return lightFormat(startDate, 'yyyy-MM-dd') === lightFormat(endDate, 'yyyy-MM-dd');
   }
@@ -195,19 +122,24 @@ export class FsDatePickerCommon {
   }
 
   public formatDateTimeRange(value, view = 'date') {
-    const format = [];
+
+    if (!isObject(value)) {
+      return '';
+    }
+
+    const parts = [];
     const startDate = this.formatDateTime(value.start, view);
     const endDate = this.formatDateTime(value.end, view);
 
     if (startDate) {
-      format.push(startDate);
+      parts.push(startDate);
     }
 
     if (endDate) {
-      format.push(endDate);
+      parts.push(endDate);
     }
 
-    return format.join(' to ');
+    return parts.join(' to ');
   }
 
   public formatDateTime(value, view = 'date') {
@@ -287,5 +219,16 @@ export class FsDatePickerCommon {
 
   public isValidRange(startDate, endDate): boolean {
     return startDate && endDate && isValid(startDate) && isValid(endDate);
+  }
+
+  public createDate(value) {
+    if (value && !isDate(value)) {
+      value = new Date(value);
+
+      if (!isValid(value)) {
+        value = null;
+      }
+    }
+    return value;
   }
 }

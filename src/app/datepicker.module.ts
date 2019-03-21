@@ -12,17 +12,15 @@ import {
 
 import 'hammerjs'
 
-import { ClickDirective } from './directives/click.directive';
-import { FsDatePickBirthdayDirective } from './directives/birthday.directive';
-import { FsDatePickDirective } from './directives/datepicker.directive';
-import { FsDatePickRangeDirective } from './directives/range.directive';
+import { FsDatePickerBirthdayComponent } from './components/birthday/birthday.component';
+import { FsDatePickerComponent } from './components/datepicker/datepicker.component';
 import { FsIsscrollDirective } from './directives/is-scroll.directive';
 
-import { FsDatepickerComponent } from './components/datepicker/datepicker.component';
-import { FsDatepickerBirthdayComponent } from './components/birthday/birthday.component';
+import { FsDatePickerDialogComponent } from './components/datepicker-dialog/datepicker-dialog.component';
+import { FsDatePickerBirthdayDialogComponent } from './components/birthday-dialog/birthday-dialog.component';
 import { FsDatePickerCalendarComponent } from './components/calendar/calendar.component';
 import { FsDatepickerPresetsComponent } from './components/presets/presets.component';
-import { FsDatepickerRangeComponent } from './components/range/range.component';
+import { FsDatePickerRangeDialogComponent } from './components/range-dialog/range-dialog.component';
 import { FsDatepickerSummaryComponent } from './components/summary/summary.component';
 import { FsDatePickerTimeComponent } from './components/time/time.component';
 
@@ -30,6 +28,10 @@ import { FsDatepickerBirthdayFactory, } from './services/birthday-factory.servic
 import { FsDatePickerCommon } from './services/common.service';
 import { FsDatepickerFactory} from './services/factory.service';
 import { FsDatepickerRangeFactory} from './services/range-factory.service';
+
+import { FsClearModule } from '@firestitch/clear';
+import { FsDatePickerRangeComponent } from './components/range/range.component';
+import { ClickDirective } from './directives/click.directive';
 
 
 @NgModule({
@@ -40,30 +42,31 @@ import { FsDatepickerRangeFactory} from './services/range-factory.service';
     MatTabsModule,
     MatIconModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    FsClearModule
   ],
   exports: [
-    FsDatePickDirective,
-    FsDatePickRangeDirective,
-    FsDatePickBirthdayDirective
+    FsDatePickerComponent,
+    FsDatePickerRangeComponent,
+    FsDatePickerBirthdayComponent
   ],
   entryComponents: [
-    FsDatepickerComponent,
-    FsDatepickerRangeComponent,
-    FsDatepickerBirthdayComponent
+    FsDatePickerDialogComponent,
+    FsDatePickerRangeDialogComponent,
+    FsDatePickerBirthdayDialogComponent
   ],
   declarations: [
-    FsDatePickDirective,
-    FsDatePickRangeDirective,
+    FsDatePickerComponent,
+    FsDatePickerRangeComponent,
     FsDatepickerSummaryComponent,
     FsDatepickerPresetsComponent,
-    FsDatepickerComponent,
-    FsDatepickerRangeComponent,
+    FsDatePickerDialogComponent,
+    FsDatePickerRangeDialogComponent,
+    FsDatePickerBirthdayDialogComponent,
     FsIsscrollDirective,
     FsDatePickerCalendarComponent,
     FsDatePickerTimeComponent,
-    FsDatePickBirthdayDirective,
-    FsDatepickerBirthdayComponent,
+    FsDatePickerBirthdayComponent,
     ClickDirective
   ],
   providers: [

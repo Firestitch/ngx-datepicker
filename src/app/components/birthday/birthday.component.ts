@@ -1,140 +1,87 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { FsDatePickerModel } from '../../services/model.service';
-import { MatSelectChange } from '@angular/material';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  Renderer2,
+  ViewContainerRef,
+  Component
+} from '@angular/core';
 
-import { addMonths, format, getDate, getDaysInMonth, isDate, isValid, setMonth } from 'date-fns';
+import { format, isDate, isValid } from 'date-fns';
 
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
+import { FsDatePickerCommon } from '../../services/common.service';
+import { FsDatepickerBirthdayFactory } from '../../services/birthday-factory.service';
 
 
 @Component({
-  selector: 'fs-date-picker-birthday',
-  templateUrl: './birthday.component.html',
-  styleUrls: ['./birthday.component.scss'],
-  providers: [FsDatePickerModel]
+  template: '<fs-clear [show]="ngModel" (clear)="cleared()"></fs-clear>',
+  selector: '[fsDatePickerBirthday]',
 })
-export class FsDatepickerBirthdayComponent extends FsDatePickerBaseComponent implements OnInit {
+export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent implements OnChanges, OnDestroy {
 
-  public years: number[] = [];
-  public months: { name: string, number: number }[] = [];
-  public days: number[] = [];
+  @Input() public minYear = null;
+  @Input() public maxYear = null;
+  @Input() public format = 'MMM d, yyyy';
+  @Input() public ngModel = null;
+  @Output() public ngModelChange = new EventEmitter<any>();
 
-  public selectedDate = { day: null, month: null, year: null };
-
-  constructor(public element: ElementRef) {
-    super();
+  constructor(
+    protected renderer: Renderer2,
+    protected _fsDatePickerCommon: FsDatePickerCommon,
+    private _fsDatepickerBirthdayFactory: FsDatepickerBirthdayFactory,
+    private _viewContainerRef: ViewContainerRef,
+    private _elementRef: ElementRef,
+  ) {
+    super(renderer, _elementRef, _fsDatePickerCommon);
   }
 
-  public ngOnInit() {
-    this.setSelectedDate();
-    this.generateYearsArray();
-    this.generateMonthArray();
-    this.generateDaysArray();
+  public setValue(value: Date) {
+    this.ngModelChange.emit(value);
   }
 
-  public changedDate(event: MatSelectChange) {
-    this.updateDate();
-  }
-
-  public changedMonth(event: MatSelectChange) {
-    const monthLength = this.daysInMonth(event.value.number);
-    this.generateDaysArray(monthLength);
-    if (monthLength < this.selectedDate.day) {
-      this.selectedDate.day = null;
-    }
-    this.updateDate();
-  }
-
-  public changedYear() {
-    const monthLength = this.selectedDate.month ? this.daysInMonth(this.selectedDate.month.number) : 31;
-    this.generateDaysArray(monthLength);
-    if (this.selectedDate.day > monthLength) {
-      this.selectedDate.day = null;
-    }
-    this.updateDate();
-  }
-
-  private setSelectedDate() {
-    const date = this.parentDirective.ngModel;
-
-    if (date && isValid(date) && isDate(date)) {
-      this.selectedDate = {
-        day: getDate(date),
-        month: addMonths(new Date(), date.getMonth()),
-        year: date.getFullYear()
-      };
+  public ngOnChanges(changes) {
+    if (changes.ngModel) {
+      setTimeout(() => {
+        const newDate = this.ngModel && isValid(this.ngModel) && isDate(this.ngModel)
+          ? format(this.ngModel, this.format)
+          : null;
+        this._elementRef.nativeElement.value = newDate;
+      }, 0);
     }
   }
 
-  private updateDate() {
-    const year = this.selectedDate.year;
-    const month = this.selectedDate.month && this.selectedDate.month.number;
-    const date = this.selectedDate.day;
+  public cleared() {
+    this.setValue(null);
+  }
 
-    if (year && month && date) {
-      const newDate = new Date();
-      newDate.setFullYear(year);
-      newDate.setMonth(month);
-      newDate.setDate(date);
-
-      this.parentDirective.setValue(newDate);
-    } else {
-      this.parentDirective.setValue(null);
+  public ngOnDestroy() {
+    if (this.dialog && this.dialog.instance.element.nativeElement.parentNode) {
+      this.dialog.instance.element.nativeElement.parentNode.removeChild(this.dialog.instance.element.nativeElement);
     }
   }
 
-  // helpers
+  protected open() {
+    super.open();
 
-  /**
-   * return count days in month
-   * @param {string} monthTitle
-   * @returns {number}
-   */
-  private daysInMonth(monthTitle: number): number {
-    // const year = this.selectedDate.year || new Date().getFullYear();
-    return getDaysInMonth(
-      new Date(
-        this.selectedDate.year || new Date().getFullYear(),
-        monthTitle
-      )
-    );
+    if (this.dialog) {
+      return;
+    }
+
+    this._fsDatepickerBirthdayFactory.setRootViewContainerRef(this._viewContainerRef);
+    this.dialog = this._fsDatepickerBirthdayFactory.addDynamicComponent();
+    this.dialog.instance.parentDirective = this;
+
+    setTimeout(() => {
+      this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
+    });
   }
 
-  /**
-   * helper for generation array of days
-   * default value is 31
-   * @param {number} length
-   */
-  private generateDaysArray(length = 31) {
-    this.days = Array.from(Array(length).keys()).map((d: number) => d + 1);
+  protected clear() {
+    this.setValue(null);
   }
-
-  /**
-   * helper for generation array of month
-   * by default format is LLLL - January, February, March ... etc.
-   */
-  private generateMonthArray(monthFormat = 'LLLL') {
-
-    this.months = Array.from(Array(12).keys())
-      .map((m: number) => {
-        return {
-          number: m,
-          name: format(setMonth(new Date(), m), monthFormat),
-        };
-      });
-  }
-
-  /**
-   * helper for generation array of years
-   */
-  private generateYearsArray() {
-    const minYear = this.parentDirective.minYear || new Date().getFullYear() - 100;
-    let maxYear = this.parentDirective.maxYear || new Date().getFullYear();
-
-     for ( maxYear; maxYear >= minYear; maxYear-- ) {
-       this.years.push(maxYear);
-     }
-  }
-
-
 }
