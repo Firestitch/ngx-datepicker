@@ -112,6 +112,8 @@ export class FsDatePickerRangeComponent extends FsDatePickerBaseComponent implem
     this.change$.emit(this.ngModel);
     this.ngModelStartChange.emit(startDate);
     this.ngModelEndChange.emit(endDate);
+
+    this._onChange(this.ngModel);
   }
 
   protected open() {
