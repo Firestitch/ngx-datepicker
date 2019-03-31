@@ -47,11 +47,8 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
   public ngOnChanges(changes) {
     if (changes.ngModel) {
       setTimeout(() => {
-        const newDate = this.ngModel && isValid(this.ngModel) && isDate(this.ngModel)
-          ? format(this.ngModel, this.format)
-          : null;
-        this._elementRef.nativeElement.value = newDate;
-      }, 0);
+        this._elementRef.nativeElement.value = this._fsDatePickerCommon.formatDateTime(this.ngModel);
+      });
     }
   }
 

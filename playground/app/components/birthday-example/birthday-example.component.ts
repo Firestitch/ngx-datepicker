@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class BirthdayExampleComponent {
 
-  public model = null;
+  public model = '2018-05-05';
   public minYear = 1900;
 
   constructor() { }
