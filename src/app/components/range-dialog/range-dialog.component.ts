@@ -212,7 +212,7 @@ export class FsDatePickerRangeDialogComponent extends FsDatePickerBaseDialogComp
       lightFormat(startDate, 'yyyy-MM') === lightFormat(endDate, 'yyyy-MM');
   }
 
-  public clear() {
+  public clear($event?) {
     this.parentDirective.cleared();
   }
 

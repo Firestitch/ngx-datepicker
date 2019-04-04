@@ -96,8 +96,6 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
 
   /**
    * return count days in month
-   * @param {string} monthTitle
-   * @returns {number}
    */
   private daysInMonth(monthTitle: number): number {
     // const year = this.selectedDate.year || new Date().getFullYear();
@@ -112,7 +110,6 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
   /**
    * helper for generation array of days
    * default value is 31
-   * @param {number} length
    */
   private generateDaysArray(length = 31) {
     this.days = Array.from(Array(length).keys()).map((d: number) => d + 1);
@@ -144,6 +141,5 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
        this.years.push(maxYear);
      }
   }
-
 
 }
