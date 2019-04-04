@@ -27,7 +27,14 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
   @Input() public minYear = null;
   @Input() public maxYear = null;
   @Input() public format = 'MMM d, yyyy';
-  @Input() public ngModel = null;
+
+  private _ngModel = null;
+  @Input() public set ngModel(value) {
+    this._ngModel = this._fsDatePickerCommon.parseISO(value);
+  };
+  public get ngModel() {
+    return this._ngModel;
+  }
   @Output() public ngModelChange = new EventEmitter<any>();
 
   constructor(
@@ -54,6 +61,12 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
 
   public cleared() {
     this.setValue(null);
+
+    if (this.dialog && this.dialog.instance) {
+      setTimeout(() => {
+        this.dialog.instance.setSelectedDate();
+      });
+    }
   }
 
   public ngOnDestroy() {
@@ -65,20 +78,16 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
   protected open() {
     super.open();
 
-    if (this.dialog) {
-      return;
+    if (!this.dialog) {
+      this._fsDatepickerBirthdayFactory.setRootViewContainerRef(this._viewContainerRef);
+      this.dialog = this._fsDatepickerBirthdayFactory.addDynamicComponent();
+      this.dialog.instance.parentDirective = this;
     }
 
-    this._fsDatepickerBirthdayFactory.setRootViewContainerRef(this._viewContainerRef);
-    this.dialog = this._fsDatepickerBirthdayFactory.addDynamicComponent();
-    this.dialog.instance.parentDirective = this;
-
+    // Calculate position each time on dialog open. Template can be dynamic
     setTimeout(() => {
       this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
     });
   }
 
-  protected clear() {
-    this.setValue(null);
-  }
 }

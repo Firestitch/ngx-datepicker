@@ -1,10 +1,14 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FsDatePickerModel } from '../../services/model.service';
 import { MatSelectChange } from '@angular/material';
 
-import { addMonths, format, getDate, getDaysInMonth, isDate, isValid, setMonth } from 'date-fns';
+import { find } from '@firestitch/common';
+
+import { format, getDate, getMonth, getYear, getDaysInMonth, isDate, isValid, setMonth } from 'date-fns';
+
+import { isNumber } from 'lodash-es';
 
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
+import { FsDatePickerModel } from '../../services/model.service';
 
 
 @Component({
@@ -26,10 +30,11 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
   }
 
   public ngOnInit() {
-    this.setSelectedDate();
     this.generateYearsArray();
     this.generateMonthArray();
     this.generateDaysArray();
+
+    this.setSelectedDate();
   }
 
   public changedDate(event: MatSelectChange) {
@@ -39,6 +44,7 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
   public changedMonth(event: MatSelectChange) {
     const monthLength = this.daysInMonth(event.value.number);
     this.generateDaysArray(monthLength);
+
     if (monthLength < this.selectedDate.day) {
       this.selectedDate.day = null;
     }
@@ -48,6 +54,7 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
   public changedYear() {
     const monthLength = this.selectedDate.month ? this.daysInMonth(this.selectedDate.month.number) : 31;
     this.generateDaysArray(monthLength);
+
     if (this.selectedDate.day > monthLength) {
       this.selectedDate.day = null;
     }
@@ -60,9 +67,11 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
     if (date && isValid(date) && isDate(date)) {
       this.selectedDate = {
         day: getDate(date),
-        month: addMonths(new Date(), date.getMonth()),
-        year: date.getFullYear()
+        month: find(this.months, { number: getMonth(date) }),
+        year: getYear(date)
       };
+    } else {
+      this.selectedDate = { day: null, month: null, year: null };
     }
   }
 
@@ -70,8 +79,8 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
     const year = this.selectedDate.year;
     const month = this.selectedDate.month && this.selectedDate.month.number;
     const date = this.selectedDate.day;
-
-    if (year && month && date) {
+    // January is === false
+    if (year && isNumber(month) && date) {
       const newDate = new Date();
       newDate.setFullYear(year);
       newDate.setMonth(month);

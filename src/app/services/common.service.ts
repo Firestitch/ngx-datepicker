@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { isNumeric } from '@firestitch/common';
 
 import { isObject } from 'lodash-es';
-import { format, isDate, isValid, lightFormat, startOfDay } from 'date-fns';
+import { format, isDate, parseISO, isValid, lightFormat, startOfDay } from 'date-fns';
 
 
 @Injectable()
@@ -107,9 +107,10 @@ export class FsDatePickerCommon {
 
     // after basic position of dialog we need to set it under input
     const input = elementRef.nativeElement;
-    const parent = input.parentElement.parentElement;
+    const parentInfix = input.parentElement;
+    // const parent = parentInfix.parentElement;
     const dialogContainer = dialog.instance.element.nativeElement.querySelector('.fs-date-picker-dialog');
-    const parentBound = parent.getBoundingClientRect();
+    // const parentBound = parent.getBoundingClientRect();
     const dialogBound = dialogContainer.getBoundingClientRect();
 
     // triangle
@@ -118,7 +119,14 @@ export class FsDatePickerCommon {
       .getPropertyValue('border-left')
       .substr(0, 2));
 
-    dialogContainer.style.top = dialogBound.top + parentBound.height + pseudoHeight + 'px';
+    const bottomOffset = Number(window
+      .getComputedStyle(parentInfix)
+      .getPropertyValue('padding-bottom')
+      .substr(0, 2));
+
+    // Dialog already aligned at the input bottom
+    // Add input container bottom padding & triangle offset
+    dialogContainer.style.top = dialogBound.top + bottomOffset + pseudoHeight + 'px';
   }
 
   public formatDateTimeRange(value, view = 'date') {
@@ -231,4 +239,16 @@ export class FsDatePickerCommon {
     }
     return value;
   }
+
+  // Get date object safe
+  public parseISO(value) {
+    let date = typeof value === 'string' ? parseISO(value) : value;
+
+    if (!isValid(date)) {
+      date = null;
+    }
+
+    return date;
+  }
+
 }

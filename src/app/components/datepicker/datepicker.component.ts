@@ -98,6 +98,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     if (this.dialog) {
       this.enableDefaultComponent();
       this.dialog.instance.initCalendar();
+      this.positionDialog();
       return;
     }
 
@@ -114,7 +115,10 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     this.dialog.instance.fsDatePickerModel.dateMode = 'date';
 
     this.enableDefaultComponent();
+    this.positionDialog();
+  }
 
+  private positionDialog() {
     setTimeout(() => {
       this.fsDatePickerCommon.positionDialog(this.dialog, this.elementRef);
     });

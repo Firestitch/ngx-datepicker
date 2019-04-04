@@ -211,4 +211,9 @@ export class FsDatePickerRangeDialogComponent extends FsDatePickerBaseDialogComp
     return isAfter(startDate, endDate) ||
       lightFormat(startDate, 'yyyy-MM') === lightFormat(endDate, 'yyyy-MM');
   }
+
+  public clear() {
+    this.parentDirective.cleared();
+  }
+
 }

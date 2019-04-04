@@ -1,5 +1,8 @@
 import { Renderer2, HostListener, ElementRef } from '@angular/core';
+
 import { FsDatePickerCommon } from '../services/common.service';
+import { FsDatePickerBirthdayDialogComponent } from '../components/birthday-dialog/birthday-dialog.component';
+
 
 export abstract class FsDatePickerBaseComponent {
 
@@ -26,12 +29,23 @@ export abstract class FsDatePickerBaseComponent {
 
   @HostListener('window:resize', ['$event'])
   public onWindowResize(event) {
+    if (!this.dialog) {
+      return;
+    }
+
+    if (this.dialog.instance instanceof FsDatePickerBirthdayDialogComponent) {
+      this.fsDatePickerCommon.positionDialogUnderInput(this.dialog, this.elementRef);
+      return;
+    }
+
     this.fsDatePickerCommon.positionDialog(this.dialog, this.elementRef);
   }
 
-  constructor(renderer: Renderer2,
-              elementRef: ElementRef,
-              fsDatePickerCommon: FsDatePickerCommon) {
+  constructor(
+    renderer: Renderer2,
+    elementRef: ElementRef,
+    fsDatePickerCommon: FsDatePickerCommon
+  ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
     this.fsDatePickerCommon = fsDatePickerCommon;
@@ -52,4 +66,5 @@ export abstract class FsDatePickerBaseComponent {
       this.elementRef.nativeElement.setAttribute('readonly', true);
     });
   }
+
 }
