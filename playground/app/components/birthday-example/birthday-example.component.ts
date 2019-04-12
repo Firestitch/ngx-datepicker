@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'birthday-example',
   templateUrl: 'birthday-example.component.html',

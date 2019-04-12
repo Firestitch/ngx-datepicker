@@ -31,6 +31,7 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
   private _ngModel = null;
   @Input() public set ngModel(value) {
     this._ngModel = this._fsDatePickerCommon.parseISO(value);
+    this._updateDialogDate();
   };
   public get ngModel() {
     return this._ngModel;
@@ -61,12 +62,7 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
 
   public cleared() {
     this.setValue(null);
-
-    if (this.dialog && this.dialog.instance) {
-      setTimeout(() => {
-        this.dialog.instance.setSelectedDate();
-      });
-    }
+    this._updateDialogDate();
   }
 
   public ngOnDestroy() {
@@ -88,6 +84,14 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
     setTimeout(() => {
       this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
     });
+  }
+
+  private _updateDialogDate() {
+    if (this.dialog && this.dialog.instance) {
+      setTimeout(() => {
+        this.dialog.instance.setSelectedDate();
+      });
+    }
   }
 
 }
