@@ -39,6 +39,10 @@
   min-width: 220px;
 }
 
+.mat-form-field .mat-form-field-flex.hide-clear .fs-clear-wrapper {
+  display: none;
+}
+
 fs-date-picker-dialog * {
   touch-action: manipulation;
 }

@@ -40,6 +40,20 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public maxDate = null;
   @Input() public view = 'date';
   @Input() public presets: FsPreset[] = [];
+
+  private _hideClearButton: boolean = null;
+  @Input() public set hideClearButton(value: boolean) {
+
+    this._hideClearButton = value;
+
+    this._hideClearButton ?
+      this.fsDatePickerCommon.addClass(this.elementRef.nativeElement.parentNode.parentNode, 'hide-clear') :
+      this.fsDatePickerCommon.removeClass(this.elementRef.nativeElement.parentNode.parentNode, 'hide-clear');
+  }
+  public get hideClearButton(): boolean {
+    return this._hideClearButton;
+  }
+
   @Output('change') change$ = new EventEmitter<any>();
 
   _onChange = (value: any) => { };
@@ -63,7 +77,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
 
   public ngOnDestroy() {
 
-    //What does this do?
+    // What does this do?
+    // As I know otherwise, when you leave page with datepicker - dialog still in the DOM
+    // and appears memory leaks
     if (this.dialog && this.dialog.instance.element.nativeElement.parentNode) {
       this.dialog.instance.element.nativeElement.parentNode.removeChild(this.dialog.instance.element.nativeElement);
     }
@@ -131,4 +147,5 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
       this.dialog.instance.fsDatePickerModel.components = { calendarStart: true };
     }
   }
+
 }

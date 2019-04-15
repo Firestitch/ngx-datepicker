@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { isNumeric } from '@firestitch/common';
 
 import { isObject } from 'lodash-es';
-import { format, isDate, parseISO, isValid, lightFormat, startOfDay } from 'date-fns';
+import { format, isDate, isValid, lightFormat, startOfDay } from 'date-fns';
 
 
 @Injectable()
@@ -240,15 +240,12 @@ export class FsDatePickerCommon {
     return value;
   }
 
-  // Get date object safe
-  public parseISO(value) {
-    let date = typeof value === 'string' ? parseISO(value) : value;
+  public addClass(element, klass) {
+    element.classList.add(klass);
+  }
 
-    if (!isValid(date)) {
-      date = null;
-    }
-
-    return date;
+  public removeClass(element, klass) {
+    element.classList.remove(klass);
   }
 
 }

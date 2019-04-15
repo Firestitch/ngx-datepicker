@@ -11,7 +11,7 @@ import {
   Component
 } from '@angular/core';
 
-import { format, isDate, isValid } from 'date-fns';
+import { date } from '@firestitch/date';
 
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { FsDatePickerCommon } from '../../services/common.service';
@@ -30,7 +30,7 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
 
   private _ngModel = null;
   @Input() public set ngModel(value) {
-    this._ngModel = this._fsDatePickerCommon.parseISO(value);
+    this._ngModel = date(value);
     this._updateDialogDate();
   };
   public get ngModel() {
