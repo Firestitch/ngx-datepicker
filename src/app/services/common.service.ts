@@ -116,7 +116,7 @@ export class FsDatePickerCommon {
     // triangle
     const pseudoHeight = Number(window
       .getComputedStyle(dialogContainer.querySelector('.wrap'), ':before')
-      .getPropertyValue('border-left')
+      .getPropertyValue('border-left-width')
       .substr(0, 2));
 
     const bottomOffset = Number(window
