@@ -27,7 +27,6 @@ import { FsDatePickerTimeComponent } from './components/time/time.component';
 import { FsDatepickerBirthdayFactory, } from './services/birthday-factory.service';
 import { FsDatePickerCommon } from './services/common.service';
 import { FsDatepickerFactory} from './services/factory.service';
-import { FsDatepickerRangeFactory} from './services/range-factory.service';
 
 import { FsClearModule } from '@firestitch/clear';
 import { FsDatePickerRangeComponent } from './components/range/range.component';
@@ -71,7 +70,6 @@ import { ClickDirective } from './directives/click.directive';
   ],
   providers: [
     FsDatepickerFactory,
-    FsDatepickerRangeFactory,
     FsDatePickerCommon,
     FsDatepickerBirthdayFactory
   ],
@@ -82,7 +80,6 @@ export class FsDatePickerModule {
       ngModule: FsDatePickerModule,
       providers: [
         FsDatepickerFactory,
-        FsDatepickerRangeFactory,
         FsDatepickerBirthdayFactory,
         FsDatePickerCommon,
       ]

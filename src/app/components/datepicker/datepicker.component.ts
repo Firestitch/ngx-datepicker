@@ -9,7 +9,8 @@ import {
   Output, Provider,
   Renderer2,
   ViewContainerRef,
-  Component
+  Component,
+  Injector,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -63,6 +64,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
 
   constructor(
     protected renderer: Renderer2,
+    protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
     @Inject(ViewContainerRef) private viewContainerRef,
     protected fsDatePickerCommon: FsDatePickerCommon,
@@ -112,39 +114,34 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     super.open();
 
     if (this.dialog) {
-      this.enableDefaultComponent();
+      // this.enableDefaultComponent();
       this.dialog.instance.initCalendar();
-      this.positionDialog();
       return;
     }
 
-    this.fsDatepickerFactory.setRootViewContainerRef(this.viewContainerRef);
-    this.dialog = this.fsDatepickerFactory.addDynamicComponent();
-    this.dialog.instance.parentDirective = this;
-
-    this.dialog.instance.fsDatePickerModel.view = this.view;
-    this.dialog.instance.fsDatePickerModel.minYear = this.minYear;
-    this.dialog.instance.fsDatePickerModel.maxYear = this.maxYear;
-    this.dialog.instance.fsDatePickerModel.minDate = this.minDate;
-    this.dialog.instance.fsDatePickerModel.maxDate = this.maxDate;
-    this.dialog.instance.fsDatePickerModel.presets = this.presets;
-    this.dialog.instance.fsDatePickerModel.dateMode = 'date';
-
-    this.enableDefaultComponent();
-    this.positionDialog();
+    this.fsDatepickerFactory.openDatePicker(
+      this.elementRef,
+      this.injector,
+      {
+        elementRef: this.elementRef,
+        parentDirective: this,
+        view: this.view,
+        minYear: this.minYear,
+        maxYear: this.maxYear,
+        minDate: this.minDate,
+        maxDate: this.maxDate,
+        presets: this.presets,
+        dateMode: 'date',
+        components: this._getDefaultComponents(),
+      }
+    );
   }
 
-  private positionDialog() {
-    setTimeout(() => {
-      this.fsDatePickerCommon.positionDialog(this.dialog, this.elementRef);
-    });
-  }
-
-  private enableDefaultComponent() {
+  private _getDefaultComponents() {
     if (this.view === 'time') {
-      this.dialog.instance.fsDatePickerModel.components = { timeStart: true };
+      return { timeStart: true };
     } else {
-      this.dialog.instance.fsDatePickerModel.components = { calendarStart: true };
+      return { calendarStart: true };
     }
   }
 
