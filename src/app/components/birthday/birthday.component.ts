@@ -1,5 +1,4 @@
 import {
-  Directive,
   ElementRef,
   EventEmitter,
   Input,
@@ -8,14 +7,15 @@ import {
   Output,
   Renderer2,
   ViewContainerRef,
-  Component
+  Component,
+  Injector,
 } from '@angular/core';
 
 import { date } from '@firestitch/date';
 
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { FsDatePickerCommon } from '../../services/common.service';
-import { FsDatepickerBirthdayFactory } from '../../services/birthday-factory.service';
+import { FsDatepickerFactory } from '../../services/factory.service';
 
 
 @Component({
@@ -41,7 +41,8 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
   constructor(
     protected renderer: Renderer2,
     protected _fsDatePickerCommon: FsDatePickerCommon,
-    private _fsDatepickerBirthdayFactory: FsDatepickerBirthdayFactory,
+    protected _injector: Injector,
+    private fsDatepickerFactory: FsDatepickerFactory,
     private _viewContainerRef: ViewContainerRef,
     private _elementRef: ElementRef,
   ) {
@@ -75,14 +76,18 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
     super.open();
 
     if (!this.dialog) {
-      this._fsDatepickerBirthdayFactory.setRootViewContainerRef(this._viewContainerRef);
-      this.dialog = this._fsDatepickerBirthdayFactory.addDynamicComponent();
-      this.dialog.instance.parentDirective = this;
+      this.fsDatepickerFactory.openBirthDayPicker(
+        this.elementRef,
+        this._injector,
+        {
+          parentDirective: this,
+        }
+      );
     }
 
     // Calculate position each time on dialog open. Template can be dynamic
     setTimeout(() => {
-      this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
+      // this._fsDatePickerCommon.positionDialogUnderInput(this.dialog, this._elementRef);
     });
   }
 

@@ -1,7 +1,14 @@
-import { Component, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  OnInit,
+  Inject,
+} from '@angular/core';
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
+import { DIALOG_DATA } from '../../services/dialog-data';
+import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 
 
 @Component({
@@ -9,7 +16,7 @@ import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-compo
     templateUrl: './datepicker-dialog.component.html',
     styleUrls: ['./datepicker-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [FsDatePickerModel]
+    providers: [ FsDatePickerModel ],
 })
 export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent implements OnInit {
 
@@ -18,11 +25,16 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   public disabledDays = null;
 
   constructor(
-    public element: ElementRef,
+    @Inject(DIALOG_DATA) public dialogData,
     public fsDatePickerModel: FsDatePickerModel,
+    private _dialogRef: FsDateDialogRef,
     private fsDatePickerCommon: FsDatePickerCommon,
   ) {
     super();
+
+    this._initModel();
+    this._initComponents();
+    this.parentDirective = this.dialogData.parentDirective;
   }
 
   public ngOnInit() {
@@ -45,6 +57,11 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     }
   }
 
+  public close() {
+    this._dialogRef.close();
+    this.dialogData.parentDirective.close();
+  }
+
   public setDateMode(mode) {
     this.fsDatePickerModel.dateMode = mode;
   }
@@ -55,5 +72,21 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
 
   public calendarDrawMonth(date) {
     this.calendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+  }
+
+  private _initModel() {
+    this.fsDatePickerModel.view = this.dialogData.view;
+    this.fsDatePickerModel.minYear = this.dialogData.minYear;
+    this.fsDatePickerModel.maxYear = this.dialogData.maxYear;
+    this.fsDatePickerModel.minDate = this.dialogData.minDate;
+    this.fsDatePickerModel.maxDate = this.dialogData.maxDate;
+    this.fsDatePickerModel.presets = this.dialogData.presets;
+    this.fsDatePickerModel.dateMode = this.dialogData.dateMode;
+  }
+
+  private _initComponents() {
+    if (this.dialogData.components) {
+      this.fsDatePickerModel.components = this.dialogData.components;
+    }
   }
 }

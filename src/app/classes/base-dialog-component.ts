@@ -7,6 +7,6 @@ export class FsDatePickerBaseDialogComponent {
   }
 
   public close($event?) {
-    this.parentDirective.close();
+    // this.parentDirective.close();
   }
 }

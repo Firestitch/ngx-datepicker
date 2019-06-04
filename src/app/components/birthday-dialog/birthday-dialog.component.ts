@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material';
 
 import { find } from '@firestitch/common';
@@ -9,6 +9,8 @@ import { isNumber } from 'lodash-es';
 
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
 import { FsDatePickerModel } from '../../services/model.service';
+import { FsDateDialogRef } from '../../classes/date-dialog-ref';
+import { DIALOG_DATA } from '../../services/dialog-data';
 
 
 @Component({
@@ -25,11 +27,17 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
 
   public selectedDate = { day: null, month: null, year: null };
 
-  constructor(public element: ElementRef) {
+  constructor(
+    @Inject(DIALOG_DATA) public dialogData,
+    public element: ElementRef,
+    private _dialogRef: FsDateDialogRef
+  ) {
     super();
   }
 
   public ngOnInit() {
+    this.parentDirective = this.dialogData.parentDirective;
+
     this.generateYearsArray();
     this.generateMonthArray();
     this.generateDaysArray();
@@ -59,6 +67,10 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
       this.selectedDate.day = null;
     }
     this.updateDate();
+  }
+
+  public close() {
+    this._dialogRef.close();
   }
 
   private setSelectedDate() {
