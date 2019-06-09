@@ -12,6 +12,7 @@ import {
 
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDatePickerCommon } from '../../services/common.service';
+import { getStartDayDate } from '../../helpers/get-start-day-date';
 
 
 @Component({
@@ -199,7 +200,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
   public createModel() {
     if (!this.date) {
-      this.setDate(this.fsDatePickerCommon.createMoment());
+      this.setDate(getStartDayDate());
     }
   }
 

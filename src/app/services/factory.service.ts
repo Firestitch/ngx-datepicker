@@ -22,9 +22,11 @@ export class FsDatepickerFactory {
 
   public openDatePicker(el: ElementRef, injector: Injector, data: any) {
     const overlayRef = this._createOverlay(el);
-    const previewRef = new FsDateDialogRef(overlayRef);
+    const dateDialogRef = new FsDateDialogRef(overlayRef);
 
-    return this._openPortalPreview(injector, FsDatePickerDialogComponent, overlayRef, previewRef, data);
+    this._openPortalPreview(injector, FsDatePickerDialogComponent, overlayRef, dateDialogRef, data);
+
+    return dateDialogRef;
   }
 
   public openDateRangePicker(el: ElementRef, injector: Injector, data: any) {

@@ -1,7 +1,7 @@
-<div class="fs-date-picker-backdrop" [hidden]="!parentDirective.opened" (click)="close($event)"></div>
+<div class="fs-date-picker-backdrop" (click)="close($event)"></div>
 
-<div class="fs-date-picker-dialog {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
-[ngClass]="{ opened: parentDirective.opened,
+<div class="fs-date-picker-dialog opened {{ 'dialog-view-' + fsDatePickerModel.view }}" tabindex="0"
+[ngClass]="{
   'has-view-date': fsDatePickerModel.view === 'date' || fsDatePickerModel.view === 'datetime',
   'has-view-time': fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime',
   'date-mode-date': fsDatePickerModel.dateMode === 'date',

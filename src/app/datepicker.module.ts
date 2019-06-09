@@ -10,11 +10,12 @@ import {
   MatTabsModule
 } from '@angular/material';
 
+import { FsClearModule } from '@firestitch/clear';
+
 import 'hammerjs'
 
 import { FsDatePickerBirthdayComponent } from './components/birthday/birthday.component';
 import { FsDatePickerComponent } from './components/datepicker/datepicker.component';
-import { FsIsscrollDirective } from './directives/is-scroll.directive';
 
 import { FsDatePickerDialogComponent } from './components/datepicker-dialog/datepicker-dialog.component';
 import { FsDatePickerBirthdayDialogComponent } from './components/birthday-dialog/birthday-dialog.component';
@@ -23,14 +24,19 @@ import { FsDatepickerPresetsComponent } from './components/presets/presets.compo
 import { FsDatePickerRangeDialogComponent } from './components/range-dialog/range-dialog.component';
 import { FsDatepickerSummaryComponent } from './components/summary/summary.component';
 import { FsDatePickerTimeComponent } from './components/time/time.component';
+import { FsDatePickerRangeComponent } from './components/range/range.component';
+import { DateRangeSeparatorComponent } from './components/date-range-separator/date-range-separator.component';
+
+import { FsIsscrollDirective } from './directives/is-scroll.directive';
+import { ClickDirective } from './directives/click.directive';
+import { DateRangePickerFromDirective } from './directives/date-range-picker-from.directive';
+import { DateRangePickerToDirective } from './directives/date-range-picker-to.directive';
 
 import { FsDatepickerBirthdayFactory, } from './services/birthday-factory.service';
 import { FsDatePickerCommon } from './services/common.service';
 import { FsDatepickerFactory} from './services/factory.service';
+import { FsRangePickerStoreService } from './services/range-picker-store.service';
 
-import { FsClearModule } from '@firestitch/clear';
-import { FsDatePickerRangeComponent } from './components/range/range.component';
-import { ClickDirective } from './directives/click.directive';
 
 
 @NgModule({
@@ -47,12 +53,16 @@ import { ClickDirective } from './directives/click.directive';
   exports: [
     FsDatePickerComponent,
     FsDatePickerRangeComponent,
-    FsDatePickerBirthdayComponent
+    FsDatePickerBirthdayComponent,
+    DateRangeSeparatorComponent,
+    DateRangePickerFromDirective,
+    DateRangePickerToDirective,
   ],
   entryComponents: [
     FsDatePickerDialogComponent,
     FsDatePickerRangeDialogComponent,
-    FsDatePickerBirthdayDialogComponent
+    FsDatePickerBirthdayDialogComponent,
+    DateRangeSeparatorComponent
   ],
   declarations: [
     FsDatePickerComponent,
@@ -62,16 +72,15 @@ import { ClickDirective } from './directives/click.directive';
     FsDatePickerDialogComponent,
     FsDatePickerRangeDialogComponent,
     FsDatePickerBirthdayDialogComponent,
-    FsIsscrollDirective,
     FsDatePickerCalendarComponent,
     FsDatePickerTimeComponent,
     FsDatePickerBirthdayComponent,
-    ClickDirective
-  ],
-  providers: [
-    FsDatepickerFactory,
-    FsDatePickerCommon,
-    FsDatepickerBirthdayFactory
+    DateRangeSeparatorComponent,
+
+    FsIsscrollDirective,
+    ClickDirective,
+    DateRangePickerFromDirective,
+    DateRangePickerToDirective,
   ],
 })
 export class FsDatePickerModule {
@@ -82,6 +91,7 @@ export class FsDatePickerModule {
         FsDatepickerFactory,
         FsDatepickerBirthdayFactory,
         FsDatePickerCommon,
+        FsRangePickerStoreService,
       ]
     };
   }

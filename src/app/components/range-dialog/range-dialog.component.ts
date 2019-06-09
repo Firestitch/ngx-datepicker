@@ -16,6 +16,7 @@ import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 import { DIALOG_DATA } from '../../services/dialog-data';
+import { getSafeDate } from '../../helpers/get-safe-date';
 
 
 @Component({
@@ -182,8 +183,8 @@ export class FsDatePickerRangeDialogComponent extends FsDatePickerBaseDialogComp
   }
 
   public startCalendarDrawMonth(date) {
-    this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
-    this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(this.endCalendarMonth);
+    this.startCalendarMonth = getSafeDate(date);
+    this.endCalendarMonth = getSafeDate(this.endCalendarMonth);
 
     if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
       this.endCalendarMonth = addMonths(this.startCalendarMonth, 1);
@@ -191,8 +192,8 @@ export class FsDatePickerRangeDialogComponent extends FsDatePickerBaseDialogComp
   }
 
   public endCalendarDrawMonth(date) {
-    this.startCalendarMonth = this.fsDatePickerCommon.getMomentSafe(this.startCalendarMonth);
-    this.endCalendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+    this.startCalendarMonth = getSafeDate(this.startCalendarMonth);
+    this.endCalendarMonth = getSafeDate(date);
 
     if (this.rangeCalendarsConflict(this.startCalendarMonth, this.endCalendarMonth)) {
       this.startCalendarMonth = subMonths(this.endCalendarMonth, 1);

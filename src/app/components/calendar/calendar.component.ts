@@ -37,6 +37,7 @@ import {
 import { FsHammerConfig } from '../../configs/hammer.config';
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDatePickerCommon } from '../../services/common.service';
+import { getStartDayDate } from '../../helpers/get-start-day-date';
 
 
 @Component({
@@ -150,7 +151,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
         if (changes.drawMonth.currentValue) {
           this.drawMonths(changes.drawMonth.currentValue);
         } else {
-          this.onDrawMonth.emit(this.fsDatePickerCommon.createMoment());
+          this.onDrawMonth.emit(getStartDayDate());
         }
       }
     }
@@ -281,7 +282,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
 
   public createModel() {
     if (!this.date) {
-      this.date = this.fsDatePickerCommon.createMoment();
+      this.date = getStartDayDate();
     }
   }
 
