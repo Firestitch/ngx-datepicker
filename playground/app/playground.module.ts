@@ -20,13 +20,14 @@ import { DateTimeRangeExampleComponent } from './components/datetimerange-exampl
 import { DateRangeExampleComponent } from './components/daterange-example/daterange-example.component';
 import { TimeRangeExampleComponent } from './components/timerange-example/timerange-example.component';
 import { BirthdayExampleComponent } from './components/birthday-example/birthday-example.component';
+import { NewDateRangeExampleComponent } from './components/date-range-example/date-range-example.component';
 
 
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsDatePickerModule,
+    FsDatePickerModule.forRoot(),
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
@@ -45,7 +46,8 @@ import { BirthdayExampleComponent } from './components/birthday-example/birthday
     DateTimeRangeExampleComponent,
     DateRangeExampleComponent,
     TimeRangeExampleComponent,
-    BirthdayExampleComponent
+    BirthdayExampleComponent,
+    NewDateRangeExampleComponent,
   ],
   providers: [
   ],

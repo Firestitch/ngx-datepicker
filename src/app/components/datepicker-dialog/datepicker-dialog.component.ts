@@ -5,10 +5,10 @@ import {
   Inject,
 } from '@angular/core';
 import { FsDatePickerModel } from '../../services/model.service';
-import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
 import { DIALOG_DATA } from '../../services/dialog-data';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
+import { getSafeDate } from '../../helpers/get-safe-date';
 
 
 @Component({
@@ -28,13 +28,12 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     @Inject(DIALOG_DATA) public dialogData,
     public fsDatePickerModel: FsDatePickerModel,
     private _dialogRef: FsDateDialogRef,
-    private fsDatePickerCommon: FsDatePickerCommon,
   ) {
     super();
 
     this._initModel();
     this._initComponents();
-    this.parentDirective = this.dialogData.parentDirective;
+    // this.parentDirective = this.dialogData.parentDirective;
   }
 
   public ngOnInit() {
@@ -43,13 +42,15 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   }
 
   public initCalendar() {
-    this.model = this.parentDirective.getModelValue();
+    // this.model = this.parentDirective.getModelValue();
+    this.model = this.dialogData.modelValue;
     this.calendarDrawMonth(this.model);
   }
 
   public setDate(date) {
     this.model = date;
-    this.parentDirective.updateValue(date);
+    this._dialogRef.updateValue(this.model);
+    // this.parentDirective.updateValue(date);
     this.calendarDrawMonth(this.model);
 
     if (this.fsDatePickerModel.view === 'date') {
@@ -59,7 +60,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
 
   public close() {
     this._dialogRef.close();
-    this.dialogData.parentDirective.close();
+    // this.dialogData.parentDirective.close();
   }
 
   public setDateMode(mode) {
@@ -71,7 +72,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   }
 
   public calendarDrawMonth(date) {
-    this.calendarMonth = this.fsDatePickerCommon.getMomentSafe(date);
+    this.calendarMonth = getSafeDate(date || this.fsDatePickerModel.minDate);
   }
 
   private _initModel() {

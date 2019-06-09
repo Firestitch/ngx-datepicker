@@ -31,18 +31,6 @@ export class FsDatePickerCommon {
     return result;
   }
 
-  public isSameDay(startDate, endDate) {
-    return lightFormat(startDate, 'yyyy-MM-dd') === lightFormat(endDate, 'yyyy-MM-dd');
-  }
-
-  public createMoment() {
-    return startOfDay(new Date());
-  }
-
-  public getMomentSafe(date) {
-    return date && isValid(date) ? date : this.createMoment();
-  }
-
   public formatDateTimeRange(value, view = 'date') {
 
     if (!isObject(value)) {
