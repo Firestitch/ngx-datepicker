@@ -1,5 +1,5 @@
 import {
-  Directive,
+  Component,
   ElementRef,
   forwardRef,
   Injector,
@@ -11,22 +11,23 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { BaseRangePickerFromDirective } from './base-range-picker-from.directive';
-import { FsRangePickerStoreService } from '../services/range-picker-store.service';
-import { FsDatepickerFactory } from '../services/factory.service';
+import { BaseRangePickerComponent } from '../base/range-picker-base.component';
+import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
+import { FsDatepickerFactory } from '../../../services/factory.service';
 
 
-@Directive({
+@Component({
   selector: '[fsDateRangeTo]',
+  template: '<fs-clear [show]="value" (clear)="cleared()"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DateRangePickerToDirective),
+      useExisting: forwardRef(() => DateRangePickerToComponent),
       multi: true
     }
   ]
 })
-export class DateRangePickerToDirective extends BaseRangePickerFromDirective implements OnInit, OnDestroy {
+export class DateRangePickerToComponent extends BaseRangePickerComponent implements OnInit, OnDestroy {
 
   @Input('fsDateRangeTo')
   public name: string;
@@ -64,6 +65,10 @@ export class DateRangePickerToDirective extends BaseRangePickerFromDirective imp
     if (this._pickerRef.endDate !== value) {
       this._pickerRef.updateEndDate(value);
     }
+  }
+
+  public cleared() {
+    this.writeValue(null);
   }
 
   /**
