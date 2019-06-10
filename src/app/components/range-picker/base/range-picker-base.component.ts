@@ -24,9 +24,6 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   public view: string;
 
   @Input()
-  public placeholder: string;
-
-  @Input()
   public minYear = null;
 
   @Input()
@@ -37,9 +34,6 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
 
   @Input()
   public maxDate = null;
-
-  @Output()
-  public updated = new EventEmitter();
 
   @HostBinding('attr.readonly')
   public disabled = false;

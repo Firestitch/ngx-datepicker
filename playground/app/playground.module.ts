@@ -16,11 +16,10 @@ import { AppComponent } from './app.component';
 import { DateExampleComponent } from './components/date-example/date-example.component';
 import { TimeExampleComponent } from './components/time-example/time-example.component';
 import { DateTimeExampleComponent } from './components/datetime-example/datetime-example.component';
-import { DateTimeRangeExampleComponent } from './components/datetimerange-example/datetimerange-example.component';
-import { DateRangeExampleComponent } from './components/daterange-example/daterange-example.component';
+import { DateTimeRangeExampleComponent } from './components/date-time-range-example/date-time-range-example.component';
+import { DateRangeExampleComponent } from './components/date-range-example/date-range-example.component';
 import { TimeRangeExampleComponent } from './components/timerange-example/timerange-example.component';
 import { BirthdayExampleComponent } from './components/birthday-example/birthday-example.component';
-import { NewDateRangeExampleComponent } from './components/date-range-example/date-range-example.component';
 
 
 @NgModule({
@@ -47,7 +46,6 @@ import { NewDateRangeExampleComponent } from './components/date-range-example/da
     DateRangeExampleComponent,
     TimeRangeExampleComponent,
     BirthdayExampleComponent,
-    NewDateRangeExampleComponent,
   ],
   providers: [
   ],
