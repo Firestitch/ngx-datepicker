@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 
 import { FsDatePickerModel } from '../../services/model.service';
-import { FsDatePickerCommon } from '../../services/common.service';
+import { formatSummary } from '../../helpers/format-summary';
 
 
 @Component({
@@ -23,7 +23,6 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
 
   constructor(
     public fsDatePickerModel: FsDatePickerModel,
-    private fsDatePickerCommon: FsDatePickerCommon,
   ) { }
 
   public ngOnInit() {}
@@ -36,15 +35,15 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
       }
 
       this.formattedStartDate = {
-        date: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue),
-        time: this.fsDatePickerCommon.formatSummary(changes.startDate.currentValue, 'time')
+        date: formatSummary(changes.startDate.currentValue),
+        time: formatSummary(changes.startDate.currentValue, 'time')
       };
     }
 
     if (changes && changes.endDate && changes.endDate.currentValue) {
       this.formattedEndDate = {
-        date: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue),
-        time: this.fsDatePickerCommon.formatSummary(changes.endDate.currentValue, 'time')
+        date: formatSummary(changes.endDate.currentValue),
+        time: formatSummary(changes.endDate.currentValue, 'time')
       };
     }
   }

@@ -33,7 +33,6 @@ import { DateRangePickerFromDirective } from './directives/date-range-picker-fro
 import { DateRangePickerToDirective } from './directives/date-range-picker-to.directive';
 
 import { FsDatepickerBirthdayFactory, } from './services/birthday-factory.service';
-import { FsDatePickerCommon } from './services/common.service';
 import { FsDatepickerFactory} from './services/factory.service';
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
 
@@ -90,7 +89,6 @@ export class FsDatePickerModule {
       providers: [
         FsDatepickerFactory,
         FsDatepickerBirthdayFactory,
-        FsDatePickerCommon,
         FsRangePickerStoreService,
       ]
     };

@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 
 import { FsDatePickerModel } from '../../services/model.service';
-import { FsDatePickerCommon } from '../../services/common.service';
 import { getStartDayDate } from '../../helpers/get-start-day-date';
+import { splitDateByComponents } from '../../helpers/split-date-by-components';
 
 
 @Component({
@@ -94,7 +94,6 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   constructor(
     public element: ElementRef,
     public fsDatePickerModel: FsDatePickerModel,
-    private fsDatePickerCommon: FsDatePickerCommon,
     private _iterableDiffers: IterableDiffers
   ) {
     this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
@@ -108,7 +107,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
   public ngOnChanges(changes) {
     if (changes && changes.date) {
-      this.selected = this.fsDatePickerCommon.getSelected(this.date);
+      this.selected = splitDateByComponents(this.date);
     }
   }
 

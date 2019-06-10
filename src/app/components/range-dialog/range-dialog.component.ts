@@ -12,7 +12,6 @@ import {
 import { addMonths, isAfter, isBefore, isSameDay, lightFormat, subMonths } from 'date-fns';
 
 import { FsDatePickerModel } from '../../services/model.service';
-import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 import { DIALOG_DATA } from '../../services/dialog-data';
@@ -39,7 +38,6 @@ export class FsDatePickerRangeDialogComponent extends FsDatePickerBaseDialogComp
   constructor(
     @Inject(DIALOG_DATA) public dialogData,
     public fsDatePickerModel: FsDatePickerModel,
-    private fsDatePickerCommon: FsDatePickerCommon,
     public element: ElementRef,
     private _iterableDiffers: IterableDiffers,
     private _dialogRef: FsDateDialogRef,

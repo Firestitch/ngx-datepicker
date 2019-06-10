@@ -16,9 +16,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
-import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { FsDatepickerFactory } from '../../services/factory.service';
+import { createDateFromValue } from '../../helpers/create-date-from-value';
+import { formatDateTimeRange } from '../../helpers/format-date-time-range';
 
 
 export const DATEPICKER_RANGE_VALUE_ACCESSOR: Provider = {
@@ -57,12 +58,11 @@ export class FsDatePickerRangeComponent extends FsDatePickerBaseComponent implem
   constructor(
     @Inject(ElementRef) protected elementRef: ElementRef,
     @Inject(ViewContainerRef) private viewContainerRef,
-    protected fsDatePickerCommon: FsDatePickerCommon,
     protected fsDatepickerFactory: FsDatepickerFactory,
     protected injector: Injector,
     protected renderer: Renderer2
   ) {
-    super(renderer, elementRef, fsDatePickerCommon);
+    super(renderer, elementRef);
   }
 
   public ngOnInit() {
@@ -86,11 +86,11 @@ export class FsDatePickerRangeComponent extends FsDatePickerBaseComponent implem
 
     if (changes.ngModelStart || changes.ngModelEnd) {
 
-      this.ngModelStart = this.fsDatePickerCommon.createDate(this.ngModelStart);
-      this.ngModelEnd = this.fsDatePickerCommon.createDate(this.ngModelEnd);
+      this.ngModelStart = createDateFromValue(this.ngModelStart);
+      this.ngModelEnd = createDateFromValue(this.ngModelEnd);
       this.ngModel = this.getModelValue();
 
-      this.elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTimeRange(this.ngModel, this.view);
+      this.elementRef.nativeElement.value = formatDateTimeRange(this.ngModel, this.view);
     }
   }
 

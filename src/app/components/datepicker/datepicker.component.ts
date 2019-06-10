@@ -14,11 +14,13 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { take, takeUntil } from 'rxjs/operators';
 
 import { FsPreset } from '../../interfaces/fspreset.interface';
 import { FsDatepickerFactory } from '../../services/factory.service';
-import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
+import { createDateFromValue } from '../../helpers/create-date-from-value';
+import { formatDateTime } from '../../helpers/format-date-time';
 
 
 export const DATEPICKER_VALUE_ACCESSOR: Provider = {
@@ -44,12 +46,13 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
 
   private _hideClearButton: boolean = null;
   @Input() public set hideClearButton(value: boolean) {
+    const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
 
     this._hideClearButton = value;
 
-    this._hideClearButton ?
-      this.fsDatePickerCommon.addClass(this.elementRef.nativeElement.parentNode.parentNode, 'hide-clear') :
-      this.fsDatePickerCommon.removeClass(this.elementRef.nativeElement.parentNode.parentNode, 'hide-clear');
+    this._hideClearButton
+      ? parentNode.classList.add('hide-clear')
+      : parentNode.classList.remove('hide-clear');
   }
   public get hideClearButton(): boolean {
     return this._hideClearButton;
@@ -67,10 +70,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
     @Inject(ViewContainerRef) private viewContainerRef,
-    protected fsDatePickerCommon: FsDatePickerCommon,
     protected fsDatepickerFactory: FsDatepickerFactory,
   ) {
-    super(renderer, elementRef, fsDatePickerCommon);
+    super(renderer, elementRef);
   }
 
   public ngAfterViewInit() {
@@ -78,6 +80,8 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   }
 
   public ngOnDestroy() {
+    this._destroy$.next();
+    this._destroy$.complete();
 
     // What does this do?
     // As I know otherwise, when you leave page with datepicker - dialog still in the DOM
@@ -88,7 +92,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   }
 
   public writeValue(value: any): void {
-    this.ngModel = this.fsDatePickerCommon.createDate(value);
+    this.ngModel = createDateFromValue(value);
     this.updateInput(value);
   }
 
@@ -107,19 +111,17 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   }
 
   private updateInput(value) {
-    this.elementRef.nativeElement.value = this.fsDatePickerCommon.formatDateTime(value, this.view);
+    this.elementRef.nativeElement.value = formatDateTime(value, this.view);
   }
 
   protected open() {
     super.open();
 
-    if (this.dialog) {
-      // this.enableDefaultComponent();
-      this.dialog.instance.initCalendar();
+    if (this._dateDialogRef) {
       return;
     }
 
-    this.fsDatepickerFactory.openDatePicker(
+    this._dateDialogRef = this.fsDatepickerFactory.openDatePicker(
       this.elementRef,
       this.injector,
       {
@@ -135,6 +137,24 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
         components: this._getDefaultComponents(),
       }
     );
+
+    this._dateDialogRef.value$
+      .pipe(
+        takeUntil(this._dateDialogRef.close$),
+        takeUntil(this._destroy$),
+      )
+      .subscribe((value) => {
+        this.updateValue(value);
+      });
+
+    this._dateDialogRef.close$
+      .pipe(
+        take(1),
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this._dateDialogRef = null;
+      });
   }
 
   private _getDefaultComponents() {

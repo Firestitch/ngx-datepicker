@@ -14,8 +14,8 @@ import {
 import { date } from '@firestitch/date';
 
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
-import { FsDatePickerCommon } from '../../services/common.service';
 import { FsDatepickerFactory } from '../../services/factory.service';
+import { formatDateTime } from '../../helpers/format-date-time';
 
 
 @Component({
@@ -40,13 +40,12 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
 
   constructor(
     protected renderer: Renderer2,
-    protected _fsDatePickerCommon: FsDatePickerCommon,
     protected _injector: Injector,
     private fsDatepickerFactory: FsDatepickerFactory,
     private _viewContainerRef: ViewContainerRef,
     private _elementRef: ElementRef,
   ) {
-    super(renderer, _elementRef, _fsDatePickerCommon);
+    super(renderer, _elementRef);
   }
 
   public setValue(value: Date) {
@@ -56,7 +55,7 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
   public ngOnChanges(changes) {
     if (changes.ngModel) {
       setTimeout(() => {
-        this._elementRef.nativeElement.value = this._fsDatePickerCommon.formatDateTime(this.ngModel);
+        this._elementRef.nativeElement.value = formatDateTime(this.ngModel);
       });
     }
   }
