@@ -1,16 +1,24 @@
-import { ElementRef, EventEmitter, HostListener, Injector, Input, Output } from '@angular/core';
+import {
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Injector,
+  Input,
+  Output
+} from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { RangePickerRef } from '../classes/range-picker-ref';
-import { FsDatepickerFactory } from '../services/factory.service';
-import { formatDateTime } from '../helpers/format-date-time';
-import { FsDateDialogRef } from '../classes/date-dialog-ref';
+import { RangePickerRef } from '../../../classes/range-picker-ref';
+import { FsDatepickerFactory } from '../../../services/factory.service';
+import { formatDateTime } from '../../../helpers/format-date-time';
+import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 
 
-export class BaseRangePickerFromDirective implements ControlValueAccessor {
+export class BaseRangePickerComponent implements ControlValueAccessor {
 
   @Input()
   public view: string;
@@ -32,6 +40,9 @@ export class BaseRangePickerFromDirective implements ControlValueAccessor {
 
   @Output()
   public updated = new EventEmitter();
+
+  @HostBinding('attr.readonly')
+  public disabled = false;
 
   public onChange: any = () => {};
   public onTouch: any = () => {};
@@ -71,10 +82,13 @@ export class BaseRangePickerFromDirective implements ControlValueAccessor {
   }
 
   @HostListener('click')
+  @HostListener('focus')
   public open() {
     if (this._dateDialogRef) {
       return
     }
+
+    this._disableInput();
 
     this._dateDialogRef = this._datepickerFactory.openDatePicker(
       this._elRef,
@@ -107,6 +121,7 @@ export class BaseRangePickerFromDirective implements ControlValueAccessor {
       )
       .subscribe(() => {
         this._dateDialogRef = null;
+        this._enableInput();
       });
   }
 
@@ -129,5 +144,13 @@ export class BaseRangePickerFromDirective implements ControlValueAccessor {
     } else {
       return { calendarStart: true, calendarEnd: true };
     }
+  }
+
+  protected _enableInput() {
+    this.disabled = false;
+  }
+
+  protected _disableInput() {
+    this.disabled = true;
   }
 }

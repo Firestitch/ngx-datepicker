@@ -26,11 +26,11 @@ import { FsDatepickerSummaryComponent } from './components/summary/summary.compo
 import { FsDatePickerTimeComponent } from './components/time/time.component';
 import { FsDatePickerRangeComponent } from './components/range/range.component';
 import { DateRangeSeparatorComponent } from './components/date-range-separator/date-range-separator.component';
+import { DateRangePickerToComponent } from './components/range-picker/to/range-picker-to.component';
+import { DateRangePickerFromComponent } from './components/range-picker/from/range-picker-from.component';
 
 import { FsIsscrollDirective } from './directives/is-scroll.directive';
 import { ClickDirective } from './directives/click.directive';
-import { DateRangePickerFromDirective } from './directives/date-range-picker-from.directive';
-import { DateRangePickerToDirective } from './directives/date-range-picker-to.directive';
 
 import { FsDatepickerBirthdayFactory, } from './services/birthday-factory.service';
 import { FsDatepickerFactory} from './services/factory.service';
@@ -54,8 +54,8 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     FsDatePickerRangeComponent,
     FsDatePickerBirthdayComponent,
     DateRangeSeparatorComponent,
-    DateRangePickerFromDirective,
-    DateRangePickerToDirective,
+    DateRangePickerFromComponent,
+    DateRangePickerToComponent,
   ],
   entryComponents: [
     FsDatePickerDialogComponent,
@@ -75,11 +75,11 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     FsDatePickerTimeComponent,
     FsDatePickerBirthdayComponent,
     DateRangeSeparatorComponent,
+    DateRangePickerFromComponent,
+    DateRangePickerToComponent,
 
     FsIsscrollDirective,
     ClickDirective,
-    DateRangePickerFromDirective,
-    DateRangePickerToDirective,
   ],
 })
 export class FsDatePickerModule {
