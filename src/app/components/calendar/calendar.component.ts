@@ -36,8 +36,8 @@ import {
 
 import { FsHammerConfig } from '../../configs/hammer.config';
 import { FsDatePickerModel } from '../../services/model.service';
-import { FsDatePickerCommon } from '../../services/common.service';
 import { getStartDayDate } from '../../helpers/get-start-day-date';
+import { splitDateByComponents } from '../../helpers/split-date-by-components';
 
 
 @Component({
@@ -113,7 +113,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
   constructor(
     public element: ElementRef,
     public fsDatePickerModel: FsDatePickerModel,
-    private fsDatePickerCommon: FsDatePickerCommon,
   ) {}
 
   public ngOnInit() {
@@ -141,7 +140,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
 
       if (changes.date) {
         // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
-        this.selected = this.fsDatePickerCommon.getSelected(this.date);
+        this.selected = splitDateByComponents(this.date);
         this.updateDaysHighlighted();
       } else if (changes.highlightStartDate || changes.highlightEndDate) {
         this.updateDaysHighlighted();

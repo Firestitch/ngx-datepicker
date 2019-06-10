@@ -7,6 +7,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { RangePickerRef } from '../classes/range-picker-ref';
 import { FsDatepickerFactory } from '../services/factory.service';
 import { formatDateTime } from '../helpers/format-date-time';
+import { FsDateDialogRef } from '../classes/date-dialog-ref';
 
 
 export class BaseRangePickerFromDirective implements ControlValueAccessor {
@@ -35,6 +36,7 @@ export class BaseRangePickerFromDirective implements ControlValueAccessor {
   public onChange: any = () => {};
   public onTouch: any = () => {};
 
+  protected _dateDialogRef: FsDateDialogRef;
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
 
@@ -68,9 +70,13 @@ export class BaseRangePickerFromDirective implements ControlValueAccessor {
     }
   }
 
-  @HostListener('focus')
+  @HostListener('click')
   public open() {
-    const dateDialogRef = this._datepickerFactory.openDatePicker(
+    if (this._dateDialogRef) {
+      return
+    }
+
+    this._dateDialogRef = this._datepickerFactory.openDatePicker(
       this._elRef,
       this._injector,
       {
@@ -85,13 +91,22 @@ export class BaseRangePickerFromDirective implements ControlValueAccessor {
       }
     );
 
-    dateDialogRef.value$
+    this._dateDialogRef.value$
       .pipe(
-        take(1),
+        takeUntil(this._dateDialogRef.close$),
         takeUntil(this._destroy$),
       )
       .subscribe((value) => {
         this.updateValueFromDialog(value);
+      });
+
+    this._dateDialogRef.close$
+      .pipe(
+        take(1),
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this._dateDialogRef = null;
       });
   }
 

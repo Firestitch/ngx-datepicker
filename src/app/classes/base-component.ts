@@ -1,7 +1,8 @@
 import { Renderer2, HostListener, ElementRef } from '@angular/core';
+import { Subject } from 'rxjs';
 
-import { FsDatePickerCommon } from '../services/common.service';
 import { FsDatePickerBirthdayDialogComponent } from '../components/birthday-dialog/birthday-dialog.component';
+import { FsDateDialogRef } from './date-dialog-ref';
 
 
 export abstract class FsDatePickerBaseComponent {
@@ -11,13 +12,14 @@ export abstract class FsDatePickerBaseComponent {
   protected dialog = null;
   protected elementRef;
   protected renderer;
-  protected fsDatePickerCommon;
+
+  protected _dateDialogRef: FsDateDialogRef;
+
+  protected _destroy$ = new Subject();
 
   @HostListener('click', ['$event'])
   public inputClick(event) {
-    this.fsDatePickerCommon.inputClick(event, () => {
-      this.open();
-    });
+    this.open();
   }
 
   @HostListener('focus', ['$event'])
@@ -34,21 +36,19 @@ export abstract class FsDatePickerBaseComponent {
     }
 
     if (this.dialog.instance instanceof FsDatePickerBirthdayDialogComponent) {
-      this.fsDatePickerCommon.positionDialogUnderInput(this.dialog, this.elementRef);
+      // this.fsDatePickerCommon.positionDialogUnderInput(this.dialog, this.elementRef);
       return;
     }
 
-    this.fsDatePickerCommon.positionDialog(this.dialog, this.elementRef);
+    // this.fsDatePickerCommon.positionDialog(this.dialog, this.elementRef);
   }
 
   constructor(
     renderer: Renderer2,
     elementRef: ElementRef,
-    fsDatePickerCommon: FsDatePickerCommon
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
-    this.fsDatePickerCommon = fsDatePickerCommon;
   }
 
   protected open() {
