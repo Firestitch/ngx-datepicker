@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: 'date-range-example.component.html',
   styleUrls: [ 'date-range-example.component.css' ]
 })
-export class NewDateRangeExampleComponent {
+export class DateRangeExampleComponent {
 
   startDate = new Date('2019-10-10');
   endDate = new Date('2019-10-12');
