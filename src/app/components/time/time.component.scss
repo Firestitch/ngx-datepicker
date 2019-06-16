@@ -2,8 +2,35 @@
   margin: 0 auto;
 }
 
+.time-header {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #efefef;
+  border-top: 1px solid #fff;
+  font-size: 12px;
+  padding: 8px 0;
+  margin-left: 25px;
+  color: #7d7d7d;
+
+  &.expanded {
+    .minute {
+      margin-left: 85px;
+    }
+  }
+
+  .hours {
+    width: 50px;
+  }
+
+  .minute {
+    width: 50px;
+    margin-left: 185px;
+  }
+}
+
+
 .time-container {
-  padding: 12px 15px;
+  padding: 0 15px;
 
   .wraper {
     display: flex;
@@ -54,18 +81,10 @@
     }
   }
 
-  .lbl {
-    margin-bottom: 2px;
-    font-size: 12px;
-  }
-
   .hour, .minute {
-    // width: 31px;
-    // height: 31px;
     width: 50px;
     height: 50px;
     text-align: center;
-    border: 1px	solid #efefef;
     padding: 0;
     cursor: pointer;
     .number {
@@ -77,14 +96,14 @@
   }
 }
 
-@media only screen and (min-width: 500px) {
-  .time {
-    display: flex !important;
-  }
-}
-
-@media only screen and (max-width: 499px) {
-  .time {
-    margin: 0 auto;
-  }
-}
+//@media only screen and (min-width: 500px) {
+//  .time {
+//    display: flex !important;
+//  }
+//}
+//
+//@media only screen and (max-width: 499px) {
+//  .time {
+//    margin: 0 auto;
+//  }
+//}

@@ -10,7 +10,6 @@ import {
   Output
 } from '@angular/core';
 
-import { FsDatePickerModel } from '../../services/model.service';
 import { getStartDayDate } from '../../helpers/get-start-day-date';
 import { splitDateByComponents } from '../../helpers/split-date-by-components';
 
@@ -26,10 +25,12 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   @Input() public disabledMinutes = [];
   @Input() public disabledHours = [];
   @Input() public disabledTimes = [];
+  @Input()
+  public expanded = false;
+
   @Output() public onChange = new EventEmitter<any>();
 
   public selected: any = {};
-  public expanded = false;
 
   public disabledTimeMinutes: any = {};
   public disabledTimeHours: any = {};
@@ -93,7 +94,6 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
   constructor(
     public element: ElementRef,
-    public fsDatePickerModel: FsDatePickerModel,
     private _iterableDiffers: IterableDiffers
   ) {
     this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);

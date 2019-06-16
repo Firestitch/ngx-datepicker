@@ -9,6 +9,7 @@ import {
   MatSelectModule,
   MatTabsModule
 } from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { FsClearModule } from '@firestitch/clear';
 
@@ -37,7 +38,6 @@ import { FsDatepickerFactory} from './services/factory.service';
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -47,6 +47,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     MatIconModule,
     MatMenuModule,
     MatSelectModule,
+    LayoutModule,
     FsClearModule
   ],
   exports: [
