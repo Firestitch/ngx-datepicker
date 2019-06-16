@@ -1,8 +1,20 @@
+<div class="month-year">
+  {{ date | date:'h:mm'}} {{ date | date:'a' | lowercase }}
+</div>
+
+<div class="time-header" [ngClass]="{ expanded: expanded }">
+  <div class="hours">
+    Hours
+  </div>
+
+  <div class="minute">
+    Minute
+  </div>
+</div>
 <div class="time-container">
   <div class="wraper">
     <ng-container *ngIf="!expanded">
       <div class="hours-group">
-        <div class="lbl">Hour</div>
         <div class="hours">
           <table>
             <tbody *ngFor="let group of timeHoursCollapsed; let i = index">
@@ -19,7 +31,6 @@
         </div>
       </div>
       <div class="minutes">
-        <div class="lbl">Minute</div>
         <table>
           <tr *ngFor="let minutes of timeMinutesCollapsed">
             <td *ngFor="let minute of minutes" class="minute"
@@ -29,12 +40,10 @@
             </td>
           </tr>
         </table>
-        <a (click)="expanded = true" class="button-expand">More</a>
       </div>
     </ng-container>
     <ng-container *ngIf="expanded">
       <div class="hours">
-        <div class="lbl">Hour</div>
           <table>
             <tr *ngFor="let hours of timeHoursExpanded">
               <td *ngFor="let hour of hours" class="hour" (click)="hourClick(hour)" [ngClass]="{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }">
@@ -47,8 +56,6 @@
         </table>
       </div>
       <div class="minutes">
-
-        <div class="lbl">Minute</div>
         <table>
           <tr *ngFor="let minutes of timeMinutesExpanded">
             <td *ngFor="let minute of minutes" class="minute"
@@ -58,9 +65,7 @@
             </td>
           </tr>
         </table>
-        <a (click)="expanded = false" class="button-expand">Less</a>
       </div>
     </ng-container>
-
   </div>
 </div>

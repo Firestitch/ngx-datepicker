@@ -10,14 +10,49 @@
  }">
   <div class="wrap">
 
-    <div *ngIf="fsDatePickerModel.view === 'datetime'" class="header">
+    <!--<div *ngIf="fsDatePickerModel.view === 'datetime'" class="header">
       <fs-date-picker-summary
         [startDate]="model"
         [range]="false"
         (componentsChange)="setComponents($event)"></fs-date-picker-summary>
-    </div>
+    </div>-->
 
-    <div class="date-time">
+    <mat-tab-group mat-stretch-tabs
+                   *ngIf="fsDatePickerModel.view === 'datetime' && mobileView"
+                   (selectedIndexChange)="selectedDateTimeTabChange($event)"
+    >
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ model | date: 'MMM d, yyyy'}}
+        </ng-template>
+
+        <fs-date-picker-calendar
+          *ngIf="fsDatePickerModel.components.calendarStart"
+          [date]="model"
+          [drawMonth]="calendarMonth"
+          [dateMode]="fsDatePickerModel.dateMode"
+          [disabledDays]="disabledDays"
+          (onChange)="setDate($event)"
+          (onDateModeChange)="setDateMode($event)"
+          (onDrawMonth)="calendarDrawMonth($event)"
+        ></fs-date-picker-calendar>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{ model | date: 'h:mm'}} {{ model | date: 'aaa' | lowercase}}
+        </ng-template>
+
+        <fs-date-picker-time
+          *ngIf="fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime'"
+          [date]="model"
+          [expanded]="timePickerExpanded"
+          (onChange)="setDate($event)"
+        ></fs-date-picker-time>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="date-time" *ngIf="fsDatePickerModel.view !== 'datetime' || !mobileView">
       <fs-date-picker-calendar
         *ngIf="fsDatePickerModel.components.calendarStart"
         [date]="model"
@@ -30,15 +65,29 @@
       ></fs-date-picker-calendar>
 
       <fs-date-picker-time
-        *ngIf="fsDatePickerModel.components.timeStart"
+        *ngIf="fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime'"
         [date]="model"
+        [expanded]="timePickerExpanded"
         (onChange)="setDate($event)"
       ></fs-date-picker-time>
     </div>
 
     <div class="done">
-      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
-      <!-- <button type="button" mat-raised-button (click)="clear($event)">Clear</button> -->
+      <button type="button" mat-button color="primary" (click)="close($event)">Done</button>
+      <button type="button" mat-button
+              *ngIf="
+                (fsDatePickerModel.view === 'datetime' ||
+                fsDatePickerModel.view === 'time') &&
+                selectedDateTimeTab === 1"
+              (click)="toggleTimeExpand()"
+      >
+        <ng-container *ngIf="!timePickerExpanded; else lessMinutes">
+          Show More Minutes
+        </ng-container>
+        <ng-template #lessMinutes>
+          Show Less Minutes
+        </ng-template>
+      </button>
     </div>
   </div>
 </div>
