@@ -8,10 +8,14 @@ import { Component } from '@angular/core';
 })
 export class DateTimeRangeExampleComponent {
 
-  startDate = new Date('2019-10-10');
-  endDate = new Date('2019-10-12');
+  startDate;
+  endDate;
   range = null;
 
   constructor() {
+    this.startDate = new Date('2019-10-10');
+
+    this.endDate = new Date('2019-10-10');
+    this.endDate.setHours(this.startDate.getHours() + 1);
   }
 }

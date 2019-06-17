@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: [ 'datetime-example.component.css' ]
 })
 export class DateTimeExampleComponent {
-  public model = null;
+  public model = new Date('2015-10-10 15:45');
 }

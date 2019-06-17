@@ -38,7 +38,7 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
     _datepickerFactory: FsDatepickerFactory,
     private _rangePickerStore: FsRangePickerStoreService
   ) {
-    super(_elRef, _injector, _datepickerFactory);
+    super(_elRef, _injector, _datepickerFactory, 'to');
   }
 
   public ngOnInit() {
@@ -54,7 +54,7 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
   }
 
   public registerPicker() {
-    this._pickerRef = this._rangePickerStore.registerPickerTo(this.name, this.value);
+    this._pickerRef = this._rangePickerStore.registerPickerTo(this.name, this.value, this.view);
 
     this.minDate = this._pickerRef.startDate;
   }

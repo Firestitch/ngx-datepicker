@@ -120,6 +120,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     this.createYearsList();
     this.updateMonthsListDisabledStatus();
 
+    if (this.date) {
+      this.selected = splitDateByComponents(this.date);
+    }
     // if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
     //   setTimeout(() => {
     //     const $date = this.element.nativeElement.querySelector('.calendar-container');
