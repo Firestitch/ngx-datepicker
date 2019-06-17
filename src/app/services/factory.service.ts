@@ -40,6 +40,8 @@ export class FsDatepickerFactory {
     const overlayConfig = new OverlayConfig({
       positionStrategy: this._createPopupPositionStrategy(el),
       scrollStrategy: this._overlay.scrollStrategies.reposition(),
+      hasBackdrop: true,
+      backdropClass: [],
     });
 
     return this._overlay.create(overlayConfig);
@@ -89,6 +91,10 @@ export class FsDatepickerFactory {
 
   private _createBasePopupPositionStrategy(el: ElementRef): FlexibleConnectedPositionStrategy {
     return this._overlay.position()
-      .flexibleConnectedTo(el);
+      .flexibleConnectedTo(el)
+      .withGrowAfterOpen(true)
+      .withFlexibleDimensions(false)
+      .withViewportMargin(8)
+      .withLockedPosition()
   }
 }
