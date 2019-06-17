@@ -52,6 +52,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
     protected _elRef: ElementRef,
     protected _injector: Injector,
     protected _datepickerFactory: FsDatepickerFactory,
+    protected _type,
   ) {
   }
 
@@ -96,6 +97,8 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
         dateMode: 'date',
         components: this._getDefaultComponents(),
         modelValue: this.value,
+        pickerRef: this._pickerRef,
+        type: this._type
       }
     );
 

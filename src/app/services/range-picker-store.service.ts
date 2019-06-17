@@ -9,8 +9,8 @@ export class FsRangePickerStoreService {
   constructor() {
   }
 
-  public registerPickerFrom(name, value) {
-    this._createIfNotExistsPicker(name);
+  public registerPickerFrom(name, value, view) {
+    this._createIfNotExistsPicker(name, view);
 
     const pickerRef = this._store.get(name);
 
@@ -39,8 +39,8 @@ export class FsRangePickerStoreService {
     }
   }
 
-  public registerPickerTo(name, value) {
-    this._createIfNotExistsPicker(name);
+  public registerPickerTo(name, value, view) {
+    this._createIfNotExistsPicker(name, view);
 
     const pickerRef = this._store.get(name);
 
@@ -49,9 +49,9 @@ export class FsRangePickerStoreService {
     return pickerRef;
   }
 
-  private _createIfNotExistsPicker(name: string) {
+  private _createIfNotExistsPicker(name: string, view: string) {
     if (!this._store.has(name)) {
-      this._store.set(name, new RangePickerRef());
+      this._store.set(name, new RangePickerRef(view));
     }
   }
 

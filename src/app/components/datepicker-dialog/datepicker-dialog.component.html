@@ -48,6 +48,7 @@
         <fs-date-picker-time
           *ngIf="fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime'"
           [date]="model"
+          [disabledTimes]="disabledTimes"
           [expanded]="timePickerExpanded"
           (onChange)="setDate($event)"
         ></fs-date-picker-time>
@@ -69,6 +70,7 @@
       <fs-date-picker-time
         *ngIf="fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime'"
         [date]="model"
+        [disabledTimes]="disabledTimes"
         [expanded]="timePickerExpanded"
         (onChange)="setDate($event)"
       ></fs-date-picker-time>

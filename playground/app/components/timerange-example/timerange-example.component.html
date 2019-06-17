@@ -2,13 +2,24 @@
   <mat-form-field>
     <input
       matInput
-      fsDatePickerRange
-      fsFormDateRange
-      [(ngModel)]="model"
-      [(ngModelStart)]="startDate"
-      [(ngModelEnd)]="endDate"
+      fsDateRangeFrom="timerangepicker"
+      [(ngModel)]="startDate"
       view="time"
-      name="timerangepicker"
-      placeholder="Time Range">
+      name="date_from"
+      placeholder="Time Range From"
+      fsFormRequired>
+  </mat-form-field>
+
+  <fs-date-range-separator></fs-date-range-separator>
+
+  <mat-form-field>
+    <input
+      matInput
+      fsDateRangeTo="timerangepicker"
+      [(ngModel)]="endDate"
+      view="time"
+      name="date_to"
+      placeholder="Time Range To"
+      fsFormRequired>
   </mat-form-field>
 </form>

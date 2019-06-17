@@ -1,6 +1,6 @@
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { isAfter } from 'date-fns';
+import { isAfter, isDate } from 'date-fns';
 
 
 export class RangePickerRef {
@@ -15,7 +15,7 @@ export class RangePickerRef {
 
   private _destroy$ = new Subject();
 
-  constructor() {}
+  constructor(public view: string) {}
 
   public get valueChange$() {
     return this._valueChange$.pipe(takeUntil(this._destroy$));
@@ -46,7 +46,7 @@ export class RangePickerRef {
 
     this._startDatePickerExists = true;
 
-    if (this._startDate && this._endDate && isAfter(this._startDate, this._endDate)) {
+    if (!this.isDateAfter(this._endDate, this._startDate)) {
       this.updateEndDate(null);
     }
 
@@ -58,6 +58,10 @@ export class RangePickerRef {
    * @param value
    */
   public updateEndDate(value: Date) {
+    if (!this.isDateAfter(value, this._startDate)) {
+      value = null;
+    }
+
     this._endDate = value;
 
     this._valueChange$.next(value);
@@ -84,5 +88,39 @@ export class RangePickerRef {
   public destroy() {
     this._destroy$.next();
     this._destroy$.complete();
+  }
+
+  private getTimeCompareDate(fromDate) {
+    if (!isDate(fromDate)) {
+      return null;
+    }
+
+    const date = new Date();
+
+    date.setHours(fromDate.getHours());
+    date.setMinutes(fromDate.getMinutes());
+    date.setSeconds(fromDate.getSeconds());
+    date.setMilliseconds(fromDate.getMilliseconds());
+
+    return date;
+  }
+
+  private isDateAfter(target, from) {
+    let startDate, endDate;
+
+    if (this.view === 'time') {
+      if (from) {
+        startDate = this.getTimeCompareDate(from);
+      }
+
+      if (target) {
+        endDate = this.getTimeCompareDate(target);
+      }
+    } else {
+      startDate = from;
+      endDate = target;
+    }
+
+    return !startDate || !endDate || isAfter(endDate, startDate);
   }
 }

@@ -36,7 +36,7 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
     _datepickerFactory: FsDatepickerFactory,
     private _rangePickerStore: FsRangePickerStoreService
   ) {
-    super(_elRef, _injector, _datepickerFactory);
+    super(_elRef, _injector, _datepickerFactory, 'from');
   }
 
   public ngOnInit() {
@@ -51,7 +51,7 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
   }
 
   public registerPicker() {
-    this._pickerRef = this._rangePickerStore.registerPickerFrom(this.name, this.value);
+    this._pickerRef = this._rangePickerStore.registerPickerFrom(this.name, this.value, this.view);
   }
 
   public writeValue(value) {

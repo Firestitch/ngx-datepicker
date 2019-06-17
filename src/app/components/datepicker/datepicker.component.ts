@@ -126,7 +126,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
       this.injector,
       {
         elementRef: this.elementRef,
-        parentDirective: this,
+        modelValue: this.ngModel,
         view: this.view,
         minYear: this.minYear,
         maxYear: this.maxYear,

@@ -13,7 +13,7 @@ import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 import { getSafeDate } from '../../helpers/get-safe-date';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { isAfter, isBefore } from 'date-fns';
+import { addYears, isAfter, isBefore, isSameDay, subDays, subYears } from 'date-fns';
 
 
 @Component({
@@ -27,7 +27,8 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
 
   public model = null;
   public calendarMonth = null;
-  public disabledDays = null;
+  public disabledDays = [];
+  public disabledTimes = [];
   public timePickerExpanded = false;
   public mobileView = this.breakpointObserver.isMatched('(max-width: 737px)');
 
@@ -51,7 +52,16 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
 
   public ngOnInit() {
     this.initCalendar();
-    this.disabledDays = this.fsDatePickerModel.disabledDays();
+
+    if (this.dialogData.type) {
+      if (this.dialogData.type === 'to') {
+        this.disabledDays = this.getDisabledDays();
+        this.disabledTimes = this.getDisabledTimes();
+      }
+    } else {
+      this.disabledDays = this.getDisabledDays();
+      this.disabledTimes = this.getDisabledTimes();
+    }
 
     this._initBaseDate();
 
@@ -63,7 +73,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
         this.mobileView = state.matches;
       });
 
-    (window as any).t = () => {
+    /*(window as any).t = () => {
       this._dialogRef.overlayRef.updatePositionStrategy(this._dialogRef.positionStrategy.withPositions(
         [
           {
@@ -75,7 +85,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
           }
         ]
       ));
-    }
+    }*/
   }
 
   public ngOnDestroy() {
@@ -117,15 +127,15 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.fsDatePickerModel.dateMode = mode;
   }
 
-  public setComponents(data) {
-    this.fsDatePickerModel.components = data;
-  }
-
   public calendarDrawMonth(date) {
     this.calendarMonth = getSafeDate(date || this.fsDatePickerModel.minDate);
   }
 
   private _initBaseDate() {
+    if (!this.dialogData.pickerRef || this.dialogData.pickerRef.view !== 'time') {
+      return;
+    }
+
     const pickerModel = this.fsDatePickerModel;
 
     const date = new Date();
@@ -156,5 +166,42 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     if (this.dialogData.components) {
       this.fsDatePickerModel.components = this.dialogData.components;
     }
+  }
+
+  private getDisabledTimes() {
+    const ref = this.dialogData.pickerRef;
+
+    if (!ref) { return }
+
+    const arr = [];
+    if (
+      (ref.view === 'time' && ref.startDate) ||
+      (ref.view === 'datetime' && ref.startDate && ref.endDate && isSameDay(ref.startDate, ref.endDate))
+    ) {
+      const from = (ref.startDate.getMinutes() + 1) + ((ref.startDate.getHours()) * 60);
+      arr.push([0, from]);
+    }
+
+    return arr;
+  }
+
+  private getDisabledDays() {
+    const result = [];
+
+    if (this.fsDatePickerModel.minDate) {
+      const from = subYears(new Date(), this.fsDatePickerModel.minYear);
+      let to = new Date(this.fsDatePickerModel.minDate);
+
+      if (this.dialogData.pickerRef && this.dialogData.pickerRef.view === 'datetime') {
+        to = subDays(this.fsDatePickerModel.minDate, 1);
+      }
+      result.push([from, to]);
+    }
+
+    if (this.fsDatePickerModel.maxDate) {
+      result.push([new Date(this.fsDatePickerModel.maxDate), addYears(new Date(), this.fsDatePickerModel.maxYear)]);
+    }
+
+    return result;
   }
 }
