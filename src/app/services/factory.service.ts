@@ -5,13 +5,12 @@ import {
   OverlayRef,
   OverlayConfig,
   PositionStrategy,
-  RepositionScrollStrategy, FlexibleConnectedPositionStrategy
+  FlexibleConnectedPositionStrategy,
 } from '@angular/cdk/overlay';
 
 import { FsDatePickerDialogComponent } from '../components/datepicker-dialog/datepicker-dialog.component';
 import { FsDateDialogRef } from '../classes/date-dialog-ref';
 import { DIALOG_DATA } from './dialog-data';
-import { FsDatePickerRangeDialogComponent } from '../components/range-dialog/range-dialog.component';
 import { FsDatePickerBirthdayDialogComponent } from '../components/birthday-dialog/birthday-dialog.component';
 
 
@@ -28,13 +27,6 @@ export class FsDatepickerFactory {
     this._openPortalPreview(injector, FsDatePickerDialogComponent, overlayRef, dateDialogRef, data);
 
     return dateDialogRef;
-  }
-
-  public openDateRangePicker(el: ElementRef, injector: Injector, data: any) {
-    const overlayRef = this._createOverlay(el);
-    const previewRef = new FsDateDialogRef(overlayRef);
-
-    return this._openPortalPreview(injector, FsDatePickerRangeDialogComponent, overlayRef, previewRef, data);
   }
 
   public openBirthDayPicker(el: ElementRef, injector: Injector, data: any) {
