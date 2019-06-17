@@ -22,10 +22,8 @@ import { FsDatePickerDialogComponent } from './components/datepicker-dialog/date
 import { FsDatePickerBirthdayDialogComponent } from './components/birthday-dialog/birthday-dialog.component';
 import { FsDatePickerCalendarComponent } from './components/calendar/calendar.component';
 import { FsDatepickerPresetsComponent } from './components/presets/presets.component';
-import { FsDatePickerRangeDialogComponent } from './components/range-dialog/range-dialog.component';
 import { FsDatepickerSummaryComponent } from './components/summary/summary.component';
 import { FsDatePickerTimeComponent } from './components/time/time.component';
-import { FsDatePickerRangeComponent } from './components/range/range.component';
 import { DateRangeSeparatorComponent } from './components/date-range-separator/date-range-separator.component';
 import { DateRangePickerToComponent } from './components/range-picker/to/range-picker-to.component';
 import { DateRangePickerFromComponent } from './components/range-picker/from/range-picker-from.component';
@@ -52,7 +50,6 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
   ],
   exports: [
     FsDatePickerComponent,
-    FsDatePickerRangeComponent,
     FsDatePickerBirthdayComponent,
     DateRangeSeparatorComponent,
     DateRangePickerFromComponent,
@@ -60,17 +57,14 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
   ],
   entryComponents: [
     FsDatePickerDialogComponent,
-    FsDatePickerRangeDialogComponent,
     FsDatePickerBirthdayDialogComponent,
     DateRangeSeparatorComponent
   ],
   declarations: [
     FsDatePickerComponent,
-    FsDatePickerRangeComponent,
     FsDatepickerSummaryComponent,
     FsDatepickerPresetsComponent,
     FsDatePickerDialogComponent,
-    FsDatePickerRangeDialogComponent,
     FsDatePickerBirthdayDialogComponent,
     FsDatePickerCalendarComponent,
     FsDatePickerTimeComponent,
