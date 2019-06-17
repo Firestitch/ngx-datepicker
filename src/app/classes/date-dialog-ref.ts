@@ -4,10 +4,16 @@ import { Subject } from 'rxjs';
 
 export class FsDateDialogRef {
 
+  public positionStrategy;
+
   private _close$ = new Subject();
   private _value$ = new Subject();
 
-  constructor(private overlayRef: OverlayRef) { }
+  constructor(private _overlayRef: OverlayRef) { }
+
+  public get overlayRef() {
+    return this._overlayRef;
+  }
 
   public get value$() {
     return this._value$.asObservable();
@@ -26,6 +32,6 @@ export class FsDateDialogRef {
     this._close$.complete();
     this._value$.complete();
 
-    this.overlayRef.dispose();
+    this._overlayRef.dispose();
   }
 }

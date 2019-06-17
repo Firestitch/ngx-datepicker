@@ -6,7 +6,9 @@
   'has-view-time': fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime',
   'date-mode-date': fsDatePickerModel.dateMode === 'date',
   'date-mode-month': fsDatePickerModel.dateMode === 'month',
-  'date-mode-year': fsDatePickerModel.dateMode === 'year'
+  'date-mode-year': fsDatePickerModel.dateMode === 'year',
+  'picker-tab-date': selectedDateTimeTab === 0,
+  'picker-tab-time': selectedDateTimeTab === 1
  }">
   <div class="wrap">
 
@@ -17,7 +19,7 @@
         (componentsChange)="setComponents($event)"></fs-date-picker-summary>
     </div>-->
 
-    <mat-tab-group mat-stretch-tabs
+    <mat-tab-group mat-stretch-tabs dynamicHeight
                    *ngIf="fsDatePickerModel.view === 'datetime' && mobileView"
                    (selectedIndexChange)="selectedDateTimeTabChange($event)"
     >
@@ -74,11 +76,10 @@
 
     <div class="done">
       <button type="button" mat-button color="primary" (click)="close($event)">Done</button>
-      <button type="button" mat-button
-              *ngIf="
-                (fsDatePickerModel.view === 'datetime' ||
-                fsDatePickerModel.view === 'time') &&
-                selectedDateTimeTab === 1"
+      <button type="button"
+              mat-button
+              class="show-more-btn"
+              *ngIf="fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time'"
               (click)="toggleTimeExpand()"
       >
         <ng-container *ngIf="!timePickerExpanded; else lessMinutes">

@@ -62,6 +62,20 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
       .subscribe((state) => {
         this.mobileView = state.matches;
       });
+
+    (window as any).t = () => {
+      this._dialogRef.overlayRef.updatePositionStrategy(this._dialogRef.positionStrategy.withPositions(
+        [
+          {
+            originX: 'start',
+            originY: 'bottom',
+            overlayX: 'start',
+            overlayY: 'top',
+            offsetY: 150,
+          }
+        ]
+      ));
+    }
   }
 
   public ngOnDestroy() {

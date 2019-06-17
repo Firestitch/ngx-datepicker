@@ -15,10 +15,19 @@
 .fs-date-picker-dialog {
 	position: fixed;
   z-index: 1000;
-  display: none;
   visibility: hidden;
   display: block;
   // margin-top: 20px;
+
+  &.picker-tab-date {
+    @media only screen and (max-width: 737px) {
+      .done {
+        .show-more-btn {
+          display: none;
+        }
+      }
+    }
+  }
 
   a {
     text-decoration: none;
@@ -105,6 +114,11 @@
 	  display: flex;
     flex-direction: row;
     align-items: center;
+    font-size: 18px;
+
+    //&.time {
+    //  padding: 0;
+    //}
 
     .actions {
       text-align: right;
