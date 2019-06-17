@@ -73,19 +73,14 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
         this.mobileView = state.matches;
       });
 
-    /*(window as any).t = () => {
-      this._dialogRef.overlayRef.updatePositionStrategy(this._dialogRef.positionStrategy.withPositions(
-        [
-          {
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'top',
-            offsetY: 150,
-          }
-        ]
-      ));
-    }*/
+    this._dialogRef.overlayRef
+      .backdropClick()
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this.close();
+      });
   }
 
   public ngOnDestroy() {
@@ -94,7 +89,6 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   }
 
   public initCalendar() {
-    // this.model = this.parentDirective.getModelValue();
     this.model = this.dialogData.modelValue;
     this.calendarDrawMonth(this.model);
   }
@@ -102,7 +96,6 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   public setDate(date) {
     this.model = date;
     this._dialogRef.updateValue(this.model);
-    // this.parentDirective.updateValue(date);
     this.calendarDrawMonth(this.model);
 
     if (this.fsDatePickerModel.view === 'date') {
@@ -112,7 +105,6 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
 
   public close() {
     this._dialogRef.close();
-    // this.dialogData.parentDirective.close();
   }
 
   public toggleTimeExpand() {
