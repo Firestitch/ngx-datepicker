@@ -1,1 +1,13 @@
 @import '../../datepicker.scss';
+
+
+.dialog-view-datetime {
+
+  fs-date-picker-time {
+    @media only screen and (max-width: 737px) {
+      margin-left: 0;
+    }
+
+    margin-left: 20px;
+  }
+}

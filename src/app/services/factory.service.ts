@@ -5,7 +5,7 @@ import {
   OverlayRef,
   OverlayConfig,
   PositionStrategy,
-  RepositionScrollStrategy
+  RepositionScrollStrategy, FlexibleConnectedPositionStrategy
 } from '@angular/cdk/overlay';
 
 import { FsDatePickerDialogComponent } from '../components/datepicker-dialog/datepicker-dialog.component';
@@ -23,6 +23,7 @@ export class FsDatepickerFactory {
   public openDatePicker(el: ElementRef, injector: Injector, data: any) {
     const overlayRef = this._createOverlay(el);
     const dateDialogRef = new FsDateDialogRef(overlayRef);
+    dateDialogRef.positionStrategy = this._createBasePopupPositionStrategy(el);
 
     this._openPortalPreview(injector, FsDatePickerDialogComponent, overlayRef, dateDialogRef, data);
 
@@ -77,12 +78,7 @@ export class FsDatepickerFactory {
   }
 
   private _createPopupPositionStrategy(el: ElementRef): PositionStrategy {
-    return this._overlay.position()
-      .flexibleConnectedTo(el)
-      .withTransformOriginOn('.mat-datepicker-content')
-      .withFlexibleDimensions(false)
-      .withViewportMargin(8)
-      .withLockedPosition()
+    return this._createBasePopupPositionStrategy(el)
       .withPositions([
         {
           originX: 'start',
@@ -94,20 +90,13 @@ export class FsDatepickerFactory {
           originX: 'start',
           originY: 'top',
           overlayX: 'start',
-          overlayY: 'bottom'
-        },
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top'
-        },
-        {
-          originX: 'end',
-          originY: 'top',
-          overlayX: 'end',
-          overlayY: 'bottom'
+          overlayY: 'bottom',
         }
       ]);
+  }
+
+  private _createBasePopupPositionStrategy(el: ElementRef): FlexibleConnectedPositionStrategy {
+    return this._overlay.position()
+      .flexibleConnectedTo(el);
   }
 }
