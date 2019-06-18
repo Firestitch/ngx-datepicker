@@ -13,11 +13,13 @@
 }
 
 .fs-date-picker-dialog {
-	//position: fixed;
   z-index: 1000;
   visibility: hidden;
   display: block;
-  // margin-top: 20px;
+
+  @media only screen and (max-width: 737px) {
+    position: fixed;
+  }
 
   &.picker-tab-date {
     @media only screen and (max-width: 737px) {

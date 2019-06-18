@@ -50,6 +50,12 @@
     }
   }
 
+  td {
+    &.minutes-col {
+      padding-left: 25px !important;
+    }
+  }
+
   .wraper {
     display: flex;
     flex-direction: row;
