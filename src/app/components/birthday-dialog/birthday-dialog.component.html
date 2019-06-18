@@ -1,4 +1,4 @@
-<div class="fs-date-picker-backdrop" [hidden]="!parentDirective.opened" (click)="close($event)"></div>
+<div class="fs-date-picker-backdrop" [hidden]="!parentDirective.opened" (click)="close()"></div>
 
 <div class="fs-date-picker-dialog fs-date-picker-range" tabindex="0"
      [ngClass]="{ opened: parentDirective.opened }">
@@ -36,7 +36,7 @@
     </div>
 
     <div class="done">
-      <button type="button" mat-raised-button color="primary" (click)="close($event)">Done</button>
+      <button type="button" mat-raised-button color="primary" (click)="close()">Done</button>
     </div>
   </div>
 </div>

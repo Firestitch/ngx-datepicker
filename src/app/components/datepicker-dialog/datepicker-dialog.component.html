@@ -44,7 +44,6 @@
         </ng-template>
 
         <fs-date-picker-time
-          *ngIf="fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime'"
           [date]="model"
           [disabledTimes]="disabledTimes"
           [expanded]="timePickerExpanded"
@@ -66,7 +65,7 @@
       ></fs-date-picker-calendar>
 
       <fs-date-picker-time
-        *ngIf="fsDatePickerModel.view === 'time' || fsDatePickerModel.view === 'datetime'"
+        *ngIf="fsDatePickerModel.view === 'time'"
         [date]="model"
         [disabledTimes]="disabledTimes"
         [expanded]="timePickerExpanded"
@@ -75,7 +74,7 @@
     </div>
 
     <div class="done">
-      <button type="button" mat-button color="primary" (click)="close($event)">Done</button>
+      <button type="button" mat-button color="primary" (click)="close()">Done</button>
       <button type="button"
               mat-button
               class="show-more-btn"
