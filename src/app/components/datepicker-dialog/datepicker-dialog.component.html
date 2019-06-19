@@ -51,6 +51,7 @@
         </ng-template>
 
         <fs-date-picker-time
+          *ngIf="fsDatePickerModel.dateMode !== 'year' && fsDatePickerModel.dateMode !== 'month'"
           [date]="model"
           [disabledTimes]="disabledTimes"
           [expanded]="timePickerExpanded"
@@ -74,13 +75,17 @@
           (yearChanged)="updateYear($event)"
         ></fs-date-picker-calendar>
 
-        <fs-date-picker-time
-          *ngIf="fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time'"
-          [date]="model"
-          [disabledTimes]="disabledTimes"
-          [expanded]="timePickerExpanded"
-          (onChange)="setDate($event)"
-        ></fs-date-picker-time>
+        <ng-container
+          *ngIf="fsDatePickerModel.dateMode !== 'year' && fsDatePickerModel.dateMode !== 'month'"
+        >
+          <fs-date-picker-time
+            *ngIf="fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time'"
+            [date]="model"
+            [disabledTimes]="disabledTimes"
+            [expanded]="timePickerExpanded"
+            (onChange)="setDate($event)"
+          ></fs-date-picker-time>
+        </ng-container>
       </div>
     </ng-template>
 
