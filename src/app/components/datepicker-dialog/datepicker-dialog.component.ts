@@ -2,7 +2,7 @@ import {
   Component,
   ViewEncapsulation,
   OnInit,
-  Inject, OnDestroy,
+  Inject, OnDestroy, HostListener,
 } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
@@ -93,12 +93,12 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.calendarDrawMonth(this.model);
   }
 
-  public setDate(date) {
+  public setDate(date, preventClose = false) {
     this.model = date;
     this._dialogRef.updateValue(this.model);
     this.calendarDrawMonth(this.model);
 
-    if (this.fsDatePickerModel.view === 'date') {
+    if (this.fsDatePickerModel.view === 'date' && !preventClose) {
       this.close();
     }
   }
@@ -121,6 +121,27 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
 
   public calendarDrawMonth(date) {
     this.calendarMonth = getSafeDate(date || this.fsDatePickerModel.minDate);
+  }
+
+  public updateMonth(month) {
+    if (this.model) {
+      this.model.setMonth(month - 1);
+      this.setDate(new Date(this.model), true);
+    }
+  }
+
+  public updateYear(year) {
+    if (this.model) {
+      this.model.setYear(year);
+      this.setDate(new Date(this.model), true);
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  private handleEscapeClose(event: KeyboardEvent) {
+    if (event.code === 'Escape') {
+      this.close();
+    }
   }
 
   private _initBaseDate() {

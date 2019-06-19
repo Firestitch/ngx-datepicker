@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material';
 
 import { find } from '@firestitch/common';
@@ -11,6 +11,8 @@ import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-compo
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 import { DIALOG_DATA } from '../../services/dialog-data';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -19,13 +21,14 @@ import { DIALOG_DATA } from '../../services/dialog-data';
   styleUrls: ['./birthday-dialog.component.scss'],
   providers: [FsDatePickerModel]
 })
-export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogComponent implements OnInit {
+export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogComponent implements OnInit, OnDestroy {
 
   public years: number[] = [];
   public months: { name: string, number: number }[] = [];
   public days: number[] = [];
 
   public selectedDate = { day: null, month: null, year: null };
+  private _destroy$ = new Subject();
 
   constructor(
     @Inject(DIALOG_DATA) public dialogData,
@@ -43,6 +46,20 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
     this.generateDaysArray();
 
     this.setSelectedDate();
+
+    this._dialogRef.overlayRef
+      .backdropClick()
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this.close();
+      });
+  }
+
+  public ngOnDestroy() {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
   public changedDate(event: MatSelectChange) {
@@ -71,6 +88,13 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
 
   public close() {
     this._dialogRef.close();
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  private handleEscapeClose(event: KeyboardEvent) {
+    if (event.code === 'Escape') {
+      this.close();
+    }
   }
 
   private setSelectedDate() {

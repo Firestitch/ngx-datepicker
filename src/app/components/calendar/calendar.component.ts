@@ -70,6 +70,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
 
   @Output()
   public onChange = new EventEmitter<any>();
+
+  @Output()
+  public yearChanged = new EventEmitter<any>();
+
+  @Output()
+  public monthChanged = new EventEmitter<any>();
+
   @Output()
   public onDateModeChange = new EventEmitter<any>();
   @Output()
@@ -268,6 +275,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     }
     this.setMonth(month);
     this.calendarView();
+    this.monthChanged.emit(month);
   }
 
   public monthChange(month) {
@@ -337,6 +345,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     setTimeout(() => {
       this.setYear(year);
       this.calendarView();
+      this.yearChanged.emit(year);
     });
   }
 

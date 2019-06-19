@@ -11,6 +11,7 @@ import {
   ViewContainerRef,
   Component,
   Injector,
+  HostListener,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -43,8 +44,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public maxDate = null;
   @Input() public view = 'date';
   @Input() public presets: FsPreset[] = [];
-
-  private _hideClearButton: boolean = null;
   @Input() public set hideClearButton(value: boolean) {
     const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
 
@@ -58,12 +57,15 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     return this._hideClearButton;
   }
 
-  @Output('change') change$ = new EventEmitter<any>();
+  @Output('change')
+  public change$ = new EventEmitter<any>();
 
-  _onChange = (value: any) => { };
+  public _onChange = (value: any) => { };
 
-  registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
-  registerOnTouched(fn: () => any): void {  }
+  public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
+  public registerOnTouched(fn: () => any): void {  }
+
+  private _hideClearButton: boolean = null;
 
   constructor(
     protected renderer: Renderer2,
@@ -154,6 +156,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
       )
       .subscribe(() => {
         this._dateDialogRef = null;
+        this.renderer.removeClass(document.body, 'fs-date-picker-open');
       });
   }
 

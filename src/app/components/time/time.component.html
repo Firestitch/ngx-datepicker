@@ -1,5 +1,8 @@
 <div class="month-year time">
-  {{ date | date:'h:mm'}} {{ date | date:'a' | lowercase }}
+  <ng-container *ngIf="date; else noTime">
+    {{ date | date:'h:mm'}} {{ date | date:'a' | lowercase }}
+  </ng-container>
+  <ng-template #noTime>Time Not Selected</ng-template>
 </div>
 
 <!--<div class="time-header" [ngClass]="{ expanded: expanded }">

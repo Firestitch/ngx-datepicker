@@ -8,7 +8,7 @@ import {
   Renderer2,
   ViewContainerRef,
   Component,
-  Injector,
+  Injector, HostListener,
 } from '@angular/core';
 
 import { date } from '@firestitch/date';
@@ -16,6 +16,7 @@ import { date } from '@firestitch/date';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { FsDatepickerFactory } from '../../services/factory.service';
 import { formatDateTime } from '../../helpers/format-date-time';
+import { take, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -74,15 +75,27 @@ export class FsDatePickerBirthdayComponent extends FsDatePickerBaseComponent imp
   protected open() {
     super.open();
 
-    if (!this.dialog) {
-      this.fsDatepickerFactory.openBirthDayPicker(
-        this.elementRef,
-        this._injector,
-        {
-          parentDirective: this,
-        }
-      );
+    if (this._dateDialogRef) {
+      return;
     }
+
+    this._dateDialogRef = this.fsDatepickerFactory.openBirthDayPicker(
+      this.elementRef,
+      this._injector,
+      {
+        parentDirective: this,
+      }
+    );
+
+    this._dateDialogRef.close$
+      .pipe(
+        take(1),
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this._dateDialogRef = null;
+        this.renderer.removeClass(document.body, 'fs-date-picker-open');
+      });
 
     // Calculate position each time on dialog open. Template can be dynamic
     setTimeout(() => {

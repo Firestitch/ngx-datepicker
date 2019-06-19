@@ -57,8 +57,9 @@ export abstract class FsDatePickerBaseComponent {
   }
 
   protected close() {
-    this.renderer.removeClass(document.body, 'fs-date-picker-open');
-    this.opened = false;
+    if (this._dateDialogRef) {
+      this._dateDialogRef.close();
+    }
   }
 
   protected setReadonly() {

@@ -1,11 +1,9 @@
 import {
   ElementRef,
-  EventEmitter,
   HostBinding,
   HostListener,
   Injector,
   Input,
-  Output
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
@@ -77,7 +75,6 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   }
 
   @HostListener('click')
-  @HostListener('focus')
   public open() {
     if (this._dateDialogRef) {
       return

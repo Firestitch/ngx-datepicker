@@ -31,9 +31,11 @@ export class FsDatepickerFactory {
 
   public openBirthDayPicker(el: ElementRef, injector: Injector, data: any) {
     const overlayRef = this._createOverlay(el);
-    const previewRef = new FsDateDialogRef(overlayRef);
+    const dateDialogRef = new FsDateDialogRef(overlayRef);
 
-    return this._openPortalPreview(injector, FsDatePickerBirthdayDialogComponent, overlayRef, previewRef, data);
+    this._openPortalPreview(injector, FsDatePickerBirthdayDialogComponent, overlayRef, dateDialogRef, data);
+
+    return dateDialogRef;
   }
 
   private _createOverlay(el: ElementRef) {
