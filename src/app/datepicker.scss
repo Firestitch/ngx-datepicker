@@ -12,6 +12,17 @@
   &[hidden] { display: none !important; }
 }
 
+.tile {
+  padding: 0;
+  position: relative;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  outline: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 .fs-date-picker-dialog {
   z-index: 1000;
   visibility: hidden;
@@ -117,8 +128,8 @@
   }
 
   .month-year {
-    height: 50px;
-	  padding: 0 10px;
+    height: 56px;
+	  padding: 0 13px;
 	  display: flex;
     flex-direction: row;
     align-items: center;
@@ -149,16 +160,6 @@
   }
 
   .day {
-    position: relative;
-    text-align: center;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    outline: none;
-
-    &:not(.blank) {
-      cursor: pointer;
-    }
 
     .today {
       color: #555555;
@@ -185,24 +186,6 @@
       width: 100%;
       height: 100%;
       display: block;
-    }
-  }
-
-  table {
-    border-collapse: collapse;
-    thead {
-      th {
-        width: 50px;
-        padding: 8px 0;
-        text-align: center;
-        border: 1px solid transparent;
-        background: #fff;
-        border-bottom: 1px solid #efefef;
-        border-top: 1px solid #fff;
-        font-weight: normal;
-        font-size: 12px;
-        color: #7d7d7d;
-      }
     }
   }
 
@@ -336,7 +319,23 @@
       margin: 6px 8px;
     }
   }
+
+  table {
+    border-collapse: collapse;
+    thead {
+      th {
+        width: 55px;
+        padding-bottom: 6px;
+        background: #fff;
+        border-bottom: 1px solid #efefef;
+        font-weight: normal;
+        font-size: 12px;
+        color: #7d7d7d;
+      }
+    }
+  }
 }
+
 
 @media only screen and (min-width: 737px) {
 

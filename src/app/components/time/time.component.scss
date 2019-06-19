@@ -1,60 +1,26 @@
 :host {
-  display: block;
-  flex: 1;
 
   @media only screen and (max-width: 737px) {
     margin-left: 0;
   }
 }
 
-.time-header {
-  display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid #efefef;
-  border-top: 1px solid #fff;
-  font-size: 12px;
-  padding: 8px 0;
-  margin-left: 25px;
-  color: #7d7d7d;
 
-  &.expanded {
-    .minute {
-      margin-left: 85px;
-    }
-  }
-
-  .hours {
-    width: 50px;
-  }
-
-  .minute {
-    width: 50px;
-    margin-left: 185px;
-  }
+thead th {
+  text-align: left;
+  padding-left: 7px;
 }
 
+tbody {
+  .minutes-col,
+  .hours-col {
+    padding: 0;
+  }
+}
 
 .time-container {
   width: 100%;
   padding: 0 15px;
-
-  thead {
-    color: #7d7d7d;
-    font-size: 12px;
-    border-bottom: 1px solid #efefef;
-
-    td {
-      padding-top: 8px;
-      padding-bottom: 8px;
-      padding-left: 10px;
-    }
-  }
-
-  td {
-    &.minutes-col {
-      padding-left: 25px !important;
-    }
-  }
 
   .wraper {
     display: flex;
@@ -67,30 +33,7 @@
     flex-direction: column;
   }
 
-
-
-  .hour, .minute {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    padding: 0;
-    cursor: pointer;
-    .number {
-      border: 1px solid transparent;
-      border-radius: 50%;
-      line-height: 50px;
-    }
+  .am-pm {
+    font-size: 13px;
   }
 }
-
-//@media only screen and (min-width: 500px) {
-//  .time {
-//    display: flex !important;
-//  }
-//}
-//
-//@media only screen and (max-width: 499px) {
-//  .time {
-//    margin: 0 auto;
-//  }
-//}

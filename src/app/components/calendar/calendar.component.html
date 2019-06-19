@@ -46,7 +46,7 @@
       </thead>
       <tbody class="calendar calendar-{{ month.monthAndYear }}" >
       <tr class="week" *ngFor="let week of month.weeks">
-        <td *ngFor="let day of week" class="day" [ngClass]="{
+        <td *ngFor="let day of week" class="tile day" [ngClass]="{
             today: today.date==day.date,
             mute: day.mute,
             selected: (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute,
@@ -55,14 +55,12 @@
             disabled: day.disabled }"
             (fsClick)="dayClick(day, $event)"
             (mouseenter)="onMouseEnterDay(day)">
-            <span>
-              {{ day.number }}
-              <span class="today" *ngIf="today.date==day.date">TODAY</span>
-            </span>
+            {{ day.number }}
+            <span class="today" *ngIf="today.date==day.date">TODAY</span>
         </td>
       </tr>
       <tr *ngIf="month.weeks.length < 6" class="week">
-        <td class="day blank" colspan="7"></td>
+        <td class="tile day blank" colspan="7"></td>
       </tr>
       </tbody>
     </table>

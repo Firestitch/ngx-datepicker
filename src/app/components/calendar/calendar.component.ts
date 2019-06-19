@@ -403,7 +403,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     const totalDays = daysInMonth + date.getDay() + (6 - addMonths(date, 1).getDay() + 1);
 
     for (let d = 0; d < totalDays; d++) {
-      const dayNumber = lightFormat(md, 'dd');
+      const dayNumber = lightFormat(md, 'd');
       days.push({ number: dayNumber });
 
       if (d % 7 == 0) {
