@@ -91,7 +91,7 @@ export class FsDatePickerBirthdayDialogComponent extends FsDatePickerBaseDialogC
   }
 
   @HostListener('document:keydown', ['$event'])
-  private handleEscapeClose(event: KeyboardEvent) {
+  public handleEscapeClose(event: KeyboardEvent) {
     if (event.code === 'Escape') {
       this.close();
     }
