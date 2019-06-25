@@ -29,7 +29,7 @@ import { DateRangePickerToComponent } from './components/range-picker/to/range-p
 import { DateRangePickerFromComponent } from './components/range-picker/from/range-picker-from.component';
 
 import { FsIsscrollDirective } from './directives/is-scroll.directive';
-import { ClickDirective } from './directives/click.directive';
+// import { ClickDirective } from './directives/click.directive';
 
 import { FsDatepickerBirthdayFactory, } from './services/birthday-factory.service';
 import { FsDatepickerFactory} from './services/factory.service';
@@ -74,7 +74,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     DateRangePickerToComponent,
 
     FsIsscrollDirective,
-    ClickDirective,
+    // ClickDirective,
   ],
 })
 export class FsDatePickerModule {
