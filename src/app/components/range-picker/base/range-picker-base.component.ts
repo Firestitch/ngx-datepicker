@@ -14,6 +14,9 @@ import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { FsDatepickerFactory } from '../../../services/factory.service';
 import { formatDateTime } from '../../../helpers/format-date-time';
 import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
+import { createDateFromValue } from '../../../helpers/create-date-from-value';
+import { isAfter, isDate } from "date-fns";
+import { isSameDate } from '../../../helpers/is-same-date';
 
 
 export class BaseRangePickerComponent implements ControlValueAccessor {
@@ -41,6 +44,8 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
 
   protected _dateDialogRef: FsDateDialogRef;
   protected _pickerRef: RangePickerRef;
+  protected _valuesAreDates = false;
+  protected _valuesDatesEquals = false;
   protected _destroy$ = new Subject();
 
 
@@ -68,8 +73,12 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   }
 
   public writeValue(value) {
-    if (value !== this.value) {
-      this._value = value;
+    value = createDateFromValue(value);
+
+    const [valuesAreDates, datesAreEquals] = this._checkValuesEquality(value, this._value);
+
+    if ((valuesAreDates && !datesAreEquals) || (!valuesAreDates && this.value !== value)) {
+      this.value = value;
       this._elRef.nativeElement.value = formatDateTime(value, this.view);
     }
   }
@@ -146,5 +155,13 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
 
   protected _disableInput() {
     this.disabled = true;
+  }
+
+  protected _checkValuesEquality(newValue, prevValue) {
+    const valuesAreDates = isDate(newValue) && isDate(prevValue);
+    const valuesDatesEquals = valuesAreDates
+      && isSameDate(newValue, prevValue);
+
+    return [valuesAreDates, valuesDatesEquals];
   }
 }
