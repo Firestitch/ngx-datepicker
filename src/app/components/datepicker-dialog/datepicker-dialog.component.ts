@@ -13,7 +13,7 @@ import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 import { getSafeDate } from '../../helpers/get-safe-date';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { addYears, isAfter, isBefore, isSameDay, subDays, subYears } from 'date-fns';
+import { addYears, isAfter, isBefore, isSameDay, subDays, subYears, startOfDay } from 'date-fns';
 
 
 @Component({
@@ -94,6 +94,11 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   }
 
   public setDate(date, preventClose = false) {
+
+    if (this.dialogData.view === 'date') {
+      date = startOfDay(date);
+    }
+
     this.model = date;
     this._dialogRef.updateValue(this.model);
     this.calendarDrawMonth(this.model);

@@ -8,7 +8,6 @@ import { FsDateDialogRef } from './date-dialog-ref';
 export abstract class FsDatePickerBaseComponent {
 
   public opened = false;
-  protected model = null;
   protected dialog = null;
   protected elementRef;
   protected renderer;
