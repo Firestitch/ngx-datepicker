@@ -6,25 +6,10 @@ import { take, takeUntil } from 'rxjs/operators';
 
 export abstract class FsDatePickerBaseComponent implements OnDestroy {
 
-  public opened = false;
-  protected dialog = null;
-  protected elementRef;
-  protected renderer;
-
-  protected _dateDialogRef: FsDateDialogRef;
-
-  protected _destroy$ = new Subject();
-
   abstract updateInput(value: Date);
-
 
   @Output('change')
   public change$ = new EventEmitter<any>();
-
-  public _onChange = (value: any) => { };
-
-  public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
-  public registerOnTouched(fn: () => any): void {  }
 
   @HostListener('click', ['$event'])
   public inputClick(event) {
@@ -38,12 +23,27 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
     });
   }
 
+  public opened = false;
+  public _onChange = (value: any) => { };
+  public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
+  public registerOnTouched(fn: () => any): void {  }
+
+  protected dialog = null;
+  protected elementRef;
+  protected renderer;
+  protected _dateDialogRef: FsDateDialogRef;
+  protected _destroy$ = new Subject();
+
   constructor(
     renderer: Renderer2,
     elementRef: ElementRef,
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
+  }
+
+  public cleared() {
+    this.updateValue(null);
   }
 
   public updateValue(value) {
