@@ -8,9 +8,6 @@ import {
   Output,
 } from '@angular/core';
 
-import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-
-import 'hammerjs';
 
 import {
   addDays,
@@ -32,7 +29,6 @@ import {
   subMonths
 } from 'date-fns';
 
-import { FsHammerConfig } from '../../configs/hammer.config';
 import { FsDatePickerModel } from '../../services/model.service';
 import { getStartDayDate } from '../../helpers/get-start-day-date';
 import { splitDateByComponents } from '../../helpers/split-date-by-components';
@@ -42,13 +38,7 @@ import { MONTHS } from '../../consts/months';
 @Component({
     selector: 'fs-date-picker-calendar',
     templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss'],
-    providers: [
-      {
-        provide: HAMMER_GESTURE_CONFIG,
-        useClass: FsHammerConfig
-      }
-    ]
+    styleUrls: ['./calendar.component.scss']
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 

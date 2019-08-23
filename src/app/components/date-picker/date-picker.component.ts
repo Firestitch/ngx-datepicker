@@ -17,6 +17,7 @@ import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
+import { DateFormat } from 'src/app/enums/date-format.enum';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public maxYear = null;
   @Input() public minDate = null;
   @Input() public maxDate = null;
-  @Input() public view = 'date';
+  @Input() public view = DateFormat.Date;
   @Input() public set hideClearButton(value: boolean) {
     const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
 
@@ -71,10 +72,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   public writeValue(value: any): void {
     this.ngModel = createDateFromValue(value);
     this.updateInput(value);
-  }
-
-  public cleared() {
-    this.updateValue(null);
   }
 
   public updateInput(value) {

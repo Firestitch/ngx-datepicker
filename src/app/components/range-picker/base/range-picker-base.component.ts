@@ -17,12 +17,13 @@ import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
 import { isAfter, isDate } from "date-fns";
 import { isSameDate } from '../../../helpers/is-same-date';
+import { DateFormat } from 'src/app/enums/date-format.enum';
 
 
 export class BaseRangePickerComponent implements ControlValueAccessor {
 
   @Input()
-  public view: string;
+  public view: DateFormat;
 
   @Input()
   public minYear = null;

@@ -1,5 +1,43 @@
 <form>
-  <mat-form-field>
-    <input matInput fsDateScrollPicker [(ngModel)]="model" view="datetime" name="scroll-picker" placeholder="Scroll Picker">
-  </mat-form-field>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field>
+      <input
+        matInput
+        fsDateScrollPicker
+        [(ngModel)]="standard"
+        name="standard"
+        placeholder="Standard Scroll Picker">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        fsDateScrollPicker
+        [showYear]="false"
+        [(ngModel)]="monthDay"
+        name="month-day"
+        placeholder="Month & Day Scroll Picker">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        fsDateScrollPicker
+        [showDay]="false"
+        [(ngModel)]="monthYear"
+        name="month-year"
+        placeholder="Month & Year Scroll Picker">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        fsDateScrollPicker
+        [showDay]="false"
+        [showMonth]="false"
+        [(ngModel)]="year"
+        name="year"
+        placeholder="Year Scroll Picker">
+    </mat-form-field>
+  </div>
 </form>

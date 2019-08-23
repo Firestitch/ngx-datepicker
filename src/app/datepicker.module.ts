@@ -14,8 +14,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FsClearModule } from '@firestitch/clear';
 import { FsScrollPickerModule } from '@firestitch/scroll-picker';
 
-import 'hammerjs'
-
 import { FsDatePickerComponent } from './components/date-picker/date-picker.component';
 
 import { FsDatePickerDialogComponent } from './components/date-picker-dialog/date-picker-dialog.component';

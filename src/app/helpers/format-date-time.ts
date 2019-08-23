@@ -1,10 +1,9 @@
 import { isNumeric } from '@firestitch/common';
 import { format, isValid } from 'date-fns';
+import { DateFormat } from '../enums/date-format.enum';
 
 
-export function formatDateTime(value, view = 'date') {
-  let result = '';
-  const convertTo = [];
+export function formatDateTime(value, dateFormat = DateFormat.Date) {
 
   if (isNumeric(value)) {
     value = new Date(value);
@@ -17,16 +16,29 @@ export function formatDateTime(value, view = 'date') {
 
   if (value && isValid(value)) {
 
-    if (['date', 'datetime'].indexOf(view) != -1) {
-      convertTo.push('MMM d, yyyy');
+    let fmt = '';
+
+    if ([DateFormat.Date, DateFormat.DateTime].indexOf(dateFormat) != -1) {
+      fmt = 'MMM d, yyyy';
+
+    } else if ([DateFormat.Time, DateFormat.DateTime].indexOf(dateFormat) != -1) {
+      fmt = 'h:mm aaaa';
+
+    } else if (dateFormat === DateFormat.MonthDay) {
+      fmt = 'MMMM d';
+
+    } else if (dateFormat === DateFormat.MonthYear) {
+      fmt = 'MMMM yyyy';
+
+    } else if (dateFormat === DateFormat.Year) {
+      fmt = 'yyyy';
+
+    } else if (dateFormat === DateFormat.Month) {
+      fmt = 'MMMM';
     }
 
-    if (['time', 'datetime'].indexOf(view) != -1) {
-      convertTo.push('h:mm aaaa');
-    }
-
-    result = format(value, convertTo.join(' '));
+    return format(value, fmt);
   }
 
-  return result;
+  return '';
 }

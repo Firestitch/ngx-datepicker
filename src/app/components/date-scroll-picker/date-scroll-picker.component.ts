@@ -14,6 +14,7 @@ import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
+import { DateFormat } from 'src/app/enums/date-format.enum';
 
 
 @Component({
@@ -30,6 +31,9 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
   @Input() public minYear = (new Date()).getFullYear() - 50;
   @Input() public maxYear = (new Date()).getFullYear() + 50;
+  @Input() public showMonth = true;
+  @Input() public showYear = true;
+  @Input() public showDay = true;
   @Input() public ngModel = null;
 
   constructor(
@@ -52,7 +56,23 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   }
 
   public updateInput(value) {
-    this.elementRef.nativeElement.value = formatDateTime(value, 'date');
+
+    let format = DateFormat.Date;
+
+    if (this.showYear && this.showMonth && !this.showDay) {
+      format = DateFormat.MonthYear;
+
+    } else if (!this.showYear && this.showMonth && this.showDay) {
+      format = DateFormat.MonthDay;
+
+    } else if (!this.showYear && this.showMonth && !this.showDay) {
+      format = DateFormat.Month;
+
+    } else if (this.showYear && !this.showMonth && !this.showDay) {
+      format = DateFormat.Year;
+    }
+
+    this.elementRef.nativeElement.value = formatDateTime(value, format);
   }
 
   protected open() {
@@ -69,6 +89,9 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
         modelValue: this.ngModel,
         minYear: this.minYear,
         maxYear: this.maxYear,
+        showMonth: this.showMonth,
+        showDay: this.showDay,
+        showYear: this.showYear,
         dateMode: 'date',
         parentComponent: this
       }
