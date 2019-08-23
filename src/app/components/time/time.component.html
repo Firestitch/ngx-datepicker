@@ -46,13 +46,7 @@
     </tr>
     </tbody>
   </table>
-  <!--<div class="hours-group">
-    <div class="hours">
-    </div>
-  </div>-->
-  <!--<div class="minutes">
 
-  </div>-->
 </ng-container>
 <ng-container *ngIf="expanded">
   <table class="time-container">
@@ -71,11 +65,11 @@
       <td class="hours-col">
         <table>
           <tr *ngFor="let hours of timeHoursExpanded">
-            <td *ngFor="let hour of hours" class="hour" (click)="hourClick(hour)" [ngClass]="{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }">
-              <div class="number">
+            <td *ngFor="let hour of hours" class="tile number hour" (click)="hourClick(hour)" [ngClass]="{ disabled: disabledTimeHours[hour], selected: hour == selected.hour }">
+
                 <span *ngIf="hour < 12">{{ hour ? hour : 12 }}<span class="am-pm">am</span></span>
                 <span *ngIf="hour >= 12">{{ hour==12 ? 12 : hour-12 }}<span class="am-pm">pm</span></span>
-              </div>
+
             </td>
           </tr>
         </table>
@@ -84,10 +78,11 @@
       <td class="minutes-col">
         <table>
           <tr *ngFor="let minutes of timeMinutesExpanded">
-            <td *ngFor="let minute of minutes" class="minute"
+            <td *ngFor="let minute of minutes"
+                class="tile number minute"
                 [ngClass]="{ disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]), selected: minute == selected.minute }"
                 (click)="minuteClick(minute)">
-              <div class="number">{{ minute }}</div>
+                {{ minute }}
             </td>
           </tr>
         </table>

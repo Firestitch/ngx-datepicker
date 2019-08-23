@@ -1,4 +1,4 @@
-import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, HostBinding } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FsDateDialogRef } from './date-dialog-ref';
 import { take, takeUntil } from 'rxjs/operators';
@@ -7,6 +7,8 @@ import { take, takeUntil } from 'rxjs/operators';
 export abstract class FsDatePickerBaseComponent implements OnDestroy {
 
   abstract updateInput(value: Date);
+
+  @HostBinding('autocomplete') autocomplete = 'off';
 
   @Output('change')
   public change$ = new EventEmitter<any>();

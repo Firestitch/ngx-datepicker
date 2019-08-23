@@ -15,12 +15,14 @@ import { FsDatepickerFactory } from '../../../services/factory.service';
 import { formatDateTime } from '../../../helpers/format-date-time';
 import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
-import { isAfter, isDate } from "date-fns";
+import { isDate } from 'date-fns';
 import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from 'src/app/enums/date-format.enum';
 
 
 export class BaseRangePickerComponent implements ControlValueAccessor {
+
+  @HostBinding('autocomplete') autocomplete = 'off';
 
   @Input()
   public view: DateFormat;

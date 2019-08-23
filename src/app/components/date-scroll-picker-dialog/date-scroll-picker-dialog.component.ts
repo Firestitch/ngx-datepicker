@@ -26,7 +26,6 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   public showDay;
   public showYear;
 
-
   constructor(
     @Inject(DIALOG_DATA) private _dialogData,
     public element: ElementRef,
@@ -45,9 +44,17 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     this._generateDaysArray();
 
     if (modelValue) {
-      this.day = modelValue.getDate();
-      this.year = modelValue.getFullYear();
-      this.month = this._getMonth(modelValue.getMonth());
+      this._setDate(modelValue);
+    } else {
+      this._setDate(new Date());
+    }
+  }
+
+  private _setDate(date: Date) {
+    if (date) {
+      this.day = date.getDate();
+      this.year = date.getFullYear();
+      this.month = this._getMonth(date.getMonth());
     }
   }
 
@@ -80,6 +87,11 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     const date = new Date(this.year, this.month.value, this.day);
 
     this.parentComponent.updateValue(date);
+  }
+
+  public close() {
+    this.change();
+    super.close();
   }
 
   public changeMonth() {

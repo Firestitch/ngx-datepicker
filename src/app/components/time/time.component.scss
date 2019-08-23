@@ -20,7 +20,6 @@ tbody {
 
 .time-container {
   width: 100%;
-  padding: 0 15px;
 
   .wraper {
     display: flex;
@@ -35,5 +34,19 @@ tbody {
 
   .am-pm {
     font-size: 13px;
+    padding-left: 2px;
+  }
+}
+
+
+@media only screen and (min-width: 737px) {
+  .time-container {
+
+    .hours-col tbody,
+    .minutes-col tbody {
+      max-height: 300px;
+      overflow: auto;
+      display: block;
+    }
   }
 }

@@ -16,28 +16,30 @@ export function formatDateTime(value, dateFormat = DateFormat.Date) {
 
   if (value && isValid(value)) {
 
-    let fmt = '';
+    const formats = [];
 
     if ([DateFormat.Date, DateFormat.DateTime].indexOf(dateFormat) != -1) {
-      fmt = 'MMM d, yyyy';
-
-    } else if ([DateFormat.Time, DateFormat.DateTime].indexOf(dateFormat) != -1) {
-      fmt = 'h:mm aaaa';
-
-    } else if (dateFormat === DateFormat.MonthDay) {
-      fmt = 'MMMM d';
-
-    } else if (dateFormat === DateFormat.MonthYear) {
-      fmt = 'MMMM yyyy';
-
-    } else if (dateFormat === DateFormat.Year) {
-      fmt = 'yyyy';
-
-    } else if (dateFormat === DateFormat.Month) {
-      fmt = 'MMMM';
+      formats.push('MMM d, yyyy');
     }
 
-    return format(value, fmt);
+    if ([DateFormat.Time, DateFormat.DateTime].indexOf(dateFormat) != -1) {
+      formats.push('h:mm aaaa');
+    }
+
+    if (dateFormat === DateFormat.MonthDay) {
+      formats.push('MMMM d');
+
+    } else if (dateFormat === DateFormat.MonthYear) {
+      formats.push('MMMM yyyy');
+
+    } else if (dateFormat === DateFormat.Year) {
+      formats.push('yyyy');
+
+    } else if (dateFormat === DateFormat.Month) {
+      formats.push('MMMM');
+    }
+
+    return format(value, formats.join(' '));
   }
 
   return '';

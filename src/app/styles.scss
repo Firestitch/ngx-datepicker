@@ -24,6 +24,21 @@
     }
   }
 
+  .done {
+    background: #fff;
+    padding: 4px;
+  }
+
+
+  &:not(.dialog-view-datetime):not(.dialog-view-time) {
+
+    .done {
+      button {
+        width: 100%;
+      }
+    }
+  }
+
   a {
     text-decoration: none;
     cursor: pointer;
@@ -107,9 +122,10 @@
     align-items: center;
     font-size: 18px;
 
-    //&.time {
-    //  padding: 0;
-    //}
+    &.time {
+      display: flex;
+      flex-direction: row;
+    }
 
     .actions {
       text-align: right;
@@ -281,20 +297,10 @@
     }
   }
 
-  .done {
-    background: #fff;
-    padding: 4px;
-
-    button {
-      width: 100%;
-    }
-  }
-
   table {
     border-collapse: collapse;
     thead {
       th {
-        width: 55px;
         padding-bottom: 6px;
         background: #fff;
         border-bottom: 1px solid #efefef;
@@ -385,11 +391,6 @@
     .close {
       display: flex;
     }
-    //.done {
-    //  //position: fixed;
-    //  //bottom: 0;
-    //}
-
     fs-tabnav {
       display: block;
     }

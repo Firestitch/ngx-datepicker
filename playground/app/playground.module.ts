@@ -7,6 +7,7 @@ import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
 import { FsDatePickerModule } from '@firestitch/datepicker';
+import { FsScrollbarModule } from '@firestitch/scrollbar';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -31,6 +32,7 @@ import { DateScrollPickerComponent } from './components/date-scroll-picker/date-
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
+    FsScrollbarModule.forRoot(),
     FsExampleModule.forRoot(),
     FsFormModule,
     FsMessageModule.forRoot(),
