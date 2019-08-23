@@ -22,8 +22,6 @@ import { DateFormat } from 'src/app/enums/date-format.enum';
 
 export class BaseRangePickerComponent implements ControlValueAccessor {
 
-  @HostBinding('autocomplete') autocomplete = 'off';
-
   @Input()
   public view: DateFormat;
 
@@ -60,6 +58,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
     protected _datepickerFactory: FsDatepickerFactory,
     protected _type,
   ) {
+    this._elRef.nativeElement.setAttribute('autocomplete', 'off');
   }
 
   public set value(value) {

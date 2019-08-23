@@ -8,8 +8,6 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
 
   abstract updateInput(value: Date);
 
-  @HostBinding('autocomplete') autocomplete = 'off';
-
   @Output('change')
   public change$ = new EventEmitter<any>();
 
@@ -42,6 +40,8 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
+
+    this.elementRef.nativeElement.setAttribute('autocomplete', 'off');
   }
 
   public cleared() {
