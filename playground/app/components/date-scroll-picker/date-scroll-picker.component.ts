@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
 })
 export class DateScrollPickerComponent {
   public standard = new Date('2015-10-10 15:45');
+  public monthYear;
+  public monthDay;
+  public year;
+  public month;
 }
