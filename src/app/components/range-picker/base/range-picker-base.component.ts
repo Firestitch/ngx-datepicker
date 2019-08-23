@@ -17,7 +17,7 @@ import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
 import { isDate } from 'date-fns';
 import { isSameDate } from '../../../helpers/is-same-date';
-import { DateFormat } from 'src/app/enums/date-format.enum';
+import { DateFormat } from '../../../enums/date-format.enum';
 
 
 export class BaseRangePickerComponent implements ControlValueAccessor {

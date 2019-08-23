@@ -1,11 +1,11 @@
-import { isNumeric } from '@firestitch/common';
+import { isNumber } from 'lodash-es';
 import { format, isValid } from 'date-fns';
 import { DateFormat } from '../enums/date-format.enum';
 
 
 export function formatDateTime(value, dateFormat = DateFormat.Date) {
 
-  if (isNumeric(value)) {
+  if (isNumber(value)) {
     value = new Date(value);
   } else if (typeof value === 'string') {
     value = new Date(value);

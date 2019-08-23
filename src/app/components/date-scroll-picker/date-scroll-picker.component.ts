@@ -14,7 +14,7 @@ import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
-import { DateFormat } from 'src/app/enums/date-format.enum';
+import { DateFormat } from '../../enums/date-format.enum';
 
 
 @Component({

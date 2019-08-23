@@ -7,6 +7,13 @@ import { FsDatePickerBaseComponent } from '../classes/base-component';
 
 export class FsDatePickerBaseDialogComponent implements OnDestroy {
 
+  @HostListener('document:keydown', ['$event'])
+  public handleKeydown(event: KeyboardEvent) {
+    if (event.keyCode === 27) {
+      this._dialogRef.close();
+    }
+  }
+
   protected _destroy$ = new Subject();
 
   constructor(protected _dialogRef: FsDateDialogRef,
@@ -24,13 +31,6 @@ export class FsDatePickerBaseDialogComponent implements OnDestroy {
 
   public close($event?) {
     this._dialogRef.close();
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  private handleKeydown(event: KeyboardEvent) {
-    if (event.keyCode === 27) {
-      this._dialogRef.close();
-    }
   }
 
   public ngOnDestroy() {
