@@ -51,6 +51,7 @@
     "@firestitch/message": "^7.1.4",
     "@firestitch/clear": "^7.1.0",
     "@firestitch/date": "^7.1.0",
+    "@firestitch/scroll-picker": "^7.0.2",
     "codelyzer": "^4.5.0",
     "cpx": "^1.5.0",
     "date-fns": "^2.0.0-alpha.27",
@@ -82,6 +83,7 @@
     "@firestitch/clear": ">=7.1.0",
     "@firestitch/date": ">=7.1.0",
     "@angular/material": ">=7.2.1",
-    "date-fns": "^2.0.0-alpha.27"
+    "date-fns": "^2.0.0-alpha.27",
+    "@firestitch/scroll-picker": ">=7.0.2"
   }
 }

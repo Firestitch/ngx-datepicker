@@ -1,0 +1,20 @@
+.scroll-pickers {
+  display: flex;
+  flex-direction: row;
+
+  fs-scroll-picker {
+
+    &.day {
+      width: 80px;
+    }
+
+    &.month {
+      width: 150px;
+    }
+
+    &.year {
+      width: 100px;
+    }
+
+  }
+}

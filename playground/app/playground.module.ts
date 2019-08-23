@@ -20,6 +20,7 @@ import { DateTimeRangeExampleComponent } from './components/date-time-range-exam
 import { DateRangeExampleComponent } from './components/date-range-example/date-range-example.component';
 import { TimeRangeExampleComponent } from './components/timerange-example/timerange-example.component';
 import { BirthdayExampleComponent } from './components/birthday-example/birthday-example.component';
+import { DateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 
 
 @NgModule({
@@ -35,8 +36,6 @@ import { BirthdayExampleComponent } from './components/birthday-example/birthday
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
   ],
-  entryComponents: [
-  ],
   declarations: [
     AppComponent,
     DateExampleComponent,
@@ -46,6 +45,7 @@ import { BirthdayExampleComponent } from './components/birthday-example/birthday
     DateRangeExampleComponent,
     TimeRangeExampleComponent,
     BirthdayExampleComponent,
+    DateScrollPickerComponent
   ],
   providers: [
   ],

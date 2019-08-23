@@ -1,27 +1,22 @@
-<div class="calendar-container"
-      (mouseleave)="onMouseLeaveCalendar()">
+<div class="calendar-container">
   <div class="months" *ngIf="dateMode == 'month'">
     <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month"
          [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value, disabled: month.disabled }">
       {{ month.abr }}
     </div>
   </div>
-  <div class="years" *ngIf="dateMode == 'year'" fsIscroll [fsOptions]="iscrollOptions"
-       fsInstance="iscrollInstance">
-    <div class="iscroll-scroller">
-      <div *ngFor="let year of years; let index = i" class="year data-year-{{ year.value }}"
-           [ngClass]="{ today: today.year==year.value, row : (index % 4 == 0), selected: selected.year==year.value, disabled: year.disabled }"
-           (click)="yearViewChange(year.value)">
-        {{ year.value }}
-      </div>
-      <div class="clear"></div>
+  <div class="years" *ngIf="dateMode == 'year'">
+    <div *ngFor="let year of years; let index = i" class="year data-year-{{ year.value }}"
+          [ngClass]="{ today: today.year==year.value, row : (index % 4 == 0), selected: selected.year==year.value, disabled: year.disabled }"
+          (click)="yearViewChange(year.value)">
+      {{ year.value }}
     </div>
+    <div class="clear"></div>
   </div>
   <div *ngIf="dateMode == 'date' && month" class="calendar">
     <div class="month-year">
       <a class="month-name" (click)="monthView()">{{month.name}}</a>
       <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>
-      <!-- <a (click)="yearView(month.year)" class="more"><mat-icon>arrow_drop_down</mat-icon></a> -->
       <div class="gap"></div>
       <div class="actions">
         <a (click)="previousMonth(month)">

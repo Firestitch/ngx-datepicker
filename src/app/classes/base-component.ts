@@ -1,11 +1,10 @@
-import { Renderer2, HostListener, ElementRef } from '@angular/core';
+import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-
-import { FsDatePickerBirthdayDialogComponent } from '../components/birthday-dialog/birthday-dialog.component';
 import { FsDateDialogRef } from './date-dialog-ref';
+import { take, takeUntil } from 'rxjs/operators';
 
 
-export abstract class FsDatePickerBaseComponent {
+export abstract class FsDatePickerBaseComponent implements OnDestroy {
 
   public opened = false;
   protected dialog = null;
@@ -15,6 +14,17 @@ export abstract class FsDatePickerBaseComponent {
   protected _dateDialogRef: FsDateDialogRef;
 
   protected _destroy$ = new Subject();
+
+  abstract updateInput(value: Date);
+
+
+  @Output('change')
+  public change$ = new EventEmitter<any>();
+
+  public _onChange = (value: any) => { };
+
+  public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
+  public registerOnTouched(fn: () => any): void {  }
 
   @HostListener('click', ['$event'])
   public inputClick(event) {
@@ -28,20 +38,6 @@ export abstract class FsDatePickerBaseComponent {
     });
   }
 
-  @HostListener('window:resize', ['$event'])
-  public onWindowResize(event) {
-    if (!this.dialog) {
-      return;
-    }
-
-    if (this.dialog.instance instanceof FsDatePickerBirthdayDialogComponent) {
-      // this.fsDatePickerCommon.positionDialogUnderInput(this.dialog, this.elementRef);
-      return;
-    }
-
-    // this.fsDatePickerCommon.positionDialog(this.dialog, this.elementRef);
-  }
-
   constructor(
     renderer: Renderer2,
     elementRef: ElementRef,
@@ -50,9 +46,39 @@ export abstract class FsDatePickerBaseComponent {
     this.elementRef = elementRef;
   }
 
+  public updateValue(value) {
+    this._onChange(value);
+    this.updateInput(value);
+    this.change$.emit(value);
+  }
+
+  public ngOnDestroy() {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
   protected open() {
     this.renderer.addClass(document.body, 'fs-date-picker-open');
     this.opened = true;
+
+    this._dateDialogRef.value$
+      .pipe(
+        takeUntil(this._dateDialogRef.close$),
+        takeUntil(this._destroy$),
+      )
+      .subscribe((value) => {
+        this.updateValue(value);
+      });
+
+    this._dateDialogRef.close$
+      .pipe(
+        take(1),
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this._dateDialogRef = null;
+        this.renderer.removeClass(document.body, 'fs-date-picker-open');
+      });
   }
 
   protected close() {

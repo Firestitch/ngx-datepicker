@@ -8,10 +8,10 @@ import {
   FlexibleConnectedPositionStrategy,
 } from '@angular/cdk/overlay';
 
-import { FsDatePickerDialogComponent } from '../components/datepicker-dialog/datepicker-dialog.component';
+import { FsDatePickerDialogComponent } from '../components/date-picker-dialog/date-picker-dialog.component';
 import { FsDateDialogRef } from '../classes/date-dialog-ref';
 import { DIALOG_DATA } from './dialog-data';
-import { FsDatePickerBirthdayDialogComponent } from '../components/birthday-dialog/birthday-dialog.component';
+import { FsDateScrollPickerDialogComponent } from '../components/date-scroll-picker-dialog/date-scroll-picker-dialog.component';
 
 
 @Injectable()
@@ -29,22 +29,26 @@ export class FsDatepickerFactory {
     return dateDialogRef;
   }
 
-  public openBirthDayPicker(el: ElementRef, injector: Injector, data: any) {
-    const overlayRef = this._createOverlay(el);
+  public openDateScrollPicker(el: ElementRef, injector: Injector, data: any) {
+    const overlayRef = this._createOverlay(el, { scrollStrategy: this._overlay.scrollStrategies.block() });
     const dateDialogRef = new FsDateDialogRef(overlayRef);
+    dateDialogRef.positionStrategy = this._createBasePopupPositionStrategy(el);
 
-    this._openPortalPreview(injector, FsDatePickerBirthdayDialogComponent, overlayRef, dateDialogRef, data);
+    this._openPortalPreview(injector, FsDateScrollPickerDialogComponent, overlayRef, dateDialogRef, data);
 
     return dateDialogRef;
   }
 
-  private _createOverlay(el: ElementRef) {
-    const overlayConfig = new OverlayConfig({
+  private _createOverlay(el: ElementRef, config = {}) {
+    config = Object.assign(
+    {
       positionStrategy: this._createPopupPositionStrategy(el),
       scrollStrategy: this._overlay.scrollStrategies.reposition(),
       hasBackdrop: true,
       backdropClass: [],
-    });
+    }, config);
+
+    const overlayConfig = new OverlayConfig(config);
 
     return this._overlay.create(overlayConfig);
   }
@@ -62,7 +66,6 @@ export class FsDatepickerFactory {
 
     return containerRef.instance;
   }
-
 
   private _createInjector(parentInjector, previewRef, data) {
     const injectionTokens = new WeakMap<any, any>([

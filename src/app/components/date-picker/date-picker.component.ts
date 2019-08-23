@@ -5,37 +5,30 @@ import {
   forwardRef,
   Inject,
   Input,
-  OnDestroy,
-  Output, Provider,
+  Output,
   Renderer2,
   ViewContainerRef,
   Component,
   Injector,
-  HostListener,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { take, takeUntil } from 'rxjs/operators';
-
-import { FsPreset } from '../../interfaces/fspreset.interface';
 import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 
 
-export const DATEPICKER_VALUE_ACCESSOR: Provider = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => FsDatePickerComponent),
-  multi: true
-};
-
 @Component({
   selector: '[fsDatePicker]',
   template: '<fs-clear [show]="ngModel" (clear)="cleared()"></fs-clear>',
-  providers: [DATEPICKER_VALUE_ACCESSOR]
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => FsDatePickerComponent),
+    multi: true
+  }]
 })
-export class FsDatePickerComponent extends FsDatePickerBaseComponent implements AfterViewInit, OnDestroy {
+export class FsDatePickerComponent extends FsDatePickerBaseComponent implements AfterViewInit {
 
   @Input() public minYear = null;
   @Input() public ngModel = null;
@@ -43,7 +36,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public minDate = null;
   @Input() public maxDate = null;
   @Input() public view = 'date';
-  @Input() public presets: FsPreset[] = [];
   @Input() public set hideClearButton(value: boolean) {
     const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
 
@@ -59,11 +51,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
 
   @Output('change')
   public change$ = new EventEmitter<any>();
-
-  public _onChange = (value: any) => { };
-
-  public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
-  public registerOnTouched(fn: () => any): void {  }
 
   private _hideClearButton: boolean = null;
 
@@ -81,18 +68,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     this.setReadonly();
   }
 
-  public ngOnDestroy() {
-    this._destroy$.next();
-    this._destroy$.complete();
-
-    // What does this do?
-    // As I know otherwise, when you leave page with datepicker - dialog still in the DOM
-    // and appears memory leaks
-    if (this.dialog && this.dialog.instance.element.nativeElement.parentNode) {
-      this.dialog.instance.element.nativeElement.parentNode.removeChild(this.dialog.instance.element.nativeElement);
-    }
-  }
-
   public writeValue(value: any): void {
     this.ngModel = createDateFromValue(value);
     this.updateInput(value);
@@ -102,22 +77,11 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     this.updateValue(null);
   }
 
-  public getModelValue() {
-    return this.ngModel;
-  }
-
-  public updateValue(value) {
-    this._onChange(value);
-    this.updateInput(value);
-    this.change$.emit(value);
-  }
-
-  private updateInput(value) {
+  public updateInput(value) {
     this.elementRef.nativeElement.value = formatDateTime(value, this.view);
   }
 
   protected open() {
-    super.open();
 
     if (this._dateDialogRef) {
       return;
@@ -134,30 +98,13 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
         maxYear: this.maxYear,
         minDate: this.minDate,
         maxDate: this.maxDate,
-        presets: this.presets,
         dateMode: 'date',
         components: this._getDefaultComponents(),
+        parentComponent: this
       }
     );
 
-    this._dateDialogRef.value$
-      .pipe(
-        takeUntil(this._dateDialogRef.close$),
-        takeUntil(this._destroy$),
-      )
-      .subscribe((value) => {
-        this.updateValue(value);
-      });
-
-    this._dateDialogRef.close$
-      .pipe(
-        take(1),
-        takeUntil(this._destroy$),
-      )
-      .subscribe(() => {
-        this._dateDialogRef = null;
-        this.renderer.removeClass(document.body, 'fs-date-picker-open');
-      });
+    super.open();
   }
 
   private _getDefaultComponents() {
@@ -167,5 +114,4 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
       return { calendarStart: true };
     }
   }
-
 }

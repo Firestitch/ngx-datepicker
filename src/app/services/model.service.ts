@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { isEqual, forEach } from 'lodash-es';
 import { addYears, isSameDay, subYears } from 'date-fns';
-import { FsComponents, FsPreset, FsDatePicker } from '../interfaces';
+import { FsComponents, FsDatePicker } from '../interfaces';
 
 
 @Injectable()
@@ -37,9 +37,6 @@ export class FsDatePickerModel implements FsDatePicker {
    * Current mode of calendar. For ranges consist values for both: start and end date
    */
   public dateMode = null;
-
-  public presets: FsPreset[] = [];
-
   public minDate = null;
   public maxDate = null;
 

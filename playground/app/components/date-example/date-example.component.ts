@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
 export class DateExampleComponent {
 
   public model = '2015-01-05T10:11:22+00:00';
-  public presets = [];
 
   constructor() {}
 

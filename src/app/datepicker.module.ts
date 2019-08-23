@@ -12,28 +12,25 @@ import {
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { FsClearModule } from '@firestitch/clear';
+import { FsScrollPickerModule } from '@firestitch/scroll-picker';
 
 import 'hammerjs'
 
-import { FsDatePickerBirthdayComponent } from './components/birthday/birthday.component';
-import { FsDatePickerComponent } from './components/datepicker/datepicker.component';
+import { FsDatePickerComponent } from './components/date-picker/date-picker.component';
 
-import { FsDatePickerDialogComponent } from './components/datepicker-dialog/datepicker-dialog.component';
-import { FsDatePickerBirthdayDialogComponent } from './components/birthday-dialog/birthday-dialog.component';
+import { FsDatePickerDialogComponent } from './components/date-picker-dialog/date-picker-dialog.component';
 import { FsDatePickerCalendarComponent } from './components/calendar/calendar.component';
-import { FsDatepickerPresetsComponent } from './components/presets/presets.component';
 import { FsDatepickerSummaryComponent } from './components/summary/summary.component';
 import { FsDatePickerTimeComponent } from './components/time/time.component';
 import { DateRangeSeparatorComponent } from './components/date-range-separator/date-range-separator.component';
 import { DateRangePickerToComponent } from './components/range-picker/to/range-picker-to.component';
 import { DateRangePickerFromComponent } from './components/range-picker/from/range-picker-from.component';
 
-import { FsIsscrollDirective } from './directives/is-scroll.directive';
-// import { ClickDirective } from './directives/click.directive';
-
-import { FsDatepickerBirthdayFactory, } from './services/birthday-factory.service';
 import { FsDatepickerFactory} from './services/factory.service';
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
+import { FsDateScrollPickerDialogComponent } from './components/date-scroll-picker-dialog/date-scroll-picker-dialog.component';
+import { FsDateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
+import { FsDatePickerBirthdayComponent } from './components/date-picker-birthday/date-picker-birthday.component';
 
 
 @NgModule({
@@ -46,35 +43,34 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     MatMenuModule,
     MatSelectModule,
     LayoutModule,
-    FsClearModule
-  ],
-  exports: [
-    FsDatePickerComponent,
-    FsDatePickerBirthdayComponent,
-    DateRangeSeparatorComponent,
-    DateRangePickerFromComponent,
-    DateRangePickerToComponent,
+    FsClearModule,
+    FsScrollPickerModule
   ],
   entryComponents: [
     FsDatePickerDialogComponent,
-    FsDatePickerBirthdayDialogComponent,
+    FsDateScrollPickerDialogComponent,
     DateRangeSeparatorComponent
   ],
   declarations: [
     FsDatePickerComponent,
     FsDatepickerSummaryComponent,
-    FsDatepickerPresetsComponent,
     FsDatePickerDialogComponent,
-    FsDatePickerBirthdayDialogComponent,
     FsDatePickerCalendarComponent,
     FsDatePickerTimeComponent,
-    FsDatePickerBirthdayComponent,
     DateRangeSeparatorComponent,
     DateRangePickerFromComponent,
     DateRangePickerToComponent,
-
-    FsIsscrollDirective,
-    // ClickDirective,
+    FsDateScrollPickerDialogComponent,
+    FsDateScrollPickerComponent,
+    FsDatePickerBirthdayComponent
+  ],
+  exports: [
+    FsDatePickerComponent,
+    DateRangeSeparatorComponent,
+    DateRangePickerFromComponent,
+    DateRangePickerToComponent,
+    FsDateScrollPickerComponent,
+    FsDatePickerBirthdayComponent
   ],
 })
 export class FsDatePickerModule {
@@ -83,7 +79,6 @@ export class FsDatePickerModule {
       ngModule: FsDatePickerModule,
       providers: [
         FsDatepickerFactory,
-        FsDatepickerBirthdayFactory,
         FsRangePickerStoreService,
       ]
     };

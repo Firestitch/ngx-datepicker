@@ -4,13 +4,11 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { throttle } from '@firestitch/common';
 
 import 'hammerjs';
 
@@ -38,6 +36,7 @@ import { FsHammerConfig } from '../../configs/hammer.config';
 import { FsDatePickerModel } from '../../services/model.service';
 import { getStartDayDate } from '../../helpers/get-start-day-date';
 import { splitDateByComponents } from '../../helpers/split-date-by-components';
+import { MONTHS } from '../../consts/months';
 
 
 @Component({
@@ -51,7 +50,7 @@ import { splitDateByComponents } from '../../helpers/split-date-by-components';
       }
     ]
 })
-export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestroy {
+export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Input()
   public date: Date = null;
@@ -83,30 +82,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
   public onDrawMonth = new EventEmitter<any>();
   @Output()
   public hoverDay = new EventEmitter<any>();
-  @Output()
-  public mouseLeaveCalendar = new EventEmitter<any>();
 
   public selected: any = {};
-  public iscrollOptions = null;
-  public iscrollInstance = null;
   public month = null;
   public years = [];
   public dateDays = [];
 
-  public monthList = [
-    { value: 1, name: 'January', abr: 'Jan', disabled: false },
-    { value: 2, name: 'February', abr: 'Feb', disabled: false },
-    { value: 3, name: 'March', abr: 'Mar', disabled: false },
-    { value: 4, name: 'April', abr: 'Apr', disabled: false },
-    { value: 5, name: 'May', abr: 'May', disabled: false },
-    { value: 6, name: 'June', abr: 'June', disabled: false },
-    { value: 7, name: 'July', abr: 'July', disabled: false },
-    { value: 8, name: 'August', abr: 'Aug', disabled: false },
-    { value: 9, name: 'September', abr: 'Sept', disabled: false },
-    { value: 10, name: 'October', abr: 'Oct', disabled: false },
-    { value: 11, name: 'November', abr: 'Nov', disabled: false },
-    { value: 12, name: 'December', abr: 'Dec', disabled: false }
-  ];
+  public monthList: any = MONTHS;
 
   public currentDate = new Date();
   public today: any = {
@@ -130,26 +112,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     if (this.date) {
       this.selected = splitDateByComponents(this.date);
     }
-    // if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
-    //   setTimeout(() => {
-    //     const $date = this.element.nativeElement.querySelector('.calendar-container');
-    //     $date.addEventListener('mousewheel', this.dateScroll);
-    //   });
-    // }
-  }
-
-  public ngOnDestroy() {
-    // if (['date', 'datetime'].indexOf(this.fsDatePickerModel.view) !== -1) {
-    //   const $date = this.element.nativeElement.querySelector('.calendar-container');
-    //   $date.removeEventListener('mousewheel', this.dateScroll);
-    // }
   }
 
   public ngOnChanges(changes) {
     if (changes) {
 
       if (changes.date) {
-        // this.onDrawMonth.emit(this.fsDatePickerCommon.getMomentSafe(this.date));
         this.selected = splitDateByComponents(this.date);
         this.updateDaysHighlighted();
       } else if (changes.highlightStartDate || changes.highlightEndDate) {
@@ -168,10 +136,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
 
   public onMouseEnterDay(day) {
     this.hoverDay.emit(day);
-  }
-
-  public onMouseLeaveCalendar() {
-    this.mouseLeaveCalendar.emit();
   }
 
   public updateDaysHighlighted() {
@@ -267,12 +231,14 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
   }
 
   public monthViewChange(month) {
-    const monthDate = new Date(this.month);
-    monthDate.setFullYear(this.month.year, month - 2);
+    const monthDate = new Date();
+    monthDate.setMonth(month)
+    monthDate.setFullYear(this.month.year);
 
     if (this.isMonthDisabled(monthDate)) {
       return;
     }
+
     this.setMonth(month);
     this.calendarView();
     this.monthChanged.emit(month);
@@ -285,7 +251,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     }
 
     const newDate = new Date(this.date);
-    newDate.setMonth(month - 1);
+    newDate.setMonth(month);
 
     this.setDate(newDate);
   }
@@ -311,7 +277,17 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
   }
 
   public yearView(year) {
-    this.iscrollOptions = { scrollToElement: `.years .data-year-${ year }` };
+
+    setTimeout(() => {
+
+      const years = this.element.nativeElement.querySelector('.years');
+      const selected = years.querySelector('.years .year.selected');
+
+      if (selected) {
+        years.scrollTop = selected.offsetTop;
+      }
+    });
+
     this.onDateModeChange.emit('year');
   }
 
@@ -376,7 +352,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
 
   public setMonth(monthNumber) {
     const month = new Date(this.month.date);
-    month.setMonth(monthNumber - 1);
+    month.setMonth(monthNumber);
 
     this.onDrawMonth.emit(month);
   }
@@ -451,7 +427,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
     for (const item of this.monthList) {
       const month = new Date();
       month.setFullYear(year);
-      month.setMonth(item.value - 1);
+      month.setMonth(item.value);
       item.disabled = this.isMonthDisabled(month);
     }
   }
@@ -486,7 +462,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
 
   public updateDate() {
 
-    const m = new Date(this.selected['year'], this.selected['month'] - 1, this.selected['day']);
+    const m = new Date(this.selected['year'], this.selected['month'], this.selected['day']);
     const max = new Date(this.selected['year'] || 1904, this.selected['month'], 0).getDate();
 
     if (max < this.selected['day']) {
@@ -497,19 +473,4 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges, OnDestr
       this.setDate(m);
     }
   }
-
-  private dateScroll = throttle((e) => {
-
-    // @TODO need better way to detect mobile devices
-    if (window.innerWidth <= 499) {
-      return;
-    }
-
-    if (e.wheelDelta > 0) {
-      this.nextMonth(this.month);
-    } else {
-      this.previousMonth(this.month);
-    }
-  }, 50);
-
 }

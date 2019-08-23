@@ -2,7 +2,7 @@ import {
   Component,
   ViewEncapsulation,
   OnInit,
-  Inject, OnDestroy, HostListener,
+  Inject,
 } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
@@ -11,19 +11,17 @@ import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-compo
 import { DIALOG_DATA } from '../../services/dialog-data';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 import { getSafeDate } from '../../helpers/get-safe-date';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { addYears, isAfter, isBefore, isSameDay, subDays, subYears, startOfDay } from 'date-fns';
 
 
 @Component({
     selector: 'fs-date-picker',
-    templateUrl: './datepicker-dialog.component.html',
-    styleUrls: ['./datepicker-dialog.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    templateUrl: './date-picker-dialog.component.html',
+    styleUrls: ['./date-picker-dialog.component.scss'],
     providers: [ FsDatePickerModel ],
 })
-export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent implements OnInit, OnDestroy {
+export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent implements OnInit {
 
   public model = null;
   public calendarMonth = null;
@@ -31,23 +29,18 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   public disabledTimes = [];
   public timePickerExpanded = false;
   public mobileView = this.breakpointObserver.isMatched('(max-width: 737px)');
-
-
   public selectedDateTimeTab = 0;
-
-  private _destroy$ = new Subject<void>();
 
   constructor(
     @Inject(DIALOG_DATA) public dialogData,
     public fsDatePickerModel: FsDatePickerModel,
     public breakpointObserver: BreakpointObserver,
-    private _dialogRef: FsDateDialogRef,
+    protected _dialogRef: FsDateDialogRef,
   ) {
-    super();
+    super(_dialogRef, dialogData.parentDirective);
 
     this._initModel();
     this._initComponents();
-    // this.parentDirective = this.dialogData.parentDirective;
   }
 
   public ngOnInit() {
@@ -72,22 +65,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
       .subscribe((state) => {
         this.mobileView = state.matches;
       });
-
-    this._dialogRef.overlayRef
-      .backdropClick()
-      .pipe(
-        takeUntil(this._destroy$),
-      )
-      .subscribe(() => {
-        this.close();
-      });
   }
-
-  public ngOnDestroy() {
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
-
   public initCalendar() {
     this.model = this.dialogData.modelValue;
     this.calendarDrawMonth(this.model);
@@ -108,10 +86,6 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     }
   }
 
-  public close() {
-    this._dialogRef.close();
-  }
-
   public toggleTimeExpand() {
     this.timePickerExpanded = !this.timePickerExpanded;
   }
@@ -130,7 +104,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
 
   public updateMonth(month) {
     if (this.model) {
-      this.model.setMonth(month - 1);
+      this.model.setMonth(month);
       this.setDate(new Date(this.model), true);
     }
   }
@@ -142,14 +116,8 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     }
   }
 
-  @HostListener('document:keydown', ['$event'])
-  public handleEscapeClose(event: KeyboardEvent) {
-    if (event.code === 'Escape') {
-      this.close();
-    }
-  }
-
   private _initBaseDate() {
+
     if (!this.dialogData.pickerRef || this.dialogData.pickerRef.view !== 'time') {
       return;
     }
@@ -176,7 +144,6 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.fsDatePickerModel.maxYear = this.dialogData.maxYear;
     this.fsDatePickerModel.minDate = this.dialogData.minDate;
     this.fsDatePickerModel.maxDate = this.dialogData.maxDate;
-    this.fsDatePickerModel.presets = this.dialogData.presets;
     this.fsDatePickerModel.dateMode = this.dialogData.dateMode;
   }
 
