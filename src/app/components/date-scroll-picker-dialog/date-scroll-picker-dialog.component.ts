@@ -46,7 +46,22 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     if (modelValue) {
       this._setDate(modelValue);
     } else {
-      this._setDate(new Date());
+
+      const date = new Date();
+
+      if (!this.showDay) {
+        date.setDate(1);
+      }
+
+      if (!this.showMonth) {
+        date.setMonth(1);
+      }
+
+      if (!this.showYear) {
+        date.setFullYear(0);
+      }
+
+      this._setDate(date);
     }
   }
 
