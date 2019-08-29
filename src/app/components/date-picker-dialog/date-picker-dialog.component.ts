@@ -72,7 +72,6 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   }
 
   public setDate(date, preventClose = false) {
-
     if (this.dialogData.view === 'date') {
       date = startOfDay(date);
     }

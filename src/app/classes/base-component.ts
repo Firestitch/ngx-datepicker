@@ -62,7 +62,6 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
   protected open() {
     this.renderer.addClass(document.body, 'fs-date-picker-open');
     this.opened = true;
-
     this._dateDialogRef.value$
       .pipe(
         takeUntil(this._dateDialogRef.close$),
