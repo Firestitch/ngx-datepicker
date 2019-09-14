@@ -11,17 +11,18 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
   @Output('change')
   public change$ = new EventEmitter<any>();
 
-  @HostListener('click', ['$event'])
-  public inputClick(event) {
+  @HostListener('click')
+  @HostListener('focus')
+  public inputClick() {
     this.open();
   }
 
-  @HostListener('focus', ['$event'])
+  /*@HostListener('focus', ['$event'])
   public onFocus($event) {
     setTimeout(() => {
       this.elementRef.nativeElement.blur();
     });
-  }
+  }*/
 
   public opened = false;
   public _onChange = (value: any) => { };
