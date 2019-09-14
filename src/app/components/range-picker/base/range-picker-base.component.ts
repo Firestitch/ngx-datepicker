@@ -86,6 +86,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   }
 
   @HostListener('click')
+  @HostListener('focus')
   public open() {
     if (this._dateDialogRef) {
       return
