@@ -64,7 +64,7 @@ export class RangePickerRef {
 
     this._endDate = value;
 
-    this._valueChange$.next(value);
+    // this._valueChange$.next(value);
     this._endDatePickerExists = true;
   }
 

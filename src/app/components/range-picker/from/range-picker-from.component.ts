@@ -66,6 +66,9 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
 
   public cleared() {
     this.writeValue(null);
+
+    this.onChange(this.value);
+    this.onTouch(this.value);
   }
 
   /**

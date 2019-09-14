@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { takeUntil } from 'rxjs/operators';
+import { skip, takeUntil } from 'rxjs/operators';
 
 import { BaseRangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
@@ -71,6 +71,9 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
 
   public cleared() {
     this.writeValue(null);
+
+    this.onChange(this.value);
+    this.onTouch(this.value);
   }
 
   /**
@@ -93,7 +96,14 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
       )
       .subscribe({
         next: () => {
+          const prevValue = this.value;
           this.writeValue(this._pickerRef.endDate);
+
+          if (prevValue !== this.value) {
+            this.onChange(this.value);
+            this.onTouch(this.value);
+          }
+
           this.minDate = this._pickerRef.startDate;
         }
       });

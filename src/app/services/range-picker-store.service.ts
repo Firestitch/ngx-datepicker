@@ -14,7 +14,7 @@ export class FsRangePickerStoreService {
 
     const pickerRef = this._store.get(name);
 
-    pickerRef.updateStartDate(value);
+    // pickerRef.updateStartDate(value);
 
     return pickerRef;
   }
@@ -44,7 +44,7 @@ export class FsRangePickerStoreService {
 
     const pickerRef = this._store.get(name);
 
-    pickerRef.updateEndDate(value);
+    // pickerRef.updateEndDate(value);
 
     return pickerRef;
   }

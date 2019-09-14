@@ -80,7 +80,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
     const [valuesAreDates, datesAreEquals] = this._checkValuesEquality(value, this._value);
 
     if ((valuesAreDates) || (!valuesAreDates && this.value !== value)) {
-      this.value = value;
+      this._value = value;
       this._elRef.nativeElement.value = formatDateTime(value, this.view);
     }
   }
