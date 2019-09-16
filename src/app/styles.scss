@@ -188,6 +188,8 @@
   .calendar-container {
     width: 100%;
     position: relative;
+    flex: 1 1 45%;
+    min-height: 350px;
   }
 
   .calendar-container .day.selected,
