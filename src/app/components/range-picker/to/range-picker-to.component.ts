@@ -5,11 +5,12 @@ import {
   Injector,
   Input,
   OnDestroy,
-  OnInit
+  OnInit, Optional
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MatFormField } from '@angular/material';
 
-import { skip, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { BaseRangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
@@ -18,7 +19,7 @@ import { FsDatepickerFactory } from '../../../services/factory.service';
 
 @Component({
   selector: '[fsDateRangeTo]',
-  template: '<fs-clear [show]="value" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear *ngIf="!disabled && !readonly" [show]="value" (clear)="cleared()"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -36,9 +37,10 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
     _elRef: ElementRef,
     _injector: Injector,
     _datepickerFactory: FsDatepickerFactory,
-    private _rangePickerStore: FsRangePickerStoreService
+    private _rangePickerStore: FsRangePickerStoreService,
+    @Optional() _parentFormField: MatFormField,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'to');
+    super(_elRef, _injector, _datepickerFactory, 'to', _parentFormField);
   }
 
   public ngOnInit() {

@@ -4,23 +4,27 @@ import {
   HostListener,
   Injector,
   Input,
+  OnChanges, Optional,
+  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { MatFormField } from '@angular/material';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
+
+import { isDate } from 'date-fns';
 
 import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { FsDatepickerFactory } from '../../../services/factory.service';
 import { formatDateTime } from '../../../helpers/format-date-time';
 import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
-import { isDate } from 'date-fns';
 import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from '../../../enums/date-format.enum';
 
 
-export class BaseRangePickerComponent implements ControlValueAccessor {
+export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor {
 
   @Input()
   public view: DateFormat;
@@ -37,8 +41,15 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   @Input()
   public maxDate = null;
 
+  @Input()
+  @HostBinding('class.fs-input-disabled')
   @HostBinding('attr.readonly')
   public disabled = false;
+
+  @Input()
+  @HostBinding('class.fs-input-readonly')
+  @HostBinding('attr.readonly')
+  public readonly = false;
 
   public onChange: any = () => {};
   public onTouch: any = () => {};
@@ -57,6 +68,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
     protected _injector: Injector,
     protected _datepickerFactory: FsDatepickerFactory,
     protected _type,
+    @Optional() private _parentFormField: MatFormField,
   ) {
     this._elRef.nativeElement.setAttribute('autocomplete', 'off');
   }
@@ -72,6 +84,24 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
 
   public get value() {
     return this._value;
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.readonly && this._parentFormField) {
+      if (this.readonly) {
+        this._parentFormField._elementRef.nativeElement.classList.add('fs-readonly-field');
+      } else {
+        this._parentFormField._elementRef.nativeElement.classList.remove('fs-readonly-field');
+      }
+    }
+
+    if (changes.disabled && this._parentFormField) {
+      if (this.disabled) {
+        this._parentFormField._elementRef.nativeElement.classList.add('fs-disabled-field');
+      } else {
+        this._parentFormField._elementRef.nativeElement.classList.remove('fs-disabled-field');
+      }
+    }
   }
 
   public writeValue(value) {

@@ -9,7 +9,7 @@ import { FsDateScrollPickerComponent } from '../date-scroll-picker/date-scroll-p
 
 @Component({
   selector: '[fsDatePickerBirthday]',
-  template: '<fs-clear [show]="ngModel" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear *ngIf="!disabled && !readonly" [show]="ngModel" (clear)="cleared()"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerBirthdayComponent),

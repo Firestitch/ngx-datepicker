@@ -1,10 +1,25 @@
-import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, HostBinding } from '@angular/core';
+import {
+  Renderer2,
+  HostListener,
+  ElementRef,
+  EventEmitter,
+  Output,
+  OnDestroy,
+  HostBinding,
+  Input,
+  Optional,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { MatFormField } from '@angular/material';
+
 import { Subject } from 'rxjs';
-import { FsDateDialogRef } from './date-dialog-ref';
 import { take, takeUntil } from 'rxjs/operators';
 
+import { FsDateDialogRef } from './date-dialog-ref';
 
-export abstract class FsDatePickerBaseComponent implements OnDestroy {
+
+export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy {
 
   abstract updateInput(value: Date);
 
@@ -14,8 +29,19 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
   @HostListener('click')
   @HostListener('focus')
   public inputClick() {
-    this.open();
+    if (!this.disabled && !this.readonly) {
+      this.open();
+    }
   }
+
+
+  @Input()
+  @HostBinding('class.fs-disabled-input')
+  public disabled = false;
+
+  @Input()
+  @HostBinding('class.fs-readonly-input')
+  public readonly = false;
 
   /*@HostListener('focus', ['$event'])
   public onFocus($event) {
@@ -38,6 +64,7 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
   constructor(
     renderer: Renderer2,
     elementRef: ElementRef,
+    @Optional() private _parentFormField: MatFormField,
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
@@ -58,6 +85,24 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
   public ngOnDestroy() {
     this._destroy$.next();
     this._destroy$.complete();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.readonly && this._parentFormField) {
+      if (this.readonly) {
+        this._parentFormField._elementRef.nativeElement.classList.add('fs-readonly-field');
+      } else {
+        this._parentFormField._elementRef.nativeElement.classList.remove('fs-readonly-field');
+      }
+    }
+
+    if (changes.disabled && this._parentFormField) {
+      if (this.disabled) {
+        this._parentFormField._elementRef.nativeElement.classList.add('fs-disabled-field');
+      } else {
+        this._parentFormField._elementRef.nativeElement.classList.remove('fs-disabled-field');
+      }
+    }
   }
 
   protected open() {

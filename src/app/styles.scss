@@ -453,3 +453,9 @@
 fs-date-picker-dialog * {
   touch-action: manipulation;
 }
+
+.fs-readonly-field {
+  .mat-form-field-underline {
+    display: none;
+  }
+}

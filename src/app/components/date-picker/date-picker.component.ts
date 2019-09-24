@@ -9,7 +9,7 @@ import {
   Renderer2,
   ViewContainerRef,
   Component,
-  Injector,
+  Injector, Optional,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -18,11 +18,12 @@ import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 import { DateFormat } from '../../enums/date-format.enum';
+import { MatFormField } from '@angular/material';
 
 
 @Component({
   selector: '[fsDatePicker]',
-  template: '<fs-clear [show]="ngModel" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear *ngIf="!disabled && !readonly" [show]="ngModel" (clear)="cleared()"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerComponent),
@@ -61,8 +62,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     @Inject(ElementRef) protected elementRef: ElementRef,
     @Inject(ViewContainerRef) private viewContainerRef,
     protected fsDatepickerFactory: FsDatepickerFactory,
+    @Optional() _parentFormField: MatFormField,
   ) {
-    super(renderer, elementRef);
+    super(renderer, elementRef, _parentFormField);
   }
 
   public ngAfterViewInit() {
