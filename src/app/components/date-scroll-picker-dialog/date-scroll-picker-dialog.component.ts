@@ -104,8 +104,11 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     this.parentComponent.updateValue(date);
   }
 
-  public close() {
-    this.change();
+  public close(save = false) {
+    if (save) {
+      this.change();
+    }
+
     super.close();
   }
 
