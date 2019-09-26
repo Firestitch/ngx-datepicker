@@ -19,7 +19,7 @@ import { FsDatepickerFactory } from '../../../services/factory.service';
 
 @Component({
   selector: '[fsDateRangeTo]',
-  template: '<fs-clear *ngIf="!disabled && !readonly" [show]="value" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="(value && !disabled && !readonly) || !!dateDialogRef" (clear)="cleared()"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -23,7 +23,7 @@ import { MatFormField } from '@angular/material';
 
 @Component({
   selector: '[fsDatePicker]',
-  template: '<fs-clear *ngIf="!disabled && !readonly" [show]="ngModel" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="(ngModel && !disabled && !readonly) || !!dateDialogRef" (clear)="cleared()"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerComponent),

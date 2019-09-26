@@ -86,6 +86,10 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
     return this._value;
   }
 
+  public get dateDialogRef() {
+    return this._dateDialogRef;
+  }
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.readonly && this._parentFormField) {
       if (this.readonly) {
@@ -118,7 +122,7 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
   @HostListener('click')
   @HostListener('focus')
   public open() {
-    if (this._dateDialogRef) {
+    if (this._dateDialogRef || this.disabled || this.readonly) {
       return
     }
 
@@ -188,6 +192,7 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
 
   protected _disableInput() {
     this.disabled = true;
+
   }
 
   protected _checkValuesEquality(newValue, prevValue) {

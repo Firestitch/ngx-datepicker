@@ -72,6 +72,10 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
     this.elementRef.nativeElement.setAttribute('autocomplete', 'off');
   }
 
+  public get dateDialogRef() {
+    return this._dateDialogRef;
+  }
+
   public cleared() {
     this.updateValue(null);
   }

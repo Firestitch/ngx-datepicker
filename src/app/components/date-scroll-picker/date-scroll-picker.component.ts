@@ -21,7 +21,7 @@ import { DateFormat } from '../../enums/date-format.enum';
 
 @Component({
   selector: '[fsDateScrollPicker]',
-  template: '<fs-clear *ngIf="!disabled && !readonly" [show]="ngModel" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="(ngModel && !disabled && !readonly) || !!dateDialogRef" (clear)="cleared()"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateScrollPickerComponent),
@@ -80,7 +80,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
   protected open() {
 
-    if (this._dateDialogRef) {
+    if (this._dateDialogRef || this.disabled || this.readonly) {
       return;
     }
 
