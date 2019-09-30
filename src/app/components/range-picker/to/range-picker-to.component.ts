@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   forwardRef,
@@ -19,7 +20,7 @@ import { FsDatepickerFactory } from '../../../services/factory.service';
 
 @Component({
   selector: '[fsDateRangeTo]',
-  template: '<fs-clear [show]="(value && !disabled && !readonly) || !!dateDialogRef" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly && !dateDialogRef" (clear)="cleared()"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -37,10 +38,11 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
     _elRef: ElementRef,
     _injector: Injector,
     _datepickerFactory: FsDatepickerFactory,
+    _cdRef: ChangeDetectorRef,
     private _rangePickerStore: FsRangePickerStoreService,
     @Optional() _parentFormField: MatFormField,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'to', _parentFormField);
+    super(_elRef, _injector, _datepickerFactory, 'to', _cdRef,_parentFormField);
   }
 
   public ngOnInit() {

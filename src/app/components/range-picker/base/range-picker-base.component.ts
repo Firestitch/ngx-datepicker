@@ -1,10 +1,12 @@
 import {
+  ChangeDetectorRef,
   ElementRef,
   HostBinding,
   HostListener,
   Injector,
   Input,
-  OnChanges, Optional,
+  OnChanges,
+  Optional,
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
@@ -56,8 +58,6 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
 
   protected _dateDialogRef: FsDateDialogRef;
   protected _pickerRef: RangePickerRef;
-  protected _valuesAreDates = false;
-  protected _valuesDatesEquals = false;
   protected _destroy$ = new Subject();
 
 
@@ -68,6 +68,7 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
     protected _injector: Injector,
     protected _datepickerFactory: FsDatepickerFactory,
     protected _type,
+    protected _cdRef: ChangeDetectorRef,
     @Optional() private _parentFormField: MatFormField,
   ) {
     this._elRef.nativeElement.setAttribute('autocomplete', 'off');
@@ -162,6 +163,8 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
       .subscribe(() => {
         this._dateDialogRef = null;
         this._enableInput();
+
+        this._cdRef.markForCheck();
       });
   }
 

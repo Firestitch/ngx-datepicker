@@ -9,7 +9,7 @@ import {
   Input,
   Optional,
   OnChanges,
-  SimpleChanges,
+  SimpleChanges, ChangeDetectorRef,
 } from '@angular/core';
 import { MatFormField } from '@angular/material';
 
@@ -64,6 +64,7 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
   constructor(
     renderer: Renderer2,
     elementRef: ElementRef,
+    protected _cdRef: ChangeDetectorRef,
     @Optional() private _parentFormField: MatFormField,
   ) {
     this.renderer = renderer;
@@ -129,6 +130,7 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
       .subscribe(() => {
         this._dateDialogRef = null;
         this.renderer.removeClass(document.body, 'fs-date-picker-open');
+        this._cdRef.markForCheck();
       });
   }
 

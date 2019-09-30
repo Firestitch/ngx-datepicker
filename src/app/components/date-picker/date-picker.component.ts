@@ -9,7 +9,7 @@ import {
   Renderer2,
   ViewContainerRef,
   Component,
-  Injector, Optional,
+  Injector, Optional, ChangeDetectorRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -23,7 +23,7 @@ import { MatFormField } from '@angular/material';
 
 @Component({
   selector: '[fsDatePicker]',
-  template: '<fs-clear [show]="(ngModel && !disabled && !readonly) || !!dateDialogRef" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="ngModel && !disabled && !readonly && !dateDialogRef" (clear)="cleared()"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerComponent),
@@ -60,11 +60,12 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     protected renderer: Renderer2,
     protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
+    protected _cdRef: ChangeDetectorRef,
     @Inject(ViewContainerRef) private viewContainerRef,
     protected fsDatepickerFactory: FsDatepickerFactory,
     @Optional() _parentFormField: MatFormField,
   ) {
-    super(renderer, elementRef, _parentFormField);
+    super(renderer, elementRef, _cdRef, _parentFormField);
   }
 
   public ngAfterViewInit() {

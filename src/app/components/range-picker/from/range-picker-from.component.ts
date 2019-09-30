@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   forwardRef,
@@ -17,7 +18,7 @@ import { MatFormField } from '@angular/material';
 
 @Component({
   selector: '[fsDateRangeFrom]',
-  template: '<fs-clear [show]="(value && !disabled && !readonly) || !!dateDialogRef" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly && !dateDialogRef" (clear)="cleared()"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -35,10 +36,11 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
     _elRef: ElementRef,
     _injector: Injector,
     _datepickerFactory: FsDatepickerFactory,
+    _cdRef: ChangeDetectorRef,
     private _rangePickerStore: FsRangePickerStoreService,
     @Optional() _parentFormField: MatFormField,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'from', _parentFormField);
+    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef,_parentFormField);
   }
 
   public ngOnInit() {
