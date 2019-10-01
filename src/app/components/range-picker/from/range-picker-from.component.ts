@@ -40,7 +40,7 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
     private _rangePickerStore: FsRangePickerStoreService,
     @Optional() _parentFormField: MatFormField,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef,_parentFormField);
+    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef, _parentFormField);
   }
 
   public ngOnInit() {

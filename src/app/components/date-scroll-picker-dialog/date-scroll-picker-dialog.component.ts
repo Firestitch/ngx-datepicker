@@ -144,6 +144,11 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     const minYear = this._dialogData.minYear;
     let maxYear = this._dialogData.maxYear;
 
+    if (!maxYear) {
+      const today = new Date();
+      maxYear = today.getFullYear();
+    }
+
      for ( maxYear; maxYear >= minYear; maxYear-- ) {
        this.years.push(maxYear);
      }
