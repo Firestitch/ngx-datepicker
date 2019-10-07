@@ -10,7 +10,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { MatFormField } from '@angular/material';
+import { MatFormField } from '@angular/material/form-field';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
