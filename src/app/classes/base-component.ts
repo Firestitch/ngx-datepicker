@@ -11,7 +11,7 @@ import {
   OnChanges,
   SimpleChanges, ChangeDetectorRef,
 } from '@angular/core';
-import { MatFormField } from '@angular/material';
+import { MatFormField } from '@angular/material/form-field';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';

@@ -10,7 +10,7 @@ import {
   OnInit, Optional
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatFormField } from '@angular/material';
+import { MatFormField } from '@angular/material/form-field';
 
 import { takeUntil } from 'rxjs/operators';
 

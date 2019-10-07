@@ -13,7 +13,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatFormField } from '@angular/material';
+import { MatFormField } from '@angular/material/form-field';
 
 import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
