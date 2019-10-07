@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   DoCheck,
   ElementRef,
@@ -15,9 +16,10 @@ import { splitDateByComponents } from '../../helpers/split-date-by-components';
 
 
 @Component({
-    selector: 'fs-date-picker-time',
-    templateUrl: './time.component.html',
-    styleUrls: ['./time.component.scss']
+  selector: 'fs-date-picker-time',
+  templateUrl: './time.component.html',
+  styleUrls: ['./time.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 

@@ -1,15 +1,18 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
   ElementRef,
   forwardRef,
   Inject,
+  Injector,
   Input,
+  Optional,
   Renderer2,
   ViewContainerRef,
-  Component,
-  Injector, Optional, ChangeDetectorRef,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormField } from '@angular/material';
 
 import { FsDatepickerFactory } from '../../services/factory.service';
@@ -26,7 +29,8 @@ import { DateFormat } from '../../enums/date-format.enum';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateScrollPickerComponent),
     multi: true
-  }]
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
         implements AfterViewInit, ControlValueAccessor {

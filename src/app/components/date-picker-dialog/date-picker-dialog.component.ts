@@ -1,13 +1,8 @@
-import {
-  Component,
-  ViewEncapsulation,
-  OnInit,
-  Inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { takeUntil } from 'rxjs/operators';
-import { addYears, isAfter, isBefore, isSameDay, subDays, subYears, startOfDay } from 'date-fns';
+import { addYears, isAfter, isBefore, isSameDay, startOfDay, subDays, subYears } from 'date-fns';
 
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
@@ -17,10 +12,11 @@ import { getSafeDate } from '../../helpers/get-safe-date';
 
 
 @Component({
-    selector: 'fs-date-picker',
-    templateUrl: './date-picker-dialog.component.html',
-    styleUrls: ['./date-picker-dialog.component.scss'],
-    providers: [ FsDatePickerModel ],
+  selector: 'fs-date-picker',
+  templateUrl: './date-picker-dialog.component.html',
+  styleUrls: ['./date-picker-dialog.component.scss'],
+  providers: [ FsDatePickerModel ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent implements OnInit {
 

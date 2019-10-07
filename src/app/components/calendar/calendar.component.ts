@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -36,9 +37,10 @@ import { MONTHS } from '../../consts/months';
 
 
 @Component({
-    selector: 'fs-date-picker-calendar',
-    templateUrl: './calendar.component.html',
-    styleUrls: ['./calendar.component.scss']
+  selector: 'fs-date-picker-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
@@ -222,7 +224,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public monthViewChange(month) {
     const monthDate = new Date();
-    monthDate.setMonth(month)
+    monthDate.setMonth(month);
     monthDate.setFullYear(this.month.year);
 
     if (this.isMonthDisabled(monthDate)) {

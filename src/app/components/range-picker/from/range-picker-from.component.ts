@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -25,7 +26,8 @@ import { MatFormField } from '@angular/material';
       useExisting: forwardRef(() => DateRangePickerFromComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangePickerFromComponent extends BaseRangePickerComponent implements OnInit, OnDestroy {
 

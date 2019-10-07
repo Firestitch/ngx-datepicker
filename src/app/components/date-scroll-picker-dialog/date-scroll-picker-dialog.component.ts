@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
@@ -10,7 +10,8 @@ import { getDaysInMonth } from 'date-fns';
 @Component({
   templateUrl: './date-scroll-picker-dialog.component.html',
   styleUrls: ['./date-scroll-picker-dialog.component.scss'],
-  providers: [FsDatePickerModel]
+  providers: [FsDatePickerModel],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogComponent {
 

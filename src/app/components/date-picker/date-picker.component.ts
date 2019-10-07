@@ -1,15 +1,18 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
   ElementRef,
   EventEmitter,
   forwardRef,
   Inject,
+  Injector,
   Input,
+  Optional,
   Output,
   Renderer2,
   ViewContainerRef,
-  Component,
-  Injector, Optional, ChangeDetectorRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -28,7 +31,8 @@ import { MatFormField } from '@angular/material';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerComponent),
     multi: true
-  }]
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatePickerComponent extends FsDatePickerBaseComponent implements AfterViewInit {
 

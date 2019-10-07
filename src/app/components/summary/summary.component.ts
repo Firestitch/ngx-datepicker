@@ -1,13 +1,22 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { FsDatePickerModel } from '../../services/model.service';
 import { formatSummary } from '../../helpers/format-summary';
 
 
 @Component({
-    selector: 'fs-date-picker-summary',
-    templateUrl: './summary.component.html',
-    styleUrls: ['./summary.component.scss']
+  selector: 'fs-date-picker-summary',
+  templateUrl: './summary.component.html',
+  styleUrls: ['./summary.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
 

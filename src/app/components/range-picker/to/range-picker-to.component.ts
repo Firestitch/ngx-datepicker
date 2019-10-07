@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -27,7 +28,8 @@ import { FsDatepickerFactory } from '../../../services/factory.service';
       useExisting: forwardRef(() => DateRangePickerToComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangePickerToComponent extends BaseRangePickerComponent implements OnInit, OnDestroy {
 
