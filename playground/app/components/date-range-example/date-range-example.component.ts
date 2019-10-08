@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'date-range-example',
   templateUrl: 'date-range-example.component.html',
-  styleUrls: [ 'date-range-example.component.css' ]
 })
 export class DateRangeExampleComponent {
 
