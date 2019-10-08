@@ -66,7 +66,7 @@
     "rxjs": "^6.5.3",
     "tsickle": "^0.37.0",
     "tsmodels": "^0.4.6",
-    "typescript": "^3.5.3",
+    "typescript": "~3.5.3",
     "zone.js": "^0.10.2"
   },
   "engines": {
@@ -75,6 +75,7 @@
   "peerDependencies": {
     "@firestitch/clear": ">=7.1.0",
     "@firestitch/date": ">=7.1.0",
-    "@firestitch/scroll-picker": ">=7.0.2"
+    "@firestitch/scroll-picker": ">=7.0.2",
+    "typescript": "~3.5.3"
   }
 }
