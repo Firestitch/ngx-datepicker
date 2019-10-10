@@ -80,7 +80,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     });
   }
 
-  public change() {
+  public change(save = false) {
 
     if (!this.year) {
       this.year = this.showYear ? this.years[0] : 0;
@@ -100,14 +100,16 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
       this.day = daysInMonth;
     }
 
-    const date = new Date(this.year, this.month.value, this.day);
+    if (save) {
+      const date = new Date(this.year, this.month.value, this.day);
 
-    this.parentComponent.updateValue(date);
+      this.parentComponent.updateValue(date);
+    }
   }
 
   public close(save = false) {
     if (save) {
-      this.change();
+      this.change(true);
     }
 
     super.close();

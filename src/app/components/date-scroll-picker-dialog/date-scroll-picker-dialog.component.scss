@@ -1,6 +1,7 @@
 .scroll-pickers {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 
   fs-scroll-picker {
 
@@ -16,5 +17,11 @@
       width: 100px;
     }
 
+  }
+}
+
+.done {
+  button {
+    width: 50% !important;
   }
 }
