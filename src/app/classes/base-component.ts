@@ -77,7 +77,9 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
     return this._dateDialogRef;
   }
 
-  public cleared() {
+  public cleared(event) {
+    event.stopPropagation();
+    event.preventDefault();
     this.updateValue(null);
   }
 

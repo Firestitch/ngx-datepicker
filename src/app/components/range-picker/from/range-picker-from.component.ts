@@ -19,7 +19,7 @@ import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: '[fsDateRangeFrom]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && !dateDialogRef" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly && !dateDialogRef" (clear)="cleared($event)"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -70,7 +70,9 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
     }
   }
 
-  public cleared() {
+  public cleared(event) {
+    event.stopPropagation();
+    event.preventDefault();
     this.writeValue(null);
 
     this.onChange(this.value);

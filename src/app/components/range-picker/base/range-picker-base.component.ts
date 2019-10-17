@@ -117,6 +117,8 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
     if ((valuesAreDates) || (!valuesAreDates && this.value !== value)) {
       this._value = value;
       this._elRef.nativeElement.value = formatDateTime(value, this.view);
+
+      this._cdRef.markForCheck();
     }
   }
 

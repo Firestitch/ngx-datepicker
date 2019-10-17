@@ -21,7 +21,7 @@ import { FsDatepickerFactory } from '../../../services/factory.service';
 
 @Component({
   selector: '[fsDateRangeTo]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && !dateDialogRef" (clear)="cleared()"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly && !dateDialogRef" (clear)="cleared($event)"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -75,7 +75,10 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
     }
   }
 
-  public cleared() {
+  public cleared(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
     this.writeValue(null);
 
     this.onChange(this.value);
