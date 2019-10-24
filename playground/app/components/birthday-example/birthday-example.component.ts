@@ -10,6 +10,7 @@ export class BirthdayExampleComponent {
 
   public model = '2018-05-05';
   public minYear = 1900;
+  public curentDay = new Date();
 
   constructor() { }
 }

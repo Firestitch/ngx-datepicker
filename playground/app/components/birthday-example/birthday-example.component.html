@@ -1,9 +1,10 @@
 <form fsForm>
   <mat-form-field>
     <input matInput
-      fsDatePickerBirthday
-      [(ngModel)]="model"
-      name="birthday"
-      placeholder="Birthday">
+           fsDatePickerBirthday
+           [(ngModel)]="model"
+           [maxDate]="curentDay"
+           name="birthday"
+           placeholder="Birthday">
   </mat-form-field>
 </form>

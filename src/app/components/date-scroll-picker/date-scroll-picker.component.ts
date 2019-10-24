@@ -37,6 +37,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
   @Input() public minYear = (new Date()).getFullYear() - 50;
   @Input() public maxYear = (new Date()).getFullYear() + 50;
+  @Input() public maxDate;
   @Input() public showMonth = true;
   @Input() public showYear = true;
   @Input() public showDay = true;
@@ -97,6 +98,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
         modelValue: this.ngModel,
         minYear: this.minYear,
         maxYear: this.maxYear,
+        maxDate: this.maxDate,
         showMonth: this.showMonth,
         showDay: this.showDay,
         showYear: this.showYear,

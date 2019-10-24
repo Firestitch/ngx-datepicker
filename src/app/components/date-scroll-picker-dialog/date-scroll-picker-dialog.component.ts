@@ -122,14 +122,26 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
 
   public changeYear() {
     this._generateDaysArray();
+    if (this._dialogData.maxDate) {
+      this._generateMonthArray();
+    }
     this.change();
   }
 
   private _generateDaysArray() {
 
     let days = 0;
+    const maxDate = this._dialogData.maxDate;
+    const maxDay = maxDate && maxDate.getDate();
+    const maxMonth = maxDate && maxDate.getMonth();
+    const maxYear = maxDate && maxDate.getFullYear();
+
     if (this.month) {
-      days = getDaysInMonth(new Date(this.year, this.month.value));
+      if (maxDay && maxMonth == this.month.value && maxYear === this.year) {
+        days = maxDay;
+      } else {
+        days = getDaysInMonth(new Date(this.year, this.month.value));
+      }
     }
 
     if (!days) {
@@ -140,7 +152,13 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   }
 
   private _generateMonthArray() {
-    this.months = MONTHS;
+    const maxDate = this._dialogData.maxDate;
+
+    if (maxDate && this.year === maxDate.getFullYear()) {
+      this.months = MONTHS.slice(0, maxDate.getMonth() + 1);
+    } else {
+      this.months = MONTHS;
+    }
   }
 
   private _generateYearsArray() {
