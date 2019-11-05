@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit
+} from '@angular/core';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
@@ -30,7 +37,8 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   constructor(
     @Inject(DIALOG_DATA) private _dialogData,
     public element: ElementRef,
-    protected _dialogRef: FsDateDialogRef
+    protected _dialogRef: FsDateDialogRef,
+    protected _cdRef: ChangeDetectorRef,
   ) {
     super(_dialogRef, _dialogData.parentComponent);
 
@@ -105,6 +113,8 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
 
       this.parentComponent.updateValue(date);
     }
+
+    this._cdRef.markForCheck();
   }
 
   public close(save = false) {

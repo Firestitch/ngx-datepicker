@@ -62,6 +62,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   public writeValue(value: any): void {
     this.ngModel = createDateFromValue(value);
     this.updateInput(value);
+
+    this._cdRef.markForCheck();
   }
 
   public updateInput(value) {
