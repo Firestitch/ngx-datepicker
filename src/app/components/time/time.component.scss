@@ -16,22 +16,19 @@ tbody {
   .hours-col {
     padding: 0;
   }
+
+  .hours-container {
+    margin-right: 20px;
+  }
+
+  .minutes-container,
+  .hours-container {
+    max-height: 322px;
+    overflow: auto;
+  }
 }
 
-.time-container {
-  width: 100%;
-
-  .wraper {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  .hours-group {
-    display: flex;
-    flex-direction: column;
-  }
-
+.time-container table {
   .am-pm {
     font-size: 13px;
     padding-left: 2px;

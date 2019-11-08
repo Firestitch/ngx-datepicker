@@ -20,7 +20,6 @@ import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { DateFormat } from '../../enums/date-format.enum';
 import { MatFormField } from '@angular/material/form-field';
-import { formatDateTime } from '../../helpers/format-date-time';
 import { isDate, format } from 'date-fns';
 
 
@@ -88,13 +87,13 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   public updateInput(value) {
     if (value && isDate(value.from) && isDate(value.to)) {
       if (value.from.getFullYear() == value.to.getFullYear()) {
-        const from = format(value.from, 'MMM dd');
-        const to = format(value.to, 'MMM dd yyyy');
-        this.elementRef.nativeElement.value = `#${value.period} ${from} - ${to}`;
+        const from = format(value.from, 'MMM d');
+        const to = format(value.to, 'MMM d yyyy');
+        this.elementRef.nativeElement.value = `#${value.period}: ${from} - ${to}`;
       } else {
-        const from = format(value.from, 'MMM dd yyyy');
-        const to = format(value.to, 'MMM dd yyyy');
-        this.elementRef.nativeElement.value = `#${value.period} ${from} - ${to}`;
+        const from = format(value.from, 'MMM d yyyy');
+        const to = format(value.to, 'MMM d yyyy');
+        this.elementRef.nativeElement.value = `#${value.period}: ${from} - ${to}`;
       }
     } else {
       this.elementRef.nativeElement.value = '';

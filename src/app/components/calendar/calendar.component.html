@@ -7,7 +7,7 @@
   </div>
   <div class="years" *ngIf="dateMode == 'year'">
     <div *ngFor="let year of years; let index = i" class="year data-year-{{ year.value }}"
-          [ngClass]="{ today: today.year==year.value, row : (index % 4 == 0), selected: selected.year==year.value, disabled: year.disabled }"
+          [ngClass]="{ today: today.year==year.value, selected: selected.year==year.value, disabled: year.disabled }"
           (click)="yearViewChange(year.value)">
       {{ year.value }}
     </div>
