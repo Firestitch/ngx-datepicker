@@ -259,9 +259,8 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public yearView(year) {
 
     setTimeout(() => {
-
       const years = this.element.nativeElement.querySelector('.years');
-      const selected = years.querySelector('.years .year.selected');
+      const selected = years.querySelector('.data-year-' + this.month.date.getFullYear());
 
       if (selected) {
         years.scrollTop = selected.offsetTop;
