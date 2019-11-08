@@ -22,6 +22,7 @@ import { DateRangeExampleComponent } from './components/date-range-example/date-
 import { TimeRangeExampleComponent } from './components/timerange-example/timerange-example.component';
 import { BirthdayExampleComponent } from './components/birthday-example/birthday-example.component';
 import { DateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
+import { WeekPickerComponent } from './components/week-example/week-picker.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { DateScrollPickerComponent } from './components/date-scroll-picker/date-
     DateRangeExampleComponent,
     TimeRangeExampleComponent,
     BirthdayExampleComponent,
-    DateScrollPickerComponent
+    DateScrollPickerComponent,
+    WeekPickerComponent
   ],
   providers: [
   ],

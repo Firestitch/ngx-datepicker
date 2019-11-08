@@ -1,0 +1,29 @@
+.period-mode {
+  cursor: default;
+  pointer-events: none;
+
+  background: none;
+}
+
+.period {
+  width: 50px;
+  padding: 18px 0;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: top;
+  background: #e4e4e4;
+  color: #858585;
+
+  cursor: pointer;
+
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #fff;
+
+  &:hover {
+    background: #effaff;
+  }
+
+  &.selected {
+    background: #8fd4ef;
+  }
+}

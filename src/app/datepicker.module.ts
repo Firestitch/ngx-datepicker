@@ -21,12 +21,13 @@ import { FsDatePickerTimeComponent } from './components/time/time.component';
 import { DateRangeSeparatorComponent } from './components/date-range-separator/date-range-separator.component';
 import { DateRangePickerToComponent } from './components/range-picker/to/range-picker-to.component';
 import { DateRangePickerFromComponent } from './components/range-picker/from/range-picker-from.component';
-
-import { FsDatepickerFactory} from './services/factory.service';
-import { FsRangePickerStoreService } from './services/range-picker-store.service';
 import { FsDateScrollPickerDialogComponent } from './components/date-scroll-picker-dialog/date-scroll-picker-dialog.component';
 import { FsDateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 import { FsDatePickerBirthdayComponent } from './components/date-picker-birthday/date-picker-birthday.component';
+import { FsDateWeekPickerComponent } from './components/date-week-picker/date-week-picker.component';
+
+import { FsDatepickerFactory} from './services/factory.service';
+import { FsRangePickerStoreService } from './services/range-picker-store.service';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { FsDatePickerBirthdayComponent } from './components/date-picker-birthday
     DateRangePickerToComponent,
     FsDateScrollPickerDialogComponent,
     FsDateScrollPickerComponent,
-    FsDatePickerBirthdayComponent
+    FsDatePickerBirthdayComponent,
+    FsDateWeekPickerComponent,
   ],
   exports: [
     FsDatePickerComponent,
@@ -66,7 +68,8 @@ import { FsDatePickerBirthdayComponent } from './components/date-picker-birthday
     DateRangePickerFromComponent,
     DateRangePickerToComponent,
     FsDateScrollPickerComponent,
-    FsDatePickerBirthdayComponent
+    FsDatePickerBirthdayComponent,
+    FsDateWeekPickerComponent
   ],
 })
 export class FsDatePickerModule {

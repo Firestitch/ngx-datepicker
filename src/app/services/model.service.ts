@@ -39,6 +39,8 @@ export class FsDatePickerModel implements FsDatePicker {
   public dateMode = null;
   public minDate = null;
   public maxDate = null;
+  public seedDate = null;
+  public periodWeeks = null;
 
   set components(value) {
     value = Object.assign({}, this._componentsDefault, value);

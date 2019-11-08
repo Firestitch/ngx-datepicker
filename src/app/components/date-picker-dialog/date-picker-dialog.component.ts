@@ -82,6 +82,11 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     }
   }
 
+  public setPeriod(period) {
+    this.model = period;
+    this._dialogRef.updateValue(this.model);
+  }
+
   public toggleTimeExpand() {
     this.timePickerExpanded = !this.timePickerExpanded;
   }
@@ -141,6 +146,8 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.fsDatePickerModel.minDate = this.dialogData.minDate;
     this.fsDatePickerModel.maxDate = this.dialogData.maxDate;
     this.fsDatePickerModel.dateMode = this.dialogData.dateMode;
+    this.fsDatePickerModel.seedDate = this.dialogData.seedDate;
+    this.fsDatePickerModel.periodWeeks = this.dialogData.periodWeeks;
   }
 
   private _initComponents() {

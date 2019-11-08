@@ -11,22 +11,17 @@ import {
 
 
 import {
-  addDays,
   addMonths,
   eachDayOfInterval,
-  endOfDay,
   endOfMonth,
   endOfYear,
   format,
-  getDaysInMonth,
   isAfter,
   isValid,
-  isWithinInterval,
   lightFormat,
   startOfDay,
   startOfMonth,
   startOfYear,
-  subDays,
   subMonths
 } from 'date-fns';
 
@@ -34,6 +29,10 @@ import { FsDatePickerModel } from '../../services/model.service';
 import { getStartDayDate } from '../../helpers/get-start-day-date';
 import { splitDateByComponents } from '../../helpers/split-date-by-components';
 import { MONTHS } from '../../consts/months';
+import { WEEKDAYS } from '../../consts/week-days';
+import { Month } from '../../models/month';
+import { Period } from '../../models/period';
+import { isRangeDisabled } from '../../helpers/is-range-disabled';
 
 
 @Component({
@@ -45,7 +44,7 @@ import { MONTHS } from '../../consts/months';
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Input()
-  public date: Date = null;
+  public date: any = null;
 
   @Input()
   public highlightStartDate = null;
@@ -59,8 +58,17 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   @Input()
   public drawMonth = null;
 
+  @Input()
+  public seedDate;
+
+  @Input()
+  public periodWeeks;
+
   @Output()
   public onChange = new EventEmitter<any>();
+
+  @Output()
+  public onPeriodChange = new EventEmitter<{ period: number, from: Date, to: Date }>();
 
   @Output()
   public yearChanged = new EventEmitter<any>();
@@ -76,11 +84,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public hoverDay = new EventEmitter<any>();
 
   public selected: any = {};
-  public month = null;
+  public selectedPeriod: Period;
+  public month: Month = null;
   public years = [];
   public dateDays = [];
 
   public monthList: any = MONTHS;
+  public weekDaysList = [];
 
   public currentDate = new Date();
   public today: any = {
@@ -101,7 +111,18 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     this.createYearsList();
     this.updateMonthsListDisabledStatus();
 
-    if (this.date) {
+    if (this.dateMode === 'week') {
+      if (this.date && this.seedDate) {
+        this.selectedPeriod = new Period(this.date.period, this.seedDate, this.periodWeeks, true);
+        this.selectedPeriod.year = this.date.from.getFullYear();
+
+        const selectedPeriod = this.month.updateSelectionForPeriod(this.selectedPeriod);
+
+        if (selectedPeriod) {
+          this.selectedPeriod = selectedPeriod;
+        }
+      }
+    } else if (this.date) {
       this.selected = splitDateByComponents(this.date);
     }
   }
@@ -171,51 +192,18 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  public isDayDisabled(date) {
-    const startDay = startOfDay(date);
-    const endDay = endOfDay(date);
-
-    return this.isRangeDisabled(startDay, endDay);
-  }
-
   public isMonthDisabled(date) {
     const startMonth = startOfMonth(date);
     const endMonth = endOfMonth(date);
 
-    return this.isRangeDisabled(startMonth, endMonth);
+    return isRangeDisabled(this.disabledDays, startMonth, endMonth);
   }
 
   public isYearDisabled(date) {
     const startYear = startOfYear(date);
     const endYear = endOfYear(date);
 
-    return this.isRangeDisabled(startYear, endYear);
-  }
-
-  public isRangeDisabled(start, end) {
-    if (!this.disabledDays) {
-      return false;
-    }
-
-    for (let i = 0; i < this.disabledDays.length; i++) {
-      const value = this.disabledDays[i];
-
-      const startDay = startOfDay(value[0]);
-      const endDay = endOfDay(value[1]);
-
-      const startDayIntersectWithDisabled =
-        isWithinInterval(start, { start: startDay, end: endDay })
-        || lightFormat(start, 'yyyy-MM-dd') === lightFormat(value[0], 'yyyy-MM-dd');
-
-      const endDayIntersectWithDisabled =
-        isWithinInterval(end, { start: startDay, end: endDay })
-        || lightFormat(end, 'yyyy-MM-dd') === lightFormat(value[1], 'yyyy-MM-dd');
-
-      if (startDayIntersectWithDisabled && endDayIntersectWithDisabled) {
-          return true;
-      }
-    }
-    return false;
+    return isRangeDisabled(this.disabledDays, startYear, endYear);
   }
 
   public monthClick(month) {
@@ -305,6 +293,31 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     this.setDate(date);
   }
 
+  public selectPeriod(period: Period) {
+    if (this.selectedPeriod) {
+      if (this.selectedPeriod === period) {
+        this.selectedPeriod.selected = !this.selectedPeriod.selected;
+      } else {
+        this.selectedPeriod.selected = false;
+        period.selected = true;
+        this.selectedPeriod = period;
+      }
+    } else {
+      period.selected = true;
+      this.selectedPeriod = period;
+    }
+
+    if (this.selectedPeriod.selected) {
+      this.onPeriodChange.emit({
+        period: this.selectedPeriod.periodId,
+        from: this.selectedPeriod.from,
+        to: this.selectedPeriod.to,
+      });
+    } else {
+      this.onPeriodChange.emit(null);
+    }
+  }
+
   public yearViewChange(year) {
     if (this.isYearDisabled(new Date().setFullYear(year))) {
       return;
@@ -350,7 +363,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   }
 
   public setYear(yearNumber) {
-    const year = new Date(this.month.datelightFormat).setFullYear(yearNumber);
+    const year = new Date(this.month.date).setFullYear(yearNumber);
     this.onDrawMonth.emit(year);
   }
 
@@ -360,49 +373,27 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   }
 
   public createMonth(date: Date) {
-    date = new Date(date);
-    date.setDate(1);
+    const month = new Month(date, this.seedDate, this.periodWeeks, this.disabledDays);
 
-    const days = [], weeks = [];
-    let week = [];
-    let md = subDays(date, date.getDay());
-
-    const daysInMonth = getDaysInMonth(date);
-    const totalDays = daysInMonth + date.getDay() + (6 - addMonths(date, 1).getDay() + 1);
-
-    for (let d = 0; d < totalDays; d++) {
-      const dayNumber = lightFormat(md, 'd');
-      days.push({ number: dayNumber });
-
-      if (d % 7 == 0) {
-        week = [];
-        weeks.push(week);
-      }
-
-      week.push({
-        mute: (d - date.getDay() < 0 || ((d - date.getDay() + 1) > daysInMonth)),
-        date: lightFormat(md, 'yyyy-MM-dd'),
-        number: dayNumber,
-        month: md.getMonth(),
-        year: md.getFullYear(),
-        disabled: this.isDayDisabled(md)
+    if (this.dateMode === 'week') {
+      this.weekDaysList = WEEKDAYS.map((_, i, arr) => {
+        return arr[(i + month.seedDay) % 7];
       });
-
-      md = addDays(md, 1);
+    } else {
+      this.weekDaysList = WEEKDAYS.slice();
     }
 
-    const monthName = format(date, 'MMMM');
+    month.renderDays();
 
-    return {
-      name: format(date, 'MMMM'),
-      number: date.getMonth(),
-      year: date.getFullYear(),
-      date: date,
-      monthAndYear: `${date.getFullYear()}-${date.getMonth()}`,
-      weeks: weeks,
-      months: [{ name: monthName, value: date.getMonth() }],
-      years: [ date.getFullYear() ]
+    if (this.dateMode === 'week' && this.selectedPeriod) {
+      const selectedPeriod = month.updateSelectionForPeriod(this.selectedPeriod);
+
+      if (selectedPeriod) {
+        this.selectedPeriod = selectedPeriod;
+      }
     }
+
+    return month;
   }
 
   public createYearsList() {
