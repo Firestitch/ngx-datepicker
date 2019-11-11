@@ -35,7 +35,16 @@
       </tr>
       </thead>
       <tbody class="calendar calendar-{{ month.monthAndYear }}" >
-      <tr class="week" *ngFor="let week of month.weeks">
+      <tr class="week"
+          *ngFor="let week of month.weeks"
+          [ngClass]="{
+            'first-period-week': week.firstWeekInPeriod,
+            'last-period-week': week.lastWeekInPeriod,
+            'hover': week.period?.mouseOver
+          }"
+          (mouseenter)="mouseEnterWeek(week)"
+          (mouseleave)="mouseLeaveWeek(week)"
+      >
         <ng-container *ngIf="week.periodLableVisible">
           <td class="period"
               [rowSpan]="week.period.countOfWeeks"
@@ -59,7 +68,7 @@
                 'week-mode': dateMode === 'week',
                 disabled: day.disabled
               }"
-              (click)="dayClick(day, $event)"
+              (click)="dayClick(day, week, $event)"
               (mouseenter)="onMouseEnterDay(day)">
             {{ day.number }}
             <span class="today" *ngIf="today.date==day.date">TODAY</span>

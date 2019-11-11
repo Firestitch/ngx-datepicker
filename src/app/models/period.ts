@@ -1,11 +1,13 @@
 import {
-  addWeeks,
+  addWeeks, differenceInCalendarYears,
   differenceInYears,
 } from 'date-fns';
 
 import { Week } from './week';
 
 export class Period {
+
+  public mouseOver = false;
 
   private _weeks: Week[] = [];
   private _countOfWeeks = 0;
@@ -15,10 +17,13 @@ export class Period {
 
   constructor(
     public periodId: number,
+    public startDate: Date,
     public seedDate: Date,
     public periodWeeks: number,
     private _selected = false,
-  ) {}
+  ) {
+    this._updatePeriodInterval();
+  }
 
   public get countOfWeeks() {
     return this._countOfWeeks;
@@ -59,20 +64,24 @@ export class Period {
 
     if (this.seedDate && this.periodWeeks) {
       this._sortWeeks();
+
+      if (this._weeks.length === 1) {
+        week.setPeriodVisibility(true);
+      }
     }
 
     this._countOfWeeks = this._weeks.length;
   }
 
   /**
-   * Set visible only FIRST week in VISIBLE period
-   *
-   * week[0] can be first week for current month, but not for whole period,
-   * because period can start from previous months
-   * (ex. when periodWeeks = 5)
+   * Mark weeks with special flags to be able to draw borders
    */
-  public updateVisibilityForWeeks() {
-    this._weeks[0].setPeriodVisibility(true)
+  public markFirstLastWeeks() {
+    const firstWeek = this._weeks[0];
+    const lastWeek = this._weeks[this._weeks.length - 1];
+
+    firstWeek.markAsFirstVisiblePeriodWeek();
+    lastWeek.markAsLastVisiblePeriodWeek();
   }
 
   private _sortWeeks() {
@@ -90,10 +99,8 @@ export class Period {
   /**
    * Calc from, to, year params based on period date start
    */
-  public updatePeriodInterval() {
-    const firstPeriodWeek = this._weeks[0];
-
-    const diffInCalendarYears = differenceInYears(firstPeriodWeek.dateStart, this.seedDate);
+  private _updatePeriodInterval() {
+    const diffInCalendarYears = differenceInCalendarYears(this.startDate, this.seedDate);
 
     const seedDate = new Date(this.seedDate);
     seedDate.setFullYear(seedDate.getFullYear() + diffInCalendarYears);

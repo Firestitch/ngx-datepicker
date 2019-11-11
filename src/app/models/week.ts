@@ -2,11 +2,11 @@ import {
   addWeeks,
   addYears,
   differenceInCalendarWeeks,
-  differenceInCalendarYears,
+  differenceInCalendarYears, differenceInWeeks,
   differenceInYears,
   isBefore,
   isSameWeek
-} from "date-fns";
+} from 'date-fns';
 
 import { Period } from './period';
 import { DayItem } from '../interfaces/day-item.interface';
@@ -17,6 +17,9 @@ export class Week {
   public days: DayItem[] = [];
   public period: Period;
   public periodId: number;
+
+  public firstWeekInPeriod = false;
+  public lastWeekInPeriod = false;
 
   private _periodVisible = false;
   private _dateEnd: Date;
@@ -70,6 +73,17 @@ export class Week {
   }
 
   /**
+   * To be able to draw borders for week
+   */
+  public markAsFirstVisiblePeriodWeek() {
+    this.firstWeekInPeriod = true;
+  }
+
+  public markAsLastVisiblePeriodWeek() {
+    this.lastWeekInPeriod = true;
+  }
+
+  /**
    * Calculate period ID based on week date start and seed date
    * @private
    */
@@ -109,7 +123,7 @@ export class Week {
     } else {
       const diffInYears = differenceInYears(addWeeks(this._dateStart, 1), this._seedDate);
 
-      let seedDate = new Date(this._seedDate);
+      const seedDate = new Date(this._seedDate);
       seedDate.setFullYear(seedDate.getFullYear() + diffInYears);
 
       const weeksDiff = differenceInCalendarWeeks(

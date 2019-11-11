@@ -59,8 +59,11 @@ export class Month {
         this.weeks.push(week);
       }
 
+      const dayMuted = d - this._prevMonthDaysCount < 0
+        || d >= this._daysInMonth + this._prevMonthDaysCount;
+
       week.addDay({
-        mute: (d - this._prevMonthDaysCount < 0 || d >= this._totalDaysInMonth + this._prevMonthDaysCount),
+        mute: dayMuted,
         date: lightFormat(currentDate, 'yyyy-MM-dd'),
         number: dayNumber,
         month: currentDate.getMonth(),
@@ -73,7 +76,7 @@ export class Month {
 
     if (this.seedDate && this.periodWeeks) {
       this._groupWeeks();
-      this._updatePeriodLabels();
+      this._markFirstAndLastWeeks();
     }
   }
 
@@ -93,6 +96,7 @@ export class Month {
    */
   public updateSelectionForPeriod(period: Period) {
     const p = this.getPeriodById(period.periodId);
+
     if (p && p.year === period.year) {
       p.selected = period.selected;
 
@@ -112,14 +116,14 @@ export class Month {
     this.date.setDate(1);
 
     this._monthStartDay = this.date.getDay();
-    this._daysInMonth = getDaysInMonth(date);
+    this._daysInMonth = getDaysInMonth(this.date);
 
     this.name = format(this.date, 'MMMM');
     this.number = this.date.getMonth();
     this.year = this.date.getFullYear();
-    this.monthAndYear = `${date.getFullYear()}-${date.getMonth()}`;
-    this.months = [{ name: format(date, 'MMMM'), value: date.getMonth() }];
-    this.years = [ date.getFullYear() ];
+    this.monthAndYear = `${this.date.getFullYear()}-${this.date.getMonth()}`;
+    this.months = [{ name: format(this.date, 'MMMM'), value: this.date.getMonth() }];
+    this.years = [ this.date.getFullYear() ];
   }
 
   /**
@@ -134,7 +138,7 @@ export class Month {
       this._prevMonthDaysCount  = 7 - (seedDay - this._monthStartDay);
     }
 
-    let totalDays = this._daysInMonth + this._prevMonthDaysCount;
+    const totalDays = this._daysInMonth + this._prevMonthDaysCount;
     this._totalDaysInMonth = Math.ceil(totalDays / 7) * 7;
   }
 
@@ -147,32 +151,27 @@ export class Month {
 
     this.weeks.forEach((week) => {
       if (!this.weeksByPeriod.has(week.periodId)) {
-        const period = new Period(
+        const newPeriod = new Period(
           week.periodId,
+          week.dateStart,
           this.seedDate,
-          this.periodWeeks
+          this.periodWeeks,
         );
 
-        this.weeksByPeriod.set(week.periodId, period);
+        this.weeksByPeriod.set(week.periodId, newPeriod);
       }
 
       const period = this.weeksByPeriod
         .get(week.periodId);
 
       period.addWeek(week);
-
       week.addPeriod(period);
     });
   }
 
-  /**
-   * Update visibility for period labels
-   * @private
-   */
-  private _updatePeriodLabels() {
+  private _markFirstAndLastWeeks() {
     this.weeksByPeriod.forEach((period) => {
-      period.updateVisibilityForWeeks();
-      period.updatePeriodInterval();
-    });
+      period.markFirstLastWeeks()
+    })
   }
 }

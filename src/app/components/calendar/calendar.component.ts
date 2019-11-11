@@ -33,6 +33,7 @@ import { WEEKDAYS } from '../../consts/week-days';
 import { Month } from '../../models/month';
 import { Period } from '../../models/period';
 import { isRangeDisabled } from '../../helpers/is-range-disabled';
+import { Week } from '../../models/week';
 
 
 @Component({
@@ -113,7 +114,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
     if (this.dateMode === 'week') {
       if (this.date && this.seedDate) {
-        this.selectedPeriod = new Period(this.date.period, this.seedDate, this.periodWeeks, true);
+        this.selectedPeriod = new Period(this.date.period, this.date.from, this.seedDate, this.periodWeeks, true);
         this.selectedPeriod.year = this.date.from.getFullYear();
 
         const selectedPeriod = this.month.updateSelectionForPeriod(this.selectedPeriod);
@@ -149,6 +150,18 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public onMouseEnterDay(day) {
     this.hoverDay.emit(day);
+  }
+
+  public mouseEnterWeek(week: Week) {
+    if (this.dateMode === 'week') {
+      week.period.mouseOver = true;
+    }
+  }
+
+  public mouseLeaveWeek(week: Week) {
+    if (this.dateMode === 'week') {
+      week.period.mouseOver = false;
+    }
   }
 
   public updateDaysHighlighted() {
@@ -273,9 +286,18 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   /**
    *
    * @param day
+   * @param week
    * @param event
    */
-  public dayClick(day, event) {
+  public dayClick(day, week, event) {
+    if (this.dateMode === 'week') {
+      this.selectPeriod(week.period);
+    } else {
+      this.selectDay(day);
+    }
+  }
+
+  public selectDay(day) {
     if (day.disabled) {
       return;
     }

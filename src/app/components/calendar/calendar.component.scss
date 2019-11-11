@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 .period-mode {
   cursor: default;
   pointer-events: none;
@@ -23,3 +25,4 @@
     background: #8fd4ef;
   }
 }
+

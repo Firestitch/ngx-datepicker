@@ -323,16 +323,6 @@
       display: flex !important;
     }
 
-    .time-container .hour:hover:not(.disabled):not(.selected),
-    .time-container .minute:hover:not(.disabled):not(.selected),
-    .calendar-container .day:hover:not(.disabled):not(.selected):not(.blank),
-    .calendar-container .years .year:hover:not(.disabled):not(.selected),
-    .calendar-container .months .month:hover:not(.disabled):not(.selected),
-    .calendar-container .year-name:hover:not(.disabled):not(.selected),
-    .calendar-container .month-name:hover:not(.disabled):not(.selected) {
-      background: rgba(70,120,174,.15);
-    }
-
     &.has-view-time {
       .summary .date:hover,
       .summary .time:hover {
@@ -405,6 +395,16 @@
 
   $primary: mat-palette($theme);
 
+  .time-container .hour:hover:not(.disabled):not(.selected),
+  .time-container .minute:hover:not(.disabled):not(.selected),
+  .calendar-container .day:hover:not(.disabled):not(.selected):not(.blank),
+  .calendar-container .years .year:hover:not(.disabled):not(.selected),
+  .calendar-container .months .month:hover:not(.disabled):not(.selected),
+  .calendar-container .year-name:hover:not(.disabled):not(.selected),
+  .calendar-container .month-name:hover:not(.disabled):not(.selected) {
+    background: rgba(mat-color($primary), 0.3)
+  }
+
   .calendar-container {
     .day.selected,
     .years .year.selected,
@@ -429,6 +429,30 @@
 
   .time-container .minutes .button-expand {
     color: mat-color($primary);
+  }
+
+  .week {
+    &.first-period-week {
+      border-top: 1px solid #e4e4e4;
+    }
+
+    &.last-period-week {
+      border-bottom: 1px solid #e4e4e4;
+    }
+
+    &.hover {
+      td {
+        &:not(.selected) {
+          &.period {
+            background: rgba(mat-color($primary), 0.1);
+          }
+
+          &.day {
+            background: rgba(mat-color($primary), 0.3) !important;
+          }
+        }
+      }
+    }
   }
 }
 
