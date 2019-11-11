@@ -109,7 +109,6 @@ export class Month {
   /**
    * Init base month field
    * @param date
-   * @private
    */
   private _initMonth(date: Date) {
     this.date = new Date(date);
@@ -129,7 +128,6 @@ export class Month {
   /**
    * Depends on week day start it counts total number of days in month
    * @param seedDay
-   * @private
    */
   private _countTotalDaysInMonth(seedDay) {
     if (this._monthStartDay > seedDay) {
@@ -144,7 +142,6 @@ export class Month {
 
   /**
    * Just for easy usage
-   * @private
    */
   private _groupWeeks() {
     this.weeksByPeriod = new Map();

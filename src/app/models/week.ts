@@ -85,7 +85,6 @@ export class Week {
 
   /**
    * Calculate period ID based on week date start and seed date
-   * @private
    */
   private _getPeriodId() {
     /**
