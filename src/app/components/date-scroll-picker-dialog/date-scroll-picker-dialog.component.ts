@@ -4,14 +4,14 @@ import {
   Component,
   ElementRef,
   Inject,
-  OnInit
 } from '@angular/core';
+import { getDaysInMonth, isValid } from 'date-fns';
+
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDateDialogRef } from '../../classes/date-dialog-ref';
 import { DIALOG_DATA } from '../../services/dialog-data';
 import { MONTHS } from '../../consts/months';
-import { getDaysInMonth } from 'date-fns';
 
 
 @Component({
@@ -52,7 +52,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     this._generateMonthArray();
     this._generateDaysArray();
 
-    if (modelValue) {
+    if (modelValue && isValid(modelValue)) {
       this._setDate(modelValue);
     } else {
 
