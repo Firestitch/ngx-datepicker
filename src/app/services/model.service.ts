@@ -14,7 +14,7 @@ export class FsDatePickerModel implements FsDatePicker {
   // @TODO create interfaces for all values
 
   /**
-   * date | datetime | time
+   * date | datetime | time | week
    * View is options selected on init. Can't be changed manually
    */
   private _view = 'date';

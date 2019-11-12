@@ -102,12 +102,17 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public highlightedRangeDays = null;
 
+  // date | datetime | week
+  private _calendarMode = 'date';
+
   constructor(
     public element: ElementRef,
     public fsDatePickerModel: FsDatePickerModel,
   ) {}
 
   public ngOnInit() {
+
+    this._calendarMode = this.dateMode;
 
     this.createYearsList();
     this.updateMonthsListDisabledStatus();
@@ -261,7 +266,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   }
 
   public calendarView() {
-    this.onDateModeChange.emit('date');
+    this.onDateModeChange.emit(this._calendarMode);
   }
 
   public monthView() {
