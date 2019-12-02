@@ -172,7 +172,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   }
 
   private _generateYearsArray() {
-    const minYear = this._dialogData.minYear;
+    let minYear = this._dialogData.minYear;
     let maxYear = this._dialogData.maxYear;
 
     if (!maxYear) {
@@ -180,8 +180,8 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
       maxYear = today.getFullYear();
     }
 
-     for ( maxYear; maxYear >= minYear; maxYear-- ) {
-       this.years.push(maxYear);
+     for ( minYear; minYear <= maxYear; minYear++ ) {
+       this.years.push(minYear);
      }
   }
 }

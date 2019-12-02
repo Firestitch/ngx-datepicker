@@ -15,5 +15,9 @@ import { FsDateScrollPickerComponent } from '../date-scroll-picker/date-scroll-p
 })
 export  class FsDatePickerBirthdayComponent extends FsDateScrollPickerComponent {
 
-  @Input() maxYear = (new Date()).getFullYear();
+  @Input()
+  public minYear = (new Date()).getFullYear() - 120;
+
+  @Input()
+  public maxYear = (new Date()).getFullYear();
 }
