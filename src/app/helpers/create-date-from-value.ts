@@ -7,6 +7,8 @@ export function createDateFromValue(value) {
     if (!isValid(value)) {
       value = null;
     }
+  } if (value && isDate(value) && !isValid(value)) {
+    value = null
   }
 
   return value;
