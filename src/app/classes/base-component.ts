@@ -112,6 +112,12 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
     }
   }
 
+  public setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+
+    this._cdRef.markForCheck();
+  }
+
   protected open() {
     this.renderer.addClass(document.body, 'fs-date-picker-open');
     this.opened = true;
