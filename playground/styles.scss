@@ -2,5 +2,8 @@
 
 @import './../tools/assets/playground.scss';
 @import '../src/app/styles.scss';
+@import "~@firestitch/form/styles.scss";
+
 @include mat-core();
 @include fs-date-picker($mat-blue);
+@include fs-form($mat-blue);

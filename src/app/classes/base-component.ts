@@ -19,7 +19,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { FsDateDialogRef } from './date-dialog-ref';
 
 
-export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy {
+export abstract class FsDatePickerBaseComponent implements OnDestroy {
 
   abstract updateInput(value: Date);
 
@@ -34,21 +34,11 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
     }
   }
 
-
   @Input()
-  @HostBinding('class.fs-disabled-input')
   public disabled = false;
 
   @Input()
-  @HostBinding('class.fs-readonly-input')
   public readonly = false;
-
-  /*@HostListener('focus', ['$event'])
-  public onFocus($event) {
-    setTimeout(() => {
-      this.elementRef.nativeElement.blur();
-    });
-  }*/
 
   public opened = false;
   public _onChange = (value: any) => { };
@@ -69,8 +59,6 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
-
-    this.elementRef.nativeElement.setAttribute('autocomplete', 'off');
   }
 
   public get dateDialogRef() {
@@ -92,24 +80,6 @@ export abstract class FsDatePickerBaseComponent implements OnChanges, OnDestroy 
   public ngOnDestroy() {
     this._destroy$.next();
     this._destroy$.complete();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.readonly && this._parentFormField) {
-      if (this.readonly) {
-        this._parentFormField._elementRef.nativeElement.classList.add('fs-readonly-field');
-      } else {
-        this._parentFormField._elementRef.nativeElement.classList.remove('fs-readonly-field');
-      }
-    }
-
-    if (changes.disabled && this._parentFormField) {
-      if (this.disabled) {
-        this._parentFormField._elementRef.nativeElement.classList.add('fs-disabled-field');
-      } else {
-        this._parentFormField._elementRef.nativeElement.classList.remove('fs-disabled-field');
-      }
-    }
   }
 
   public setDisabledState(isDisabled: boolean) {

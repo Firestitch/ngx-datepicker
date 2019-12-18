@@ -26,7 +26,7 @@ import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from '../../../enums/date-format.enum';
 
 
-export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor {
+export class BaseRangePickerComponent implements ControlValueAccessor {
 
   @Input()
   public view: DateFormat;
@@ -89,24 +89,6 @@ export class BaseRangePickerComponent implements OnChanges, ControlValueAccessor
 
   public get dateDialogRef() {
     return this._dateDialogRef;
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.readonly && this._parentFormField) {
-      if (this.readonly) {
-        this._parentFormField._elementRef.nativeElement.classList.add('fs-readonly-field');
-      } else {
-        this._parentFormField._elementRef.nativeElement.classList.remove('fs-readonly-field');
-      }
-    }
-
-    if (changes.disabled && this._parentFormField) {
-      if (this.disabled) {
-        this._parentFormField._elementRef.nativeElement.classList.add('fs-disabled-field');
-      } else {
-        this._parentFormField._elementRef.nativeElement.classList.remove('fs-disabled-field');
-      }
-    }
   }
 
   public writeValue(value) {
