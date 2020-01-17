@@ -2,7 +2,15 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit, } from '@angular/co
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { takeUntil } from 'rxjs/operators';
-import { addYears, isAfter, isBefore, isSameDay, startOfDay, subDays, subYears } from 'date-fns';
+import {
+  addYears,
+  isAfter,
+  isBefore, isDate,
+  isSameDay, isValid,
+  startOfDay,
+  subDays,
+  subYears
+} from 'date-fns';
 
 import { FsDatePickerModel } from '../../services/model.service';
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
@@ -146,7 +154,13 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.fsDatePickerModel.minDate = this.dialogData.minDate;
     this.fsDatePickerModel.maxDate = this.dialogData.maxDate;
     this.fsDatePickerModel.dateMode = this.dialogData.dateMode;
-    this.fsDatePickerModel.seedDate = this.dialogData.seedDate;
+
+    if (!isDate(this.dialogData.seedDate) || !isValid(this.dialogData.seedDate)) {
+      this.fsDatePickerModel.seedDate = new Date((new Date().getFullYear()), 0, 1);
+    } else {
+      this.fsDatePickerModel.seedDate = this.dialogData.seedDate;
+    }
+
     this.fsDatePickerModel.periodWeeks = this.dialogData.periodWeeks;
   }
 
