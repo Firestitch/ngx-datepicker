@@ -89,7 +89,9 @@
     </ng-template>
 
     <div class="done">
-      <button type="button" mat-button color="primary" (click)="close()">Done</button>
+      <ng-container *ngIf="fsDatePickerModel.view === 'datetime'">
+        <button type="button" mat-button color="primary" (click)="close()">Done</button>
+      </ng-container>
       <button type="button"
               mat-button
               class="show-more-btn"
