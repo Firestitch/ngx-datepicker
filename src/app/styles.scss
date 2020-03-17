@@ -27,8 +27,12 @@
   .done {
     background: #fff;
     padding: 4px;
+    display: flex;
   }
 
+  .show-more-btn {
+    width: 100%;
+  }
 
   &:not(.dialog-view-datetime):not(.dialog-view-time) {
 
