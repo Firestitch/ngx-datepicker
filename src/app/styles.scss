@@ -8,38 +8,19 @@
     position: fixed;
   }
 
-  &.picker-tab-date {
-    @media only screen and (max-width: 737px) {
-      .done {
-        .show-more-btn {
-          display: none;
-        }
-      }
-    }
-  }
-
   &.date-mode-year, &.date-mode-month {
     .wrap {
       width: 350px;
     }
   }
 
-  .done {
+  .buttons {
     background: #fff;
-    padding: 4px;
     display: flex;
-  }
 
-  .show-more-btn {
-    width: 100%;
-  }
-
-  &:not(.dialog-view-datetime):not(.dialog-view-time) {
-
-    .done {
-      button {
-        width: 100%;
-      }
+    button {
+      margin: 5px;
+      width: 100%;
     }
   }
 
@@ -193,7 +174,6 @@
     width: 100%;
     position: relative;
     flex: 1 1 45%;
-    min-height: 350px;
   }
 
   .calendar-container .day.selected,
@@ -245,7 +225,6 @@
   .date-time {
     flex-direction: row;
     display: flex;
-    height: 370px;
   }
 
   .months {
@@ -335,6 +314,10 @@
       }
     }
   }
+
+  .buttons .button-done {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 736px) {
@@ -346,6 +329,7 @@
     margin: 0px;
     height: 100vh;
     max-height: initial !important;
+    background-color: #fff;
 
     &.has-view-date.has-view-time {
       .date-time {
@@ -356,19 +340,12 @@
     .wrap {
     	margin: 0px;
     	width: 100% !important;
-      height: 100%;
       box-shadow: none;
 
       .header {
         position: fixed;
         top: 0;
         width: 100%;
-      }
-
-      .date-time {
-        margin-bottom: 50px;
-        height: 100%;
-        overflow: auto;
       }
     }
 
@@ -471,11 +448,6 @@
 
 .mat-form-field .mat-form-field-flex.hide-clear .fs-clear-wrapper {
   display: none;
-}
-
-.fs-clear-wrapper {
-  width: 28px;
-  height: 28px;
 }
 
 fs-date-picker-dialog * {

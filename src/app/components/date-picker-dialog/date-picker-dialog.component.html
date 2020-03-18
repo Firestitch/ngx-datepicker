@@ -88,13 +88,11 @@
       </div>
     </ng-template>
 
-    <div class="done">
-      <ng-container *ngIf="fsDatePickerModel.view === 'datetime'">
-        <button type="button" mat-button color="primary" (click)="close()">Done</button>
-      </ng-container>
+    <div class="buttons">
+      <button class="button-done" type="button" mat-button color="primary" (click)="close()">Done</button>
       <button type="button"
               mat-button
-              class="show-more-btn"
+              class="button-more"
               *ngIf="fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time'"
               (click)="toggleTimeExpand()">
         <ng-container *ngIf="!timePickerExpanded; else lessMinutes">
