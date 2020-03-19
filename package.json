@@ -77,6 +77,6 @@
     "@firestitch/clear": ">=7.1.0",
     "@firestitch/date": ">=7.1.0",
     "@firestitch/scroll-picker": ">=7.0.2",
-    "typescript": "~3.5.3"
+    "typescript": ">=3.5.3"
   }
 }
