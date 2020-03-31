@@ -311,10 +311,15 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       this.createModel();
     }
 
-    const date = new Date(this.date);
-    date.setFullYear(day.year);
-    date.setMonth(day.month);
-    date.setDate(day.number);
+
+    const date = new Date(
+      day.year,
+      day.month,
+      day.number,
+      this.date.getHours(),
+      this.date.getMinutes(),
+      this.date.getSeconds()
+    );
 
     this.setDate(date);
   }
