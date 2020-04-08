@@ -19,7 +19,7 @@ import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: '[fsDateRangeFrom]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && !dateDialogRef" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="value && ((!disabled && !readonly) || !!dateDialogRef)" (clear)="cleared($event)"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -8,8 +8,7 @@ import {
   HostBinding,
   Input,
   Optional,
-  OnChanges,
-  SimpleChanges, ChangeDetectorRef,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { MatFormField } from '@angular/material/form-field';
 
@@ -17,9 +16,10 @@ import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { FsDateDialogRef } from './date-dialog-ref';
+import { ControlValueAccessor } from '@angular/forms';
 
 
-export abstract class FsDatePickerBaseComponent implements OnDestroy {
+export abstract class FsDatePickerBaseComponent implements ControlValueAccessor, OnDestroy {
 
   abstract updateInput(value: Date);
 
@@ -34,10 +34,17 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
     }
   }
 
-  @Input()
+  @HostBinding('class.fs-input-disabled')
+  @HostBinding('attr.readonly')
   public disabled = false;
 
-  @Input()
+  @Input('readonly')
+  public set readonlyState(isReadonly: string) {
+    this.readonly = !!isReadonly || isReadonly === '';
+  }
+
+  @HostBinding('class.fs-input-readonly')
+  @HostBinding('attr.readonly')
   public readonly = false;
 
   public opened = false;
@@ -60,6 +67,8 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
     this.renderer = renderer;
     this.elementRef = elementRef;
   }
+
+  public writeValue(obj: any): void {}
 
   public get dateDialogRef() {
     return this._dateDialogRef;
@@ -123,5 +132,4 @@ export abstract class FsDatePickerBaseComponent implements OnDestroy {
       this.elementRef.nativeElement.setAttribute('readonly', true);
     });
   }
-
 }

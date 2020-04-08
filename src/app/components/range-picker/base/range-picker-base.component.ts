@@ -43,12 +43,15 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   @Input()
   public maxDate = null;
 
-  @Input()
   @HostBinding('class.fs-input-disabled')
   @HostBinding('attr.readonly')
   public disabled = false;
 
-  @Input()
+  @Input('readonly')
+  public set readonlyState(isReadonly: string) {
+    this.readonly = !!isReadonly || isReadonly === '';
+  }
+
   @HostBinding('class.fs-input-readonly')
   @HostBinding('attr.readonly')
   public readonly = false;
@@ -102,6 +105,10 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
 
       this._cdRef.markForCheck();
     }
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   @HostListener('click')

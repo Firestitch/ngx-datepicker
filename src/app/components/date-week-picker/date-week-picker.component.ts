@@ -25,7 +25,7 @@ import { isDate, format } from 'date-fns';
 
 @Component({
   selector: '[fsDateWeekPicker]',
-  template: '<fs-clear [show]="ngModel && !disabled && !readonly && !dateDialogRef" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="ngModel && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateWeekPickerComponent),
