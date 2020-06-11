@@ -24,7 +24,7 @@ import { DateFormat } from '../../enums/date-format.enum';
 
 @Component({
   selector: '[fsDateScrollPicker]',
-  template: '<fs-clear [show]="ngModel && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateScrollPickerComponent),
@@ -41,7 +41,6 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   @Input() public showMonth = true;
   @Input() public showYear = true;
   @Input() public showDay = true;
-  @Input() public ngModel = null;
 
   constructor(
     protected renderer: Renderer2,
@@ -60,7 +59,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   }
 
   public writeValue(value: any): void {
-    this.ngModel = createDateFromValue(value);
+    this._value = createDateFromValue(value);
     this.updateInput(value);
 
     this._cdRef.markForCheck();
@@ -97,7 +96,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
       this.injector,
       {
         elementRef: this.elementRef,
-        modelValue: this.ngModel,
+        modelValue: this.value,
         minYear: this.minYear,
         maxYear: this.maxYear,
         maxDate: this.maxDate,

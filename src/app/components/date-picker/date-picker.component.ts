@@ -26,7 +26,7 @@ import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: '[fsDatePicker]',
-  template: '<fs-clear [show]="ngModel && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerComponent),
@@ -37,7 +37,6 @@ import { MatFormField } from '@angular/material/form-field';
 export class FsDatePickerComponent extends FsDatePickerBaseComponent implements AfterViewInit {
 
   @Input() public minYear = null;
-  @Input() public ngModel = null;
   @Input() public maxYear = null;
   @Input() public minDate = null;
   @Input() public maxDate = null;
@@ -54,7 +53,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   public get hideClearButton(): boolean {
     return this._hideClearButton;
   }
-
   @Output('change')
   public change$ = new EventEmitter<any>();
 
@@ -77,7 +75,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   }
 
   public writeValue(value: any): void {
-    this.ngModel = createDateFromValue(value);
+    this._value = createDateFromValue(value);
     this.updateInput(value);
 
     this._cdRef.markForCheck();
@@ -98,7 +96,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
       this.injector,
       {
         elementRef: this.elementRef,
-        modelValue: this.ngModel,
+        modelValue: this.value,
         view: this.view,
         minYear: this.minYear,
         maxYear: this.maxYear,

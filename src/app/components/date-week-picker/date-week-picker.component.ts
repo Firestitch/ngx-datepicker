@@ -25,7 +25,7 @@ import { isDate, format } from 'date-fns';
 
 @Component({
   selector: '[fsDateWeekPicker]',
-  template: '<fs-clear [show]="ngModel && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateWeekPickerComponent),
@@ -36,7 +36,6 @@ import { isDate, format } from 'date-fns';
 export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent implements AfterViewInit {
 
   @Input() public minYear = null;
-  @Input() public ngModel = null;
   @Input() public maxYear = null;
   @Input() public minDate = null;
   @Input() public maxDate = null;
@@ -78,7 +77,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   }
 
   public writeValue(value: any): void {
-    this.ngModel = value;
+    this._value = value;
     this.updateInput(value);
 
     this._cdRef.markForCheck();
@@ -111,7 +110,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
       this.injector,
       {
         elementRef: this.elementRef,
-        modelValue: this.ngModel,
+        modelValue: this.value,
         view: this.view,
         minYear: this.minYear,
         maxYear: this.maxYear,

@@ -111,7 +111,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     if (save) {
       const date = new Date(this.year, this.month.value, this.day);
 
-      this.parentComponent.updateValue(date);
+      this.parentComponent.value = date;
     }
 
     this._cdRef.markForCheck();

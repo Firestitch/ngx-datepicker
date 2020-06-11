@@ -52,6 +52,7 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
   public registerOnTouched(fn: () => any): void {  }
 
+  protected _value;
   protected dialog = null;
   protected elementRef;
   protected renderer;
@@ -68,6 +69,19 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
     this.elementRef = elementRef;
   }
 
+  public get value() {
+    return this._value;
+  }
+
+  public set value(value) {
+    this._value = value;
+
+    this._onChange(this.value);
+    this.updateInput(this.value);
+
+    this.change$.emit(this.value);
+  }
+
   public writeValue(obj: any): void {}
 
   public get dateDialogRef() {
@@ -77,13 +91,7 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   public cleared(event) {
     event.stopPropagation();
     event.preventDefault();
-    this.updateValue(null);
-  }
-
-  public updateValue(value) {
-    this._onChange(value);
-    this.updateInput(value);
-    this.change$.emit(value);
+    this.value = null;
   }
 
   public ngOnDestroy() {
@@ -106,7 +114,7 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
         takeUntil(this._destroy$),
       )
       .subscribe((value) => {
-        this.updateValue(value);
+        this.value = value;
       });
 
     this._dateDialogRef.close$
