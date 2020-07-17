@@ -1,18 +1,31 @@
 <div class="calendar-container">
   <div class="months" *ngIf="dateMode == 'month'">
-    <div *ngFor="let month of monthList" (click)="monthViewChange(month.value)" class="month"
-         [ngClass]="{ today: today.month == month.value, selected: selected.month == month.value, disabled: month.disabled }">
-      {{ month.abr }}
+    <div
+      *ngFor="let month of monthList"
+      (click)="monthViewChange(month.value)"
+      class="month"
+      [ngClass]="{
+        now: today.month == month.value,
+        selected: selected.month == month.value,
+        disabled: month.disabled
+      }">
+        <div class="tile-content">{{ month.abr }}</div>
     </div>
   </div>
   <div class="years" *ngIf="dateMode == 'year'">
-    <div *ngFor="let year of years; let index = i" class="year data-year-{{ year.value }}"
-          [ngClass]="{ today: today.year==year.value, selected: selected.year==year.value, disabled: year.disabled }"
-          (click)="yearViewChange(year.value)">
-      {{ year.value }}
+    <div
+      *ngFor="let year of years; let index = i"
+      class="year data-year-{{ year.value }}"
+      (click)="yearViewChange(year.value)"
+      [ngClass]="{
+        now: today.year==year.value,
+        selected: selected.year==year.value,
+        disabled: year.disabled
+      }">
+        <div class="tile-content">{{ year.value }}</div>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="clear"></div>
-  </div>
   <div *ngIf="(dateMode == 'week' || dateMode == 'date') && month" class="calendar">
     <div class="month-year">
       <a class="month-name" (click)="monthView()">{{month.name}}</a>
@@ -60,18 +73,18 @@
         <ng-container *ngFor="let day of week.days">
           <td class="tile day"
               [ngClass]="{
-                today: today.date==day.date,
+                now: today.date==day.date,
                 mute: day.mute,
                 selected: (day.selected || (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute),
                 'min-date': day.date === highlightedRangeDays.min,
                 'max-date': day.date === highlightedRangeDays.max,
                 'week-mode': dateMode === 'week',
-                disabled: day.disabled
-              }"
+                disabled: day.disabled }"
               (click)="dayClick(day, week, $event)"
               (mouseenter)="onMouseEnterDay(day)">
-            {{ day.number }}
-            <span class="today" *ngIf="today.date==day.date">TODAY</span>
+            <div class="tile-content">
+              {{ day.number }}
+            </div>
           </td>
         </ng-container>
       </tr>

@@ -27,16 +27,16 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   @Input() public disabledMinutes = [];
   @Input() public disabledHours = [];
   @Input() public disabledTimes = [];
-  @Input()
-  public expanded = false;
+  @Input() public expanded = false;
 
   @Output() public onChange = new EventEmitter<any>();
 
   public selected: any = {};
-
   public disabledTimeMinutes: any = {};
   public disabledTimeHours: any = {};
   public disabledGroupedMinutes: any = {};
+  public nowHour;
+  public nowMinute;
   public timeHoursCollapsed = [
     [
       [0, 1, 2, 3],
@@ -105,6 +105,8 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
   public ngOnInit() {
     this.checkDisabledTime();
+    this.nowHour = (new Date()).getHours();
+    this.nowMinute = (new Date()).getMinutes();
   }
 
   public ngOnChanges(changes) {
