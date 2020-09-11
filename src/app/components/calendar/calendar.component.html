@@ -29,6 +29,9 @@
   <div *ngIf="(dateMode == 'week' || dateMode == 'date') && month" class="calendar">
     <div class="month-year">
       <a class="month-name" (click)="monthView()">{{month.name}}</a>
+      <span *ngIf="selected" class="day-name">
+        {{selected.day}}
+      </span>
       <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>
       <div class="gap"></div>
       <div class="actions">
