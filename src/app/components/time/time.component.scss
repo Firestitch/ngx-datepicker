@@ -7,7 +7,7 @@
 
 
 thead th {
-  text-align: left;
+  text-align: center;
   padding-left: 7px;
 }
 
@@ -15,6 +15,10 @@ tbody {
   .minutes-col,
   .hours-col {
     padding: 0;
+  }
+
+  .minutes-col {
+    padding-left: 20px;
   }
 
   .hours-container {

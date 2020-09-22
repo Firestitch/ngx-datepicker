@@ -404,7 +404,7 @@
 
   .calendar-container, .time-container {
     .now .tile-content {
-      border: 1px solid mat-color($primary);
+      border: 1px solid mat-color($primary,.5);
     }
   }
 
