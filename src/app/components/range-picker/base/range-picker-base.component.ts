@@ -43,6 +43,9 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   @Input()
   public maxDate = null;
 
+  @Input()
+  public hideClearButton;
+
   @HostBinding('class.fs-input-disabled')
   @HostBinding('attr.readonly')
   public disabled = false;

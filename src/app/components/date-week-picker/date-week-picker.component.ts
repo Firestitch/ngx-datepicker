@@ -25,7 +25,7 @@ import { isDate, format } from 'date-fns';
 
 @Component({
   selector: '[fsDateWeekPicker]',
-  template: '<fs-clear [show]="value && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly && !hideClearButton" (clear)="cleared($event)"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateWeekPickerComponent),
@@ -42,23 +42,9 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   @Input() public seedDate = null;
   @Input() public periodWeeks = 1;
   @Input() public view = DateFormat.Date;
-  @Input() public set hideClearButton(value: boolean) {
-    const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
-
-    this._hideClearButton = value;
-
-    this._hideClearButton
-      ? parentNode.classList.add('hide-clear')
-      : parentNode.classList.remove('hide-clear');
-  }
-  public get hideClearButton(): boolean {
-    return this._hideClearButton;
-  }
 
   @Output('change')
   public change$ = new EventEmitter<any>();
-
-  private _hideClearButton: boolean = null;
 
   constructor(
     protected renderer: Renderer2,

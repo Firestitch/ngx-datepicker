@@ -26,7 +26,7 @@ import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: '[fsDatePicker]',
-  template: '<fs-clear [show]="value && !disabled && !readonly" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly && !hideClearButton" (clear)="cleared($event)"></fs-clear>',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerComponent),
@@ -41,22 +41,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public minDate = null;
   @Input() public maxDate = null;
   @Input() public view = DateFormat.Date;
-  @Input() public set hideClearButton(value: boolean) {
-    const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
 
-    this._hideClearButton = value;
-
-    this._hideClearButton
-      ? parentNode.classList.add('hide-clear')
-      : parentNode.classList.remove('hide-clear');
-  }
-  public get hideClearButton(): boolean {
-    return this._hideClearButton;
-  }
   @Output('change')
   public change$ = new EventEmitter<any>();
-
-  private _hideClearButton: boolean = null;
 
   constructor(
     protected renderer: Renderer2,
