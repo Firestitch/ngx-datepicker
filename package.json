@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "8.2.9",
+  "version": "8.2.10",
   "title": "Date/Time Picker",
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "@angular/forms": "^8.2.9",
     "@angular/http": "^7.2.1",
     "@angular/material": "^8.2.2",
+    "@angular/router": "^8.2.12",
     "@angular/platform-browser": "^8.2.9",
     "@angular/platform-browser-dynamic": "^8.2.9",
     "@compodoc/compodoc": "^1.1.10",

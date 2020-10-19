@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit, } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { takeUntil } from 'rxjs/operators';
@@ -40,6 +40,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     @Inject(DIALOG_DATA) public dialogData,
     public fsDatePickerModel: FsDatePickerModel,
     public breakpointObserver: BreakpointObserver,
+    private _cd: ChangeDetectorRef,
     protected _dialogRef: FsDateDialogRef,
   ) {
     super(_dialogRef, dialogData.parentDirective);
@@ -69,6 +70,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
       )
       .subscribe((state) => {
         this.mobileView = state.matches;
+        this._cd.detectChanges();
       });
   }
   public initCalendar() {

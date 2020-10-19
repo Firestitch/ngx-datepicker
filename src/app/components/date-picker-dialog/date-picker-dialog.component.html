@@ -93,7 +93,10 @@
       <button type="button"
               mat-button
               class="button-more"
-              *ngIf="fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time'"
+              *ngIf="
+                (fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time') &&
+                !(mobileView && selectedDateTimeTab === 0 && fsDatePickerModel.view === 'datetime' && fsDatePickerModel.dateMode === 'date')
+              "
               (click)="toggleTimeExpand()">
         <ng-container *ngIf="!timePickerExpanded; else lessMinutes">
           Show More Minutes
