@@ -7,16 +7,20 @@ import {
   Injector,
   Input,
   OnDestroy,
-  OnInit, Optional
+  OnInit,
+  Optional,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 
 import { takeUntil } from 'rxjs/operators';
 
+import { endOfDay, subDays } from 'date-fns';
+
 import { BaseRangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
 import { FsDatepickerFactory } from '../../../services/factory.service';
+import { DateFormat } from '../../../enums/date-format.enum';
 
 
 @Component({
@@ -44,7 +48,7 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
     private _rangePickerStore: FsRangePickerStoreService,
     @Optional() _parentFormField: MatFormField,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'to', _cdRef,_parentFormField);
+    super(_elRef, _injector, _datepickerFactory, 'to', _cdRef, _parentFormField);
   }
 
   public ngOnInit() {
@@ -62,7 +66,7 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
   public registerPicker() {
     this._pickerRef = this._rangePickerStore.registerPickerTo(this.name, this.value, this.view);
 
-    this.minDate = this._pickerRef.startDate;
+    this.minDate = subDays(this._pickerRef.startDate, 1);
   }
 
   public writeValue(value) {
@@ -90,9 +94,13 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
    * @param value
    */
   public updateValueFromDialog(value) {
-    super.updateValueFromDialog(value);
+    if (this.view === DateFormat.Date) {
+      value = endOfDay(value);
+    }
 
     this._pickerRef.updateEndDate(value);
+
+    super.updateValueFromDialog(this._pickerRef.endDate);
   }
 
   /**
@@ -113,7 +121,7 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
             this.onTouch(this.value);
           }
 
-          this.minDate = this._pickerRef.startDate;
+          this.minDate = subDays(this._pickerRef.startDate, 1);
         }
       });
   }

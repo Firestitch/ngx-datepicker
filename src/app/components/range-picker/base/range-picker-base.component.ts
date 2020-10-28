@@ -32,16 +32,16 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   public view: DateFormat;
 
   @Input()
-  public minYear = null;
+  public minYear: number = null;
 
   @Input()
-  public maxYear = null;
+  public maxYear: number = null;
 
   @Input()
-  public minDate = null;
+  public minDate: Date = null;
 
   @Input()
-  public maxDate = null;
+  public maxDate: Date = null;
 
   @Input()
   public hideClearButton;

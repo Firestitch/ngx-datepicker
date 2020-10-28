@@ -7,14 +7,19 @@ import {
   Injector,
   Input,
   OnDestroy,
-  OnInit, Optional
+  OnInit,
+  Optional,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { MatFormField } from '@angular/material/form-field';
+
+import { startOfDay } from 'date-fns';
 
 import { BaseRangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
 import { FsDatepickerFactory } from '../../../services/factory.service';
-import { MatFormField } from '@angular/material/form-field';
+import { DateFormat } from '../../../enums/date-format.enum';
 
 
 @Component({
@@ -84,6 +89,10 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
    * @param value
    */
   public updateValueFromDialog(value) {
+    if (this.view === DateFormat.Date) {
+      value = startOfDay(value);
+    }
+
     super.updateValueFromDialog(value);
 
     this._pickerRef.updateStartDate(value);

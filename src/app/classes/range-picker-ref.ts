@@ -10,8 +10,8 @@ export class RangePickerRef {
 
   private _valueChange$ = new ReplaySubject(1);
 
-  private _startDate = null;
-  private _endDate = null;
+  private _startDate: Date = null;
+  private _endDate: Date = null;
 
   private _destroy$ = new Subject();
 
@@ -21,11 +21,11 @@ export class RangePickerRef {
     return this._valueChange$.pipe(takeUntil(this._destroy$));
   }
 
-  public get startDate() {
+  public get startDate(): Date {
     return this._startDate;
   }
 
-  public get endDate() {
+  public get endDate(): Date {
     return this._endDate;
   }
 
