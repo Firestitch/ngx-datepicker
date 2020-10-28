@@ -15,7 +15,7 @@ import { MatFormField } from '@angular/material/form-field';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { endOfDay, subDays } from 'date-fns';
+import { endOfDay, isDate, isValid, subDays } from 'date-fns';
 
 import { BaseRangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
@@ -66,7 +66,7 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
   public registerPicker() {
     this._pickerRef = this._rangePickerStore.registerPickerTo(this.name, this.value, this.view);
 
-    this.minDate = subDays(this._pickerRef.startDate, 1);
+    this._updateMinDate();
   }
 
   public writeValue(value) {
@@ -121,8 +121,14 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
             this.onTouch(this.value);
           }
 
-          this.minDate = subDays(this._pickerRef.startDate, 1);
+          this._updateMinDate();
         }
       });
+  }
+
+  private _updateMinDate() {
+    if (isDate(this._pickerRef.startDate) && isValid(this._pickerRef.startDate)) {
+      this.minDate = subDays(this._pickerRef.startDate, 1);
+    }
   }
 }
