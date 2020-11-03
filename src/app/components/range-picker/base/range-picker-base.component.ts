@@ -5,9 +5,7 @@ import {
   HostListener,
   Injector,
   Input,
-  OnChanges,
   Optional,
-  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
@@ -15,7 +13,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { isDate } from 'date-fns';
+import { isDate, isValid, subDays } from 'date-fns';
 
 import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { FsDatepickerFactory } from '../../../services/factory.service';
@@ -130,7 +128,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
         view: this.view,
         minYear: this.minYear,
         maxYear: this.maxYear,
-        minDate: this.minDate,
+        minDate: this._getPickerStartDate() || this.minDate,
         maxDate: this.maxDate,
         dateMode: 'date',
         components: this._getDefaultComponents(),
@@ -198,5 +196,16 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
       && isSameDate(newValue, prevValue);
 
     return [valuesAreDates, valuesDatesEquals];
+  }
+
+  /**
+   * We need picker start date to be able to limit "Date To" picker
+   */
+  protected _getPickerStartDate() {
+    if (isDate(this._pickerRef.startDate) && isValid(this._pickerRef.startDate)) {
+      return subDays(this._pickerRef.startDate, 1);
+    }
+
+    return false;
   }
 }
