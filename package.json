@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "8.2.12",
+  "version": "8.3.0",
   "title": "Date/Time Picker",
   "repository": {
     "type": "git",
@@ -55,6 +55,7 @@
     "@firestitch/message": "^8.0.0",
     "@firestitch/scroll-picker": "^7.0.3",
     "@firestitch/scrollbar": "7.0.4",
+    "@firestitch/style": "^8.1.1",
     "codelyzer": "^5.1.2",
     "cpx": "^1.5.0",
     "date-fns": "^2.4.1",
@@ -77,6 +78,7 @@
   "peerDependencies": {
     "@firestitch/clear": ">=7.1.0",
     "@firestitch/date": ">=7.1.0",
+    "@firestitch/style": ">=8.1.1",
     "@firestitch/scroll-picker": ">=7.0.2",
     "typescript": ">=3.5.3"
   }

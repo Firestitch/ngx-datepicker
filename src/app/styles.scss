@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import '~@firestitch/style/styles';
 
 
 .fs-date-picker-dialog {
@@ -301,9 +302,7 @@
       }
     }
   }
-
 }
-
 
 @media only screen and (min-width: 737px) {
 
@@ -373,9 +372,9 @@
 
 
 
-@mixin fs-date-picker($theme) {
+@mixin fs-date-picker($palette) {
 
-  $primary: mat-palette($theme);
+  $primary: mat-palette($palette);
 
   .time-container .hour:hover:not(.disabled):not(.selected) .tile-content,
   .time-container .minute:hover:not(.disabled):not(.selected) .tile-content,
@@ -384,7 +383,7 @@
   .calendar-container .months .month:hover:not(.disabled):not(.selected) .tile-content,
   .calendar-container .year-name:hover:not(.disabled):not(.selected) .tile-content,
   .calendar-container .month-name:hover:not(.disabled):not(.selected) .tile-content {
-    background: rgba(mat-color($primary), 0.3)
+    background: fs-style-color-rgb($primary, .3);
   }
 
   .calendar-container {
@@ -404,7 +403,7 @@
 
   .calendar-container, .time-container {
     .now .tile-content {
-      border: 1px solid mat-color($primary,.5);
+      border: 1px solid fs-style-color-rgb($primary,.5);
     }
   }
 
@@ -432,11 +431,11 @@
       td {
         &:not(.selected) {
           &.period {
-            background: rgba(mat-color($primary), 0.1);
+            background: fs-style-color-rgb($primary, 0.1);
           }
 
           &.day {
-            background: rgba(mat-color($primary), 0.3) !important;
+            background: fs-style-color-rgb($primary, 0.3) !important;
           }
         }
       }
@@ -459,3 +458,4 @@
 fs-date-picker-dialog * {
   touch-action: manipulation;
 }
+
