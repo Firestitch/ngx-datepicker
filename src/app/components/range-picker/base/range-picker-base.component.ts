@@ -27,7 +27,7 @@ import { DateFormat } from '../../../enums/date-format.enum';
 export class BaseRangePickerComponent implements ControlValueAccessor {
 
   @Input()
-  public view: DateFormat;
+  public view: DateFormat = DateFormat.Date;
 
   @Input()
   public minYear: number = null;
