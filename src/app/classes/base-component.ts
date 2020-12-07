@@ -23,10 +23,11 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
 
   abstract updateInput(value: Date);
 
-  @Input() public set hideClearButton(value: boolean) {
+  @Input()
+  public set clear(value: boolean) {
     // const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
 
-    this._hideClearButton = value;
+    this._clear = value;
 
     // this._hideClearButton
     //   ? parentNode.classList.add('hide-clear')
@@ -69,7 +70,7 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   protected _dateDialogRef: FsDateDialogRef;
   protected _destroy$ = new Subject();
 
-  private _hideClearButton: boolean = null;
+  private _clear: boolean = true;
 
   constructor(
     renderer: Renderer2,
@@ -81,8 +82,8 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
     this.elementRef = elementRef;
   }
 
-  public get hideClearButton(): boolean {
-    return this._hideClearButton;
+  public get clear(): boolean {
+    return this._clear;
   }
 
   public get value() {
