@@ -5,10 +5,11 @@ import { takeUntil } from 'rxjs/operators';
 import {
   addYears,
   isAfter,
-  isBefore, isDate,
-  isSameDay, isValid,
+  isBefore,
+  isDate,
+  isSameDay,
+  isValid,
   startOfDay,
-  subDays,
   subYears
 } from 'date-fns';
 
@@ -100,7 +101,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
   }
 
   public setDate(date, preventClose = false) {
-    if (this.dialogData.view === 'date') {
+    if (this.dialogData.view === 'date' && this.fsDatePickerModel.startOfDay) {
       date = startOfDay(date);
     }
 
@@ -180,6 +181,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.fsDatePickerModel.maxYear = this.dialogData.maxYear;
     this.fsDatePickerModel.minDate = this.dialogData.minDate;
     this.fsDatePickerModel.maxDate = this.dialogData.maxDate;
+    this.fsDatePickerModel.startOfDay = this.dialogData.startOfDay;
     this.fsDatePickerModel.dateMode = this.dialogData.dateMode;
 
     if (!isDate(this.dialogData.seedDate) || !isValid(this.dialogData.seedDate)) {

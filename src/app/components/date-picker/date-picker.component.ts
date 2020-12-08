@@ -40,6 +40,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public maxYear = null;
   @Input() public minDate = null;
   @Input() public maxDate = null;
+  @Input() public startOfDay = true;
   @Input() public view = DateFormat.Date;
 
   @Output('change')
@@ -89,6 +90,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
         maxYear: this.maxYear,
         minDate: this.minDate,
         maxDate: this.maxDate,
+        startOfDay: this.startOfDay,
         dateMode: 'date',
         components: this._getDefaultComponents(),
         parentComponent: this

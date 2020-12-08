@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { isEqual, forEach } from 'lodash-es';
-import { addYears, isSameDay, subYears } from 'date-fns';
+import { addYears, isSameDay, subYears, startOfDay } from 'date-fns';
 import { FsComponents, FsDatePicker } from '../interfaces';
 
 
@@ -39,6 +39,7 @@ export class FsDatePickerModel implements FsDatePicker {
   public dateMode = null;
   public minDate = null;
   public maxDate = null;
+  public startOfDay = true;
   public seedDate = null;
   public periodWeeks = null;
 
