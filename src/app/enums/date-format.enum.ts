@@ -6,4 +6,5 @@ export enum DateFormat {
   Year = 'year',
   MonthDay = 'monthday',
   MonthYear = 'monthyear',
+  Custom = 'custom',
 }

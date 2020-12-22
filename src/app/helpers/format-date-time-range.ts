@@ -1,7 +1,8 @@
 import { isObject } from 'lodash-es';
+import { DateFormat } from 'package/app/enums/date-format.enum';
 import { formatDateTime } from './format-date-time';
 
-export function formatDateTimeRange(value, view = 'date') {
+export function formatDateTimeRange(value, view = DateFormat.Date) {
   if (!isObject(value)) {
     return '';
   }

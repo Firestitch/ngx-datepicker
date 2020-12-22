@@ -42,6 +42,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public maxDate = null;
   @Input() public startOfDay = true;
   @Input() public view = DateFormat.Date;
+  @Input() public format;
 
   @Output('change')
   public change$ = new EventEmitter<any>();
@@ -51,7 +52,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
     protected _cdRef: ChangeDetectorRef,
-    @Inject(ViewContainerRef) private viewContainerRef,
     protected fsDatepickerFactory: FsDatepickerFactory,
     @Optional() _parentFormField: MatFormField,
   ) {
@@ -70,7 +70,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   }
 
   public updateInput(value) {
-    this.elementRef.nativeElement.value = formatDateTime(value, this.view);
+    this.elementRef.nativeElement.value = formatDateTime(value, this.view, this.format);
   }
 
   protected open() {
