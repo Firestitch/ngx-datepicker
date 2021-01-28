@@ -1,4 +1,4 @@
-<div class="month-year time">
+<div class="month-year time" *ngIf="minutes">
   <ng-container *ngIf="date; else noTime">
     {{ date | date:'h:mm'}} {{ date | date:'a' | lowercase }}
   </ng-container>
@@ -7,12 +7,12 @@
 
 <div class="time-container">
   <table *ngIf="expanded; else contracted">
-    <thead>
+    <thead *ngIf="minutes">
       <tr>
         <th class="hours-col">
           Hour
         </th>
-        <th class="minutes-col" *ngIf="minutes">
+        <th class="minutes-col">
           Minute
         </th>
       </tr>
@@ -66,12 +66,12 @@
 
 <ng-template #contracted>
   <table>
-    <thead>
+    <thead *ngIf="minutes">
       <tr>
         <th class="hours-col">
           Hour
         </th>
-        <th class="minutes-col" *ngIf="minutes">
+        <th class="minutes-col">
           Minute
         </th>
       </tr>
