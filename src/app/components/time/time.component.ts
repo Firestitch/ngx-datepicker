@@ -115,6 +115,10 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   public ngOnChanges(changes) {
     if (changes && changes.date) {
       this.selected = splitDateByComponents(this.date);
+      if (!this.minutes) {
+        this.selected.minute = 0;
+        this.date.setMinutes(0);
+      }
     }
   }
 

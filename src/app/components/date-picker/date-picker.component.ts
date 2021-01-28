@@ -70,6 +70,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   }
 
   public updateInput(value) {
+    if (!this.minutes && value) {
+      value.setMinutes(0);
+    }
     this.elementRef.nativeElement.value = formatDateTime(value, this.view, this.format);
   }
 
