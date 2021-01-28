@@ -50,6 +50,7 @@
         <fs-date-picker-time
           *ngIf="fsDatePickerModel.dateMode !== 'year' && fsDatePickerModel.dateMode !== 'month'"
           [date]="model"
+          [minutes]="fsDatePickerModel.minutes"
           [disabledTimes]="disabledTimes"
           [expanded]="timePickerExpanded"
           (onChange)="setDate($event)"
@@ -80,6 +81,7 @@
           <fs-date-picker-time
             *ngIf="fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time'"
             [date]="model"
+            [minutes]="fsDatePickerModel.minutes"
             [disabledTimes]="disabledTimes"
             [expanded]="timePickerExpanded"
             (onChange)="setDate($event)"
@@ -94,8 +96,10 @@
               mat-button
               class="button-more"
               *ngIf="
-                (fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time') &&
-                !(mobileView && selectedDateTimeTab === 0 && fsDatePickerModel.view === 'datetime' && fsDatePickerModel.dateMode === 'date')
+                fsDatePickerModel.minutes
+                && (fsDatePickerModel.view === 'datetime' || fsDatePickerModel.view === 'time')
+                && !(mobileView && selectedDateTimeTab === 0 && fsDatePickerModel.view === 'datetime'
+                && fsDatePickerModel.dateMode === 'date')
               "
               (click)="toggleTimeExpand()">
         <ng-container *ngIf="!timePickerExpanded; else lessMinutes">

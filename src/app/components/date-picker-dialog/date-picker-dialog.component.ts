@@ -183,6 +183,10 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.fsDatePickerModel.maxDate = this.dialogData.maxDate;
     this.fsDatePickerModel.startOfDay = this.dialogData.startOfDay;
     this.fsDatePickerModel.dateMode = this.dialogData.dateMode;
+    this.fsDatePickerModel.minutes = this.dialogData.minutes === undefined
+      ? true
+      : this.dialogData.minutes;
+
 
     if (!isDate(this.dialogData.seedDate) || !isValid(this.dialogData.seedDate)) {
       this.fsDatePickerModel.seedDate = new Date((new Date().getFullYear()), 0, 1);

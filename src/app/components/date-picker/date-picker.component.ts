@@ -12,7 +12,6 @@ import {
   Optional,
   Output,
   Renderer2,
-  ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -43,6 +42,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public startOfDay = true;
   @Input() public view = DateFormat.Date;
   @Input() public format;
+  @Input() public minutes = true;
 
   @Output('change')
   public change$ = new EventEmitter<any>();
@@ -86,6 +86,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
         elementRef: this.elementRef,
         modelValue: this.value,
         view: this.view,
+        minutes: this.minutes,
         minYear: this.minYear,
         maxYear: this.maxYear,
         minDate: this.minDate,

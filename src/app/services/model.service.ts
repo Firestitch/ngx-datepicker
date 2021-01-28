@@ -42,6 +42,7 @@ export class FsDatePickerModel implements FsDatePicker {
   public startOfDay = true;
   public seedDate = null;
   public periodWeeks = null;
+  public minutes = true;
 
   set components(value) {
     value = Object.assign({}, this._componentsDefault, value);

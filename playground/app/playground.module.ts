@@ -23,6 +23,7 @@ import { TimeRangeExampleComponent } from './components/timerange-example/timera
 import { BirthdayExampleComponent } from './components/birthday-example/birthday-example.component';
 import { DateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 import { WeekPickerComponent } from './components/week-example/week-picker.component';
+import { OnlyHoursExampleComponent } from './components/only-hours-example/only-hours-example.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { WeekPickerComponent } from './components/week-example/week-picker.compo
     TimeRangeExampleComponent,
     BirthdayExampleComponent,
     DateScrollPickerComponent,
+    OnlyHoursExampleComponent,
     WeekPickerComponent
   ],
   providers: [
