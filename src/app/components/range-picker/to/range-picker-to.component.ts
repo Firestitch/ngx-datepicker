@@ -25,7 +25,7 @@ import { DateFormat } from '../../../enums/date-format.enum';
 
 @Component({
   selector: '[fsDateRangeTo]',
-  template: '<fs-clear [show]="value && ((!disabled && !readonly && clear) || !!dateDialogRef)" (clear)="cleared($event)"></fs-clear>',
+  template: '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
