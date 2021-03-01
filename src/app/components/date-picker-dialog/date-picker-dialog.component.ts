@@ -55,7 +55,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this.initCalendar();
 
     this._updateDisabled();
-    this._initBaseDate();
+    // this._initBaseDate();
 
     this.breakpointObserver.observe('(max-width: 737px)')
       .pipe(
@@ -153,27 +153,27 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     this._cd.markForCheck();
   }
 
-  private _initBaseDate() {
-
-    if (!this.dialogData.pickerRef || this.dialogData.pickerRef.view !== 'time') {
-      return;
-    }
-
-    const pickerModel = this.fsDatePickerModel;
-
-    const date = new Date();
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-
-    if (
-      (!pickerModel.minDate || isAfter(date, pickerModel.minDate)) &&
-      (!pickerModel.maxDate || isBefore(date, pickerModel.maxDate))
-    ) {
-      this.model = date;
-    }
-  }
+  // private _initBaseDate() {
+  //
+  //   if (!this.dialogData.pickerRef || this.dialogData.pickerRef.view !== 'time') {
+  //     return;
+  //   }
+  //
+  //   const pickerModel = this.fsDatePickerModel;
+  //
+  //   const date = new Date();
+  //   date.setHours(0);
+  //   date.setMinutes(0);
+  //   date.setSeconds(0);
+  //   date.setMilliseconds(0);
+  //
+  //   if (
+  //     (!pickerModel.minDate || isAfter(date, pickerModel.minDate)) &&
+  //     (!pickerModel.maxDate || isBefore(date, pickerModel.maxDate))
+  //   ) {
+  //     this.model = date;
+  //   }
+  // }
 
   private _initModel() {
     this.fsDatePickerModel.view = this.dialogData.view;
