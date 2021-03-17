@@ -112,6 +112,10 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   }
 
   public ngOnDestroy() {
+    if (this.dateDialogRef) {
+      this.dateDialogRef.close();
+    }
+
     this._destroy$.next();
     this._destroy$.complete();
   }
