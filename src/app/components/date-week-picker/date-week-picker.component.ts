@@ -9,23 +9,21 @@ import {
   Inject,
   Injector,
   Input,
-  Optional,
   Output,
   Renderer2,
-  ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { DateFormat } from '../../enums/date-format.enum';
-import { MatFormField } from '@angular/material/form-field';
 import { isDate, format } from 'date-fns';
+import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 
 @Component({
   selector: '[fsDateWeekPicker]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>',
+  template: FsDatePickerComponent.template,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateWeekPickerComponent),
@@ -51,11 +49,9 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
     protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
     protected _cdRef: ChangeDetectorRef,
-    @Inject(ViewContainerRef) private viewContainerRef,
     protected fsDatepickerFactory: FsDatepickerFactory,
-    @Optional() _parentFormField: MatFormField,
   ) {
-    super(renderer, elementRef, _cdRef, _parentFormField);
+    super(renderer, elementRef, _cdRef);
   }
 
   public ngAfterViewInit() {

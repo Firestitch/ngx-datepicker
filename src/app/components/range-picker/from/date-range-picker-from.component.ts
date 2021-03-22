@@ -8,11 +8,8 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Optional,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { MatFormField } from '@angular/material/form-field';
 
 import { startOfDay } from 'date-fns';
 
@@ -20,11 +17,12 @@ import { BaseRangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
 import { FsDatepickerFactory } from '../../../services/factory.service';
 import { DateFormat } from '../../../enums/date-format.enum';
+import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 
 
 @Component({
   selector: '[fsDateRangeFrom]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>',
+  template: FsDatePickerComponent.template,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -45,9 +43,8 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
     _datepickerFactory: FsDatepickerFactory,
     _cdRef: ChangeDetectorRef,
     private _rangePickerStore: FsRangePickerStoreService,
-    @Optional() _parentFormField: MatFormField,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef, _parentFormField);
+    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef);
   }
 
   public ngOnInit() {

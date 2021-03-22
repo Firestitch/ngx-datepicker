@@ -8,23 +8,21 @@ import {
   Inject,
   Injector,
   Input,
-  Optional,
   Renderer2,
-  ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
 
 import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 import { DateFormat } from '../../enums/date-format.enum';
+import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 
 @Component({
   selector: '[fsDateScrollPicker]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>',
+  template: FsDatePickerComponent.template,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateScrollPickerComponent),
@@ -48,10 +46,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     @Inject(ElementRef) protected elementRef: ElementRef,
     protected _datepickerFactory: FsDatepickerFactory,
     protected _cdRef: ChangeDetectorRef,
-    @Inject(ViewContainerRef) private viewContainerRef,
-    @Optional() _parentFormField: MatFormField,
   ) {
-    super(renderer, elementRef, _cdRef, _parentFormField);
+    super(renderer, elementRef, _cdRef);
   }
 
   public ngAfterViewInit() {

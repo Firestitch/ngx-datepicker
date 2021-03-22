@@ -1,14 +1,13 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   ElementRef,
   HostBinding,
   HostListener,
   Injector,
   Input,
-  Optional,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -24,7 +23,7 @@ import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from '../../../enums/date-format.enum';
 
 
-export class BaseRangePickerComponent implements ControlValueAccessor {
+export class BaseRangePickerComponent implements ControlValueAccessor, AfterViewInit{
 
   @Input()
   public view: DateFormat = DateFormat.Date;
@@ -63,8 +62,6 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
   protected _dateDialogRef: FsDateDialogRef;
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
-
-
   protected _value;
 
   constructor(
@@ -73,7 +70,6 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
     protected _datepickerFactory: FsDatepickerFactory,
     protected _type,
     protected _cdRef: ChangeDetectorRef,
-    @Optional() private _parentFormField: MatFormField,
   ) {
     this._elRef.nativeElement.setAttribute('autocomplete', 'off');
   }
@@ -85,6 +81,12 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
       this.onChange(value);
       this.onTouch(value);
     }
+  }
+
+  public ngAfterViewInit() {
+    setTimeout(() => {
+      this._elRef.nativeElement.setAttribute('readonly', true);
+    });
   }
 
   public get value() {
@@ -119,7 +121,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor {
       return
     }
 
-    this._disableInput();
+    //this._disableInput();
 
     this._dateDialogRef = this._datepickerFactory.openDatePicker(
       this._elRef,

@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 import { FsDateScrollPickerComponent } from '../date-scroll-picker/date-scroll-picker.component';
 
 
 @Component({
   selector: '[fsDatePickerBirthday]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>',
+  template: FsDatePickerComponent.template,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerBirthdayComponent),

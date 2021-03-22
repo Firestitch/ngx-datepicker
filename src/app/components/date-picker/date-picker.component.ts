@@ -9,7 +9,6 @@ import {
   Inject,
   Injector,
   Input,
-  Optional,
   Output,
   Renderer2,
 } from '@angular/core';
@@ -20,12 +19,11 @@ import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 import { DateFormat } from '../../enums/date-format.enum';
-import { MatFormField } from '@angular/material/form-field';
 
 
 @Component({
   selector: '[fsDatePicker]',
-  template: '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>',
+  template: FsDatePickerComponent.template,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDatePickerComponent),
@@ -34,6 +32,8 @@ import { MatFormField } from '@angular/material/form-field';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatePickerComponent extends FsDatePickerBaseComponent implements AfterViewInit {
+
+  static template = '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>';
 
   @Input() public minYear = null;
   @Input() public maxYear = null;
@@ -53,9 +53,8 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     @Inject(ElementRef) protected elementRef: ElementRef,
     protected _cdRef: ChangeDetectorRef,
     protected fsDatepickerFactory: FsDatepickerFactory,
-    @Optional() _parentFormField: MatFormField,
   ) {
-    super(renderer, elementRef, _cdRef, _parentFormField);
+    super(renderer, elementRef, _cdRef);
   }
 
   public ngAfterViewInit() {

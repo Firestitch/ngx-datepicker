@@ -16,8 +16,10 @@ export class FsDatePickerBaseDialogComponent implements OnDestroy {
 
   protected _destroy$ = new Subject();
 
-  constructor(protected _dialogRef: FsDateDialogRef,
-              protected parentComponent: FsDatePickerBaseComponent) {
+  constructor(
+    protected _dialogRef: FsDateDialogRef,
+    protected parentComponent: FsDatePickerBaseComponent,
+  ) {
 
     this._dialogRef.overlayRef
       .backdropClick()

@@ -7,10 +7,8 @@ import {
   OnDestroy,
   HostBinding,
   Input,
-  Optional,
   ChangeDetectorRef,
 } from '@angular/core';
-import { MatFormField } from '@angular/material/form-field';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -76,7 +74,6 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
     renderer: Renderer2,
     elementRef: ElementRef,
     protected _cdRef: ChangeDetectorRef,
-    @Optional() private _parentFormField: MatFormField,
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
