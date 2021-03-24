@@ -27,7 +27,7 @@ export function formatDateTime(value, dateFormat = DateFormat.Date, customDateFo
       }
 
       if ([DateFormat.Time, DateFormat.DateTime].indexOf(dateFormat) != -1) {
-        formats.push('h:mm aaaa');
+        formats.push('h:mm aa');
       }
 
       if (dateFormat === DateFormat.MonthDay) {

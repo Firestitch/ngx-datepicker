@@ -1,6 +1,6 @@
 <div class="month-year time" *ngIf="minutes">
   <ng-container *ngIf="date; else noTime">
-    {{ date | date:'h:mm'}} {{ date | date:'a' | lowercase }}
+    {{ date | date:'h:mm aa'}}
   </ng-container>
   <ng-template #noTime>Time Not Selected</ng-template>
 </div>
