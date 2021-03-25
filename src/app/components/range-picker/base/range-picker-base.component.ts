@@ -23,7 +23,7 @@ import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from '../../../enums/date-format.enum';
 
 
-export class BaseRangePickerComponent implements ControlValueAccessor, AfterViewInit{
+export class BaseRangePickerComponent implements ControlValueAccessor, AfterViewInit {
 
   @Input()
   public view: DateFormat = DateFormat.Date;

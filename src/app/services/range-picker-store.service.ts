@@ -39,7 +39,7 @@ export class FsRangePickerStoreService {
     }
   }
 
-  public registerPickerTo(name, value, view) {
+  public registerPickerTo(name, value, view): RangePickerRef {
     this._createIfNotExistsPicker(name, view);
 
     const pickerRef = this._store.get(name);

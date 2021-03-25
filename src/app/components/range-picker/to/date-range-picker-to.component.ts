@@ -51,7 +51,7 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
 
   public ngOnInit() {
     this.registerPicker();
-    this._subscribeToPickerRefUpdates();
+    //this._subscribeToPickerRefUpdates();
   }
 
   public ngOnDestroy() {
