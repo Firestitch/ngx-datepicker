@@ -13,12 +13,10 @@ export class RangePickerRef {
   private _startDate: Date = null;
   private _endDate: Date = null;
 
-  private _destroy$ = new Subject();
-
   constructor(public view: string) {}
 
   public get valueChange$() {
-    return this._valueChange$.pipe(takeUntil(this._destroy$));
+    return this._valueChange$;
   }
 
   public get startDate(): Date {
@@ -85,10 +83,7 @@ export class RangePickerRef {
   /**
    * destroy everything related with picker
    */
-  public destroy() {
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
+  public destroy() {}
 
   private getTimeCompareDate(fromDate) {
     if (!isDate(fromDate)) {

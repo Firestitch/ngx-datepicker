@@ -100,7 +100,7 @@ export class BaseRangePickerComponent implements ControlValueAccessor, AfterView
   public writeValue(value) {
     value = createDateFromValue(value);
 
-    const [valuesAreDates, datesAreEquals] = this._checkValuesEquality(value, this._value);
+    const [valuesAreDates] = this._checkValuesEquality(value, this.value);
 
     if ((valuesAreDates) || (!valuesAreDates && this.value !== value)) {
       this._value = value;
@@ -167,6 +167,10 @@ export class BaseRangePickerComponent implements ControlValueAccessor, AfterView
    * @param value
    */
   public updateValueFromDialog(value) {
+    if (value === this.value) {
+      return;
+    }
+
     this.writeValue(value);
     this.onChange(value);
     this.onTouch(value);

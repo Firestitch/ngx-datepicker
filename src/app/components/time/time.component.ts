@@ -228,11 +228,14 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
       return;
     }
 
+    let newDate: Date;
+
     if (!this.date) {
-      this.createModel();
+      newDate = getStartDayDate();
+    } else {
+      newDate = new Date(this.date);
     }
 
-    const newDate = new Date(this.date);
     newDate.setHours(hour);
 
     this.setDate(newDate);
@@ -244,11 +247,14 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
       return;
     }
 
+    let newDate: Date;
+
     if (!this.date) {
-      this.createModel();
+      newDate = getStartDayDate();
+    } else {
+      newDate = new Date(this.date);
     }
 
-    const newDate = new Date(this.date);
     newDate.setMinutes(minute);
 
     this.setDate(newDate);

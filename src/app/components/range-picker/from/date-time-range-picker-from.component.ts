@@ -25,6 +25,10 @@ import { DateRangePickerFromComponent } from './date-range-picker-from.component
 })
 export class DateTimeRangePickerFromComponent extends DateRangePickerFromComponent {
 
-  @Input() public view = DateFormat.DateTime;
+  @Input('fsDateTimeRangeFrom')
+  public name: string;
+
+  @Input()
+  public view = DateFormat.DateTime;
 
 }
