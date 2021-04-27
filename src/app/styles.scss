@@ -1,5 +1,5 @@
+@use '~@firestitch/style/styles' as fs-styles;
 @import '~@angular/material/theming';
-@import '~@firestitch/style/styles';
 
 
 .fs-date-picker-dialog {
@@ -372,10 +372,7 @@
 
 
 
-@mixin fs-date-picker($palette) {
-
-  $primary: mat-palette($palette);
-
+@mixin fs-date-picker() {
   .time-container .hour:hover:not(.disabled):not(.selected) .tile-content,
   .time-container .minute:hover:not(.disabled):not(.selected) .tile-content,
   .calendar-container .day:hover:not(.disabled):not(.selected):not(.blank) .tile-content,
@@ -383,39 +380,39 @@
   .calendar-container .months .month:hover:not(.disabled):not(.selected) .tile-content,
   .calendar-container .year-name:hover:not(.disabled):not(.selected) .tile-content,
   .calendar-container .month-name:hover:not(.disabled):not(.selected) .tile-content {
-    background: fs-style-color-rgb($primary, .3);
+    background: fs-styles.color-rgb(fs-styles.$palette, .3);
   }
 
   .calendar-container {
     .day.selected .tile-content,
     .years .year.selected .tile-content,
     .months .month.selected .tile-content {
-      background-color: mat-color($primary);
+      background-color: mat-color(fs-styles.$palette);
     }
   }
 
   .time-container {
     .hour.selected .tile-content,
     .minute.selected .tile-content {
-      background-color: mat-color($primary);
+      background-color: mat-color(fs-styles.$palette);
     }
   }
 
   .calendar-container, .time-container {
     .now .tile-content {
-      border: 1px solid fs-style-color-rgb($primary,.5);
+      border: 1px solid fs-styles.color-rgb(fs-styles.$palette,.5);
     }
   }
 
   .has-view-time {
     .summary .date.active,
     .summary .time.active {
-      color: mat-color($primary);
+      color: mat-color(fs-styles.$palette);
     }
   }
 
   .time-container .minutes .button-expand {
-    color: mat-color($primary);
+    color: mat-color(fs-styles.$palette);
   }
 
   .week {
@@ -431,11 +428,11 @@
       td {
         &:not(.selected) {
           &.period {
-            background: fs-style-color-rgb($primary, 0.1);
+            background: fs-styles.color-rgb(fs-styles.$palette, 0.1);
           }
 
           &.day {
-            background: fs-style-color-rgb($primary, 0.3) !important;
+            background: fs-styles.color-rgb(fs-styles.$palette, 0.3) !important;
           }
         }
       }

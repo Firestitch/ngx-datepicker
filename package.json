@@ -40,9 +40,9 @@
     "@angular/forms": "^8.2.9",
     "@angular/http": "^7.2.1",
     "@angular/material": "^8.2.2",
-    "@angular/router": "^8.2.12",
     "@angular/platform-browser": "^8.2.9",
     "@angular/platform-browser-dynamic": "^8.2.9",
+    "@angular/router": "^8.2.12",
     "@compodoc/compodoc": "^1.1.10",
     "@firestitch/clear": "^8.1.0",
     "@firestitch/common": "7.0.2",
@@ -55,7 +55,7 @@
     "@firestitch/message": "^8.0.0",
     "@firestitch/scroll-picker": "^7.0.3",
     "@firestitch/scrollbar": "7.0.4",
-    "@firestitch/style": "^8.1.1",
+    "@firestitch/style": "^8.2.0",
     "codelyzer": "^5.1.2",
     "cpx": "^1.5.0",
     "date-fns": "^2.4.1",
@@ -78,7 +78,7 @@
   "peerDependencies": {
     "@firestitch/clear": ">=7.1.0",
     "@firestitch/date": ">=7.1.0",
-    "@firestitch/style": ">=8.1.1",
+    "@firestitch/style": ">=8.2.0",
     "@firestitch/scroll-picker": ">=7.0.2",
     "typescript": ">=3.5.3"
   }
