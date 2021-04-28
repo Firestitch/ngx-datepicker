@@ -1,10 +1,11 @@
-import { HostListener, OnDestroy } from '@angular/core';
+import { HostListener, OnDestroy, Directive } from '@angular/core';
 import { FsDateDialogRef } from '../classes/date-dialog-ref';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FsDatePickerBaseComponent } from '../classes/base-component';
 
 
+@Directive()
 export class FsDatePickerBaseDialogComponent implements OnDestroy {
 
   @HostListener('document:keydown', ['$event'])

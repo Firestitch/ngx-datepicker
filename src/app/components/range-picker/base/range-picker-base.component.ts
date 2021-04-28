@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  ElementRef,
-  HostBinding,
-  HostListener,
-  Injector,
-  Input,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, ElementRef, HostBinding, HostListener, Injector, Input, Directive } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -23,6 +15,7 @@ import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from '../../../enums/date-format.enum';
 
 
+@Directive()
 export class BaseRangePickerComponent implements ControlValueAccessor, AfterViewInit {
 
   @Input()

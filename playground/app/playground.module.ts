@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
-import { FsDatePickerModule } from '@firestitch/datepicker';
+import { FsDatePickerModule } from 'fs-datepicker';
 import { FsScrollbarModule } from '@firestitch/scrollbar';
 
 import { ToastrModule } from 'ngx-toastr';

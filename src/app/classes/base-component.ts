@@ -1,14 +1,4 @@
-import {
-  Renderer2,
-  HostListener,
-  ElementRef,
-  EventEmitter,
-  Output,
-  OnDestroy,
-  HostBinding,
-  Input,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, HostBinding, Input, ChangeDetectorRef, Directive } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -17,6 +7,7 @@ import { FsDateDialogRef } from './date-dialog-ref';
 import { ControlValueAccessor } from '@angular/forms';
 
 
+@Directive()
 export abstract class FsDatePickerBaseComponent implements ControlValueAccessor, OnDestroy {
 
   abstract updateInput(value: Date);

@@ -2,7 +2,7 @@
   "extends": "./tools/config/tsconfig.cli.json",
   "compilerOptions": {
     "paths": {
-      "@firestitch/datepicker": [
+      "fs-datepicker": [
         "src/public_api.ts"
       ]
     }

@@ -91,7 +91,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
   ],
 })
 export class FsDatePickerModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<FsDatePickerModule> {
     return {
       ngModule: FsDatePickerModule,
       providers: [

@@ -5,5 +5,5 @@
 @import "~@firestitch/form/styles.scss";
 
 @include mat-core();
-@include fs-date-picker($mat-blue);
+@include fs-date-picker();
 @include fs-form($mat-blue);
