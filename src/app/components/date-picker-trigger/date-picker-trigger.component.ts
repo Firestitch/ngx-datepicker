@@ -10,6 +10,8 @@ import {
 
 import { MatFormField } from '@angular/material/form-field';
 
+import { DateFormat } from '../../enums/date-format.enum';
+
 
 @Component({
   selector: 'fs-datepicker-trigger',
@@ -22,6 +24,9 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
   @Input()
   public disabled: boolean;
 
+  @Input()
+  public view: DateFormat;
+
   @Output()
   public click = new EventEmitter<void>();
 
@@ -29,6 +34,10 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
     @Optional() public matFormField: MatFormField,
     private el: ElementRef,
   ) {}
+
+  public get isTimeView(): boolean {
+    return this.view === DateFormat.Time;
+  }
 
   public ngAfterViewInit() {
     const matElementRef = this.matFormField._elementRef.nativeElement;
