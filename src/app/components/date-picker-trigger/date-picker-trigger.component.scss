@@ -1,0 +1,14 @@
+.fs-date-picker-trigger {
+  margin-right: 5px;
+  margin-bottom: 2px;
+  align-self: flex-end;
+
+  mat-icon {
+    cursor: pointer;
+  }
+}
+
+.disabled {
+  color: rgba(0, 0, 0, 0.38);
+  pointer-events: none;
+}

@@ -9,7 +9,13 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  ValidatorFn, Validators
+} from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 
@@ -30,11 +36,17 @@ import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DateRangePickerToComponent),
       multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DateRangePickerToComponent),
+      multi: true,
     }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateRangePickerToComponent extends BaseRangePickerComponent implements OnInit, OnDestroy {
+export class DateRangePickerToComponent extends BaseRangePickerComponent
+  implements OnInit, OnDestroy, Validator {
 
   @Input('fsDateRangeTo')
   public name: string;
@@ -90,14 +102,29 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
    * @param value
    */
   public updateValueFromDialog(value) {
+    this.updateValue(value);
+
+    super.updateValueFromDialog(this._pickerRef.endDate);
+  }
+
+  public updateValue(value) {
     if (this.view === DateFormat.Date) {
       value = endOfDay(value);
     }
 
     this._pickerRef.updateEndDate(value);
 
-    super.updateValueFromDialog(this._pickerRef.endDate);
+    super.updateValue(value);
   }
+
+  /** The form control validator for whether the input parses. */
+  protected _parseValidator: ValidatorFn = (): ValidationErrors | null => {
+    return this._pickerRef.isRangeValid
+      ? null
+      : { fsDatepickerRange: 'Invalid Range' };
+  }
+
+  protected _validator: ValidatorFn | null = Validators.compose([this._parseValidator]);
 
   /**
    * Update min/max and value if date start was changed
@@ -110,12 +137,16 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent impleme
       .subscribe({
         next: () => {
           const prevValue = this.value;
-          this.writeValue(this._pickerRef.endDate);
+          // this.writeValue(this._pickerRef.endDate);
 
           if (prevValue !== this.value) {
             this.onChange(this.value);
             this.onTouch(this.value);
+          } else {
+            this._validatorOnChange();
           }
+
+          this._cdRef.markForCheck();
         }
       });
   }

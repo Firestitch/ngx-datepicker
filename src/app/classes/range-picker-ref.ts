@@ -35,6 +35,10 @@ export class RangePickerRef {
     return this._endDatePickerExists;
   }
 
+  public get isRangeValid() {
+    return this.isDateAfter(this._endDate, this._startDate);
+  }
+
   /**
    * Update start date and change end date if needed
    * @param value
@@ -56,9 +60,9 @@ export class RangePickerRef {
    * @param value
    */
   public updateEndDate(value: Date) {
-    if (!this.isDateAfter(value, this._startDate)) {
-      value = null;
-    }
+    // if (!this.isDateAfter(value, this._startDate)) {
+    //   // value = null;
+    // }
 
     this._endDate = value;
 

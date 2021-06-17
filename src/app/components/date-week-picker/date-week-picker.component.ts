@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostListener,
   Inject,
   Injector,
   Input,
@@ -54,6 +55,14 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
     super(renderer, elementRef, _cdRef);
   }
 
+  @HostListener('click')
+  @HostListener('focus')
+  public inputClick() {
+    if (!this.disabled && !this.readonly) {
+      this.open();
+    }
+  }
+
   public ngAfterViewInit() {
     this.setReadonly();
   }
@@ -81,7 +90,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
     }
   }
 
-  protected open() {
+  public open() {
 
     if (this._dateDialogRef) {
       return;

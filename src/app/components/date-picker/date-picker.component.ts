@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -12,7 +11,9 @@ import {
   Output,
   Renderer2,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { isValid } from 'date-fns';
 
 import { FsDatepickerFactory } from '../../services/factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
@@ -24,16 +25,27 @@ import { DateFormat } from '../../enums/date-format.enum';
 @Component({
   selector: '[fsDatePicker]',
   template: FsDatePickerComponent.template,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsDatePickerComponent),
-    multi: true
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FsDatePickerComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => FsDatePickerComponent),
+      multi: true,
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDatePickerComponent extends FsDatePickerBaseComponent implements AfterViewInit {
+export class FsDatePickerComponent extends FsDatePickerBaseComponent {
 
-  static template = '<fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>';
+  static template = `
+    <fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)">
+    </fs-clear>
+    <fs-datepicker-trigger (click)="open()" [disabled]="disabled || readonly"></fs-datepicker-trigger>
+  `;
 
   @Input() public minYear = null;
   @Input() public maxYear = null;
@@ -57,10 +69,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     super(renderer, elementRef, _cdRef);
   }
 
-  public ngAfterViewInit() {
-    this.setReadonly();
-  }
-
   public writeValue(value: any): void {
     this._value = createDateFromValue(value);
     this.updateInput(value);
@@ -72,33 +80,38 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     if (!this.minutes && value) {
       value.setMinutes(0);
     }
-    this.elementRef.nativeElement.value = formatDateTime(value, this.view, this.format);
+
+    const viewValue = formatDateTime(value, this.view, this.format);
+
+    if (!!viewValue || value === null) {
+      this.elementRef.nativeElement.value = formatDateTime(value, this.view, this.format);
+    }
   }
 
-  protected open() {
-
-    if (this._dateDialogRef) {
+  public open() {
+    if (this.disabled || this.readonly || this._dateDialogRef) {
       return;
     }
 
+    const modelValue = isValid(this.value) ? this.value : null;
+
     this._dateDialogRef = this.fsDatepickerFactory.openDatePicker(
-      this.elementRef,
-      this.injector,
-      {
-        elementRef: this.elementRef,
-        modelValue: this.value,
-        view: this.view,
-        minutes: this.minutes,
-        minYear: this.minYear,
-        maxYear: this.maxYear,
-        minDate: this.minDate,
-        maxDate: this.maxDate,
-        startOfDay: this.startOfDay,
-        dateMode: 'date',
-        components: this._getDefaultComponents(),
-        parentComponent: this
-      }
-    );
+    this.elementRef,
+    this.injector,
+    {
+      elementRef: this.elementRef,
+      modelValue: modelValue,
+      view: this.view,
+      minutes: this.minutes,
+      minYear: this.minYear,
+      maxYear: this.maxYear,
+      minDate: this.minDate,
+      maxDate: this.maxDate,
+      startOfDay: this.startOfDay,
+      dateMode: 'date',
+      components: this._getDefaultComponents(),
+      parentComponent: this
+    });
 
     super.open();
   }

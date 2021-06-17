@@ -31,6 +31,7 @@ import { FsDatePickerBirthdayComponent } from './components/date-picker-birthday
 import { FsDateWeekPickerComponent } from './components/date-week-picker/date-week-picker.component';
 import { FsDateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 import { FsTimePickerComponent } from './components/time-picker/time-picker.component';
+import { FsDatePickerTriggerComponent } from './components/date-picker-trigger/date-picker-trigger.component';
 
 import { FsDatepickerFactory} from './services/factory.service';
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
@@ -66,6 +67,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     FsDateScrollPickerDialogComponent,
     FsDateScrollPickerComponent,
     FsDatePickerBirthdayComponent,
+    FsDatePickerTriggerComponent,
     FsDateWeekPickerComponent,
     FsTimePickerComponent,
     DateTimeRangePickerFromComponent,

@@ -4,7 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
+  forwardRef, HostListener,
   Inject,
   Injector,
   Input,
@@ -61,6 +61,15 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     this._cdRef.markForCheck();
   }
 
+  @HostListener('click')
+  @HostListener('focus')
+  public inputClick() {
+    if (!this.disabled && !this.readonly) {
+      this.open();
+    }
+  }
+
+
   public updateInput(value) {
 
     let format = DateFormat.Date;
@@ -81,7 +90,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     this.elementRef.nativeElement.value = formatDateTime(value, format);
   }
 
-  protected open() {
+  public open() {
 
     if (this._dateDialogRef || this.disabled || this.readonly) {
       return;

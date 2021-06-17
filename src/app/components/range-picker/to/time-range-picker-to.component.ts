@@ -4,7 +4,7 @@ import {
   forwardRef,
   Input,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateFormat } from '../../../enums/date-format.enum';
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { DateRangePickerToComponent } from './date-range-picker-to.component';
@@ -18,6 +18,11 @@ import { DateRangePickerToComponent } from './date-range-picker-to.component';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => TimeRangePickerToComponent),
       multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => TimeRangePickerToComponent),
+      multi: true,
     }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,11 +4,22 @@ import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { FsDateDialogRef } from './date-dialog-ref';
-import { ControlValueAccessor } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  ValidationErrors,
+  Validator,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
+
+import * as parseDate from 'parse-messy-time';
+import { isDate, isEqual, isValid } from 'date-fns';
 
 
 @Directive()
-export abstract class FsDatePickerBaseComponent implements ControlValueAccessor, OnDestroy {
+export abstract class FsDatePickerBaseComponent<D = any>
+  implements Validator, ControlValueAccessor, OnDestroy {
 
   abstract updateInput(value: Date);
 
@@ -26,14 +37,6 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   @Output('change')
   public change$ = new EventEmitter<any>();
 
-  @HostListener('click')
-  @HostListener('focus')
-  public inputClick() {
-    if (!this.disabled && !this.readonly) {
-      this.open();
-    }
-  }
-
   @HostBinding('class.fs-input-disabled')
   @HostBinding('attr.readonly')
   public disabled = false;
@@ -48,9 +51,9 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   public readonly = false;
 
   public opened = false;
-  public _onChange = (value: any) => { };
   public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
   public registerOnTouched(fn: () => any): void {  }
+  public registerOnValidatorChange(fn: () => void): void { this._validatorOnChange = fn; }
 
   protected _value;
   protected dialog = null;
@@ -59,12 +62,15 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   protected _dateDialogRef: FsDateDialogRef;
   protected _destroy$ = new Subject();
 
-  private _clear: boolean = true;
+  private _onChange = (value: any) => { };
+  private _validatorOnChange = () => {};
+  private _clear = true;
+  private _lastValueValid = false;
 
-  constructor(
+  protected constructor(
     renderer: Renderer2,
     elementRef: ElementRef,
-    protected _cdRef: ChangeDetectorRef,
+    protected _cdRef: ChangeDetectorRef
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
@@ -81,6 +87,8 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   public set value(value) {
     this._value = value;
 
+    this._lastValueValid = !value || isValid(value);
+
     this._onChange(this.value);
     this.updateInput(this.value);
 
@@ -96,6 +104,7 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
   public cleared(event) {
     event.stopPropagation();
     event.preventDefault();
+
     this.value = null;
   }
 
@@ -114,7 +123,11 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
     this._cdRef.markForCheck();
   }
 
-  protected open() {
+  public validate(c: AbstractControl): ValidationErrors | null {
+    return this._validator ? this._validator(c) : null;
+  }
+
+  public open() {
     this.renderer.addClass(document.body, 'fs-date-picker-open');
     this.opened = true;
     this._dateDialogRef.value$
@@ -138,15 +151,50 @@ export abstract class FsDatePickerBaseComponent implements ControlValueAccessor,
       });
   }
 
+  protected setReadonly() {
+    setTimeout(() => {
+      this.elementRef.nativeElement.setAttribute('readonly', true);
+    });
+  }
+
   protected close() {
     if (this._dateDialogRef) {
       this._dateDialogRef.close();
     }
   }
 
-  protected setReadonly() {
-    setTimeout(() => {
-      this.elementRef.nativeElement.setAttribute('readonly', true);
-    });
+  /** The form control validator for whether the input parses. */
+  protected _parseValidator: ValidatorFn = (): ValidationErrors | null => {
+    return this._lastValueValid
+      ? null
+      : { fsDatepickerParse: 'Invalid Date' };
+  }
+
+  protected _validator: ValidatorFn | null = Validators.compose([this._parseValidator]);
+
+  protected _getDateInstanceOrNull(obj: any): D | null {
+    return isDate(obj) ? obj : null;
+  }
+
+  @HostListener('input', ['$event.target.value'])
+  private _inputChange(value: string): void {
+    const lastValueWasValid = this._lastValueValid;
+    let date = parseDate(value);
+
+    this._lastValueValid = !date || isValid(date);
+    date = this._getDateInstanceOrNull(date);
+
+    if (!isEqual(date, this._value)) {
+      this._value = date;
+      this._onChange(this.value);
+      this.change$.emit(this.value);
+    } else if (lastValueWasValid !== this._lastValueValid) {
+      this._validatorOnChange();
+    }
+  }
+
+  @HostListener('blur')
+  private _formatValue() {
+    this.updateInput(this.value);
   }
 }
