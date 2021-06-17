@@ -40,6 +40,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   @Input() public showYear = true;
   @Input() public showDay = true;
 
+  public view = DateFormat.Date;
+
   constructor(
     protected renderer: Renderer2,
     protected injector: Injector,
