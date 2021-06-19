@@ -177,7 +177,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
   }
 
   @HostListener('input', ['$event.target.value'])
-  private _inputChange(value: string): void {
+  public _inputChange(value: string): void {
     const lastValueWasValid = this._lastValueValid;
     let date = parseDate(value);
 
@@ -194,7 +194,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
   }
 
   @HostListener('blur')
-  private _formatValue() {
+  public _formatValue() {
     this.updateInput(this.value);
   }
 }
