@@ -104,6 +104,7 @@ export abstract class BaseRangePickerComponent<D = any>
 
   public writeValue(value) {
     value = createDateFromValue(value);
+    this.validateDate(value);
 
     const [valuesAreDates] = this._checkValuesEquality(value, this.value);
 
@@ -244,6 +245,10 @@ export abstract class BaseRangePickerComponent<D = any>
 
   protected _getDateInstanceOrNull(obj: any): D | null {
     return isDate(obj) ? obj : null;
+  }
+
+  protected validateDate(date: Date | unknown) {
+    this._lastValueValid = !date || isValid(date);
   }
 
   @HostListener('input', ['$event.target.value'])

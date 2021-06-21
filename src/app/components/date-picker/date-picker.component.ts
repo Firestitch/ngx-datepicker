@@ -71,6 +71,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
 
   public writeValue(value: any): void {
     this._value = createDateFromValue(value);
+    this.validateDate(this.value);
     this.updateInput(value);
 
     this._cdRef.markForCheck();

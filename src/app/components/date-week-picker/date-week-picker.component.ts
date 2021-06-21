@@ -69,6 +69,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
 
   public writeValue(value: any): void {
     this._value = value;
+    this.validateDate(this.value);
     this.updateInput(value);
 
     this._cdRef.markForCheck();

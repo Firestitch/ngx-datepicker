@@ -176,12 +176,16 @@ export abstract class FsDatePickerBaseComponent<D = any>
     return isDate(obj) ? obj : null;
   }
 
+  protected validateDate(date: Date | unknown) {
+    this._lastValueValid = !date || isValid(date);
+  }
+
   @HostListener('input', ['$event.target.value'])
   public _inputChange(value: string): void {
     const lastValueWasValid = this._lastValueValid;
     let date = parseDate(value);
 
-    this._lastValueValid = !date || isValid(date);
+    this.validateDate(date)
     date = this._getDateInstanceOrNull(date);
 
     if (!isEqual(date, this._value)) {
