@@ -3,13 +3,12 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
   Injector,
   Input,
   OnDestroy,
-  OnInit,
+  OnInit, Optional, Self,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 
 import { startOfDay } from 'date-fns';
 
@@ -23,13 +22,6 @@ import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 @Component({
   selector: '[fsDateRangeFrom]',
   template: FsDatePickerComponent.template,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DateRangePickerFromComponent),
-      multi: true
-    }
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangePickerFromComponent extends BaseRangePickerComponent implements OnInit, OnDestroy {
@@ -42,13 +34,16 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
     _injector: Injector,
     _datepickerFactory: FsDatepickerFactory,
     _cdRef: ChangeDetectorRef,
+    @Optional() @Self() protected _ngControl: NgControl,
     private _rangePickerStore: FsRangePickerStoreService,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef);
+    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef, _ngControl);
   }
 
   public ngOnInit() {
     this.registerPicker();
+
+    super.ngOnInit();
   }
 
   public ngOnDestroy() {
@@ -93,5 +88,11 @@ export class DateRangePickerFromComponent extends BaseRangePickerComponent imple
     super.updateValueFromDialog(value);
 
     this._pickerRef.updateStartDate(value);
+  }
+
+  public updateValue(value): void {
+    this._pickerRef.updateStartDate(value);
+
+    super.updateValue(value);
   }
 }

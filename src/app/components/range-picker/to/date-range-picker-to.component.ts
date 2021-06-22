@@ -3,21 +3,18 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
   Injector,
   Input,
   OnDestroy,
-  OnInit,
+  OnInit, Optional, Self,
 } from '@angular/core';
 import {
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
+  NgControl,
   ValidationErrors,
-  Validator,
-  ValidatorFn, Validators
+  ValidatorFn,
 } from '@angular/forms';
 
-import { takeUntil } from 'rxjs/operators';
+import { skip, takeUntil } from 'rxjs/operators';
 
 import { endOfDay } from 'date-fns';
 
@@ -31,22 +28,10 @@ import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 @Component({
   selector: '[fsDateRangeTo]',
   template: FsDatePickerComponent.template,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DateRangePickerToComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => DateRangePickerToComponent),
-      multi: true,
-    }
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangePickerToComponent extends BaseRangePickerComponent
-  implements OnInit, OnDestroy, Validator {
+  implements OnInit, OnDestroy {
 
   @Input('fsDateRangeTo')
   public name: string;
@@ -56,14 +41,17 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent
     _injector: Injector,
     _datepickerFactory: FsDatepickerFactory,
     _cdRef: ChangeDetectorRef,
+    @Optional() @Self() protected _ngControl: NgControl,
     private _rangePickerStore: FsRangePickerStoreService,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'to', _cdRef);
+    super(_elRef, _injector, _datepickerFactory, 'to', _cdRef, _ngControl);
   }
 
   public ngOnInit() {
     this.registerPicker();
     this._subscribeToPickerRefUpdates();
+
+    super.ngOnInit();
   }
 
   public ngOnDestroy() {
@@ -124,14 +112,13 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent
       : { fsDatepickerRange: 'Invalid Range' };
   }
 
-  protected _validator: ValidatorFn | null = Validators.compose([this._parseValidator]);
-
   /**
    * Update min/max and value if date start was changed
    */
   private _subscribeToPickerRefUpdates() {
     this._pickerRef.valueChange$
       .pipe(
+        skip(1),
         takeUntil(this._destroy$),
       )
       .subscribe({
@@ -142,10 +129,10 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent
           if (prevValue !== this.value) {
             this.onChange(this.value);
             this.onTouch(this.value);
-          } else {
-            this._validatorOnChange();
           }
 
+          this._ngControl.control.markAsDirty();
+          this._ngControl.control.updateValueAndValidity();
           this._cdRef.markForCheck();
         }
       });

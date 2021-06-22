@@ -1,18 +1,23 @@
-import { AfterViewInit, ChangeDetectorRef, ElementRef, HostBinding, HostListener, Injector, Input, Directive } from '@angular/core';
 import {
-  AbstractControl,
-  ControlValueAccessor,
+  ChangeDetectorRef,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  Injector,
+  Input,
+  Directive,
+  OnInit
+} from '@angular/core';
+import {
+  ControlValueAccessor, NgControl,
   ValidationErrors,
-  Validator,
   ValidatorFn,
-  Validators
 } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
-import * as parseDate from 'parse-messy-time';
 
 import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { FsDatepickerFactory } from '../../../services/factory.service';
@@ -21,11 +26,12 @@ import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
 import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from '../../../enums/date-format.enum';
+import { parseDate } from '../../../helpers/parse-date';
 
 
 @Directive()
 export abstract class BaseRangePickerComponent<D = any>
-  implements Validator, ControlValueAccessor, AfterViewInit {
+  implements ControlValueAccessor, OnInit {
 
   @Input()
   public view: DateFormat = DateFormat.Date;
@@ -65,7 +71,6 @@ export abstract class BaseRangePickerComponent<D = any>
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
   protected _value;
-  protected _validatorOnChange = () => {};
 
   private _lastValueValid = false;
 
@@ -75,7 +80,9 @@ export abstract class BaseRangePickerComponent<D = any>
     protected _datepickerFactory: FsDatepickerFactory,
     protected _type,
     protected _cdRef: ChangeDetectorRef,
+    protected _ngControl: NgControl,
   ) {
+    this._ngControl.valueAccessor = this;
     this._elRef.nativeElement.setAttribute('autocomplete', 'off');
   }
 
@@ -88,10 +95,13 @@ export abstract class BaseRangePickerComponent<D = any>
     }
   }
 
-  public ngAfterViewInit() {
-    setTimeout(() => {
-      // this._elRef.nativeElement.setAttribute('readonly', true);
-    });
+  public ngOnInit(): void {
+    const control = this._ngControl.control;
+    const validators = control.validator
+      ? [ control.validator, this._parseValidator]
+      : this._parseValidator;
+    control.setValidators(validators);
+    control.updateValueAndValidity();
   }
 
   public get value() {
@@ -172,6 +182,8 @@ export abstract class BaseRangePickerComponent<D = any>
    */
   public updateValueFromDialog(value) {
     this.writeValue(value);
+    this.onChange(value);
+    this.onTouch(value);
   }
 
   public updateValue(value): void {
@@ -180,23 +192,16 @@ export abstract class BaseRangePickerComponent<D = any>
     this.onTouch(value);
   }
 
-  public validate(c: AbstractControl): ValidationErrors | null {
-    return this._validator ? this._validator(c) : null;
-  }
-
   public updateInput(value) {
     const viewValue = formatDateTime(value, this.view);
 
-    if (!!viewValue || value === null) {
-      this.updateValueFromDialog(value);
-
+    if (!!viewValue) {
       this._elRef.nativeElement.value = formatDateTime(this.value, this.view);
     }
   }
 
   public registerOnChange(fn) { this.onChange = fn;  }
   public registerOnTouched(fn) { this.onTouch = fn; }
-  public registerOnValidatorChange(fn: () => void): void { this._validatorOnChange = fn; }
 
   protected _getDefaultComponents() {
     if (this.view === 'time') {
@@ -241,12 +246,6 @@ export abstract class BaseRangePickerComponent<D = any>
       : { fsDatepickerParse: 'Invalid Date' };
   }
 
-  protected _validator: ValidatorFn | null = Validators.compose([this._parseValidator]);
-
-  protected _getDateInstanceOrNull(obj: any): D | null {
-    return isDate(obj) ? obj : null;
-  }
-
   protected validateDate(date: Date | unknown) {
     this._lastValueValid = !date || isValid(date);
   }
@@ -254,17 +253,16 @@ export abstract class BaseRangePickerComponent<D = any>
   @HostListener('input', ['$event.target.value'])
   public _inputChange(value: string): void {
     const lastValueWasValid = this._lastValueValid;
-    let date = parseDate(value);
+    const date = parseDate(value);
 
     this._lastValueValid = !date || isValid(date);
-    date = this._getDateInstanceOrNull(date);
 
     if (!isEqual(date, this._value)) {
       this.updateValue(date);
       /*this._value = date;
       this.onChange(this.value);*/
     } else if (lastValueWasValid !== this._lastValueValid) {
-      this._validatorOnChange();
+      this._ngControl.control.updateValueAndValidity();
     }
   }
 

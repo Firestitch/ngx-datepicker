@@ -372,17 +372,17 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public previousMonth(month) {
     const prevMonth = subMonths(month.date, 1);
-    if (this.isMonthDisabled(prevMonth)) {
-      return;
-    }
+    // if (this.isMonthDisabled(prevMonth)) {
+    //   return;
+    // }
     this.onDrawMonth.emit(prevMonth);
   }
 
   public nextMonth(month) {
     const nextMonth = addMonths(month.date, 1);
-    if (this.isMonthDisabled(nextMonth)) {
-      return;
-    }
+    // if (this.isMonthDisabled(nextMonth)) {
+    //   return;
+    // }
     this.onDrawMonth.emit(nextMonth);
   }
 

@@ -13,8 +13,10 @@ import {
   Validators
 } from '@angular/forms';
 
-import * as parseDate from 'parse-messy-time';
+// import * as parseDate from 'parse-messy-time';
 import { isDate, isEqual, isValid } from 'date-fns';
+
+import { parseDate } from '../helpers/parse-date';
 
 
 @Directive()
@@ -172,10 +174,6 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
   protected _validator: ValidatorFn | null = Validators.compose([this._parseValidator]);
 
-  protected _getDateInstanceOrNull(obj: any): D | null {
-    return isDate(obj) ? obj : null;
-  }
-
   protected validateDate(date: Date | unknown) {
     this._lastValueValid = !date || isValid(date);
   }
@@ -183,10 +181,9 @@ export abstract class FsDatePickerBaseComponent<D = any>
   @HostListener('input', ['$event.target.value'])
   public _inputChange(value: string): void {
     const lastValueWasValid = this._lastValueValid;
-    let date = parseDate(value);
+    const date = parseDate(value);
 
     this.validateDate(date)
-    date = this._getDateInstanceOrNull(date);
 
     if (!isEqual(date, this._value)) {
       this._value = date;

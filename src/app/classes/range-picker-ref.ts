@@ -48,9 +48,9 @@ export class RangePickerRef {
 
     this._startDatePickerExists = true;
 
-    if (!this.isDateAfter(this._endDate, this._startDate)) {
-      this.updateEndDate(null);
-    }
+    // if (!this.isDateAfter(this._endDate, this._startDate)) {
+    //   // this.updateEndDate(null);
+    // }
 
     this._valueChange$.next(value);
   }
