@@ -1,18 +1,14 @@
 import {
   ChangeDetectorRef,
+  Directive,
   ElementRef,
   HostBinding,
   HostListener,
   Injector,
   Input,
-  Directive,
   OnInit
 } from '@angular/core';
-import {
-  ControlValueAccessor, NgControl,
-  ValidationErrors,
-  ValidatorFn,
-} from '@angular/forms';
+import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -187,6 +183,14 @@ export abstract class BaseRangePickerComponent<D = any>
   }
 
   public updateValue(value): void {
+    if (this.view === DateFormat.Time && isValid(this._value) && isValid(value)) {
+      this._value.setHours(value.getHours());
+      this._value.setMinutes(value.getMinutes());
+      this._value.setSeconds(value.getSeconds());
+
+      value = new Date(this._value);
+    }
+
     this._value = value;
     this.onChange(value);
     this.onTouch(value);

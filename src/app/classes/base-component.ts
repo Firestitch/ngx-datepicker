@@ -17,6 +17,7 @@ import {
 import { isDate, isEqual, isValid } from 'date-fns';
 
 import { parseDate } from '../helpers/parse-date';
+import { DateFormat } from '../enums/date-format.enum';
 
 
 @Directive()
@@ -54,7 +55,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
   public opened = false;
   public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
-  public registerOnTouched(fn: () => any): void {  }
+  public registerOnTouched(fn: () => any): void { this._onTouch = fn }
   public registerOnValidatorChange(fn: () => void): void { this._validatorOnChange = fn; }
 
   protected _value;
@@ -65,6 +66,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
   protected _destroy$ = new Subject();
 
   private _onChange = (value: any) => { };
+  private _onTouch = () => { };
   private _validatorOnChange = () => {};
   private _clear = true;
   private _lastValueValid = false;
@@ -153,6 +155,13 @@ export abstract class FsDatePickerBaseComponent<D = any>
       });
   }
 
+  protected updateValue(date): void {
+    this._value = date;
+    this._onChange(this.value);
+    this._onTouch();
+    this.change$.emit(this.value);
+  }
+
   protected setReadonly() {
     setTimeout(() => {
       this.elementRef.nativeElement.setAttribute('readonly', true);
@@ -178,6 +187,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
     this._lastValueValid = !date || isValid(date);
   }
 
+
   @HostListener('input', ['$event.target.value'])
   public _inputChange(value: string): void {
     const lastValueWasValid = this._lastValueValid;
@@ -186,9 +196,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
     this.validateDate(date)
 
     if (!isEqual(date, this._value)) {
-      this._value = date;
-      this._onChange(this.value);
-      this.change$.emit(this.value);
+      this.updateValue(date);
     } else if (lastValueWasValid !== this._lastValueValid) {
       this._validatorOnChange();
     }

@@ -117,6 +117,18 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
     super.open();
   }
 
+  protected updateValue(value) {
+    if (this.view === DateFormat.Time && isValid(this._value) && isValid(value)) {
+      this._value.setHours(value.getHours());
+      this._value.setMinutes(value.getMinutes());
+      this._value.setSeconds(value.getSeconds());
+
+      value = new Date(this._value);
+    }
+
+    super.updateValue(value);
+  }
+
   private _getDefaultComponents() {
     if (this.view === 'time') {
       return { timeStart: true };
