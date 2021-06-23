@@ -66,6 +66,12 @@ export class DateRangePickerToComponent extends BaseRangePickerComponent
   }
 
   public writeValue(value) {
+    // Hot fix while angular has ongoing issue
+    // https://github.com/angular/angular/issues/29218
+    if (!this.onChange) {
+      return;
+    }
+
     super.writeValue(value);
 
     const [valuesAreDates, datesAreEquals] = this._checkValuesEquality(value, this._pickerRef.endDate);

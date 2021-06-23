@@ -60,7 +60,7 @@ export abstract class BaseRangePickerComponent<D = any>
   @HostBinding('attr.readonly')
   public readonly = false;
 
-  public onChange: any = () => {};
+  public onChange: any;
   public onTouch: any = () => {};
 
   protected _dateDialogRef: FsDateDialogRef;
