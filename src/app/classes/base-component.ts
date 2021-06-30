@@ -24,7 +24,7 @@ import { DateFormat } from '../enums/date-format.enum';
 export abstract class FsDatePickerBaseComponent<D = any>
   implements Validator, ControlValueAccessor, OnDestroy {
 
-  abstract updateInput(value: Date);
+  abstract updateInput(value: Date): void;
 
   @Input()
   public set clear(value: boolean) {
@@ -110,6 +110,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
     event.preventDefault();
 
     this.value = null;
+    this.clearInput();
   }
 
   public ngOnDestroy() {
@@ -153,6 +154,10 @@ export abstract class FsDatePickerBaseComponent<D = any>
         this.renderer.removeClass(document.body, 'fs-date-picker-open');
         this._cdRef.markForCheck();
       });
+  }
+
+  public clearInput() {
+    this.elementRef.nativeElement.value = null;
   }
 
   protected updateValue(date): void {
