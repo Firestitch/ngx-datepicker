@@ -197,11 +197,7 @@ export abstract class BaseRangePickerComponent<D = any>
   }
 
   public updateInput(value) {
-    const viewValue = formatDateTime(value, this.view);
-
-    if (!!viewValue) {
-      this._elRef.nativeElement.value = formatDateTime(this.value, this.view);
-    }
+    this._elRef.nativeElement.value = formatDateTime(value, this.view);
   }
 
   public registerOnChange(fn) { this.onChange = fn;  }

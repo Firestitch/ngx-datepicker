@@ -82,11 +82,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
       value.setMinutes(0);
     }
 
-    const viewValue = formatDateTime(value, this.view, this.format);
-
-    if (!!viewValue) {
-      this.elementRef.nativeElement.value = formatDateTime(value, this.view, this.format);
-    }
+    this.elementRef.nativeElement.value = formatDateTime(value, this.view, this.format);
   }
 
   public open() {
