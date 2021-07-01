@@ -195,15 +195,19 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
   @HostListener('input', ['$event.target.value'])
   public _inputChange(value: string): void {
-    const lastValueWasValid = this._lastValueValid;
-    const date = parseDate(value);
+    if (!!value) {
+      const lastValueWasValid = this._lastValueValid;
+      const date = parseDate(value);
 
-    this.validateDate(date)
+      this.validateDate(date)
 
-    if (!isEqual(date, this._value)) {
-      this.updateValue(date);
-    } else if (lastValueWasValid !== this._lastValueValid) {
-      this._validatorOnChange();
+      if (!isEqual(date, this._value)) {
+        this.updateValue(date);
+      } else if (lastValueWasValid !== this._lastValueValid) {
+        this._validatorOnChange();
+      }
+    } else {
+      this.updateValue(null);
     }
   }
 
