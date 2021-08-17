@@ -24,7 +24,10 @@
     "package:test": "cd tools && npm run cli:package:test",
     "package:publish": "cd tools && npm run cli:package:publish",
     "demo:build": "cd tools && npm run cli:demo",
-    "serve": "cd tools && npm run cli:serve"
+    "serve": "cd tools && npm run cli:serve",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.15",
@@ -76,7 +79,8 @@
     "tslint": "^5.20.1",
     "tsmodels": "^0.4.6",
     "typescript": "~3.8.3",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "cypress": "8.3.0"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -88,6 +92,7 @@
     "@firestitch/scroll-picker": ">=7.0.2"
   },
   "dependencies": {
+    "@cypress/schematic": "^1.5.0",
     "tslib": "^1.10.0"
   }
 }
