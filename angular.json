@@ -214,8 +214,7 @@
           "options": {
             "tsConfig": [
               "src/tsconfig.lib.json",
-              "src/tsconfig.spec.json",
-              "src/cypress/tsconfig.json"
+              "src/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
