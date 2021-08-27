@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// import * as moment from 'moment';
 
 @Component({
   selector: 'date-example',
@@ -8,11 +7,17 @@ import { Component } from '@angular/core';
 })
 export class DateExampleComponent {
 
-  public model = '2015-01-05T10:11:22+00:00';
+  public model = new Date();
 
-  constructor() {}
+  public selected(e) {
+    console.log('selected', e);
+  }
 
-  change(e) {
-    console.log(e);
+  public blured(e) {
+    console.log('blured', e);
+  }
+  
+  public ngModelChange(e) {
+    console.log('ngModelChange', e);
   }
 }

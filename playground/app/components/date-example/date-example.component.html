@@ -4,7 +4,9 @@
     fsDatePicker
     [(ngModel)]="model"
     fsFormRequired
-    (change)="change($event)"
+    (ngModelChange)="ngModelChange($event)"
+    (selected)="selected($event)"
+    (blured)="blured($event)"
     name="datepicker"
     placeholder="Date">
   </mat-form-field>

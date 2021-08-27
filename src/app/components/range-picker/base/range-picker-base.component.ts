@@ -55,6 +55,12 @@ export abstract class BaseRangePickerComponent<D = any>
   public set readonlyState(isReadonly: string) {
     this.readonly = !!isReadonly || isReadonly === '';
   }
+  
+  @Input() public ngModelOptions: {
+    name?: string;
+    standalone?: boolean;
+    updateOn?: 'change' | 'blur' | 'submit';
+  };
 
   @HostBinding('class.fs-input-readonly')
   @HostBinding('attr.readonly')
@@ -250,8 +256,21 @@ export abstract class BaseRangePickerComponent<D = any>
     this._lastValueValid = !date || isValid(date);
   }
 
-  @HostListener('input', ['$event.target.value'])
-  public _inputChange(value: string): void {
+  @HostListener('keyup', ['$event', '$event.target.value'])
+  public _inputKeyup(event: KeyboardEvent, value: string): void {
+    if(event.key === 'Enter') {
+      this.inputChange(value);
+    }
+  }
+
+  @HostListener('input', ['$event.target.value', '$event.target'])
+  public _inputChange(value: string, target): void {
+    if(this.ngModelOptions?.updateOn !== 'blur')  {
+      this.inputChange(value);
+    }
+  }
+
+  public inputChange(value: string): void {
     const lastValueWasValid = this._lastValueValid;
     const date = parseDate(value);
 
@@ -259,15 +278,17 @@ export abstract class BaseRangePickerComponent<D = any>
 
     if (!isEqual(date, this._value)) {
       this.updateValue(date);
-      /*this._value = date;
-      this.onChange(this.value);*/
     } else if (lastValueWasValid !== this._lastValueValid) {
       this._ngControl.control.updateValueAndValidity();
     }
   }
 
-  @HostListener('blur')
-  public _formatValue() {
+  @HostListener('blur', ['$event.target.value'])
+  public _inputBlur(value: string): void {
+    if(this.ngModelOptions?.updateOn === 'blur')  {
+      this.inputChange(value);
+    }
+
     this.updateInput(this.value);
   }
 

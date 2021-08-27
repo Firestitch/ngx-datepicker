@@ -13,11 +13,9 @@ import {
   Validators
 } from '@angular/forms';
 
-// import * as parseDate from 'parse-messy-time';
-import { isDate, isEqual, isValid } from 'date-fns';
+import { isEqual, isValid } from 'date-fns';
 
 import { parseDate } from '../helpers/parse-date';
-import { DateFormat } from '../enums/date-format.enum';
 
 
 @Directive()
@@ -26,19 +24,25 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
   abstract updateInput(value: Date): void;
 
+  @Input() public ngModelOptions: {
+    name?: string;
+    standalone?: boolean;
+    updateOn?: 'change' | 'blur' | 'submit';
+  };
+
   @Input()
   public set clear(value: boolean) {
-    // const parentNode = this.elementRef.nativeElement.parentNode.parentNode;
-
     this._clear = value;
-
-    // this._hideClearButton
-    //   ? parentNode.classList.add('hide-clear')
-    //   : parentNode.classList.remove('hide-clear');
   }
 
   @Output('change')
-  public change$ = new EventEmitter<any>();
+  public change$ = new EventEmitter<Date>();
+
+  @Output('selected')
+  public selected$ = new EventEmitter<Date>();
+
+  @Output('blured')
+  public blured$ = new EventEmitter<Date>();
 
   @HostBinding('class.fs-input-disabled')
   @HostBinding('attr.readonly')
@@ -111,6 +115,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
     this.value = null;
     this.clearInput();
+    this.selected$.next(null);
   }
 
   public ngOnDestroy() {
@@ -140,8 +145,9 @@ export abstract class FsDatePickerBaseComponent<D = any>
         takeUntil(this._dateDialogRef.close$),
         takeUntil(this._destroy$),
       )
-      .subscribe((value) => {
+      .subscribe((value: Date) => {
         this.value = value;
+        this.selected$.emit(value);
       });
 
     this._dateDialogRef.close$
@@ -192,9 +198,32 @@ export abstract class FsDatePickerBaseComponent<D = any>
     this._lastValueValid = !date || isValid(date);
   }
 
+  @HostListener('keyup', ['$event', '$event.target.value'])
+  public _inputKeyup(event: KeyboardEvent, value: string): void {
+    if(event.key === 'Enter') {
+      this.inputChange(value);
+    }
+  }
 
-  @HostListener('input', ['$event.target.value'])
-  public _inputChange(value: string): void {
+  @HostListener('input', ['$event.target.value', '$event.target'])
+  public _inputChange(value: string, target): void {
+    if(this.ngModelOptions?.updateOn !== 'blur')  {
+      this.inputChange(value);
+    }
+  }
+
+  @HostListener('blur', ['$event.target.value'])
+  public _inputBlur(value: string): void {
+    if(this.ngModelOptions?.updateOn === 'blur')  {
+      this.inputChange(value);
+    }
+
+    this.updateInput(this.value);
+
+    this.blured$.emit(this.value);
+  }
+    
+  protected inputChange(value: string): void {
     if (!!value) {
       const lastValueWasValid = this._lastValueValid;
       const date = parseDate(value);
@@ -209,10 +238,5 @@ export abstract class FsDatePickerBaseComponent<D = any>
     } else {
       this.updateValue(null);
     }
-  }
-
-  @HostListener('blur')
-  public _formatValue() {
-    this.updateInput(this.value);
   }
 }

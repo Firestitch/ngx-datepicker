@@ -83,7 +83,9 @@ export class FsDatepickerFactory {
           originX: 'start',
           originY: 'bottom',
           overlayX: 'start',
-          overlayY: 'top'
+          overlayY: 'top',
+          offsetX: -29,
+          offsetY: 5,
         },
         {
           originX: 'start',

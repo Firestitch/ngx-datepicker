@@ -48,7 +48,9 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
       ?.insertBefore(this.el.nativeElement.firstChild, infixEl);
   }
 
-  public triggerClick(): void {
+  public triggerClick(event: UIEvent) {
+    event.preventDefault();
+    event.stopPropagation();    
     this.click.emit();
   }
 
