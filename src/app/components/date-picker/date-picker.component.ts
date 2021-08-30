@@ -42,8 +42,7 @@ import { DateFormat } from '../../enums/date-format.enum';
 export class FsDatePickerComponent extends FsDatePickerBaseComponent {
 
   static template = `
-    <fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)">
-    </fs-clear>
+    <fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>
     <fs-datepicker-trigger (click)="open()" [disabled]="disabled || readonly" [view]="view"></fs-datepicker-trigger>
   `;
 

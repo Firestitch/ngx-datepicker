@@ -26,7 +26,7 @@ import { parseDate } from '../../../helpers/parse-date';
 
 
 @Directive()
-export abstract class BaseRangePickerComponent<D = any>
+export abstract class RangePickerComponent<D = any>
   implements ControlValueAccessor, OnInit {
 
   @Input()
@@ -73,6 +73,7 @@ export abstract class BaseRangePickerComponent<D = any>
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
   protected _value;
+  protected _name;
 
   private _lastValueValid = false;
 
@@ -86,6 +87,10 @@ export abstract class BaseRangePickerComponent<D = any>
   ) {
     this._ngControl.valueAccessor = this;
     this._elRef.nativeElement.setAttribute('autocomplete', 'off');
+  }
+
+  public get name() {
+    return this._name;
   }
 
   public set value(value) {

@@ -321,6 +321,11 @@
 }
 
 @media only screen and (max-width: 736px) {
+
+  .cdk-overlay-pane.fs-datepicker-overlay-pane {
+    transform: none !important;
+  }
+
   .fs-date-picker-dialog {
     left: 0 !important;
     right: 0 !important;

@@ -39,14 +39,15 @@ export class FsDatepickerFactory {
     return dateDialogRef;
   }
 
-  private _createOverlay(el: ElementRef, config = {}) {
-    config = Object.assign(
-    {
+  private _createOverlay(el: ElementRef, config: OverlayConfig = {}) {
+    config = {
+      ...config,
       positionStrategy: this._createPopupPositionStrategy(el),
       scrollStrategy: this._overlay.scrollStrategies.reposition(),
       hasBackdrop: true,
       backdropClass: [],
-    }, config);
+      panelClass: 'fs-datepicker-overlay-pane',
+    };
 
     const overlayConfig = new OverlayConfig(config);
 

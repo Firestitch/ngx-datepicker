@@ -6,18 +6,23 @@ import {
 
 import { DateFormat } from '../../../enums/date-format.enum';
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
-import { DateRangePickerFromComponent } from './date-range-picker-from.component';
+import { RangePickerFromComponent } from '../base/range-picker-from.component';
 
 
 @Component({
-  selector: '[fsDateTimeRangeFrom]',
+  selector: '[fsDateTimeRangeFrom],[fsDateTimeRangeFromPicker]',
   template: FsDatePickerComponent.template,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateTimeRangePickerFromComponent extends DateRangePickerFromComponent {
+export class DateTimeRangePickerFromComponent extends RangePickerFromComponent {
+  
+  @Input() set fsDateTimeRangeFrom(value) {
+    this._name = value;
+  }
 
-  @Input('fsDateTimeRangeFrom')
-  public name: string;
+  @Input() set fsDateTimeRangeFromPicker(value) {
+    this._name = value;
+  }
 
   @Input()
   public view = DateFormat.DateTime;

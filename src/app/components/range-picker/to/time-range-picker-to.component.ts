@@ -5,18 +5,23 @@ import {
 } from '@angular/core';
 import { DateFormat } from '../../../enums/date-format.enum';
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
-import { DateRangePickerToComponent } from './date-range-picker-to.component';
+import { RangePickerToComponent } from '../base/range-picker-to.component';
 
 
 @Component({
-  selector: '[fsTimeRangeTo]',
+  selector: '[fsTimeRangeTo],[fsTimeRangeToPicker]',
   template: FsDatePickerComponent.template,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimeRangePickerToComponent extends DateRangePickerToComponent {
+export class TimeRangePickerToComponent extends RangePickerToComponent {
+      
+  @Input() set fsTimeRangeTo(value) {
+    this._name = value;
+  }
 
-  @Input('fsTimeRangeTo')
-  public name: string;
+  @Input() set fsTimeRangeToPicker(value) {
+    this._name = value;
+  }
 
   @Input()
   public view = DateFormat.Time;
