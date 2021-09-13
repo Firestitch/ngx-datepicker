@@ -1,6 +1,7 @@
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { isAfter, isDate } from 'date-fns';
+import { isSameDate } from '../helpers/is-same-date';
 
 
 export class RangePickerRef {
@@ -104,7 +105,7 @@ export class RangePickerRef {
     return date;
   }
 
-  private isDateAfter(target, from) {
+  private isDateAfter(target, from): boolean {
     let startDate, endDate;
 
     if (this.view === 'time') {
@@ -120,6 +121,14 @@ export class RangePickerRef {
       endDate = target;
     }
 
-    return !startDate || !endDate || isAfter(endDate, startDate);
+    if (!startDate || !endDate) {
+      return true;
+    }
+
+    if (this.view === 'date' && isSameDate(startDate, endDate)) {
+      return true;
+    }
+
+    return isAfter(endDate, startDate);
   }
 }
