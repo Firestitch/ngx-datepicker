@@ -25,6 +25,7 @@ import {
   subMonths
 } from 'date-fns';
 
+import { FsDatePickerModel } from '@libs/dialog/services/model.service';
 import { isRangeDisabled } from '@libs/common/helpers/is-range-disabled';
 import { getStartDayDate } from '@libs/common/helpers/get-start-day-date';
 import { splitDateByComponents } from '@libs/common/helpers/split-date-by-components';
@@ -114,7 +115,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   constructor(
     public element: ElementRef,
-    // public fsDatePickerModel: FsDatePickerModel,
+    public fsDatePickerModel: FsDatePickerModel,
   ) {}
 
   public ngOnInit() {
@@ -436,10 +437,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public createYearsList() {
     this.years = [];
-    // for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
-    //   const year = new Date().setFullYear(y);
-    //   this.years.push({ value: y, disabled: this.isYearDisabled(year) });
-    // }
+    for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
+      const year = new Date().setFullYear(y);
+      this.years.push({ value: y, disabled: this.isYearDisabled(year) });
+    }
   }
 
   public updateMonthsListDisabledStatus() {
