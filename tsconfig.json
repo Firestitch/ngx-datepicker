@@ -4,6 +4,12 @@
     "paths": {
       "fs-datepicker": [
         "src/public_api.ts"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@libs/*": [
+        "src/libs/*"
       ]
     }
   }

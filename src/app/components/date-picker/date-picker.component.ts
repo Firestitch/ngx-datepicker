@@ -15,7 +15,8 @@ import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isValid } from 'date-fns';
 
-import { FsDatepickerFactory } from '../../services/factory.service';
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
@@ -63,7 +64,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
     protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
     protected _cdRef: ChangeDetectorRef,
-    protected fsDatepickerFactory: FsDatepickerFactory,
+    protected fsDatepickerFactory: FsDatePickerDialogFactory,
   ) {
     super(renderer, elementRef, _cdRef);
   }

@@ -10,9 +10,10 @@ import { NgControl } from '@angular/forms';
 
 import { startOfDay } from 'date-fns';
 
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+
 import { RangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
-import { FsDatepickerFactory } from '../../../services/factory.service';
 import { DateFormat } from '../../../enums/date-format.enum';
 
 
@@ -22,7 +23,7 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
   public constructor(
     protected _elRef: ElementRef,
     protected _injector: Injector,
-    protected _datepickerFactory: FsDatepickerFactory,
+    protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _cdRef: ChangeDetectorRef,
     @Optional() @Self() protected _ngControl: NgControl,
     private _rangePickerStore: FsRangePickerStoreService,

@@ -4,8 +4,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { takeUntil } from 'rxjs/operators';
 import {
   addYears,
-  isAfter,
-  isBefore,
   isDate,
   isSameDay,
   isValid,
@@ -13,22 +11,23 @@ import {
   subYears
 } from 'date-fns';
 
-import { FsDatePickerModel } from '../../services/model.service';
-import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
-import { DIALOG_DATA } from '../../services/dialog-data';
-import { FsDateDialogRef } from '../../classes/date-dialog-ref';
-import { getSafeDate } from '../../helpers/get-safe-date';
-import { DateFormat } from '../../enums/date-format.enum';
+import { getSafeDate } from '@libs/common/helpers/get-safe-date';
+import { DateFormat } from '@libs/common/enums/date-format.enum';
+
+import { FsDatePickerModel } from '../../../../services/model.service';
+import { FsDatePickerBaseCalendarDialogDirective } from '../../directives/base-desktop-dialog.directive';
+
+import { FsDateDialogRef } from '../../../../classes/date-dialog-ref';
+import { DIALOG_DATA } from '../../../../providers/dialog-data.token';
 
 
 @Component({
-  selector: 'fs-date-picker',
-  templateUrl: './date-picker-dialog.component.html',
-  styleUrls: ['./date-picker-dialog.component.scss'],
+  templateUrl: './desktop-dialog.component.html',
+  styleUrls: ['./desktop-dialog.component.scss'],
   providers: [ FsDatePickerModel ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent implements OnInit {
+export class FsDesktopCalendarDialogComponent extends FsDatePickerBaseCalendarDialogDirective implements OnInit {
 
   public model = null;
   public calendarMonth = null;
@@ -45,7 +44,7 @@ export class FsDatePickerDialogComponent extends FsDatePickerBaseDialogComponent
     private _cd: ChangeDetectorRef,
     protected _dialogRef: FsDateDialogRef,
   ) {
-    super(_dialogRef, dialogData.parentDirective);
+    super(_dialogRef);
 
     this._initModel();
     this._initComponents();

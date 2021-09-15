@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { getDaysInMonth, isValid } from 'date-fns';
 
-import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
-import { FsDatePickerModel } from '../../services/model.service';
-import { FsDateDialogRef } from '../../classes/date-dialog-ref';
-import { DIALOG_DATA } from '../../services/dialog-data';
+import { FsDateDialogRef } from '@libs/dialog/classes/date-dialog-ref';
+import { DIALOG_DATA } from '@libs/dialog/providers/dialog-data.token';
+
+import { FsDatePickerBaseDialogComponent } from '../../../../classes/base-dialog-component';
+import { FsDatePickerModel } from '../../../../services/model.service';
 import { MONTHS } from '../../consts/months';
 
 
@@ -40,7 +41,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     protected _dialogRef: FsDateDialogRef,
     protected _cdRef: ChangeDetectorRef,
   ) {
-    super(_dialogRef, _dialogData.parentComponent);
+    super(_dialogRef);
 
     const modelValue: Date = _dialogData.modelValue;
 
@@ -111,7 +112,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     if (save) {
       const date = new Date(this.year, this.month.value, this.day);
 
-      this.parentComponent.value = date;
+      // this.parentComponent.value = date;
     }
 
     this._cdRef.markForCheck();

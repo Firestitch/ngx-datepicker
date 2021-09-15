@@ -15,10 +15,11 @@ import { take, takeUntil } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
 
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+import { FsDateDialogRef } from '@libs/dialog/classes/date-dialog-ref';
+
 import { RangePickerRef } from '../../../classes/range-picker-ref';
-import { FsDatepickerFactory } from '../../../services/factory.service';
 import { formatDateTime } from '../../../helpers/format-date-time';
-import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
 import { isSameDate } from '../../../helpers/is-same-date';
 import { DateFormat } from '../../../enums/date-format.enum';
@@ -55,7 +56,7 @@ export abstract class RangePickerComponent<D = any>
   public set readonlyState(isReadonly: string) {
     this.readonly = !!isReadonly || isReadonly === '';
   }
-  
+
   @Input() public ngModelOptions: {
     name?: string;
     standalone?: boolean;
@@ -80,7 +81,7 @@ export abstract class RangePickerComponent<D = any>
   protected constructor(
     protected _elRef: ElementRef,
     protected _injector: Injector,
-    protected _datepickerFactory: FsDatepickerFactory,
+    protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _type,
     protected _cdRef: ChangeDetectorRef,
     protected _ngControl: NgControl,

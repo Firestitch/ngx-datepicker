@@ -8,14 +8,14 @@ import {
   FlexibleConnectedPositionStrategy,
 } from '@angular/cdk/overlay';
 
-import { FsDatePickerDialogComponent } from '../components/date-picker-dialog/date-picker-dialog.component';
+import { FsDesktopCalendarDialogComponent } from '../modules/desktop-dialog-container/components/desktop-dialog/desktop-dialog.component';
+import { FsDateScrollPickerDialogComponent } from '../modules/scroll-picker-dialog-container/components/date-scroll-picker-dialog/date-scroll-picker-dialog.component';
 import { FsDateDialogRef } from '../classes/date-dialog-ref';
-import { DIALOG_DATA } from './dialog-data';
-import { FsDateScrollPickerDialogComponent } from '../components/date-scroll-picker-dialog/date-scroll-picker-dialog.component';
+import { DIALOG_DATA } from '../providers/dialog-data.token';
 
 
 @Injectable()
-export class FsDatepickerFactory {
+export class FsDatePickerDialogFactory {
 
   constructor(private _overlay: Overlay) {}
 
@@ -24,7 +24,7 @@ export class FsDatepickerFactory {
     const dateDialogRef = new FsDateDialogRef(overlayRef);
     dateDialogRef.positionStrategy = this._createBasePopupPositionStrategy(el);
 
-    this._openPortalPreview(injector, FsDatePickerDialogComponent, overlayRef, dateDialogRef, data);
+    this._openPortalPreview(injector, FsDesktopCalendarDialogComponent, overlayRef, dateDialogRef, data);
 
     return dateDialogRef;
   }

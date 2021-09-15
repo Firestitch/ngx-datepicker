@@ -1,3 +1,4 @@
+/*
 import {
   Component,
   Input,
@@ -61,3 +62,4 @@ export class FsDatepickerSummaryComponent implements OnInit, OnChanges {
     this.componentsChange.emit(view);
   }
 }
+*/

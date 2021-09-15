@@ -25,14 +25,16 @@ import {
   subMonths
 } from 'date-fns';
 
-import { FsDatePickerModel } from '../../services/model.service';
-import { getStartDayDate } from '../../helpers/get-start-day-date';
-import { splitDateByComponents } from '../../helpers/split-date-by-components';
+import { isRangeDisabled } from '@libs/common/helpers/is-range-disabled';
+import { getStartDayDate } from '@libs/common/helpers/get-start-day-date';
+import { splitDateByComponents } from '@libs/common/helpers/split-date-by-components';
+
+// import { FsDatePickerModel } from '@app/services/model.service';
+
 import { MONTHS } from '../../consts/months';
 import { WEEKDAYS } from '../../consts/week-days';
 import { Month } from '../../models/month';
 import { Period } from '../../models/period';
-import { isRangeDisabled } from '../../helpers/is-range-disabled';
 import { Week } from '../../models/week';
 
 
@@ -48,14 +50,17 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public date: any = null;
 
   @Input()
-  public highlightStartDate = null;
+  public highlightStartDate: Date = null;
+
   @Input()
-  public highlightEndDate = null;
+  public highlightEndDate: Date = null;
 
   @Input()
   public dateMode = null;
+
   @Input()
   public disabledDays = null;
+
   @Input()
   public drawMonth = null;
 
@@ -79,8 +84,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Output()
   public onDateModeChange = new EventEmitter<any>();
+
   @Output()
   public onDrawMonth = new EventEmitter<any>();
+
   @Output()
   public hoverDay = new EventEmitter<any>();
 
@@ -107,7 +114,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   constructor(
     public element: ElementRef,
-    public fsDatePickerModel: FsDatePickerModel,
+    // public fsDatePickerModel: FsDatePickerModel,
   ) {}
 
   public ngOnInit() {
@@ -429,10 +436,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public createYearsList() {
     this.years = [];
-    for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
-      const year = new Date().setFullYear(y);
-      this.years.push({ value: y, disabled: this.isYearDisabled(year) });
-    }
+    // for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
+    //   const year = new Date().setFullYear(y);
+    //   this.years.push({ value: y, disabled: this.isYearDisabled(year) });
+    // }
   }
 
   public updateMonthsListDisabledStatus() {

@@ -1,4 +1,4 @@
-export interface FsDatePicker {
+export interface IFsDatePickerDialogModel {
   view: string;
   dateMode: string | object;
   minYear: number;

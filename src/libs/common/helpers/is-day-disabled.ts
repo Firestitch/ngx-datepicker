@@ -1,4 +1,5 @@
-import { endOfDay, startOfDay } from "date-fns";
+import { endOfDay, startOfDay } from 'date-fns';
+
 import { isRangeDisabled } from './is-range-disabled';
 
 export function isDayDisabled(disabledDays, date) {

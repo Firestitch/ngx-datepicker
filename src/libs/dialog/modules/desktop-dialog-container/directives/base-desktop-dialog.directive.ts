@@ -1,12 +1,13 @@
 import { HostListener, OnDestroy, Directive } from '@angular/core';
-import { FsDateDialogRef } from '../classes/date-dialog-ref';
-import { takeUntil } from 'rxjs/operators';
+
 import { Subject } from 'rxjs';
-import { FsDatePickerBaseComponent } from '../classes/base-component';
+import { takeUntil } from 'rxjs/operators';
+
+import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 
 
 @Directive()
-export class FsDatePickerBaseDialogComponent implements OnDestroy {
+export class FsDatePickerBaseCalendarDialogDirective implements OnDestroy {
 
   @HostListener('document:keydown', ['$event'])
   public handleKeydown(event: KeyboardEvent) {
@@ -19,7 +20,6 @@ export class FsDatePickerBaseDialogComponent implements OnDestroy {
 
   constructor(
     protected _dialogRef: FsDateDialogRef,
-    protected parentComponent: FsDatePickerBaseComponent,
   ) {
 
     this._dialogRef.overlayRef

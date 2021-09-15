@@ -1,4 +1,4 @@
-import { endOfDay, isWithinInterval, lightFormat, startOfDay } from "date-fns";
+import { endOfDay, isWithinInterval, lightFormat, startOfDay } from 'date-fns';
 
 export function isRangeDisabled(disabledDays, start, end) {
   if (!disabledDays) {
@@ -23,5 +23,6 @@ export function isRangeDisabled(disabledDays, start, end) {
       return true;
     }
   }
+
   return false;
 }

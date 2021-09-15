@@ -12,7 +12,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FsDatepickerFactory } from '../../services/factory.service';
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
@@ -46,7 +47,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     protected renderer: Renderer2,
     protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
-    protected _datepickerFactory: FsDatepickerFactory,
+    protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _cdRef: ChangeDetectorRef,
   ) {
     super(renderer, elementRef, _cdRef);

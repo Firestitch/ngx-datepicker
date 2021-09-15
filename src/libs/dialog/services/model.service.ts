@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { isEqual, forEach } from 'lodash-es';
-import { addYears, isSameDay, subYears, startOfDay } from 'date-fns';
-import { FsComponents, FsDatePicker } from '../interfaces';
+import { addYears, subYears } from 'date-fns';
+
+import { IFsDatePickerDialogComponents } from '../interfaces/dialog-components.interface';
+import { IFsDatePickerDialogModel } from '../interfaces/dialog-model.interface';
 
 
 @Injectable()
-export class FsDatePickerModel implements FsDatePicker {
+export class FsDatePickerModel implements IFsDatePickerDialogModel {
 
   private _minYear = null;
   private _maxYear = null;
@@ -22,14 +24,14 @@ export class FsDatePickerModel implements FsDatePicker {
   /**
    * Visual components. Can be changed by summary widget but only if _view allowed to do this.
    */
-  private _componentsDefault: FsComponents = {
+  private _componentsDefault: IFsDatePickerDialogComponents = {
     calendarStart: false,
     calendarEnd: false,
     timeStart: false,
     timeEnd: false
   };
 
-  private _components: FsComponents = null;
+  private _components: IFsDatePickerDialogComponents = null;
 
   /**
    * year | month | date
