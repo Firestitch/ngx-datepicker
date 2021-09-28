@@ -45,7 +45,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     protected _dialogRef: FsDateDialogRef,
     protected _cdRef: ChangeDetectorRef,
     private _renderer: Renderer2,
-    @Inject(DOCUMENT) private _document: Document,
+    @Inject(DOCUMENT) private _document,
   ) {
     super(_dialogRef, _dialogData.parentComponent);
 
