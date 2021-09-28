@@ -461,3 +461,7 @@ fs-date-picker-dialog * {
   touch-action: manipulation;
 }
 
+// SC-T246 hack should fix issues on old android devices
+.fs-date-picker-prevent-pull-to-refresh {
+  overscroll-behavior: none;
+}

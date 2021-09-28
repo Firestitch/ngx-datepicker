@@ -4,7 +4,11 @@ import {
   Component,
   ElementRef,
   Inject,
+  OnInit,
+  OnDestroy,
+  Renderer2,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { getDaysInMonth, isValid } from 'date-fns';
 
 import { FsDatePickerBaseDialogComponent } from '../../classes/base-dialog-component';
@@ -20,7 +24,8 @@ import { MONTHS } from '../../consts/months';
   providers: [FsDatePickerModel],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogComponent {
+export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogComponent
+  implements OnInit, OnDestroy {
 
   public years: number[] = [];
   public months: any[] = [];
@@ -39,6 +44,8 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
     public element: ElementRef,
     protected _dialogRef: FsDateDialogRef,
     protected _cdRef: ChangeDetectorRef,
+    private _renderer: Renderer2,
+    @Inject(DOCUMENT) private _document: Document,
   ) {
     super(_dialogRef, _dialogData.parentComponent);
 
@@ -72,6 +79,16 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
 
       this._setDate(date);
     }
+  }
+
+  public ngOnInit(): void {
+    this._pullToRefreshDisable();
+  }
+
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+
+    this._pullToRefreshDefault();
   }
 
   private _setDate(date: Date) {
@@ -183,5 +200,13 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
      for ( minYear; minYear <= maxYear; minYear++ ) {
        this.years.push(minYear);
      }
+  }
+
+  private _pullToRefreshDisable(): void {
+    this._renderer.addClass(this._document.body, 'fs-date-picker-prevent-pull-to-refresh');
+  }
+
+  private _pullToRefreshDefault(): void {
+    this._renderer.removeClass(this._document.body, 'fs-date-picker-prevent-pull-to-refresh');
   }
 }
