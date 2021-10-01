@@ -1,7 +1,7 @@
 import { endOfDay, isWithinInterval, lightFormat, startOfDay } from 'date-fns';
 
 export function isRangeDisabled(disabledDays, start, end) {
-  if (!disabledDays) {
+  if (!disabledDays || !disabledDays.length) {
     return false;
   }
 

@@ -4,7 +4,8 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef, HostListener,
+  forwardRef,
+  HostListener,
   Inject,
   Injector,
   Input,
@@ -13,11 +14,11 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+import { ScrollPickerViewType } from '@libs/common/enums/scroll-picker-view-type.enum';
 
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
-import { DateFormat } from '../../enums/date-format.enum';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 
@@ -41,7 +42,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   @Input() public showYear = true;
   @Input() public showDay = true;
 
-  public view = DateFormat.Date;
+  public view = ScrollPickerViewType.Date;
 
   constructor(
     protected renderer: Renderer2,
@@ -76,19 +77,19 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
   public updateInput(value) {
 
-    let format = DateFormat.Date;
+    let format = ScrollPickerViewType.Date;
 
     if (this.showYear && this.showMonth && !this.showDay) {
-      format = DateFormat.MonthYear;
+      format = ScrollPickerViewType.MonthYear;
 
     } else if (!this.showYear && this.showMonth && this.showDay) {
-      format = DateFormat.MonthDay;
+      format = ScrollPickerViewType.MonthDay;
 
     } else if (!this.showYear && this.showMonth && !this.showDay) {
-      format = DateFormat.Month;
+      format = ScrollPickerViewType.Month;
 
     } else if (this.showYear && !this.showMonth && !this.showDay) {
-      format = DateFormat.Year;
+      format = ScrollPickerViewType.Year;
     }
 
     this.elementRef.nativeElement.value = formatDateTime(value, format);
@@ -104,7 +105,6 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
       this.elementRef,
       this.injector,
       {
-        elementRef: this.elementRef,
         modelValue: this.value,
         minYear: this.minYear,
         maxYear: this.maxYear,
@@ -112,8 +112,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
         showMonth: this.showMonth,
         showDay: this.showDay,
         showYear: this.showYear,
-        dateMode: 'date',
-        parentComponent: this
+        view: this.view,
       }
     );
 

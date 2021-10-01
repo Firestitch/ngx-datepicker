@@ -1,6 +1,6 @@
 import {
-  addWeeks, differenceInCalendarYears,
-  differenceInYears,
+  addWeeks,
+  differenceInCalendarYears,
 } from 'date-fns';
 
 import { Week } from './week';

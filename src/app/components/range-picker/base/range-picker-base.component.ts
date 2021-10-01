@@ -17,12 +17,12 @@ import { isDate, isEqual, isValid, subDays } from 'date-fns';
 
 import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
 import { FsDateDialogRef } from '@libs/dialog/classes/date-dialog-ref';
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
 
 import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { formatDateTime } from '../../../helpers/format-date-time';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
 import { isSameDate } from '../../../helpers/is-same-date';
-import { DateFormat } from '../../../enums/date-format.enum';
 import { parseDate } from '../../../helpers/parse-date';
 
 
@@ -31,7 +31,7 @@ export abstract class RangePickerComponent<D = any>
   implements ControlValueAccessor, OnInit {
 
   @Input()
-  public view: DateFormat = DateFormat.Date;
+  public view = PickerViewType.Date;
 
   @Input()
   public minYear: number = null;
@@ -154,11 +154,10 @@ export abstract class RangePickerComponent<D = any>
         maxYear: this.maxYear,
         minDate: this._getPickerStartDate() || this.minDate,
         maxDate: this.maxDate,
-        dateMode: 'date',
         components: this._getDefaultComponents(),
         modelValue: this.value,
         pickerRef: this._pickerRef,
-        type: this._type
+        rangeType: this._type
       }
     );
 
@@ -195,7 +194,7 @@ export abstract class RangePickerComponent<D = any>
   }
 
   public updateValue(value): void {
-    if (this.view === DateFormat.Time && isValid(this._value) && isValid(value)) {
+    if (this.view === PickerViewType.Time && isValid(this._value) && isValid(value)) {
       this._value.setHours(value.getHours());
       this._value.setMinutes(value.getMinutes());
       this._value.setSeconds(value.getSeconds());

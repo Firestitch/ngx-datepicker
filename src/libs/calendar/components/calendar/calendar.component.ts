@@ -11,28 +11,18 @@ import {
 
 
 import {
-  addMonths,
   eachDayOfInterval,
-  endOfMonth,
-  endOfYear,
   format,
   isAfter,
   isValid,
   lightFormat,
   startOfDay,
-  startOfMonth,
-  startOfYear,
-  subMonths
 } from 'date-fns';
 
-import { FsDatePickerModel } from '@libs/dialog/services/model.service';
-import { isRangeDisabled } from '@libs/common/helpers/is-range-disabled';
 import { getStartDayDate } from '@libs/common/helpers/get-start-day-date';
 import { splitDateByComponents } from '@libs/common/helpers/split-date-by-components';
+import { IPeriod } from '@libs/common/interfaces/period.interface';
 
-// import { FsDatePickerModel } from '@app/services/model.service';
-
-import { MONTHS } from '../../consts/months';
 import { WEEKDAYS } from '../../consts/week-days';
 import { Month } from '../../models/month';
 import { Period } from '../../models/period';
@@ -48,7 +38,10 @@ import { Week } from '../../models/week';
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Input()
-  public date: any = null;
+  public date: Date = null;
+
+  @Input()
+  public period: IPeriod = null;
 
   @Input()
   public highlightStartDate: Date = null;
@@ -57,13 +50,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public highlightEndDate: Date = null;
 
   @Input()
-  public dateMode = null;
+  public dateMode: string = null;
 
   @Input()
-  public disabledDays = null;
+  public disabledDays: [Date, Date][] = null;
 
   @Input()
-  public drawMonth = null;
+  public drawMonth: Date = null;
 
   @Input()
   public seedDate;
@@ -72,22 +65,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public periodWeeks;
 
   @Output()
-  public onChange = new EventEmitter<any>();
+  public change = new EventEmitter<Date>();
 
   @Output()
-  public onPeriodChange = new EventEmitter<{ period: number, from: Date, to: Date }>();
-
-  @Output()
-  public yearChanged = new EventEmitter<any>();
-
-  @Output()
-  public monthChanged = new EventEmitter<any>();
-
-  @Output()
-  public onDateModeChange = new EventEmitter<any>();
-
-  @Output()
-  public onDrawMonth = new EventEmitter<any>();
+  public periodChange = new EventEmitter<IPeriod>();
 
   @Output()
   public hoverDay = new EventEmitter<any>();
@@ -98,7 +79,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public years = [];
   public dateDays = [];
 
-  public monthList: any = MONTHS;
   public weekDaysList = [];
 
   public currentDate = new Date();
@@ -115,20 +95,16 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   constructor(
     public element: ElementRef,
-    public fsDatePickerModel: FsDatePickerModel,
   ) {}
 
   public ngOnInit() {
 
     this._calendarMode = this.dateMode;
 
-    this.createYearsList();
-    this.updateMonthsListDisabledStatus();
-
     if (this.dateMode === 'week') {
-      if (this.date && this.seedDate) {
-        this.selectedPeriod = new Period(this.date.period, this.date.from, this.seedDate, this.periodWeeks, true);
-        this.selectedPeriod.year = this.date.from.getFullYear();
+      if (this.period && this.seedDate) {
+        this.selectedPeriod = new Period(this.period.period, this.period.from, this.seedDate, this.periodWeeks, true);
+        this.selectedPeriod.year = this.period.from.getFullYear();
 
         const selectedPeriod = this.month.updateSelectionForPeriod(this.selectedPeriod);
 
@@ -154,8 +130,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       if (changes.drawMonth) {
         if (changes.drawMonth.currentValue) {
           this.drawMonths(changes.drawMonth.currentValue);
-        } else {
-          this.onDrawMonth.emit(getStartDayDate());
         }
       }
     }
@@ -218,50 +192,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  public isMonthDisabled(date) {
-    const startMonth = startOfMonth(date);
-    const endMonth = endOfMonth(date);
-
-    return isRangeDisabled(this.disabledDays, startMonth, endMonth);
-  }
-
-  public isYearDisabled(date) {
-    const startYear = startOfYear(date);
-    const endYear = endOfYear(date);
-
-    return isRangeDisabled(this.disabledDays, startYear, endYear);
-  }
-
-  public monthClick(month) {
-    Object.assign(month.months, this.monthList);
-  }
-
-  public monthViewChange(month) {
-    const monthDate = new Date();
-    monthDate.setMonth(month);
-    monthDate.setFullYear(this.month.year);
-
-    if (this.isMonthDisabled(monthDate)) {
-      return;
-    }
-
-    this.setMonth(month);
-    this.calendarView();
-    this.monthChanged.emit(month);
-  }
-
-  public monthChange(month) {
-
-    if (!this.date) {
-      this.createModel();
-    }
-
-    const newDate = new Date(this.date);
-    newDate.setMonth(month);
-
-    this.setDate(newDate);
-  }
-
   public createModel() {
     if (!this.date) {
       this.date = getStartDayDate();
@@ -270,30 +200,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public setDate(date) {
     this.date = date;
-    this.onChange.emit(date);
-  }
-
-  public calendarView() {
-    this.onDateModeChange.emit(this._calendarMode);
-  }
-
-  public monthView() {
-    this.updateMonthsListDisabledStatus();
-    this.onDateModeChange.emit('month');
-  }
-
-  public yearView(year) {
-
-    setTimeout(() => {
-      const years = this.element.nativeElement.querySelector('.years');
-      const selected = years.querySelector('.data-year-' + this.month.date.getFullYear());
-
-      if (selected) {
-        years.scrollTop = selected.offsetTop;
-      }
-    });
-
-    this.onDateModeChange.emit('year');
+    this.change.emit(date);
   }
 
   /**
@@ -347,67 +254,17 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     }
 
     if (this.selectedPeriod.selected) {
-      this.onPeriodChange.emit({
+      this.periodChange.emit({
         period: this.selectedPeriod.periodId,
         from: this.selectedPeriod.from,
         to: this.selectedPeriod.to,
       });
     } else {
-      this.onPeriodChange.emit(null);
+      this.periodChange.emit(null);
     }
-  }
-
-  public yearViewChange(year) {
-    if (this.isYearDisabled(new Date().setFullYear(year))) {
-      return;
-    }
-    // For some reason for mobile devices click event fired for both year/day modes. setTimeout fix this problem
-    setTimeout(() => {
-      this.setYear(year);
-      this.calendarView();
-      this.yearChanged.emit(year);
-    });
-  }
-
-  public yearChange(year) {
-
-    if (!this.date) {
-      this.createModel();
-    }
-
-    this.setDate((new Date(this.date).setFullYear(year)));
-  }
-
-  public previousMonth(month) {
-    const prevMonth = subMonths(month.date, 1);
-    // if (this.isMonthDisabled(prevMonth)) {
-    //   return;
-    // }
-    this.onDrawMonth.emit(prevMonth);
-  }
-
-  public nextMonth(month) {
-    const nextMonth = addMonths(month.date, 1);
-    // if (this.isMonthDisabled(nextMonth)) {
-    //   return;
-    // }
-    this.onDrawMonth.emit(nextMonth);
-  }
-
-  public setMonth(monthNumber) {
-    const month = new Date(this.month.date);
-    month.setMonth(monthNumber);
-
-    this.onDrawMonth.emit(month);
-  }
-
-  public setYear(yearNumber) {
-    const year = new Date(this.month.date).setFullYear(yearNumber);
-    this.onDrawMonth.emit(year);
   }
 
   public drawMonths(date) {
-    this.onDrawMonth.emit(date);
     this.month = this.createMonth(date);
   }
 
@@ -435,25 +292,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     return month;
   }
 
-  public createYearsList() {
-    this.years = [];
-    for (let y: any = this.fsDatePickerModel.minYear; y < this.fsDatePickerModel.maxYear; y++) {
-      const year = new Date().setFullYear(y);
-      this.years.push({ value: y, disabled: this.isYearDisabled(year) });
-    }
-  }
-
-  public updateMonthsListDisabledStatus() {
-    const year = this.month ? this.month.year : this.currentDate.getFullYear();
-
-    for (const item of this.monthList) {
-      const month = new Date();
-      month.setFullYear(year);
-      month.setMonth(item.value);
-      item.disabled = this.isMonthDisabled(month);
-    }
-  }
-
   public updateDateDays() {
     const year = this.selected['year'] || 1904;
     const month = this.selected['month'] || 1;
@@ -471,19 +309,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     this.updateDate();
   }
 
-  public dayDateViewChange() {
-    this.updateDateDays();
-    this.updateDate();
-
-  }
-
-  public yearDateViewChange() {
-    this.updateDateDays();
-    this.updateDate();
-  }
-
   public updateDate() {
-
     const m = new Date(this.selected['year'], this.selected['month'], this.selected['day']);
     const max = new Date(this.selected['year'] || 1904, this.selected['month'], 0).getDate();
 

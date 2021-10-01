@@ -11,30 +11,60 @@ import {
 import { FsDesktopCalendarDialogComponent } from '../modules/desktop-dialog-container/components/desktop-dialog/desktop-dialog.component';
 import { FsDateScrollPickerDialogComponent } from '../modules/scroll-picker-dialog-container/components/date-scroll-picker-dialog/date-scroll-picker-dialog.component';
 import { FsDateDialogRef } from '../classes/date-dialog-ref';
-import { DIALOG_DATA } from '../providers/dialog-data.token';
+import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
 
 
 @Injectable()
 export class FsDatePickerDialogFactory {
 
+  private _activePickerType: 'date' | 'scroll';
+  private _activePickerOptions: IDialogFactoryOptions;
+
   constructor(private _overlay: Overlay) {}
 
-  public openDatePicker(el: ElementRef, injector: Injector, data: any) {
+  public openDatePicker(
+    el: ElementRef,
+    injector: Injector,
+    options: IDialogFactoryOptions,
+  ): FsDateDialogRef {
     const overlayRef = this._createOverlay(el);
-    const dateDialogRef = new FsDateDialogRef(overlayRef);
+
+    const dateDialogRef = new FsDateDialogRef(options, overlayRef);
     dateDialogRef.positionStrategy = this._createBasePopupPositionStrategy(el);
 
-    this._openPortalPreview(injector, FsDesktopCalendarDialogComponent, overlayRef, dateDialogRef, data);
+    this._openPortalPreview(
+      injector,
+      FsDesktopCalendarDialogComponent,
+      overlayRef,
+      dateDialogRef,
+    );
+
+    this._setActivePicker('date', options);
 
     return dateDialogRef;
   }
 
-  public openDateScrollPicker(el: ElementRef, injector: Injector, data: any) {
-    const overlayRef = this._createOverlay(el, { scrollStrategy: this._overlay.scrollStrategies.block() });
-    const dateDialogRef = new FsDateDialogRef(overlayRef);
+  public openDateScrollPicker(
+    el: ElementRef,
+    injector: Injector,
+    options: IDialogFactoryOptions,
+  ): FsDateDialogRef {
+    const overlayRef = this._createOverlay(
+      el,
+      { scrollStrategy: this._overlay.scrollStrategies.block() }
+    );
+
+    const dateDialogRef = new FsDateDialogRef(options, overlayRef);
     dateDialogRef.positionStrategy = this._createBasePopupPositionStrategy(el);
 
-    this._openPortalPreview(injector, FsDateScrollPickerDialogComponent, overlayRef, dateDialogRef, data);
+    this._openPortalPreview(
+      injector,
+      FsDateScrollPickerDialogComponent,
+      overlayRef,
+      dateDialogRef
+    );
+
+    this._setActivePicker('date', options);
 
     return dateDialogRef;
   }
@@ -59,19 +89,20 @@ export class FsDatePickerDialogFactory {
     component: ComponentType<any>,
     overlayRef: OverlayRef,
     previewRef: FsDateDialogRef,
-    data: any,
   ) {
-    const injector = this._createInjector(parentInjector, previewRef, data);
+    const injector = this._createInjector(parentInjector, previewRef);
     const containerPortal = new ComponentPortal(component, undefined, injector);
     const containerRef = overlayRef.attach(containerPortal);
 
     return containerRef.instance;
   }
 
-  private _createInjector(parentInjector, previewRef, data) {
+  private _createInjector(
+    parentInjector: Injector,
+    previewRef: FsDateDialogRef,
+  ): PortalInjector {
     const injectionTokens = new WeakMap<any, any>([
       [FsDateDialogRef, previewRef],
-      [DIALOG_DATA, data]
     ]);
 
     return new PortalInjector(parentInjector, injectionTokens);
@@ -104,5 +135,10 @@ export class FsDatePickerDialogFactory {
       .withFlexibleDimensions(false)
       .withViewportMargin(8)
       .withLockedPosition()
+  }
+
+  private _setActivePicker(type: 'date' | 'scroll', options: IDialogFactoryOptions) {
+    this._activePickerType = type;
+    this._activePickerOptions = options;
   }
 }

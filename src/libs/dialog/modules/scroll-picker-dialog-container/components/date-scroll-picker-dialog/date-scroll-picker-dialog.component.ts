@@ -3,22 +3,18 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Inject,
 } from '@angular/core';
 import { getDaysInMonth, isValid } from 'date-fns';
 
 import { FsDateDialogRef } from '@libs/dialog/classes/date-dialog-ref';
-import { DIALOG_DATA } from '@libs/dialog/providers/dialog-data.token';
 
 import { FsDatePickerBaseDialogComponent } from '../../../../classes/base-dialog-component';
-import { FsDatePickerModel } from '../../../../services/model.service';
 import { MONTHS } from '../../consts/months';
 
 
 @Component({
   templateUrl: './date-scroll-picker-dialog.component.html',
   styleUrls: ['./date-scroll-picker-dialog.component.scss'],
-  providers: [FsDatePickerModel],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogComponent {
@@ -36,18 +32,17 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   public showYear;
 
   constructor(
-    @Inject(DIALOG_DATA) private _dialogData,
     public element: ElementRef,
     protected _dialogRef: FsDateDialogRef,
     protected _cdRef: ChangeDetectorRef,
   ) {
     super(_dialogRef);
 
-    const modelValue: Date = _dialogData.modelValue;
+    const modelValue: Date = _dialogRef.pickerModel.model;
 
-    this.showMonth = _dialogData.showMonth;
-    this.showDay = _dialogData.showDay;
-    this.showYear = _dialogData.showYear;
+    this.showMonth = _dialogRef.options.showMonth;
+    this.showDay = _dialogRef.options.showDay;
+    this.showYear = _dialogRef.options.showYear;
 
     this._generateYearsArray();
     this._generateMonthArray();
@@ -111,8 +106,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
 
     if (save) {
       const date = new Date(this.year, this.month.value, this.day);
-
-      // this.parentComponent.value = date;
+      this._dialogRef.updateValue(date);
     }
 
     this._cdRef.markForCheck();
@@ -133,7 +127,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
 
   public changeYear() {
     this._generateDaysArray();
-    if (this._dialogData.maxDate) {
+    if (this._dialogRef.options.maxDate) {
       this._generateMonthArray();
     }
     this.change();
@@ -142,7 +136,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   private _generateDaysArray() {
 
     let days = 0;
-    const maxDate = this._dialogData.maxDate;
+    const maxDate = this._dialogRef.options.maxDate;
     const maxDay = maxDate && maxDate.getDate();
     const maxMonth = maxDate && maxDate.getMonth();
     const maxYear = maxDate && maxDate.getFullYear();
@@ -163,7 +157,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   }
 
   private _generateMonthArray() {
-    const maxDate = this._dialogData.maxDate;
+    const maxDate = this._dialogRef.options.maxDate;
 
     if (maxDate && this.year === maxDate.getFullYear()) {
       this.months = MONTHS.slice(0, maxDate.getMonth() + 1);
@@ -173,8 +167,8 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
   }
 
   private _generateYearsArray() {
-    let minYear = this._dialogData.minYear;
-    let maxYear = this._dialogData.maxYear;
+    let minYear = this._dialogRef.options.minYear;
+    let maxYear = this._dialogRef.options.maxYear;
 
     if (!maxYear) {
       const today = new Date();

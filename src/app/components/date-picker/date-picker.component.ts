@@ -15,12 +15,12 @@ import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isValid } from 'date-fns';
 
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
 import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
 
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
-import { DateFormat } from '../../enums/date-format.enum';
 
 
 @Component({
@@ -52,8 +52,8 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   @Input() public minDate = null;
   @Input() public maxDate = null;
   @Input() public startOfDay = true;
-  @Input() public view = DateFormat.Date;
-  @Input() public format;
+  @Input() public view = PickerViewType.Date;
+  @Input() public format: string;
   @Input() public minutes = true;
 
   @Output('change')
@@ -96,7 +96,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
     this.elementRef,
     this.injector,
     {
-      elementRef: this.elementRef,
       modelValue: modelValue,
       view: this.view,
       minutes: this.minutes,
@@ -105,16 +104,14 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
       minDate: this.minDate,
       maxDate: this.maxDate,
       startOfDay: this.startOfDay,
-      dateMode: 'date',
       components: this._getDefaultComponents(),
-      parentComponent: this
     });
 
     super.open();
   }
 
   protected updateValue(value) {
-    if (this.view === DateFormat.Time && isValid(this._value) && isValid(value)) {
+    if (this.view === PickerViewType.Time && isValid(this._value) && isValid(value)) {
       this._value.setHours(value.getHours());
       this._value.setMinutes(value.getMinutes());
       this._value.setSeconds(value.getSeconds());

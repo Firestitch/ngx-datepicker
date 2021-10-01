@@ -5,6 +5,7 @@ import { isDayDisabled } from '@libs/common/helpers/is-day-disabled';
 import { Week } from './week';
 import { Period } from './period';
 
+const CALENDAR_DAYS_NUMBER = 42;
 
 export class Month {
 
@@ -52,7 +53,7 @@ export class Month {
     let week;
 
 
-    for (let d = 0; d < this._totalDaysInMonth; d++) {
+    for (let d = 0; d < CALENDAR_DAYS_NUMBER; d++) {
       const dayNumber = lightFormat(currentDate, 'd');
 
       if (d % 7 == 0) {
@@ -138,8 +139,8 @@ export class Month {
       this._prevMonthDaysCount  = 7 - (seedDay - this._monthStartDay);
     }
 
-    const totalDays = this._daysInMonth + this._prevMonthDaysCount;
-    this._totalDaysInMonth = Math.ceil(totalDays / 7) * 7;
+    // const totalDays = this._daysInMonth + this._prevMonthDaysCount;
+    // this._totalDaysInMonth = Math.ceil(totalDays / 7) * 7;
   }
 
   /**

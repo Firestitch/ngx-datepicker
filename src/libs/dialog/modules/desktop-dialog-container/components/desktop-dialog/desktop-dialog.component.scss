@@ -8,3 +8,19 @@
     margin-left: 20px;
   }
 }
+
+.date-time {
+  display: flex;
+}
+
+
+fs-date-picker-calendar {
+  display: none;
+}
+
+.date-mode-date, .date-mode-date-time, .date-mode-week {
+  fs-date-picker-calendar {
+    display: flex;
+    flex: 1;
+  }
+}

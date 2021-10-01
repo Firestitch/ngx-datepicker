@@ -1,88 +1,38 @@
-<div class="calendar-container">
-  <div class="months" *ngIf="dateMode == 'month'">
-    <div
-      *ngFor="let month of monthList"
-      (click)="monthViewChange(month.value)"
-      class="month"
-      [ngClass]="{
-        now: today.month == month.value,
-        selected: selected.month == month.value,
-        disabled: month.disabled
-      }">
-        <div class="tile-content">{{ month.abr }}</div>
-    </div>
-  </div>
-  <div class="years" *ngIf="dateMode == 'year'">
-    <div
-      *ngFor="let year of years; let index = i"
-      class="year data-year-{{ year.value }}"
-      (click)="yearViewChange(year.value)"
-      [ngClass]="{
-        now: today.year==year.value,
-        selected: selected.year==year.value,
-        disabled: year.disabled
-      }">
-        <div class="tile-content">{{ year.value }}</div>
-      </div>
-      <div class="clear"></div>
-    </div>
-  <div *ngIf="(dateMode == 'week' || dateMode == 'date') && month" class="calendar">
-    <div class="month-year">
-      <a class="month-name" (click)="monthView()">{{month.name}}</a>
-      <span *ngIf="selected?.day" class="day-name">
-        {{selected.day}},
-      </span>
-      <a class="year-name" (click)="yearView(month.year)">{{month.year}}</a>
-      <div class="gap"></div>
-      <div class="actions">
-        <a (click)="previousMonth(month)">
-          <mat-icon>navigate_before</mat-icon>
-        </a>
-        <a (click)="nextMonth(month)">
-          <mat-icon>navigate_next</mat-icon>
-        </a>
-      </div>
-    </div>
-    <table>
-      <thead>
-      <tr>
-        <th *ngIf="seedDate && periodWeeks">#</th>
-        <th *ngFor="let wd of weekDaysList">{{wd}}</th>
-      </tr>
-      </thead>
-      <tbody class="calendar calendar-{{ month.monthAndYear }}" >
+<table>
+  <thead>
+    <tr>
+      <th *ngIf="seedDate && periodWeeks">#</th>
+      <th *ngFor="let wd of weekDaysList">{{wd}}</th>
+    </tr>
+  </thead>
+
+  <tbody class="calendar calendar-{{ month.monthAndYear }}" >
+    <ng-container *ngFor="let week of month.weeks">
       <tr class="week"
-          *ngFor="let week of month.weeks"
-          [ngClass]="{
-            'first-period-week': week.firstWeekInPeriod,
-            'last-period-week': week.lastWeekInPeriod,
-            'hover': week.period?.mouseOver
-          }"
+          [class.first-period-week]="week.firstWeekInPeriod"
+          [class.last-period-week]="week.lastWeekInPeriod"
+          [class.hover]="week.period?.mouseOver"
           (mouseenter)="mouseEnterWeek(week)"
           (mouseleave)="mouseLeaveWeek(week)"
       >
         <ng-container *ngIf="week.periodLableVisible">
           <td class="period"
               [rowSpan]="week.period.countOfWeeks"
-              [ngClass]="{
-                selected: week.period.selected
-              }"
-              (click)="selectPeriod(week.period)"
-          >
+              [class.selected]="week.period.selected"
+              (click)="selectPeriod(week.period)">
             {{ week.period.periodId }}
           </td>
         </ng-container>
 
         <ng-container *ngFor="let day of week.days">
           <td class="tile day"
-              [ngClass]="{
-                now: today.date==day.date,
-                mute: day.mute,
-                selected: (day.selected || (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute),
-                'min-date': day.date === highlightedRangeDays.min,
-                'max-date': day.date === highlightedRangeDays.max,
-                'week-mode': dateMode === 'week',
-                disabled: day.disabled }"
+              [class.now]="today.date == day.date"
+              [class.mute]="day.mute"
+              [class.selected]="(day.selected || (day.date==selected.date || highlightedRangeDays.data[day.date]) && !day.mute)"
+              [class.min-date]="day.date === highlightedRangeDays.min"
+              [class.max-date]="day.date === highlightedRangeDays.max"
+              [class.week-mode]="dateMode === 'week'"
+              [class.disabled]="day.disabled"
               (click)="dayClick(day, week, $event)"
               (mouseenter)="onMouseEnterDay(day)">
             <div class="tile-content">
@@ -91,10 +41,10 @@
           </td>
         </ng-container>
       </tr>
-      <tr *ngIf="month.weeks.length<6">
-        <td colspan="7" class="tile"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+    </ng-container>
+
+  <!--<tr *ngIf="month.weeks.length < 6">
+    <td colspan="7" class="tile"></td>
+  </tr>-->
+  </tbody>
+</table>
