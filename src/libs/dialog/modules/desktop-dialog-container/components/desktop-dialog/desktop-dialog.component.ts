@@ -1,11 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, } from '@angular/core';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
 import { FsDatePickerDialogModel } from '@libs/dialog/classes/dialog-model';
 
-import { FsDatePickerBaseCalendarDialogDirective } from '../../directives/base-desktop-dialog.directive';
-
-import { FsDateDialogRef } from '../../../../classes/date-dialog-ref';
+import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 
 
 @Component({
@@ -13,38 +10,22 @@ import { FsDateDialogRef } from '../../../../classes/date-dialog-ref';
   styleUrls: ['./desktop-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDesktopCalendarDialogComponent extends FsDatePickerBaseCalendarDialogDirective implements OnInit {
+export class FsDesktopCalendarDialogComponent {
 
   public timePickerExpanded = false;
-  public mobileView = this.breakpointObserver.isMatched('(max-width: 737px)');
   public selectedDateTimeTab = 0;
 
   constructor(
-    public breakpointObserver: BreakpointObserver,
     private _cd: ChangeDetectorRef,
-    protected _dialogRef: FsDateDialogRef,
-  ) {
-    super(_dialogRef);
-  }
+    protected _dialogRef: FsDatePickerDialogRef,
+  ) {}
 
   public get datePickerModel(): FsDatePickerDialogModel {
     return this._dialogRef.pickerModel;
   }
 
-  public get dialogRef(): FsDateDialogRef {
+  public get dialogRef(): FsDatePickerDialogRef {
     return this._dialogRef;
-  }
-
-  public ngOnInit() {
-
-    /*this.breakpointObserver.observe('(max-width: 737px)')
-      .pipe(
-        takeUntil(this._destroy$),
-      )
-      .subscribe((state) => {
-        this.mobileView = state.matches;
-        this._cd.detectChanges();
-      });*/
   }
 
   public viewModeChanged(mode: string) {
@@ -89,5 +70,9 @@ export class FsDesktopCalendarDialogComponent extends FsDatePickerBaseCalendarDi
 
   public setDateMode(mode) {
     this.datePickerModel.dateMode = mode;
+  }
+
+  public close(): void {
+    this._dialogRef.close();
   }
 }

@@ -6,7 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { FsScrollPickerModule } from '@firestitch/scroll-picker';
 
-import { FsDateScrollPickerDialogComponent } from './components/date-scroll-picker-dialog/date-scroll-picker-dialog.component';
+import { FsDateScrollPickerMobileDialogComponent } from './components/date-scroll-picker-mobile-dialog/date-scroll-picker-mobile-dialog.component';
+import { FsDateScrollPickerDesktopComponent } from './components/date-scroll-picker-desktop/date-scroll-picker-desktop.component';
+import { FsDateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -17,12 +20,16 @@ import { FsDateScrollPickerDialogComponent } from './components/date-scroll-pick
     MatButtonModule,
 
     FsScrollPickerModule,
+    MatListModule,
   ],
   declarations: [
-    FsDateScrollPickerDialogComponent,
+    FsDateScrollPickerDesktopComponent,
+    FsDateScrollPickerMobileDialogComponent,
+    FsDateScrollPickerComponent,
   ],
   exports: [
-    FsDateScrollPickerDialogComponent,
+    FsDateScrollPickerDesktopComponent,
+    FsDateScrollPickerMobileDialogComponent,
   ],
 })
 export class FsDatePickerScrollPickerDialogContainerModule {}

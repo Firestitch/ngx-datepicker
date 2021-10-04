@@ -1,0 +1,8 @@
+<fs-date-picker-time
+  class="fs-date-picker-dialog"
+  [date]="datePickerModel.model$ | async"
+  [minutes]="datePickerModel.minutes"
+  [disabledTimes]="datePickerModel.disabledTimes$ | async"
+  [expanded]="datePickerModel.timeExpanded$ | async"
+  (onChange)="dateChanged($event)"
+></fs-date-picker-time>

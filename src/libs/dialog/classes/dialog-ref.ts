@@ -1,5 +1,3 @@
-import { OverlayRef } from '@angular/cdk/overlay';
-
 import { Observable, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
@@ -8,16 +6,16 @@ import { IPeriod } from '@libs/common/interfaces/period.interface';
 import { isEqual, forEach } from 'lodash-es';
 
 import { FsDatePickerDialogModel } from './dialog-model';
+import { FsDatePickerOverlayRef } from './overlay-ref';
 import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
 import { IFsDatePickerDialogComponents } from '../interfaces/dialog-components.interface';
 
 
-export class FsDateDialogRef {
+export class FsDatePickerDialogRef {
 
-  public positionStrategy;
-
-  private _close$ = new Subject<void>();
+  private _overlayRef = new FsDatePickerOverlayRef();
   private _dialogModel: FsDatePickerDialogModel;
+  private _close$ = new Subject<void>();
   private _value$: Observable<Date | null | IPeriod>;
 
   /**
@@ -34,7 +32,6 @@ export class FsDateDialogRef {
 
   constructor(
     private _pickerOptions: IDialogFactoryOptions,
-    private _overlayRef: OverlayRef,
   ) {
     this._init();
   }
@@ -47,12 +44,12 @@ export class FsDateDialogRef {
     return this._pickerOptions;
   }
 
-  public get overlayRef() {
-    return this._overlayRef;
-  }
-
   public get value$(): Observable<Date | null | IPeriod> {
     return this._value$;
+  }
+
+  public get pickerOverlayRef(): FsDatePickerOverlayRef {
+    return this._overlayRef;
   }
 
   public get close$() {
@@ -68,10 +65,9 @@ export class FsDateDialogRef {
   }
 
   public close(): void {
+    this.pickerOverlayRef.close();
     this._close$.next();
     this._close$.complete();
-
-    this._overlayRef.dispose();
   }
 
   private _init(): void {

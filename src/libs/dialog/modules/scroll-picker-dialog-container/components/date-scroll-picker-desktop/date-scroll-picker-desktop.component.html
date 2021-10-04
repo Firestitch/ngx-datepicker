@@ -1,0 +1,11 @@
+<div class="fs-date-picker-dialog fs-date-picker-dialog-shadow fs-date-picker-range" tabindex="0">
+  <div class="wrap">
+    <fs-date-scroll-picker [dialogRef]="dialogRef">
+    </fs-date-scroll-picker>
+
+    <div class="buttons">
+      <button type="button" mat-button color="primary" (click)="close(true)">Select</button>
+      <button type="button" mat-button (click)="close(false)">Cancel</button>
+    </div>
+  </div>
+</div>

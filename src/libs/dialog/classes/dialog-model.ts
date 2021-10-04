@@ -50,6 +50,7 @@ export class FsDatePickerDialogModel {
   private _calendarDay$ = new BehaviorSubject<number>(this.now.getDate());
   private _calendarMonth$ = new BehaviorSubject<number>(this.now.getMonth());
   private _calendarYear$ = new BehaviorSubject<number>(this.now.getFullYear());
+  private _timeExpanded$ = new BehaviorSubject<boolean>(false);
 
   /**
    * date | datetime | time | week
@@ -176,6 +177,18 @@ export class FsDatePickerDialogModel {
 
   private set _calendarYear(value: number) {
     this._calendarYear$.next(value);
+  }
+
+  public get timeExpanded$(): Observable<boolean> {
+    return this._timeExpanded$.asObservable();
+  }
+
+  public get timeExpanded(): boolean {
+    return this._timeExpanded$.value;
+  }
+
+  public set timeExpanded(flag: boolean) {
+    this._timeExpanded$.next(flag);
   }
 
   /*public disabledDays() {

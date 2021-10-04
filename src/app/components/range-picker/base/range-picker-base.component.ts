@@ -16,7 +16,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
 
 import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
-import { FsDateDialogRef } from '@libs/dialog/classes/date-dialog-ref';
+import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
 import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
 
 import { RangePickerRef } from '../../../classes/range-picker-ref';
@@ -70,7 +70,7 @@ export abstract class RangePickerComponent<D = any>
   public onChange: any;
   public onTouch: any = () => {};
 
-  protected _dateDialogRef: FsDateDialogRef;
+  protected _dateDialogRef: FsDatePickerDialogRef;
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
   protected _value;

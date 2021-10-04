@@ -6,18 +6,17 @@ import {
 } from '@angular/core';
 import { getDaysInMonth, isValid } from 'date-fns';
 
-import { FsDateDialogRef } from '@libs/dialog/classes/date-dialog-ref';
+import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
 
-import { FsDatePickerBaseDialogComponent } from '../../../../classes/base-dialog-component';
 import { MONTHS } from '../../consts/months';
 
 
 @Component({
-  templateUrl: './date-scroll-picker-dialog.component.html',
-  styleUrls: ['./date-scroll-picker-dialog.component.scss'],
+  templateUrl: './date-scroll-picker-desktop.component.html',
+  styleUrls: ['./date-scroll-picker-desktop.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogComponent {
+export class FsDateScrollPickerDesktopComponent {
 
   public years: number[] = [];
   public months: any[] = [];
@@ -33,11 +32,9 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
 
   constructor(
     public element: ElementRef,
-    protected _dialogRef: FsDateDialogRef,
+    protected _dialogRef: FsDatePickerDialogRef,
     protected _cdRef: ChangeDetectorRef,
   ) {
-    super(_dialogRef);
-
     const modelValue: Date = _dialogRef.pickerModel.model;
 
     this.showMonth = _dialogRef.options.showMonth;
@@ -68,6 +65,10 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
 
       this._setDate(date);
     }
+  }
+
+  public get dialogRef(): FsDatePickerDialogRef {
+    return this._dialogRef;
   }
 
   private _setDate(date: Date) {
@@ -117,7 +118,7 @@ export class FsDateScrollPickerDialogComponent extends FsDatePickerBaseDialogCom
       this.change(true);
     }
 
-    super.close();
+    this._dialogRef.close();
   }
 
   public changeMonth() {

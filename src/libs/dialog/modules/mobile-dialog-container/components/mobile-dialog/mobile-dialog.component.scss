@@ -1,0 +1,23 @@
+fs-date-picker-calendar {
+  display: block;
+}
+
+:host {
+  ::ng-deep {
+    .actions {
+      .mat-list-item-content {
+        justify-content: center;
+      }
+    }
+
+    fs-date-picker-calendar {
+      table {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.example-viewport {
+  height: 328px;
+}

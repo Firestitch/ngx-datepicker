@@ -1,0 +1,35 @@
+<div class="fs-date-picker-dialog">
+  <fs-date-picker-mobile-header
+    [calendarDate]="datePickerModel.calendarDate$ | async"
+    [minYear]="datePickerModel.minYear"
+    [maxYear]="datePickerModel.maxYear"
+    [viewMode]="datePickerModel.calendarMode$ | async"
+    [disabledDays]="datePickerModel.disabledDays$ | async"
+  >
+  </fs-date-picker-mobile-header>
+
+
+  <!--<cdk-virtual-scroll-viewport itemSize="348" class="example-viewport">
+    <div *cdkVirtualFor="let item of ds">
+      <div>{{ item | fsDateFormat: 'full-date-dayless' }}</div>
+      <fs-date-picker-calendar
+        [date]="datePickerModel.model$ | async"
+        [drawMonth]="item"
+        [dateMode]="datePickerModel.calendarMode$ | async"
+        [disabledDays]="datePickerModel.disabledDays$ | async"
+        [period]="datePickerModel.period"
+        [seedDate]="datePickerModel.seedDate"
+        [periodWeeks]="datePickerModel.periodWeeks"
+        (change)="dateChanged($event)">
+      </fs-date-picker-calendar>
+    </div>
+  </cdk-virtual-scroll-viewport>-->
+
+  <mat-nav-list class="actions">
+    <mat-list-item>
+      <button mat-icon-button color="primary">
+        Done
+      </button>
+    </mat-list-item>
+  </mat-nav-list>
+</div>

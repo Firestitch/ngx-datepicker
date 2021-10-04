@@ -1,0 +1,25 @@
+<fs-date-picker-mobile-header
+  [calendarDate]="datePickerModel.model$ | async"
+  [minYear]="datePickerModel.minYear"
+  [maxYear]="datePickerModel.maxYear"
+  [viewMode]="datePickerModel.calendarMode$ | async"
+  [disabledDays]="datePickerModel.disabledDays$ | async">
+</fs-date-picker-mobile-header>
+
+<div class="view-port">
+  <ng-container *ngFor="let item of items">
+    <div class="month-header" [class.selected]="item.current">
+      {{ item.date | fsDateFormat: 'full-date-dayless' }}
+    </div>
+    <fs-date-picker-calendar
+      [date]="datePickerModel.model$ | async"
+      [drawMonth]="item.date"
+      [dateMode]="datePickerModel.calendarMode$ | async"
+      [disabledDays]="datePickerModel.disabledDays$ | async"
+      [period]="datePickerModel.period"
+      [seedDate]="datePickerModel.seedDate"
+      [periodWeeks]="datePickerModel.periodWeeks"
+      (change)="dateChanged($event)">
+    </fs-date-picker-calendar>
+  </ng-container>
+</div>
