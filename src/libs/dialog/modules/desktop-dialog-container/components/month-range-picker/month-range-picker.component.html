@@ -1,13 +1,13 @@
 <div class="calendar-container">
   <div class="date-time">
     <div class="calendar-view">
-      <fs-date-picker-header
-        [calendarDate]="datePickerModel.calendarDate$ | async"
-        [viewMode]="datePickerModel.calendarMode$ | async"
+      <fs-date-picker-header-month-range
+        [calendarDate]="leftCalendarDate$ | async"
+        [nextCalendarDate]="rightCalendarDate$ | async"
         (goNextMonth)="nextMonth()"
         (goPrevMonth)="prevMonth()"
       >
-      </fs-date-picker-header>
+      </fs-date-picker-header-month-range>
 
       <div class="month-range-container">
         <fs-date-picker-calendar
