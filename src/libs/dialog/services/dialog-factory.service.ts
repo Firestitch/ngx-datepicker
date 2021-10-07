@@ -124,7 +124,7 @@ export class FsDatePickerDialogFactory {
               skip(1),
             )
         }),
-        debounceTime(250),
+        debounceTime(100),
         distinctUntilChanged(),
         tap(() => {
           this._resolutionChanged = true;

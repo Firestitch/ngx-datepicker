@@ -3,8 +3,13 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Input, OnInit,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 import { getDaysInMonth, isValid } from 'date-fns';
 
@@ -19,7 +24,7 @@ import { MONTHS } from '../../consts/months';
   styleUrls: ['./date-scroll-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateScrollPickerComponent implements OnInit {
+export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
 
   @Input('dialogRef')
   private readonly _dialogRef: FsDatePickerDialogRef;
@@ -39,6 +44,9 @@ export class FsDateScrollPickerComponent implements OnInit {
   constructor(
     public element: ElementRef,
     private _cdRef: ChangeDetectorRef,
+    private _renderer: Renderer2,
+    @Inject(DOCUMENT)
+    private _document: Document,
   ) {}
 
   public ngOnInit(): void {
@@ -72,6 +80,12 @@ export class FsDateScrollPickerComponent implements OnInit {
 
       this._setDate(date);
     }
+
+    this._pullToRefreshDisable();
+  }
+
+  public ngOnDestroy(): void {
+    this._pullToRefreshDefault();
   }
 
   private _setDate(date: Date) {
@@ -175,4 +189,13 @@ export class FsDateScrollPickerComponent implements OnInit {
        this.years.push(minYear);
      }
   }
+
+  private _pullToRefreshDisable(): void {
+    this._renderer.addClass(this._document.body, 'fs-date-picker-prevent-pull-to-refresh');
+  }
+
+  private _pullToRefreshDefault(): void {
+    this._renderer.removeClass(this._document.body, 'fs-date-picker-prevent-pull-to-refresh');
+  }
+
 }

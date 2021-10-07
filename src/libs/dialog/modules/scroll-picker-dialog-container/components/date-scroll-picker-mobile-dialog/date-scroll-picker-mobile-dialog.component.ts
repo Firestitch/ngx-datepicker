@@ -2,14 +2,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, Inject,
+  ElementRef,
+  Inject,
 } from '@angular/core';
-import { getDaysInMonth, isValid } from 'date-fns';
+
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+
+import { getDaysInMonth } from 'date-fns';
 
 import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
-
-import { MONTHS } from '../../consts/months';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 
 @Component({
@@ -42,7 +43,6 @@ export class FsDateScrollPickerMobileDialogComponent {
   ) {
     this.dialogRef = _data.dateDialogRef;
   }
-
 
   public change(save = false) {
 

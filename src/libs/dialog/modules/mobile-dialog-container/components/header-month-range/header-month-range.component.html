@@ -3,8 +3,8 @@
     {{ rangeFrom | fsDateFormat: 'day-date' }}
   </ng-container>
   &nbsp;
-  <mat-icon>arrow_forward</mat-icon>&nbsp;
-  <ng-container *ngIf="rangeTo else notSelected">
+  <ng-container *ngIf="rangeTo">
+    <mat-icon>arrow_forward</mat-icon>&nbsp;
     {{ rangeTo | fsDateFormat: 'day-date' }}
   </ng-container>
 </ng-container>
