@@ -1,6 +1,15 @@
 .view-port {
-  height: 328px;
+  height: 380px;
   overflow-y: auto;
+}
+
+.header {
+  display: block;
+  padding: 15px 0;
+  text-align: center;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .month-header {

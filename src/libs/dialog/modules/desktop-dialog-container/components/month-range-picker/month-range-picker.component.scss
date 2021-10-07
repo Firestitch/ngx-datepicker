@@ -1,0 +1,9 @@
+.month-range-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 40px;
+}
+
+fs-date-picker-calendar {
+  display: flex;
+}

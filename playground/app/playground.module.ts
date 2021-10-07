@@ -24,6 +24,7 @@ import { BirthdayExampleComponent } from './components/birthday-example/birthday
 import { DateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 import { WeekPickerComponent } from './components/week-example/week-picker.component';
 import { OnlyHoursExampleComponent } from './components/only-hours-example/only-hours-example.component';
+import { MonthExampleComponent } from './components/month-example/month-example.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { OnlyHoursExampleComponent } from './components/only-hours-example/only-
     BirthdayExampleComponent,
     DateScrollPickerComponent,
     OnlyHoursExampleComponent,
-    WeekPickerComponent
+    WeekPickerComponent,
+    MonthExampleComponent,
   ],
   providers: [
   ],

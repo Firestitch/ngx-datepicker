@@ -27,6 +27,7 @@ import { WEEKDAYS } from '../../consts/week-days';
 import { Month } from '../../models/month';
 import { Period } from '../../models/period';
 import { Week } from '../../models/week';
+import { DayItem } from '../../interfaces/day-item.interface';
 
 
 @Component({
@@ -42,6 +43,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Input()
   public period: IPeriod = null;
+
+  @Input()
+  public rangeFrom: Date = null;
+
+  @Input()
+  public rangeTo: Date = null;
 
   @Input()
   public highlightStartDate: Date = null;
@@ -68,6 +75,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public change = new EventEmitter<Date>();
 
   @Output()
+  public rangeChange = new EventEmitter<Date>();
+
+  @Output()
   public periodChange = new EventEmitter<IPeriod>();
 
   @Output()
@@ -75,6 +85,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public selected: any = {};
   public selectedPeriod: Period;
+  public selectedRange: { from?: string, to?: string } = {}
   public month: Month = null;
   public years = [];
   public dateDays = [];
@@ -132,6 +143,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
           this.drawMonths(changes.drawMonth.currentValue);
         }
       }
+
+      if (changes.rangeFrom || changes.rangeTo) {
+        this.selectedRange = {
+          from: this.rangeFrom && lightFormat(this.rangeFrom, 'yyyy-MM-dd') || null,
+          to: this.rangeTo && lightFormat(this.rangeTo, 'yyyy-MM-dd') || null,
+        }
+      }
     }
   }
 
@@ -152,7 +170,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   }
 
   public updateDaysHighlighted() {
-
     this.highlightedRangeDays = {
       data: {},
       min: null,
@@ -162,10 +179,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     let start = null;
     let end = null;
 
-    if (this.highlightStartDate) {
-
-      this.highlightEndDate = this.highlightEndDate || this.highlightStartDate;
-
+    if (this.highlightStartDate && this.highlightEndDate) {
       if (isAfter(this.highlightStartDate, this.highlightEndDate)) {
         start = this.highlightEndDate;
         end = this.highlightStartDate;
@@ -212,6 +226,8 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public dayClick(day, week, event) {
     if (this.dateMode === 'week') {
       this.selectPeriod(week.period);
+    } else if (this.dateMode === 'monthrange') {
+      this.selectMonthRange(day);
     } else {
       this.selectDay(day);
     }
@@ -234,6 +250,19 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       this.date.getHours(),
       this.date.getMinutes(),
       this.date.getSeconds()
+    );
+
+    this.setDate(date);
+  }
+
+  public selectMonthRange(day: DayItem) {
+    const date = new Date(
+      day.year,
+      day.month,
+      +day.number,
+      0,
+      0,
+      0,
     );
 
     this.setDate(date);

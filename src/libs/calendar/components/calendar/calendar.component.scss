@@ -1,5 +1,10 @@
 @import '~@angular/material/theming';
 
+:host {
+  display: flex;
+  justify-content: center;
+}
+
 .period-mode {
   cursor: default;
   pointer-events: none;
@@ -29,5 +34,60 @@
 .day {
   &.selected {
     color: #fff;
+  }
+}
+
+.highlighted {
+  &:not(.selected):not(.range-from):not(.range-to) {
+    .tile-content {
+      background-color: #c9e5fc;
+      border-radius: initial;
+    }
+  }
+}
+
+
+.month-range {
+  .tile {
+    padding: 0;
+  }
+
+  &.range-selected {
+    .range-from {
+      background: linear-gradient(90deg, #fff 0%, #fff 49%, #c9e5fc 51%);
+    }
+
+    .range-to {
+      background: linear-gradient(-90deg, #fff 0%, #fff 49%, #c9e5fc 51%);
+    }
+  }
+
+  &:not(.range-selected) {
+    .range-from {
+      .tile-content {
+        background-color: #fff;
+        color: #000;
+        width: 30px;
+        height: 30px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 8px solid transparent;
+        border-radius: 100%;
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border: 8px solid transparent;
+          border-radius: 100%;
+          border-left-color: #38f;
+          border-bottom-color: #38f;
+          transform: rotateZ(45deg);
+        }
+      }
+    }
   }
 }

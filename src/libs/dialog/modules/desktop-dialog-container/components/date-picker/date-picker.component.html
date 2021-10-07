@@ -1,0 +1,63 @@
+<div class="calendar-container">
+  <div class="date-time">
+    <div class="calendar-view">
+      <fs-date-picker-header
+        [calendarDate]="datePickerModel.calendarDate$ | async"
+        [minYear]="datePickerModel.minYear"
+        [maxYear]="datePickerModel.maxYear"
+        [viewMode]="datePickerModel.calendarMode$ | async"
+        [disabledDays]="datePickerModel.disabledDays$ | async"
+        (viewModeChange)="viewModeChanged($event)"
+        (monthChange)="monthChanged($event)"
+        (yearChange)="yearChanged($event)"
+        (goNextMonth)="nextMonth()"
+        (goPrevMonth)="prevMonth()"
+      >
+      </fs-date-picker-header>
+
+      <ng-container *ngIf="dialogRef.components.calendarStart">
+        <fs-date-picker-calendar
+          [date]="datePickerModel.model$ | async"
+          [drawMonth]="datePickerModel.calendarDate$ | async"
+          [dateMode]="datePickerModel.calendarMode$ | async"
+          [disabledDays]="datePickerModel.disabledDays$ | async"
+          [period]="datePickerModel.period"
+          [seedDate]="datePickerModel.seedDate"
+          [periodWeeks]="datePickerModel.periodWeeks"
+          (change)="dateChanged($event)"
+          (periodChange)="periodChanged($event)">
+        </fs-date-picker-calendar>
+      </ng-container>
+    </div>
+
+    <ng-container
+      *ngIf="datePickerModel.dateMode !== 'year' && datePickerModel.dateMode !== 'month'">
+      <fs-date-picker-time
+        *ngIf="datePickerModel.view === 'datetime' || datePickerModel.view === 'time'"
+        [date]="datePickerModel.model$ | async"
+        [minutes]="datePickerModel.minutes"
+        [disabledTimes]="datePickerModel.disabledTimes$ | async"
+        [expanded]="timePickerExpanded"
+        (onChange)="dateChanged($event)"
+      ></fs-date-picker-time>
+    </ng-container>
+  </div>
+
+  <div class="buttons">
+    <button class="button-done" type="button" mat-button color="primary" (click)="close()">Done</button>
+    <button type="button"
+            mat-button
+            class="button-more"
+            *ngIf="datePickerModel.minutes
+                   && (datePickerModel.view === 'datetime' || datePickerModel.view === 'time')
+                   && !(datePickerModel.view === 'datetime' && datePickerModel.dateMode === 'date')"
+            (click)="toggleTimeExpand()">
+      <ng-container *ngIf="!timePickerExpanded; else lessMinutes">
+        More Minutes
+      </ng-container>
+      <ng-template #lessMinutes>
+        Less Minutes
+      </ng-template>
+    </button>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 import { Observable, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { IPeriod } from '@libs/common/interfaces/period.interface';
-
 import { isEqual, forEach } from 'lodash-es';
+
+import { IPeriod } from '@libs/common/interfaces/period.interface';
 
 import { FsDatePickerDialogModel } from './dialog-model';
 import { FsDatePickerOverlayRef } from './overlay-ref';
@@ -44,7 +44,7 @@ export class FsDatePickerDialogRef {
     return this._pickerOptions;
   }
 
-  public get value$(): Observable<Date | null | IPeriod> {
+  public get value$(): Observable<Date | IPeriod | null> {
     return this._value$;
   }
 
@@ -80,19 +80,21 @@ export class FsDatePickerDialogRef {
       this._pickerOptions,
     );
 
-    const model$ = this._dialogModel.model$
-      .pipe(
-        skip(1),
-      );
+    this._initValue();
+  }
 
-    const period$ = this._dialogModel.period$
-      .pipe(
-        skip(1),
-      );
-
-    this._value$ = this.options.view === 'week'
-      ? period$
-      : model$;
+  private _initValue(): void {
+    if (this.options.view === 'week') {
+      this._value$ = this._dialogModel.period$
+        .pipe(
+          skip(1),
+        );
+    } else {
+      this._value$ = this._dialogModel.model$
+        .pipe(
+          skip(1),
+        );
+    }
   }
 
   private _initComponents(): void {
@@ -103,7 +105,7 @@ export class FsDatePickerDialogRef {
     const tempData = { ...value };
     const allowable = [];
 
-    if (['week', 'date', 'datetime'].indexOf(this._pickerOptions.view) !== -1) {
+    if (['week', 'date', 'datetime', 'monthrange'].indexOf(this._pickerOptions.view) !== -1) {
       allowable.push('calendarStart');
       allowable.push('calendarEnd');
     }

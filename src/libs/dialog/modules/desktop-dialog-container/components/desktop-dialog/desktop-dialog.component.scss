@@ -1,26 +1,20 @@
-.dialog-view-datetime {
-
-  fs-date-picker-time {
-    @media only screen and (max-width: 737px) {
-      margin-left: 0;
+:host {
+  ::ng-deep {
+    .dialog-view-datetime {
+      fs-date-picker-time {
+        margin-left: 20px;
+      }
     }
 
-    margin-left: 20px;
-  }
-}
+    fs-date-picker-calendar {
+      display: none;
+    }
 
-.date-time {
-  display: flex;
-}
-
-
-fs-date-picker-calendar {
-  display: none;
-}
-
-.date-mode-date, .date-mode-date-time, .date-mode-week {
-  fs-date-picker-calendar {
-    display: flex;
-    flex: 1;
+    .date-mode-date, .date-mode-date-time, .date-mode-week {
+      fs-date-picker-calendar {
+        display: flex;
+        flex: 1;
+      }
+    }
   }
 }

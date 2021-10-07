@@ -17,3 +17,5 @@ export { DateTimeRangePickerToComponent } from './app/components/range-picker/to
 export { FsDateTimePickerComponent } from './app/components/date-time-picker/date-time-picker.component';
 export { TimeRangePickerFromComponent } from './app/components/range-picker/from/time-range-picker-from.component';
 export { TimeRangePickerToComponent } from './app/components/range-picker/to/time-range-picker-to.component';
+export { MonthRangePickerFromComponent } from './app/components/range-picker/from/month-range-picker-from.component';
+export { MonthRangePickerToComponent } from './app/components/range-picker/to/month-range-picker-to.component';

@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, pairwise, skip, take, takeUntil } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
 
@@ -161,14 +161,7 @@ export abstract class RangePickerComponent<D = any>
       }
     );
 
-    this._dateDialogRef.value$
-      .pipe(
-        takeUntil(this._dateDialogRef.close$),
-        takeUntil(this._destroy$),
-      )
-      .subscribe((value) => {
-        this.updateValueFromDialog(value);
-      });
+    this._listenDialogValueChanges();
 
     this._dateDialogRef.close$
       .pipe(
@@ -187,10 +180,8 @@ export abstract class RangePickerComponent<D = any>
    * Set value which was selected in dialog
    * @param value
    */
-  public updateValueFromDialog(value) {
+  public updateValueFromDialog(value: Date) {
     this.writeValue(value);
-    this.onChange(value);
-    this.onTouch(value);
   }
 
   public updateValue(value): void {
@@ -203,12 +194,49 @@ export abstract class RangePickerComponent<D = any>
     }
 
     this._value = value;
+
     this.onChange(value);
     this.onTouch(value);
   }
 
   public updateInput(value) {
     this._elRef.nativeElement.value = formatDateTime(value, this.view);
+  }
+
+  @HostListener('keyup', ['$event', '$event.target.value'])
+  public _inputKeyup(event: KeyboardEvent, value: string): void {
+    if(event.key === 'Enter') {
+      this.inputChange(value);
+    }
+  }
+
+  @HostListener('input', ['$event.target.value', '$event.target'])
+  public _inputChange(value: string, target): void {
+    if (this.ngModelOptions?.updateOn !== 'blur')  {
+      this.inputChange(value);
+    }
+  }
+
+  public inputChange(value: string): void {
+    const lastValueWasValid = this._lastValueValid;
+    const date = parseDate(value);
+
+    this._lastValueValid = !date || isValid(date);
+
+    if (!isEqual(date, this._value)) {
+      this.updateValue(date);
+    } else if (lastValueWasValid !== this._lastValueValid) {
+      this._ngControl.control.updateValueAndValidity();
+    }
+  }
+
+  @HostListener('blur', ['$event.target.value'])
+  public _inputBlur(value: string): void {
+    if (this.ngModelOptions?.updateOn === 'blur')  {
+      this.inputChange(value);
+    }
+
+    this.updateInput(this.value);
   }
 
   public registerOnChange(fn) { this.onChange = fn;  }
@@ -231,8 +259,19 @@ export abstract class RangePickerComponent<D = any>
 
   }
 
+  protected _listenDialogValueChanges(): void {
+    this._dateDialogRef.value$
+      .pipe(
+        takeUntil(this._dateDialogRef.close$),
+        takeUntil(this._destroy$),
+      )
+      .subscribe((value: Date) => {
+        this.updateValueFromDialog(value);
+      });
+  }
+
   protected _checkValuesEquality(newValue, prevValue) {
-    const valuesAreDates = isDate(newValue) && isDate(prevValue);
+    const valuesAreDates = isDate(newValue) && isDate(prevValue) && isValid(newValue) && isValid(prevValue);
     const valuesDatesEquals = valuesAreDates
       && isSameDate(newValue, prevValue);
 
@@ -243,7 +282,11 @@ export abstract class RangePickerComponent<D = any>
    * We need picker start date to be able to limit "Date To" picker
    */
   protected _getPickerStartDate() {
-    if (isDate(this._pickerRef.startDate) && isValid(this._pickerRef.startDate)) {
+    if (
+      this.view !== PickerViewType.MonthRange
+      && isDate(this._pickerRef.startDate)
+      && isValid(this._pickerRef.startDate)
+    ) {
       return subDays(this._pickerRef.startDate, 1);
     }
 
@@ -261,40 +304,21 @@ export abstract class RangePickerComponent<D = any>
     this._lastValueValid = !date || isValid(date);
   }
 
-  @HostListener('keyup', ['$event', '$event.target.value'])
-  public _inputKeyup(event: KeyboardEvent, value: string): void {
-    if(event.key === 'Enter') {
-      this.inputChange(value);
-    }
-  }
+  protected _pickerRefUpdates$(target: Observable<Date | null>): Observable<Date | any> {
+    return target
+      .pipe(
+        skip(1),
+        pairwise(),
+        filter((changes: [Date | null, Date | null]) => {
+          const prevValue = changes[0]?.getTime();
+          const newValue = changes[1]?.getTime();
 
-  @HostListener('input', ['$event.target.value', '$event.target'])
-  public _inputChange(value: string, target): void {
-    if(this.ngModelOptions?.updateOn !== 'blur')  {
-      this.inputChange(value);
-    }
-  }
-
-  public inputChange(value: string): void {
-    const lastValueWasValid = this._lastValueValid;
-    const date = parseDate(value);
-
-    this._lastValueValid = !date || isValid(date);
-
-    if (!isEqual(date, this._value)) {
-      this.updateValue(date);
-    } else if (lastValueWasValid !== this._lastValueValid) {
-      this._ngControl.control.updateValueAndValidity();
-    }
-  }
-
-  @HostListener('blur', ['$event.target.value'])
-  public _inputBlur(value: string): void {
-    if(this.ngModelOptions?.updateOn === 'blur')  {
-      this.inputChange(value);
-    }
-
-    this.updateInput(this.value);
+          return prevValue !== newValue
+            && this.value?.getTime() !== newValue;
+        }),
+        map((changes) => changes[1]),
+        takeUntil(this._destroy$),
+      );
   }
 
 }

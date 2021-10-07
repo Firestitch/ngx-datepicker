@@ -4,7 +4,9 @@ import {
   ElementRef,
   Injector,
   OnDestroy,
-  OnInit, Optional, Self,
+  OnInit,
+  Optional,
+  Self,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
@@ -76,17 +78,17 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
    * Set value which was selected in dialog
    * @param value
    */
-  public updateValueFromDialog(value) {
+  public updateValueFromDialog(value: Date) {
+    this.updateValue(value);
+
+    super.updateValueFromDialog(value);
+  }
+
+  public updateValue(value): void {
     if (this.view === PickerViewType.Date) {
       value = startOfDay(value);
     }
 
-    super.updateValueFromDialog(value);
-
-    this._pickerRef.updateStartDate(value);
-  }
-
-  public updateValue(value): void {
     this._pickerRef.updateStartDate(value);
 
     super.updateValue(value);

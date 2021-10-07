@@ -3,4 +3,5 @@ export enum PickerViewType {
   DateTime = 'datetime',
   Time = 'time',
   Week = 'week',
+  MonthRange = 'monthrange',
 }

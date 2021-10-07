@@ -26,7 +26,7 @@
   <div class="clear"></div>
 </div>
 
-<div *ngIf="viewMode == 'week' || viewMode == 'date' || viewMode == 'datetime'" class="calendar">
+<div *ngIf="viewMode == 'week' || viewMode == 'date' || viewMode == 'datetime' || viewMode == 'monthrange'" class="calendar">
   <div class="month-year">
     <a class="month-name" (click)="setViewMode('month')">
       {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}

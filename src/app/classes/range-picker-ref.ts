@@ -1,6 +1,7 @@
-import { ReplaySubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { isAfter, isDate } from 'date-fns';
+
 import { isSameDate } from '../helpers/is-same-date';
 
 
@@ -9,16 +10,13 @@ export class RangePickerRef {
   private _startDatePickerExists = false;
   private _endDatePickerExists = false;
 
-  private _valueChange$ = new ReplaySubject(1);
+  private _startDate$ = new BehaviorSubject(null);
+  private _endDate$ = new BehaviorSubject(null);
 
   private _startDate: Date = null;
   private _endDate: Date = null;
 
   constructor(public view: string) {}
-
-  public get valueChange$() {
-    return this._valueChange$;
-  }
 
   public get startDate(): Date {
     return this._startDate;
@@ -26,6 +24,14 @@ export class RangePickerRef {
 
   public get endDate(): Date {
     return this._endDate;
+  }
+
+  public get startDate$(): Observable<Date> {
+    return this._startDate$.asObservable();
+  }
+
+  public get endDate$(): Observable<Date> {
+    return this._endDate$.asObservable();
   }
 
   public get startDatePickerExists() {
@@ -49,11 +55,7 @@ export class RangePickerRef {
 
     this._startDatePickerExists = true;
 
-    // if (!this.isDateAfter(this._endDate, this._startDate)) {
-    //   // this.updateEndDate(null);
-    // }
-
-    this._valueChange$.next(value);
+    this._startDate$.next(value);
   }
 
   /**
@@ -67,8 +69,9 @@ export class RangePickerRef {
 
     this._endDate = value;
 
-    // this._valueChange$.next(value);
     this._endDatePickerExists = true;
+
+    this._endDate$.next(value);
   }
 
   /**

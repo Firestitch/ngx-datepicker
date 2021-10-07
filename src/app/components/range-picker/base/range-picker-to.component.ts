@@ -4,15 +4,11 @@ import {
   ElementRef,
   Injector,
   OnDestroy,
-  OnInit, Optional, Self,
+  OnInit,
+  Optional,
+  Self,
 } from '@angular/core';
-import {
-  NgControl,
-  ValidationErrors,
-  ValidatorFn,
-} from '@angular/forms';
-
-import { skip, takeUntil } from 'rxjs/operators';
+import { NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
 import { endOfDay } from 'date-fns';
 
@@ -91,12 +87,12 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
     super.updateValueFromDialog(this._pickerRef.endDate);
   }
 
-  public updateValue(value) {
+  public updateValue(value: Date) {
     if (this.view === PickerViewType.Date) {
       value = endOfDay(value);
     }
 
-    this._pickerRef.updateEndDate(value);
+    this._pickerRef.updateEndDate(value as Date);
 
     super.updateValue(value);
   }
@@ -108,29 +104,13 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
       : { fsDatepickerRange: 'Invalid Range' };
   }
 
-  /**
-   * Update min/max and value if date start was changed
-   */
-  private _subscribeToPickerRefUpdates() {
-    this._pickerRef.valueChange$
-      .pipe(
-        skip(1),
-        takeUntil(this._destroy$),
-      )
-      .subscribe({
-        next: () => {
-          const prevValue = this.value;
-          // this.writeValue(this._pickerRef.endDate);
-
-          if (prevValue !== this.value) {
-            this.onChange(this.value);
-            this.onTouch(this.value);
-          }
-
-          this._ngControl.control.markAsDirty();
-          this._ngControl.control.updateValueAndValidity();
-          this._cdRef.markForCheck();
-        }
+  protected _subscribeToPickerRefUpdates() {
+    this._pickerRefUpdates$(this._pickerRef.startDate$)
+      .subscribe(() => {
+        this._ngControl.control.markAsDirty();
+        this._ngControl.control.updateValueAndValidity();
+        this._cdRef.markForCheck();
       });
   }
+
 }

@@ -16,6 +16,7 @@ import { getDisabledDays } from '@libs/dialog/helpers/get-disabled-days';
 import { getDisabledTimes } from '@libs/dialog/helpers/get-disabled-times';
 import { IPeriod } from '@libs/common/interfaces/period.interface';
 
+import { RangePickerRef } from '@app/classes/range-picker-ref';
 
 
 export class FsDatePickerDialogModel {
@@ -47,9 +48,6 @@ export class FsDatePickerDialogModel {
   private _disabledTimes$ = new BehaviorSubject<[Date, Date][]>([]);
   private _calendarDate$ = new BehaviorSubject<Date>(this.now);
   private _calendarMode$ = new BehaviorSubject<string>('date');
-  private _calendarDay$ = new BehaviorSubject<number>(this.now.getDate());
-  private _calendarMonth$ = new BehaviorSubject<number>(this.now.getMonth());
-  private _calendarYear$ = new BehaviorSubject<number>(this.now.getFullYear());
   private _timeExpanded$ = new BehaviorSubject<boolean>(false);
 
   /**
@@ -167,18 +165,6 @@ export class FsDatePickerDialogModel {
     this._calendarMode$.next(value);
   }
 
-  private set _calendarDay(value: number) {
-    this._calendarDay$.next(value);
-  }
-
-  private set _calendarMonth(value: number) {
-    this._calendarMonth$.next(value);
-  }
-
-  private set _calendarYear(value: number) {
-    this._calendarYear$.next(value);
-  }
-
   public get timeExpanded$(): Observable<boolean> {
     return this._timeExpanded$.asObservable();
   }
@@ -191,20 +177,9 @@ export class FsDatePickerDialogModel {
     this._timeExpanded$.next(flag);
   }
 
-  /*public disabledDays() {
-
-    const result = [];
-
-    if (this.minDate) {
-      result.push([subYears(new Date(), this.minYear), new Date(this.minDate)]);
-    }
-
-    if (this.maxDate) {
-      result.push([new Date(this.maxDate), addYears(new Date(), this._maxYear)]);
-    }
-
-    return result;
-  }*/
+  public get rangePickerRef(): RangePickerRef | null {
+    return this._pickerOptions.pickerRef;
+  }
 
   private _initCalendar(options: IDialogFactoryOptions) {
     this._pickerOptions = { ...options };
@@ -216,7 +191,7 @@ export class FsDatePickerDialogModel {
       this.calendarDate = (options.modelValue as IPeriod)?.from || new Date();
     } else {
       this.model = (options.modelValue as Date);
-      this.calendarDate = (options.modelValue as Date);
+      this.calendarDate = (options.modelValue as Date) || new Date();
     }
 
     this._calendarMode = options.view;

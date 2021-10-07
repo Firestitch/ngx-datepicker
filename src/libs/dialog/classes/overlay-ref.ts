@@ -40,12 +40,12 @@ export class FsDatePickerOverlayRef {
 
   public close(): void {
     if (this.activeOverlayRef instanceof OverlayRef) {
-      this.activeOverlayRef.detach();
-      this.activeOverlayRef.dispose();
+      this.activeOverlayRef?.detach();
+      this.activeOverlayRef?.dispose();
     }
 
     if (this.activeOverlayRef instanceof MatBottomSheetRef) {
-      this.activeOverlayRef.dismiss();
+      this.activeOverlayRef?.dismiss();
     }
 
     this.setActiveOverlay(null);

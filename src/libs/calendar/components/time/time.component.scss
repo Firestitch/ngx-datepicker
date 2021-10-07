@@ -1,9 +1,9 @@
-:host {
+/*:host {
   @media only screen and (max-width: 737px) {
     margin-left: 0;
     width: 100%;
   }
-}
+}*/
 
 
 thead th {
@@ -33,6 +33,8 @@ tbody {
 }
 
 .time-container table {
+  width: 100%;
+
   .am-pm {
     font-size: 13px;
     padding-left: 2px;
@@ -40,7 +42,7 @@ tbody {
 }
 
 
-@media only screen and (min-width: 737px) {
+/*@media only screen and (min-width: 737px) {
   .time-container {
 
     .hours-col tbody,
@@ -50,4 +52,4 @@ tbody {
       display: block;
     }
   }
-}
+}*/

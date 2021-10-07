@@ -29,6 +29,8 @@ import { FsDateWeekPickerComponent } from './components/date-week-picker/date-we
 import { FsDateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 import { FsTimePickerComponent } from './components/time-picker/time-picker.component';
 import { FsDatePickerTriggerComponent } from './components/date-picker-trigger/date-picker-trigger.component';
+import { MonthRangePickerFromComponent } from './components/range-picker/from/month-range-picker-from.component';
+import { MonthRangePickerToComponent } from './components/range-picker/to/month-range-picker-to.component';
 
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
 
@@ -62,6 +64,8 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     FsDateTimePickerComponent,
     TimeRangePickerFromComponent,
     TimeRangePickerToComponent,
+    MonthRangePickerFromComponent,
+    MonthRangePickerToComponent,
   ],
   exports: [
     FsDatePickerComponent,
@@ -77,6 +81,8 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     FsDateTimePickerComponent,
     TimeRangePickerFromComponent,
     TimeRangePickerToComponent,
+    MonthRangePickerFromComponent,
+    MonthRangePickerToComponent,
   ],
 })
 export class FsDatePickerModule {

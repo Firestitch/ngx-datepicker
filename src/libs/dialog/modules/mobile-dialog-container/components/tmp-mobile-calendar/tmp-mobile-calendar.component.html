@@ -1,10 +1,21 @@
-<fs-date-picker-mobile-header
-  [calendarDate]="datePickerModel.model$ | async"
-  [minYear]="datePickerModel.minYear"
-  [maxYear]="datePickerModel.maxYear"
-  [viewMode]="datePickerModel.calendarMode$ | async"
-  [disabledDays]="datePickerModel.disabledDays$ | async">
-</fs-date-picker-mobile-header>
+<div class="header">
+  <ng-container *ngIf="datePickerModel.view !== 'monthrange' else monthRangeHeader">
+    <fs-date-picker-mobile-header
+      [calendarDate]="datePickerModel.model$ | async"
+      [minYear]="datePickerModel.minYear"
+      [maxYear]="datePickerModel.maxYear"
+      [viewMode]="datePickerModel.calendarMode$ | async"
+      [disabledDays]="datePickerModel.disabledDays$ | async">
+    </fs-date-picker-mobile-header>
+  </ng-container>
+
+  <ng-template #monthRangeHeader>
+    <fs-date-picker-mobile-header-month-range
+      [rangeFrom]="modelFrom$ | async"
+      [rangeTo]="modelTo$ | async">
+    </fs-date-picker-mobile-header-month-range>
+  </ng-template>
+</div>
 
 <div class="view-port">
   <ng-container *ngFor="let item of items">
@@ -14,6 +25,10 @@
     <fs-date-picker-calendar
       [date]="datePickerModel.model$ | async"
       [drawMonth]="item.date"
+      [rangeFrom]="modelFrom$ | async"
+      [rangeTo]="modelTo$ | async"
+      [highlightStartDate]="modelFrom$ | async"
+      [highlightEndDate]="modelTo$ | async"
       [dateMode]="datePickerModel.calendarMode$ | async"
       [disabledDays]="datePickerModel.disabledDays$ | async"
       [period]="datePickerModel.period"

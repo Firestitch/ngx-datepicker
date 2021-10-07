@@ -14,7 +14,7 @@ import { RangePickerToComponent } from '../base/range-picker-to.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangePickerToComponent extends RangePickerToComponent {
-      
+
   @Input() set fsDateRangeTo(value) {
     this._name = value;
   }

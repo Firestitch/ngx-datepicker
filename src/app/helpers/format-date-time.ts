@@ -28,7 +28,11 @@ export function formatDateTime(
       formats.push(customDateFormat);
     } else {
 
-      if (([PickerViewType.Date, PickerViewType.DateTime] as unknown[]).indexOf(dateFormat) != -1) {
+      if (([
+        PickerViewType.Date,
+        PickerViewType.MonthRange,
+        PickerViewType.DateTime,
+      ] as unknown[]).indexOf(dateFormat) != -1) {
         formats.push('MMM d, yyyy');
       }
 

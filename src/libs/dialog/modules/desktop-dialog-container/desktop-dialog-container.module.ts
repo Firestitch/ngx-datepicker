@@ -11,6 +11,8 @@ import { FsDatePickerCalendarModule } from '@libs/calendar/calendar.module';
 
 import { FsDesktopCalendarDialogComponent } from './components/desktop-dialog/desktop-dialog.component';
 import { FsDatePickerHeaderComponent } from './components/header/header.component';
+import { FsDesktopDatePickerComponent } from './components/date-picker/date-picker.component';
+import { FsMonthRangePickerComponent } from './components/month-range-picker/month-range-picker.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { FsDatePickerHeaderComponent } from './components/header/header.componen
   declarations: [
     FsDesktopCalendarDialogComponent,
     FsDatePickerHeaderComponent,
+    FsDesktopDatePickerComponent,
+    FsMonthRangePickerComponent,
   ],
   exports: [
     FsDesktopCalendarDialogComponent,

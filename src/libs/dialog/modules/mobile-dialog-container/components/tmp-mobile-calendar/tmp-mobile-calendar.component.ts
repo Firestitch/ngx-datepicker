@@ -3,14 +3,19 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Input,
+  Input, OnChanges, SimpleChanges,
 } from '@angular/core';
 
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
+
+import { addMonths, isBefore } from 'date-fns';
+
 import { FsDatePickerDialogModel } from '@libs/dialog/classes/dialog-model';
 
-import { addMonths } from 'date-fns';
+import { RangePickerRef } from '@app/classes/range-picker-ref';
 
 
 @Component({
@@ -19,7 +24,7 @@ import { addMonths } from 'date-fns';
   styleUrls: ['./tmp-mobile-calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDatePickerTmpMobileCalendarComponent implements AfterViewInit {
+export class FsDatePickerTmpMobileCalendarComponent implements OnChanges, AfterViewInit {
 
   @Input()
   public datePickerModel: FsDatePickerDialogModel;
@@ -27,6 +32,10 @@ export class FsDatePickerTmpMobileCalendarComponent implements AfterViewInit {
   @Input()
   public autoClose = true;
 
+  public modelFrom$: Observable<Date>;
+  public modelTo$: Observable<Date>;
+
+  // Temporary solution
   public items = Array
     .from({length: 12})
     .map((_, i) => {
@@ -43,6 +52,19 @@ export class FsDatePickerTmpMobileCalendarComponent implements AfterViewInit {
     private _bottomSheetRef: MatBottomSheetRef<any>,
   ) {}
 
+  public get rangePickerRef(): RangePickerRef | null {
+    return this.datePickerModel.rangePickerRef;
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.datePickerModel?.currentValue
+      && changes.datePickerModel?.firstChange
+      && this.datePickerModel.view === 'monthrange') {
+      this._initMonthRangeModels();
+    }
+  }
+
+
   public ngAfterViewInit(): void {
     this._el.nativeElement.querySelector('.selected').scrollIntoView();
   }
@@ -58,34 +80,55 @@ export class FsDatePickerTmpMobileCalendarComponent implements AfterViewInit {
   // public yearChanged(year: number) {
   //   this.datePickerModel.setCalendarYear(year);
   // }
-  //
-  // public nextMonth(): void {
-  //   this.datePickerModel.nextMonth();
-  // }
-  //
-  // public prevMonth(): void {
-  //   this.datePickerModel.prevMonth();
-  // }
-  //
+
   public dateChanged(date): void {
-    this.datePickerModel.model = date;
 
-    this.close();
+    if (this.datePickerModel.view !== 'monthrange') {
+      this.datePickerModel.model = date;
+      this.close();
+    } else {
+      this.monthRangeChange(date);
+    }
   }
-  //
-  // public periodChanged(date): void {
-  //   this.datePickerModel.period = date;
-  //
-  //   // this.close();
-  // }
 
-  // public setDateMode(mode) {
-  //   this.datePickerModel.dateMode = mode;
-  // }
+  public monthRangeChange(date): void {
+    const rangeRef = this.rangePickerRef;
+    const { startDate, endDate } = rangeRef;
+
+    if (!startDate && !endDate) {
+      rangeRef.updateStartDate(date);
+    } else if (startDate && !endDate) {
+      if (isBefore(date, startDate)) {
+        rangeRef.updateStartDate(date);
+        rangeRef.updateEndDate(null);
+      } else {
+        rangeRef.updateEndDate(date);
+      }
+    } else if (startDate && endDate) {
+      rangeRef.updateStartDate(date);
+      rangeRef.updateEndDate(null);
+    }
+  }
 
   public close(): void {
     if (this.autoClose) {
       this._bottomSheetRef.dismiss();
     }
+  }
+
+  private _initMonthRangeModels(): void {
+    this.modelFrom$ = this.datePickerModel
+      .rangePickerRef
+      .startDate$
+      .pipe(
+        shareReplay(),
+      );
+
+    this.modelTo$ = this.datePickerModel
+      .rangePickerRef
+      .endDate$
+      .pipe(
+        shareReplay(),
+      );
   }
 }
