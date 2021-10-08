@@ -212,19 +212,23 @@ export class FsDatePickerDialogFactory {
     return this._createBasePopupPositionStrategy(el)
       .withPositions([
         {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top',
-          offsetX: -29,
-          offsetY: 5,
-        },
-        {
-          originX: 'start',
+          originX: 'end',
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
-        }
+        },
+        {
+          originX: 'end',
+          originY: 'top',
+          overlayX: 'start',
+          overlayY: 'center',
+        },
+        {
+          originX: 'end',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'bottom',
+        },
       ]);
   }
 
@@ -232,9 +236,9 @@ export class FsDatePickerDialogFactory {
     return this._overlay.position()
       .flexibleConnectedTo(el)
       .withGrowAfterOpen(true)
-      .withFlexibleDimensions(false)
-      .withViewportMargin(8)
-      .withLockedPosition()
+      .withFlexibleDimensions(true)
+      .withViewportMargin(9)
+      .withPush(true)
   }
 
   private _openDatePickerDesktop (
