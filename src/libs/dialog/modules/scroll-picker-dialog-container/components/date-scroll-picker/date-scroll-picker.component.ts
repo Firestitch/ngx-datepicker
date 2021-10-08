@@ -64,7 +64,7 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
     private _cdRef: ChangeDetectorRef,
     private _renderer: Renderer2,
     @Inject(DOCUMENT)
-    private _document: Document,
+    private _document,
   ) {}
 
   public ngOnInit(): void {
