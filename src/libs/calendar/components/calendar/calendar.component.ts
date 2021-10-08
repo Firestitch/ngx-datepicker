@@ -71,6 +71,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   @Input()
   public periodWeeks;
 
+  @Input()
+  public hideExtraDays = false;
+
   @Output()
   public change = new EventEmitter<Date>();
 
@@ -298,7 +301,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   }
 
   public createMonth(date: Date) {
-    const month = new Month(date, this.seedDate, this.periodWeeks, this.disabledDays);
+    const month = new Month(
+      date,
+      this.seedDate,
+      this.periodWeeks,
+      this.disabledDays,
+      this.hideExtraDays,
+    );
 
     if (this.dateMode === 'week') {
       this.weekDaysList = WEEKDAYS.map((_, i, arr) => {

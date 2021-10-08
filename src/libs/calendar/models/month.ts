@@ -22,7 +22,6 @@ export class Month {
 
   private _monthStartDay: number;
   private _daysInMonth: number;
-  private _totalDaysInMonth: number;
   private _seedDay: number;
 
 
@@ -30,6 +29,7 @@ export class Month {
               public seedDate: Date,
               public periodWeeks: number,
               private _disabledDays,
+              private _hideExtraDays: boolean,
   ) {
     this._initMonth(date);
 
@@ -55,6 +55,13 @@ export class Month {
 
     for (let d = 0; d < CALENDAR_DAYS_NUMBER; d++) {
       const dayNumber = lightFormat(currentDate, 'd');
+
+      // skip days & weeks for month range
+      if (this._hideExtraDays && this._prevMonthDaysCount === 7 && d < 7) {
+        currentDate = addDays(currentDate, 1);
+
+        continue
+      }
 
       if (d % 7 == 0) {
         week = new Week(currentDate, this.seedDate, this.periodWeeks);

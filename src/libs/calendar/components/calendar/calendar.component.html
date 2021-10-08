@@ -28,6 +28,7 @@
 
         <ng-container *ngFor="let day of week.days">
           <td class="tile day"
+              [class.hidden-day]="hideExtraDays && day.mute"
               [class.now]="today.date == day.date"
               [class.mute]="day.mute"
               [class.selected]="(day.selected || day.date == selected.date && !day.mute)"

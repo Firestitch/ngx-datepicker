@@ -5,6 +5,14 @@
   justify-content: center;
 }
 
+.hidden-day {
+  pointer-events: none;
+
+  .tile-content {
+    display: none;
+  }
+}
+
 .period-mode {
   cursor: default;
   pointer-events: none;
