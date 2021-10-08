@@ -1,9 +1,15 @@
 import { isNumber } from 'lodash-es';
 import { format, isValid } from 'date-fns';
-import { DateFormat } from '../enums/date-format.enum';
+
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { ScrollPickerViewType } from '@libs/common/enums/scroll-picker-view-type.enum';
 
 
-export function formatDateTime(value, dateFormat = DateFormat.Date, customDateFormat = '') {
+export function formatDateTime(
+  value,
+  dateFormat: PickerViewType | ScrollPickerViewType = PickerViewType.Date,
+  customDateFormat = ''
+) {
 
   if (isNumber(value)) {
     value = new Date(value);
@@ -22,24 +28,28 @@ export function formatDateTime(value, dateFormat = DateFormat.Date, customDateFo
       formats.push(customDateFormat);
     } else {
 
-      if ([DateFormat.Date, DateFormat.DateTime].indexOf(dateFormat) != -1) {
+      if (([
+        PickerViewType.Date,
+        PickerViewType.MonthRange,
+        PickerViewType.DateTime,
+      ] as unknown[]).indexOf(dateFormat) != -1) {
         formats.push('MMM d, yyyy');
       }
 
-      if ([DateFormat.Time, DateFormat.DateTime].indexOf(dateFormat) != -1) {
+      if (([PickerViewType.Time, PickerViewType.DateTime] as unknown[]).indexOf(dateFormat) != -1) {
         formats.push('h:mm aa');
       }
 
-      if (dateFormat === DateFormat.MonthDay) {
+      if (dateFormat === ScrollPickerViewType.MonthDay) {
         formats.push('MMMM d');
 
-      } else if (dateFormat === DateFormat.MonthYear) {
+      } else if (dateFormat === ScrollPickerViewType.MonthYear) {
         formats.push('MMMM yyyy');
 
-      } else if (dateFormat === DateFormat.Year) {
+      } else if (dateFormat === ScrollPickerViewType.Year) {
         formats.push('yyyy');
 
-      } else if (dateFormat === DateFormat.Month) {
+      } else if (dateFormat === ScrollPickerViewType.Month) {
         formats.push('MMMM');
       }
     }

@@ -1,0 +1,23 @@
+<div
+  class="fs-date-picker-dialog fs-date-picker-dialog-shadow opened {{ 'dialog-view-' + datePickerModel.view }}"
+  tabindex="0"
+  [ngClass]="{
+      'has-view-date': datePickerModel.view === 'date' || datePickerModel.view === 'datetime',
+      'has-view-time': datePickerModel.view === 'time' || datePickerModel.view === 'datetime',
+      'date-mode-date-time': (datePickerModel.calendarMode$ | async) === 'datetime',
+      'date-mode-date': (datePickerModel.calendarMode$ | async) === 'date',
+      'date-mode-month': (datePickerModel.calendarMode$ | async) === 'month',
+      'date-mode-year': (datePickerModel.calendarMode$ | async) === 'year',
+      'date-mode-week': (datePickerModel.calendarMode$ | async) === 'week'
+    }">
+
+  <ng-container *ngIf="datePickerModel.view === 'monthrange' else defaultPicker">
+    <fs-datepicker-month-range-picker [dialogRef]="dialogRef" [datePickerModel]="datePickerModel">
+    </fs-datepicker-month-range-picker>
+  </ng-container>
+
+  <ng-template #defaultPicker>
+    <fs-datepicker-desktop-datepicker [dialogRef]="dialogRef" [datePickerModel]="datePickerModel">
+    </fs-datepicker-desktop-datepicker>
+  </ng-template>
+</div>

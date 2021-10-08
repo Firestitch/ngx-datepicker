@@ -9,8 +9,7 @@ import {
 } from '@angular/core';
 
 import { MatFormField } from '@angular/material/form-field';
-
-import { DateFormat } from '../../enums/date-format.enum';
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
 
 
 @Component({
@@ -25,7 +24,7 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
   public disabled: boolean;
 
   @Input()
-  public view: DateFormat;
+  public view: PickerViewType;
 
   @Output()
   public click = new EventEmitter<void>();
@@ -36,7 +35,7 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
   ) {}
 
   public get isTimeView(): boolean {
-    return this.view === DateFormat.Time;
+    return this.view === PickerViewType.Time;
   }
 
   public ngAfterViewInit() {
@@ -50,7 +49,7 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
 
   public triggerClick(event: UIEvent) {
     event.preventDefault();
-    event.stopPropagation();    
+    event.stopPropagation();
     this.click.emit();
   }
 

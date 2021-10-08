@@ -4,22 +4,19 @@ import {
   ElementRef,
   Injector,
   OnDestroy,
-  OnInit, Optional, Self,
+  OnInit,
+  Optional,
+  Self,
 } from '@angular/core';
-import {
-  NgControl,
-  ValidationErrors,
-  ValidatorFn,
-} from '@angular/forms';
-
-import { skip, takeUntil } from 'rxjs/operators';
+import { NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
 import { endOfDay } from 'date-fns';
 
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+
 import { RangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
-import { FsDatepickerFactory } from '../../../services/factory.service';
-import { DateFormat } from '../../../enums/date-format.enum';
 
 
 @Directive()
@@ -28,7 +25,7 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
   public constructor(
     protected _elRef: ElementRef,
     protected _injector: Injector,
-    protected _datepickerFactory: FsDatepickerFactory,
+    protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _cdRef: ChangeDetectorRef,
     @Optional() @Self() protected _ngControl: NgControl,
     private _rangePickerStore: FsRangePickerStoreService,
@@ -90,12 +87,12 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
     super.updateValueFromDialog(this._pickerRef.endDate);
   }
 
-  public updateValue(value) {
-    if (this.view === DateFormat.Date) {
+  public updateValue(value: Date) {
+    if (this.view === PickerViewType.Date) {
       value = endOfDay(value);
     }
 
-    this._pickerRef.updateEndDate(value);
+    this._pickerRef.updateEndDate(value as Date);
 
     super.updateValue(value);
   }
@@ -107,29 +104,13 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
       : { fsDatepickerRange: 'Invalid Range' };
   }
 
-  /**
-   * Update min/max and value if date start was changed
-   */
-  private _subscribeToPickerRefUpdates() {
-    this._pickerRef.valueChange$
-      .pipe(
-        skip(1),
-        takeUntil(this._destroy$),
-      )
-      .subscribe({
-        next: () => {
-          const prevValue = this.value;
-          // this.writeValue(this._pickerRef.endDate);
-
-          if (prevValue !== this.value) {
-            this.onChange(this.value);
-            this.onTouch(this.value);
-          }
-
-          this._ngControl.control.markAsDirty();
-          this._ngControl.control.updateValueAndValidity();
-          this._cdRef.markForCheck();
-        }
+  protected _subscribeToPickerRefUpdates() {
+    this._pickerRefUpdates$(this._pickerRef.startDate$)
+      .subscribe(() => {
+        this._ngControl.control.markAsDirty();
+        this._ngControl.control.updateValueAndValidity();
+        this._cdRef.markForCheck();
       });
   }
+
 }

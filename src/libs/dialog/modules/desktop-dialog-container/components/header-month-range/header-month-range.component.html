@@ -1,0 +1,23 @@
+<div class="current-month-header month-year">
+  <div class="actions">
+    <a (click)="prevMonth()">
+      <mat-icon>navigate_before</mat-icon>
+    </a>
+  </div>
+  <span class="month-name">
+    {{ calendarDate | fsDateFormat: 'full-date-dayless' }}
+  </span>
+</div>
+
+
+
+<div class="next-month-header month-year">
+  <span class="month-name">
+    {{ nextCalendarDate | fsDateFormat: 'full-date-dayless' }}
+  </span>
+  <div class="actions">
+    <a (click)="nextMonth()">
+      <mat-icon>navigate_next</mat-icon>
+    </a>
+  </div>
+</div>

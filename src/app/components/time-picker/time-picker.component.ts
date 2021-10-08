@@ -6,7 +6,8 @@ import {
 } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { DateFormat } from '../../enums/date-format.enum';
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 
@@ -29,6 +30,6 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 })
 export class FsTimePickerComponent extends FsDatePickerComponent {
 
-  @Input() public view = DateFormat.Time;
+  @Input() public view = PickerViewType.Time;
 
 }

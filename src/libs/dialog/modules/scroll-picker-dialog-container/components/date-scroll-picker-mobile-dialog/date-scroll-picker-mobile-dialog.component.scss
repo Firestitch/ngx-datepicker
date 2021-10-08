@@ -1,0 +1,9 @@
+:host {
+  ::ng-deep {
+    .actions {
+      .mat-list-item-content {
+        justify-content: center;
+      }
+    }
+  }
+}

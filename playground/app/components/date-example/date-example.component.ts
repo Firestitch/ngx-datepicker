@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class DateExampleComponent {
 
+  // public model = new Date('2015-10-10 15:45');
+
   public model = new Date();
 
   public selected(e) {
@@ -16,7 +18,7 @@ export class DateExampleComponent {
   public blured(e) {
     console.log('blured', e);
   }
-  
+
   public ngModelChange(e) {
     console.log('ngModelChange', e);
   }

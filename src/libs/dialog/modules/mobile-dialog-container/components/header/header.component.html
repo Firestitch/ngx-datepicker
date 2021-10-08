@@ -1,0 +1,42 @@
+<div class="months" *ngIf="viewMode == 'month'">
+  <div
+    *ngFor="let month of monthList"
+    (click)="selectMonth(month.value)"
+    class="month"
+    [ngClass]="{
+        now: monthNow == month.value,
+        selected: calendarMonth === month.value,
+        disabled: month.disabled
+      }">
+    <div class="tile-content">{{ month.abr }}</div>
+  </div>
+</div>
+
+<div class="years" *ngIf="viewMode == 'year'">
+  <ng-container *ngFor="let year of yearsList;">
+    <div
+      class="year data-year-{{ year.value }}"
+      (click)="selectYear(year.value)"
+      [class.now]="yearNow == year.value"
+      [class.selected]="calendarYear === year.value"
+      [class.disabled]="year.disabled">
+      <div class="tile-content">{{ year.value }}</div>
+    </div>
+  </ng-container>
+  <div class="clear"></div>
+</div>
+
+<div *ngIf="viewMode == 'week' || viewMode == 'date' || viewMode == 'datetime'" class="calendar">
+  <div class="month-year">
+    <a class="month-name" (click)="setViewMode('month')">
+      {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}
+    </a>
+
+    <span *ngIf="calendarDay" class="day-name">
+      {{ calendarDay }},
+    </span>
+
+    <a class="year-name" (click)="setViewMode('year')">{{ calendarYear }}</a>
+  </div>
+
+</div>

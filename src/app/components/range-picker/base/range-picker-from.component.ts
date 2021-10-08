@@ -4,16 +4,19 @@ import {
   ElementRef,
   Injector,
   OnDestroy,
-  OnInit, Optional, Self,
+  OnInit,
+  Optional,
+  Self,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 import { startOfDay } from 'date-fns';
 
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+
 import { RangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
-import { FsDatepickerFactory } from '../../../services/factory.service';
-import { DateFormat } from '../../../enums/date-format.enum';
 
 
 @Directive()
@@ -22,7 +25,7 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
   public constructor(
     protected _elRef: ElementRef,
     protected _injector: Injector,
-    protected _datepickerFactory: FsDatepickerFactory,
+    protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _cdRef: ChangeDetectorRef,
     @Optional() @Self() protected _ngControl: NgControl,
     private _rangePickerStore: FsRangePickerStoreService,
@@ -75,17 +78,17 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
    * Set value which was selected in dialog
    * @param value
    */
-  public updateValueFromDialog(value) {
-    if (this.view === DateFormat.Date) {
-      value = startOfDay(value);
-    }
+  public updateValueFromDialog(value: Date) {
+    this.updateValue(value);
 
     super.updateValueFromDialog(value);
-
-    this._pickerRef.updateStartDate(value);
   }
 
   public updateValue(value): void {
+    if (this.view === PickerViewType.Date) {
+      value = startOfDay(value);
+    }
+
     this._pickerRef.updateStartDate(value);
 
     super.updateValue(value);

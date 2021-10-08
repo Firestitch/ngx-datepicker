@@ -1,0 +1,33 @@
+<div class="scroll-pickers">
+  <fs-scroll-picker
+    *ngIf="showMonth"
+    class="month"
+    [values]="months"
+    name="month"
+    [(ngModel)]="month"
+    (ngModelChange)="changeMonth()">
+    <ng-template
+      fs-scroll-picker-template
+      let-value="value">
+      {{value.name}}
+    </ng-template>
+  </fs-scroll-picker>
+
+  <fs-scroll-picker
+    *ngIf="showDay"
+    class="day"
+    [values]="days"
+    name="day"
+    [(ngModel)]="day"
+    (ngModelChange)="change()">
+  </fs-scroll-picker>
+
+  <fs-scroll-picker
+    *ngIf="showYear"
+    class="year"
+    [values]="years"
+    name="year"
+    [(ngModel)]="year"
+    (ngModelChange)="changeYear()">
+  </fs-scroll-picker>
+</div>

@@ -10,18 +10,19 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, pairwise, skip, take, takeUntil } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
 
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+
 import { RangePickerRef } from '../../../classes/range-picker-ref';
-import { FsDatepickerFactory } from '../../../services/factory.service';
 import { formatDateTime } from '../../../helpers/format-date-time';
-import { FsDateDialogRef } from '../../../classes/date-dialog-ref';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
 import { isSameDate } from '../../../helpers/is-same-date';
-import { DateFormat } from '../../../enums/date-format.enum';
 import { parseDate } from '../../../helpers/parse-date';
 
 
@@ -30,7 +31,7 @@ export abstract class RangePickerComponent<D = any>
   implements ControlValueAccessor, OnInit {
 
   @Input()
-  public view: DateFormat = DateFormat.Date;
+  public view = PickerViewType.Date;
 
   @Input()
   public minYear: number = null;
@@ -55,7 +56,7 @@ export abstract class RangePickerComponent<D = any>
   public set readonlyState(isReadonly: string) {
     this.readonly = !!isReadonly || isReadonly === '';
   }
-  
+
   @Input() public ngModelOptions: {
     name?: string;
     standalone?: boolean;
@@ -69,7 +70,7 @@ export abstract class RangePickerComponent<D = any>
   public onChange: any;
   public onTouch: any = () => {};
 
-  protected _dateDialogRef: FsDateDialogRef;
+  protected _dateDialogRef: FsDatePickerDialogRef;
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
   protected _value;
@@ -80,7 +81,7 @@ export abstract class RangePickerComponent<D = any>
   protected constructor(
     protected _elRef: ElementRef,
     protected _injector: Injector,
-    protected _datepickerFactory: FsDatepickerFactory,
+    protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _type,
     protected _cdRef: ChangeDetectorRef,
     protected _ngControl: NgControl,
@@ -153,22 +154,14 @@ export abstract class RangePickerComponent<D = any>
         maxYear: this.maxYear,
         minDate: this._getPickerStartDate() || this.minDate,
         maxDate: this.maxDate,
-        dateMode: 'date',
         components: this._getDefaultComponents(),
         modelValue: this.value,
         pickerRef: this._pickerRef,
-        type: this._type
+        rangeType: this._type
       }
     );
 
-    this._dateDialogRef.value$
-      .pipe(
-        takeUntil(this._dateDialogRef.close$),
-        takeUntil(this._destroy$),
-      )
-      .subscribe((value) => {
-        this.updateValueFromDialog(value);
-      });
+    this._listenDialogValueChanges();
 
     this._dateDialogRef.close$
       .pipe(
@@ -187,14 +180,12 @@ export abstract class RangePickerComponent<D = any>
    * Set value which was selected in dialog
    * @param value
    */
-  public updateValueFromDialog(value) {
+  public updateValueFromDialog(value: Date) {
     this.writeValue(value);
-    this.onChange(value);
-    this.onTouch(value);
   }
 
   public updateValue(value): void {
-    if (this.view === DateFormat.Time && isValid(this._value) && isValid(value)) {
+    if (this.view === PickerViewType.Time && isValid(this._value) && isValid(value)) {
       this._value.setHours(value.getHours());
       this._value.setMinutes(value.getMinutes());
       this._value.setSeconds(value.getSeconds());
@@ -203,12 +194,49 @@ export abstract class RangePickerComponent<D = any>
     }
 
     this._value = value;
+
     this.onChange(value);
     this.onTouch(value);
   }
 
   public updateInput(value) {
     this._elRef.nativeElement.value = formatDateTime(value, this.view);
+  }
+
+  @HostListener('keyup', ['$event', '$event.target.value'])
+  public _inputKeyup(event: KeyboardEvent, value: string): void {
+    if(event.key === 'Enter') {
+      this.inputChange(value);
+    }
+  }
+
+  @HostListener('input', ['$event.target.value', '$event.target'])
+  public _inputChange(value: string, target): void {
+    if (this.ngModelOptions?.updateOn !== 'blur')  {
+      this.inputChange(value);
+    }
+  }
+
+  public inputChange(value: string): void {
+    const lastValueWasValid = this._lastValueValid;
+    const date = parseDate(value);
+
+    this._lastValueValid = !date || isValid(date);
+
+    if (!isEqual(date, this._value)) {
+      this.updateValue(date);
+    } else if (lastValueWasValid !== this._lastValueValid) {
+      this._ngControl.control.updateValueAndValidity();
+    }
+  }
+
+  @HostListener('blur', ['$event.target.value'])
+  public _inputBlur(value: string): void {
+    if (this.ngModelOptions?.updateOn === 'blur')  {
+      this.inputChange(value);
+    }
+
+    this.updateInput(this.value);
   }
 
   public registerOnChange(fn) { this.onChange = fn;  }
@@ -231,8 +259,19 @@ export abstract class RangePickerComponent<D = any>
 
   }
 
+  protected _listenDialogValueChanges(): void {
+    this._dateDialogRef.value$
+      .pipe(
+        takeUntil(this._dateDialogRef.close$),
+        takeUntil(this._destroy$),
+      )
+      .subscribe((value: Date) => {
+        this.updateValueFromDialog(value);
+      });
+  }
+
   protected _checkValuesEquality(newValue, prevValue) {
-    const valuesAreDates = isDate(newValue) && isDate(prevValue);
+    const valuesAreDates = isDate(newValue) && isDate(prevValue) && isValid(newValue) && isValid(prevValue);
     const valuesDatesEquals = valuesAreDates
       && isSameDate(newValue, prevValue);
 
@@ -243,7 +282,11 @@ export abstract class RangePickerComponent<D = any>
    * We need picker start date to be able to limit "Date To" picker
    */
   protected _getPickerStartDate() {
-    if (isDate(this._pickerRef.startDate) && isValid(this._pickerRef.startDate)) {
+    if (
+      this.view !== PickerViewType.MonthRange
+      && isDate(this._pickerRef.startDate)
+      && isValid(this._pickerRef.startDate)
+    ) {
       return subDays(this._pickerRef.startDate, 1);
     }
 
@@ -261,40 +304,21 @@ export abstract class RangePickerComponent<D = any>
     this._lastValueValid = !date || isValid(date);
   }
 
-  @HostListener('keyup', ['$event', '$event.target.value'])
-  public _inputKeyup(event: KeyboardEvent, value: string): void {
-    if(event.key === 'Enter') {
-      this.inputChange(value);
-    }
-  }
+  protected _pickerRefUpdates$(target: Observable<Date | null>): Observable<Date | any> {
+    return target
+      .pipe(
+        skip(1),
+        pairwise(),
+        filter((changes: [Date | null, Date | null]) => {
+          const prevValue = changes[0]?.getTime();
+          const newValue = changes[1]?.getTime();
 
-  @HostListener('input', ['$event.target.value', '$event.target'])
-  public _inputChange(value: string, target): void {
-    if(this.ngModelOptions?.updateOn !== 'blur')  {
-      this.inputChange(value);
-    }
-  }
-
-  public inputChange(value: string): void {
-    const lastValueWasValid = this._lastValueValid;
-    const date = parseDate(value);
-
-    this._lastValueValid = !date || isValid(date);
-
-    if (!isEqual(date, this._value)) {
-      this.updateValue(date);
-    } else if (lastValueWasValid !== this._lastValueValid) {
-      this._ngControl.control.updateValueAndValidity();
-    }
-  }
-
-  @HostListener('blur', ['$event.target.value'])
-  public _inputBlur(value: string): void {
-    if(this.ngModelOptions?.updateOn === 'blur')  {
-      this.inputChange(value);
-    }
-
-    this.updateInput(this.value);
+          return prevValue !== newValue
+            && this.value?.getTime() !== newValue;
+        }),
+        map((changes) => changes[1]),
+        takeUntil(this._destroy$),
+      );
   }
 
 }

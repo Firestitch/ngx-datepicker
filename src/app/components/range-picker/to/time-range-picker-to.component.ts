@@ -3,7 +3,9 @@ import {
   Component,
   Input,
 } from '@angular/core';
-import { DateFormat } from '../../../enums/date-format.enum';
+
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerToComponent } from '../base/range-picker-to.component';
 
@@ -14,7 +16,7 @@ import { RangePickerToComponent } from '../base/range-picker-to.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimeRangePickerToComponent extends RangePickerToComponent {
-      
+
   @Input() set fsTimeRangeTo(value) {
     this._name = value;
   }
@@ -24,6 +26,6 @@ export class TimeRangePickerToComponent extends RangePickerToComponent {
   }
 
   @Input()
-  public view = DateFormat.Time;
+  public view = PickerViewType.Time;
 
 }

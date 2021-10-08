@@ -2,26 +2,27 @@
 @import '~@angular/material/theming';
 
 
+.fs-date-picker-dialog-shadow {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
 .fs-date-picker-dialog {
   display: block;
 
-  @media only screen and (max-width: 737px) {
+  /*@media only screen and (max-width: 737px) {
     position: fixed;
-  }
+  }*/
 
   &.date-mode-year, &.date-mode-month {
-    .wrap {
-      width: 350px;
-    }
-
-    .date-time {
-      height: 370px;
+    .calendar-view {
+      height: 350px;
     }
   }
 
   .buttons {
     background: #fff;
     display: flex;
+    position: relative;
 
     button {
       margin: 5px;
@@ -45,21 +46,13 @@
     outline: none;
   }
 
-  fs-date-picker-calendar {
-    /* Need for year view */
-    // width: 100%;
-    display: flex;
-    flex: 1;
-  }
-
-  .wrap {
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  .calendar-container {
     height: 100%;
     display: flex;
     flex-direction: column;
     background: #fff;
     padding: 0 !important;
-    overflow-y: auto;
+    overflow: hidden;
 
     &:focus {
       outline: none;
@@ -83,7 +76,7 @@
     height: 100%;
     max-height: 472px;
     .wrap {
-      .date-time {
+      .calendar-view {
         overflow-y: auto;
       }
     }
@@ -155,8 +148,8 @@
     padding: 0;
     position: relative;
     text-align: center;
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 46px;
     outline: none;
     font-size: 14px;
     cursor: pointer;
@@ -169,8 +162,8 @@
     border-radius: 50%;
     flex-direction: column;
     border: 1px solid transparent;
-    height: 44px;
-    width: 44px;
+    height: 46px;
+    width: 46px;
     margin: 0 auto;
 
     .now {
@@ -204,7 +197,9 @@
   .calendar-container .years .year.selected,
   .calendar-container .months .month.selected,
   .time-container .hour.selected,
-  .time-container .minute.selected {
+  .time-container .minute.selected,
+  .month-range.range-selected .range-from,
+  .month-range.range-selected .range-to{
 	  color: #fff;
   }
 
@@ -222,9 +217,8 @@
   }
 
   .years {
-    position: absolute;
-    width: 100%;
-    max-height: 100%;
+    min-width: 350px;
+    height: 100%;
     overflow: auto;
     .year {
       width: 100%;
@@ -240,15 +234,9 @@
     }
   }
 
-  .date-time {
-    flex-direction: row;
-    display: flex;
-  }
-
   .months {
     width: 100%;
     height: 100%;
-    position: absolute;
     border-bottom: 1px solid #efefef;
 
     .tile-content {
@@ -304,6 +292,7 @@
   }
 }
 
+/*
 @media only screen and (min-width: 737px) {
 
   .fs-date-picker-dialog {
@@ -319,7 +308,9 @@
     }
   }
 }
+*/
 
+/*
 @media only screen and (max-width: 736px) {
 
   .cdk-overlay-pane.fs-datepicker-overlay-pane {
@@ -327,17 +318,17 @@
   }
 
   .fs-date-picker-dialog {
-    left: 0 !important;
+    !*left: 0 !important;
     right: 0 !important;
     top: 0 !important;
     bottom: 0px !important;
     margin: 0px;
     height: 100vh;
     max-height: initial !important;
-    background-color: #fff;
+    background-color: #fff;*!
 
     &.has-view-date.has-view-time {
-      .date-time {
+      .calendar-view {
         margin-top: 41px;
       }
     }
@@ -374,24 +365,41 @@
     }
   }
 }
+*/
 
 
 
 @mixin fs-date-picker() {
-  .time-container .hour:hover:not(.disabled):not(.selected) .tile-content,
-  .time-container .minute:hover:not(.disabled):not(.selected) .tile-content,
-  .calendar-container .day:hover:not(.disabled):not(.selected):not(.blank) .tile-content,
-  .calendar-container .years .year:hover:not(.disabled):not(.selected) .tile-content,
-  .calendar-container .months .month:hover:not(.disabled):not(.selected) .tile-content,
-  .calendar-container .year-name:hover:not(.disabled):not(.selected) .tile-content,
-  .calendar-container .month-name:hover:not(.disabled):not(.selected) .tile-content {
-    background: fs-styles.color-rgb(fs-styles.$palette, .3);
+  .time-container {
+    .hour, .minute {
+      &:hover {
+        &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
+          .tile-content {
+            background: fs-styles.color-rgb(fs-styles.$palette, .3);
+          }
+        }
+      }
+    }
+  }
+
+  .calendar-container {
+    .day, .years .year, .months .month, .year-name, .month-name {
+      &:hover {
+        &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
+          .tile-content {
+            background: fs-styles.color-rgb(fs-styles.$palette, .3);
+          }
+        }
+      }
+    }
   }
 
   .calendar-container {
     .day.selected .tile-content,
     .years .year.selected .tile-content,
-    .months .month.selected .tile-content {
+    .months .month.selected .tile-content,
+    .month-range.range-selected .range-from .tile-content,
+    .month-range.range-selected .range-to .tile-content{
       background-color: mat-color(fs-styles.$palette);
     }
   }

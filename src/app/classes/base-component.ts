@@ -3,7 +3,8 @@ import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, H
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { FsDateDialogRef } from './date-dialog-ref';
+import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
+
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -66,7 +67,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
   protected dialog = null;
   protected elementRef;
   protected renderer;
-  protected _dateDialogRef: FsDateDialogRef;
+  protected _dateDialogRef: FsDatePickerDialogRef;
   protected _destroy$ = new Subject();
 
   private _onChange = (value: any) => { };
@@ -222,7 +223,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
     this.blured$.emit(this.value);
   }
-    
+
   protected inputChange(value: string): void {
     if (!!value) {
       const lastValueWasValid = this._lastValueValid;

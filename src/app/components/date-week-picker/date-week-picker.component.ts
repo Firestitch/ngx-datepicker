@@ -15,9 +15,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FsDatepickerFactory } from '../../services/factory.service';
+import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
-import { DateFormat } from '../../enums/date-format.enum';
 import { isDate, format } from 'date-fns';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
@@ -40,7 +41,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   @Input() public maxDate = null;
   @Input() public seedDate = null;
   @Input() public periodWeeks = 1;
-  @Input() public view = DateFormat.Date;
+  @Input() public view = PickerViewType.Week;
 
   @Output('change')
   public change$ = new EventEmitter<any>();
@@ -50,7 +51,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
     protected injector: Injector,
     @Inject(ElementRef) protected elementRef: ElementRef,
     protected _cdRef: ChangeDetectorRef,
-    protected fsDatepickerFactory: FsDatepickerFactory,
+    protected fsDatepickerFactory: FsDatePickerDialogFactory,
   ) {
     super(renderer, elementRef, _cdRef);
   }
@@ -101,16 +102,13 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
       this.elementRef,
       this.injector,
       {
-        elementRef: this.elementRef,
         modelValue: this.value,
         view: this.view,
         minYear: this.minYear,
         maxYear: this.maxYear,
         minDate: this.minDate,
         maxDate: this.maxDate,
-        dateMode: 'week',
         components: this._getDefaultComponents(),
-        parentComponent: this,
         seedDate: this.seedDate,
         periodWeeks: this.periodWeeks,
       }
