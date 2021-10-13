@@ -46,7 +46,7 @@
 }
 
 .highlighted {
-  &:not(.selected):not(.range-from):not(.range-to) {
+  &:not(.selected):not(.range-from):not(.range-to):not(.same-range-dates) {
     .tile-content {
       background-color: #c9e5fc;
       border-radius: initial;
@@ -67,6 +67,10 @@
 
     .range-to {
       background: linear-gradient(-90deg, #fff 0%, #fff 49%, #c9e5fc 51%);
+    }
+
+    .same-range-dates {
+      background: #c9e5fc;
     }
   }
 

@@ -199,7 +199,8 @@
   .time-container .hour.selected,
   .time-container .minute.selected,
   .month-range.range-selected .range-from,
-  .month-range.range-selected .range-to{
+  .month-range.range-selected .range-to,
+  .month-range.range-selected .same-range-dates {
 	  color: #fff;
   }
 
@@ -399,7 +400,8 @@
     .years .year.selected .tile-content,
     .months .month.selected .tile-content,
     .month-range.range-selected .range-from .tile-content,
-    .month-range.range-selected .range-to .tile-content{
+    .month-range.range-selected .range-to .tile-content,
+    .month-range.range-selected .same-range-dates .tile-content {
       background-color: mat-color(fs-styles.$palette);
     }
   }
