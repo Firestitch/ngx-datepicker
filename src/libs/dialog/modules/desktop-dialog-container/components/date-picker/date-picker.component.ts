@@ -46,7 +46,9 @@ export class FsDesktopDatePickerComponent {
   public dateChanged(date): void {
     this.datePickerModel.model = date;
 
-    this.close();
+    if (!this.datePickerModel.isDateTimeView && !this.datePickerModel.isTimeView) {
+      this.close();
+    }
   }
 
   public periodChanged(date): void {

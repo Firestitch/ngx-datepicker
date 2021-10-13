@@ -91,6 +91,26 @@ export class FsDatePickerDialogModel {
     this._view$.next(view);
   }
 
+  public get isDateView(): boolean {
+    return this.view === PickerViewType.Date;
+  }
+
+  public get isDateTimeView(): boolean {
+    return this.view === PickerViewType.DateTime;
+  }
+
+  public get isTimeView(): boolean {
+    return this.view === PickerViewType.Time;
+  }
+
+  public get isWeekView(): boolean {
+    return this.view === PickerViewType.Week;
+  }
+
+  public get isMonthRangeView(): boolean {
+    return this.view === PickerViewType.MonthRange;
+  }
+
   public get calendarMode$(): Observable<string> {
     return this._calendarMode$;
   }
@@ -181,6 +201,27 @@ export class FsDatePickerDialogModel {
     return this._pickerOptions.pickerRef;
   }
 
+  public setCalendarMonth(month: number) {
+    this.calendarDate = setMonth(this.calendarDate, month);
+  }
+
+  public setCalendarYear(year: number) {
+    this.calendarDate = setYear(this.calendarDate, year);
+    this._updateDisabled();
+  }
+
+  public nextMonth() {
+    this.calendarDate = addMonths(this.calendarDate, 1);
+  }
+
+  public prevMonth() {
+    this.calendarDate = subMonths(this.calendarDate, 1);
+  }
+
+  public setCalendarMode(mode: string) {
+    this._calendarMode = mode;
+  }
+
   private _initCalendar(options: IDialogFactoryOptions) {
     this._pickerOptions = { ...options };
 
@@ -190,7 +231,7 @@ export class FsDatePickerDialogModel {
       this.period = (options.modelValue as IPeriod);
       this.calendarDate = (options.modelValue as IPeriod)?.from || new Date();
     } else {
-      this.model = (options.modelValue as Date);
+      this.model = (options.modelValue as Date) || new Date();
       this.calendarDate = (options.modelValue as Date) || new Date();
     }
 
@@ -247,24 +288,4 @@ export class FsDatePickerDialogModel {
     }
   }
 
-  public setCalendarMonth(month: number) {
-    this.calendarDate = setMonth(this.calendarDate, month);
-  }
-
-  public setCalendarYear(year: number) {
-    this.calendarDate = setYear(this.calendarDate, year);
-    this._updateDisabled();
-  }
-
-  public nextMonth() {
-    this.calendarDate = addMonths(this.calendarDate, 1);
-  }
-
-  public prevMonth() {
-    this.calendarDate = subMonths(this.calendarDate, 1);
-  }
-
-  public setCalendarMode(mode: string) {
-    this._calendarMode = mode;
-  }
 }

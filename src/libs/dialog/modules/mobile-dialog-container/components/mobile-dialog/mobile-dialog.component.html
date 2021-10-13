@@ -32,8 +32,10 @@
 
 <mat-nav-list class="actions">
   <ng-container *ngIf="datePickerModel.minutes
-                    && (datePickerModel.view === 'datetime' || datePickerModel.view === 'time')
-                    && selectedDateTimeTab !== 0">
+                    && (
+                      (datePickerModel.isDateTimeView && selectedDateTimeTab !== 0)
+                      || datePickerModel.isTimeView
+                    )">
     <mat-list-item (click)="toggleTimeExpand()">
       <button type="button"
               mat-button

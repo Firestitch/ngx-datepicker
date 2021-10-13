@@ -30,8 +30,6 @@ export class FsMobileTimePickerComponent {
 
   public dateChanged(date): void {
     this.datePickerModel.model = date;
-
-    this.close();
   }
 
   public close(): void {
