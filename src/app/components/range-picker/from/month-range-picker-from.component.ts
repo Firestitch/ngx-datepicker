@@ -5,6 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { startOfDay } from 'date-fns';
 
 import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
@@ -62,6 +64,9 @@ export class MonthRangePickerFromComponent extends RangePickerFromComponent impl
 
   protected _subscribeToPickerRefUpdates() {
     this._pickerRefUpdates$(this._pickerRef.startDate$)
+      .pipe(
+        takeUntil(this._destroy$),
+      )
       .subscribe((newValue: Date | null) => {
         this.updateValue(newValue);
 

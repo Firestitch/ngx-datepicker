@@ -6,6 +6,8 @@ import {
 
 import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { endOfDay } from 'date-fns';
 
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
@@ -49,6 +51,9 @@ export class MonthRangePickerToComponent extends RangePickerToComponent {
 
   protected _subscribeToPickerRefUpdates() {
     this._pickerRefUpdates$(this._pickerRef.endDate$)
+      .pipe(
+        takeUntil(this._destroy$),
+      )
       .subscribe((newValue: Date | null) => {
         this.updateValue(newValue);
 

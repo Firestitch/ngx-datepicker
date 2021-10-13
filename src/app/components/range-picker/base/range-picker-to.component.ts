@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { endOfDay } from 'date-fns';
 
 import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
@@ -67,9 +69,11 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
     }
   }
 
-  public cleared(event) {
-    event.stopPropagation();
-    event.preventDefault();
+  public cleared(event?) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
 
     this.writeValue(null);
 
@@ -106,7 +110,15 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
 
   protected _subscribeToPickerRefUpdates() {
     this._pickerRefUpdates$(this._pickerRef.startDate$)
-      .subscribe(() => {
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe((value: Date | null) => {
+        debugger;
+        if (!this._pickerRef.isRangeValid) {
+          this.cleared();
+        }
+
         this._ngControl.control.markAsDirty();
         this._ngControl.control.updateValueAndValidity();
         this._cdRef.markForCheck();

@@ -1,10 +1,9 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { endOfDay, isAfter, isDate, startOfDay } from 'date-fns';
+import { endOfDay, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-
-import { isSameDate } from '../helpers/is-same-date';
+import { isDateAfter } from '@libs/common/helpers/is-date-after';
 
 
 export class RangePickerRef {
@@ -45,7 +44,7 @@ export class RangePickerRef {
   }
 
   public get isRangeValid() {
-    return this.isDateAfter(this._endDate, this._startDate);
+    return isDateAfter(this._endDate, this._startDate, this.view as PickerViewType);
   }
 
   /**
@@ -60,7 +59,6 @@ export class RangePickerRef {
     }
 
     this._startDate = value;
-
     this._startDatePickerExists = true;
 
     this._startDate$.next(value);
@@ -103,45 +101,4 @@ export class RangePickerRef {
    */
   public destroy() {}
 
-  private getTimeCompareDate(fromDate) {
-    if (!isDate(fromDate)) {
-      return null;
-    }
-
-    const date = new Date();
-
-    date.setHours(fromDate.getHours());
-    date.setMinutes(fromDate.getMinutes());
-    date.setSeconds(fromDate.getSeconds());
-    date.setMilliseconds(fromDate.getMilliseconds());
-
-    return date;
-  }
-
-  private isDateAfter(target, from): boolean {
-    let startDate, endDate;
-
-    if (this.view === 'time') {
-      if (from) {
-        startDate = this.getTimeCompareDate(from);
-      }
-
-      if (target) {
-        endDate = this.getTimeCompareDate(target);
-      }
-    } else {
-      startDate = from;
-      endDate = target;
-    }
-
-    if (!startDate || !endDate) {
-      return true;
-    }
-
-    if (this.view === 'date' && isSameDate(startDate, endDate)) {
-      return true;
-    }
-
-    return isAfter(endDate, startDate);
-  }
 }

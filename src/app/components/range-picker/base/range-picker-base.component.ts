@@ -18,11 +18,11 @@ import { isDate, isEqual, isValid, subDays } from 'date-fns';
 import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
 import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
 import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { isSameDate } from '@libs/common/helpers/is-same-date';
 
 import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { formatDateTime } from '../../../helpers/format-date-time';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
-import { isSameDate } from '../../../helpers/is-same-date';
 import { parseDate } from '../../../helpers/parse-date';
 
 
@@ -317,7 +317,6 @@ export abstract class RangePickerComponent<D = any>
             && this.value?.getTime() !== newValue;
         }),
         map((changes) => changes[1]),
-        takeUntil(this._destroy$),
       );
   }
 
