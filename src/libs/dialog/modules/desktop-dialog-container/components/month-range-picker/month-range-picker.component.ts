@@ -69,7 +69,6 @@ export class FsMonthRangePickerComponent implements OnChanges {
     const rangeRef = this.datePickerModel.rangePickerRef;
     const { startDate, endDate } = rangeRef;
 
-
     if (!startDate && !endDate) {
       rangeRef.updateStartDate(date);
     } else if (startDate && !endDate) {

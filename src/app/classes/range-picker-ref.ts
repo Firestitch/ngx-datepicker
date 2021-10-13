@@ -1,6 +1,8 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { isAfter, isDate } from 'date-fns';
+import { endOfDay, isAfter, isDate, startOfDay } from 'date-fns';
+
+import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
 
 import { isSameDate } from '../helpers/is-same-date';
 
@@ -51,6 +53,12 @@ export class RangePickerRef {
    * @param value
    */
   public updateStartDate(value: Date) {
+    if (!!value
+      && (this.view === PickerViewType.Date || this.view === PickerViewType.MonthRange)
+    ) {
+      value = startOfDay(value);
+    }
+
     this._startDate = value;
 
     this._startDatePickerExists = true;
@@ -63,9 +71,11 @@ export class RangePickerRef {
    * @param value
    */
   public updateEndDate(value: Date) {
-    // if (!this.isDateAfter(value, this._startDate)) {
-    //   // value = null;
-    // }
+    if (!!value
+      && (this.view === PickerViewType.Date || this.view === PickerViewType.MonthRange)
+    ) {
+      value = endOfDay(value);
+    }
 
     this._endDate = value;
 
