@@ -3,7 +3,7 @@ import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, H
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
+import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
 
 import {
   AbstractControl,

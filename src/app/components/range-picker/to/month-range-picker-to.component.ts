@@ -4,7 +4,7 @@ import {
   Input,
 } from '@angular/core';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 
 import { takeUntil } from 'rxjs/operators';
 

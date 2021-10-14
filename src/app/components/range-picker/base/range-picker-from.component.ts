@@ -12,8 +12,8 @@ import { NgControl } from '@angular/forms';
 
 import { startOfDay } from 'date-fns';
 
-import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
+import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 
 import { RangePickerComponent } from '../base/range-picker-base.component';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';

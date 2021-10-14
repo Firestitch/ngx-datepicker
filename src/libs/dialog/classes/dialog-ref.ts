@@ -3,7 +3,7 @@ import { skip } from 'rxjs/operators';
 
 import { isEqual, forEach } from 'lodash-es';
 
-import { IPeriod } from '@libs/common/interfaces/period.interface';
+import { IPeriod } from '../../common/interfaces/period.interface';
 
 import { FsDatePickerDialogModel } from './dialog-model';
 import { FsDatePickerOverlayRef } from './overlay-ref';

@@ -15,11 +15,11 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-
-import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { isDate, format } from 'date-fns';
+
+import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
+import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
+import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 

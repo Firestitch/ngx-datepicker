@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { FsDatePickerDialogModel } from '@libs/dialog/classes/dialog-model';
+import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 

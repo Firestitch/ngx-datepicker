@@ -13,9 +13,8 @@ import { shareReplay } from 'rxjs/operators';
 
 import { addMonths, isBefore } from 'date-fns';
 
-import { FsDatePickerDialogModel } from '@libs/dialog/classes/dialog-model';
-
-import { RangePickerRef } from '@app/classes/range-picker-ref';
+import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
+import { RangePickerRef } from '../../../../../../app/classes/range-picker-ref';
 
 
 @Component({

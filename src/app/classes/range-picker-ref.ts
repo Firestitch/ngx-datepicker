@@ -2,8 +2,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { endOfDay, startOfDay } from 'date-fns';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-import { isDateAfter } from '@libs/common/helpers/is-date-after';
+import { PickerViewType } from '../../libs/common/enums/picker-view-type.enum';
+import { isDateAfter } from '../../libs/common/helpers/is-date-after';
 
 
 export class RangePickerRef {

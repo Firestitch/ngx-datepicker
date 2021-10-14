@@ -1,5 +1,5 @@
 import { isSameDay } from 'date-fns';
-import { RangePickerRef } from '@app/classes/range-picker-ref';
+import { RangePickerRef } from '../../../app/classes/range-picker-ref';
 
 
 export function getDisabledTimes(model: Date | null, ref: RangePickerRef): [Date, Date][] {

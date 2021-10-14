@@ -12,8 +12,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FsClearModule } from '@firestitch/clear';
 import { FsScrollPickerModule } from '@firestitch/scroll-picker';
 
-import { FsDatePickerCalendarModule } from '@libs/calendar/calendar.module';
-import { FsDatePickerDialogModule } from '@libs/dialog/dialog.module';
+import { FsDatePickerCalendarModule } from '../libs/calendar/calendar.module';
+import { FsDatePickerDialogModule } from '../libs/dialog/dialog.module';
 
 import { FsDatePickerComponent } from './components/date-picker/date-picker.component';
 import { DateRangeSeparatorComponent } from './components/date-range-separator/date-range-separator.component';

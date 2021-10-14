@@ -15,9 +15,8 @@ import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isValid } from 'date-fns';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
-
+import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
+import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';

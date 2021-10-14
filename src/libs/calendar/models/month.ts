@@ -1,6 +1,6 @@
 import { addDays, format, getDaysInMonth, lightFormat, subDays } from 'date-fns';
 
-import { isDayDisabled } from '@libs/common/helpers/is-day-disabled';
+import { isDayDisabled } from '../../common/helpers/is-day-disabled';
 
 import { Week } from './week';
 import { Period } from './period';

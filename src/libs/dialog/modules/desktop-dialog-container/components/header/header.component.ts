@@ -12,9 +12,9 @@ import {
 
 import { endOfYear, startOfYear } from 'date-fns';
 
-import { isRangeDisabled } from '@libs/common/helpers/is-range-disabled';
-import { MONTHS } from '@libs/calendar/consts/months';
-import { isMonthDisabled } from '@libs/common/helpers/is-month-disabled';
+import { isRangeDisabled } from '../../../../../common/helpers/is-range-disabled';
+import { MONTHS } from '../../../../../calendar/consts/months';
+import { isMonthDisabled } from '../../../../../common/helpers/is-month-disabled';
 
 
 interface IYearListItem {

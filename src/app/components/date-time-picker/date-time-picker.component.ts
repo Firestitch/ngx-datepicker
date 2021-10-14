@@ -6,8 +6,7 @@ import {
 } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-
+import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 

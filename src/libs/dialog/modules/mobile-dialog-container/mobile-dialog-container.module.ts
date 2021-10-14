@@ -10,7 +10,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { FsDateModule } from '@firestitch/date';
 
-import { FsDatePickerCalendarModule } from '@libs/calendar/calendar.module';
+import { FsDatePickerCalendarModule } from '../../../calendar/calendar.module';
 
 import { FsMobileCalendarDialogComponent } from './components/mobile-dialog/mobile-dialog.component';
 import { FsDatePickerMobileHeaderComponent } from './components/header/header.component';

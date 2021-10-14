@@ -6,7 +6,7 @@ import {
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
-import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
+import { FsDatePickerDialogRef } from '../../../../../dialog/classes/dialog-ref';
 
 
 @Component({

@@ -10,13 +10,13 @@ import {
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { IDialogFactoryOptions } from '@libs/dialog/interfaces/dialog-factory-data.interface';
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-import { getDisabledDays } from '@libs/dialog/helpers/get-disabled-days';
-import { getDisabledTimes } from '@libs/dialog/helpers/get-disabled-times';
-import { IPeriod } from '@libs/common/interfaces/period.interface';
+import { IDialogFactoryOptions } from '../../dialog/interfaces/dialog-factory-data.interface';
+import { PickerViewType } from '../../common/enums/picker-view-type.enum';
+import { getDisabledDays } from '../../dialog/helpers/get-disabled-days';
+import { getDisabledTimes } from '../../dialog/helpers/get-disabled-times';
+import { IPeriod } from '../../common/interfaces/period.interface';
 
-import { RangePickerRef } from '@app/classes/range-picker-ref';
+import { RangePickerRef } from '../../../app/classes/range-picker-ref';
 
 
 export class FsDatePickerDialogModel {

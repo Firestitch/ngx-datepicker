@@ -1,6 +1,6 @@
 import { isObject } from 'lodash-es';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { PickerViewType } from '../../libs/common/enums/picker-view-type.enum';
 
 import { formatDateTime } from './format-date-time';
 

@@ -13,9 +13,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
-import { ScrollPickerViewType } from '@libs/common/enums/scroll-picker-view-type.enum';
-
+import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
+import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';

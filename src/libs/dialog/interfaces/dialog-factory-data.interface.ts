@@ -1,9 +1,8 @@
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { RangePickerRef } from '../../../app/classes/range-picker-ref';
 
-import { ScrollPickerViewType } from '@libs/common/enums/scroll-picker-view-type.enum';
-import { IPeriod } from '@libs/common/interfaces/period.interface';
-
-import { RangePickerRef } from '@app/classes/range-picker-ref';
+import { PickerViewType } from '../../common/enums/picker-view-type.enum';
+import { ScrollPickerViewType } from '../../common/enums/scroll-picker-view-type.enum';
+import { IPeriod } from '../../common/interfaces/period.interface';
 
 import { IFsDatePickerDialogComponents } from './dialog-components.interface';
 

@@ -4,10 +4,9 @@ import {
   Input, Output,
 } from '@angular/core';
 
-import { FsDatePickerDialogModel } from '@libs/dialog/classes/dialog-model';
-
-import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+
+import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 
 @Component({
   selector: 'fs-datepicker-mobile-datetime-picker',

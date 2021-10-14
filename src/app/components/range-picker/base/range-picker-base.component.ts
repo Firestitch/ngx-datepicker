@@ -15,10 +15,10 @@ import { filter, map, pairwise, skip, take, takeUntil } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
 
-import { FsDatePickerDialogFactory } from '@libs/dialog/services/dialog-factory.service';
-import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-import { isSameDate } from '@libs/common/helpers/is-same-date';
+import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
+import { FsDatePickerDialogRef } from '../../../../libs/dialog/classes/dialog-ref';
+import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
+import { isSameDate } from '../../../../libs/common/helpers/is-same-date';
 
 import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { formatDateTime } from '../../../helpers/format-date-time';

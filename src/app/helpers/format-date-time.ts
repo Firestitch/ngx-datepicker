@@ -1,8 +1,8 @@
 import { isNumber } from 'lodash-es';
 import { format, isValid } from 'date-fns';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
-import { ScrollPickerViewType } from '@libs/common/enums/scroll-picker-view-type.enum';
+import { PickerViewType } from '../../libs/common/enums/picker-view-type.enum';
+import { ScrollPickerViewType } from '../../libs/common/enums/scroll-picker-view-type.enum';
 
 
 export function formatDateTime(

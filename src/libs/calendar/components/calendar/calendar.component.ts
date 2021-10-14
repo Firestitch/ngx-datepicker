@@ -19,9 +19,9 @@ import {
   startOfDay,
 } from 'date-fns';
 
-import { getStartDayDate } from '@libs/common/helpers/get-start-day-date';
-import { splitDateByComponents } from '@libs/common/helpers/split-date-by-components';
-import { IPeriod } from '@libs/common/interfaces/period.interface';
+import { getStartDayDate } from '../../../common/helpers/get-start-day-date';
+import { splitDateByComponents } from '../../../common/helpers/split-date-by-components';
+import { IPeriod } from '../../../common/interfaces/period.interface';
 
 import { WEEKDAYS } from '../../consts/week-days';
 import { Month } from '../../models/month';

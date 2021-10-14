@@ -9,7 +9,8 @@ import {
 } from '@angular/core';
 
 import { MatFormField } from '@angular/material/form-field';
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+
+import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 
 
 @Component({

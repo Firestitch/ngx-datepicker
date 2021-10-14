@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { startOfDay } from 'date-fns';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerFromComponent } from '../base/range-picker-from.component';

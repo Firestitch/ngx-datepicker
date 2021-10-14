@@ -11,8 +11,8 @@ import {
   Output
 } from '@angular/core';
 
-import { getStartDayDate } from '@libs/common/helpers/get-start-day-date';
-import { splitDateByComponents } from '@libs/common/helpers/split-date-by-components';
+import { getStartDayDate } from '../../../common/helpers/get-start-day-date';
+import { splitDateByComponents } from '../../../common/helpers/split-date-by-components';
 
 
 @Component({

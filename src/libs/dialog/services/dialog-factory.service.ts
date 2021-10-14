@@ -11,6 +11,9 @@ import {
   FlexibleConnectedPositionStrategy,
 } from '@angular/cdk/overlay';
 
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+
+import { fromEvent, Observable } from 'rxjs';
 import {
   debounceTime,
   takeUntil,
@@ -24,15 +27,13 @@ import {
   finalize,
 } from 'rxjs/operators';
 
-import { FsMobileCalendarDialogComponent } from '@libs/dialog/modules/mobile-dialog-container/components/mobile-dialog/mobile-dialog.component';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { FsDateScrollPickerDesktopComponent } from '@libs/dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-desktop/date-scroll-picker-desktop.component';
-import { FsDateScrollPickerMobileDialogComponent } from '@libs/dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-mobile-dialog/date-scroll-picker-mobile-dialog.component';
-import { FsDesktopCalendarDialogComponent } from '@libs/dialog/modules/desktop-dialog-container/components/desktop-dialog/desktop-dialog.component';
+import { FsMobileCalendarDialogComponent } from '../../dialog/modules/mobile-dialog-container/components/mobile-dialog/mobile-dialog.component';
+import { FsDateScrollPickerDesktopComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-desktop/date-scroll-picker-desktop.component';
+import { FsDateScrollPickerMobileDialogComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-mobile-dialog/date-scroll-picker-mobile-dialog.component';
+import { FsDesktopCalendarDialogComponent } from '../../dialog/modules/desktop-dialog-container/components/desktop-dialog/desktop-dialog.component';
 
 import { FsDatePickerDialogRef } from '../classes/dialog-ref';
 import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
-import { fromEvent, Observable } from 'rxjs';
 
 const MOBILE_BREAKPOINT = '(max-width: 737px)';
 

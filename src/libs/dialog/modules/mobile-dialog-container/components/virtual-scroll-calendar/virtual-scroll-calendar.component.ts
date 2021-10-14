@@ -7,15 +7,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
-import { FsDatePickerDialogModel } from '@libs/dialog/classes/dialog-model';
-
-import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 import { addMonths } from 'date-fns';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { FsCalendarDataSource } from '@libs/dialog/modules/mobile-dialog-container/classes/calendar-data-source';
+
+import { FsCalendarDataSource } from '../../../../../dialog/modules/mobile-dialog-container/classes/calendar-data-source';
+import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
+import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 
 
 @Component({

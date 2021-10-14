@@ -3,7 +3,7 @@ import {
   Component,
 } from '@angular/core';
 
-import { FsDatePickerDialogRef } from '@libs/dialog/classes/dialog-ref';
+import { FsDatePickerDialogRef } from '../../../../../dialog/classes/dialog-ref';
 
 
 @Component({

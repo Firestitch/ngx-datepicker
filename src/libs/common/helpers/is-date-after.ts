@@ -1,6 +1,6 @@
 import { isAfter } from 'date-fns';
 
-import { PickerViewType } from '@libs/common/enums/picker-view-type.enum';
+import { PickerViewType } from '../../common/enums/picker-view-type.enum';
 
 import { cloneDate } from './clone-date';
 import { isSameDate } from './is-same-date';

@@ -15,15 +15,7 @@
     "lib": [
       "dom",
       "es2015"
-    ],
-    "paths": {
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@libs/*": [
-        "src/libs/*"
-      ]
-    }
+    ]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
