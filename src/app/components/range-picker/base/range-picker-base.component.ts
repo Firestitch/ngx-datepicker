@@ -14,6 +14,7 @@ import { Observable, Subject } from 'rxjs';
 import { filter, map, pairwise, skip, take, takeUntil } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerDialogRef } from '../../../../libs/dialog/classes/dialog-ref';
@@ -48,6 +49,9 @@ export abstract class RangePickerComponent<D = any>
   @Input()
   public clear = true;
 
+  @Input()
+  public format: string;
+
   @HostBinding('class.fs-input-disabled')
   @HostBinding('attr.readonly')
   public disabled = false;
@@ -63,6 +67,13 @@ export abstract class RangePickerComponent<D = any>
     updateOn?: 'change' | 'blur' | 'submit';
   };
 
+  @Input()
+  public set timezone(value: string) {
+    this._timezone = value;
+
+    this._tzChanged(this._originValue);
+  }
+
   @HostBinding('class.fs-input-readonly')
   @HostBinding('attr.readonly')
   public readonly = false;
@@ -74,7 +85,9 @@ export abstract class RangePickerComponent<D = any>
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
   protected _value;
+  protected _originValue: Date | null; // before timezone
   protected _name;
+  protected _timezone: string;
 
   private _lastValueValid = false;
 
@@ -92,6 +105,10 @@ export abstract class RangePickerComponent<D = any>
 
   public get name() {
     return this._name;
+  }
+
+  public get timezone(): string {
+    return this._timezone;
   }
 
   public set value(value) {
@@ -121,14 +138,17 @@ export abstract class RangePickerComponent<D = any>
   }
 
   public writeValue(value) {
-    value = createDateFromValue(value);
+    value = this._processInputDate(value);
+
+    this._originValue = value;
+
     this.validateDate(value);
 
     const [valuesAreDates] = this._checkValuesEquality(value, this.value);
 
     if ((valuesAreDates) || (!valuesAreDates && this.value !== value)) {
       this._value = value;
-      this._elRef.nativeElement.value = formatDateTime(value, this.view);
+      this.updateInput(this._value);
 
       this._cdRef.markForCheck();
     }
@@ -195,12 +215,16 @@ export abstract class RangePickerComponent<D = any>
 
     this._value = value;
 
+    if (value && this.timezone) {
+      value = zonedTimeToUtc(value, this.timezone);
+    }
+
     this.onChange(value);
     this.onTouch(value);
   }
 
   public updateInput(value) {
-    this._elRef.nativeElement.value = formatDateTime(value, this.view);
+    this._elRef.nativeElement.value = formatDateTime(value, this.view, this.format);
   }
 
   @HostListener('keyup', ['$event', '$event.target.value'])
@@ -242,6 +266,14 @@ export abstract class RangePickerComponent<D = any>
   public registerOnChange(fn) { this.onChange = fn;  }
   public registerOnTouched(fn) { this.onTouch = fn; }
 
+  protected _processInputDate(date: Date | null): Date | null {
+    if (!date) {
+      return null;
+    }
+
+    return createDateFromValue(date, this.timezone);
+  }
+
   protected _getDefaultComponents() {
     if (this.view === 'time') {
       return { timeStart: true };
@@ -257,6 +289,13 @@ export abstract class RangePickerComponent<D = any>
   protected _disableInput() {
     this.disabled = true;
 
+  }
+
+  protected _tzChanged(originDate: Date | null) {
+    this._value = createDateFromValue(originDate, this.timezone);
+    this.updateInput(this._value);
+
+    this._cdRef.markForCheck();
   }
 
   protected _listenDialogValueChanges(): void {

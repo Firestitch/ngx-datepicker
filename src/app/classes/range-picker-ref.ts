@@ -11,8 +11,8 @@ export class RangePickerRef {
   private _startDatePickerExists = false;
   private _endDatePickerExists = false;
 
-  private _startDate$ = new BehaviorSubject(null);
-  private _endDate$ = new BehaviorSubject(null);
+  private _startDate$ = new BehaviorSubject<Date | null>(null);
+  private _endDate$ = new BehaviorSubject<Date | null>(null);
 
   private _startDate: Date = null;
   private _endDate: Date = null;
@@ -57,11 +57,10 @@ export class RangePickerRef {
     ) {
       value = startOfDay(value);
     }
-
-    this._startDate = value;
+    this._startDate = new Date(value);
     this._startDatePickerExists = true;
 
-    this._startDate$.next(value);
+    this._startDate$.next(this._startDate);
   }
 
   /**
@@ -75,11 +74,30 @@ export class RangePickerRef {
       value = endOfDay(value);
     }
 
-    this._endDate = value;
-
+    this._endDate = new Date(value);
     this._endDatePickerExists = true;
 
-    this._endDate$.next(value);
+    this._endDate$.next(this._endDate);
+  }
+
+  public sameAsStartDate(value: Date): boolean {
+    if (!!value
+      && (this.view === PickerViewType.Date || this.view === PickerViewType.MonthRange)
+    ) {
+      value = startOfDay(value);
+    }
+
+    return this._startDate === value;
+  }
+
+  public sameAsEndDate(value: Date): boolean {
+    if (!!value
+      && (this.view === PickerViewType.Date || this.view === PickerViewType.MonthRange)
+    ) {
+      value = endOfDay(value);
+    }
+
+    return this._endDate === value;
   }
 
   /**

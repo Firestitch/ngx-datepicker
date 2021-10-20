@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 
 import { isEqual, isValid } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { parseDate } from '../helpers/parse-date';
 
@@ -34,6 +35,13 @@ export abstract class FsDatePickerBaseComponent<D = any>
   @Input()
   public set clear(value: boolean) {
     this._clear = value;
+  }
+
+  @Input()
+  public set timezone(value: string) {
+    this._timezone = value;
+
+    this.writeValue(this._originValue);
   }
 
   @Output('change')
@@ -63,6 +71,8 @@ export abstract class FsDatePickerBaseComponent<D = any>
   public registerOnTouched(fn: () => any): void { this._onTouch = fn }
   public registerOnValidatorChange(fn: () => void): void { this._validatorOnChange = fn; }
 
+  protected _timezone: string;
+  protected _originValue: Date | null; // before timezone
   protected _value;
   protected dialog = null;
   protected elementRef;
@@ -93,7 +103,15 @@ export abstract class FsDatePickerBaseComponent<D = any>
     return this._value;
   }
 
+  public get timezone(): string {
+    return this._timezone;
+  }
+
   public set value(value) {
+    if (value && this.timezone) {
+      value = zonedTimeToUtc(value, this.timezone);
+    }
+
     this._value = value;
 
     this._lastValueValid = !value || isValid(value);

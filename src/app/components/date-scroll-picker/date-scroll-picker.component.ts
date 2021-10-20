@@ -58,7 +58,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   }
 
   public writeValue(value: any): void {
-    this._value = createDateFromValue(value);
+    this._originValue = value;
+    this._value = createDateFromValue(value, this.timezone);
     this.validateDate(this.value);
     this.updateInput(value);
 

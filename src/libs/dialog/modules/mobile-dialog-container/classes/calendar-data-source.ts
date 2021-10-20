@@ -19,7 +19,6 @@ export class FsCalendarDataSource extends DataSource<Date> {
 
     this._cached();
     this._dataStream.next(this._cachedData);
-    console.log(this._cachedData);
   }
 
   public connect(collectionViewer: CollectionViewer): Observable<Date[]> {
@@ -91,6 +90,5 @@ export class FsCalendarDataSource extends DataSource<Date> {
         return new Date(1900, i, 1);
       })
 
-    console.log(this._cachedData);
   }
 }

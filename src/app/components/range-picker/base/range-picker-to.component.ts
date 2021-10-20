@@ -12,7 +12,7 @@ import { NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { endOfDay } from 'date-fns';
+import { endOfDay, startOfDay } from 'date-fns';
 
 import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
@@ -62,9 +62,9 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
 
     super.writeValue(value);
 
-    const [valuesAreDates, datesAreEquals] = this._checkValuesEquality(value, this._pickerRef.endDate);
+    const [valuesAreDates] = this._checkValuesEquality(this.value, this._pickerRef.endDate);
 
-    if ((valuesAreDates && !datesAreEquals) || (!valuesAreDates && this._pickerRef.endDate !== value)) {
+    if ((valuesAreDates && !this._pickerRef.sameAsEndDate(this.value)) || !valuesAreDates) {
       this._pickerRef.updateEndDate(this.value);
     }
   }
@@ -101,11 +101,25 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
     super.updateValue(value);
   }
 
+  protected _tzChanged(originDate: Date | null): void {
+    super._tzChanged(originDate);
+
+    this._pickerRef?.updateEndDate(this.value);
+  }
+
   /** The form control validator for whether the input parses. */
   protected _parseValidator: ValidatorFn = (): ValidationErrors | null => {
     return this._pickerRef.isRangeValid
       ? null
       : { fsDatepickerRange: 'Invalid Range' };
+  }
+
+  protected _processInputDate(date: Date | null): Date | null {
+    if (this.view === PickerViewType.Date) {
+      date = endOfDay(date);
+    }
+
+    return super._processInputDate(date);
   }
 
   protected _subscribeToPickerRefUpdates() {
@@ -114,7 +128,6 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
         takeUntil(this._destroy$),
       )
       .subscribe((value: Date | null) => {
-        debugger;
         if (!this._pickerRef.isRangeValid) {
           this.cleared();
         }

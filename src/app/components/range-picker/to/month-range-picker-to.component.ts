@@ -4,11 +4,12 @@ import {
   Input,
 } from '@angular/core';
 
-import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
-
 import { takeUntil } from 'rxjs/operators';
 
+import { zonedTimeToUtc } from 'date-fns-tz';
 import { endOfDay } from 'date-fns';
+
+import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerToComponent } from '../base/range-picker-to.component';
@@ -31,15 +32,32 @@ export class MonthRangePickerToComponent extends RangePickerToComponent {
 
   public view = PickerViewType.MonthRange;
 
+  private _skipUpdateValue = false;
+
   public updateValue(value: Date) {
     value = endOfDay(value);
 
     this._value = value;
+    this.updateInput(this._value);
 
-    this.writeValue(this._value);
+    if (value && this.timezone) {
+      value = zonedTimeToUtc(value, this.timezone);
+    }
 
     this.onChange(value);
     this.onTouch(value);
+  }
+
+  protected _tzChanged(originDate: Date | null) {
+    this._skipUpdateValue = true;
+
+    super._tzChanged(originDate);
+  }
+
+  protected _processInputDate(date: Date | null): Date | null {
+    date = endOfDay(date);
+
+    return super._processInputDate(date);
   }
 
   /**
@@ -55,6 +73,11 @@ export class MonthRangePickerToComponent extends RangePickerToComponent {
         takeUntil(this._destroy$),
       )
       .subscribe((newValue: Date | null) => {
+        if (this._skipUpdateValue) {
+          this._skipUpdateValue = false;
+          return;
+        }
+
         this.updateValue(newValue);
 
         this._ngControl.control.markAsDirty();

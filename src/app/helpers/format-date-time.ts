@@ -1,6 +1,10 @@
 import { isNumber } from 'lodash-es';
 import { format, isValid } from 'date-fns';
 
+import { format as fsFormat } from '@firestitch/date';
+
+import { utcToZonedTime } from 'date-fns-tz';
+
 import { PickerViewType } from '../../libs/common/enums/picker-view-type.enum';
 import { ScrollPickerViewType } from '../../libs/common/enums/scroll-picker-view-type.enum';
 
@@ -8,7 +12,8 @@ import { ScrollPickerViewType } from '../../libs/common/enums/scroll-picker-view
 export function formatDateTime(
   value,
   dateFormat: PickerViewType | ScrollPickerViewType = PickerViewType.Date,
-  customDateFormat = ''
+  customDateFormat = '',
+  timezone?: string,
 ) {
 
   if (isNumber(value)) {
@@ -24,8 +29,12 @@ export function formatDateTime(
 
     const formats = [];
 
+    if (timezone) {
+      value = utcToZonedTime(value, timezone);
+    }
+
     if (customDateFormat) {
-      formats.push(customDateFormat);
+      return fsFormat(value, customDateFormat);
     } else {
 
       if (([

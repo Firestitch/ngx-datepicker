@@ -67,7 +67,7 @@
     "codelyzer": "^5.1.2",
     "cpx": "^1.5.0",
     "cypress": "8.3.0",
-    "date-fns": "^2.4.1",
+    "date-fns": "^2.25.0",
     "date-fns-tz": "^1.1.6",
     "hammerjs": "^2.0.8",
     "highlight.js": "^9.15.10",

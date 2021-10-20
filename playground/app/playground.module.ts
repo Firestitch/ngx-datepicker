@@ -8,6 +8,7 @@ import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
 import { FsDatePickerModule } from 'fs-datepicker';
 import { FsScrollbarModule } from '@firestitch/scrollbar';
+import { FsDateModule } from '@firestitch/date';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -25,6 +26,8 @@ import { DateScrollPickerComponent } from './components/date-scroll-picker/date-
 import { WeekPickerComponent } from './components/week-example/week-picker.component';
 import { OnlyHoursExampleComponent } from './components/only-hours-example/only-hours-example.component';
 import { MonthExampleComponent } from './components/month-example/month-example.component';
+import { DatetimeTzExampleComponent } from './components/datetime-tz-example/datetime-tz-example.component';
+import { TzOffsetPipe } from './components/datetime-tz-example/tz-offset.pipe';
 
 
 @NgModule({
@@ -40,6 +43,7 @@ import { MonthExampleComponent } from './components/month-example/month-example.
     FsFormModule,
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
+    FsDateModule,
   ],
   declarations: [
     AppComponent,
@@ -54,6 +58,8 @@ import { MonthExampleComponent } from './components/month-example/month-example.
     OnlyHoursExampleComponent,
     WeekPickerComponent,
     MonthExampleComponent,
+    DatetimeTzExampleComponent,
+    TzOffsetPipe,
   ],
   providers: [
   ],

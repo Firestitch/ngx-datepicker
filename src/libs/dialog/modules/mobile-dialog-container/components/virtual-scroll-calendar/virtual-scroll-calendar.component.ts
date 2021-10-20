@@ -49,9 +49,7 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, After
     private _bottomSheetRef: MatBottomSheetRef<any>,
   ) {
     this._dialogRef = this._data.dateDialogRef;
-    console.log(this.virtualScroll, this);
     // this.virtualScroll.scrollToIndex();
-    console.log(this.items);
   }
 
   public get datePickerModel(): FsDatePickerDialogModel {

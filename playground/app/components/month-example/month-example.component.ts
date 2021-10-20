@@ -13,13 +13,4 @@ export class MonthExampleComponent {
 
   constructor() {
   }
-
-
-  public cha(): void {
-    console.log('start');
-  }
-
-  public ng(): void {
-    console.log('end');
-  }
 }

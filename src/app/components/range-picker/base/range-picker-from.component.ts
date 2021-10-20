@@ -58,9 +58,9 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
     }
     super.writeValue(value);
 
-    const [valuesAreDates, datesAreEquals] = this._checkValuesEquality(value, this._pickerRef.startDate);
+    const [valuesAreDates] = this._checkValuesEquality(this.value, this._pickerRef.startDate);
 
-    if ((valuesAreDates && !datesAreEquals) || (!valuesAreDates && this._pickerRef.startDate !== value)) {
+    if ((valuesAreDates && !this._pickerRef.sameAsStartDate(this.value)) || (!valuesAreDates)) {
       this._pickerRef.updateStartDate(this.value);
     }
   }
@@ -92,5 +92,19 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
     this._pickerRef.updateStartDate(value);
 
     super.updateValue(value);
+  }
+
+  protected _tzChanged(originDate: Date | null): void {
+    super._tzChanged(originDate);
+
+    this._pickerRef?.updateStartDate(this.value);
+  }
+
+  protected _processInputDate(date: Date | null): Date | null {
+    if (this.view === PickerViewType.Date) {
+      date = startOfDay(date);
+    }
+
+    return super._processInputDate(date);
   }
 }
