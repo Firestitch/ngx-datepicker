@@ -52,14 +52,15 @@ export class RangePickerRef {
    * @param value
    */
   public updateStartDate(value: Date) {
+    this._startDatePickerExists = true;
+
     if (!!value
       && (this.view === PickerViewType.Date || this.view === PickerViewType.MonthRange)
     ) {
       value = startOfDay(value);
     }
-    this._startDate = new Date(value);
-    this._startDatePickerExists = true;
 
+    this._startDate = value && new Date(value) || null;
     this._startDate$.next(this._startDate);
   }
 
@@ -74,7 +75,7 @@ export class RangePickerRef {
       value = endOfDay(value);
     }
 
-    this._endDate = new Date(value);
+    this._endDate = value && new Date(value) || null;
     this._endDatePickerExists = true;
 
     this._endDate$.next(this._endDate);

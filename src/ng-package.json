@@ -6,5 +6,9 @@
   },
   "whitelistedNonPeerDependencies": [
     "."
+  ],
+  "assets": [
+    "./styles.scss",
+    "./_variables.scss"
   ]
 }

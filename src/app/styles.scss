@@ -1,4 +1,6 @@
 @use '~@firestitch/style/styles' as fs-styles;
+@use './variables' as vars;
+
 @import '~@angular/material/theming';
 
 
@@ -368,87 +370,83 @@
 }
 */
 
-
-
-@mixin fs-date-picker() {
-  .time-container {
-    .hour, .minute {
-      &:hover {
-        &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
-          .tile-content {
-            background: fs-styles.color-rgb(fs-styles.$palette, .3);
-          }
+.time-container {
+  .hour, .minute {
+    &:hover {
+      &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
+        .tile-content {
+          background: fs-styles.color-rgb(vars.$hover-color, vars.$hover-color-opacity);
         }
       }
     }
   }
+}
 
-  .calendar-container {
-    .day, .years .year, .months .month, .year-name, .month-name {
-      &:hover {
-        &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
-          .tile-content {
-            background: fs-styles.color-rgb(fs-styles.$palette, .3);
-          }
+.calendar-container {
+  .day, .years .year, .months .month, .year-name, .month-name {
+    &:hover {
+      &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
+        .tile-content {
+          background: fs-styles.color-rgb(vars.$hover-color, vars.$hover-color-opacity);
         }
       }
     }
   }
+}
 
-  .calendar-container {
-    .day.selected .tile-content,
-    .years .year.selected .tile-content,
-    .months .month.selected .tile-content,
-    .month-range.range-selected .range-from .tile-content,
-    .month-range.range-selected .range-to .tile-content,
-    .month-range.range-selected .same-range-dates .tile-content {
-      background-color: mat-color(fs-styles.$palette);
-    }
+.calendar-container {
+  .day.selected .tile-content,
+  .years .year.selected .tile-content,
+  .months .month.selected .tile-content,
+  .month-range.range-selected .range-from .tile-content,
+  .month-range.range-selected .range-to .tile-content,
+  .month-range.range-selected .same-range-dates .tile-content {
+    background-color: mat-color(vars.$selected-color);
   }
+}
 
-  .time-container {
-    .hour.selected .tile-content,
-    .minute.selected .tile-content {
-      background-color: mat-color(fs-styles.$palette);
-    }
+.time-container {
+  .hour.selected .tile-content,
+  .minute.selected .tile-content {
+    background-color: mat-color(vars.$selected-color);
   }
+}
 
-  .calendar-container, .time-container {
-    .now .tile-content {
-      border: 1px solid fs-styles.color-rgb(fs-styles.$palette,.5);
-    }
+.calendar-container, .time-container {
+  .now .tile-content {
+    border: 1px solid fs-styles.color-rgb(vars.$now-color, vars.$now-color-opacity);
   }
+}
 
-  .has-view-time {
-    .summary .date.active,
-    .summary .time.active {
-      color: mat-color(fs-styles.$palette);
-    }
-  }
-
-  .time-container .minutes .button-expand {
+.has-view-time {
+  .summary .date.active,
+  .summary .time.active {
     color: mat-color(fs-styles.$palette);
   }
+}
 
-  .week {
-    &.first-period-week {
-      border-top: 1px solid #e4e4e4;
-    }
+.time-container .minutes .button-expand {
+  color: mat-color(fs-styles.$palette);
+}
 
-    &.last-period-week {
-      border-bottom: 1px solid #e4e4e4;
-    }
+.week {
+  &.first-period-week {
+    border-top: 1px solid #e4e4e4;
+  }
 
-    &.hover {
-      td {
-        &:not(.selected) {
-          &.period {
-            background: fs-styles.color-rgb(fs-styles.$palette, 0.1);
-          }
+  &.last-period-week {
+    border-bottom: 1px solid #e4e4e4;
+  }
 
-          &.day {
-            background: fs-styles.color-rgb(fs-styles.$palette, 0.3) !important;
-          }
+  &.hover {
+    td {
+      &:not(.selected) {
+        &.period {
+          background: fs-styles.color-rgb(fs-styles.$palette, 0.1);
+        }
+
+        &.day {
+          background: fs-styles.color-rgb(fs-styles.$palette, 0.3) !important;
         }
       }
     }

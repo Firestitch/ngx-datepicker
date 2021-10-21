@@ -50,18 +50,14 @@ export class Month {
    */
   public renderDays() {
     let currentDate = subDays(this.date, this._prevMonthDaysCount);
+    const daysToBeRendered = this._hideExtraDays
+      ? getDaysInMonth(this.date) + this._prevMonthDaysCount
+      : CALENDAR_DAYS_NUMBER;
+
     let week;
 
-
-    for (let d = 0; d < CALENDAR_DAYS_NUMBER; d++) {
+    for (let d = 0; d < daysToBeRendered; d++) {
       const dayNumber = lightFormat(currentDate, 'd');
-
-      // skip days & weeks for month range
-      if (this._hideExtraDays && this._prevMonthDaysCount === 7 && d < 7) {
-        currentDate = addDays(currentDate, 1);
-
-        continue
-      }
 
       if (d % 7 == 0) {
         week = new Week(currentDate, this.seedDate, this.periodWeeks);

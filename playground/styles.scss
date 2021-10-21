@@ -1,9 +1,12 @@
+@use '../src/app/variables.scss' with (
+  $selected-color-opacity: .9
+);
+@use '../src/app/styles.scss' as fs-date-picker;
+
 @import '~@angular/material/theming';
 
 @import './../tools/assets/playground.scss';
-@import '../src/app/styles.scss';
 @import "~@firestitch/form/styles.scss";
 
 @include mat-core();
-@include fs-date-picker();
 @include fs-form($app-theme);

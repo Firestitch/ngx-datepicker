@@ -227,12 +227,19 @@ export class FsDatePickerDialogModel {
 
     this.view = options.view;
 
-    if (this.view === PickerViewType.Week) {
-      this.period = (options.modelValue as IPeriod);
-      this.calendarDate = (options.modelValue as IPeriod)?.from || new Date();
-    } else {
-      this.model = (options.modelValue as Date) || new Date();
-      this.calendarDate = (options.modelValue as Date) || new Date();
+    switch (this.view) {
+      case PickerViewType.Week: {
+        this.period = (options.modelValue as IPeriod);
+        this.calendarDate = (options.modelValue as IPeriod)?.from || new Date();
+      } break;
+
+      case PickerViewType.MonthRange: {
+        this.calendarDate = (options.modelValue as Date) || new Date();
+      } break;
+
+      default: {
+        this.model = (options.modelValue as Date) || new Date();
+      }
     }
 
     this._calendarMode = options.view;

@@ -1,4 +1,5 @@
-@import '~@angular/material/theming';
+@use '~@firestitch/style/styles' as fs-styles;
+@use '../../../../app/variables' as variables;
 
 :host {
   display: flex;
@@ -35,7 +36,7 @@
   }
 
   &.selected {
-    background: #8fd4ef;
+    background: fs-styles.color-rgb(variables.$selected-color);
   }
 }
 
@@ -48,7 +49,7 @@
 .highlighted {
   &:not(.selected):not(.range-from):not(.range-to):not(.same-range-dates) {
     .tile-content {
-      background-color: #c9e5fc;
+      background-color: fs-styles.color-rgb(variables.$selected-color, variables.$selected-color-opacity);
       border-radius: initial;
     }
   }
@@ -62,15 +63,25 @@
 
   &.range-selected {
     .range-from {
-      background: linear-gradient(90deg, #fff 0%, #fff 49%, #c9e5fc 51%);
+      background: linear-gradient(
+          90deg,
+          #fff 0%,
+          #fff 49%,
+          fs-styles.color-rgb(variables.$selected-color, variables.$selected-color-opacity) 51%
+      );
     }
 
     .range-to {
-      background: linear-gradient(-90deg, #fff 0%, #fff 49%, #c9e5fc 51%);
+      background: linear-gradient(
+          -90deg,
+          #fff 0%,
+          #fff 49%,
+          fs-styles.color-rgb(variables.$selected-color, variables.$selected-color-opacity) 51%
+      );
     }
 
     .same-range-dates {
-      background: #c9e5fc;
+      background: fs-styles.color-rgb(variables.$selected-color, variables.$selected-color-opacity);
     }
   }
 
@@ -95,8 +106,8 @@
           height: 100%;
           border: 8px solid transparent;
           border-radius: 100%;
-          border-left-color: #38f;
-          border-bottom-color: #38f;
+          border-left-color: fs-styles.color-rgb(variables.$selected-color);
+          border-bottom-color: fs-styles.color-rgb(variables.$selected-color);
           transform: rotateZ(45deg);
         }
       }
