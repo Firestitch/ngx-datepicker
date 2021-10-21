@@ -28,10 +28,6 @@ export function formatDateTime(
   if (value && isValid(value)) {
     const formats = [];
 
-    if (timezone) {
-      value = utcToZonedTime(value, timezone);
-    }
-
     if (customDateFormat) {
       return fsFormat(value, customDateFormat, { timezone });
     } else {
