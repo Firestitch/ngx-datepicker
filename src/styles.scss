@@ -1,8 +1,117 @@
-@use '~@firestitch/style/styles' as fs-styles;
-@use './variables' as vars;
+@import '~@firestitch/style/styles';
+@import './variables';
 
 @import '~@angular/material/theming';
 
+.fs-date-picker-calendar {
+  display: flex;
+  justify-content: center;
+
+  .hidden-day {
+    pointer-events: none;
+
+    .tile-content {
+      display: none;
+    }
+  }
+
+  .period-mode {
+    cursor: default;
+    pointer-events: none;
+
+    background: none;
+  }
+
+  .period {
+    width: 50px;
+    padding: 18px 0;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: top;
+    background: #e4e4e4;
+    color: #858585;
+    cursor: pointer;
+
+    &:hover {
+      background: #effaff;
+    }
+  }
+
+  .day {
+    &.selected {
+      color: #fff;
+    }
+  }
+
+  .highlighted {
+    &:not(.selected):not(.range-from):not(.range-to):not(.same-range-dates) {
+      .tile-content {
+        background-color: color-rgb($selected-color, $selected-color-opacity);
+        border-radius: initial;
+      }
+    }
+  }
+
+
+  .month-range {
+    .tile {
+      padding: 0;
+    }
+
+    &.range-selected {
+      .range-from {
+        background: linear-gradient(
+            90deg,
+            #fff 0%,
+            #fff 49%,
+            color-rgb($selected-color, $selected-color-opacity) 51%
+        );
+      }
+
+      .range-to {
+        background: linear-gradient(
+            -90deg,
+            #fff 0%,
+            #fff 49%,
+            color-rgb($selected-color, $selected-color-opacity) 51%
+        );
+      }
+
+      .same-range-dates {
+        background: color-rgb($selected-color, $selected-color-opacity);
+      }
+    }
+
+    &:not(.range-selected) {
+      .range-from {
+        .tile-content {
+          background-color: #fff;
+          color: #000;
+          width: 30px;
+          height: 30px;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 8px solid transparent;
+          border-radius: 100%;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid transparent;
+            border-radius: 100%;
+            border-left-color: color-rgb($selected-color);
+            border-bottom-color: color-rgb($selected-color);
+            transform: rotateZ(45deg);
+          }
+        }
+      }
+    }
+  }
+}
 
 .fs-date-picker-dialog-shadow {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
@@ -375,7 +484,7 @@
     &:hover {
       &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
         .tile-content {
-          background: fs-styles.color-rgb(vars.$hover-color, vars.$hover-color-opacity);
+          background: color-rgb($hover-color, $hover-color-opacity);
         }
       }
     }
@@ -387,7 +496,7 @@
     &:hover {
       &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
         .tile-content {
-          background: fs-styles.color-rgb(vars.$hover-color, vars.$hover-color-opacity);
+          background: color-rgb($hover-color, $hover-color-opacity);
         }
       }
     }
@@ -401,32 +510,32 @@
   .month-range.range-selected .range-from .tile-content,
   .month-range.range-selected .range-to .tile-content,
   .month-range.range-selected .same-range-dates .tile-content {
-    background-color: mat-color(vars.$selected-color);
+    background-color: mat-color($selected-color);
   }
 }
 
 .time-container {
   .hour.selected .tile-content,
   .minute.selected .tile-content {
-    background-color: mat-color(vars.$selected-color);
+    background-color: mat-color($selected-color);
   }
 }
 
 .calendar-container, .time-container {
   .now .tile-content {
-    border: 1px solid fs-styles.color-rgb(vars.$now-color, vars.$now-color-opacity);
+    border: 1px solid color-rgb($now-color, $now-color-opacity);
   }
 }
 
 .has-view-time {
   .summary .date.active,
   .summary .time.active {
-    color: mat-color(fs-styles.$palette);
+    color: mat-color($palette);
   }
 }
 
 .time-container .minutes .button-expand {
-  color: mat-color(fs-styles.$palette);
+  color: mat-color($palette);
 }
 
 .week {
@@ -442,11 +551,11 @@
     td {
       &:not(.selected) {
         &.period {
-          background: fs-styles.color-rgb(fs-styles.$palette, 0.1);
+          background: color-rgb($palette, 0.1);
         }
 
         &.day {
-          background: fs-styles.color-rgb(fs-styles.$palette, 0.3) !important;
+          background: color-rgb($palette, 0.3) !important;
         }
       }
     }

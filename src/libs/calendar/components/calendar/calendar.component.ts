@@ -35,6 +35,9 @@ import { DayItem } from '../../interfaces/day-item.interface';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    'class': 'fs-date-picker-calendar',
+  },
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
