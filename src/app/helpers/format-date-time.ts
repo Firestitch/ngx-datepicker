@@ -26,7 +26,6 @@ export function formatDateTime(
   }
 
   if (value && isValid(value)) {
-
     const formats = [];
 
     if (timezone) {
@@ -34,7 +33,7 @@ export function formatDateTime(
     }
 
     if (customDateFormat) {
-      return fsFormat(value, customDateFormat);
+      return fsFormat(value, customDateFormat, { timezone });
     } else {
 
       if (([

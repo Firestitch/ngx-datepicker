@@ -50,12 +50,13 @@
     "@firestitch/autocomplete": "^10.0.6",
     "@firestitch/clear": "^8.1.0",
     "@firestitch/common": "^8.0.6",
-    "@firestitch/date": "^8.0.19",
+    "@firestitch/date": "^8.0.24",
     "@firestitch/datepicker": "8.6.3",
     "@firestitch/dialog": "^8.2.7",
     "@firestitch/drawer": "^9.2.7",
     "@firestitch/example": "^9.1.0",
     "@firestitch/form": "^9.5.16",
+    "@firestitch/label": "^8.2.10",
     "@firestitch/iframe": "^8.0.0",
     "@firestitch/menu": "^9.1.8",
     "@firestitch/message": "^8.2.1",
@@ -81,7 +82,8 @@
     "tslint": "^5.20.1",
     "tsmodels": "^0.4.6",
     "typescript": "~3.8.3",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@vvo/tzdb": "^6.29.0"
   },
   "engines": {
     "node": ">=6.0.0"

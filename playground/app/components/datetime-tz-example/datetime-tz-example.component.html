@@ -1,11 +1,14 @@
 <form>
-  <strong>Origin Date UTC0</strong>: {{ todayMonth }}/{{ todayDay }}/{{ todayYear }} 00:00
-  <br><br>
-  <mat-form-field appearance="fill">
+  <fs-label-field>
+    <fs-label>Origin Date UTC +00:00</fs-label>
+    {{ todayMonth }}/{{ todayDay }}/{{ todayYear }} 00:00
+  </fs-label-field>
+
+  <mat-form-field appearance="fill" class="timezones">
     <mat-label>Calendar Time Zone</mat-label>
     <mat-select [(ngModel)]="selectedTimeZone" name="tz">
-      <mat-option *ngFor="let tz of tzList" [value]="tz.name">
-        {{ tz.name }} ({{tz.offset}})
+      <mat-option *ngFor="let tz of timezones" [value]="tz.name">
+        {{ tz.currentTimeFormat}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -17,6 +20,7 @@
       matInput
       fsDateTimePicker
       fsFormRequired
+      format="MMM d, yyyy h:mm aa OOOO"
       [(ngModel)]="model"
       [timezone]="selectedTimeZone"
       name="datetimepicker"
@@ -31,6 +35,7 @@
       fsDateTimeRangeFromPicker="datetimerangepickertz"
       [(ngModel)]="startDateTimeDate"
       [timezone]="selectedTimeZone"
+      format="MMM d, yyyy h:mm aa OOOO"
       name="date_time_from"
       placeholder="Date Range From"
       fsFormRequired>
@@ -44,6 +49,7 @@
       fsDateTimeRangeToPicker="datetimerangepickertz"
       [(ngModel)]="endDateTimeDate"
       [timezone]="selectedTimeZone"
+      format="MMM d, yyyy h:mm aa OOOO"
       name="date_time_to"
       placeholder="Date Range To"
       fsFormRequired>

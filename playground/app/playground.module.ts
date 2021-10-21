@@ -9,6 +9,7 @@ import { FsMessageModule } from '@firestitch/message';
 import { FsDatePickerModule } from 'fs-datepicker';
 import { FsScrollbarModule } from '@firestitch/scrollbar';
 import { FsDateModule } from '@firestitch/date';
+import { FsLabelModule } from '@firestitch/label';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -41,6 +42,7 @@ import { TzOffsetPipe } from './components/datetime-tz-example/tz-offset.pipe';
     FsScrollbarModule.forRoot(),
     FsExampleModule.forRoot(),
     FsFormModule,
+    FsLabelModule,
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
     FsDateModule,

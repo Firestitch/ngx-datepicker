@@ -224,7 +224,7 @@ export abstract class RangePickerComponent<D = any>
   }
 
   public updateInput(value) {
-    this._elRef.nativeElement.value = formatDateTime(value, this.view, this.format);
+    this._elRef.nativeElement.value = formatDateTime(value, this.view, this.format, this.timezone);
   }
 
   @HostListener('keyup', ['$event', '$event.target.value'])

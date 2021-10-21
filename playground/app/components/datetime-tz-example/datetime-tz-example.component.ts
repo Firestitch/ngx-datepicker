@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { tzList } from './tz-list';
+import { getTimeZones } from '@vvo/tzdb';
 
 @Component({
   selector: 'datetime-tz-example',
   templateUrl: 'datetime-tz-example.component.html',
-  styleUrls: ['datetime-tz-example.component.css' ]
+  styleUrls: ['./datetime-tz-example.component.scss' ]
 })
 export class DatetimeTzExampleComponent {
+  
+  public selectedTimeZone: string;
+  public timezones;
   public today = new Date();
   public todayYear = this.today.getFullYear();
   public todayMonth = this.today.getMonth();
@@ -97,18 +101,16 @@ export class DatetimeTzExampleComponent {
     )
   );
 
-  public selectedTimeZone: string;
-
-  public tzList = tzList;
-
   constructor() {
     this.initTz();
   }
 
   public initTz(): void {
+    this.timezones = getTimeZones();
+
     const userTZName = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    const userTZ = this.tzList
+    const userTZ = this.timezones
       .find((tz) => tz.name === userTZName);
 
     if (userTZ) {
