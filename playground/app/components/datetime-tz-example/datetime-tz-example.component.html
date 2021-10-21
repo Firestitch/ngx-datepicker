@@ -1,9 +1,4 @@
 <form>
-  <fs-label-field>
-    <fs-label>Origin Date UTC +00:00</fs-label>
-    {{ todayMonth }}/{{ todayDay }}/{{ todayYear }} 00:00
-  </fs-label-field>
-
   <mat-form-field appearance="fill" class="timezones">
     <mat-label>Calendar Time Zone</mat-label>
     <mat-select [(ngModel)]="selectedTimeZone" name="tz">
@@ -13,34 +8,35 @@
     </mat-select>
   </mat-form-field>
 
-  {{model.toUTCString()}}
-
   <br>
 
   <mat-form-field>
     <input
-      matInput
-      fsDateTimePicker
-      fsFormRequired
-      format="MMM d, yyyy h:mm aa OOOO"
-      [(ngModel)]="model"
-      [timezone]="selectedTimeZone"
-      name="datetimepicker"
-      placeholder="Date Time">
+        matInput
+        fsDateTimePicker
+        fsFormRequired
+        [format]="format"
+        [(ngModel)]="model"
+        [timezone]="selectedTimeZone"
+        name="datetimepicker"
+        placeholder="Date Time">
+      <mat-hint>UTC: {{model.toUTCString()}}</mat-hint>
   </mat-form-field>
 
   <br>
+  <br>
 
   <mat-form-field>
     <input
-      matInput
-      fsDateTimeRangeFromPicker="datetimerangepickertz"
-      [(ngModel)]="startDateTimeDate"
-      [timezone]="selectedTimeZone"
-      format="MMM d, yyyy h:mm aa OOOO"
-      name="date_time_from"
-      placeholder="Date Range From"
-      fsFormRequired>
+        matInput
+        fsDateTimeRangeFromPicker="datetimerangepickertz"
+        [(ngModel)]="startDateTimeDate"
+        [timezone]="selectedTimeZone"
+        [format]="format"
+        name="dateTimeFrom"
+        placeholder="Date Range From"
+        fsFormRequired>
+      <mat-hint>UTC: {{startDateTimeDate.toUTCString()}}</mat-hint>
   </mat-form-field>
 
   <fs-date-range-separator></fs-date-range-separator>
@@ -51,9 +47,10 @@
       fsDateTimeRangeToPicker="datetimerangepickertz"
       [(ngModel)]="endDateTimeDate"
       [timezone]="selectedTimeZone"
-      format="MMM d, yyyy h:mm aa OOOO"
-      name="date_time_to"
+      [format]="format"
+      name="dateTimeTo"
       placeholder="Date Range To"
       fsFormRequired>
+    <mat-hint>UTC: {{endDateTimeDate.toUTCString()}}</mat-hint>
   </mat-form-field>
 </form>

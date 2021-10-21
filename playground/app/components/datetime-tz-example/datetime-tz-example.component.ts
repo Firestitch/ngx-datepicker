@@ -15,7 +15,7 @@ export class DatetimeTzExampleComponent {
   public todayYear = this.today.getFullYear();
   public todayMonth = this.today.getMonth();
   public todayDay = this.today.getDate();
-  public format = 'MMM d, yyyy h:mm aa xxx';
+  public format = 'MMM d, yyyy h:mm aa OOOO';
 
   public model = new Date(
     Date.UTC(
