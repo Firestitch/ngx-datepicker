@@ -20,7 +20,7 @@
         [timezone]="selectedTimeZone"
         name="datetimepicker"
         placeholder="Date Time">
-      <mat-hint>UTC: {{model.toUTCString()}}</mat-hint>
+      <mat-hint>UTC: {{model?.toUTCString()}}</mat-hint>
   </mat-form-field>
 
   <br>
@@ -36,7 +36,7 @@
         name="dateTimeFrom"
         placeholder="Date Range From"
         fsFormRequired>
-      <mat-hint>UTC: {{startDateTimeDate.toUTCString()}}</mat-hint>
+      <mat-hint>UTC: {{startDateTimeDate?.toUTCString()}}</mat-hint>
   </mat-form-field>
 
   <fs-date-range-separator></fs-date-range-separator>
@@ -51,6 +51,6 @@
       name="dateTimeTo"
       placeholder="Date Range To"
       fsFormRequired>
-    <mat-hint>UTC: {{endDateTimeDate.toUTCString()}}</mat-hint>
+    <mat-hint>UTC: {{endDateTimeDate?.toUTCString()}}</mat-hint>
   </mat-form-field>
 </form>
