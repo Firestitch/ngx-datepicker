@@ -23,6 +23,7 @@
     "package": "cd tools && npm run cli:package",
     "package:test": "cd tools && npm run cli:package:test",
     "package:publish": "cd tools && npm run cli:package:publish",
+    "package:publish:beta": "cd tools && npm run cli:package:publish-beta:npm",
     "demo:build": "cd tools && npm run cli:demo",
     "serve": "cd tools && npm run cli:serve",
     "e2e": "ng e2e",
