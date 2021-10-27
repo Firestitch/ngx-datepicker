@@ -35,7 +35,9 @@ export class MonthRangePickerToComponent extends RangePickerToComponent {
   private _skipUpdateValue = false;
 
   public updateValue(value: Date) {
-    value = endOfDay(value);
+    if (value) {
+      value = endOfDay(value);
+    }
 
     this._value = value;
     this.updateInput(this._value);
