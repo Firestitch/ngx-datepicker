@@ -1,4 +1,4 @@
-import { isAfter } from 'date-fns';
+import { isAfter, isEqual } from 'date-fns';
 
 import { PickerViewType } from '../../common/enums/picker-view-type.enum';
 
@@ -27,6 +27,10 @@ export function isDateAfter(target, from, view: PickerViewType): boolean {
   }
 
   if (view === PickerViewType.Date && isSameDate(startDate, endDate)) {
+    return true;
+  }
+
+  if ((view === PickerViewType.DateTime || view === PickerViewType.Time) && isEqual(startDate, endDate)) {
     return true;
   }
 
