@@ -201,7 +201,8 @@ export abstract class RangePickerComponent<D = any>
    * @param value
    */
   public updateValueFromDialog(value: Date) {
-    this.writeValue(value);
+    this.updateValue(value);
+    // this.writeValue(value);
   }
 
   public updateValue(value): void {
@@ -214,6 +215,7 @@ export abstract class RangePickerComponent<D = any>
     }
 
     this._value = value;
+    this.updateInput(this._value);
 
     if (value && this.timezone) {
       value = zonedTimeToUtc(value, this.timezone);
