@@ -121,23 +121,27 @@ export class FsDatePickerDialogModel {
   }
 
   public set model(value: Date | null) {
-    if (this.isDateView && this.startOfDay) {
-      value = startOfDay(value);
-    }
-
-    /**
-     * For cases when we have datetime view type and have opened "To" date picker.
-     * If "From" date is already selected it means that we have some Time range to be disabled.
-     * When user select "To" date without time (only clicks on date) we have to pull up time for selected date.
-     */
-    if (this.isDateTimeView
-      && this._pickerOptions.rangeType === 'to'
-      && !this.model
-      && value
-    ) {
-      if (isBefore(value, this.rangePickerRef.startDate)) {
-        value = new Date(this.rangePickerRef.startDate);
+    if (isValid(value)) {
+      if (this.isDateView && this.startOfDay) {
+        value = startOfDay(value);
       }
+
+      /**
+       * For cases when we have datetime view type and have opened "To" date picker.
+       * If "From" date is already selected it means that we have some Time range to be disabled.
+       * When user select "To" date without time (only clicks on date) we have to pull up time for selected date.
+       */
+      if (this.isDateTimeView
+        && this._pickerOptions.rangeType === 'to'
+        && !this.model
+        && value
+      ) {
+        if (isBefore(value, this.rangePickerRef.startDate)) {
+          value = new Date(this.rangePickerRef.startDate);
+        }
+      }
+    } else {
+      value = null;
     }
 
     this._model$.next(value);
