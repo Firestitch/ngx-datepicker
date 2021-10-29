@@ -322,6 +322,7 @@
   .calendar-container .months .month.disabled {
     color: #ccc;
     cursor: initial;
+    pointer-events: none;
 
     .tile-content {
       background: #ececec;

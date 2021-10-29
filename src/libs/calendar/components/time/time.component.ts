@@ -242,8 +242,9 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   }
 
   public minuteClick(minute) {
-
-    if (this.disabledTimeMinutes[minute]) {
+    if (this.disabledTimeMinutes[minute]
+      || (this.disabledGroupedMinutes[this.selected.hour] && this.disabledGroupedMinutes[this.selected.hour][minute])
+    ) {
       return;
     }
 
