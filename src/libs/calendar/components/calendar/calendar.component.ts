@@ -14,7 +14,6 @@ import {
   eachDayOfInterval,
   format,
   isAfter,
-  isValid,
   lightFormat,
   startOfDay,
 } from 'date-fns';
@@ -93,8 +92,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public selectedPeriod: Period;
   public selectedRange: { from?: string, to?: string } = {}
   public month: Month = null;
-  public years = [];
-  public dateDays = [];
 
   public weekDaysList = [];
 
@@ -333,33 +330,4 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     return month;
   }
 
-  public updateDateDays() {
-    const year = this.selected['year'] || 1904;
-    const month = this.selected['month'] || 1;
-    const max = new Date(year, month, 0).getDate();
-    this.dateDays = [];
-    for (let d = 1; d <= max; d++) {
-      this.dateDays.push(d);
-    }
-
-    return this.dateDays;
-  }
-
-  public monthDateViewChange() {
-    this.updateDateDays();
-    this.updateDate();
-  }
-
-  public updateDate() {
-    const m = new Date(this.selected['year'], this.selected['month'], this.selected['day']);
-    const max = new Date(this.selected['year'] || 1904, this.selected['month'], 0).getDate();
-
-    if (max < this.selected['day']) {
-      this.selected['day'] = null;
-    }
-
-    if (m && isValid(m)) {
-      this.setDate(m);
-    }
-  }
 }
