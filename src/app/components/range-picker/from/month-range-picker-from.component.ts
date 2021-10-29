@@ -70,7 +70,7 @@ export class MonthRangePickerFromComponent extends RangePickerFromComponent impl
   protected _processInputDate(date: Date | null): Date | null {
     date = startOfDay(date);
 
-    return super._processInputDate(date);
+    return date;
   }
 
   /**

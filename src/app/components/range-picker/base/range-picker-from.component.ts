@@ -105,6 +105,6 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
       date = startOfDay(date);
     }
 
-    return super._processInputDate(date);
+    return date;
   }
 }

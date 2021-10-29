@@ -119,7 +119,7 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
       date = endOfDay(date);
     }
 
-    return super._processInputDate(date);
+    return date;
   }
 
   protected _subscribeToPickerRefUpdates() {
