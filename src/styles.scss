@@ -10,8 +10,10 @@
   .hidden-day {
     pointer-events: none;
 
-    .tile-content {
-      display: none;
+    &:not(.week-mode) {
+      .tile-content {
+        display: none;
+      }
     }
   }
 
@@ -23,8 +25,8 @@
   }
 
   .period {
-    width: 50px;
-    padding: 18px 0;
+    width: 48px;
+    padding: 14px 0;
     font-size: 14px;
     text-align: center;
     vertical-align: top;
@@ -391,7 +393,8 @@
   }
 
   table {
-    border-collapse: collapse;
+    //border-collapse: collapse;
+    border-spacing: 0;
     thead {
       th {
         padding-bottom: 6px;

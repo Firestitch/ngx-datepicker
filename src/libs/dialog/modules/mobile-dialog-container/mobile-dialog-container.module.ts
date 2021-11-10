@@ -18,6 +18,7 @@ import { FsMobileTimePickerComponent } from './components/time-picker/time-picke
 import { FsDatePickerTmpMobileCalendarComponent } from './components/tmp-mobile-calendar/tmp-mobile-calendar.component';
 import { FDatePickerMobileDatetimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 import { FsDatePickerMobileHeaderMonthRangeComponent } from './components/header-month-range/header-month-range.component';
+import { FsDatePickerVirtualScrollCalendarComponent } from './components/virtual-scroll-calendar/virtual-scroll-calendar.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { FsDatePickerMobileHeaderMonthRangeComponent } from './components/header
     FsDatePickerTmpMobileCalendarComponent,
     FDatePickerMobileDatetimePickerComponent,
     FsDatePickerMobileHeaderMonthRangeComponent,
+    FsDatePickerVirtualScrollCalendarComponent,
   ],
   exports: [
     FsMobileCalendarDialogComponent,

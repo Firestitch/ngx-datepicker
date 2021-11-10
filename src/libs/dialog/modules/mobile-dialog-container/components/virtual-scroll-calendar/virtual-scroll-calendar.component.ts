@@ -1,114 +1,179 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
+  ElementRef,
   Inject,
+  Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
-import { addMonths } from 'date-fns';
+import {
+  CdkVirtualScrollViewport,
+  VIRTUAL_SCROLL_STRATEGY,
+} from '@angular/cdk/scrolling';
 
-import { FsCalendarDataSource } from '../../../../../dialog/modules/mobile-dialog-container/classes/calendar-data-source';
+import { fromEvent, Observable, race, timer } from 'rxjs';
+import { debounceTime, shareReplay, switchMap, take, takeUntil } from 'rxjs/operators';
+
+import { isBefore } from 'date-fns';
+
+import { FsCalendarDataSource } from './calendar-data-source';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
+import { RangePickerRef } from '../../../../../../app/classes/range-picker-ref';
+
+import { FsCalendarMobileScrollStrategy, CalendarScrollStrategy } from './calendar-scroll-strategy';
 
 
 @Component({
+  selector: 'fs-datepicker-mobile-scroll-calendar',
   templateUrl: './virtual-scroll-calendar.component.html',
   styleUrls: ['./virtual-scroll-calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: VIRTUAL_SCROLL_STRATEGY,
+      useClass: CalendarScrollStrategy,
+    },
+  ],
 })
-export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, AfterViewInit {
+export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnChanges {
+
+  @Input()
+  public datePickerModel: FsDatePickerDialogModel;
+
+  @Input()
+  public autoClose = true;
 
   @ViewChild(CdkVirtualScrollViewport, { static: true })
   public virtualScroll: CdkVirtualScrollViewport
 
-  public timePickerExpanded = false;
-  public selectedDateTimeTab = 0;
+  public modelFrom$: Observable<Date>;
+  public modelTo$: Observable<Date>;
 
-  public ds = new FsCalendarDataSource();
-  public items = Array
-    .from({length: 100})
-    .map((_, i) => {
-      const monthNumber = i + -50;
-
-      return addMonths(new Date(), monthNumber);
-    });
+  public dataSource = new FsCalendarDataSource();
 
   private _dialogRef: FsDatePickerDialogRef;
+  private _activeScrollIndex: number;
 
   constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA)
-    private _data: any,
-    private _cd: ChangeDetectorRef,
+    private _el: ElementRef,
     private _bottomSheetRef: MatBottomSheetRef<any>,
-  ) {
-    this._dialogRef = this._data.dateDialogRef;
-    // this.virtualScroll.scrollToIndex();
-  }
-
-  public get datePickerModel(): FsDatePickerDialogModel {
-    return this._dialogRef.pickerModel;
-  }
+    @Inject(VIRTUAL_SCROLL_STRATEGY)
+    private _scrollStrategy: FsCalendarMobileScrollStrategy,
+  ) {}
 
   public get dialogRef(): FsDatePickerDialogRef {
     return this._dialogRef;
   }
 
-  public ngOnInit() {}
-
-  public ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.virtualScroll.scrollToIndex(50);
-    });
+  public get rangePickerRef(): RangePickerRef | null {
+    return this.datePickerModel.rangePickerRef;
   }
 
-  // public viewModeChanged(mode: string) {
-  //   this.datePickerModel.setCalendarMode(mode);
-  // }
-  //
-  // public monthChanged(month: number) {
-  //   this.datePickerModel.setCalendarMonth(month);
-  // }
-  //
-  // public yearChanged(year: number) {
-  //   this.datePickerModel.setCalendarYear(year);
-  // }
-  //
-  // public nextMonth(): void {
-  //   this.datePickerModel.nextMonth();
-  // }
-  //
-  // public prevMonth(): void {
-  //   this.datePickerModel.prevMonth();
-  // }
-  //
+  public ngOnInit() {
+    this._scrollStrategy.setInitialDate(this.datePickerModel.model || new Date());
+    this._scrollToClosestMonth();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.datePickerModel?.currentValue
+      && changes.datePickerModel?.firstChange
+      && this.datePickerModel.view === 'monthrange') {
+      this._initMonthRangeModels();
+    }
+  }
+
   public dateChanged(date): void {
-    this.datePickerModel.model = date;
 
-    // this.close();
-  }
-  //
-  // public periodChanged(date): void {
-  //   this.datePickerModel.period = date;
-  //
-  //   // this.close();
-  // }
-
-  public toggleTimeExpand() {
-    this.timePickerExpanded = !this.timePickerExpanded;
+    if (this.datePickerModel.view !== 'monthrange') {
+      this.datePickerModel.model = date;
+      this.close();
+    } else {
+      this.monthRangeChange(date);
+    }
   }
 
-  public selectedDateTimeTabChange(index) {
-    this.selectedDateTimeTab = index;
+  public monthRangeChange(date): void {
+    const rangeRef = this.rangePickerRef;
+    const { startDate, endDate } = rangeRef;
+
+    if (!startDate && !endDate) {
+      rangeRef.updateStartDate(date);
+    } else if (startDate && !endDate) {
+      if (isBefore(date, startDate)) {
+        rangeRef.updateStartDate(date);
+        rangeRef.updateEndDate(null);
+      } else {
+        rangeRef.updateEndDate(date);
+      }
+    } else if (startDate && endDate) {
+      rangeRef.updateStartDate(date);
+      rangeRef.updateEndDate(null);
+    }
   }
 
-  // public setDateMode(mode) {
-  //   this.datePickerModel.dateMode = mode;
-  // }
+  public close(): void {
+    if (this.autoClose) {
+      this._bottomSheetRef.dismiss();
+    }
+  }
+
+  public scollIndexChange(activeIndex: number): void {
+    this._activeScrollIndex = activeIndex;
+  }
+
+  private _scrollToClosestMonth(): void {
+    const touchstart$ = fromEvent(
+      this.virtualScroll.elementRef.nativeElement,
+      'touchstart',
+    );
+
+    const touchend$ = fromEvent(
+      this.virtualScroll.elementRef.nativeElement,
+      'touchend',
+    );
+
+    const scrollDebounceTime = 80;
+
+    touchstart$
+      .pipe(
+        switchMap(() => touchend$),
+        switchMap(() =>
+          race<unknown>(
+            this.virtualScroll.elementScrolled(),
+            timer(scrollDebounceTime),
+          ).pipe(
+            debounceTime(scrollDebounceTime * 2),
+            take(1),
+            takeUntil(touchstart$),
+          )
+        )
+      )
+      .subscribe(() => {
+        this.virtualScroll.scrollToIndex(this._activeScrollIndex, 'smooth');
+      })
+  }
+
+  private _initMonthRangeModels(): void {
+    this.modelFrom$ = this.datePickerModel
+      .rangePickerRef
+      .startDate$
+      .pipe(
+        shareReplay(),
+      );
+
+    this.modelTo$ = this.datePickerModel
+      .rangePickerRef
+      .endDate$
+      .pipe(
+        shareReplay(),
+      );
+  }
 }

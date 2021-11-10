@@ -1,4 +1,4 @@
-import { addDays, format, getDaysInMonth, lightFormat, subDays } from 'date-fns';
+import { addDays, addMonths, format, getDaysInMonth, lightFormat, subDays } from 'date-fns';
 
 import { isDayDisabled } from '../../common/helpers/is-day-disabled';
 
@@ -50,9 +50,14 @@ export class Month {
    */
   public renderDays() {
     let currentDate = subDays(this.date, this._prevMonthDaysCount);
-    const daysToBeRendered = this._hideExtraDays
+    let daysToBeRendered = this._hideExtraDays
       ? getDaysInMonth(this.date) + this._prevMonthDaysCount
       : CALENDAR_DAYS_NUMBER;
+
+    // only for week mode in mobile view!
+    if (this._hideExtraDays && this.periodWeeks) {
+      daysToBeRendered += 7 - (daysToBeRendered % 7);
+    }
 
     let week;
 
@@ -136,10 +141,10 @@ export class Month {
    * @param seedDay
    */
   private _countTotalDaysInMonth(seedDay) {
-    if (this._monthStartDay > seedDay) {
-      this._prevMonthDaysCount  = this._monthStartDay - seedDay;
+    if (this._monthStartDay >= seedDay) {
+      this._prevMonthDaysCount = this._monthStartDay - seedDay;
     } else {
-      this._prevMonthDaysCount  = 7 - (seedDay - this._monthStartDay);
+      this._prevMonthDaysCount = 7 - (seedDay - this._monthStartDay);
     }
 
     // const totalDays = this._daysInMonth + this._prevMonthDaysCount;

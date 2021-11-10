@@ -2,18 +2,18 @@
   <div class="calendar-container">
     <ng-container [ngSwitch]="datePickerModel.view">
       <ng-template [ngSwitchCase]="'date'">
-        <fs-datepicker-tmp-mobile-calendar [datePickerModel]="datePickerModel">
-        </fs-datepicker-tmp-mobile-calendar>
+        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel">
+        </fs-datepicker-mobile-scroll-calendar>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'week'">
-        <fs-datepicker-tmp-mobile-calendar [datePickerModel]="datePickerModel">
-        </fs-datepicker-tmp-mobile-calendar>
+        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel">
+        </fs-datepicker-mobile-scroll-calendar>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'monthrange'">
-        <fs-datepicker-tmp-mobile-calendar [datePickerModel]="datePickerModel">
-        </fs-datepicker-tmp-mobile-calendar>
+        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel">
+        </fs-datepicker-mobile-scroll-calendar>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'time'">

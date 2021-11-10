@@ -1,17 +1,23 @@
-fs-date-picker-calendar {
+.view-port {
+  height: 380px;
+  overflow-y: auto;
+}
+
+.header {
   display: block;
+  //padding: 8px 0;
+  text-align: center;
+  //border-bottom: 1px solid #f1f1f1;
+  font-size: 16px;
+  line-height: 40px;
+  font-weight: 500;
 }
 
-:host {
-  ::ng-deep {
-    .actions {
-      .mat-list-item-content {
-        justify-content: center;
-      }
-    }
-  }
-}
-
-.example-viewport {
-  height: 328px;
+.month-header {
+  text-align: center;
+  //margin-top: 15px;
+  //margin-bottom: 15px;
+  line-height: 50px;
+  font-size: 14px;
+  font-weight: 500;
 }

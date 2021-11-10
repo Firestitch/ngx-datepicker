@@ -28,15 +28,17 @@
 
 <div *ngIf="viewMode == 'week' || viewMode == 'date' || viewMode == 'datetime'" class="calendar">
   <div class="month-year">
-    <a class="month-name" (click)="setViewMode('month')">
+    <span class="month-name">
       {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}
-    </a>
+    </span>
 
     <span *ngIf="calendarDay" class="day-name">
       {{ calendarDay }},
     </span>
 
-    <a class="year-name" (click)="setViewMode('year')">{{ calendarYear }}</a>
+    <span class="year-name">
+      {{ calendarYear }}
+    </span>
   </div>
 
 </div>
