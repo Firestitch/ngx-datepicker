@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 40px;
-  min-height: 308px;
+  align-items: start;
+  min-height: 265px;
 }
 
 fs-date-picker-calendar {
