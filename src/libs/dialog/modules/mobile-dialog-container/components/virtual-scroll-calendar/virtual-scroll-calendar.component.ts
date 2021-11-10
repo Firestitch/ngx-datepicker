@@ -5,6 +5,7 @@ import {
   Inject,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
   ViewChild,
@@ -17,8 +18,16 @@ import {
   VIRTUAL_SCROLL_STRATEGY,
 } from '@angular/cdk/scrolling';
 
-import { fromEvent, Observable, race, timer } from 'rxjs';
-import { debounceTime, shareReplay, switchMap, take, takeUntil } from 'rxjs/operators';
+import { fromEvent, Observable, race, timer, Subject } from 'rxjs';
+import {
+  debounceTime,
+  delay,
+  filter,
+  shareReplay,
+  switchMap,
+  take,
+  takeUntil
+} from 'rxjs/operators';
 
 import { isBefore } from 'date-fns';
 
@@ -28,6 +37,7 @@ import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 import { RangePickerRef } from '../../../../../../app/classes/range-picker-ref';
 
 import { FsCalendarMobileScrollStrategy, CalendarScrollStrategy } from './calendar-scroll-strategy';
+import { MatTabGroup } from '@angular/material/tabs';
 
 
 @Component({
@@ -42,13 +52,19 @@ import { FsCalendarMobileScrollStrategy, CalendarScrollStrategy } from './calend
     },
   ],
 })
-export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnChanges {
+export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input()
   public datePickerModel: FsDatePickerDialogModel;
 
   @Input()
   public autoClose = true;
+
+  @Input()
+  public parentTabGroup: MatTabGroup;
+
+  @Input()
+  public parentTabIndex: number;
 
   @ViewChild(CdkVirtualScrollViewport, { static: true })
   public virtualScroll: CdkVirtualScrollViewport
@@ -60,6 +76,7 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
 
   private _dialogRef: FsDatePickerDialogRef;
   private _activeScrollIndex: number;
+  private _destroy$ = new Subject<void>();
 
   constructor(
     private _el: ElementRef,
@@ -79,6 +96,10 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
   public ngOnInit() {
     this._scrollStrategy.setInitialDate(this.datePickerModel.model || new Date());
     this._scrollToClosestMonth();
+
+    if (this.parentTabGroup) {
+      this._listenTabIndexChange();
+    }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -87,6 +108,11 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
       && this.datePickerModel.view === 'monthrange') {
       this._initMonthRangeModels();
     }
+  }
+
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
   public dateChanged(date): void {
@@ -153,7 +179,8 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
             take(1),
             takeUntil(touchstart$),
           )
-        )
+        ),
+        takeUntil(this._destroy$),
       )
       .subscribe(() => {
         this.virtualScroll.scrollToIndex(this._activeScrollIndex, 'smooth');
@@ -174,5 +201,17 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
       .pipe(
         shareReplay(),
       );
+  }
+
+  private _listenTabIndexChange(): void {
+    this.parentTabGroup.selectedIndexChange
+      .pipe(
+        filter((index) => index === this.parentTabIndex),
+        delay(0),
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this._scrollStrategy.scrollToDate(this.datePickerModel.model || new Date());
+      });
   }
 }
