@@ -29,6 +29,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   @Input() public disabledTimes = [];
   @Input() public expanded = false;
   @Input() public minutes = true;
+  @Input() public showNotSelected = true;
 
   @Output() public onChange = new EventEmitter<any>();
 

@@ -1,8 +1,10 @@
-<div class="month-year time" *ngIf="minutes">
+<div class="month-year time" *ngIf="minutes && showNotSelected">
   <ng-container *ngIf="date; else noTime">
     {{ date | date:'h:mm aa'}}
   </ng-container>
-  <ng-template #noTime>Time Not Selected</ng-template>
+  <ng-template #noTime>
+    Time Not Selected
+  </ng-template>
 </div>
 
 <div class="time-container">

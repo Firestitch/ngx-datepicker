@@ -23,6 +23,9 @@ export class FsMobileTimePickerComponent {
   @Input()
   public autoClose = true;
 
+  @Input()
+  public showNotSelected = true;
+
   constructor(
     private _bottomSheet: MatBottomSheetRef,
   ) {
