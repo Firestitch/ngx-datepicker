@@ -15,7 +15,6 @@ import { FsDatePickerCalendarModule } from '../../../calendar/calendar.module';
 import { FsMobileCalendarDialogComponent } from './components/mobile-dialog/mobile-dialog.component';
 import { FsDatePickerMobileHeaderComponent } from './components/header/header.component';
 import { FsMobileTimePickerComponent } from './components/time-picker/time-picker.component';
-import { FsDatePickerTmpMobileCalendarComponent } from './components/tmp-mobile-calendar/tmp-mobile-calendar.component';
 import { FDatePickerMobileDatetimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 import { FsDatePickerMobileHeaderMonthRangeComponent } from './components/header-month-range/header-month-range.component';
 import { FsDatePickerVirtualScrollCalendarComponent } from './components/virtual-scroll-calendar/virtual-scroll-calendar.component';
@@ -37,7 +36,6 @@ import { FsDatePickerVirtualScrollCalendarComponent } from './components/virtual
     FsMobileCalendarDialogComponent,
     FsDatePickerMobileHeaderComponent,
     FsMobileTimePickerComponent,
-    FsDatePickerTmpMobileCalendarComponent,
     FDatePickerMobileDatetimePickerComponent,
     FsDatePickerMobileHeaderMonthRangeComponent,
     FsDatePickerVirtualScrollCalendarComponent,
