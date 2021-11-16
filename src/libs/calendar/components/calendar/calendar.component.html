@@ -34,7 +34,7 @@
               [class.selected]="(day.selected || day.date == selected.date && !day.mute)"
               [class.range-from]="day.date === selectedRange.from && !day.mute && selectedRange.from !== selectedRange.to"
               [class.range-to]="day.date === selectedRange.to && !day.mute && selectedRange.from !== selectedRange.to"
-              [class.same-range-dates]="selectedRange.from === day.date && selectedRange.from === selectedRange.to"
+              [class.same-range-dates]="(hideExtraDays && !day.mute) && selectedRange.from === day.date && selectedRange.from === selectedRange.to"
               [class.highlighted]="!day.disabled && !day.mute && !!highlightedRangeDays.data[day.date]"
               [class.highlight-min-date]="day.date === highlightedRangeDays.min"
               [class.highlight-max-date]="day.date === highlightedRangeDays.max"
