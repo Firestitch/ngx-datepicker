@@ -134,8 +134,11 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
           this.cleared();
         }
 
-        this._ngControl.control.markAsDirty();
-        this._ngControl.control.updateValueAndValidity();
+        if (this.value) {
+          this._ngControl.control.markAsDirty();
+          this._ngControl.control.updateValueAndValidity();
+        }
+
         this._cdRef.markForCheck();
       });
   }
