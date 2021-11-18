@@ -101,10 +101,12 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
   }
 
   protected _processInputDate(date: Date | null): Date | null {
-    if (this.view === PickerViewType.Date) {
+    date = super._processInputDate(date);
+
+    if (this.view === PickerViewType.Date && date) {
       date = startOfDay(date);
     }
 
-    return super._processInputDate(date);
+    return date;
   }
 }
