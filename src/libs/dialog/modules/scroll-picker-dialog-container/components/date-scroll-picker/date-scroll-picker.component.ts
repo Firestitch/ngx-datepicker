@@ -51,9 +51,9 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
   @Output()
   public changed = new EventEmitter<Date>();
 
-  public years: number[] = [];
+  public years: any[] = [];
   public months: any[] = [];
-  public days: number[] = [];
+  public days: any[] = [];
 
   public month;
   public day;
@@ -116,8 +116,7 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
     });
   }
 
-  public change(save = false) {
-
+  public change() {
     if (!this.year) {
       this.year = this.showYear ? this.years[0] : 0;
     }
@@ -130,13 +129,13 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
       this.day = this.days[0];
     }
 
-    const daysInMonth = getDaysInMonth(new Date(this.year, this.month.value));
+    const daysInMonth = getDaysInMonth(new Date(this.year, this.month));
 
     if (this.day > daysInMonth) {
       this.day = daysInMonth;
     }
 
-    const date = new Date(this.year, this.month.value, this.day);
+    const date = new Date(this.year, this.month, this.day);
 
     this.changed.emit(date);
     this._cdRef.markForCheck();
@@ -175,17 +174,14 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
       days = 31;
     }
 
-    this.days = Array.from(Array(days).keys()).map((d: number) => d + 1);
+    this.days = Array.from(Array(days).keys()).map((d: number) => d + 1)
+    .map((day) => {
+      return { name: day, value: day };
+    });
   }
 
   private _generateMonthArray() {
-    const maxDate = this.maxDate;
-
-    if (maxDate && this.year === maxDate.getFullYear()) {
-      this.months = MONTHS.slice(0, maxDate.getMonth() + 1);
-    } else {
-      this.months = MONTHS;
-    }
+    this.months = MONTHS;
   }
 
   private _generateYearsArray() {
@@ -198,7 +194,7 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
     }
 
      for ( minYear; minYear <= maxYear; minYear++ ) {
-       this.years.push(minYear);
+       this.years.push({ name: minYear, value: minYear });
      }
   }
 

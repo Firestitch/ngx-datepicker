@@ -62,7 +62,7 @@
     "@firestitch/menu": "^9.1.8",
     "@firestitch/message": "^8.2.1",
     "@firestitch/prompt": "^8.4.4",
-    "@firestitch/scroll-picker": "^8.0.0",
+    "@firestitch/scroll-picker": "^10.0.1",
     "@firestitch/scrollbar": "7.0.4",
     "@firestitch/store": "^8.1.0",
     "@firestitch/style": "^8.2.0",
