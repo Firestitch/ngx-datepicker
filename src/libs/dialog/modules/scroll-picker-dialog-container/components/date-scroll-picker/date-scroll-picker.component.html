@@ -11,7 +11,8 @@
   <fs-scroll-picker
       *ngIf="showDay"
       class="day"
-      [values]="days"
+      [valuesMin]="1"
+      [valuesMax]="maxDay"
       name="day"
       [(ngModel)]="day"
       (ngModelChange)="change()">

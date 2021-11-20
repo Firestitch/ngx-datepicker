@@ -53,11 +53,11 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
 
   public years: any[] = [];
   public months: any[] = [];
-  public days: any[] = [];
 
   public month;
   public day;
   public year;
+  public maxDay = 0;
 
   constructor(
     public element: ElementRef,
@@ -106,7 +106,7 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
     if (date) {
       this.day = date.getDate();
       this.year = date.getFullYear();
-      this.month = this._getMonth(date.getMonth());
+      this.month = date.getMonth();
     }
   }
 
@@ -126,11 +126,10 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
     }
 
     if (!this.day) {
-      this.day = this.days[0];
+      this.day = 1;
     }
-
+    
     const daysInMonth = getDaysInMonth(new Date(this.year, this.month));
-
     if (this.day > daysInMonth) {
       this.day = daysInMonth;
     }
@@ -155,8 +154,7 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
   }
 
   private _generateDaysArray() {
-
-    let days = 0;
+    this.maxDay = 0;
     const maxDate = this.maxDate;
     const maxDay = maxDate && maxDate.getDate();
     const maxMonth = maxDate && maxDate.getMonth();
@@ -164,20 +162,16 @@ export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
 
     if (this.month) {
       if (maxDay && maxMonth == this.month.value && maxYear === this.year) {
-        days = maxDay;
+        this.maxDay = maxDay;
       } else {
-        days = getDaysInMonth(new Date(this.year, this.month.value));
+        const daysInMonth = getDaysInMonth(new Date(this.year, this.month));
+        this.maxDay = daysInMonth;
       }
     }
 
-    if (!days) {
-      days = 31;
+    if (!this.maxDay) {
+      this.maxDay = 31;
     }
-
-    this.days = Array.from(Array(days).keys()).map((d: number) => d + 1)
-    .map((day) => {
-      return { name: day, value: day };
-    });
   }
 
   private _generateMonthArray() {

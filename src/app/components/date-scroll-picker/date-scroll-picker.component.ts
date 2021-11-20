@@ -1,11 +1,9 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   forwardRef,
-  HostListener,
   Inject,
   Injector,
   Input,
@@ -32,7 +30,7 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
-        implements AfterViewInit, ControlValueAccessor {
+        implements ControlValueAccessor {
 
   @Input() public minYear = (new Date()).getFullYear() - 50;
   @Input() public maxYear = (new Date()).getFullYear() + 50;
@@ -53,10 +51,6 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     super(renderer, elementRef, _cdRef);
   }
 
-  public ngAfterViewInit() {
-    this.setReadonly();
-  }
-
   public writeValue(value: any): void {
     this._originValue = value;
     this._value = createDateFromValue(value, this.timezone);
@@ -65,15 +59,6 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
     this._cdRef.markForCheck();
   }
-
-  @HostListener('click')
-  @HostListener('focus')
-  public inputClick() {
-    if (!this.disabled && !this.readonly) {
-      this.open();
-    }
-  }
-
 
   public updateInput(value) {
 
