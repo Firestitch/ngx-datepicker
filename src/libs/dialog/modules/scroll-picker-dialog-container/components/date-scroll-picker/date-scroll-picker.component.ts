@@ -25,7 +25,7 @@ import { MONTHS } from '../../consts/months';
   styleUrls: ['./date-scroll-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateScrollPickerComponent implements OnInit, OnDestroy {
+export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
 
   @Input()
   public model: Date | null;
