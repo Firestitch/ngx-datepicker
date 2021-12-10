@@ -122,7 +122,7 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     }
 
     if (!this.month) {
-      this.month = this.months[0];
+      this.month = this.months[0].value;
     }
 
     if (!this.day) {
