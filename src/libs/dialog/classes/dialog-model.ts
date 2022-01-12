@@ -259,6 +259,7 @@ export class FsDatePickerDialogModel {
 
       default: {
         this.model = (options.modelValue as Date);
+        this.calendarDate = (options.modelValue as Date) || new Date();
       }
     }
 
