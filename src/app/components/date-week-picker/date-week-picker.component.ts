@@ -93,7 +93,6 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   }
 
   public open() {
-
     if (this._dateDialogRef) {
       return;
     }

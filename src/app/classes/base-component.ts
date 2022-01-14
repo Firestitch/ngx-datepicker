@@ -1,7 +1,7 @@
-import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, HostBinding, Input, ChangeDetectorRef, Directive } from '@angular/core';
+import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, HostBinding, Input, ChangeDetectorRef, Directive, OnInit } from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { filter, take, takeUntil, tap } from 'rxjs/operators';
 
 import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
 
@@ -22,7 +22,7 @@ import { parseDate } from '../helpers/parse-date';
 
 @Directive()
 export abstract class FsDatePickerBaseComponent<D = any>
-  implements Validator, ControlValueAccessor, OnDestroy {
+  implements Validator, ControlValueAccessor, OnDestroy, OnInit {
 
   abstract updateInput(value: Date): void;
 
@@ -75,7 +75,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
   protected _originValue: Date | null; // before timezone
   protected _value;
   protected dialog = null;
-  protected elementRef;
+  protected elementRef: ElementRef;
   protected renderer;
   protected _dateDialogRef: FsDatePickerDialogRef;
   protected _destroy$ = new Subject();
@@ -93,6 +93,35 @@ export abstract class FsDatePickerBaseComponent<D = any>
   ) {
     this.renderer = renderer;
     this.elementRef = elementRef;
+  }
+
+  public ngOnInit(): void {
+    fromEvent(this.el, 'click')
+    .pipe(
+      takeUntil(this._destroy$),
+    )
+    .subscribe(() => {
+      this.open();
+    });
+
+    
+    fromEvent(this.el, 'keydown')
+    .pipe(
+      tap(() => this.close()),
+      filter((event: KeyboardEvent) => event.key === 'Tab' || event.key === 'Enter' ),
+      takeUntil(this._destroy$),
+    )
+    .subscribe((event: KeyboardEvent) => {
+      if(event.key === 'Enter') {
+        this.inputChange(this.el.value);
+      }
+
+      this.close();    
+    });
+  }
+
+  public get el() {
+    return this.elementRef.nativeElement;
   }
 
   public get clear(): boolean {

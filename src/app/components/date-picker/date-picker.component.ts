@@ -59,9 +59,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   public change$ = new EventEmitter<any>();
 
   constructor(
+    @Inject(ElementRef) protected elementRef: ElementRef,
     protected renderer: Renderer2,
     protected injector: Injector,
-    @Inject(ElementRef) protected elementRef: ElementRef,
     protected _cdRef: ChangeDetectorRef,
     protected fsDatepickerFactory: FsDatePickerDialogFactory,
   ) {
