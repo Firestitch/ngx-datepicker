@@ -6,6 +6,7 @@
       'has-view-time': datePickerModel.view === 'time' || datePickerModel.view === 'datetime',
       'date-mode-date-time': (datePickerModel.calendarMode$ | async) === 'datetime',
       'date-mode-date': (datePickerModel.calendarMode$ | async) === 'date',
+      'date-mode-time': (datePickerModel.calendarMode$ | async) === 'time',
       'date-mode-month': (datePickerModel.calendarMode$ | async) === 'month',
       'date-mode-year': (datePickerModel.calendarMode$ | async) === 'year',
       'date-mode-week': (datePickerModel.calendarMode$ | async) === 'week'

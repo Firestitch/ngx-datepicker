@@ -263,8 +263,9 @@ export class FsDatePickerDialogFactory {
   private _openDatePickerMobile(dialogRef: FsDatePickerDialogRef): MatBottomSheetRef {
     return this._bottomSheet.open(FsMobileCalendarDialogComponent, {
       data: {
-        dateDialogRef: dialogRef,
-      }
+        dateDialogRef: dialogRef,        
+      },
+      restoreFocus: false,
     });
   }
 

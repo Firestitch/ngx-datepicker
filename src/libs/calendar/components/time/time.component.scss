@@ -1,14 +1,5 @@
-/*:host {
-  @media only screen and (max-width: 737px) {
-    margin-left: 0;
-    width: 100%;
-  }
-}*/
-
-
 thead th {
   text-align: center;
-  padding-left: 7px;
 }
 
 tbody {
@@ -40,16 +31,3 @@ tbody {
     padding-left: 2px;
   }
 }
-
-
-/*@media only screen and (min-width: 737px) {
-  .time-container {
-
-    .hours-col tbody,
-    .minutes-col tbody {
-      max-height: 300px;
-      overflow: auto;
-      display: block;
-    }
-  }
-}*/

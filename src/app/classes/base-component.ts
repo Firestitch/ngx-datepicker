@@ -96,27 +96,27 @@ export abstract class FsDatePickerBaseComponent<D = any>
   }
 
   public ngOnInit(): void {
-    fromEvent(this.el, 'click')
+    fromEvent(this.el, 'focus')
     .pipe(
       takeUntil(this._destroy$),
     )
     .subscribe(() => {
       this.open();
     });
-
     
     fromEvent(this.el, 'keydown')
     .pipe(
       tap(() => this.close()),
-      filter((event: KeyboardEvent) => event.key === 'Tab' || event.key === 'Enter' ),
+      filter((event: KeyboardEvent) => ['Tab', 'Enter', 'Escape'].includes(event.key)),
       takeUntil(this._destroy$),
     )
     .subscribe((event: KeyboardEvent) => {
       if(event.key === 'Enter') {
-        this.inputChange(this.el.value);
+        this.inputChange(this.el.value);        
       }
 
       this.close();    
+      this.el.blur();
     });
   }
 

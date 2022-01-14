@@ -3,21 +3,13 @@
   overflow-y: auto;
 }
 
-.header {
-  display: block;
-  //padding: 8px 0;
+.month-header {
   text-align: center;
-  //border-bottom: 1px solid #f1f1f1;
-  font-size: 16px;
-  line-height: 40px;
+  line-height: 50px;
+  font-size: 110%;
   font-weight: 500;
 }
 
-.month-header {
-  text-align: center;
-  //margin-top: 15px;
-  //margin-bottom: 15px;
-  line-height: 50px;
-  font-size: 14px;
-  font-weight: 500;
+cdk-virtual-scroll-viewport::-webkit-scrollbar {
+  width: 0;
 }

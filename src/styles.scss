@@ -255,8 +255,6 @@
     }
   }
 
-
-
   .tile {
     padding: 0;
     position: relative;
@@ -274,10 +272,9 @@
     justify-content: center;
     border-radius: 50%;
     flex-direction: column;
-    border: 1px solid transparent;
-    height: 46px;
-    width: 46px;
-    margin: 0 auto;
+    margin: 2px auto;
+    height: 42px;
+    width: 42px;
 
     .now {
       top: 8%;
@@ -393,11 +390,10 @@
   }
 
   table {
-    //border-collapse: collapse;
     border-spacing: 0;
     thead {
       th {
-        padding-bottom: 6px;
+        padding: 7px;
         background: #fff;
         border-bottom: 1px solid #efefef;
         font-weight: normal;
@@ -407,81 +403,6 @@
     }
   }
 }
-
-/*
-@media only screen and (min-width: 737px) {
-
-  .fs-date-picker-dialog {
-    .calendar-container {
-      display: flex !important;
-    }
-
-    &.has-view-time {
-      .summary .date:hover,
-      .summary .time:hover {
-        background: rgba(181,181,181,.15);
-      }
-    }
-  }
-}
-*/
-
-/*
-@media only screen and (max-width: 736px) {
-
-  .cdk-overlay-pane.fs-datepicker-overlay-pane {
-    transform: none !important;
-  }
-
-  .fs-date-picker-dialog {
-    !*left: 0 !important;
-    right: 0 !important;
-    top: 0 !important;
-    bottom: 0px !important;
-    margin: 0px;
-    height: 100vh;
-    max-height: initial !important;
-    background-color: #fff;*!
-
-    &.has-view-date.has-view-time {
-      .calendar-view {
-        margin-top: 41px;
-      }
-    }
-
-    .wrap {
-    	margin: 0px;
-    	width: 100% !important;
-      box-shadow: none;
-
-      .header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-      }
-    }
-
-    table {
-	    width: 100%;
-    }
-    .close {
-      display: flex;
-    }
-    fs-tabnav {
-      display: block;
-    }
-
-    .months, .years {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      z-index: 1000;
-      background: #fff;
-      top: 0;
-    }
-  }
-}
-*/
 
 .time-container {
   .hour, .minute {

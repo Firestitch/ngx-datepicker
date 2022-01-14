@@ -4,8 +4,6 @@ import {
   Input, Output,
 } from '@angular/core';
 
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
-
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 
 @Component({
@@ -21,11 +19,6 @@ export class FDatePickerMobileDatetimePickerComponent {
 
   @Output()
   public tabChange = new EventEmitter<number>();
-
-  constructor(
-    private _bottomSheet: MatBottomSheetRef,
-  ) {
-  }
 
   public selectedDateTimeTabChange(index: number): void {
     this.tabChange.emit(index);

@@ -25,20 +25,3 @@
   </ng-container>
   <div class="clear"></div>
 </div>
-
-<div *ngIf="viewMode == 'week' || viewMode == 'date' || viewMode == 'datetime'" class="calendar">
-  <div class="month-year">
-    <span class="month-name">
-      {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}
-    </span>
-
-    <span *ngIf="calendarDay" class="day-name">
-      {{ calendarDay }},
-    </span>
-
-    <span class="year-name">
-      {{ calendarYear }}
-    </span>
-  </div>
-
-</div>

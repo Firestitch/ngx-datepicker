@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Inject,
 } from '@angular/core';
@@ -25,7 +24,6 @@ export class FsMobileCalendarDialogComponent {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA)
     private _data: any,
-    private _cd: ChangeDetectorRef,
     private _bottomSheetRef: MatBottomSheetRef<any>,
   ) {
     this._dialogRef = this._data.dateDialogRef;
