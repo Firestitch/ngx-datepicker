@@ -103,21 +103,21 @@ export abstract class FsDatePickerBaseComponent<D = any>
     .subscribe(() => {
       this.open();
     });
-    
-    fromEvent(this.el, 'keydown')
-    .pipe(
-      tap(() => this.close()),
-      filter((event: KeyboardEvent) => ['Tab', 'Enter', 'Escape'].includes(event.key)),
-      takeUntil(this._destroy$),
-    )
-    .subscribe((event: KeyboardEvent) => {
-      if(event.key === 'Enter') {
-        this.inputChange(this.el.value);        
-      }
 
-      this.close();    
-      this.el.blur();
-    });
+    fromEvent(this.el, 'keydown')
+      .pipe(
+        tap(() => this.close()),
+        filter((event: KeyboardEvent) => ['Tab', 'Enter', 'Escape'].includes(event.key)),
+        takeUntil(this._destroy$),
+      )
+      .subscribe((event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          this.inputChange(this.el.value);
+        }
+
+        this.close();
+        this.el.blur();
+      });
   }
 
   public get el() {
@@ -188,6 +188,9 @@ export abstract class FsDatePickerBaseComponent<D = any>
   public open() {
     this.renderer.addClass(document.body, 'fs-date-picker-open');
     this.opened = true;
+
+    this.el.focus();
+
     this._dateDialogRef.value$
       .pipe(
         takeUntil(this._dateDialogRef.close$),
@@ -255,14 +258,14 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
   @HostListener('input', ['$event.target.value', '$event.target'])
   public _inputChange(value: string, target): void {
-    if(this.ngModelOptions?.updateOn !== 'blur')  {
+    if (this.ngModelOptions?.updateOn !== 'blur')  {
       this.inputChange(value);
     }
   }
 
   @HostListener('blur', ['$event.target.value'])
   public _inputBlur(value: string): void {
-    if(this.ngModelOptions?.updateOn === 'blur')  {
+    if (this.ngModelOptions?.updateOn === 'blur')  {
       this.inputChange(value);
     }
 

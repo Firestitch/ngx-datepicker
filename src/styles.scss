@@ -272,9 +272,10 @@
     justify-content: center;
     border-radius: 50%;
     flex-direction: column;
-    margin: 2px auto;
-    height: 42px;
-    width: 42px;
+    border: 1px solid transparent;
+    height: 46px;
+    width: 46px;
+    margin: 0 auto;
 
     .now {
       top: 8%;

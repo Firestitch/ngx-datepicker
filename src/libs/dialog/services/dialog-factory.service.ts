@@ -213,6 +213,13 @@ export class FsDatePickerDialogFactory {
     return this._createBasePopupPositionStrategy(el)
       .withPositions([
         {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'top',
+          offsetY: 10,
+        },
+        {
           originX: 'end',
           originY: 'top',
           overlayX: 'start',
@@ -236,10 +243,9 @@ export class FsDatePickerDialogFactory {
   private _createBasePopupPositionStrategy(el: ElementRef): FlexibleConnectedPositionStrategy {
     return this._overlay.position()
       .flexibleConnectedTo(el)
-      .withGrowAfterOpen(true)
-      .withFlexibleDimensions(true)
-      .withViewportMargin(9)
-      .withPush(true)
+      .withGrowAfterOpen(false)
+      .withFlexibleDimensions(false)
+      .withPush(false)
   }
 
   private _openDatePickerDesktop (
@@ -263,7 +269,7 @@ export class FsDatePickerDialogFactory {
   private _openDatePickerMobile(dialogRef: FsDatePickerDialogRef): MatBottomSheetRef {
     return this._bottomSheet.open(FsMobileCalendarDialogComponent, {
       data: {
-        dateDialogRef: dialogRef,        
+        dateDialogRef: dialogRef,
       },
       restoreFocus: false,
     });

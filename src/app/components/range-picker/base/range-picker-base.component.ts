@@ -158,6 +158,7 @@ export abstract class RangePickerComponent<D = any>
     this.disabled = isDisabled;
   }
 
+  @HostListener('focus', ['$event.target.value'])
   public open() {
     if (this._dateDialogRef || this.disabled || this.readonly) {
       return
@@ -180,6 +181,8 @@ export abstract class RangePickerComponent<D = any>
         rangeType: this._type
       }
     );
+
+    this._elRef.nativeElement.focus();
 
     this._listenDialogValueChanges();
 
