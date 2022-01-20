@@ -43,7 +43,9 @@
               (click)="dayClick(day, week, $event)"
               (mouseenter)="onMouseEnterDay(day)">
             <div class="tile-content">
-              {{ day.number }}
+              <div class="tile-day-label">
+                {{ day.number }}
+              </div>
             </div>
           </td>
         </ng-container>
