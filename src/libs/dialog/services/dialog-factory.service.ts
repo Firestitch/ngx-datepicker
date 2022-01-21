@@ -218,6 +218,7 @@ export class FsDatePickerDialogFactory {
           overlayX: 'start',
           overlayY: 'top',
           offsetY: 10,
+          offsetX: -29
         },
         {
           originX: 'end',
@@ -236,6 +237,20 @@ export class FsDatePickerDialogFactory {
           originY: 'bottom',
           overlayX: 'start',
           overlayY: 'bottom',
+        },
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'end',
+          overlayY: 'top',
+          offsetX: -29,
+        },
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'end',
+          overlayY: 'center',
+          offsetX: -29,
         },
       ]);
   }
