@@ -271,6 +271,13 @@ export abstract class RangePickerComponent<D = any>
   public registerOnChange(fn) { this.onChange = fn;  }
   public registerOnTouched(fn) { this.onTouch = fn; }
 
+  public triggerClick(): void {
+    this._elRef.nativeElement.focus();
+    this._elRef.nativeElement.select();
+
+    this.open();
+  }
+
   protected _processInputDate(date: Date | null): Date | null {
     if (!date) {
       return null;

@@ -102,6 +102,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
     )
     .subscribe(() => {
       this.open();
+      this.el.focus();
     });
 
     fromEvent(this.el, 'keydown')
@@ -189,8 +190,6 @@ export abstract class FsDatePickerBaseComponent<D = any>
     this.renderer.addClass(document.body, 'fs-date-picker-open');
     this.opened = true;
 
-    this.el.focus();
-
     this._dateDialogRef.value$
       .pipe(
         takeUntil(this._dateDialogRef.close$),
@@ -215,6 +214,13 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
   public clearInput() {
     this.elementRef.nativeElement.value = null;
+  }
+
+  public triggerClick(): void {
+    this.el.focus();
+    this.el.select();
+
+    this.open();
   }
 
   protected updateValue(date): void {

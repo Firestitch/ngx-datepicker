@@ -43,7 +43,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
 
   static template = `
     <fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>
-    <fs-datepicker-trigger (click)="open()" [disabled]="disabled || readonly" [view]="view"></fs-datepicker-trigger>
+    <fs-datepicker-trigger (click)="triggerClick()" [disabled]="disabled || readonly" [view]="view"></fs-datepicker-trigger>
   `;
 
   @Input() public minYear = null;
