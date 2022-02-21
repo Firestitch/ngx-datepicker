@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 import { getYearsCycle, reduceCycle } from './helpers';
+import { Injectable } from "@angular/core";
 
 export const YEARS_TO_BE_RENDERED = 200;
 export const START_CYCLE_YEAR = 1900;
@@ -25,6 +26,7 @@ export interface FsCalendarMobileScrollStrategy extends VirtualScrollStrategy {
  * Implementation has been taken from Alex Inkin article, adopted and modified a bit
  * https://indepth.dev/posts/1091/writing-custom-virtual-scroll-strategy
  */
+@Injectable()
 export class CalendarScrollStrategy implements FsCalendarMobileScrollStrategy {
 
   private readonly _index$ = new Subject<number>();

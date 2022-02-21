@@ -10,7 +10,7 @@ import {
 
 export class FsCalendarDataSource extends DataSource<Date> {
 
-  private _cachedMonths: Date[];
+  private _cachedMonths: Date[] = [];
   private _fetchedPages = new Set<number>();
 
   private readonly _dataStream = new BehaviorSubject<Date[]>(this._cachedMonths);

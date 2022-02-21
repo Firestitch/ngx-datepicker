@@ -1,7 +1,7 @@
+@use '~@angular/material' as mat;
 @import '~@firestitch/style/styles';
 @import './variables';
 
-@import '~@angular/material/theming';
 
 .fs-date-picker-calendar {
   display: flex;
@@ -432,14 +432,14 @@
   .month-range.range-selected .range-from .tile-content,
   .month-range.range-selected .range-to .tile-content,
   .month-range.range-selected .same-range-dates .tile-content {
-    background-color: mat-color($selected-color);
+    background-color: mat.get-color-from-palette($selected-color);
   }
 }
 
 .time-container {
   .hour.selected .tile-content,
   .minute.selected .tile-content {
-    background-color: mat-color($selected-color);
+    background-color: mat.get-color-from-palette($selected-color);
   }
 }
 
@@ -453,12 +453,12 @@
 .has-view-time {
   .summary .date.active,
   .summary .time.active {
-    color: mat-color($palette);
+    color: mat.get-color-from-palette($palette);
   }
 }
 
 .time-container .minutes .button-expand {
-  color: mat-color($palette);
+  color: mat.get-color-from-palette($palette);
 }
 
 .week {

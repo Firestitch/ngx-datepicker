@@ -1,9 +1,9 @@
+@use '~@angular/material' as mat;
 @use '../src/styles.scss' as fs-date-picker;
 
-@import '~@angular/material/theming';
 
 @import './../tools/assets/playground.scss';
 @import "~@firestitch/form/styles.scss";
 
-@include mat-core();
+@include mat.core();
 @include fs-form($app-theme);
