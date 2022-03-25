@@ -116,9 +116,8 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
   public setViewMode(mode: string): void {
     this.viewModeChange.emit(mode);
 
-    if (mode === 'year') {
-      this._scrollToSelectedYear();
-    }
+    this._scrollToSelectedYear();
+    this._scrollToSelectedMonth();
   }
 
   public nextMonth(): void {
@@ -174,9 +173,20 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
       const selected = years.querySelector('.year.selected');
 
       if (selected) {
-        years.scrollTop = selected.offsetTop;
+        selected.scrollIntoView({behavior: 'auto', block: 'center'});
       }
-    }, 50);
+    });
+  }
+
+  private _scrollToSelectedMonth(): void {
+    setTimeout(() => {
+      const years = this._elRef.nativeElement.querySelector('.months');
+      const selected = years.querySelector('.month.selected');
+
+      if (selected) {
+        selected.scrollIntoView({behavior: 'auto', block: 'center'});
+      }
+    });
   }
 
 }
