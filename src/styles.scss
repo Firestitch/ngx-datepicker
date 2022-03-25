@@ -223,24 +223,9 @@
       flex-direction: row;
     }
 
-    .actions {
-      text-align: right;
-      a {
-        padding: 6px;
-        color: #757575;
-      }
-    }
-
     .more {
       padding: 1px;
     }
-  }
-
-  .year-name, .month-name {
-    color: inherit;
-    padding: 5px;
-    border-radius: 3px;
-    float: left;
   }
 
   .day {

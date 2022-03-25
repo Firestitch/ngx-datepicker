@@ -36,15 +36,18 @@
       {{ calendarDay }},
     </span>
 
-    <a class="year-name" (click)="setViewMode('year')">{{ calendarYear }}</a>
-
+    <a class="year-name" (click)="setViewMode('year')">
+      {{ calendarYear }}
+      <mat-icon class="action">arrow_drop_down</mat-icon>
+    </a>
+    
     <div class="gap"></div>
 
-    <div class="actions">
-      <a (click)="prevMonth()">
+    <div class="action">
+      <a (click)="prevMonth()" class="action">
         <mat-icon>navigate_before</mat-icon>
       </a>
-      <a (click)="nextMonth()">
+      <a (click)="nextMonth()" class="action">
         <mat-icon>navigate_next</mat-icon>
       </a>
     </div>

@@ -1,3 +1,31 @@
 .months {
   width: 350px;
 }
+
+
+.year-name, .month-name {
+  color: inherit;
+  padding: 5px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+a.month-name,
+a.year-name {
+  &:hover {
+    background-color: rgb(234, 234, 234);
+    border-radius: 3px;
+  }  
+}
+
+.actions {
+  a {
+    padding: 6px;
+    color: #757575;
+  }
+}
+
+a.action {
+  color: #757575;
+}
