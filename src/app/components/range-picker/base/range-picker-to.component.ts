@@ -85,11 +85,11 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
    * Set value which was selected in dialog
    * @param value
    */
-  public updateValueFromDialog(value) {
-    this.updateValue(value);
-
-    super.updateValueFromDialog(this._pickerRef.endDate);
-  }
+  // public updateValueFromDialog(value) {
+  //   this.updateValue(value);
+  //
+  //   super.updateValueFromDialog(this._pickerRef.endDate);
+  // }
 
   public updateValue(value: Date) {
     if (this.view === PickerViewType.Date) {
