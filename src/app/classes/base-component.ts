@@ -58,8 +58,8 @@ export abstract class FsDatePickerBaseComponent<D = any>
   public disabled = false;
 
   @Input('readonly')
-  public set readonlyState(isReadonly: string) {
-    this.readonly = !!isReadonly || isReadonly === '';
+  public set readonlyState(isReadonly: boolean) {
+    this.readonly = !!isReadonly || (isReadonly as unknown) === '';
   }
 
   @HostBinding('class.fs-input-readonly')

@@ -57,8 +57,8 @@ export abstract class RangePickerComponent<D = any>
   public disabled = false;
 
   @Input('readonly')
-  public set readonlyState(isReadonly: string) {
-    this.readonly = !!isReadonly || isReadonly === '';
+  public set readonlyState(isReadonly: boolean) {
+    this.readonly = !!isReadonly || (isReadonly as unknown) === '';
   }
 
   @Input() public ngModelOptions: {
