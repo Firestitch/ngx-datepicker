@@ -15,10 +15,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { isDate, format } from 'date-fns';
-
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
+import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interface';
+import { formatPeriodObject } from '../../../libs/common/helpers/format-period-object';
 import { FsDatePickerBaseComponent } from '../../classes/base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
@@ -40,7 +40,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   @Input() public minDate = null;
   @Input() public maxDate = null;
   @Input() public seedDate = null;
-  @Input() public periodWeeks = 1;
+  @Input() public period = 1;
   @Input() public view = PickerViewType.Week;
 
   @Output('change')
@@ -68,7 +68,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
     this.setReadonly();
   }
 
-  public writeValue(value: any): void {
+  public writeValue(value: IDatePickerPeriod): void {
     this._value = value;
     this.validateDate(this.value);
     this.updateInput(value);
@@ -77,19 +77,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   }
 
   public updateInput(value) {
-    if (value && isDate(value.from) && isDate(value.to)) {
-      if (value.from.getFullYear() == value.to.getFullYear()) {
-        const from = format(value.from, 'MMM d');
-        const to = format(value.to, 'MMM d yyyy');
-        this.elementRef.nativeElement.value = `#${value.period}: ${from} - ${to}`;
-      } else {
-        const from = format(value.from, 'MMM d yyyy');
-        const to = format(value.to, 'MMM d yyyy');
-        this.elementRef.nativeElement.value = `#${value.period}: ${from} - ${to}`;
-      }
-    } else {
-      this.elementRef.nativeElement.value = '';
-    }
+    return formatPeriodObject(value);
   }
 
   public open() {
@@ -109,7 +97,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
         maxDate: this.maxDate,
         components: this._getDefaultComponents(),
         seedDate: this.seedDate,
-        periodWeeks: this.periodWeeks,
+        periodWeeks: this.period,
       }
     );
 

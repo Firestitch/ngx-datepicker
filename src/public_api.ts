@@ -19,3 +19,6 @@ export { TimeRangePickerFromComponent } from './app/components/range-picker/from
 export { TimeRangePickerToComponent } from './app/components/range-picker/to/time-range-picker-to.component';
 export { MonthRangePickerFromComponent } from './app/components/range-picker/from/month-range-picker-from.component';
 export { MonthRangePickerToComponent } from './app/components/range-picker/to/month-range-picker-to.component';
+
+export { IDatePickerPeriod } from './libs/common/interfaces/period.interface';
+export { formatPeriodObject } from './libs/common/helpers/format-period-object';

@@ -3,7 +3,7 @@ import { skip } from 'rxjs/operators';
 
 import { isEqual, forEach } from 'lodash-es';
 
-import { IPeriod } from '../../common/interfaces/period.interface';
+import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 
 import { FsDatePickerDialogModel } from './dialog-model';
 import { FsDatePickerOverlayRef } from './overlay-ref';
@@ -16,7 +16,7 @@ export class FsDatePickerDialogRef {
   private _overlayRef = new FsDatePickerOverlayRef();
   private _dialogModel: FsDatePickerDialogModel;
   private _close$ = new Subject<void>();
-  private _value$: Observable<Date | null | IPeriod>;
+  private _value$: Observable<Date | null | IDatePickerPeriod>;
 
   /**
    * Visual components. Can be changed by summary widget but only if _view allowed to do this.
@@ -44,7 +44,7 @@ export class FsDatePickerDialogRef {
     return this._pickerOptions;
   }
 
-  public get value$(): Observable<Date | IPeriod | null> {
+  public get value$(): Observable<Date | IDatePickerPeriod | null> {
     return this._value$;
   }
 

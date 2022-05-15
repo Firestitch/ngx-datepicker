@@ -14,7 +14,7 @@ export class WeekPickerComponent {
 
   public model = null;
 
-  public seedDate = new Date(2019, 0, 1);
+  public seedDate = null;
   public periodWeeks = 1;
 
   constructor() {}

@@ -15,9 +15,10 @@ import { IDialogFactoryOptions } from '../../dialog/interfaces/dialog-factory-da
 import { PickerViewType } from '../../common/enums/picker-view-type.enum';
 import { getDisabledDays } from '../../dialog/helpers/get-disabled-days';
 import { getDisabledTimes } from '../../dialog/helpers/get-disabled-times';
-import { IPeriod } from '../../common/interfaces/period.interface';
+import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 
 import { RangePickerRef } from '../../../app/classes/range-picker-ref';
+import { getFirstDayOfFirstYearWeek } from '../helpers/get-first-day-of-first-year-week';
 
 
 export class FsDatePickerDialogModel {
@@ -41,7 +42,7 @@ export class FsDatePickerDialogModel {
   private _pickerOptions: IDialogFactoryOptions;
 
   private _model$ = new BehaviorSubject<Date | null>(null);
-  private _period$ = new BehaviorSubject<IPeriod | null>(null);
+  private _period$ = new BehaviorSubject<IDatePickerPeriod | null>(null);
 
   private _now$ = new BehaviorSubject<Date>(new Date());
 
@@ -157,15 +158,15 @@ export class FsDatePickerDialogModel {
     return this._model$;
   }
 
-  public set period(value: IPeriod | null) {
+  public set period(value: IDatePickerPeriod | null) {
     this._period$.next(value);
   }
 
-  public get period(): IPeriod | null {
+  public get period(): IDatePickerPeriod | null {
     return this._period$.value;
   }
 
-  public get period$(): Observable<IPeriod | null> {
+  public get period$(): Observable<IDatePickerPeriod | null> {
     return this._period$;
   }
 
@@ -249,8 +250,8 @@ export class FsDatePickerDialogModel {
 
     switch (this.view) {
       case PickerViewType.Week: {
-        this.period = (options.modelValue as IPeriod);
-        this.calendarDate = (options.modelValue as IPeriod)?.from || new Date();
+        this.period = (options.modelValue as IDatePickerPeriod);
+        this.calendarDate = (options.modelValue as IDatePickerPeriod)?.from || new Date();
       } break;
 
       case PickerViewType.MonthRange: {
@@ -273,9 +274,8 @@ export class FsDatePickerDialogModel {
       ? true
       : options.minutes;
 
-
     if (!isDate(options.seedDate) || !isValid(options.seedDate)) {
-      this.seedDate = new Date((new Date().getFullYear()), 0, 1);
+      this.seedDate = getFirstDayOfFirstYearWeek(new Date());
     } else {
       this.seedDate = options.seedDate;
     }

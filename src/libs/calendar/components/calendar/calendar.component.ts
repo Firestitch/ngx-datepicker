@@ -20,7 +20,7 @@ import {
 
 import { getStartDayDate } from '../../../common/helpers/get-start-day-date';
 import { splitDateByComponents } from '../../../common/helpers/split-date-by-components';
-import { IPeriod } from '../../../common/interfaces/period.interface';
+import { IDatePickerPeriod } from '../../../common/interfaces/period.interface';
 
 import { WEEKDAYS } from '../../consts/week-days';
 import { Month } from '../../models/month';
@@ -44,7 +44,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public date: Date = null;
 
   @Input()
-  public period: IPeriod = null;
+  public period: IDatePickerPeriod = null;
 
   @Input()
   public rangeFrom: Date = null;
@@ -83,7 +83,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public rangeChange = new EventEmitter<Date>();
 
   @Output()
-  public periodChange = new EventEmitter<IPeriod>();
+  public periodChange = new EventEmitter<IDatePickerPeriod>();
 
   @Output()
   public hoverDay = new EventEmitter<any>();

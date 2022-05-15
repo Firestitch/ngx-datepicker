@@ -2,13 +2,13 @@ import { RangePickerRef } from '../../../app/classes/range-picker-ref';
 
 import { PickerViewType } from '../../common/enums/picker-view-type.enum';
 import { ScrollPickerViewType } from '../../common/enums/scroll-picker-view-type.enum';
-import { IPeriod } from '../../common/interfaces/period.interface';
+import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 
 import { IFsDatePickerDialogComponents } from './dialog-components.interface';
 
 
 export interface IDialogFactoryOptions {
-  modelValue?:  Date | null | IPeriod;
+  modelValue?:  Date | null | IDatePickerPeriod;
   view?:        PickerViewType | ScrollPickerViewType;
   minutes?:     boolean;
   minYear?:     number;

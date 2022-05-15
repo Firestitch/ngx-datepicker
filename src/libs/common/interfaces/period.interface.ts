@@ -1,4 +1,4 @@
-export interface IPeriod {
+export interface IDatePickerPeriod {
   from?: Date;
   to?: Date;
   period?: number;
