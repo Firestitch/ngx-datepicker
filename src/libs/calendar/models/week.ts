@@ -1,15 +1,8 @@
-import {
-  addWeeks,
-  addYears,
-  differenceInCalendarWeeks,
-  differenceInCalendarYears, differenceInWeeks,
-  differenceInYears,
-  isBefore,
-  isSameWeek
-} from 'date-fns';
+import { addWeeks, } from 'date-fns';
 
 import { Period } from './period';
 import { DayItem } from '../interfaces/day-item.interface';
+import { getPeriodId } from '../../common/helpers/get-period-id';
 
 
 export class Week {
@@ -30,7 +23,7 @@ export class Week {
     private _periodWeeks: number
   ) {
     if (this._seedDate && this._periodWeeks) {
-      this.periodId = this._getPeriodId();
+      this.periodId = getPeriodId(this._dateStart, this._seedDate, this._periodWeeks);
     }
 
     this._dateEnd = addWeeks(this._dateStart, 1);
@@ -83,56 +76,4 @@ export class Week {
     this.lastWeekInPeriod = true;
   }
 
-  /**
-   * Calculate period ID based on week date start and seed date
-   */
-  private _getPeriodId() {
-    /**
-     * If week date start before seed date
-     */
-    if (isBefore(this._dateStart, this._seedDate)) {
-      const diffInYears = differenceInYears(this._dateStart, this._seedDate);
-      const diffInCalendarYears = differenceInCalendarYears(this._dateStart, this._seedDate);
-
-      const seedDate = new Date(this._seedDate);
-
-      /**
-       * Check if week date start includes seed date
-       */
-      const sameWeek = isSameWeek(
-        this._dateStart,
-        addYears(seedDate, diffInYears),
-        { weekStartsOn: <any>this._seedDate.getDay()}
-      );
-
-      if (sameWeek) {
-        seedDate.setFullYear(seedDate.getFullYear() + (diffInYears || -1));
-      } else {
-        seedDate.setFullYear(seedDate.getFullYear() + (diffInCalendarYears || -1));
-      }
-
-      const weeksDiff = differenceInCalendarWeeks(
-        this._dateStart,
-        seedDate,
-        { weekStartsOn: <any>this._seedDate.getDay()}
-        ) / this._periodWeeks;
-
-      // Sometimes weeksDiff can be integer and we use +0.1 for easy round
-      return Math.ceil(weeksDiff + 0.1);
-    } else {
-      const diffInYears = differenceInYears(addWeeks(this._dateStart, 1), this._seedDate);
-
-      const seedDate = new Date(this._seedDate);
-      seedDate.setFullYear(seedDate.getFullYear() + diffInYears);
-
-      const weeksDiff = differenceInCalendarWeeks(
-        this._dateStart,
-        seedDate,
-        { weekStartsOn: <any>this._seedDate.getDay()}
-        ) / this._periodWeeks;
-
-      // Sometimes weeksDiff can be integer and we use +0.1 for easy round
-      return Math.ceil(weeksDiff + 0.1);
-    }
-  }
 }

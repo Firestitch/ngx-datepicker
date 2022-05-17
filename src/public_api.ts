@@ -22,3 +22,6 @@ export { MonthRangePickerToComponent } from './app/components/range-picker/to/mo
 
 export { IDatePickerPeriod } from './libs/common/interfaces/period.interface';
 export { formatPeriodObject } from './libs/common/helpers/format-period-object';
+export { getPeriodForDate } from './libs/common/helpers/get-period-for-date';
+export { getPeriodId } from './libs/common/helpers/get-period-id';
+export { getFirstDayOfFirstYearWeek } from './libs/dialog/helpers/get-first-day-of-first-year-week';
