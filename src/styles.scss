@@ -122,10 +122,6 @@
 .fs-date-picker-dialog {
   display: block;
 
-  /*@media only screen and (max-width: 737px) {
-    position: fixed;
-  }*/
-
   &.date-mode-year, &.date-mode-month {
     .calendar-view {
       height: 350px;
@@ -173,16 +169,6 @@
     &:active {
       outline: none;
     }
-    /*
-    @TODO in scope of presets
-    .header {
-      padding: 0 15px;
-      // Don't use flex. Strange behaviour of scroll
-      display: table;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    */
   }
 
   &.has-time {
