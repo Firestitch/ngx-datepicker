@@ -77,7 +77,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   }
 
   public updateInput(value) {
-    return formatPeriodObject(value);
+    this.elementRef.nativeElement.value = formatPeriodObject(value);
   }
 
   public open() {
