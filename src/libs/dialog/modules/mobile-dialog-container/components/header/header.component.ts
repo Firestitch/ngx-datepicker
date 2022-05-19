@@ -171,10 +171,12 @@ export class FsDatePickerMobileHeaderComponent implements OnChanges, AfterViewIn
   private _scrollToSelectedYear(): void {
     setTimeout(() => {
       const years = this._elRef.nativeElement.querySelector('.years');
-      const selected = years.querySelector('.year.selected');
+      if(years) {
+        const selected = years.querySelector('.year.selected');
 
-      if (selected) {
-        years.scrollTop = selected.offsetTop;
+        if (selected) {
+          years.scrollTop = selected.offsetTop;
+        }
       }
     }, 50);
   }

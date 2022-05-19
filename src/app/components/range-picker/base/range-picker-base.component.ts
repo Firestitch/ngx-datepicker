@@ -20,7 +20,7 @@ import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dial
 import { FsDatePickerDialogRef } from '../../../../libs/dialog/classes/dialog-ref';
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { isSameDate } from '../../../../libs/common/helpers/is-same-date';
-
+import { FsPickerBaseComponent } from '../../../classes/picker-base-component';
 import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { formatDateTime } from '../../../helpers/format-date-time';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
@@ -28,7 +28,7 @@ import { parseDate } from '../../../helpers/parse-date';
 
 
 @Directive()
-export abstract class RangePickerComponent<D = any>
+export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponent
   implements ControlValueAccessor, OnInit {
 
   @Input()
@@ -52,15 +52,6 @@ export abstract class RangePickerComponent<D = any>
   @Input()
   public format: string;
 
-  @HostBinding('class.fs-input-disabled')
-  @HostBinding('attr.readonly')
-  public disabled = false;
-
-  @Input('readonly')
-  public set readonlyState(isReadonly: boolean) {
-    this.readonly = !!isReadonly || (isReadonly as unknown) === '';
-  }
-
   @Input() public ngModelOptions: {
     name?: string;
     standalone?: boolean;
@@ -73,10 +64,6 @@ export abstract class RangePickerComponent<D = any>
 
     this._tzChanged(this._originValue);
   }
-
-  @HostBinding('class.fs-input-readonly')
-  @HostBinding('attr.readonly')
-  public readonly = false;
 
   public onChange: any;
   public onTouch: any = () => {};
@@ -92,15 +79,14 @@ export abstract class RangePickerComponent<D = any>
   private _lastValueValid = false;
 
   protected constructor(
-    protected _elRef: ElementRef,
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _type,
-    protected _cdRef: ChangeDetectorRef,
     protected _ngControl: NgControl,
   ) {
+    super(_injector);
     this._ngControl.valueAccessor = this;
-    this._elRef.nativeElement.setAttribute('autocomplete', 'off');
+    this.editable = false;
   }
 
   public get name() {
@@ -121,6 +107,7 @@ export abstract class RangePickerComponent<D = any>
   }
 
   public ngOnInit(): void {
+    super.ngOnInit();
     const control = this._ngControl.control;
     const validators = control.validator
       ? [ control.validator, this._parseValidator]
@@ -164,10 +151,8 @@ export abstract class RangePickerComponent<D = any>
       return
     }
 
-    //this._disableInput();
-
     this._dateDialogRef = this._datepickerFactory.openDatePicker(
-      this._elRef,
+      this._elementRef,
       this._injector,
       {
         view: this.view,
@@ -182,7 +167,7 @@ export abstract class RangePickerComponent<D = any>
       }
     );
 
-    this._elRef.nativeElement.focus();
+    this._elementRef.nativeElement.focus();
 
     this._listenDialogValueChanges();
 
@@ -229,7 +214,7 @@ export abstract class RangePickerComponent<D = any>
   }
 
   public updateInput(value) {
-    this._elRef.nativeElement.value = formatDateTime(value, this.view, this.format, this.timezone);
+    this._elementRef.nativeElement.value = formatDateTime(value, this.view, this.format, this.timezone);
   }
 
   @HostListener('keyup', ['$event', '$event.target.value'])
@@ -272,8 +257,8 @@ export abstract class RangePickerComponent<D = any>
   public registerOnTouched(fn) { this.onTouch = fn; }
 
   public triggerClick(): void {
-    this._elRef.nativeElement.focus();
-    this._elRef.nativeElement.select();
+    this._elementRef.nativeElement.focus();
+    this._elementRef.nativeElement.select();
 
     this.open();
   }

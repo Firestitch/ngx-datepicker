@@ -1,7 +1,5 @@
 import {
-  ChangeDetectorRef,
   Directive,
-  ElementRef,
   Injector,
   OnDestroy,
   OnInit,
@@ -23,19 +21,16 @@ import { FsRangePickerStoreService } from '../../../services/range-picker-store.
 export abstract class RangePickerFromComponent extends RangePickerComponent implements OnInit, OnDestroy {
 
   public constructor(
-    protected _elRef: ElementRef,
+    @Optional() @Self() protected _ngControl: NgControl,
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
-    protected _cdRef: ChangeDetectorRef,
-    @Optional() @Self() protected _ngControl: NgControl,
-    private _rangePickerStore: FsRangePickerStoreService,
+    protected _rangePickerStore: FsRangePickerStoreService,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'from', _cdRef, _ngControl);
+    super(_injector, _datepickerFactory, 'from', _ngControl);
   }
 
   public ngOnInit() {
     this.registerPicker();
-
     super.ngOnInit();
   }
 
@@ -56,6 +51,7 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
     if (!this.onChange) {
       return;
     }
+    
     super.writeValue(value);
 
     const [valuesAreDates] = this._checkValuesEquality(this.value, this._pickerRef.startDate);

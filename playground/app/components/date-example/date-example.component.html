@@ -1,13 +1,14 @@
 <form fsForm>
   <mat-form-field>
-    <input matInput
-    fsDatePicker
-    [(ngModel)]="model"
-    fsFormRequired
-    (ngModelChange)="ngModelChange($event)"
-    (selected)="selected($event)"
-    (blured)="blured($event)"
-    name="datepicker"
-    placeholder="Date">
+    <input 
+      matInput
+      fsDatePicker
+      [(ngModel)]="model"
+      fsFormRequired
+      (ngModelChange)="ngModelChange($event)"
+      (selected)="selected($event)"
+      (blured)="blured($event)"
+      name="datepicker"
+      placeholder="Date">
   </mat-form-field>
 </form>

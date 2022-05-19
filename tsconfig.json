@@ -12,5 +12,8 @@
         "src/libs/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

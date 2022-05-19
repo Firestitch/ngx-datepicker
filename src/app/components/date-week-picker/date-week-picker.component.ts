@@ -1,17 +1,12 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   forwardRef,
   HostListener,
-  Inject,
   Injector,
   Input,
   Output,
-  Renderer2,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -19,7 +14,7 @@ import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interface';
 import { formatPeriodObject } from '../../../libs/common/helpers/format-period-object';
-import { FsDatePickerBaseComponent } from '../../classes/base-component';
+import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 
@@ -33,7 +28,7 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent implements AfterViewInit {
+export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
 
   @Input() public minYear = null;
   @Input() public maxYear = null;
@@ -47,13 +42,11 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   public change$ = new EventEmitter<any>();
 
   constructor(
-    protected renderer: Renderer2,
-    protected injector: Injector,
-    @Inject(ElementRef) protected elementRef: ElementRef,
-    protected _cdRef: ChangeDetectorRef,
-    protected fsDatepickerFactory: FsDatePickerDialogFactory,
+    protected _injector: Injector,
+    protected _fsDatepickerFactory: FsDatePickerDialogFactory,
   ) {
-    super(renderer, elementRef, _cdRef);
+    super(_injector);
+    this.editable = false;
   }
 
   @HostListener('click')
@@ -62,10 +55,6 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
     if (!this.disabled && !this.readonly) {
       this.open();
     }
-  }
-
-  public ngAfterViewInit() {
-    this.setReadonly();
   }
 
   public writeValue(value: IDatePickerPeriod): void {
@@ -77,7 +66,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
   }
 
   public updateInput(value) {
-    this.elementRef.nativeElement.value = formatPeriodObject(value);
+    this._elementRef.nativeElement.value = formatPeriodObject(value);
   }
 
   public open() {
@@ -85,9 +74,9 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent impleme
       return;
     }
 
-    this._dateDialogRef = this.fsDatepickerFactory.openDatePicker(
-      this.elementRef,
-      this.injector,
+    this._dateDialogRef = this._fsDatepickerFactory.openDatePicker(
+      this._elementRef,
+      this._injector,
       {
         modelValue: this.value,
         view: this.view,

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { MatFormField } from '@angular/material/form-field';
-
+import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 
 
@@ -25,7 +25,7 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
   public disabled: boolean;
 
   @Input()
-  public view: PickerViewType;
+  public view: PickerViewType | ScrollPickerViewType;
 
   @Output()
   public click = new EventEmitter<void>();

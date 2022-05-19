@@ -1,12 +1,12 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, ElementRef,
-  forwardRef, Inject,
+  ChangeDetectionStrategy, 
+  Component, 
+  forwardRef,
   Injector,
   Input,
-  Renderer2,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 import { FsDateScrollPickerComponent } from '../date-scroll-picker/date-scroll-picker.component';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
@@ -31,12 +31,9 @@ export  class FsDatePickerBirthdayComponent extends FsDateScrollPickerComponent 
   public maxYear = (new Date()).getFullYear();
 
   constructor(
-    renderer: Renderer2,
-    injector: Injector,
-    elementRef: ElementRef,
-    _datepickerFactory: FsDatePickerDialogFactory,
-    _cdRef: ChangeDetectorRef,
+    protected _injector: Injector,
+    protected _datepickerFactory: FsDatePickerDialogFactory,
   ) {
-    super(renderer, injector, elementRef, _datepickerFactory, _cdRef);
+    super(_injector, _datepickerFactory);
   }
 }

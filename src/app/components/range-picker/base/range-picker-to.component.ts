@@ -1,7 +1,5 @@
 import {
-  ChangeDetectorRef,
   Directive,
-  ElementRef,
   Injector,
   OnDestroy,
   OnInit,
@@ -12,7 +10,7 @@ import { NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { endOfDay, startOfDay } from 'date-fns';
+import { endOfDay } from 'date-fns';
 
 import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
@@ -25,14 +23,12 @@ import { FsRangePickerStoreService } from '../../../services/range-picker-store.
 export abstract class RangePickerToComponent extends RangePickerComponent implements OnInit, OnDestroy {
 
   public constructor(
-    protected _elRef: ElementRef,
+    @Optional() @Self() protected _ngControl: NgControl,
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
-    protected _cdRef: ChangeDetectorRef,
-    @Optional() @Self() protected _ngControl: NgControl,
     private _rangePickerStore: FsRangePickerStoreService,
   ) {
-    super(_elRef, _injector, _datepickerFactory, 'to', _cdRef, _ngControl);
+    super(_injector, _datepickerFactory, 'to', _ngControl);
   }
 
   public ngOnInit() {

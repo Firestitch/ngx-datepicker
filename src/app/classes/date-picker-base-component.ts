@@ -1,4 +1,4 @@
-import { Renderer2, HostListener, ElementRef, EventEmitter, Output, OnDestroy, HostBinding, Input, ChangeDetectorRef, Directive, OnInit } from '@angular/core';
+import { HostListener, ElementRef, EventEmitter, Output, OnDestroy, Input, Directive, OnInit } from '@angular/core';
 
 import { fromEvent, Subject } from 'rxjs';
 import { filter, take, takeUntil, tap } from 'rxjs/operators';
@@ -18,10 +18,11 @@ import { isEqual, isValid } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { parseDate } from '../helpers/parse-date';
+import { FsPickerBaseComponent } from './picker-base-component';
 
 
 @Directive()
-export abstract class FsDatePickerBaseComponent<D = any>
+export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseComponent
   implements Validator, ControlValueAccessor, OnDestroy, OnInit {
 
   abstract updateInput(value: Date): void;
@@ -53,19 +54,6 @@ export abstract class FsDatePickerBaseComponent<D = any>
   @Output('blured')
   public blured$ = new EventEmitter<Date>();
 
-  @HostBinding('class.fs-input-disabled')
-  @HostBinding('attr.readonly')
-  public disabled = false;
-
-  @Input('readonly')
-  public set readonlyState(isReadonly: boolean) {
-    this.readonly = !!isReadonly || (isReadonly as unknown) === '';
-  }
-
-  @HostBinding('class.fs-input-readonly')
-  @HostBinding('attr.readonly')
-  public readonly = false;
-
   public opened = false;
   public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
   public registerOnTouched(fn: () => any): void { this._onTouch = fn }
@@ -74,9 +62,9 @@ export abstract class FsDatePickerBaseComponent<D = any>
   protected _timezone: string;
   protected _originValue: Date | null; // before timezone
   protected _value;
-  protected dialog = null;
-  protected elementRef: ElementRef;
-  protected renderer;
+  protected _dialog = null;
+  protected _elementRef: ElementRef;
+  protected _renderer;
   protected _dateDialogRef: FsDatePickerDialogRef;
   protected _destroy$ = new Subject();
 
@@ -86,16 +74,8 @@ export abstract class FsDatePickerBaseComponent<D = any>
   private _clear = true;
   private _lastValueValid = false;
 
-  protected constructor(
-    renderer: Renderer2,
-    elementRef: ElementRef,
-    protected _cdRef: ChangeDetectorRef
-  ) {
-    this.renderer = renderer;
-    this.elementRef = elementRef;
-  }
-
   public ngOnInit(): void {
+    super.ngOnInit();
     fromEvent(this.el, 'focus')
     .pipe(
       takeUntil(this._destroy$),
@@ -107,6 +87,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
     fromEvent(this.el, 'keydown')
       .pipe(
+        filter(() => this.editable),
         tap(() => this.close()),
         filter((event: KeyboardEvent) => ['Tab', 'Enter', 'Escape'].includes(event.key)),
         takeUntil(this._destroy$),
@@ -119,10 +100,6 @@ export abstract class FsDatePickerBaseComponent<D = any>
         this.close();
         this.el.blur();
       });
-  }
-
-  public get el() {
-    return this.elementRef.nativeElement;
   }
 
   public get clear(): boolean {
@@ -178,7 +155,6 @@ export abstract class FsDatePickerBaseComponent<D = any>
 
   public setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
-
     this._cdRef.markForCheck();
   }
 
@@ -187,7 +163,7 @@ export abstract class FsDatePickerBaseComponent<D = any>
   }
 
   public open() {
-    this.renderer.addClass(document.body, 'fs-date-picker-open');
+    this._renderer.addClass(document.body, 'fs-date-picker-open');
     this.opened = true;
 
     this._dateDialogRef.value$
@@ -207,13 +183,13 @@ export abstract class FsDatePickerBaseComponent<D = any>
       )
       .subscribe(() => {
         this._dateDialogRef = null;
-        this.renderer.removeClass(document.body, 'fs-date-picker-open');
+        this._renderer.removeClass(document.body, 'fs-date-picker-open');
         this._cdRef.markForCheck();
       });
   }
 
   public clearInput() {
-    this.elementRef.nativeElement.value = null;
+    this.el.value = null;
   }
 
   public triggerClick(): void {
@@ -228,12 +204,6 @@ export abstract class FsDatePickerBaseComponent<D = any>
     this._onChange(this.value);
     this._onTouch();
     this.change$.emit(this.value);
-  }
-
-  protected setReadonly() {
-    setTimeout(() => {
-      this.elementRef.nativeElement.setAttribute('readonly', true);
-    });
   }
 
   protected close() {

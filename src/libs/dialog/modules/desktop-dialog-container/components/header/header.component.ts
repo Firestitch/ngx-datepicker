@@ -170,10 +170,12 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
   private _scrollToSelectedYear(): void {
     setTimeout(() => {
       const years = this._elRef.nativeElement.querySelector('.years');
-      const selected = years.querySelector('.year.selected');
+      if(years) {
+        const selected = years.querySelector('.year.selected');
 
-      if (selected) {
-        selected.scrollIntoView({behavior: 'auto', block: 'center'});
+        if (selected) {
+          selected.scrollIntoView({behavior: 'auto', block: 'center'});
+        }
       }
     });
   }
@@ -181,10 +183,12 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
   private _scrollToSelectedMonth(): void {
     setTimeout(() => {
       const years = this._elRef.nativeElement.querySelector('.months');
-      const selected = years.querySelector('.month.selected');
+      if(years) {
+        const selected = years.querySelector('.month.selected');
 
-      if (selected) {
-        selected.scrollIntoView({behavior: 'auto', block: 'center'});
+        if (selected) {
+          selected.scrollIntoView({behavior: 'auto', block: 'center'});
+        }
       }
     });
   }

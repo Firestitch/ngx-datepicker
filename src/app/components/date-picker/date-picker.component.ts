@@ -1,15 +1,11 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   forwardRef,
-  Inject,
   Injector,
   Input,
   Output,
-  Renderer2,
 } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -17,7 +13,7 @@ import { isValid } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
-import { FsDatePickerBaseComponent } from '../../classes/base-component';
+import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 
@@ -59,13 +55,10 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   public change$ = new EventEmitter<any>();
 
   constructor(
-    @Inject(ElementRef) protected elementRef: ElementRef,
-    protected renderer: Renderer2,
-    protected injector: Injector,
-    protected _cdRef: ChangeDetectorRef,
-    protected fsDatepickerFactory: FsDatePickerDialogFactory,
+    protected _injector: Injector,
+    protected _fsDatepickerFactory: FsDatePickerDialogFactory,
   ) {
-    super(renderer, elementRef, _cdRef);
+    super(_injector);
   }
 
   public writeValue(value: any): void {
@@ -82,7 +75,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
       value.setMinutes(0);
     }
 
-    this.elementRef.nativeElement.value = formatDateTime(value, this.view, this.format, this.timezone);
+    this._elementRef.nativeElement.value = formatDateTime(value, this.view, this.format, this.timezone);
   }
 
   public open() {
@@ -92,9 +85,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
 
     const modelValue = isValid(this.value) ? this.value : null;
 
-    this._dateDialogRef = this.fsDatepickerFactory.openDatePicker(
-    this.elementRef,
-    this.injector,
+    this._dateDialogRef = this._fsDatepickerFactory.openDatePicker(
+    this._elementRef,
+    this._injector,
     {
       modelValue: modelValue,
       view: this.view,

@@ -1,19 +1,15 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   forwardRef,
-  Inject,
   Injector,
   Input,
-  Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
-import { FsDatePickerBaseComponent } from '../../classes/base-component';
+import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
@@ -42,13 +38,10 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   public view = ScrollPickerViewType.Date;
 
   constructor(
-    protected renderer: Renderer2,
-    protected injector: Injector,
-    @Inject(ElementRef) protected elementRef: ElementRef,
+    protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
-    protected _cdRef: ChangeDetectorRef,
   ) {
-    super(renderer, elementRef, _cdRef);
+    super(_injector);
   }
 
   public writeValue(value: any): void {
@@ -77,7 +70,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
       format = ScrollPickerViewType.Year;
     }
 
-    this.elementRef.nativeElement.value = formatDateTime(value, format);
+    this.el.value = formatDateTime(value, format);
   }
 
   public open() {
@@ -87,8 +80,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     }
 
     this._dateDialogRef = this._datepickerFactory.openDateScrollPicker(
-      this.elementRef,
-      this.injector,
+      this._elementRef,
+      this._injector,
       {
         modelValue: this.value,
         minYear: this.minYear,
