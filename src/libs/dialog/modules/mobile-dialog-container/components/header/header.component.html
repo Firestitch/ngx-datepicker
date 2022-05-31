@@ -5,8 +5,7 @@
     class="month"
     [ngClass]="{
         now: monthNow == month.value,
-        selected: calendarMonth === month.value,
-        disabled: month.disabled
+        selected: calendarMonth === month.value
       }">
     <div class="tile-content">{{ month.abr }}</div>
   </div>
@@ -18,8 +17,7 @@
       class="year data-year-{{ year.value }}"
       (click)="selectYear(year.value)"
       [class.now]="yearNow == year.value"
-      [class.selected]="calendarYear === year.value"
-      [class.disabled]="year.disabled">
+      [class.selected]="calendarYear === year.value">
       <div class="tile-content">{{ year.value }}</div>
     </div>
   </ng-container>

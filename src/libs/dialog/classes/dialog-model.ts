@@ -7,6 +7,8 @@ import {
   setYear,
   startOfDay,
   isBefore,
+  addDays,
+  addMinutes,
 } from 'date-fns';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -283,6 +285,7 @@ export class FsDatePickerDialogModel {
     this.periodWeeks = options.periodWeeks;
 
     this._updateDisabledDays();
+    this._updateCalendarDate();
   }
 
   private _updateDisabled() {
@@ -297,6 +300,19 @@ export class FsDatePickerDialogModel {
       }
     } else {
       this.disabledDays = getDisabledDays(this.minDate, this.maxDate, this.minYear, this.maxYear);
+    }
+  }
+
+  private _updateCalendarDate() {
+    if (this.minDate && isDate(this.minDate) && isValid(this.minDate)) {
+      const pickerView = this.view;
+
+      // Add days because it was substructed by 1 day in DatePicker component
+      if ([PickerViewType.Date, PickerViewType.Week].includes(pickerView as PickerViewType)) {
+        this.calendarDate = addDays(this.minDate, 1);
+      } else if ([PickerViewType.DateTime, PickerViewType.Time].includes(pickerView as PickerViewType)) {
+        this.calendarDate = addDays(addMinutes(this.minDate, 5), 1);
+      }
     }
   }
 

@@ -19,14 +19,14 @@ import { isMonthDisabled } from '../../../../../common/helpers/is-month-disabled
 
 interface IYearListItem {
   value: number;
-  disabled: boolean;
+  // disabled: boolean;
 }
 
 interface IMonthListItem {
   value: number;
   name: string;
   abr: string;
-  disabled: boolean;
+  // disabled: boolean;
 }
 
 
@@ -132,14 +132,15 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
     this.yearsList = [];
 
     for (let y: number = this.minYear; y < this.maxYear; y++) {
-      const year = new Date().setFullYear(y);
-      this.yearsList.push({ value: y, disabled: this._isYearDisabled(year) });
+      // const year = new Date().setFullYear(y);
+      this.yearsList.push({ value: y, /*disabled: this._isYearDisabled(year)*/ });
     }
   }
 
   private _createMonthsList(): void {
-    const year = this.calendarMonth ? this.calendarYear : this.now.getFullYear();
+    // const year = this.calendarMonth ? this.calendarYear : this.now.getFullYear();
 
+/*
     const checkIfMonthDisabled = (monthNumber: number, disabledDays) => {
       const month = new Date();
       month.setFullYear(year);
@@ -147,25 +148,28 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
 
       return isMonthDisabled(month, disabledDays)
     }
+*/
 
     this.monthList = [];
 
     for (const item of MONTHS) {
       const monthItem = {
         ...item,
-        disabled: checkIfMonthDisabled(item.value, this.disabledDays),
+        // disabled: checkIfMonthDisabled(item.value, this.disabledDays),
       }
 
       this.monthList.push(monthItem);
     }
   }
 
+/*
   private _isYearDisabled(date): boolean {
     const startYear = startOfYear(date);
     const endYear = endOfYear(date);
 
     return isRangeDisabled(this.disabledDays, startYear, endYear);
   }
+*/
 
   private _scrollToSelectedYear(): void {
     setTimeout(() => {
