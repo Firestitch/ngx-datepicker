@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "12.4.0",
+  "version": "12.5.0",
   "title": "Date/Time Picker",
   "repository": {
     "type": "git",
@@ -51,7 +51,7 @@
     "@firestitch/autocomplete-chips": "^12.0.0",
     "@firestitch/clear": "^12.0.0",
     "@firestitch/common": "^12.0.0",
-    "@firestitch/date": "^12.0.0",
+    "@firestitch/date": "^12.2.0",
     "@firestitch/datepicker": "^12.0.1",
     "@firestitch/dialog": "^12.0.1",
     "@firestitch/drawer": "^12.0.0",
@@ -79,7 +79,6 @@
     "ngx-highlightjs": "^4.1.4",
     "ngx-toastr": "^14.2.2",
     "npm-run-all": "^4.1.5",
-    "parse-messy-time": "^2.1.0",
     "rxjs": "^6.5.3",
     "tslint": "~6.1.0",
     "tsmodels": "^0.4.6",
@@ -97,6 +96,7 @@
   },
   "dependencies": {
     "@cypress/schematic": "^1.5.0",
+    "parse-messy-time": "^2.1.0",
     "tslib": "^2.0.0"
   }
 }
