@@ -143,6 +143,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   public setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this._cdRef.markForCheck();
   }
 
   @HostListener('focus')
