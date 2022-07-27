@@ -1,4 +1,14 @@
-import { HostListener, ElementRef, EventEmitter, Output, OnDestroy, Input, Directive, OnInit } from '@angular/core';
+import {
+  HostListener,
+  ElementRef,
+  EventEmitter,
+  Output,
+  OnDestroy,
+  Input,
+  Directive,
+  OnInit,
+  Injector
+} from '@angular/core';
 
 import { fromEvent, Subject } from 'rxjs';
 import { filter, take, takeUntil, tap } from 'rxjs/operators';
@@ -77,13 +87,19 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   public ngOnInit(): void {
     super.ngOnInit();
     fromEvent(this.el, 'focus')
-    .pipe(
-      takeUntil(this._destroy$),
-    )
-    .subscribe(() => {
-      this.open();
-      this.el.focus();
-    });
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        if (this._focusAfterClose) {
+          this._focusAfterClose = false;
+
+          return;
+        }
+
+        this.open();
+        this._doFocus();
+      });
 
     fromEvent(this.el, 'keydown')
       .pipe(
@@ -136,6 +152,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   public cleared(event) {
+    super.cleared(event);
     event.stopPropagation();
     event.preventDefault();
 
@@ -183,7 +200,11 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       )
       .subscribe(() => {
         this._dateDialogRef = null;
+        this._focusAfterClose = true;
+
+        this._doFocus();
         this._renderer.removeClass(document.body, 'fs-date-picker-open');
+
         this._cdRef.markForCheck();
       });
   }

@@ -9,6 +9,7 @@ import {
   OnInit
 } from '@angular/core';
 import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
+import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { Observable, Subject } from 'rxjs';
 import { filter, map, pairwise, skip, take, takeUntil } from 'rxjs/operators';
@@ -83,8 +84,9 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _type,
     protected _ngControl: NgControl,
+    fm: FocusMonitor,
   ) {
-    super(_injector);
+    super(_injector, fm);
     this._ngControl.valueAccessor = this;
     this.editable = false;
   }
@@ -152,6 +154,12 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
       return
     }
 
+    if (this._focusAfterClose) {
+      this._focusAfterClose = false;
+
+      return;
+    }
+
     this._dateDialogRef = this._datepickerFactory.openDatePicker(
       this._elementRef,
       this._injector,
@@ -168,7 +176,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
       }
     );
 
-    this._elementRef.nativeElement.focus();
+    this._doFocus();
 
     this._listenDialogValueChanges();
 
@@ -180,6 +188,9 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
       .subscribe(() => {
         this._dateDialogRef = null;
         this._enableInput();
+
+        this._focusAfterClose = true;
+        this._doFocus();
 
         this._cdRef.markForCheck();
       });

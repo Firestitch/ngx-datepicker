@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
+import { FocusMonitor } from '@angular/cdk/a11y';
+
 import { startOfDay } from 'date-fns';
 
 import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
@@ -25,8 +27,9 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
     protected _rangePickerStore: FsRangePickerStoreService,
+    fm: FocusMonitor,
   ) {
-    super(_injector, _datepickerFactory, 'from', _ngControl);
+    super(_injector, _datepickerFactory, 'from', _ngControl, fm);
   }
 
   public ngOnInit() {
@@ -51,7 +54,7 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
     if (!this.onChange) {
       return;
     }
-    
+
     super.writeValue(value);
 
     const [valuesAreDates] = this._checkValuesEquality(this.value, this._pickerRef.startDate);

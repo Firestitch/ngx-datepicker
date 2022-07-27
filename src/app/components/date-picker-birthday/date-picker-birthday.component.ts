@@ -1,11 +1,13 @@
 import {
-  ChangeDetectionStrategy, 
-  Component, 
+  ChangeDetectionStrategy,
+  Component,
   forwardRef,
   Injector,
   Input,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 import { FsDateScrollPickerComponent } from '../date-scroll-picker/date-scroll-picker.component';
@@ -33,7 +35,8 @@ export  class FsDatePickerBirthdayComponent extends FsDateScrollPickerComponent 
   constructor(
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
+    fm: FocusMonitor,
   ) {
-    super(_injector, _datepickerFactory);
+    super(_injector, _datepickerFactory, fm);
   }
 }

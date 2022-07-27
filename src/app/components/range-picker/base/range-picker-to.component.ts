@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 
+import { FocusMonitor } from '@angular/cdk/a11y';
+
 import { takeUntil } from 'rxjs/operators';
 
 import { endOfDay } from 'date-fns';
@@ -27,8 +29,9 @@ export abstract class RangePickerToComponent extends RangePickerComponent implem
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
     private _rangePickerStore: FsRangePickerStoreService,
+    fm: FocusMonitor
   ) {
-    super(_injector, _datepickerFactory, 'to', _ngControl);
+    super(_injector, _datepickerFactory, 'to', _ngControl, fm);
   }
 
   public ngOnInit() {

@@ -1,10 +1,12 @@
 <div class="mat-form-field-prefix fs-date-picker-trigger" [ngClass]="{ disabled: disabled }">
-  <mat-icon (click)="triggerClick($event)">
-    <ng-container *ngIf="isTimeView; else calendarIcon">
-      schedule
-    </ng-container>
-    <ng-template #calendarIcon>
-      calendar_today
-    </ng-template>
-  </mat-icon>
+  <button (click)="triggerClick($event)" mat-icon-button>
+    <mat-icon>
+      <ng-container *ngIf="isTimeView; else calendarIcon">
+        schedule
+      </ng-container>
+      <ng-template #calendarIcon>
+        calendar_today
+      </ng-template>
+    </mat-icon>
+  </button>
 </div>

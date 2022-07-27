@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { FocusMonitor } from '@angular/cdk/a11y';
+
 import { isValid } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
@@ -57,8 +59,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   constructor(
     protected _injector: Injector,
     protected _fsDatepickerFactory: FsDatePickerDialogFactory,
+    fm: FocusMonitor,
   ) {
-    super(_injector);
+    super(_injector, fm);
   }
 
   public writeValue(value: any): void {

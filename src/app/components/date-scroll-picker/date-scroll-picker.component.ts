@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { FocusMonitor } from '@angular/cdk/a11y';
+
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
@@ -40,8 +42,9 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   constructor(
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
+    fm: FocusMonitor,
   ) {
-    super(_injector);
+    super(_injector, fm);
   }
 
   public writeValue(value: any): void {

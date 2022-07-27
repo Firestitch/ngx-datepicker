@@ -49,7 +49,7 @@
     "@compodoc/compodoc": "^1.1.10",
     "@firestitch/autocomplete": "^12.0.0",
     "@firestitch/autocomplete-chips": "^12.0.0",
-    "@firestitch/clear": "^12.0.0",
+    "@firestitch/clear": "^12.1.0",
     "@firestitch/common": "^12.0.0",
     "@firestitch/date": "^12.2.0",
     "@firestitch/datepicker": "^12.0.1",
