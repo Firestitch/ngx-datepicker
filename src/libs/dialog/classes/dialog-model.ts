@@ -310,11 +310,13 @@ export class FsDatePickerDialogModel {
     if (this.minDate && isDate(this.minDate) && isValid(this.minDate)) {
       const pickerView = this.view;
 
-      // Add days because it was substructed by 1 day in DatePicker component
-      if ([PickerViewType.Date, PickerViewType.Week].includes(pickerView as PickerViewType)) {
-        this.calendarDate = addDays(this.minDate, 1);
-      } else if ([PickerViewType.DateTime, PickerViewType.Time].includes(pickerView as PickerViewType)) {
-        this.calendarDate = addDays(addMinutes(this.minDate, 5), 1);
+      if (!this.model) {
+        // Add days because it was substructed by 1 day in DatePicker component
+        if ([PickerViewType.Date, PickerViewType.Week].includes(pickerView as PickerViewType)) {
+          this.calendarDate = addDays(this.minDate, 1);
+        } else if ([PickerViewType.DateTime, PickerViewType.Time].includes(pickerView as PickerViewType)) {
+          this.calendarDate = addDays(addMinutes(this.minDate, 5), 1);
+        }
       }
     }
   }
