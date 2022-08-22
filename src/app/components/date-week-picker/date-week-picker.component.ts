@@ -52,19 +52,20 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
     this.editable = false;
   }
 
-  @HostListener('click')
-  @HostListener('focus')
-  public inputClick() {
-    if (this._focusAfterClose) {
-      this._focusAfterClose = false;
-
-      return;
-    }
-
-    if (!this.disabled && !this.readonly) {
-      this.open();
-    }
-  }
+  // @HostListener('click')
+  // @HostListener('focus')
+  // public inputClick() {
+  //   debugger;
+  //   if (this._focusAfterClose) {
+  //     this._focusAfterClose = false;
+  //
+  //     return;
+  //   }
+  //
+  //   if (!this.disabled && !this.readonly) {
+  //     this.open();
+  //   }
+  // }
 
   public writeValue(value: IDatePickerPeriod): void {
     this._value = value;
