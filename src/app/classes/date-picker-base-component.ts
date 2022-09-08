@@ -24,7 +24,7 @@ import {
   Validators
 } from '@angular/forms';
 
-import { isEqual, isValid } from 'date-fns';
+import { isEqual, isValid, startOfDay } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { parseDate } from '../helpers/parse-date';
@@ -77,9 +77,9 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   protected _renderer;
   protected _dateDialogRef: FsDatePickerDialogRef;
   protected _destroy$ = new Subject();
+  protected _onChange = (value: any) => { };
+  protected _onTouch = () => { };
 
-  private _onChange = (value: any) => { };
-  private _onTouch = () => { };
   private _validatorOnChange = () => {};
   private _clear = true;
   private _lastValueValid = false;
@@ -130,21 +130,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     return this._timezone;
   }
 
-  public set value(value) {
-    if (value && this.timezone) {
-      value = zonedTimeToUtc(value, this.timezone);
-    }
-
-    this._value = value;
-
-    this._lastValueValid = !value || isValid(value);
-
-    this._onChange(this.value);
-    this.updateInput(this.value);
-
-    this.change$.emit(this.value);
-  }
-
   public writeValue(obj: any): void {}
 
   public get dateDialogRef() {
@@ -156,7 +141,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     event.stopPropagation();
     event.preventDefault();
 
-    this.value = null;
+    this.updateValue(null);
     this.clearInput();
     this.selected$.next(null);
   }
@@ -189,8 +174,8 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
         takeUntil(this._destroy$),
       )
       .subscribe((value: Date) => {
-        this.value = value;
-        this.selected$.emit(value);
+        this.updateValue(value);
+        this.selected$.emit(this.value);
       });
 
     this._dateDialogRef.close$
@@ -221,9 +206,20 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   protected updateValue(date): void {
+    date = startOfDay(date);
+
+    if (date && this.timezone) {
+      date = zonedTimeToUtc(date, this.timezone);
+    }
+
     this._value = date;
+    this._lastValueValid = !date || isValid(date);
+
+    this.updateInput(this.value);
+
     this._onChange(this.value);
     this._onTouch();
+
     this.change$.emit(this.value);
   }
 

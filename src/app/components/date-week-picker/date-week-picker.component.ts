@@ -18,6 +18,7 @@ import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interf
 import { formatPeriodObject } from '../../../libs/common/helpers/format-period-object';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
+import { endOfDay, startOfDay } from 'date-fns';
 
 
 @Component({
@@ -101,6 +102,18 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
     );
 
     super.open();
+  }
+
+  protected updateValue(period): void {
+    period.from = startOfDay(period.from);
+    period.to = endOfDay(period.to);
+
+    this._value = period;
+
+    this._onChange(this.value);
+    this._onTouch();
+
+    this.change$.emit(this.value);
   }
 
   private _getDefaultComponents() {
