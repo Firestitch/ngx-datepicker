@@ -112,7 +112,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   ) {}
 
   public ngOnInit() {
-
     this._calendarMode = this.dateMode;
 
     if (this.dateMode === 'week') {

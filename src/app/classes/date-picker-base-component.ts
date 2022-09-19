@@ -206,8 +206,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   protected updateValue(date): void {
-    date = startOfDay(date);
-
     if (date && this.timezone) {
       date = zonedTimeToUtc(date, this.timezone);
     }

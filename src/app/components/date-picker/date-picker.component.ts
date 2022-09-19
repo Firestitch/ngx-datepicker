@@ -11,7 +11,7 @@ import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-import { isValid } from 'date-fns';
+import { isValid, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
@@ -112,7 +112,11 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
       this._value.setMinutes(value.getMinutes());
       this._value.setSeconds(value.getSeconds());
 
-      value = new Date(this._value);
+      value = new Date(this._value.getTime());
+    }
+
+    if (this.view !== PickerViewType.Time && this.view !== PickerViewType.DateTime) {
+      value = startOfDay(value);
     }
 
     super.updateValue(value);

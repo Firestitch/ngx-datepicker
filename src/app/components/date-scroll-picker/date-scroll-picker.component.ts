@@ -15,6 +15,7 @@ import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-compon
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
+import { startOfDay } from 'date-fns';
 
 
 @Component({
@@ -55,9 +56,13 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
     this._cdRef.markForCheck();
   }
+  
+  protected updateValue(date): void {
+    date = startOfDay(date);
+    super.updateValue(date);
+  }
 
   public updateInput(value) {
-
     let format = ScrollPickerViewType.Date;
 
     if (this.showYear && this.showMonth && !this.showDay) {
@@ -77,7 +82,6 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   }
 
   public open() {
-
     if (this._dateDialogRef || this.disabled || this.readonly) {
       return;
     }
