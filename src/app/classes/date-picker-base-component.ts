@@ -260,7 +260,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       this.inputChange(value);
     }
 
-    this.updateInput(this.value);
+    // this.updateInput(this.value);
 
     this.blured$.emit(this.value);
   }

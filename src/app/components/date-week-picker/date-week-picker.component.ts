@@ -113,6 +113,8 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
     this._onChange(this.value);
     this._onTouch();
 
+    this.updateInput(period);
+
     this.change$.emit(this.value);
   }
 
