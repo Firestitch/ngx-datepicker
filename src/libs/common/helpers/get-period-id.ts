@@ -42,7 +42,7 @@ export function getPeriodId(dateStart: Date, seedDate: Date, periodWeeks: number
     ) / periodWeeks;
 
     // Sometimes weeksDiff can be integer and we use +0.1 for easy round
-    return Math.ceil(weeksDiff + 0.1);
+    return Math.abs(Math.ceil(weeksDiff + 0.1));
   } else {
     const diffInYears = differenceInYears(addWeeks(dateStart, 1), seedDate);
 
@@ -56,6 +56,6 @@ export function getPeriodId(dateStart: Date, seedDate: Date, periodWeeks: number
     ) / periodWeeks;
 
     // Sometimes weeksDiff can be integer and we use +0.1 for easy round
-    return Math.ceil(weeksDiff + 0.1);
+    return Math.abs(Math.ceil(weeksDiff + 0.1));
   }
 }
