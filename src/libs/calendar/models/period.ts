@@ -1,4 +1,5 @@
 import {
+  addSeconds,
   addWeeks,
   differenceInCalendarYears,
 } from 'date-fns';
@@ -108,7 +109,7 @@ export class Period {
     const offsetFromSeedDate = (this.periodWeeks * (this.periodId - 1));
 
     this._from = addWeeks(seedDate, offsetFromSeedDate);
-    this._to = addWeeks(this._from, this.periodWeeks);
+    this._to = addSeconds(addWeeks(this._from, this.periodWeeks), -1);
     this._year = this._from.getFullYear();
   }
 }
