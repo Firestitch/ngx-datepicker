@@ -33,6 +33,7 @@ export class FsDatePickerDialogModel {
   public dateMode = null;
   public minDate = null;
   public maxDate = null;
+  public rangeStart: Date = null;
   public startOfDay = true;
   public seedDate = null;
   public periodWeeks = null;
@@ -274,6 +275,12 @@ export class FsDatePickerDialogModel {
     this.maxYear = options.maxYear;
     this.minDate = options.minDate;
     this.maxDate = options.maxDate;
+    this.rangeStart = options.rangeStart;
+
+    if (this._pickerOptions.rangeType === 'to' && this.minDate < this.rangeStart) {
+      this.minDate = this.rangeStart;
+    }
+
     this.startOfDay = options.startOfDay;
     this.minutes = options.minutes === undefined
       ? true
@@ -297,13 +304,7 @@ export class FsDatePickerDialogModel {
   }
 
   private _updateDisabledDays() {
-    if (this._pickerOptions.rangeType) {
-      if (this._pickerOptions.rangeType === 'to') {
-        this.disabledDays = getDisabledDays(this.minDate, this.maxDate, this.minYear, this.maxYear);
-      }
-    } else {
-      this.disabledDays = getDisabledDays(this.minDate, this.maxDate, this.minYear, this.maxYear);
-    }
+    this.disabledDays = getDisabledDays(this.minDate, this.maxDate, this.minYear, this.maxYear);
   }
 
   private _updateCalendarDate() {

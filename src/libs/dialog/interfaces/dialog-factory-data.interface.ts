@@ -15,6 +15,7 @@ export interface IDialogFactoryOptions {
   maxYear?:     number;
   minDate?:     Date;
   maxDate?:     Date;
+  rangeStart?:  Date;
   startOfDay?:  boolean;
   components?:  IFsDatePickerDialogComponents;
   periodWeeks?: number;
