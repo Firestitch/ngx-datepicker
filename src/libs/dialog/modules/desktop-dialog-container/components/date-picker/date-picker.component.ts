@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 
@@ -23,6 +24,14 @@ export class FsDesktopDatePickerComponent {
 
   constructor() {}
 
+  public get doneBtnClass(): ThemePalette {
+    if (this.datePickerModel.isPickerRangeFrom) {
+      return undefined;
+    } else {
+      return 'primary';
+    }
+  }
+
   public viewModeChanged(mode: string) {
     this.datePickerModel.setCalendarMode(mode);
   }
@@ -41,6 +50,18 @@ export class FsDesktopDatePickerComponent {
 
   public prevMonth(): void {
     this.datePickerModel.prevMonth();
+  }
+
+  public nextCalendar(): void {
+    this.datePickerModel.rangePickerRef.activateToPicker();
+
+    this.close();
+  }
+
+  public prevCalendar(): void {
+    this.datePickerModel.rangePickerRef.activateFromPicker();
+
+    this.close();
   }
 
   public dateChanged(date): void {

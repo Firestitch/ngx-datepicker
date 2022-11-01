@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { endOfDay, startOfDay } from 'date-fns';
 
@@ -13,6 +13,7 @@ export class RangePickerRef {
 
   private _startDate$ = new BehaviorSubject<Date | null>(null);
   private _endDate$ = new BehaviorSubject<Date | null>(null);
+  private _activePicker$ = new Subject<'from' | 'to' | null>();
 
   private _startDate: Date = null;
   private _endDate: Date = null;
@@ -25,6 +26,10 @@ export class RangePickerRef {
 
   public get endDate(): Date {
     return this._endDate;
+  }
+
+  public get activePicker$(): Observable<'from' | 'to' | null> {
+    return this._activePicker$.asObservable();
   }
 
   public get startDate$(): Observable<Date> {
@@ -99,6 +104,14 @@ export class RangePickerRef {
     }
 
     return this._endDate === value;
+  }
+
+  public activateFromPicker(): void {
+    this._activePicker$.next('from');
+  }
+
+  public activateToPicker(): void {
+    this._activePicker$.next('to');
   }
 
   /**

@@ -44,7 +44,24 @@
   </div>
 
   <div class="buttons">
-    <button class="button-done" type="button" mat-button color="primary" (click)="close()">Done</button>
+    <ng-container *ngIf="datePickerModel.rangePickerRef">
+      <ng-container *ngIf="datePickerModel.isPickerRangeFrom">
+        <button type="button" mat-button color="primary" (click)="nextCalendar()">
+          Continue
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="datePickerModel.isPickerRangeTo">
+        <button type="button" mat-button (click)="prevCalendar()">
+          Back
+        </button>
+      </ng-container>
+    </ng-container>
+
+    <button class="button-done" type="button" mat-button [color]="doneBtnClass" (click)="close()">
+      Done
+    </button>
+
     <button type="button"
             mat-button
             class="button-more"

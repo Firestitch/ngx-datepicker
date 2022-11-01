@@ -124,6 +124,14 @@ export class FsDatePickerDialogModel {
     return this._calendarMode$.value;
   }
 
+  public get isPickerRangeFrom(): boolean {
+    return this._pickerOptions.rangeType === 'from';
+  }
+
+  public get isPickerRangeTo(): boolean {
+    return this._pickerOptions.rangeType === 'to';
+  }
+
   public set model(value: Date | null) {
     if (isValid(value)) {
       if (this.isDateView && this.startOfDay) {

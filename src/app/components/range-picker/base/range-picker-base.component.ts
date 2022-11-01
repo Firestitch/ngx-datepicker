@@ -110,10 +110,13 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   public ngOnInit(): void {
     super.ngOnInit();
+    this._listenActivePicker();
+
     const control = this._ngControl.control;
     const validators = control.validator
       ? [ control.validator, this._parseValidator]
       : this._parseValidator;
+
     control.setValidators(validators);
     control.updateValueAndValidity();
   }
@@ -367,6 +370,21 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         }),
         map((changes) => changes[1]),
       );
+  }
+
+  private _listenActivePicker(): void {
+    this._pickerRef.activePicker$
+      .pipe(
+        filter((pickerType) => {
+          return pickerType === this._type;
+        }),
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        setTimeout(() => {
+          this._doFocus();
+        });
+      });
   }
 
 }
