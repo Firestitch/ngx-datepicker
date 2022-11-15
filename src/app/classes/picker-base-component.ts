@@ -5,6 +5,7 @@ import {
 import { MatInput } from '@angular/material/input';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
 
 
 @Directive()
@@ -23,6 +24,7 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
 
   protected _renderer: Renderer2;
   protected _elementRef: ElementRef;
+  protected _dateDialogRef: FsDatePickerDialogRef;
   protected _cdRef: ChangeDetectorRef;
   protected _focusAfterClose = false;
 
@@ -56,12 +58,18 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
     }
   }
 
-  public cleared(event) {
-    this._doFocus();
-  }
+  // public cleared(event) {
+  //   this._doFocus();
+  // }
 
   protected _doFocus(): void {
     this._fm.focusVia(this._elementRef, 'program');
+  }
+
+  protected close() {
+    if (this._dateDialogRef) {
+      this._dateDialogRef.close();
+    }
   }
 
 }

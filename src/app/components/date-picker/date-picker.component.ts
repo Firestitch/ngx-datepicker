@@ -115,7 +115,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
       value = new Date(this._value.getTime());
     }
 
-    if (this.view !== PickerViewType.Time && this.view !== PickerViewType.DateTime) {
+    if (this.view !== PickerViewType.Time && this.view !== PickerViewType.DateTime && isValid(value)) {
       value = startOfDay(value);
     }
 

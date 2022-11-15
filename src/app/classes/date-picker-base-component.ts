@@ -72,10 +72,8 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   protected _timezone: string;
   protected _originValue: Date | null; // before timezone
   protected _value;
-  protected _dialog = null;
   protected _elementRef: ElementRef;
   protected _renderer;
-  protected _dateDialogRef: FsDatePickerDialogRef;
   protected _destroy$ = new Subject();
   protected _onChange = (value: any) => { };
   protected _onTouch = () => { };
@@ -137,7 +135,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   public cleared(event) {
-    super.cleared(event);
+    // super.cleared(event);
     event.stopPropagation();
     event.preventDefault();
 
@@ -147,9 +145,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   public ngOnDestroy() {
-    if (this.dateDialogRef) {
-      this.dateDialogRef.close();
-    }
+    this.close();
 
     this._destroy$.next();
     this._destroy$.complete();
@@ -219,12 +215,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this._onTouch();
 
     this.change$.emit(this.value);
-  }
-
-  protected close() {
-    if (this._dateDialogRef) {
-      this._dateDialogRef.close();
-    }
   }
 
   /** The form control validator for whether the input parses. */

@@ -11,14 +11,13 @@ import {
 import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-import { Observable, Subject } from 'rxjs';
-import { filter, map, pairwise, skip, take, takeUntil } from 'rxjs/operators';
+import { fromEvent, Observable, Subject } from 'rxjs';
+import { filter, map, pairwise, skip, take, takeUntil, tap } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
-import { FsDatePickerDialogRef } from '../../../../libs/dialog/classes/dialog-ref';
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { isSameDate } from '../../../../libs/common/helpers/is-same-date';
 import { FsPickerBaseComponent } from '../../../classes/picker-base-component';
@@ -69,7 +68,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   public onChange: any;
   public onTouch: any = () => {};
 
-  protected _dateDialogRef: FsDatePickerDialogRef;
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
   protected _value;
@@ -111,6 +109,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   public ngOnInit(): void {
     super.ngOnInit();
     this._listenActivePicker();
+    this._listenKeydown();
 
     const control = this._ngControl.control;
     const validators = control.validator
@@ -384,6 +383,23 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         setTimeout(() => {
           this._doFocus();
         });
+      });
+  }
+
+  private _listenKeydown(): void {
+    fromEvent(this.el, 'keydown')
+      .pipe(
+        tap(() => this.close()),
+        filter((event: KeyboardEvent) => ['Tab', 'Enter', 'Escape'].includes(event.key)),
+        takeUntil(this._destroy$),
+      )
+      .subscribe((event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+          this.inputChange(this.el.value);
+        }
+
+        this.close();
+        this.el.blur();
       });
   }
 
