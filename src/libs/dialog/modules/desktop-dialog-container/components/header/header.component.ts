@@ -77,6 +77,11 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
   public yearsList: IYearListItem[] = [];
   public monthList: IMonthListItem[] = [];
 
+  // this is viewMode that was selected before view was changed to selecting month/year
+  // this logic MUST be moved out of this component to the DialogModel in case when such functionality
+  // will be not only in this component
+  private _mainViewMode: string;
+
   constructor(
     private _elRef: ElementRef,
   ) {}
@@ -104,16 +109,22 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
   public selectMonth(month: number): void {
     this.monthChange.emit(month);
 
-    this.setViewMode('date');
+    this.setViewMode(this._mainViewMode);
+    this._mainViewMode = null;
   }
 
   public selectYear(year: number): void {
     this.yearChange.emit(year);
 
-    this.setViewMode('date');
+    this.setViewMode(this._mainViewMode);
+    this._mainViewMode = null;
   }
 
   public setViewMode(mode: string): void {
+    if (mode === 'month') {
+      this._mainViewMode = this.viewMode;
+    }
+
     this.viewModeChange.emit(mode);
 
     this._scrollToSelectedYear();

@@ -44,7 +44,7 @@ export class FsMonthRangePickerComponent implements OnChanges {
     }
   }
 
-  public viewModeChanged(mode: string) {
+  /*public viewModeChanged(mode: string) {
     this.datePickerModel.setCalendarMode(mode);
   }
 
@@ -54,7 +54,7 @@ export class FsMonthRangePickerComponent implements OnChanges {
 
   public yearChanged(year: number) {
     this.datePickerModel.setCalendarYear(year);
-  }
+  }*/
 
   public nextMonth(): void {
     this.datePickerModel.nextMonth();
