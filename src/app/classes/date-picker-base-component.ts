@@ -7,13 +7,10 @@ import {
   Input,
   Directive,
   OnInit,
-  Injector
 } from '@angular/core';
 
 import { fromEvent, Subject } from 'rxjs';
 import { filter, take, takeUntil, tap } from 'rxjs/operators';
-
-import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
 
 import {
   AbstractControl,
@@ -24,7 +21,7 @@ import {
   Validators
 } from '@angular/forms';
 
-import { isEqual, isValid, startOfDay } from 'date-fns';
+import { isEqual, isValid } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { parseDate } from '../helpers/parse-date';
