@@ -105,8 +105,10 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
   }
 
   protected updateValue(period): void {
-    period.from = startOfDay(period.from);
-    period.to = endOfDay(period.to);
+    if (!!period) {
+      period.from = startOfDay(period.from);
+      period.to = endOfDay(period.to);
+    }
 
     this._value = period;
 
