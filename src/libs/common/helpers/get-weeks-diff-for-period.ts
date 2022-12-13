@@ -1,10 +1,11 @@
 import { differenceInCalendarWeeks, isBefore } from 'date-fns';
+import { WeekDays } from '../../common/types/week-days.type';
 
 
 /**
  * Calculate difference in weeks based on seedDate and periodWeeks
  */
-export function getWeeksDiffForPeriod(dateStart, seedDate, periodWeeks) {
+export function getWeeksDiffForPeriod(dateStart, seedDate, periodWeeks, weekStartsOn: WeekDays = 1) {
   /**
    * If week date start before seed date
    */
@@ -12,7 +13,7 @@ export function getWeeksDiffForPeriod(dateStart, seedDate, periodWeeks) {
     const weeksDiff = differenceInCalendarWeeks(
       dateStart,
       seedDate,
-      { weekStartsOn: seedDate.getDay()}
+      { weekStartsOn}
     ) / periodWeeks;
 
     // Sometimes weeksDiff can be integer and we use +0.1 for easy round
@@ -21,7 +22,7 @@ export function getWeeksDiffForPeriod(dateStart, seedDate, periodWeeks) {
     const weeksDiff = differenceInCalendarWeeks(
       dateStart,
       seedDate,
-      { weekStartsOn: seedDate.getDay()}
+      { weekStartsOn}
     ) / periodWeeks;
 
     // Sometimes weeksDiff can be integer and we use +0.1 for easy round

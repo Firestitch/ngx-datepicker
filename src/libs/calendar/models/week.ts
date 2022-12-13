@@ -3,6 +3,7 @@ import { addWeeks, } from 'date-fns';
 import { Period } from './period';
 import { DayItem } from '../interfaces/day-item.interface';
 import { getPeriodId } from '../../common/helpers/get-period-id';
+import { WeekDays } from '../../common/types/week-days.type';
 
 
 export class Week {
@@ -20,10 +21,11 @@ export class Week {
   constructor(
     private _dateStart: Date,
     private _seedDate: Date,
-    private _periodWeeks: number
+    private _periodWeeks: number,
+    private _weekStartsOn: WeekDays,
   ) {
     if (this._seedDate && this._periodWeeks) {
-      this.periodId = getPeriodId(this._dateStart, this._seedDate, this._periodWeeks);
+      this.periodId = getPeriodId(this._dateStart, this._seedDate, this._periodWeeks, this._weekStartsOn);
     }
 
     this._dateEnd = addWeeks(this._dateStart, 1);

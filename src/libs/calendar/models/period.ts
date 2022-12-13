@@ -19,7 +19,6 @@ export class Period {
   constructor(
     public periodId: number,
     public startDate: Date,
-    public seedDate: Date,
     public periodWeeks: number,
     private _selected = false,
   ) {
@@ -63,7 +62,7 @@ export class Period {
   public addWeek(week: Week) {
     this._weeks.push(week);
 
-    if (this.seedDate && this.periodWeeks) {
+    if (this.periodWeeks) {
       this._sortWeeks();
 
       if (this._weeks.length === 1) {
@@ -101,14 +100,7 @@ export class Period {
    * Calc from, to, year params based on period date start
    */
   private _updatePeriodInterval() {
-    const diffInCalendarYears = differenceInCalendarYears(this.startDate, this.seedDate);
-
-    const seedDate = new Date(this.seedDate);
-    seedDate.setFullYear(seedDate.getFullYear() + diffInCalendarYears);
-
-    const offsetFromSeedDate = (this.periodWeeks * (this.periodId - 1));
-
-    this._from = addWeeks(seedDate, offsetFromSeedDate);
+    this._from = this.startDate;
     this._to = addSeconds(addWeeks(this._from, this.periodWeeks), -1);
     this._year = this._from.getFullYear();
   }

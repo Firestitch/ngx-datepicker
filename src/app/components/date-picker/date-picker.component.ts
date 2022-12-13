@@ -18,6 +18,8 @@ import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
+import { WeekDays } from '../../../libs/common/types/week-days.type';
+import { WeekDay } from '../../../libs/common/enums/week-day.enum';
 
 
 @Component({
@@ -52,6 +54,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   @Input() public view = PickerViewType.Date;
   @Input() public format: string;
   @Input() public minutes = true;
+
+  @Input()
+  public weekStartsOn: WeekDays = WeekDay.Monday;
 
   @Output('change')
   public change$ = new EventEmitter<any>();
@@ -101,6 +106,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
       maxDate: this.maxDate,
       startOfDay: this.startOfDay,
       components: this._getDefaultComponents(),
+      weekStartsOn: this.weekStartsOn,
     });
 
     super.open();

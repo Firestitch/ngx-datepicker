@@ -21,6 +21,8 @@ import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 
 import { RangePickerRef } from '../../../app/classes/range-picker-ref';
 import { getFirstDayOfFirstYearWeek } from '../helpers/get-first-day-of-first-year-week';
+import { WeekDays } from '../../common/types/week-days.type';
+import { WeekDay } from '../../../libs/common/enums/week-day.enum';
 
 
 export class FsDatePickerDialogModel {
@@ -38,6 +40,7 @@ export class FsDatePickerDialogModel {
   public seedDate = null;
   public periodWeeks = null;
   public minutes = true;
+  public weekStartsOn: WeekDays = WeekDay.Monday;
 
   private _minYear = null;
   private _maxYear = null;
@@ -284,6 +287,7 @@ export class FsDatePickerDialogModel {
     this.minDate = options.minDate;
     this.maxDate = options.maxDate;
     this.rangeStart = options.rangeStart;
+    this.weekStartsOn = options.weekStartsOn;
 
     if (this._pickerOptions.rangeType === 'to' && this.minDate < this.rangeStart) {
       this.minDate = this.rangeStart;

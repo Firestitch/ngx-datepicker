@@ -1,8 +1,5 @@
 import {
-  ChangeDetectorRef,
   Directive,
-  ElementRef,
-  HostBinding,
   HostListener,
   Injector,
   Input,
@@ -25,6 +22,8 @@ import { RangePickerRef } from '../../../classes/range-picker-ref';
 import { formatDateTime } from '../../../helpers/format-date-time';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
 import { parseDate } from '../../../helpers/parse-date';
+import { WeekDays } from '../../../../libs/common/types/week-days.type';
+import { WeekDay } from '../../../../libs/common/enums/week-day.enum';
 
 
 @Directive()
@@ -51,6 +50,9 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   @Input()
   public format: string;
+
+  @Input()
+  public weekStartsOn: WeekDays = WeekDay.Monday;
 
   @Input() public ngModelOptions: {
     name?: string;
@@ -175,7 +177,8 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         components: this._getDefaultComponents(),
         modelValue: this.value,
         pickerRef: this._pickerRef,
-        rangeType: this._type
+        rangeType: this._type,
+        weekStartsOn: this.weekStartsOn,
       }
     );
 

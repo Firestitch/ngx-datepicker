@@ -27,6 +27,7 @@ import { Month } from '../../models/month';
 import { Period } from '../../models/period';
 import { Week } from '../../models/week';
 import { DayItem } from '../../interfaces/day-item.interface';
+import { WeekDays } from '../../../common/types/week-days.type';
 
 
 @Component({
@@ -69,6 +70,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Input()
   public seedDate;
+
+  @Input()
+  public weekStartsOn: WeekDays;
 
   @Input()
   public periodWeeks;
@@ -116,7 +120,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
     if (this.dateMode === 'week') {
       if (this.period && this.seedDate) {
-        this.selectedPeriod = new Period(this.period.period, this.period.from, this.seedDate, this.periodWeeks, true);
+        this.selectedPeriod = new Period(this.period.period, this.period.from, this.periodWeeks, true);
         this.selectedPeriod.year = this.period.from.getFullYear();
 
         const selectedPeriod = this.month.updateSelectionForPeriod(this.selectedPeriod);
@@ -306,11 +310,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       this.periodWeeks,
       this.disabledDays,
       this.hideExtraDays,
+      this.weekStartsOn,
     );
 
     if (this.dateMode === 'week') {
       this.weekDaysList = WEEKDAYS.map((_, i, arr) => {
-        return arr[(i + month.seedDay) % 7];
+        return arr[(i + this.weekStartsOn) % 7];
       });
     } else {
       this.weekDaysList = WEEKDAYS.slice();

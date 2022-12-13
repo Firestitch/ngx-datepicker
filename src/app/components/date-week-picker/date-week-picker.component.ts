@@ -19,6 +19,8 @@ import { formatPeriodObject } from '../../../libs/common/helpers/format-period-o
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 import { endOfDay, startOfDay } from 'date-fns';
+import { WeekDays } from '../../../libs/common/types/week-days.type';
+import { WeekDay } from '../../../libs/common/enums/week-day.enum';
 
 
 @Component({
@@ -40,6 +42,9 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
   @Input() public seedDate = null;
   @Input() public period = 1;
   @Input() public view = PickerViewType.Week;
+
+  @Input()
+  public weekStartsOn: WeekDays = WeekDay.Monday;
 
   @Output('change')
   public change$ = new EventEmitter<any>();
@@ -98,6 +103,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
         components: this._getDefaultComponents(),
         seedDate: this.seedDate,
         periodWeeks: this.period,
+        weekStartsOn: this.weekStartsOn,
       }
     );
 

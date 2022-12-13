@@ -4,6 +4,7 @@ import { isDayDisabled } from '../../common/helpers/is-day-disabled';
 
 import { Week } from './week';
 import { Period } from './period';
+import { WeekDays } from '../../common/types/week-days.type';
 
 const CALENDAR_DAYS_NUMBER = 42;
 
@@ -22,7 +23,6 @@ export class Month {
 
   private _monthStartDay: number;
   private _daysInMonth: number;
-  private _seedDay: number;
 
 
   constructor(public date: Date,
@@ -30,19 +30,10 @@ export class Month {
               public periodWeeks: number,
               private _disabledDays,
               private _hideExtraDays: boolean,
+              private _weekStartsOn: WeekDays,
   ) {
     this._initMonth(date);
-
-    if (this.seedDate && this.periodWeeks) {
-      this._seedDay = seedDate.getDay();
-      this._countTotalDaysInMonth(this._seedDay);
-    } else {
-      this._countTotalDaysInMonth(0);
-    }
-  }
-
-  public get seedDay() {
-    return this._seedDay;
+    this._countTotalDaysInMonth();
   }
 
   /**
@@ -65,7 +56,7 @@ export class Month {
       const dayNumber = lightFormat(currentDate, 'd');
 
       if (d % 7 == 0) {
-        week = new Week(currentDate, this.seedDate, this.periodWeeks);
+        week = new Week(currentDate, this.seedDate, this.periodWeeks, this._weekStartsOn);
 
         this.weeks.push(week);
       }
@@ -138,13 +129,12 @@ export class Month {
 
   /**
    * Depends on week day start it counts total number of days in month
-   * @param seedDay
    */
-  private _countTotalDaysInMonth(seedDay) {
-    if (this._monthStartDay >= seedDay) {
-      this._prevMonthDaysCount = this._monthStartDay - seedDay;
+  private _countTotalDaysInMonth() {
+    if (this._monthStartDay >= this._weekStartsOn) {
+      this._prevMonthDaysCount = this._monthStartDay - this._weekStartsOn;
     } else {
-      this._prevMonthDaysCount = 7 - (seedDay - this._monthStartDay);
+      this._prevMonthDaysCount = 7 - (this._weekStartsOn - this._monthStartDay);
     }
 
     // const totalDays = this._daysInMonth + this._prevMonthDaysCount;
@@ -162,7 +152,6 @@ export class Month {
         const newPeriod = new Period(
           week.periodId,
           week.dateStart,
-          this.seedDate,
           this.periodWeeks,
         );
 

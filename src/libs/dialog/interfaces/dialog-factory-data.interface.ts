@@ -5,6 +5,7 @@ import { ScrollPickerViewType } from '../../common/enums/scroll-picker-view-type
 import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 
 import { IFsDatePickerDialogComponents } from './dialog-components.interface';
+import { WeekDays } from '../../../libs/common/types/week-days.type';
 
 
 export interface IDialogFactoryOptions {
@@ -22,6 +23,7 @@ export interface IDialogFactoryOptions {
   seedDate?: Date;
   pickerRef?: RangePickerRef;
   rangeType?: 'from' | 'to';
+  weekStartsOn?: WeekDays
 
   //
   showMonth?: boolean;

@@ -23,6 +23,7 @@
           [disabledDays]="datePickerModel.disabledDays$ | async"
           [period]="datePickerModel.period"
           [seedDate]="datePickerModel.seedDate"
+          [weekStartsOn]="datePickerModel.weekStartsOn"
           [periodWeeks]="datePickerModel.periodWeeks"
           (change)="dateChanged($event)"
           (periodChange)="periodChanged($event)">

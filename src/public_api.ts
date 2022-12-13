@@ -21,6 +21,8 @@ export { MonthRangePickerFromComponent } from './app/components/range-picker/fro
 export { MonthRangePickerToComponent } from './app/components/range-picker/to/month-range-picker-to.component';
 
 export { IDatePickerPeriod } from './libs/common/interfaces/period.interface';
+export { WeekDays } from './libs/common/types/week-days.type';
+export { WeekDay } from './libs/common/enums/week-day.enum';
 export { formatPeriodObject } from './libs/common/helpers/format-period-object';
 export { getPeriodForDate } from './libs/common/helpers/get-period-for-date';
 export { getPeriodId } from './libs/common/helpers/get-period-id';
