@@ -287,7 +287,7 @@ export class FsDatePickerDialogModel {
     this.minDate = options.minDate;
     this.maxDate = options.maxDate;
     this.rangeStart = options.rangeStart;
-    this.weekStartsOn = options.weekStartsOn;
+    this.weekStartsOn = options.weekStartsOn ?? WeekDay.Monday;
 
     if (this._pickerOptions.rangeType === 'to' && this.minDate < this.rangeStart) {
       this.minDate = this.rangeStart;
