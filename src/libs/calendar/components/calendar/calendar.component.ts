@@ -313,7 +313,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       this.weekStartsOn,
     );
 
-    if (this.dateMode === 'week') {
+    if (this.weekStartsOn !== undefined) {
       this.weekDaysList = WEEKDAYS.map((_, i, arr) => {
         return arr[(i + this.weekStartsOn) % 7];
       });
