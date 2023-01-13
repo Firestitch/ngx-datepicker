@@ -6,6 +6,7 @@
       fsFormRequired
       [(ngModel)]="model"
       name="datetimepicker"
-      placeholder="Date Time">
+      placeholder="Date Time"
+      (closed)="dateChange()">
   </mat-form-field>
 </form>

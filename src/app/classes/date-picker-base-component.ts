@@ -58,6 +58,9 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   @Output('selected')
   public selected$ = new EventEmitter<Date>();
 
+  @Output('closed')
+  public closed$ = new EventEmitter<void>();
+
   @Output('blured')
   public blured$ = new EventEmitter<Date>();
 
@@ -183,6 +186,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
         this._doFocus();
         this._renderer.removeClass(document.body, 'fs-date-picker-open');
 
+        this.closed$.emit();
         this._cdRef.markForCheck();
       });
   }
