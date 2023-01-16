@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class DateTimeExampleComponent {
   public model = new Date('2015-10-10 15:45');
 
-  public dateChange(): void {
-    console.log('date', this.model);
+  public pickerClosed(): void {
+    console.log('picker closed');
   }
 }

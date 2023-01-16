@@ -119,4 +119,8 @@ export class DatetimeTzExampleComponent {
       this.selectedTimeZone = tzList[0].name;
     }
   }
+
+  public pickerClosed(): void {
+    console.log('picker closed');
+  }
 }

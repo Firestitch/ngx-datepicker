@@ -4,6 +4,7 @@
       matInput
       fsTimeRangeFromPicker="timerangepicker"
       [(ngModel)]="startDate"
+      (closed)="pickerClosed()"
       name="date_from"
       placeholder="Time Range From"
       fsFormRequired>
@@ -16,6 +17,7 @@
       matInput
       fsTimeRangeToPicker="timerangepicker"
       [(ngModel)]="endDate"
+      (closed)="pickerClosed()"
       name="date_to"
       placeholder="Time Range To"
       fsFormRequired>

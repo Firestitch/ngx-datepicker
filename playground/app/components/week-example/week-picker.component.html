@@ -7,6 +7,7 @@
           [(ngModel)]="seedDate"
           fsFormRequired             
           (change)="change($event)"
+          (closed)="pickerClosed()"
           name="seedDate"
           placeholder="Seed Date">
     </mat-form-field>
@@ -31,6 +32,7 @@
         [(ngModel)]="model"
         [seedDate]="seedDate"
         [period]="periodWeeks"
+        (closed)="pickerClosed()"
         name="weekpicker"
         placeholder="Weeks Picker">
     </mat-form-field>

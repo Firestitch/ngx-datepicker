@@ -4,6 +4,7 @@
            fsDatePickerBirthday
            [(ngModel)]="model"
            [maxDate]="curentDay"
+           (closed)="pickerClosed()"
            name="birthday"
            placeholder="Birthday">
   </mat-form-field>

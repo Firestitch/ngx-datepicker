@@ -11,6 +11,7 @@ export class TimeRangeExampleComponent {
   public startDate = new Date('2015-10-10 15:45');
   public endDate = new Date('2015-10-10 18:45');
 
-  constructor() {
+  public pickerClosed(): void {
+    console.log('picker closed');
   }
 }

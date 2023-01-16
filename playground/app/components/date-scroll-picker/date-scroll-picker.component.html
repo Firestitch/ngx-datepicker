@@ -5,6 +5,7 @@
         matInput
         fsDateScrollPicker
         [(ngModel)]="standard"
+        (closed)="pickerClosed()"
         name="standard"
         placeholder="Standard Scroll Picker">
     </mat-form-field>
@@ -15,6 +16,7 @@
         fsDateScrollPicker
         [showYear]="false"
         [(ngModel)]="monthDay"
+        (closed)="pickerClosed()"
         name="month-day"
         placeholder="Month & Day Scroll Picker">
     </mat-form-field>
@@ -25,6 +27,7 @@
         fsDateScrollPicker
         [showDay]="false"
         [(ngModel)]="monthYear"
+        (closed)="pickerClosed()"
         name="month-year"
         placeholder="Month & Year Scroll Picker">
     </mat-form-field>
@@ -36,6 +39,7 @@
         [showDay]="false"
         [showYear]="false"
         [(ngModel)]="month"
+        (closed)="pickerClosed()"
         name="month"
         placeholder="Month Scroll Picker">
     </mat-form-field>
@@ -47,6 +51,7 @@
         [showDay]="false"
         [showMonth]="false"
         [(ngModel)]="year"
+        (closed)="pickerClosed()"
         name="year"
         placeholder="Year Scroll Picker">
     </mat-form-field>

@@ -6,7 +6,8 @@
       [(ngModel)]="startDate"
       name="date_from"
       placeholder="Date Range From"
-      fsFormRequired>
+      fsFormRequired
+      (closed)="pickerClosed()">
   </mat-form-field>
 
   <fs-date-range-separator></fs-date-range-separator>
@@ -18,6 +19,7 @@
       [(ngModel)]="endDate"
       name="date_to"
       placeholder="Date Range To"
-      fsFormRequired>
+      fsFormRequired
+      (closed)="pickerClosed()">
   </mat-form-field>
 </form>
