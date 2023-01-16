@@ -13,4 +13,8 @@ export class BirthdayExampleComponent {
   public curentDay = new Date();
 
   constructor() { }
+
+  public pickerClosed(): void {
+    console.log('picker closed');
+  }
 }

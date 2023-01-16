@@ -19,7 +19,8 @@
         [(ngModel)]="model"
         [timezone]="selectedTimeZone"
         name="datetimepicker"
-        placeholder="Date Time">
+        placeholder="Date Time"
+        (closed)="pickerClosed()">
       <mat-hint>UTC: {{model?.toUTCString()}}</mat-hint>
   </mat-form-field>
 
@@ -35,7 +36,8 @@
         [format]="format"
         name="dateTimeFrom"
         placeholder="Date Range From"
-        fsFormRequired>
+        fsFormRequired
+        (closed)="pickerClosed()">
       <mat-hint>UTC: {{startDateTimeDate?.toUTCString()}}</mat-hint>
   </mat-form-field>
 
@@ -50,7 +52,8 @@
       [format]="format"
       name="dateTimeTo"
       placeholder="Date Range To"
-      fsFormRequired>
+      fsFormRequired
+      (closed)="pickerClosed()">
     <mat-hint>UTC: {{endDateTimeDate?.toUTCString()}}</mat-hint>
   </mat-form-field>
 </form>

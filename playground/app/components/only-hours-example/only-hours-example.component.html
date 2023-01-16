@@ -7,6 +7,7 @@
       [(ngModel)]="model"
       [minutes]="false"
       name="timepicker"
-      placeholder="Time">
+      placeholder="Time"
+      (closed)="pickerClosed()">
   </mat-form-field>
 </form>

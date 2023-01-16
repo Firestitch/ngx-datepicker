@@ -11,4 +11,8 @@ export class TimeExampleComponent {
   public selected(date) {
     console.log(date);
   }
+
+  public pickerClosed(): void {
+    console.log('picker closed');
+  }
 }

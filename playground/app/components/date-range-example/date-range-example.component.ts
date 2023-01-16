@@ -7,10 +7,11 @@ import { Component } from '@angular/core';
 })
 export class DateRangeExampleComponent {
 
-  startDate = new Date('2019-10-10');
-  endDate = new Date('2019-10-12');
-  range = null;
+  public startDate = new Date('2019-10-10');
+  public endDate = new Date('2019-10-12');
+  public range = null;
 
-  constructor() {
+  public pickerClosed(): void {
+    console.log('picker closed');
   }
 }

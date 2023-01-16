@@ -22,4 +22,8 @@ export class DateExampleComponent {
   public ngModelChange(e) {
     console.log('ngModelChange', e);
   }
+
+  public pickerClosed(): void {
+    console.log('picker closed');
+  }
 }

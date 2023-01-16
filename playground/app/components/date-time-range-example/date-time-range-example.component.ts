@@ -18,4 +18,8 @@ export class DateTimeRangeExampleComponent {
     this.endDate = new Date('2019-10-10');
     this.endDate.setHours(this.startDate.getHours() + 1);
   }
+
+  public pickerClosed(): void {
+    console.log('picker closed');
+  }
 }

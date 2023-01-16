@@ -10,4 +10,8 @@ export class DateScrollPickerComponent {
   public monthDay;
   public year;
   public month;
+
+  public pickerClosed(): void {
+    console.log('picker closed');
+  }
 }

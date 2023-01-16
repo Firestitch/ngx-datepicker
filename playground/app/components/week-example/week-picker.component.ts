@@ -19,7 +19,11 @@ export class WeekPickerComponent {
 
   constructor() {}
 
-  change(e) {
+  public change(e) {
     this.model = null;
+  }
+
+  public pickerClosed(): void {
+    console.log('picker closed');
   }
 }
