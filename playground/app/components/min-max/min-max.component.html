@@ -1,0 +1,26 @@
+<form>
+  <div fxLayout="row wrap" fxLayoutGap="10px">
+    <mat-form-field>
+      <input 
+        matInput
+        fsDatePicker
+        [(ngModel)]="data.datePicker"
+        fsFormRequired
+        name="datePicker"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        placeholder="Date">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        fsDateScrollPicker
+        [(ngModel)]="data.scrollPicker"
+        name="year"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        placeholder="Max Date Scroll Picker">
+    </mat-form-field>
+  </div>
+</form>

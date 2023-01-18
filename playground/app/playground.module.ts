@@ -29,6 +29,7 @@ import { OnlyHoursExampleComponent } from './components/only-hours-example/only-
 import { MonthExampleComponent } from './components/month-example/month-example.component';
 import { DatetimeTzExampleComponent } from './components/datetime-tz-example/datetime-tz-example.component';
 import { TzOffsetPipe } from './components/datetime-tz-example/tz-offset.pipe';
+import { MinMaxComponent } from './components';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { TzOffsetPipe } from './components/datetime-tz-example/tz-offset.pipe';
     MonthExampleComponent,
     DatetimeTzExampleComponent,
     TzOffsetPipe,
+    MinMaxComponent,
   ],
   providers: [
   ],

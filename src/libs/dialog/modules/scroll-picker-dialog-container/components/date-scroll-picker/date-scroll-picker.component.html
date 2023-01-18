@@ -9,21 +9,21 @@
   </fs-scroll-picker>
 
   <fs-scroll-picker
-      *ngIf="showDay"
-      class="day"
-      [valuesMin]="1"
-      [valuesMax]="maxDay"
-      name="day"
-      [(ngModel)]="day"
-      (ngModelChange)="change()">
+    *ngIf="showDay"
+    class="day"
+    [valuesMin]="1"
+    [valuesMax]="maxDay"
+    name="day"
+    [(ngModel)]="day"
+    (ngModelChange)="change()">
   </fs-scroll-picker>
 
   <fs-scroll-picker
-      *ngIf="showYear"
-      class="year"
-      [values]="years"
-      name="year"
-      [(ngModel)]="year"
-      (ngModelChange)="changeYear()">
+    *ngIf="showYear"
+    class="year"
+    [values]="years"
+    name="year"
+    [(ngModel)]="year"
+    (ngModelChange)="changeYear()">
   </fs-scroll-picker>
 </div>

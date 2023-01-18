@@ -1,13 +1,15 @@
 <div class="fs-date-picker-dialog fs-date-picker-dialog-shadow fs-date-picker-range" tabindex="0">
   <div class="wrap">
-    <fs-date-scroll-picker [model]="dialogRef.pickerModel.model"
-                           [minYear]="dialogRef.options.minYear"
-                           [maxDate]="dialogRef.options.maxDate"
-                           [maxYear]="dialogRef.options.maxYear"
-                           [showDay]="dialogRef.options.showDay"
-                           [showMonth]="dialogRef.options.showMonth"
-                           [showYear]="dialogRef.options.showYear"
-                           (changed)="change($event)">
+    <fs-date-scroll-picker 
+      [model]="dialogRef.pickerModel.model"
+      [minYear]="dialogRef.options.minYear"
+      [minDate]="dialogRef.options.minDate"
+      [maxDate]="dialogRef.options.maxDate"
+      [maxYear]="dialogRef.options.maxYear"
+      [showDay]="dialogRef.options.showDay"
+      [showMonth]="dialogRef.options.showMonth"
+      [showYear]="dialogRef.options.showYear"
+      (changed)="change($event)">
     </fs-date-scroll-picker>
 
     <div class="buttons">

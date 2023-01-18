@@ -15,7 +15,6 @@ import { DOCUMENT } from '@angular/common';
 
 import { getDaysInMonth, isValid } from 'date-fns';
 
-
 import { MONTHS } from '../../consts/months';
 
 
@@ -47,6 +46,9 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
 
   @Input()
   public maxDate: Date;
+
+  @Input()
+  public minDate: Date;
 
   @Output()
   public changed = new EventEmitter<Date>();
@@ -108,12 +110,6 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
       this.year = date.getFullYear();
       this.month = date.getMonth();
     }
-  }
-
-  private _getMonth(month) {
-    return this.months.find(item => {
-      return month === item.value;
-    });
   }
 
   public change() {
