@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
+  ViewChild,
 } from '@angular/core';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 import { FsDatePickerDialogRef } from '../../../../../dialog/classes/dialog-ref';
+import { FsDateScrollPickerDialogComponent } from '../date-scroll-picker/date-scroll-picker.component';
 
 
 @Component({
@@ -15,6 +17,10 @@ import { FsDatePickerDialogRef } from '../../../../../dialog/classes/dialog-ref'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDateScrollPickerMobileDialogComponent {
+  public disabledSubmit = false;
+
+  @ViewChild('scrollPickerRef')
+  public scrollPickerRef: FsDateScrollPickerDialogComponent;
 
   private _date: Date | null;
 
@@ -34,6 +40,7 @@ export class FsDateScrollPickerMobileDialogComponent {
 
   public change(date: Date | null) {
     this._date = date;
+    this.disabledSubmit = !!this.scrollPickerRef?.disabledValue;
   }
 
   public close(save = false) {

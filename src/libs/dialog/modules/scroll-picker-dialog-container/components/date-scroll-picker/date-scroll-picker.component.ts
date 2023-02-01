@@ -10,12 +10,14 @@ import {
   OnInit,
   Output,
   Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 import { getDaysInMonth, isValid } from 'date-fns';
 
 import { MONTHS } from '../../consts/months';
+import { ScrollPickerComponent } from '@firestitch/scroll-picker';
 
 
 @Component({
@@ -53,6 +55,15 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
   @Output()
   public changed = new EventEmitter<Date>();
 
+  @ViewChild('monthRef')
+  public monthRef: ScrollPickerComponent;
+
+  @ViewChild('yearRef')
+  public yearRef: ScrollPickerComponent;
+
+  @ViewChild('dayRef')
+  public dayRef: ScrollPickerComponent;
+
   public years: any[] = [];
   public months: any[] = [];
 
@@ -65,6 +76,12 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
   public disabledMaxMonth = null;
   public disabledMinDay = null;
   public disabledMaxDay = null;
+
+  public get disabledValue(): boolean {
+    return this.monthRef?.valueDisabled
+        || this.yearRef?.valueDisabled
+        || this.dayRef?.valueDisabled;
+  }
 
   constructor(
     public element: ElementRef,
