@@ -30,8 +30,8 @@
     class="year"
     [values]="years"
     name="year"
-    [disabledMin]="minDate?.getFullYear() - 1"
-    [disabledMax]="maxDate?.getFullYear() + 1"
+    [disabledMin]="disabledMinYear - 1"
+    [disabledMax]="disabledMaxYear + 1"
     [(ngModel)]="year"
     (ngModelChange)="changeYear()">
   </fs-scroll-picker>
