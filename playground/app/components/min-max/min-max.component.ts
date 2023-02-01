@@ -10,7 +10,6 @@ import { addMonths, subMonths } from 'date-fns';
 export class MinMaxComponent {
 
   public data: any = {};
-  public minDate = subMonths(new Date(),5);
-  public maxDate = addMonths(new Date(),6);
-  
+  public minDate = new Date('2021-08-23');
+  public maxDate = new Date('2023-08-23');
 }
