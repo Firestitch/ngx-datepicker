@@ -175,7 +175,9 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
   }
 
   private _generateDaysArray() {
+    this.dayRef?.updateValues();
     this.maxDay = 0;
+
     const maxDate = this.maxDate;
     const maxDay = maxDate && maxDate.getDate();
     const maxMonth = maxDate && maxDate.getMonth();
