@@ -1,28 +1,37 @@
 <div class="scroll-pickers">
   <fs-scroll-picker
+    #monthRef
     *ngIf="showMonth"
     class="month"
-    [values]="months"
     name="month"
+    [values]="months"
+    [disabledMin]="disabledMinMonth - 1"
+    [disabledMax]="disabledMaxMonth + 1"
     [(ngModel)]="month"
     (ngModelChange)="changeMonth()">
   </fs-scroll-picker>
 
   <fs-scroll-picker
+    #dayRef
     *ngIf="showDay"
     class="day"
-    [valuesMin]="1"
-    [valuesMax]="maxDay"
     name="day"
+    [valuesMin]="minDay"
+    [valuesMax]="maxDay"
+    [disabledMin]="disabledMinDay - 1"
+    [disabledMax]="disabledMaxDay + 1"
     [(ngModel)]="day"
     (ngModelChange)="change()">
   </fs-scroll-picker>
 
   <fs-scroll-picker
+    #yearRef
     *ngIf="showYear"
     class="year"
-    [values]="years"
     name="year"
+    [values]="years"
+    [disabledMin]="disabledMinYear - 1"
+    [disabledMax]="disabledMaxYear + 1"
     [(ngModel)]="year"
     (ngModelChange)="changeYear()">
   </fs-scroll-picker>

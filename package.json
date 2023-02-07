@@ -65,7 +65,7 @@
     "@firestitch/message": "^12.2.1",
     "@firestitch/popover": "^12.1.2",
     "@firestitch/prompt": "^12.0.1",
-    "@firestitch/scroll-picker": "^12.0.0",
+    "@firestitch/scroll-picker": "^12.1.0",
     "@firestitch/scrollbar": "^12.0.1",
     "@firestitch/store": "^12.1.1",
     "@firestitch/style": "^12.1.0",

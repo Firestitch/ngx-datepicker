@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewChild,
 } from '@angular/core';
 
 import { FsDatePickerDialogRef } from '../../../../../dialog/classes/dialog-ref';
+import { FsDateScrollPickerDialogComponent } from '../date-scroll-picker/date-scroll-picker.component';
 
 
 @Component({
@@ -12,6 +14,10 @@ import { FsDatePickerDialogRef } from '../../../../../dialog/classes/dialog-ref'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDateScrollPickerDesktopComponent {
+  public disabledSubmit = false;
+
+  @ViewChild('scrollPickerRef')
+  public scrollPickerRef: FsDateScrollPickerDialogComponent;
 
   private _date: Date | null;
 
@@ -25,6 +31,7 @@ export class FsDateScrollPickerDesktopComponent {
 
   public change(date: Date | null) {
     this._date = date;
+    this.disabledSubmit = !!this.scrollPickerRef?.disabledValue;
   }
 
   public close(save = false) {
