@@ -40,7 +40,14 @@ export class FsDateScrollPickerMobileDialogComponent {
 
   public change(date: Date | null) {
     this._date = date;
-    this.disabledSubmit = !!this.scrollPickerRef?.disabledValue;
+
+    if (this.scrollPickerRef?.maxDate && date > this.scrollPickerRef?.maxDate) {
+      this.disabledSubmit = true;
+    } else if (this.scrollPickerRef?.minDate && date < this.scrollPickerRef?.minDate) {
+      this.disabledSubmit = true;
+    } else {
+      this.disabledSubmit = false;
+    }
   }
 
   public close(save = false) {

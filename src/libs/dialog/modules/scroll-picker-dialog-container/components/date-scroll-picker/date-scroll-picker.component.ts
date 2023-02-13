@@ -148,7 +148,7 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     if (!this.day) {
       this.day = 1;
     }
-    
+
     const daysInMonth = getDaysInMonth(new Date(this.year, this.month));
     if (this.day > daysInMonth) {
       this.day = daysInMonth;
@@ -182,8 +182,7 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     const maxDay = maxDate && maxDate.getDate();
     const maxMonth = maxDate && maxDate.getMonth();
     const maxYear = maxDate && maxDate.getFullYear();
-    
-    
+
     const minDate = this.minDate;
     const minDay = minDate && minDate.getDate();
     const minMonth = minDate && minDate.getMonth();
@@ -201,9 +200,14 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     }
 
     if (this.minDate) {
+
       if (minYear === this.year && minMonth === this.month) {
         this.disabledMinDay = minDay;
       } else {
+        if (this.year < this.minDate?.getFullYear()) {
+          this.disabledMaxDay = 1;
+        }
+
         this.disabledMinDay = 1;
       }
     }
@@ -222,19 +226,25 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
         this.maxDay = daysInMonth;
       }
     }
-    this.disabledMaxDay = this.maxDay;
 
+    if (this.maxDate && this.year > this.maxDate?.getFullYear()) {
+      this.disabledMaxDay = 0;
+    } else {
+      this.disabledMaxDay = this.maxDay;
+    }
   }
 
   private _generateMonthArray() {
     this.months = MONTHS;
-    
+
     if (this.maxDate) {
       if (this.maxDate?.getFullYear() === this.year) {
         const maxMonth = this.maxDate.getMonth();
 
         this.disabledMaxMonth = maxMonth;
 
+      } else if (this.year > this.maxDate?.getFullYear()) {
+        this.disabledMaxMonth = 0;
       } else {
         this.disabledMaxMonth = 12;
       }
@@ -243,10 +253,14 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     }
 
     if (this.minDate) {
-      if(this.minDate.getFullYear() === this.year) {
+      if (this.minDate.getFullYear() === this.year) {
         const minMonth = this.minDate.getMonth();
         this.disabledMinMonth = minMonth;
       } else {
+        if (this.year < this.minDate.getFullYear()) {
+          this.disabledMaxMonth = -1;
+          this.disabledMaxDay = -1;
+        }
         this.disabledMinMonth = null;
       }
     }
@@ -254,7 +268,7 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
 
   private _generateYearsArray() {
     let minYear = this.minYear;
-    let maxYear = this.maxYear;
+    const maxYear = this.maxYear;
 
     if (this.maxDate) {
       this.disabledMaxYear = this.maxDate?.getFullYear();
