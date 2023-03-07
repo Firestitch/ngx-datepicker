@@ -1,19 +1,10 @@
 {
-  "extends": "./tools/config/tsconfig.cli.json",
+  "extends": "./node_modules/@firestitch/component-tools/config/tsconfig.cli.json",
   "compilerOptions": {
     "paths": {
-      "fs-datepicker": [
+      "@firestitch/select-button": [
         "src/public_api.ts"
-      ],
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@libs/*": [
-        "src/libs/*"
       ]
     }
-  },
-  "angularCompilerOptions": {
-    "strictTemplates": true
   }
 }

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'date-scroll-picker',
-  templateUrl: 'date-scroll-picker.component.html',
+  templateUrl: './date-scroll-picker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateScrollPickerComponent {

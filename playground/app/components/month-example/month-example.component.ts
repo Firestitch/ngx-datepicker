@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'month-example',
-  templateUrl: 'month-example.component.html',
+  templateUrl: './month-example.component.html',
 })
 export class MonthExampleComponent {
 

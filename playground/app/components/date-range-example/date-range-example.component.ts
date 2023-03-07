@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'date-range-example',
-  templateUrl: 'date-range-example.component.html',
+  templateUrl: './date-range-example.component.html',
 })
 export class DateRangeExampleComponent {
 

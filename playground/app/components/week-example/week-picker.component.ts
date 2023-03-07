@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'week-picker-example',
-  templateUrl: 'week-picker.component.html'
+  templateUrl: './week-picker.component.html'
 })
 export class WeekPickerComponent {
 

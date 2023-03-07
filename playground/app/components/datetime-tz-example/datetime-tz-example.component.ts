@@ -4,7 +4,7 @@ import { getTimeZones } from '@vvo/tzdb';
 
 @Component({
   selector: 'datetime-tz-example',
-  templateUrl: 'datetime-tz-example.component.html',
+  templateUrl: './datetime-tz-example.component.html',
   styleUrls: ['./datetime-tz-example.component.scss' ]
 })
 export class DatetimeTzExampleComponent {

@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
-import { FsDatePickerModule } from 'fs-datepicker';
 import { FsScrollbarModule } from '@firestitch/scrollbar';
 import { FsDateModule } from '@firestitch/date';
 import { FsLabelModule } from '@firestitch/label';
@@ -30,11 +29,14 @@ import { MonthExampleComponent } from './components/month-example/month-example.
 import { DatetimeTzExampleComponent } from './components/datetime-tz-example/datetime-tz-example.component';
 import { TzOffsetPipe } from './components/datetime-tz-example/tz-offset.pipe';
 import { MinMaxComponent } from './components';
+import { FsDatePickerModule } from '../../src/app/datepicker.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
+    RouterModule.forRoot([]),
     BrowserModule,
     FsDatePickerModule.forRoot(),
     BrowserAnimationsModule,
@@ -64,8 +66,6 @@ import { MinMaxComponent } from './components';
     DatetimeTzExampleComponent,
     TzOffsetPipe,
     MinMaxComponent,
-  ],
-  providers: [
   ],
 })
 export class PlaygroundModule {}

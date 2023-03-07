@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'birthday-example',
-  templateUrl: 'birthday-example.component.html',
-  styleUrls: [ 'birthday-example.component.css' ]
+  templateUrl: './birthday-example.component.html',
+  styleUrls: [ './birthday-example.component.css' ]
 })
 export class BirthdayExampleComponent {
 
