@@ -9,14 +9,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 
+import { isValid, startOfDay } from 'date-fns';
+
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
-import { startOfDay } from 'date-fns';
-
 
 @Component({
   selector: '[fsDateScrollPicker]',
@@ -58,8 +58,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     this._cdRef.markForCheck();
   }
 
-  protected updateValue(date): void {
-    if (date) {
+  protected updateValue(date: Date | null): void {
+    if (isValid(date)) {
       date = startOfDay(date);
     }
 
