@@ -59,7 +59,10 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   }
 
   protected updateValue(date): void {
-    date = startOfDay(date);
+    if (date) {
+      date = startOfDay(date);
+    }
+
     super.updateValue(date);
   }
 
