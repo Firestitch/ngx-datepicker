@@ -4,6 +4,7 @@ import {
   forwardRef,
   Injector,
   Input,
+  OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -28,11 +29,10 @@ import { startOfDay } from 'date-fns';
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
-        implements ControlValueAccessor {
+export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent implements ControlValueAccessor, OnInit {
 
-  @Input() public minYear = (new Date()).getFullYear() - 50;
-  @Input() public maxYear = (new Date()).getFullYear() + 50;
+  @Input() public minYear
+  @Input() public maxYear;
   @Input() public minDate;
   @Input() public maxDate;
   @Input() public showMonth = true;
@@ -47,6 +47,18 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     fm: FocusMonitor,
   ) {
     super(_injector, fm);
+  }
+  
+  public ngOnInit(): void {
+    super.ngOnInit();
+
+    if(!this.minYear) {
+      this.minYear = (new Date()).getFullYear() - 50;
+    }
+
+    if(!this.maxYear) {
+      this.maxYear = (new Date()).getFullYear() + 50;
+    }
   }
 
   public writeValue(value: any): void {
