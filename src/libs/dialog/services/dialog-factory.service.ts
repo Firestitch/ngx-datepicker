@@ -252,6 +252,13 @@ export class FsDatePickerDialogFactory {
           overlayY: 'center',
           offsetX: -29,
         },
+        // for case described in TU-T5142, works when input has 100% width
+        {
+          originX: 'start',
+          originY: 'top',
+          overlayX: 'start',
+          overlayY: 'bottom'
+        }
       ]);
   }
 
