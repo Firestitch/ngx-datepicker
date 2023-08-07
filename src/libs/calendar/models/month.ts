@@ -1,4 +1,12 @@
-import { addDays, addMonths, format, getDaysInMonth, lightFormat, subDays } from 'date-fns';
+import {
+  addDays,
+  addMonths,
+  format,
+  getDaysInMonth,
+  lightFormat,
+  startOfDay,
+  subDays
+} from 'date-fns';
 
 import { isDayDisabled } from '../../common/helpers/is-day-disabled';
 
@@ -40,7 +48,7 @@ export class Month {
    * Render days and weeks
    */
   public renderDays() {
-    let currentDate = subDays(this.date, this._prevMonthDaysCount);
+    let currentDate = startOfDay(subDays(this.date, this._prevMonthDaysCount));
     let daysToBeRendered = this._hideExtraDays
       ? getDaysInMonth(this.date) + this._prevMonthDaysCount
       : CALENDAR_DAYS_NUMBER;
