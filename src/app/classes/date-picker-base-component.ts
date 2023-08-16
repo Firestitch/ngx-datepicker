@@ -41,6 +41,9 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   };
 
   @Input()
+  public icon = true;
+
+  @Input()
   public set clear(value: boolean) {
     this._clear = value;
   }

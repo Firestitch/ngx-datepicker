@@ -49,6 +49,9 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   @Input()
   public clear = true;
+  
+  @Input()
+  public icon = true;
 
   @Input()
   public format: string;
