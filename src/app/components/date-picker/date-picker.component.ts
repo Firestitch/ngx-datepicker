@@ -42,7 +42,7 @@ import { WeekDay } from '../../../libs/common/enums/week-day.enum';
 export class FsDatePickerComponent extends FsDatePickerBaseComponent {
 
   static template = `
-    <fs-clear [show]="value && !disabled && !readonly && clear" (clear)="cleared($event)"></fs-clear>
+    <fs-clear [show]="!disabled && !readonly && clear" (clear)="cleared($event)" [visible]="value"></fs-clear>
     <ng-container *ngIf="icon">
       <fs-datepicker-trigger (click)="triggerClick()" [disabled]="disabled || readonly" [view]="view"></fs-datepicker-trigger>
     </ng-container>

@@ -10,8 +10,6 @@ import { FsScrollbarModule } from '@firestitch/scrollbar';
 import { FsDateModule } from '@firestitch/date';
 import { FsLabelModule } from '@firestitch/label';
 
-import { ToastrModule } from 'ngx-toastr';
-
 import { AppMaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 
@@ -31,6 +29,7 @@ import { TzOffsetPipe } from './components/datetime-tz-example/tz-offset.pipe';
 import { MinMaxComponent } from './components';
 import { FsDatePickerModule } from '../../src/app/datepicker.module';
 import { RouterModule } from '@angular/router';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 
 @NgModule({
@@ -44,10 +43,10 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     FsScrollbarModule.forRoot(),
     FsExampleModule.forRoot(),
+    MatBottomSheetModule,
     FsFormModule,
     FsLabelModule,
     FsMessageModule.forRoot(),
-    ToastrModule.forRoot({ preventDuplicates: true }),
     FsDateModule,
   ],
   declarations: [
