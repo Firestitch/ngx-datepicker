@@ -31,20 +31,21 @@
 </div>
 
 <mat-nav-list class="actions">
-  <ng-container *ngIf="datePickerModel.minutes
-                    && (
-                      (datePickerModel.isDateTimeView && selectedDateTimeTab !== 0)
-                      || datePickerModel.isTimeView
-                    )">
+  <ng-container 
+      *ngIf="datePickerModel.minutes && 
+          ((datePickerModel.isDateTimeView && selectedDateTimeTab !== 0) ||
+          datePickerModel.isTimeView
+      )">
     <mat-list-item (click)="toggleTimeExpand()">
-      <button type="button"
-              mat-button
-              class="button-more">
+      <button 
+          type="button"
+          mat-button
+          class="button-more">
         <ng-container *ngIf="!(datePickerModel.timeExpanded$ | async); else lessMinutes">
-          More Minutes
+          More
         </ng-container>
         <ng-template #lessMinutes>
-          Less Minutes
+          Less
         </ng-template>
       </button>
     </mat-list-item>

@@ -2,32 +2,41 @@ thead th {
   text-align: center;
 }
 
-tbody {
-  .minutes-col,
-  .hours-col {
-    padding: 0;
-  }
-
-  .minutes-col {
-    padding-left: 20px;
-  }
-
-  .hours-container {
-    margin-right: 20px;
-  }
-
-  .minutes-container,
-  .hours-container {
-    max-height: 300px;
-    overflow: auto;
-  }
-}
-
-.time-container table {
-  width: 100%;
+.time-container {
+  display: flex;
 
   .am-pm {
     font-size: 13px;
     padding-left: 2px;
   }
+
+  .scroll-container {
+    max-height: 300px;
+    overflow: auto;
+    padding: 4px;
+  }
+
+  .heading {
+    text-align: center;
+    font-size: 12px;
+    padding: 7px;
+    border-bottom: 1px solid #efefef;
+    color: #7d7d7d;
+  }
+  
+  .minutes-container,
+  .hours-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hours-container + .minutes-container {
+    
+    .heading, 
+    .scroll-container {
+      padding-left: 20px;
+    }
+  }
 }
+
+

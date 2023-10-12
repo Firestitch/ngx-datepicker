@@ -8,81 +8,34 @@
 </div>
 
 <div class="time-container">
-  <table *ngIf="expanded; else contracted">
-    <thead *ngIf="minutes">
-      <tr>
-        <th class="hours-col">
-          Hour
-        </th>
-        <th class="minutes-col">
-          Minute
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="hours-col">
-          <div class="hours-container">
-            <table>
-              <tr *ngFor="let hours of timeHoursExpanded">
-                <td
-                  *ngFor="let hour of hours"
-                  class="tile number hour"
-                  (click)="hourClick(hour)"
-                  [ngClass]="{
-                    disabled: disabledTimeHours[hour],
-                    now: nowHour === hour,
-                    selected: hour == selected.hour
-                  }">
-                  <div class="tile-content">
-                    <span *ngIf="hour < 12">{{ hour ? hour : 12 }}<span class="am-pm">am</span></span>
-                    <span *ngIf="hour >= 12">{{ hour==12 ? 12 : hour-12 }}<span class="am-pm">pm</span></span>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </td>
-        <td class="minutes-col" *ngIf="minutes">
-          <div class="minutes-container">
-            <table>
-              <tr *ngFor="let minutes of timeMinutesExpanded">
-                <td *ngFor="let minute of minutes"
-                    class="tile number minute"
-                    [ngClass]="{
-                      disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]),
-                      selected: minute == selected.minute,
-                      now: nowMinute === minute
-                    }"
-                    (click)="minuteClick(minute)">
-                    <div class="tile-content">{{ minute }}</div>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<ng-template #contracted>
-  <table>
-    <thead *ngIf="minutes">
-      <tr>
-        <th class="hours-col">
-          Hour
-        </th>
-        <th class="minutes-col">
-          Minute
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="hours-col">
-          <table>
-            <tbody *ngFor="let group of timeHoursCollapsed; let i = index">
+  <div class="hours-container">
+    <ng-container *ngIf="minutes">
+      <div class="heading">Hour</div>
+    </ng-container>
+    <div class="scroll-container">
+      <ng-container *ngIf="expanded">
+        <table>
+          <tr *ngFor="let hours of timeHoursExpanded">
+            <td
+              *ngFor="let hour of hours"
+              class="tile number hour"
+              (click)="hourClick(hour)"
+              [ngClass]="{
+                disabled: disabledTimeHours[hour],
+                now: nowHour === hour,
+                selected: hour == selected.hour
+              }">
+              <div class="tile-content">
+                <span *ngIf="hour < 12">{{ hour ? hour : 12 }}<span class="am-pm">am</span></span>
+                <span *ngIf="hour >= 12">{{ hour==12 ? 12 : hour-12 }}<span class="am-pm">pm</span></span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </ng-container>
+      <ng-container *ngIf="!expanded">
+        <table>
+          <tbody *ngFor="let group of timeHoursCollapsed; let i = index">
             <tr *ngFor="let hours of group">
               <td
                 *ngFor="let hour of hours"
@@ -99,11 +52,32 @@
                 </div>
               </td>
             </tr>
-            </tbody>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </div>
+  <ng-container *ngIf="minutes">
+    <div class="minutes-container">
+      <div class="heading">Minute</div>
+      <div class="scroll-container">
+        <ng-container *ngIf="expanded">
+          <table>
+            <tr *ngFor="let minutes of timeMinutesExpanded">
+              <td *ngFor="let minute of minutes"
+                  class="tile number minute"
+                  [ngClass]="{
+                    disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]),
+                    selected: minute == selected.minute,
+                    now: nowMinute === minute
+                  }"
+                  (click)="minuteClick(minute)">
+                  <div class="tile-content">{{ minute }}</div>
+              </td>
+            </tr>
           </table>
-        </td>
-
-        <td class="minutes-col" *ngIf="minutes">
+        </ng-container>
+        <ng-container *ngIf="!expanded">
           <table>
             <tr *ngFor="let minutes of timeMinutesCollapsed">
               <td
@@ -119,8 +93,8 @@
               </td>
             </tr>
           </table>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</div>

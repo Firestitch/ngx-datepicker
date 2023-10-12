@@ -39,8 +39,8 @@
         [minutes]="datePickerModel.minutes"
         [disabledTimes]="datePickerModel.disabledTimes$ | async"
         [expanded]="timePickerExpanded"
-        (onChange)="dateChanged($event)"
-      ></fs-date-picker-time>
+        (onChange)="dateChanged($event)">
+      </fs-date-picker-time>
     </ng-container>
   </div>
 
@@ -63,18 +63,19 @@
       Done
     </button>
 
-    <button type="button"
-            mat-button
-            class="button-more"
-            *ngIf="datePickerModel.minutes
-                   && (datePickerModel.view === 'datetime' || datePickerModel.view === 'time')
-                   && !(datePickerModel.view === 'datetime' && datePickerModel.dateMode === 'date')"
-            (click)="toggleTimeExpand()">
+    <button 
+        type="button"
+        mat-button
+        class="button-more"
+        *ngIf="datePickerModel.minutes
+                && (datePickerModel.view === 'datetime' || datePickerModel.view === 'time')
+                && !(datePickerModel.view === 'datetime' && datePickerModel.dateMode === 'date')"
+        (click)="toggleTimeExpand()">
       <ng-container *ngIf="!timePickerExpanded; else lessMinutes">
-        More Minutes
+        More
       </ng-container>
       <ng-template #lessMinutes>
-        Less Minutes
+        Less
       </ng-template>
     </button>
   </div>
