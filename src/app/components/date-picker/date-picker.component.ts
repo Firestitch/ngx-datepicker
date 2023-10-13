@@ -58,7 +58,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   @Input() public minutes = true;
 
   @Input()
-  public weekStartsOn: WeekDays = WeekDay.Monday;
+  public weekStartsOn: WeekDays;
 
   @Output('change')
   public change$ = new EventEmitter<any>();

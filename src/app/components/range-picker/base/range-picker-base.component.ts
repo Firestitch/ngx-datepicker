@@ -57,7 +57,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   public format: string;
 
   @Input()
-  public weekStartsOn: WeekDays = WeekDay.Monday;
+  public weekStartsOn: WeekDays;
 
   @Input() public ngModelOptions: {
     name?: string;

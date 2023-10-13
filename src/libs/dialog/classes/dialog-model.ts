@@ -40,7 +40,7 @@ export class FsDatePickerDialogModel {
   public seedDate = null;
   public periodWeeks = null;
   public minutes = true;
-  public weekStartsOn: WeekDays = WeekDay.Monday;
+  public weekStartsOn: WeekDays;
 
   private _minYear = null;
   private _maxYear = null;
@@ -287,7 +287,7 @@ export class FsDatePickerDialogModel {
     this.minDate = options.minDate;
     this.maxDate = options.maxDate;
     this.rangeStart = options.rangeStart;
-    this.weekStartsOn = options.weekStartsOn ?? WeekDay.Monday;
+    this.weekStartsOn = options.weekStartsOn ?? WeekDay.Sunday;
 
     if (this._pickerOptions.rangeType === 'to' && this.minDate < this.rangeStart) {
       this.minDate = this.rangeStart;

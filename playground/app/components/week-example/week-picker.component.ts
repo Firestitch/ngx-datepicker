@@ -13,7 +13,6 @@ export class WeekPickerComponent {
   };*/
 
   public model = null;
-
   public seedDate = null;
   public periodWeeks = 1;
 
