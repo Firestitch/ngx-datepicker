@@ -40,7 +40,6 @@ dist/*
 /node_modules
 /.playground
 /dll
-/package-lock.json
 /*.code-workspace
 /package
 /demo
