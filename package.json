@@ -70,7 +70,7 @@
     "@firestitch/store": "^12.1.1",
     "@firestitch/style": "^12.1.0",
     "@vvo/tzdb": "^6.29.0",
-    "cypress": "8.3.0",
+    "cypress": "13.3.1",
     "date-fns": "^2.25.0",
     "date-fns-tz": "^1.1.6",
     "hammerjs": "^2.0.8",
