@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "extends": [
+    "./node_modules/@firestitch/lint/.eslintrc-component.json"
+  ]
+}
