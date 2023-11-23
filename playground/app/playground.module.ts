@@ -30,6 +30,7 @@ import { MinMaxComponent } from './components';
 import { FsDatePickerModule } from '../../src/app/datepicker.module';
 import { RouterModule } from '@angular/router';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -65,6 +66,12 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     DatetimeTzExampleComponent,
     TzOffsetPipe,
     MinMaxComponent,
+  ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'legacy' },
+    },
   ],
 })
 export class PlaygroundModule {}

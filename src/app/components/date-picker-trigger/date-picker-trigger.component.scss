@@ -6,7 +6,6 @@
     cursor: pointer;
     font-size: 21px !important;
     height: 24px;
-    margin-bottom: 2px;
   }
 }
 
@@ -14,3 +13,25 @@
   color: rgba(0, 0, 0, 0.38);
   pointer-events: none;
 }
+
+
+
+::ng-deep {
+  .mat-form-field {
+    &.mat-form-field-appearance-legacy, 
+    &.mat-form-field-appearance-standard {
+
+      .fs-date-picker-trigger {
+        mat-icon {
+          position: relative;
+          top: 4px;
+        }
+      }
+
+        // .mat-form-field-appearance-outline {
+              
+        // }
+    }
+  }
+}
+
