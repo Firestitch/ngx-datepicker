@@ -12,8 +12,8 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { isValid, startOfDay } from 'date-fns';
 
-import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
+import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
@@ -25,13 +25,14 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateScrollPickerComponent),
-    multi: true
+    multi: true,
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent implements ControlValueAccessor, OnInit {
+export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
+  implements ControlValueAccessor, OnInit {
 
-  @Input() public minYear
+  @Input() public minYear;
   @Input() public maxYear;
   @Input() public minDate;
   @Input() public maxDate;
@@ -48,7 +49,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent imple
   ) {
     super(_injector, fm);
   }
-  
+
   public ngOnInit(): void {
     super.ngOnInit();
 
@@ -68,14 +69,6 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent imple
     this.updateInput(value);
 
     this._cdRef.markForCheck();
-  }
-
-  protected updateValue(date: Date | null): void {
-    if (isValid(date)) {
-      date = startOfDay(date);
-    }
-
-    super.updateValue(date);
   }
 
   public updateInput(value) {
@@ -115,9 +108,17 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent imple
         showDay: this.showDay,
         showYear: this.showYear,
         view: this.view,
-      }
+      },
     );
 
     super.open();
+  }
+
+  protected updateValue(date: Date | null): void {
+    if (isValid(date)) {
+      date = startOfDay(date);
+    }
+
+    super.updateValue(date);
   }
 }

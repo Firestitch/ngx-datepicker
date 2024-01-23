@@ -1,38 +1,37 @@
 import {
-  HostListener,
+  Directive,
   ElementRef,
   EventEmitter,
-  Output,
-  OnDestroy,
+  HostListener,
   Input,
-  Directive,
+  OnDestroy,
   OnInit,
+  Output,
 } from '@angular/core';
-
-import { fromEvent, Subject } from 'rxjs';
-import { filter, take, takeUntil, tap } from 'rxjs/operators';
-
 import {
   AbstractControl,
   ControlValueAccessor,
   ValidationErrors,
   Validator,
   ValidatorFn,
-  Validators
+  Validators,
 } from '@angular/forms';
+
+import { fromEvent, Subject } from 'rxjs';
+import { filter, take, takeUntil, tap } from 'rxjs/operators';
+
 
 import { isEqual, isValid } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { parseDate } from '../helpers/parse-date';
+
 import { FsPickerBaseComponent } from './picker-base-component';
 
 
 @Directive()
 export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseComponent
   implements Validator, ControlValueAccessor, OnDestroy, OnInit {
-
-  abstract updateInput(value: Date): void;
 
   @Input() public ngModelOptions: {
     name?: string;
@@ -48,11 +47,19 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this._clear = value;
   }
 
+  public get clear(): boolean {
+    return this._clear;
+  }
+
   @Input()
   public set timezone(value: string) {
     this._timezone = value;
 
     this.writeValue(this._originValue);
+  }
+
+  public get timezone(): string {
+    return this._timezone;
   }
 
   @Output('change')
@@ -68,24 +75,36 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   public blured$ = new EventEmitter<Date>();
 
   public opened = false;
-  public registerOnChange(fn: (value: any) => any): void { this._onChange = fn }
-  public registerOnTouched(fn: () => any): void { this._onTouch = fn }
-  public registerOnValidatorChange(fn: () => void): void { this._validatorOnChange = fn; }
 
   protected _timezone: string;
   protected _originValue: Date | null; // before timezone
   protected _value;
   protected _elementRef: ElementRef;
   protected _renderer;
-  protected _destroy$ = new Subject();
-  protected _onChange = (value: any) => { };
-  protected _onTouch = () => { };
+  protected _onChange: (value: any) => void;
+  protected _onTouch: () => void;
+  protected _validator: ValidatorFn | null;
 
-  private _validatorOnChange = () => {};
+
+  private _validatorOnChange: () => void;
   private _clear = true;
   private _lastValueValid = false;
+  private _destroy$ = new Subject();
+
+  public registerOnChange(fn: (value: any) => any): void {
+    this._onChange = fn;
+  }
+
+  public registerOnTouched(fn: () => any): void {
+    this._onTouch = fn;
+  }
+
+  public registerOnValidatorChange(fn: () => void): void {
+    this._validatorOnChange = fn;
+  }
 
   public ngOnInit(): void {
+    this._validator = Validators.compose([this._parseValidator]);
     super.ngOnInit();
     fromEvent(this.el, 'focus')
       .pipe(
@@ -119,19 +138,13 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       });
   }
 
-  public get clear(): boolean {
-    return this._clear;
-  }
-
   public get value() {
     return this._value;
   }
 
-  public get timezone(): string {
-    return this._timezone;
+  public writeValue(obj: any): void {
+    //
   }
-
-  public writeValue(obj: any): void {}
 
   public get dateDialogRef() {
     return this._dateDialogRef;
@@ -205,35 +218,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this.open();
   }
 
-  protected updateValue(date): void {
-    if (date && this.timezone) {
-      date = zonedTimeToUtc(date, this.timezone);
-    }
-
-    this._value = date;
-    this._lastValueValid = !date || isValid(date);
-
-    this.updateInput(this.value);
-
-    this._onChange(this.value);
-    this._onTouch();
-
-    this.change$.emit(this.value);
-  }
-
-  /** The form control validator for whether the input parses. */
-  protected _parseValidator: ValidatorFn = (): ValidationErrors | null => {
-    return this._lastValueValid
-      ? null
-      : { fsDatepickerParse: 'Invalid Date' };
-  }
-
-  protected _validator: ValidatorFn | null = Validators.compose([this._parseValidator]);
-
-  protected validateDate(date: Date | unknown) {
-    this._lastValueValid = !date || isValid(date);
-  }
-
   @HostListener('keyup', ['$event', '$event.target.value'])
   public _inputKeyup(event: KeyboardEvent, value: string): void {
     if(event.key === 'Enter') {
@@ -259,12 +243,39 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this.blured$.emit(this.value);
   }
 
+  protected updateValue(date): void {
+    if (date && this.timezone) {
+      date = zonedTimeToUtc(date, this.timezone);
+    }
+
+    this._value = date;
+    this._lastValueValid = !date || isValid(date);
+
+    this.updateInput(this.value);
+
+    this._onChange(this.value);
+    this._onTouch();
+
+    this.change$.emit(this.value);
+  }
+
+  /** The form control validator for whether the input parses. */
+  protected _parseValidator: ValidatorFn = (): ValidationErrors | null => {
+    return this._lastValueValid
+      ? null
+      : { fsDatepickerParse: 'Invalid Date' };
+  };
+
+  protected validateDate(date: Date | unknown) {
+    this._lastValueValid = !date || isValid(date);
+  }
+
   protected inputChange(value: string): void {
     if (!!value) {
       const lastValueWasValid = this._lastValueValid;
       const date = parseDate(value);
 
-      this.validateDate(date)
+      this.validateDate(date);
 
       if (!isEqual(date, this._value)) {
         this.updateValue(date);
@@ -275,4 +286,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       this.updateValue(null);
     }
   }
+
+  abstract updateInput(value: Date): void;
+
 }

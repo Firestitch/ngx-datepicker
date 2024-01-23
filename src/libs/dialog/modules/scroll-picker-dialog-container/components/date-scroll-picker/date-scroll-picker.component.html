@@ -10,7 +10,6 @@
     [(ngModel)]="month"
     (ngModelChange)="changeMonth()">
   </fs-scroll-picker>
-
   <fs-scroll-picker
     #dayRef
     *ngIf="showDay"
@@ -23,7 +22,6 @@
     [(ngModel)]="day"
     (ngModelChange)="change()">
   </fs-scroll-picker>
-
   <fs-scroll-picker
     #yearRef
     *ngIf="showYear"

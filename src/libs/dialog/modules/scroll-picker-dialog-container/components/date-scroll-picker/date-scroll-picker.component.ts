@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -12,12 +13,12 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
+import { ScrollPickerComponent } from '@firestitch/scroll-picker';
 
 import { getDaysInMonth, isValid } from 'date-fns';
 
 import { MONTHS } from '../../consts/months';
-import { ScrollPickerComponent } from '@firestitch/scroll-picker';
 
 
 @Component({
@@ -128,14 +129,6 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     this._pullToRefreshDefault();
   }
 
-  private _setDate(date: Date) {
-    if (date) {
-      this.day = date.getDate();
-      this.year = date.getFullYear();
-      this.month = date.getMonth();
-    }
-  }
-
   public change() {
     if (!this.year) {
       this.year = this.showYear ? this.years[0] : 0;
@@ -176,6 +169,12 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
 
   private _generateDaysArray() {
     this.dayRef?.updateValues();
+
+    this._generateMaxDaysArray();
+    this._generateMinDaysArray();
+  }
+
+  private _generateMaxDaysArray() {
     this.maxDay = 0;
 
     const maxDate = this.maxDate;
@@ -183,24 +182,34 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     const maxMonth = maxDate && maxDate.getMonth();
     const maxYear = maxDate && maxDate.getFullYear();
 
-    const minDate = this.minDate;
-    const minDay = minDate && minDate.getDate();
-    const minMonth = minDate && minDate.getMonth();
-    const minYear = minDate && minDate.getFullYear();
-
-
+    this.disabledMaxDay = undefined;
     if (this.maxDate) {
       if (maxYear === this.year && maxMonth === this.month) {
         this.disabledMaxDay = maxDay;
       } else {
         this._setMaxDay(maxDay, maxMonth, maxYear);
+
+        if(this.year === this.maxDate?.getFullYear() && this.month > this.maxDate?.getMonth()) {
+          this.disabledMaxDay = 0;
+        }
       }
     } else {
       this._setMaxDay(maxDay, maxMonth, maxYear);
     }
 
-    if (this.minDate) {
+    if (!this.maxDay) {
+      this.maxDay = 31;
+    }
+  }
 
+  private _generateMinDaysArray() {
+    const minDate = this.minDate;
+    const minDay = minDate && minDate.getDate();
+    const minMonth = minDate && minDate.getMonth();
+    const minYear = minDate && minDate.getFullYear();
+
+    this.disabledMinDay = undefined;
+    if (this.minDate) {
       if (minYear === this.year && minMonth === this.month) {
         this.disabledMinDay = minDay;
       } else {
@@ -211,26 +220,24 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
         this.disabledMinDay = 1;
       }
     }
+  }
 
-    if (!this.maxDay) {
-      this.maxDay = 31;
+  private _setDate(date: Date) {
+    if (date) {
+      this.day = date.getDate();
+      this.year = date.getFullYear();
+      this.month = date.getMonth();
     }
   }
 
   private _setMaxDay(maxDay, maxMonth, maxYear): void {
     if (this.month) {
-      if (maxDay && maxMonth == this.month.value && maxYear === this.year) {
+      if (maxDay && maxMonth === this.month.value && maxYear === this.year) {
         this.maxDay = maxDay;
       } else {
         const daysInMonth = getDaysInMonth(new Date(this.year, this.month));
         this.maxDay = daysInMonth;
       }
-    }
-
-    if (this.maxDate && this.year > this.maxDate?.getFullYear()) {
-      this.disabledMaxDay = 0;
-    } else {
-      this.disabledMaxDay = this.maxDay;
     }
   }
 
@@ -270,17 +277,9 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     let minYear = this.minYear;
     const maxYear = this.maxYear;
 
-    if (this.maxDate) {
-      this.disabledMaxYear = this.maxDate?.getFullYear();
-    } else {
-      this.disabledMaxYear = maxYear;
-    }
+    this.disabledMaxYear = this.maxDate ? this.maxDate?.getFullYear() : maxYear;
 
-    if (this.minDate) {
-      this.disabledMinYear = this.minDate?.getFullYear();
-    } else {
-      this.disabledMinYear = minYear;
-    }
+    this.disabledMinYear = this.minDate ? this.minDate?.getFullYear() : minYear;
 
     for ( minYear; minYear <= maxYear; minYear++ ) {
       this.years.push({

@@ -14,12 +14,11 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { isValid, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
+import { WeekDays } from '../../../libs/common/types/week-days.type';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
-import { WeekDays } from '../../../libs/common/types/week-days.type';
-import { WeekDay } from '../../../libs/common/enums/week-day.enum';
 
 
 @Component({
@@ -35,7 +34,7 @@ import { WeekDay } from '../../../libs/common/enums/week-day.enum';
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => FsDatePickerComponent),
       multi: true,
-    }
+    },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -96,20 +95,20 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
     const modelValue = isValid(this.value) ? this.value : null;
 
     this._dateDialogRef = this._fsDatepickerFactory.openDatePicker(
-    this._elementRef,
-    this._injector,
-    {
-      modelValue: modelValue,
-      view: this.view,
-      minutes: this.minutes,
-      minYear: this.minYear,
-      maxYear: this.maxYear,
-      minDate: this.minDate,
-      maxDate: this.maxDate,
-      startOfDay: this.startOfDay,
-      components: this._getDefaultComponents(),
-      weekStartsOn: this.weekStartsOn,
-    });
+      this._elementRef,
+      this._injector,
+      {
+        modelValue,
+        view: this.view,
+        minutes: this.minutes,
+        minYear: this.minYear,
+        maxYear: this.maxYear,
+        minDate: this.minDate,
+        maxDate: this.maxDate,
+        startOfDay: this.startOfDay,
+        components: this._getDefaultComponents(),
+        weekStartsOn: this.weekStartsOn,
+      });
 
     super.open();
   }
@@ -133,8 +132,9 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   private _getDefaultComponents() {
     if (this.view === 'time') {
       return { timeStart: true };
-    } else {
-      return { calendarStart: true };
     }
+
+    return { calendarStart: true };
+
   }
 }
