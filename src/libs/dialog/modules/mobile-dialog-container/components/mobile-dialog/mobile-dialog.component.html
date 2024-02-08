@@ -1,4 +1,4 @@
-<div class="fs-date-picker-dialog">
+<div class="fs-date-picker-dialog fs-date-picker-container">
   <div class="calendar-container">
     <ng-container [ngSwitch]="datePickerModel.view">
       <ng-template [ngSwitchCase]="'date'">
@@ -31,13 +31,13 @@
 </div>
 
 <mat-nav-list class="actions">
-  <ng-container 
-      *ngIf="datePickerModel.minutes && 
+  <ng-container
+      *ngIf="datePickerModel.minutes &&
           ((datePickerModel.isDateTimeView && selectedDateTimeTab !== 0) ||
           datePickerModel.isTimeView
       )">
     <mat-list-item (click)="toggleTimeExpand()">
-      <button 
+      <button
           type="button"
           mat-button
           class="button-more">

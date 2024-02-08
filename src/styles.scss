@@ -4,9 +4,6 @@
 
 
 .fs-date-picker-calendar {
-  display: flex;
-  justify-content: center;
-
   .hidden-day {
     pointer-events: none;
 
@@ -122,7 +119,9 @@
 .fs-date-picker-dialog {
   display: flex;
   justify-content: center;
+}
 
+.fs-date-picker-container {
   &.date-mode-year, &.date-mode-month {
     .calendar-view {
       height: 350px;

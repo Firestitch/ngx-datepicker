@@ -1,6 +1,6 @@
 <form fsForm>
   <mat-form-field>
-    <input 
+    <input
       matInput
       fsDatePicker
       [(ngModel)]="model"
@@ -13,3 +13,5 @@
       (closed)="pickerClosed()">
   </mat-form-field>
 </form>
+
+<fs-date-calendar-picker [(ngModel)]="model"></fs-date-calendar-picker>

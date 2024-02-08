@@ -33,6 +33,7 @@ import { MonthRangePickerFromComponent } from './components/range-picker/from/mo
 import { MonthRangePickerToComponent } from './components/range-picker/to/month-range-picker-to.component';
 
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
+import { FsDateCalendarPickerComponent } from './components/calendar-picker/calendar-picker.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     TimeRangePickerToComponent,
     MonthRangePickerFromComponent,
     MonthRangePickerToComponent,
+    FsDateCalendarPickerComponent,
   ],
   exports: [
     FsDatePickerComponent,
@@ -83,6 +85,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     TimeRangePickerToComponent,
     MonthRangePickerFromComponent,
     MonthRangePickerToComponent,
+    FsDateCalendarPickerComponent,
   ],
 })
 export class FsDatePickerModule {

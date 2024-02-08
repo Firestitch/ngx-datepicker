@@ -1,0 +1,13 @@
+<div class="fs-date-picker-container calendar-container">
+  <fs-date-picker-calendar
+    [date]="datePickerModel.model$ | async"
+    [drawMonth]="datePickerModel.calendarDate$ | async"
+    [dateMode]="datePickerModel.calendarMode$ | async"
+    [disabledDays]="datePickerModel.disabledDays$ | async"
+    [period]="datePickerModel.period"
+    [seedDate]="datePickerModel.seedDate"
+    [weekStartsOn]="datePickerModel.weekStartsOn"
+    [periodWeeks]="datePickerModel.periodWeeks"
+    (change)="dateChanged($event)">
+  </fs-date-picker-calendar>
+</div>

@@ -19,6 +19,7 @@ export { TimeRangePickerFromComponent } from './app/components/range-picker/from
 export { TimeRangePickerToComponent } from './app/components/range-picker/to/time-range-picker-to.component';
 export { MonthRangePickerFromComponent } from './app/components/range-picker/from/month-range-picker-from.component';
 export { MonthRangePickerToComponent } from './app/components/range-picker/to/month-range-picker-to.component';
+export { FsDateCalendarPickerComponent } from './app/components/calendar-picker/calendar-picker.component';
 
 export { IDatePickerPeriod } from './libs/common/interfaces/period.interface';
 export { WeekDays } from './libs/common/types/week-days.type';
