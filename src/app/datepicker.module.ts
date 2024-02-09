@@ -34,6 +34,9 @@ import { MonthRangePickerToComponent } from './components/range-picker/to/month-
 
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
 import { FsDateCalendarPickerComponent } from './components/calendar-picker/calendar-picker.component';
+import {
+  FsDatePickerDesktopDialogContainerModule
+} from '../libs/dialog/modules/desktop-dialog-container/desktop-dialog-container.module';
 
 
 @NgModule({
@@ -49,6 +52,7 @@ import { FsDateCalendarPickerComponent } from './components/calendar-picker/cale
     FsClearModule,
     FsScrollPickerModule,
     FsDatePickerCalendarModule,
+    FsDatePickerDesktopDialogContainerModule,
   ],
   declarations: [
     FsDatePickerComponent,

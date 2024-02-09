@@ -36,7 +36,8 @@ export class Month {
   constructor(public date: Date,
               public seedDate: Date,
               public periodWeeks: number,
-              private _disabledDays,
+              private _enabledDays: Date[],
+              private _disabledDays: [Date, Date][],
               private _hideExtraDays: boolean,
               private _weekStartsOn: WeekDays,
   ) {
@@ -71,6 +72,9 @@ export class Month {
 
       const dayMuted = d - this._prevMonthDaysCount < 0
         || d >= this._daysInMonth + this._prevMonthDaysCount;
+      const disabled = !!this._enabledDays
+        ? isDayDisabled(this._enabledDays.map((d) => [d, d]), currentDate)
+        : isDayDisabled(this._disabledDays, currentDate);
 
       week.addDay({
         mute: dayMuted,
@@ -78,7 +82,7 @@ export class Month {
         number: dayNumber,
         month: currentDate.getMonth(),
         year: currentDate.getFullYear(),
-        disabled: isDayDisabled(this._disabledDays, currentDate),
+        disabled: disabled,
       });
 
       currentDate = addDays(currentDate, 1);

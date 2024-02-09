@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, } from '@angular/core';
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
@@ -7,6 +7,9 @@ import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-mod
 @Component({
   selector: 'fs-date-calendar-picker',
   templateUrl: './calendar-picker.component.html',
+  styleUrls: [
+    './calendar-picker.component.scss',
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -17,6 +20,12 @@ import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-mod
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDateCalendarPickerComponent implements ControlValueAccessor {
+
+  @Input()
+  public today = true;
+
+  @Input()
+  public enabledDates: Date[];
 
   private readonly _datePickerModel =
     new FsDatePickerDialogModel({ view: PickerViewType.Date });
@@ -43,5 +52,13 @@ export class FsDateCalendarPickerComponent implements ControlValueAccessor {
   public dateChanged(date: Date): void {
     this.datePickerModel.model = date;
     this._onChange(this.datePickerModel.model);
+  }
+
+  public nextMonth(): void {
+    this.datePickerModel.nextMonth();
+  }
+
+  public prevMonth(): void {
+    this.datePickerModel.prevMonth();
   }
 }

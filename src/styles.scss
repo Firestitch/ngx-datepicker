@@ -339,6 +339,14 @@
   }
 }
 
+.tile {
+  &.day.enabled {
+    .tile-content {
+      background: color-rgb($hover-color, $hover-color-opacity);
+    }
+  }
+}
+
 .calendar-container {
   .day, .years .year, .months .month, .year-name, .month-name {
     &:hover {

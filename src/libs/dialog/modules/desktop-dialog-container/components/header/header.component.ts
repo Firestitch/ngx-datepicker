@@ -55,6 +55,9 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
   @Input()
   public calendarDate: Date;
 
+  @Input()
+  public monthYearConfigurable = true;
+
   @Output()
   public monthChange = new EventEmitter<number>();
 

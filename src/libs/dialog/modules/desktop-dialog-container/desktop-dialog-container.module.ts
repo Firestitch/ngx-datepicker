@@ -35,6 +35,7 @@ import { FsDatePickerHeaderMonthRangeComponent } from './components/header-month
   ],
   exports: [
     FsDesktopCalendarDialogComponent,
+    FsDatePickerHeaderComponent,
   ],
 })
 export class FsDatePickerDesktopDialogContainerModule {}

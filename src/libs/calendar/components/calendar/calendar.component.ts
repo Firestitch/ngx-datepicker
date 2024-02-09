@@ -63,6 +63,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public dateMode: string = null;
 
   @Input()
+  public enabledDays: Date[] = null;
+
+  @Input()
   public disabledDays: [Date, Date][] = null;
 
   @Input()
@@ -79,6 +82,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Input()
   public hideExtraDays = false;
+
+  @Input()
+  public showToday = true;
 
   @Output()
   public change = new EventEmitter<Date>();
@@ -308,6 +314,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       date,
       this.seedDate,
       this.periodWeeks,
+      this.enabledDays,
       this.disabledDays,
       this.hideExtraDays,
       this.weekStartsOn,

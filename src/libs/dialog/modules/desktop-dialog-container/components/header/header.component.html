@@ -28,7 +28,7 @@
 
 <div *ngIf="viewMode == 'week' || viewMode == 'date' || viewMode == 'datetime' || viewMode == 'monthrange'" class="calendar">
   <div class="month-year">
-    <a class="month-year-name" (click)="setViewMode('month')">
+    <a class="month-year-name" (click)="setViewMode('month')" [ngClass]="{ 'not-configurable': !monthYearConfigurable}">
       {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}
 
       <span *ngIf="calendarDay" class="day-name">
@@ -36,7 +36,7 @@
       </span>
 
       {{ calendarYear }}
-      <mat-icon class="action">arrow_drop_down</mat-icon>
+      <mat-icon class="action" *ngIf="monthYearConfigurable">arrow_drop_down</mat-icon>
     </a>
 
     <div class="gap"></div>

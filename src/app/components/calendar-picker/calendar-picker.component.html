@@ -1,4 +1,15 @@
 <div class="fs-date-picker-container calendar-container">
+  <fs-date-picker-header
+    [calendarDate]="datePickerModel.calendarDate$ | async"
+    [minYear]="datePickerModel.minYear"
+    [maxYear]="datePickerModel.maxYear"
+    [viewMode]="datePickerModel.calendarMode$ | async"
+    [disabledDays]="datePickerModel.disabledDays$ | async"
+    [monthYearConfigurable]="false"
+    (goNextMonth)="nextMonth()"
+    (goPrevMonth)="prevMonth()"
+  >
+  </fs-date-picker-header>
   <fs-date-picker-calendar
     [date]="datePickerModel.model$ | async"
     [drawMonth]="datePickerModel.calendarDate$ | async"
@@ -8,6 +19,8 @@
     [seedDate]="datePickerModel.seedDate"
     [weekStartsOn]="datePickerModel.weekStartsOn"
     [periodWeeks]="datePickerModel.periodWeeks"
+    [showToday]="today"
+    [enabledDays]="enabledDates"
     (change)="dateChanged($event)">
   </fs-date-picker-calendar>
 </div>

@@ -29,7 +29,8 @@
         <ng-container *ngFor="let day of week.days">
           <td class="tile day"
               [class.hidden-day]="hideExtraDays && day.mute"
-              [class.now]="today.date == day.date"
+              [class.now]="today.date == day.date && showToday"
+              [class.enabled]="!!enabledDays && day.disabled"
               [class.mute]="day.mute"
               [class.selected]="(day.selected || day.date == selected.date && !day.mute)"
               [class.range-from]="day.date === selectedRange.from && !day.mute && selectedRange.from !== selectedRange.to"
@@ -39,7 +40,7 @@
               [class.highlight-min-date]="day.date === highlightedRangeDays.min"
               [class.highlight-max-date]="day.date === highlightedRangeDays.max"
               [class.week-mode]="dateMode === 'week'"
-              [class.disabled]="day.disabled"
+              [class.disabled]="!enabledDays && day.disabled"
               (click)="dayClick(day, week, $event)"
               (mouseenter)="onMouseEnterDay(day)">
             <div class="tile-content">

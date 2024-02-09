@@ -10,10 +10,10 @@
   align-items: center;
   padding-left: 10px;
 
-  &:hover {
+  &:not(.not-configurable):hover {
     background-color: rgb(234, 234, 234);
     border-radius: 3px;
-  }  
+  }
 }
 
 .day-name {
