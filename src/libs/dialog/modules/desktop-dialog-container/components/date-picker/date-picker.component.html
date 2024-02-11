@@ -16,7 +16,7 @@
       <ng-container *ngIf="dialogRef.components.calendarStart">
         <fs-date-picker-calendar
           [date]="datePickerModel.model$ | async"
-          [drawMonth]="datePickerModel.calendarDate$ | async"
+          [calendarDate]="datePickerModel.calendarDate$ | async"
           [dateMode]="datePickerModel.calendarMode$ | async"
           [disabledDays]="datePickerModel.disabledDays$ | async"
           [period]="datePickerModel.period"

@@ -9,7 +9,6 @@ import {
   Output,
 } from '@angular/core';
 
-
 import {
   eachDayOfInterval,
   format,
@@ -68,7 +67,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public disabledDays: [Date, Date][] = null;
 
   @Input()
-  public drawMonth: Date = null;
+  public calendarDate: Date = null;
 
   @Input()
   public seedDate;
@@ -144,7 +143,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes) {
     if (changes) {
-
       if (changes.date) {
         this.selected = splitDateByComponents(this.date);
         this.updateDaysHighlighted();
@@ -152,10 +150,8 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
         this.updateDaysHighlighted();
       }
 
-      if (changes.drawMonth) {
-        if (changes.drawMonth.currentValue) {
-          this.drawMonths(changes.drawMonth.currentValue);
-        }
+      if (changes.calendarDate || changes.enabledDays) {
+        this.drawMonths();
       }
 
       if (changes.rangeFrom || changes.rangeTo) {
@@ -307,8 +303,8 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  public drawMonths(date) {
-    this.month = this.createMonth(date);
+  public drawMonths() {
+    this.month = this.createMonth(this.calendarDate);
   }
 
   public createMonth(date: Date) {

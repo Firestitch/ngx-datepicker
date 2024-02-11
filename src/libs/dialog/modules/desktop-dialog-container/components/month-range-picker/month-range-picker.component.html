@@ -12,7 +12,7 @@
         <fs-date-picker-calendar
           [rangeFrom]="modelFrom$ | async"
           [rangeTo]="modelTo$ | async"
-          [drawMonth]="leftCalendarDate$ | async"
+          [calendarDate]="leftCalendarDate$ | async"
           [dateMode]="datePickerModel.calendarMode$ | async"
           [highlightStartDate]="modelFrom$ | async"
           [highlightEndDate]="modelTo$ | async"
@@ -27,7 +27,7 @@
           [rangeTo]="modelTo$ | async"
           [highlightStartDate]="modelFrom$ | async"
           [highlightEndDate]="modelTo$ | async"
-          [drawMonth]="rightCalendarDate$ | async"
+          [calendarDate]="rightCalendarDate$ | async"
           [dateMode]="datePickerModel.calendarMode$ | async"
           [disabledDays]="datePickerModel.disabledDays$ | async"
           [weekStartsOn]="datePickerModel.weekStartsOn"

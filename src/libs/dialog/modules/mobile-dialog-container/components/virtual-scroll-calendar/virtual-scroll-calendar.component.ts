@@ -11,14 +11,14 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
-
 import {
   CdkVirtualScrollViewport,
   VIRTUAL_SCROLL_STRATEGY,
 } from '@angular/cdk/scrolling';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatTabGroup } from '@angular/material/tabs';
 
-import { fromEvent, Observable, race, timer, Subject } from 'rxjs';
+import { Observable, Subject, fromEvent, race, timer } from 'rxjs';
 import {
   debounceTime,
   delay,
@@ -26,18 +26,17 @@ import {
   shareReplay,
   switchMap,
   take,
-  takeUntil
+  takeUntil,
 } from 'rxjs/operators';
 
 import { isBefore } from 'date-fns';
 
-import { FsCalendarDataSource } from './calendar-data-source';
+import { RangePickerRef } from '../../../../../../app/classes/range-picker-ref';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
-import { RangePickerRef } from '../../../../../../app/classes/range-picker-ref';
 
-import { FsCalendarMobileScrollStrategy, CalendarScrollStrategy } from './calendar-scroll-strategy';
-import { MatTabGroup } from '@angular/material/tabs';
+import { FsCalendarDataSource } from './calendar-data-source';
+import { CalendarScrollStrategy, FsCalendarMobileScrollStrategy } from './calendar-scroll-strategy';
 
 
 @Component({
@@ -67,7 +66,7 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
   public parentTabIndex: number;
 
   @ViewChild(CdkVirtualScrollViewport, { static: true })
-  public virtualScroll: CdkVirtualScrollViewport
+  public virtualScroll: CdkVirtualScrollViewport;
 
   public modelFrom$: Observable<Date>;
   public modelTo$: Observable<Date>;
@@ -80,7 +79,7 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
 
   constructor(
     private _el: ElementRef,
-    private _bottomSheetRef: MatBottomSheetRef<any>,
+    private _bottomSheetRef: MatBottomSheetRef,
     @Inject(VIRTUAL_SCROLL_STRATEGY)
     private _scrollStrategy: FsCalendarMobileScrollStrategy,
   ) {}
@@ -178,13 +177,13 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
             debounceTime(scrollDebounceTime * 2),
             take(1),
             takeUntil(touchstart$),
-          )
+          ),
         ),
         takeUntil(this._destroy$),
       )
       .subscribe(() => {
         this.virtualScroll.scrollToIndex(this._activeScrollIndex, 'smooth');
-      })
+      });
   }
 
   private _initMonthRangeModels(): void {
