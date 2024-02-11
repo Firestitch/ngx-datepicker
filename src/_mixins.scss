@@ -1,0 +1,44 @@
+
+@mixin headingContainer {
+  .heading-container {
+    padding: 15px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 120%;
+  }
+}
+
+@mixin navAction {
+  .nav-action {
+    &.mat-icon-button,
+    .mat-icon {
+      width: 30px;
+      height: 30px;
+      line-height: 30px !important;
+    }
+    
+    text-decoration: none;
+    cursor: pointer;
+    color: #757575;
+
+    .ma-ripple {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+}
+
+@mixin heading {
+  .heading {
+    padding: 5px 6px;
+    background: #fff;
+    font-weight: normal;
+    font-size: 12px;
+    color: #828282;
+    text-transform: uppercase;
+    font-size: 80%;
+    text-align: center;
+  }
+}

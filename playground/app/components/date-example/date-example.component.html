@@ -17,5 +17,9 @@
 <fs-date-calendar-picker 
   [(ngModel)]="model" 
   [today]="false"
-  [enabledDates]="enabledDates">
+  [enabledDates]="enabledDates"
+  (monthChange)="monthChange($event)">
 </fs-date-calendar-picker>
+
+
+{{monthDate|json}}

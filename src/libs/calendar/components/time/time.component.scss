@@ -1,3 +1,7 @@
+@import '../../../../_mixins';
+@include headingContainer();
+@include heading();
+
 :host {
   padding: 0 10px;
 }

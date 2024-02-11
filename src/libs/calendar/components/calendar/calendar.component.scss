@@ -1,3 +1,6 @@
+@import '../../../../_mixins';
+@include heading();
+
 :host {
   padding: 0 10px;
 }
@@ -7,5 +10,15 @@
 
   &:not(.week-mode) {
     display: none;
+  }
+}
+
+.week {
+  &.first-period-week {
+    border-top: 1px solid #e4e4e4;
+  }
+
+  &.last-period-week {
+    border-bottom: 1px solid #e4e4e4;
   }
 }

@@ -1,3 +1,6 @@
+@import '../../../../../../_mixins';
+@include headingContainer();
+
 .months {
   width: 350px;
 }

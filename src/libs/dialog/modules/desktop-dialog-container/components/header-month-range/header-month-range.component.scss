@@ -1,3 +1,6 @@
+@import '../../../../../../_mixins';
+@include headingContainer();
+
 :host {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { addDays, setDate } from 'date-fns';
 
@@ -6,14 +6,19 @@ import { addDays, setDate } from 'date-fns';
   selector: 'date-example',
   templateUrl: './date-example.component.html',
   styleUrls: ['./date-example.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateExampleComponent {
+export class DateExampleComponent implements OnInit {
 
-  public enabledDates: [Date, Date][] = [
-    [setDate(new Date(), 10), setDate(new Date(), 27)],
-  ];
+  public monthDate;
+
+  public enabledDates: [Date, Date][];
 
   public model = addDays(new Date(),2);
+
+  public ngOnInit(): void {
+    this.updateEnabledDates();
+  }
 
   public selected(e) {
     console.log('selected', e);
@@ -29,5 +34,16 @@ export class DateExampleComponent {
 
   public pickerClosed(): void {
     console.log('picker closed');
+  }
+
+  public monthChange(date): void {
+    this.monthDate = date;
+    this.updateEnabledDates();
+  }
+
+  public updateEnabledDates() {
+    this.enabledDates = [
+      [setDate(this.monthDate || new Date(), 10), setDate(this.monthDate || new Date(), 18)],
+    ];
   }
 }
