@@ -1,32 +1,24 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  Input,
-  AfterViewInit,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
   ElementRef,
+  EventEmitter,
+  Input,
+  Output,
 } from '@angular/core';
 
-import { endOfYear, startOfYear } from 'date-fns';
 
-import { isRangeDisabled } from '../../../../../common/helpers/is-range-disabled';
 import { MONTHS } from '../../../../../calendar/consts/months';
-import { isMonthDisabled } from '../../../../../common/helpers/is-month-disabled';
-
 
 interface IYearListItem {
   value: number;
-  // disabled: boolean;
 }
 
 interface IMonthListItem {
   value: number;
   name: string;
   abr: string;
-  // disabled: boolean;
 }
 
 
@@ -38,7 +30,7 @@ interface IMonthListItem {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDatePickerMobileHeaderComponent implements OnChanges, AfterViewInit {
+export class FsDatePickerMobileHeaderComponent implements AfterViewInit {
 
   @Input()
   public viewMode: string;
@@ -93,9 +85,6 @@ export class FsDatePickerMobileHeaderComponent implements OnChanges, AfterViewIn
     return this.calendarDate?.getDate();
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-  }
-
   public ngAfterViewInit(): void {
     this._createMonthsList();
     this._createYearsList();
@@ -134,14 +123,14 @@ export class FsDatePickerMobileHeaderComponent implements OnChanges, AfterViewIn
 
     for (let y: number = this.minYear; y < this.maxYear; y++) {
       // const year = new Date().setFullYear(y);
-      this.yearsList.push({ value: y, /*disabled: this._isYearDisabled(year)*/ });
+      this.yearsList.push({ value: y /*disabled: this._isYearDisabled(year)*/ });
     }
   }
 
   private _createMonthsList(): void {
     // const year = this.calendarMonth ? this.calendarYear : this.now.getFullYear();
 
-/*
+    /*
     const checkIfMonthDisabled = (monthNumber: number, disabledDays) => {
       const month = new Date();
       month.setFullYear(year);
@@ -157,13 +146,13 @@ export class FsDatePickerMobileHeaderComponent implements OnChanges, AfterViewIn
       const monthItem = {
         ...item,
         // disabled: checkIfMonthDisabled(item.value, this.disabledDays),
-      }
+      };
 
       this.monthList.push(monthItem);
     }
   }
 
-/*
+  /*
   private _isYearDisabled(date): boolean {
     const startYear = startOfYear(date);
     const endYear = endOfYear(date);

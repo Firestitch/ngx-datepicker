@@ -4,7 +4,6 @@
     [minYear]="datePickerModel.minYear"
     [maxYear]="datePickerModel.maxYear"
     [viewMode]="datePickerModel.calendarMode$ | async"
-    [disabledDays]="datePickerModel.disabledDays$ | async"
     [monthYearConfigurable]="false"
     (goNextMonth)="nextMonth()"
     (goPrevMonth)="prevMonth()">
@@ -20,6 +19,7 @@
     [periodWeeks]="datePickerModel.periodWeeks"
     [showToday]="today"
     [enabledDays]="enabledDates"
+    [disabledDays]="disabledDays"
     (change)="dateChanged($event)">
   </fs-date-picker-calendar>
 </div>

@@ -1,9 +1,10 @@
-import { addWeeks, } from 'date-fns';
+import { addWeeks } from 'date-fns';
 
-import { Period } from './period';
-import { DayItem } from '../interfaces/day-item.interface';
 import { getPeriodId } from '../../common/helpers/get-period-id';
 import { WeekDays } from '../../common/types/week-days.type';
+import { DayItem } from '../interfaces/day-item.interface';
+
+import { Period } from './period';
 
 
 export class Week {
@@ -45,6 +46,7 @@ export class Week {
 
   /**
    * Add related day
+   *
    * @param day
    */
   public addDay(day: DayItem) {
@@ -53,6 +55,7 @@ export class Week {
 
   /**
    * Add related period
+   *
    * @param period
    */
   public addPeriod(period: Period) {
@@ -61,6 +64,7 @@ export class Week {
 
   /**
    * Set visibility for period label
+   *
    * @param flag
    */
   public setPeriodVisibility(flag: boolean) {

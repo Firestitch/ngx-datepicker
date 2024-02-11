@@ -30,27 +30,26 @@
 
 <div *ngIf="viewMode === 'week' || viewMode === 'date' || viewMode === 'datetime' || viewMode === 'monthrange'" class="calendar">
   <div class="heading-container">
-    <a class="month-year-name" (click)="setViewMode('month')" [ngClass]="{ 'not-configurable': !monthYearConfigurable}">
-      {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}
+    <div class="month-year-name">
+      <a (click)="setViewMode('month')" [ngClass]="{ 'not-configurable': !monthYearConfigurable}">
+        {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}
 
-      <span *ngIf="calendarDay" class="day-name">
-        {{ calendarDay }},
-      </span>
-
-      {{ calendarYear }}
-      <mat-icon class="nav-action" *ngIf="monthYearConfigurable">arrow_drop_down</mat-icon>
-    </a>
-
-    <div class="gap"></div>
-
-    <div class="actions">
-      <a (click)="prevMonth()" class="nav-action">
-        <mat-icon>navigate_before</mat-icon>
-      </a>
-      <a (click)="nextMonth()" class="nav-action">
-        <mat-icon>navigate_next</mat-icon>
+        {{ calendarYear }}
+        <mat-icon class="nav-action" *ngIf="monthYearConfigurable">arrow_drop_down</mat-icon>
       </a>
     </div>
+    <a 
+        mat-icon-button    
+        (click)="prevMonth()" 
+        class="nav-action">
+      <mat-icon>navigate_before</mat-icon>
+    </a>
+    <a  
+        mat-icon-button    
+        (click)="nextMonth()" 
+        class="nav-action">
+      <mat-icon>navigate_next</mat-icon>
+    </a>
   </div>
 
 </div>

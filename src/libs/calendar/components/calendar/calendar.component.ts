@@ -62,7 +62,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public dateMode: string = null;
 
   @Input()
-  public enabledDays: Date[] = null;
+  public enabledDays: [Date, Date][] = null;
 
   @Input()
   public disabledDays: [Date, Date][] = null;
@@ -237,7 +237,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
    * @param week
    * @param event
    */
-  public dayClick(day, week, event) {
+  public dayClick(day, week) {
     if (this.dateMode === 'week') {
       this.selectPeriod(week.period);
     } else if (this.dateMode === 'monthrange') {

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, } from '@angular/core';
-import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
 
 
@@ -25,7 +26,10 @@ export class FsDateCalendarPickerComponent implements ControlValueAccessor {
   public today = true;
 
   @Input()
-  public enabledDates: Date[];
+  public disabledDays: [Date, Date][];
+
+  @Input()
+  public enabledDates: [Date, Date][];
 
   private readonly _datePickerModel =
     new FsDatePickerDialogModel({ view: PickerViewType.Date });

@@ -3,16 +3,21 @@
 }
 
 .month-year-name {
-  color: inherit;
-  border-radius: 3px;
-  padding-left: 5px;
-  margin-left: -5px;
-  display: flex;
-  align-items: center;
+  flex: 1;
 
-  &:not(.not-configurable):hover {
-    background-color: rgb(234, 234, 234);
+  a {
+    color: inherit;
     border-radius: 3px;
+    padding-left: 5px;
+    margin-left: -5px;
+    display: flex;
+    align-items: center;
+    display: inline-flex;
+
+    &:not(.not-configurable):hover {
+      background-color: rgb(234, 234, 234);
+      border-radius: 3px;
+    }
   }
 }
 

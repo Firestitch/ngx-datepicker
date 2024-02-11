@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { addDays } from 'date-fns';
+import { addDays, setDate } from 'date-fns';
 
 @Component({
   selector: 'date-example',
@@ -9,8 +9,9 @@ import { addDays } from 'date-fns';
 })
 export class DateExampleComponent {
 
-  // public model = new Date('2015-10-10 15:45');
-  public enabledDates = [new Date('2024-02-07'), new Date('2024-02-08'), new Date('2024-02-09'), new Date('2024-02-10')];
+  public enabledDates: [Date, Date][] = [
+    [setDate(new Date(), 10), setDate(new Date(), 27)],
+  ];
 
   public model = addDays(new Date(),2);
 

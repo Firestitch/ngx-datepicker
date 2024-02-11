@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
 import { ThemePalette } from '@angular/material/core';
 
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
-
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 
 
@@ -27,9 +27,10 @@ export class FsDesktopDatePickerComponent {
   public get doneBtnClass(): ThemePalette {
     if (this.datePickerModel.isPickerRangeFrom) {
       return undefined;
-    } else {
-      return 'primary';
     }
+
+    return 'primary';
+
   }
 
   public viewModeChanged(mode: string) {

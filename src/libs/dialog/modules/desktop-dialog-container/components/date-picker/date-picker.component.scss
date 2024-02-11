@@ -1,3 +1,7 @@
 .date-time {
   display: flex;
 }
+
+fs-date-picker-header ::ng-deep .heading-container {
+  padding-left: 18px;
+}

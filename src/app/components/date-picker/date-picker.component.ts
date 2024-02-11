@@ -40,7 +40,7 @@ import { formatDateTime } from '../../helpers/format-date-time';
 })
 export class FsDatePickerComponent extends FsDatePickerBaseComponent {
 
-  static template = `
+  public static template = `
     <fs-clear [show]="!disabled && !readonly && clear" (clear)="cleared($event)" [visible]="value"></fs-clear>
     <ng-container *ngIf="icon">
       <fs-datepicker-trigger (click)="triggerClick()" [disabled]="disabled || readonly" [view]="view"></fs-datepicker-trigger>

@@ -10,7 +10,7 @@ export function createDateFromValue(value, timezone: string) {
       value = null;
     }
   } if (value && isDate(value) && !isValid(value)) {
-    value = null
+    value = null;
   }
 
   if (value && timezone) {

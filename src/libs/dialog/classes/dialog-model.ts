@@ -262,25 +262,7 @@ export class FsDatePickerDialogModel {
 
   private _initCalendar(options: IDialogFactoryOptions) {
     this._pickerOptions = { ...options };
-
     this.view = options.view;
-
-    switch (this.view) {
-      case PickerViewType.Week: {
-        this.period = (options.modelValue as IDatePickerPeriod);
-        this.calendarDate = (options.modelValue as IDatePickerPeriod)?.from || new Date();
-      } break;
-
-      case PickerViewType.MonthRange: {
-        this.calendarDate = (options.modelValue as Date) || new Date();
-      } break;
-
-      default: {
-        this.model = (options.modelValue as Date);
-        this.calendarDate = (options.modelValue as Date) || new Date();
-      }
-    }
-
     this._calendarMode = options.view;
     this.minYear = options.minYear;
     this.maxYear = options.maxYear;
@@ -298,12 +280,32 @@ export class FsDatePickerDialogModel {
       ? true
       : options.minutes;
 
-    this.seedDate = !isDate(options.seedDate) || !isValid(options.seedDate) ? getFirstDayOfFirstYearWeek(new Date()) : options.seedDate;
-
+    this.seedDate = !isDate(options.seedDate) || !isValid(options.seedDate) ?
+      getFirstDayOfFirstYearWeek(new Date()) :
+      options.seedDate;
     this.periodWeeks = options.periodWeeks;
 
+    this._initCalendarDate(options);
     this._updateDisabledDays();
     this._updateCalendarDate();
+  }
+
+  private _initCalendarDate(options: IDialogFactoryOptions) {
+    switch (this.view) {
+      case PickerViewType.Week: {
+        this.period = (options.modelValue as IDatePickerPeriod);
+        this.calendarDate = (options.modelValue as IDatePickerPeriod)?.from || new Date();
+      } break;
+
+      case PickerViewType.MonthRange: {
+        this.calendarDate = (options.modelValue as Date) || new Date();
+      } break;
+
+      default: {
+        this.model = (options.modelValue as Date);
+        this.calendarDate = (options.modelValue as Date) || new Date();
+      }
+    }
   }
 
   private _updateDisabled() {

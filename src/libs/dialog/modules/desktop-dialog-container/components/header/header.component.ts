@@ -5,25 +5,19 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
-
 
 import { MONTHS } from '../../../../../calendar/consts/months';
 
-
 interface IYearListItem {
   value: number;
-  // disabled: boolean;
 }
 
 interface IMonthListItem {
   value: number;
   name: string;
   abr: string;
-  // disabled: boolean;
 }
 
 
@@ -35,7 +29,7 @@ interface IMonthListItem {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
+export class FsDatePickerHeaderComponent implements AfterViewInit {
 
   @Input()
   public viewMode: string;
@@ -45,9 +39,6 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
 
   @Input()
   public maxYear: number;
-
-  @Input()
-  public disabledDays: [Date, Date][];
 
   @Input()
   public calendarDate: Date;
@@ -98,9 +89,6 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
     return this.calendarDate?.getDate();
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-  }
-
   public ngAfterViewInit(): void {
     this._createMonthsList();
     this._createYearsList();
@@ -149,44 +137,23 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
   }
 
   private _createMonthsList(): void {
-    // const year = this.calendarMonth ? this.calendarYear : this.now.getFullYear();
-
-    /*
-    const checkIfMonthDisabled = (monthNumber: number, disabledDays) => {
-      const month = new Date();
-      month.setFullYear(year);
-      month.setMonth(monthNumber);
-
-      return isMonthDisabled(month, disabledDays)
-    }
-*/
 
     this.monthList = [];
 
     for (const item of MONTHS) {
       const monthItem = {
         ...item,
-        // disabled: checkIfMonthDisabled(item.value, this.disabledDays),
       };
 
       this.monthList.push(monthItem);
     }
   }
 
-  /*
-  private _isYearDisabled(date): boolean {
-    const startYear = startOfYear(date);
-    const endYear = endOfYear(date);
-
-    return isRangeDisabled(this.disabledDays, startYear, endYear);
-  }
-*/
-
   private _scrollToSelectedYear(): void {
     setTimeout(() => {
       const years = this._elRef.nativeElement.querySelector('.years');
       if(years) {
-        const selected = years.querySelector('.year.selected');
+        const selected = years.querySelector('.year .selected');
 
         if (selected) {
           selected.scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -199,7 +166,7 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
     setTimeout(() => {
       const years = this._elRef.nativeElement.querySelector('.months');
       if(years) {
-        const selected = years.querySelector('.month.selected');
+        const selected = years.querySelector('.month .selected');
 
         if (selected) {
           selected.scrollIntoView({ behavior: 'auto', block: 'center' });

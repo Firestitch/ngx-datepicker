@@ -36,16 +36,16 @@
                 class="tile-content" 
                 [class.hidden-day]="hideExtraDays && day.surrounding"
                 [class.now]="today.date === day.date && showToday"
-                [class.enabled]="!!enabledDays && day.disabled"
+                [class.enabled]="day.enabled"
                 [class.surrounding]="day.surrounding"
                 [class.selected]="(day.selected || day.date === selected.date && !day.surrounding)"
                 [class.range-from]="day.date === selectedRange.from && !day.surrounding && selectedRange.from !== selectedRange.to"
                 [class.range-to]="day.date === selectedRange.to && !day.surrounding && selectedRange.from !== selectedRange.to"
                 [class.same-range-dates]="(hideExtraDays && !day.surrounding) && selectedRange.from === day.date && selectedRange.from === selectedRange.to"
                 [class.week-mode]="dateMode === 'week'"
-                [class.disabled]="!enabledDays && day.disabled"
+                [class.disabled]="day.disabled"
                 (mouseenter)="onMouseEnterDay(day)"
-                (click)="dayClick(day, week, $event)">
+                (click)="dayClick(day, week)">
                 {{ day.number }}
               </div>
             </ng-container>

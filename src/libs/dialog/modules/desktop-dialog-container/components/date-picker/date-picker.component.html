@@ -6,7 +6,6 @@
         [minYear]="datePickerModel.minYear"
         [maxYear]="datePickerModel.maxYear"
         [viewMode]="datePickerModel.calendarMode$ | async"
-        [disabledDays]="datePickerModel.disabledDays$ | async"
         (viewModeChange)="viewModeChanged($event)"
         (monthChange)="monthChanged($event)"
         (yearChange)="yearChanged($event)"
@@ -45,12 +44,18 @@
   </div>
 
   <div class="buttons">
+    <ng-container *ngIf="!datePickerModel.rangePickerRef">
+      <ng-container [ngTemplateOutlet]="done"></ng-container>
+    </ng-container>
+
     <ng-container *ngIf="datePickerModel.rangePickerRef">
       <ng-container *ngIf="datePickerModel.isPickerRangeFrom">
         <button type="button" mat-button color="primary" (click)="nextCalendar()">
           Continue
         </button>
       </ng-container>
+
+      <ng-container [ngTemplateOutlet]="done"></ng-container>
 
       <ng-container *ngIf="datePickerModel.isPickerRangeTo">
         <button type="button" mat-button (click)="prevCalendar()">
@@ -59,9 +64,16 @@
       </ng-container>
     </ng-container>
 
-    <button class="button-done" type="button" mat-button [color]="doneBtnClass" (click)="close()">
-      Done
-    </button>
+    <ng-template #done>
+      <button 
+          class="button-done" 
+          type="button" 
+          mat-button 
+          [color]="doneBtnClass" 
+          (click)="close()">
+        Done
+      </button>
+    </ng-template>
 
     <button 
         type="button"

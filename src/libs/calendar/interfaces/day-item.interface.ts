@@ -5,5 +5,6 @@ export interface DayItem {
   month?: number;
   year?: number;
   disabled?: boolean;
+  enabled?: boolean;
   selected?: boolean;
 }

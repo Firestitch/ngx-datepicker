@@ -4,14 +4,6 @@
 
 
 .fs-date-picker-calendar {
-  .hidden-day {
-    pointer-events: none;
-
-    &:not(.week-mode) {
-      display: none;
-    }
-  }
-
   .highlight {
     &:not(.highlight-from):not(.highlight-to) {
       background-color: color-rgb($selected-color, $selected-color-opacity);
@@ -93,7 +85,7 @@
 }
 
 .heading {
-  padding: 7px;
+  padding: 5px 6px;
   background: #fff;
   font-weight: normal;
   font-size: 12px;
@@ -157,11 +149,6 @@
     width: 100%;
   }
 
-  .gap {
-    display: flex;
-    flex: 1;
-  }
-
   .tile {
     padding: 0;
   }
@@ -190,7 +177,7 @@
     }
 
     &.disabled {
-      background: #f4f4f4;
+      background: #f9f9f9;
       color: #ccc;
       cursor: initial;
       pointer-events: none;
@@ -313,7 +300,21 @@ fs-date-picker-dialog * {
 }
 
 .nav-action {
+  
+  &.mat-icon-button,
+  .mat-icon {
+    width: 30px;
+    height: 30px;
+    line-height: 30px !important;
+  }
+  
   text-decoration: none;
   cursor: pointer;
   color: #757575;
+
+  .ma-ripple {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
 }

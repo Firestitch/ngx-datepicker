@@ -1,0 +1,11 @@
+:host {
+  padding: 0 10px;
+}
+
+.hidden-day {
+  pointer-events: none;
+
+  &:not(.week-mode) {
+    display: none;
+  }
+}
