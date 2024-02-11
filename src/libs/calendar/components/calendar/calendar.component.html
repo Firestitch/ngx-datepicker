@@ -1,10 +1,10 @@
 <table
-  [class.month-range]="dateMode === 'monthrange'"
-  [class.range-selected]="!!selectedRange.from && !!selectedRange.to">
+    [class.month-range]="dateMode === 'monthrange'"
+    [class.range-selected]="!!selectedRange.from && !!selectedRange.to">
   <thead>
     <tr>
-      <th *ngIf="seedDate && periodWeeks">#</th>
-      <th *ngFor="let wd of weekDaysList">{{wd}}</th>
+      <th *ngIf="seedDate && periodWeeks" class="heading">#</th>
+      <th *ngFor="let wd of weekDaysList" class="heading">{{wd}}</th>
     </tr>
   </thead>
 
@@ -15,8 +15,7 @@
           [class.last-period-week]="week.lastWeekInPeriod"
           [class.hover]="week.period?.mouseOver"
           (mouseenter)="mouseEnterWeek(week)"
-          (mouseleave)="mouseLeaveWeek(week)"
-      >
+          (mouseleave)="mouseLeaveWeek(week)">
         <ng-container *ngIf="week.periodLableVisible">
           <td class="period"
               [rowSpan]="week.period.countOfWeeks"
@@ -27,34 +26,32 @@
         </ng-container>
 
         <ng-container *ngFor="let day of week.days">
-          <td class="tile day"
-              [class.hidden-day]="hideExtraDays && day.mute"
-              [class.now]="today.date == day.date && showToday"
-              [class.enabled]="!!enabledDays && day.disabled"
-              [class.mute]="day.mute"
-              [class.selected]="(day.selected || day.date == selected.date && !day.mute)"
-              [class.range-from]="day.date === selectedRange.from && !day.mute && selectedRange.from !== selectedRange.to"
-              [class.range-to]="day.date === selectedRange.to && !day.mute && selectedRange.from !== selectedRange.to"
-              [class.same-range-dates]="(hideExtraDays && !day.mute) && selectedRange.from === day.date && selectedRange.from === selectedRange.to"
-              [class.highlighted]="!day.disabled && !day.mute && !!highlightedRangeDays.data[day.date]"
-              [class.highlight-min-date]="day.date === highlightedRangeDays.min"
-              [class.highlight-max-date]="day.date === highlightedRangeDays.max"
-              [class.week-mode]="dateMode === 'week'"
-              [class.disabled]="!enabledDays && day.disabled"
-              (click)="dayClick(day, week, $event)"
-              (mouseenter)="onMouseEnterDay(day)">
-            <div class="tile-content">
-              <div class="tile-day-label">
+          <td 
+              class="tile day"
+              [class.highlight]="!day.disabled && !day.surrounding && !!highlightedRangeDays.data[day.date]"
+              [class.highlight-from]="day.date === selectedRange.from && !day.surrounding && selectedRange.from !== selectedRange.to"
+              [class.highlight-to]="day.date === selectedRange.to && !day.surrounding && selectedRange.from !== selectedRange.to">
+            <ng-container *ngIf="!day.surrounding || (showSurroundingDays && day.surrounding)">
+              <div 
+                class="tile-content" 
+                [class.hidden-day]="hideExtraDays && day.surrounding"
+                [class.now]="today.date === day.date && showToday"
+                [class.enabled]="!!enabledDays && day.disabled"
+                [class.surrounding]="day.surrounding"
+                [class.selected]="(day.selected || day.date === selected.date && !day.surrounding)"
+                [class.range-from]="day.date === selectedRange.from && !day.surrounding && selectedRange.from !== selectedRange.to"
+                [class.range-to]="day.date === selectedRange.to && !day.surrounding && selectedRange.from !== selectedRange.to"
+                [class.same-range-dates]="(hideExtraDays && !day.surrounding) && selectedRange.from === day.date && selectedRange.from === selectedRange.to"
+                [class.week-mode]="dateMode === 'week'"
+                [class.disabled]="!enabledDays && day.disabled"
+                (mouseenter)="onMouseEnterDay(day)"
+                (click)="dayClick(day, week, $event)">
                 {{ day.number }}
               </div>
-            </div>
+            </ng-container>
           </td>
         </ng-container>
       </tr>
     </ng-container>
-
-  <!--<tr *ngIf="month.weeks.length < 6">
-    <td colspan="7" class="tile"></td>
-  </tr>-->
   </tbody>
 </table>

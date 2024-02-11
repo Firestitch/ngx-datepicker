@@ -11,8 +11,7 @@
         (monthChange)="monthChanged($event)"
         (yearChange)="yearChanged($event)"
         (goNextMonth)="nextMonth()"
-        (goPrevMonth)="prevMonth()"
-      >
+        (goPrevMonth)="prevMonth()">
       </fs-date-picker-header>
 
       <ng-container *ngIf="dialogRef.components.calendarStart">
@@ -39,6 +38,7 @@
         [minutes]="datePickerModel.minutes"
         [disabledTimes]="datePickerModel.disabledTimes$ | async"
         [expanded]="timePickerExpanded"
+        [showHeading]="datePickerModel.view !== 'time'"
         (onChange)="dateChanged($event)">
       </fs-date-picker-time>
     </ng-container>

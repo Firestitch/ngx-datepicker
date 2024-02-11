@@ -8,9 +8,29 @@
     pointer-events: none;
 
     &:not(.week-mode) {
-      .tile-content {
-        display: none;
-      }
+      display: none;
+    }
+  }
+
+  .highlight {
+    &:not(.highlight-from):not(.highlight-to) {
+      background-color: color-rgb($selected-color, $selected-color-opacity);
+    }
+
+    &.highlight-from {
+      background: linear-gradient(
+        90deg,
+        #fff 0%,
+        #fff 49%,
+        color-rgb($selected-color, $selected-color-opacity) 51%);
+    }
+
+    &.highlight-to {
+      background: linear-gradient(
+          -90deg,
+          #fff 0%,
+          #fff 49%,
+          color-rgb($selected-color, $selected-color-opacity) 51%);
     }
   }
 
@@ -36,76 +56,27 @@
     }
   }
 
-  .day {
-    &.selected {
-      color: #fff;
-    }
-  }
-
-  .highlighted {
-    &:not(.selected):not(.range-from):not(.range-to):not(.same-range-dates) {
-      .tile-content {
-        background-color: color-rgb($selected-color, $selected-color-opacity);
-        border-radius: initial;
-      }
-    }
-  }
-
-
   .month-range {
-    .tile {
-      padding: 0;
-    }
-
-    &.range-selected {
-      .range-from {
-        background: linear-gradient(
-            90deg,
-            #fff 0%,
-            #fff 49%,
-            color-rgb($selected-color, $selected-color-opacity) 51%
-        );
-      }
-
-      .range-to {
-        background: linear-gradient(
-            -90deg,
-            #fff 0%,
-            #fff 49%,
-            color-rgb($selected-color, $selected-color-opacity) 51%
-        );
-      }
-
-      .same-range-dates {
-        background: color-rgb($selected-color, $selected-color-opacity);
-      }
-    }
-
     &:not(.range-selected) {
-      .range-from {
-        .tile-content {
-          background-color: #fff;
-          color: #000;
-          width: 30px;
-          height: 30px;
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+      .tile-content.range-from {
+        background-color: #fff;
+        color: #000;
+        font-weight: normal;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        border: 8px solid transparent;
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
           border: 8px solid transparent;
           border-radius: 100%;
-
-          &:before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 8px solid transparent;
-            border-radius: 100%;
-            border-left-color: color-rgb($selected-color);
-            border-bottom-color: color-rgb($selected-color);
-            transform: rotateZ(45deg);
-          }
+          border-left-color: color-rgb($selected-color);
+          border-bottom-color: color-rgb($selected-color);
+          transform: rotateZ(45deg);
         }
       }
     }
@@ -119,6 +90,17 @@
 .fs-date-picker-dialog {
   display: flex;
   justify-content: center;
+}
+
+.heading {
+  padding: 7px;
+  background: #fff;
+  font-weight: normal;
+  font-size: 12px;
+  color: #828282;
+  text-transform: uppercase;
+  font-size: 80%;
+  text-align: center;
 }
 
 .fs-date-picker-container {
@@ -137,11 +119,6 @@
       margin: 5px;
       width: 100%;
     }
-  }
-
-  a {
-    text-decoration: none;
-    cursor: pointer;
   }
 
   * {
@@ -171,16 +148,6 @@
     }
   }
 
-  &.has-time {
-    height: 100%;
-    max-height: 472px;
-    .wrap {
-      .calendar-view {
-        overflow-y: auto;
-      }
-    }
-  }
-
   .calendar-container::-webkit-scrollbar {
     display: none;
   }
@@ -195,72 +162,60 @@
     flex: 1;
   }
 
-  .month-year {
-    height: 56px;
-	  padding: 0 13px;
-	  display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 18px;
-
-    &.time {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .more {
-      padding: 1px;
-    }
-  }
-
-  .day {
-    &.mute {
-      color: #b2b2b2;
-    }
-
-    span {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-  }
-
   .tile {
     padding: 0;
-    position: relative;
-    text-align: center;
-    width: 46px;
-    height: 46px;
-    outline: none;
-    font-size: 14px;
-    cursor: pointer;
-    box-sizing: border-box;
   }
 
   .tile-content {
-    background-color: #fff;
+    outline: none;
     display: flex;
+    cursor: pointer;
+    text-align: center;
     justify-content: center;
     border-radius: 50%;
     flex-direction: column;
-    border: 1px solid transparent;
-    height: 46px;
-    width: 46px;
-    margin: 0 auto;
+    border: 2px solid #fff;
+    height: 43px;
+    width: 43px;
+    box-sizing: border-box;
 
-    .tile-day-label {
-      display: block;
-      width: 45px;
-      height: 45px;
-      line-height: 45px;
+    &.enabled {
+      background: color-rgb($enabled-color, $enabled-color-opacity);
+      font-weight: bold;
+      color: color-rgb($enabled-color);
     }
-  }
 
-  fs-date-picker {
-    .lbl {
-      font-weight: normal;
-      font-size: 12px;
-      color: #4d4d4d;
+    &.surrounding {
+      color: #b2b2b2;
+    }
+
+    &.disabled {
+      background: #f4f4f4;
+      color: #ccc;
+      cursor: initial;
+      pointer-events: none;
+    }
+      
+    &.selected,
+    &.range-from, 
+    &.range-to {
+      background-color: mat.get-color-from-palette($selected-color);
+      font-weight: bold;
+      color: #fff;
+    }
+
+    &:hover:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
+      background: color-rgb($hover-color, $hover-color-opacity);
+    }
+
+    &.now:not(:hover)::after {
+      content: '•';
+      font-size: 140%;
+      line-height: 0;
+      margin-top: 0;
+      top: 8px;
+      position: relative;
+      color: color-rgb($now-color, 1);
     }
   }
 
@@ -269,31 +224,6 @@
     position: relative;
     flex: 1 1 45%;
     overflow: hidden;
-  }
-
-  .calendar-container .day.selected,
-  .calendar-container .years .year.selected,
-  .calendar-container .months .month.selected,
-  .time-container .hour.selected,
-  .time-container .minute.selected,
-  .month-range.range-selected .range-from,
-  .month-range.range-selected .range-to,
-  .month-range.range-selected .same-range-dates {
-	  color: #fff;
-  }
-
-  .time-container .hour.disabled,
-  .time-container .minute.disabled,
-  .calendar-container .day.disabled,
-  .calendar-container .years .year.disabled,
-  .calendar-container .months .month.disabled {
-    color: #ccc;
-    cursor: initial;
-    pointer-events: none;
-
-    .tile-content {
-      background: #ececec;
-    }
   }
 
   .clear {
@@ -314,73 +244,7 @@
 
   table {
     border-spacing: 0;
-    thead {
-      th {
-        padding: 7px;
-        background: #fff;
-        border-bottom: 1px solid #efefef;
-        font-weight: normal;
-        font-size: 12px;
-        color: #7d7d7d;
-      }
-    }
-  }
-}
-
-.time-container {
-  .hour, .minute {
-    &:hover {
-      &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
-        .tile-content {
-          background: color-rgb($hover-color, $hover-color-opacity);
-        }
-      }
-    }
-  }
-}
-
-.tile {
-  &.day.enabled {
-    .tile-content {
-      background: color-rgb($hover-color, $hover-color-opacity);
-    }
-  }
-}
-
-.calendar-container {
-  .day, .years .year, .months .month, .year-name, .month-name {
-    &:hover {
-      &:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
-        .tile-content {
-          background: color-rgb($hover-color, $hover-color-opacity);
-        }
-      }
-    }
-  }
-}
-
-.calendar-container {
-  .day.selected .tile-content,
-  .years .year.selected .tile-content,
-  .months .month.selected .tile-content,
-  .month-range.range-selected .range-from .tile-content,
-  .month-range.range-selected .range-to .tile-content,
-  .month-range.range-selected .same-range-dates .tile-content {
-    background-color: mat.get-color-from-palette($selected-color);
-  }
-}
-
-.time-container {
-  .hour.selected .tile-content,
-  .minute.selected .tile-content {
-    background-color: mat.get-color-from-palette($selected-color);
-  }
-}
-
-.calendar-container, .time-container {
-  .now .tile-day-label {
-    border: 1px solid color-rgb($now-color, $now-color-opacity);
-    border-radius: 50%;
+    margin: auto;
   }
 }
 
@@ -438,4 +302,18 @@ fs-date-picker-dialog * {
 // SC-T246 hack should fix issues on old android devices
 .fs-date-picker-prevent-pull-to-refresh {
   overscroll-behavior: none;
+}
+
+.heading-container {
+  padding: 15px 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 120%;
+}
+
+.nav-action {
+  text-decoration: none;
+  cursor: pointer;
+  color: #757575;
 }

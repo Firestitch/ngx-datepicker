@@ -1,28 +1,28 @@
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import {
+  addDays,
+  addMinutes,
+  addMonths,
+  isBefore,
   isDate,
   isValid,
-  addMonths,
-  subMonths,
   setMonth,
   setYear,
   startOfDay,
-  isBefore,
-  addDays,
-  addMinutes,
+  subMonths,
 } from 'date-fns';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-
-import { IDialogFactoryOptions } from '../../dialog/interfaces/dialog-factory-data.interface';
-import { PickerViewType } from '../../common/enums/picker-view-type.enum';
-import { getDisabledDays } from '../../dialog/helpers/get-disabled-days';
-import { getDisabledTimes } from '../../dialog/helpers/get-disabled-times';
-import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 
 import { RangePickerRef } from '../../../app/classes/range-picker-ref';
-import { getFirstDayOfFirstYearWeek } from '../helpers/get-first-day-of-first-year-week';
-import { WeekDays } from '../../common/types/week-days.type';
 import { WeekDay } from '../../../libs/common/enums/week-day.enum';
+import { PickerViewType } from '../../common/enums/picker-view-type.enum';
+import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
+import { WeekDays } from '../../common/types/week-days.type';
+import { getDisabledDays } from '../../dialog/helpers/get-disabled-days';
+import { getDisabledTimes } from '../../dialog/helpers/get-disabled-times';
+import { IDialogFactoryOptions } from '../../dialog/interfaces/dialog-factory-data.interface';
+import { getFirstDayOfFirstYearWeek } from '../helpers/get-first-day-of-first-year-week';
 
 
 export class FsDatePickerDialogModel {
@@ -32,7 +32,7 @@ export class FsDatePickerDialogModel {
    *
    * Current mode of calendar. For ranges consist values for both: start and end date
    */
-  public dateMode = null;
+  public dateMode: 'datetime' | 'year' | 'time' | 'date' | 'month' = null;
   public minDate = null;
   public maxDate = null;
   public rangeStart: Date = null;
@@ -298,11 +298,7 @@ export class FsDatePickerDialogModel {
       ? true
       : options.minutes;
 
-    if (!isDate(options.seedDate) || !isValid(options.seedDate)) {
-      this.seedDate = getFirstDayOfFirstYearWeek(new Date());
-    } else {
-      this.seedDate = options.seedDate;
-    }
+    this.seedDate = !isDate(options.seedDate) || !isValid(options.seedDate) ? getFirstDayOfFirstYearWeek(new Date()) : options.seedDate;
 
     this.periodWeeks = options.periodWeeks;
 

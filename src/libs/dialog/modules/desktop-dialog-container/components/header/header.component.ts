@@ -1,20 +1,17 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  Input,
-  AfterViewInit,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
   ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
 
-import { endOfYear, startOfYear } from 'date-fns';
 
-import { isRangeDisabled } from '../../../../../common/helpers/is-range-disabled';
 import { MONTHS } from '../../../../../calendar/consts/months';
-import { isMonthDisabled } from '../../../../../common/helpers/is-month-disabled';
 
 
 interface IYearListItem {
@@ -147,14 +144,14 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
 
     for (let y: number = this.minYear; y < this.maxYear; y++) {
       // const year = new Date().setFullYear(y);
-      this.yearsList.push({ value: y, /*disabled: this._isYearDisabled(year)*/ });
+      this.yearsList.push({ value: y /*disabled: this._isYearDisabled(year)*/ });
     }
   }
 
   private _createMonthsList(): void {
     // const year = this.calendarMonth ? this.calendarYear : this.now.getFullYear();
 
-/*
+    /*
     const checkIfMonthDisabled = (monthNumber: number, disabledDays) => {
       const month = new Date();
       month.setFullYear(year);
@@ -170,13 +167,13 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
       const monthItem = {
         ...item,
         // disabled: checkIfMonthDisabled(item.value, this.disabledDays),
-      }
+      };
 
       this.monthList.push(monthItem);
     }
   }
 
-/*
+  /*
   private _isYearDisabled(date): boolean {
     const startYear = startOfYear(date);
     const endYear = endOfYear(date);
@@ -192,7 +189,7 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
         const selected = years.querySelector('.year.selected');
 
         if (selected) {
-          selected.scrollIntoView({behavior: 'auto', block: 'center'});
+          selected.scrollIntoView({ behavior: 'auto', block: 'center' });
         }
       }
     });
@@ -205,7 +202,7 @@ export class FsDatePickerHeaderComponent implements OnChanges, AfterViewInit {
         const selected = years.querySelector('.month.selected');
 
         if (selected) {
-          selected.scrollIntoView({behavior: 'auto', block: 'center'});
+          selected.scrollIntoView({ behavior: 'auto', block: 'center' });
         }
       }
     });

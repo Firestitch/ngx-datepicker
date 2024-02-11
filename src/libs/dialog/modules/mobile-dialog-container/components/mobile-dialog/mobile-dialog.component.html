@@ -2,28 +2,33 @@
   <div class="calendar-container">
     <ng-container [ngSwitch]="datePickerModel.view">
       <ng-template [ngSwitchCase]="'date'">
-        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel">
+        <fs-datepicker-mobile-scroll-calendar 
+          [datePickerModel]="datePickerModel">
         </fs-datepicker-mobile-scroll-calendar>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'week'">
-        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel">
+        <fs-datepicker-mobile-scroll-calendar 
+          [datePickerModel]="datePickerModel">
         </fs-datepicker-mobile-scroll-calendar>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'monthrange'">
-        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel">
+        <fs-datepicker-mobile-scroll-calendar 
+          [datePickerModel]="datePickerModel">
         </fs-datepicker-mobile-scroll-calendar>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'time'">
-        <fs-datepicker-mobile-timepicker [datePickerModel]="datePickerModel">
+        <fs-datepicker-mobile-timepicker
+          [datePickerModel]="datePickerModel">
         </fs-datepicker-mobile-timepicker>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'datetime'">
-        <fs-datepicker-mobile-datetime-picker [datePickerModel]="datePickerModel"
-                                              (tabChange)="datetimeTabChanged($event)">
+        <fs-datepicker-mobile-datetime-picker 
+          [datePickerModel]="datePickerModel"
+          (tabChange)="datetimeTabChanged($event)">
         </fs-datepicker-mobile-datetime-picker>
       </ng-template>
     </ng-container>

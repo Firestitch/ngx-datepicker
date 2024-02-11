@@ -4,11 +4,11 @@
 
 .month-year-name {
   color: inherit;
-  padding: 5px;
   border-radius: 3px;
+  padding-left: 5px;
+  margin-left: -5px;
   display: flex;
   align-items: center;
-  padding-left: 10px;
 
   &:not(.not-configurable):hover {
     background-color: rgb(234, 234, 234);
@@ -20,17 +20,6 @@
   padding: 0px 4px;
 }
 
-.actions {
-  a {
-    padding: 6px;
-    color: #757575;
-  }
-}
-
-a.action {
-  color: #757575;
-}
-
 .months-years {
   display: flex;
   height: 100%;
@@ -40,13 +29,10 @@ a.action {
     overflow: auto;
     width: 100%;
 
-    .year {
-      text-align: center;
+    .year .tile-content {
       height: 50px;
-      line-height: 50px;
-      outline: none;
-      cursor: pointer;
-      box-sizing: border-box;
+      width: 50px;
+      margin: auto;
     }
   }
 
@@ -58,6 +44,7 @@ a.action {
     .tile-content {
       width: 50px;
       height: 50px;
+      margin: auto;
     }
 
     .month {

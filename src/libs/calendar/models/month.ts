@@ -1,18 +1,17 @@
 import {
   addDays,
-  addMonths,
   format,
   getDaysInMonth,
   lightFormat,
   startOfDay,
-  subDays
+  subDays,
 } from 'date-fns';
 
 import { isDayDisabled } from '../../common/helpers/is-day-disabled';
-
-import { Week } from './week';
-import { Period } from './period';
 import { WeekDays } from '../../common/types/week-days.type';
+
+import { Period } from './period';
+import { Week } from './week';
 
 const CALENDAR_DAYS_NUMBER = 42;
 
@@ -28,18 +27,17 @@ export class Month {
   public weeksByPeriod: Map<number, Period>;
 
   private _prevMonthDaysCount: number;
-
   private _monthStartDay: number;
   private _daysInMonth: number;
 
-
-  constructor(public date: Date,
-              public seedDate: Date,
-              public periodWeeks: number,
-              private _enabledDays: Date[],
-              private _disabledDays: [Date, Date][],
-              private _hideExtraDays: boolean,
-              private _weekStartsOn: WeekDays,
+  constructor(
+    public date: Date,
+    public seedDate: Date,
+    public periodWeeks: number,
+    private _enabledDays: Date[],
+    private _disabledDays: [Date, Date][],
+    private _hideExtraDays: boolean,
+    private _weekStartsOn: WeekDays,
   ) {
     this._initMonth(date);
     this._countTotalDaysInMonth();
@@ -50,6 +48,7 @@ export class Month {
    */
   public renderDays() {
     let currentDate = startOfDay(subDays(this.date, this._prevMonthDaysCount));
+
     let daysToBeRendered = this._hideExtraDays
       ? getDaysInMonth(this.date) + this._prevMonthDaysCount
       : CALENDAR_DAYS_NUMBER;
@@ -59,12 +58,12 @@ export class Month {
       daysToBeRendered += 7 - (daysToBeRendered % 7);
     }
 
-    let week;
+    let week: Week;
 
     for (let d = 0; d < daysToBeRendered; d++) {
       const dayNumber = lightFormat(currentDate, 'd');
 
-      if (d % 7 == 0) {
+      if (d % 7 === 0) {
         week = new Week(currentDate, this.seedDate, this.periodWeeks, this._weekStartsOn);
 
         this.weeks.push(week);
@@ -72,17 +71,18 @@ export class Month {
 
       const dayMuted = d - this._prevMonthDaysCount < 0
         || d >= this._daysInMonth + this._prevMonthDaysCount;
+
       const disabled = !!this._enabledDays
         ? isDayDisabled(this._enabledDays.map((d) => [d, d]), currentDate)
         : isDayDisabled(this._disabledDays, currentDate);
 
       week.addDay({
-        mute: dayMuted,
+        surrounding: dayMuted,
         date: lightFormat(currentDate, 'yyyy-MM-dd'),
         number: dayNumber,
         month: currentDate.getMonth(),
         year: currentDate.getFullYear(),
-        disabled: disabled,
+        disabled,
       });
 
       currentDate = addDays(currentDate, 1);
@@ -106,6 +106,7 @@ export class Month {
    * Input period means that instance of period is not same instance
    * that was created for month.
    * It means that period and weeksByPeriod can have same periodIds but different object refs
+   *
    * @param period
    */
   public updateSelectionForPeriod(period: Period) {
@@ -115,42 +116,35 @@ export class Month {
       p.selected = period.selected;
 
       return p;
-    } else {
-      return false;
     }
+
+    return false;
+
   }
 
   /**
    * Init base month field
+   *
    * @param date
    */
   private _initMonth(date: Date) {
     this.date = new Date(date);
     this.date.setDate(1);
-
     this._monthStartDay = this.date.getDay();
     this._daysInMonth = getDaysInMonth(this.date);
-
     this.name = format(this.date, 'MMMM');
     this.number = this.date.getMonth();
     this.year = this.date.getFullYear();
     this.monthAndYear = `${this.date.getFullYear()}-${this.date.getMonth()}`;
     this.months = [{ name: format(this.date, 'MMMM'), value: this.date.getMonth() }];
-    this.years = [ this.date.getFullYear() ];
+    this.years = [this.date.getFullYear()];
   }
 
   /**
    * Depends on week day start it counts total number of days in month
    */
   private _countTotalDaysInMonth() {
-    if (this._monthStartDay >= this._weekStartsOn) {
-      this._prevMonthDaysCount = this._monthStartDay - this._weekStartsOn;
-    } else {
-      this._prevMonthDaysCount = 7 - (this._weekStartsOn - this._monthStartDay);
-    }
-
-    // const totalDays = this._daysInMonth + this._prevMonthDaysCount;
-    // this._totalDaysInMonth = Math.ceil(totalDays / 7) * 7;
+    this._prevMonthDaysCount = this._monthStartDay >= this._weekStartsOn ? this._monthStartDay - this._weekStartsOn : 7 - (this._weekStartsOn - this._monthStartDay);
   }
 
   /**
@@ -180,7 +174,7 @@ export class Month {
 
   private _markFirstAndLastWeeks() {
     this.weeksByPeriod.forEach((period) => {
-      period.markFirstLastWeeks()
-    })
+      period.markFirstLastWeeks();
+    });
   }
 }

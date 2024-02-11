@@ -1,33 +1,35 @@
-<div class="months-years" *ngIf="viewMode == 'month' || viewMode == 'year'">
+<div class="months-years" *ngIf="viewMode === 'month' || viewMode === 'year'">
   <div class="months">
     <div
-      *ngFor="let month of monthList"
-      (click)="selectMonth(month.value)"
-      class="month"
-      [ngClass]="{
-          now: monthNow == month.value,
-          selected: calendarMonth === month.value
-        }">
-      <div class="tile-content">{{ month.abr }}</div>
+        *ngFor="let month of monthList"        
+        class="month">
+      <div 
+          class="tile-content" 
+          (click)="selectMonth(month.value)" 
+          [ngClass]="{ selected: calendarMonth === month.value }">
+        {{ month.abr }}
+      </div>
     </div>
   </div>
 
   <div class="years">
     <ng-container *ngFor="let year of yearsList;">
       <div
-        class="year data-year-{{ year.value }}"
-        (click)="selectYear(year.value)"
-        [class.now]="yearNow == year.value"
-        [class.selected]="calendarYear === year.value">
-        <div class="tile-content">{{ year.value }}</div>
+          class="year data-year-{{ year.value }}">
+        <div 
+            class="tile-content"
+            (click)="selectYear(year.value)"
+            [class.selected]="calendarYear === year.value">
+          {{ year.value }}
+        </div>
       </div>
     </ng-container>
     <div class="clear"></div>
   </div>
 </div>
 
-<div *ngIf="viewMode == 'week' || viewMode == 'date' || viewMode == 'datetime' || viewMode == 'monthrange'" class="calendar">
-  <div class="month-year">
+<div *ngIf="viewMode === 'week' || viewMode === 'date' || viewMode === 'datetime' || viewMode === 'monthrange'" class="calendar">
+  <div class="heading-container">
     <a class="month-year-name" (click)="setViewMode('month')" [ngClass]="{ 'not-configurable': !monthYearConfigurable}">
       {{ calendarDate | fsDateFormat: 'full-date-dayless-yearless' }}
 
@@ -36,16 +38,16 @@
       </span>
 
       {{ calendarYear }}
-      <mat-icon class="action" *ngIf="monthYearConfigurable">arrow_drop_down</mat-icon>
+      <mat-icon class="nav-action" *ngIf="monthYearConfigurable">arrow_drop_down</mat-icon>
     </a>
 
     <div class="gap"></div>
 
-    <div class="action">
-      <a (click)="prevMonth()" class="action">
+    <div class="actions">
+      <a (click)="prevMonth()" class="nav-action">
         <mat-icon>navigate_before</mat-icon>
       </a>
-      <a (click)="nextMonth()" class="action">
+      <a (click)="nextMonth()" class="nav-action">
         <mat-icon>navigate_next</mat-icon>
       </a>
     </div>

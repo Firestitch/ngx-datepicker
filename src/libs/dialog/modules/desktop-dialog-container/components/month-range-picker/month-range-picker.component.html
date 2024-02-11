@@ -5,8 +5,7 @@
         [calendarDate]="leftCalendarDate$ | async"
         [nextCalendarDate]="rightCalendarDate$ | async"
         (goNextMonth)="nextMonth()"
-        (goPrevMonth)="prevMonth()"
-      >
+        (goPrevMonth)="prevMonth()">
       </fs-date-picker-header-month-range>
 
       <div class="month-range-container">
@@ -44,6 +43,7 @@
         *ngIf="datePickerModel.view === 'datetime' || datePickerModel.view === 'time'"
         [date]="datePickerModel.model$ | async"
         [minutes]="datePickerModel.minutes"
+        [showHeading]="true"
         [disabledTimes]="datePickerModel.disabledTimes$ | async"
         (onChange)="dateChanged($event)"
       ></fs-date-picker-time>

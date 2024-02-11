@@ -7,8 +7,7 @@
     [disabledDays]="datePickerModel.disabledDays$ | async"
     [monthYearConfigurable]="false"
     (goNextMonth)="nextMonth()"
-    (goPrevMonth)="prevMonth()"
-  >
+    (goPrevMonth)="prevMonth()">
   </fs-date-picker-header>
   <fs-date-picker-calendar
     [date]="datePickerModel.model$ | async"

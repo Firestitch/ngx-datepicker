@@ -8,7 +8,7 @@ import {
   IterableDiffers,
   OnChanges,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 
 import { getStartDayDate } from '../../../common/helpers/get-start-day-date';
@@ -27,6 +27,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   @Input() public disabledMinutes = [];
   @Input() public disabledHours = [];
   @Input() public disabledTimes = [];
+  @Input() public showHeading = false;
   @Input() public expanded = false;
   @Input() public minutes = true;
   @Input() public showNotSelected = true;
@@ -43,13 +44,13 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
     [
       [0, 1, 2, 3],
       [4, 5, 6, 7],
-      [8, 9, 10, 11]
+      [8, 9, 10, 11],
     ],
     [
       [12, 13, 14, 15],
       [16, 17, 18, 19],
-      [20, 21, 22, 23]
-    ]
+      [20, 21, 22, 23],
+    ],
   ];
 
   public timeMinutesCollapsed = [
@@ -58,7 +59,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
     [20, 25],
     [30, 35],
     [40, 45],
-    [50, 55]
+    [50, 55],
   ];
 
   public timeHoursExpanded = [
@@ -73,7 +74,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
     [8, 20],
     [9, 21],
     [10, 22],
-    [11, 23]
+    [11, 23],
   ];
 
   public timeMinutesExpanded = [
@@ -88,17 +89,16 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
     [40, 41, 42, 43, 44],
     [45, 46, 47, 48, 49],
     [50, 51, 52, 53, 54],
-    [55, 56, 57, 58, 59]
+    [55, 56, 57, 58, 59],
   ];
 
   private disabledMinutesDiffer = null;
   private disabledHoursDiffer = null;
   private disabledTimesDiffer = null;
 
-
   constructor(
     public element: ElementRef,
-    private _iterableDiffers: IterableDiffers
+    private _iterableDiffers: IterableDiffers,
   ) {
     this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
     this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
@@ -125,14 +125,14 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
           }
         }
       }
-      
+
       if(changes.expanded?.firstChange === false) {
         setTimeout(() => {
           const els = this.element.nativeElement.querySelectorAll('.tile.selected');
 
           els.forEach((el, index) => {
             setTimeout(() => {
-              el.scrollIntoView({ behavior: 'instant'});
+              el.scrollIntoView({ behavior: 'instant' });
             });
           });
         });
@@ -244,11 +244,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
     let newDate: Date;
 
-    if (!this.date) {
-      newDate = getStartDayDate();
-    } else {
-      newDate = new Date(this.date);
-    }
+    newDate = !this.date ? getStartDayDate() : new Date(this.date);
 
     newDate.setHours(hour);
 
@@ -264,11 +260,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 
     let newDate: Date;
 
-    if (!this.date) {
-      newDate = getStartDayDate();
-    } else {
-      newDate = new Date(this.date);
-    }
+    newDate = !this.date ? getStartDayDate() : new Date(this.date);
 
     newDate.setMinutes(minute);
 

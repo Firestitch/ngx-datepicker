@@ -1,5 +1,5 @@
 export interface DayItem {
-  mute?: boolean;
+  surrounding?: boolean;
   date?: string;
   number?: string;
   month?: number;

@@ -1,10 +1,13 @@
 @import 'node_modules/@firestitch/style/variables';
 
 $selected-color: $palette !default;
-$selected-color-opacity: .3 !default;
+$selected-color-opacity: .2 !default;
 
 $hover-color: $palette !default;
 $hover-color-opacity: 0.3;
+
+$enabled-color: $palette !default;
+$enabled-color-opacity: .1 !default;
 
 $now-color: $palette !default;
 $now-color-opacity: 0.5 !default;

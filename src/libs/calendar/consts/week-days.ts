@@ -1,9 +1,9 @@
 export const WEEKDAYS = [
   'Sun',
   'Mon',
-  'Tues',
+  'Tue',
   'Wed',
-  'Thurs',
+  'Thu',
   'Fri',
   'Sat',
 ];

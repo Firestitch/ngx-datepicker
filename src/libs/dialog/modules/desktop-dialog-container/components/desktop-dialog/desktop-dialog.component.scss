@@ -10,12 +10,6 @@
       display: none;
     }
 
-    .date-mode-time {
-      .month-year.time{
-        display: none;
-      }
-    }
-
     .date-mode-date, .date-mode-date-time, .date-mode-week {
       fs-date-picker-calendar {
         display: flex;

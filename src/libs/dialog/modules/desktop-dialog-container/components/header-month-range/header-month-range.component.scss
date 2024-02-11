@@ -4,22 +4,27 @@
   grid-column-gap: 40px;
 }
 
-.month-year {
-  padding: 0;
-  position: relative;
+.heading-container {
   justify-content: center;
+
+  .actions {
+    position: absolute;
+    display: flex;
+
+    a {
+      display: flex;
+    }
+  }
 }
 
 .current-month-header {
   .actions {
-    left: 5px;
-    position: absolute;
+    left: 8px;
   }
 }
 
 .next-month-header {
   .actions {
-    right: 5px;
-    position: absolute;
+    right: 8px;
   }
 }

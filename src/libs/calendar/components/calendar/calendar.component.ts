@@ -21,13 +21,12 @@ import {
 import { getStartDayDate } from '../../../common/helpers/get-start-day-date';
 import { splitDateByComponents } from '../../../common/helpers/split-date-by-components';
 import { IDatePickerPeriod } from '../../../common/interfaces/period.interface';
-
+import { WeekDays } from '../../../common/types/week-days.type';
 import { WEEKDAYS } from '../../consts/week-days';
+import { DayItem } from '../../interfaces/day-item.interface';
 import { Month } from '../../models/month';
 import { Period } from '../../models/period';
 import { Week } from '../../models/week';
-import { DayItem } from '../../interfaces/day-item.interface';
-import { WeekDays } from '../../../common/types/week-days.type';
 
 
 @Component({
@@ -36,7 +35,7 @@ import { WeekDays } from '../../../common/types/week-days.type';
   styleUrls: ['./calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'class': 'fs-date-picker-calendar',
+    class: 'fs-date-picker-calendar',
   },
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
@@ -81,6 +80,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public periodWeeks;
 
   @Input()
+  public showSurroundingDays = false;
+
+  @Input()
   public hideExtraDays = false;
 
   @Input()
@@ -100,7 +102,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public selected: any = {};
   public selectedPeriod: Period;
-  public selectedRange: { from?: string, to?: string } = {}
+  public selectedRange: { from?: string; to?: string } = {};
   public month: Month = null;
 
   public weekDaysList = [];
@@ -109,7 +111,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public today: any = {
     date: format(this.currentDate, 'yyyy-MM-dd'),
     month: this.currentDate.getMonth(),
-    year: this.currentDate.getFullYear()
+    year: this.currentDate.getFullYear(),
   };
 
   public highlightedRangeDays = null;
@@ -160,7 +162,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
         this.selectedRange = {
           from: this.rangeFrom && lightFormat(this.rangeFrom, 'yyyy-MM-dd') || null,
           to: this.rangeTo && lightFormat(this.rangeTo, 'yyyy-MM-dd') || null,
-        }
+        };
       }
     }
   }
@@ -185,7 +187,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     this.highlightedRangeDays = {
       data: {},
       min: null,
-      max: null
+      max: null,
     };
 
     let start = null;
@@ -261,7 +263,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       day.number,
       this.date.getHours(),
       this.date.getMinutes(),
-      this.date.getSeconds()
+      this.date.getSeconds(),
     );
 
     this.setDate(date);
@@ -320,13 +322,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       this.weekStartsOn,
     );
 
-    if (this.weekStartsOn !== undefined) {
-      this.weekDaysList = WEEKDAYS.map((_, i, arr) => {
-        return arr[(i + this.weekStartsOn) % 7];
-      });
-    } else {
-      this.weekDaysList = WEEKDAYS.slice();
-    }
+    this.weekDaysList = this.weekStartsOn !== undefined ? WEEKDAYS.map((_, i, arr) => {
+      return arr[(i + this.weekStartsOn) % 7];
+    }) : WEEKDAYS.slice();
 
     month.renderDays();
 
