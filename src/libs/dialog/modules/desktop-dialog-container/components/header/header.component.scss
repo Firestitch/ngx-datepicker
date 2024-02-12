@@ -1,5 +1,6 @@
 @import '../../../../../../_mixins';
 @include headingContainer();
+@include navAction();
 
 .months {
   width: 350px;

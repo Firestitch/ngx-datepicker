@@ -17,7 +17,7 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FsTimePickerComponent),
-      multi: true
+      multi: true,
     },
     {
       provide: NG_VALIDATORS,

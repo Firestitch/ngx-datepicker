@@ -8,9 +8,8 @@ fs-date-picker-calendar {
   display: flex;
 }
 
-
 :host ::ng-deep {
   .tile-content {
-    border-color: transparent;
+    clip-path: none;
   }
 }

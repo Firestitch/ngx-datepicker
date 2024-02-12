@@ -87,6 +87,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   @Input()
   public showToday = true;
 
+  @Input()
+  public daySize;
+
   @Output()
   public change = new EventEmitter<Date>();
 
@@ -124,6 +127,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public ngOnInit() {
     this._calendarMode = this.dateMode;
+    this.daySize = this.daySize ?? 43;
 
     if (this.dateMode === 'week') {
       if (this.period && this.seedDate) {

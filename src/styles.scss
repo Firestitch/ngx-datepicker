@@ -166,9 +166,7 @@
     justify-content: center;
     border-radius: 50%;
     flex-direction: column;
-    border: 2px solid #fff;
-    height: 43px;
-    width: 43px;
+    clip-path: circle(46%);
     box-sizing: border-box;
 
     &.enabled {

@@ -35,6 +35,8 @@ export class FsDateCalendarPickerComponent implements ControlValueAccessor {
   @Input()
   public enabledDates: [Date, Date][];
 
+  @Input()
+  public daySize;
 
   @Output()
   public monthChange = new EventEmitter<Date>();
