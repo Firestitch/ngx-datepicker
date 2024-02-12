@@ -59,10 +59,6 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
     }
   }
 
-  // public cleared(event) {
-  //   this._doFocus();
-  // }
-
   protected _doFocus(): void {
     this._fm.focusVia(this._elementRef, 'program');
   }

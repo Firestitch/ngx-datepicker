@@ -1,41 +1,39 @@
-import { ElementRef, Injectable, Injector, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { ElementRef, Inject, Injectable, Injector, Optional } from '@angular/core';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import {
-  Overlay,
-  OverlayRef,
-  OverlayConfig,
-  PositionStrategy,
   FlexibleConnectedPositionStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+  PositionStrategy,
 } from '@angular/cdk/overlay';
-
+import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 import { fromEvent, Observable } from 'rxjs';
 import {
   debounceTime,
-  takeUntil,
-  take,
-  tap,
-  map,
-  switchMap,
-  skip,
   distinctUntilChanged,
   filter,
   finalize,
+  map,
+  skip,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
 } from 'rxjs/operators';
 
+import { FsDesktopCalendarDialogComponent } from '../../dialog/modules/desktop-dialog-container/components/desktop-dialog/desktop-dialog.component';
 import { FsMobileCalendarDialogComponent } from '../../dialog/modules/mobile-dialog-container/components/mobile-dialog/mobile-dialog.component';
 import { FsDateScrollPickerDesktopComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-desktop/date-scroll-picker-desktop.component';
 import { FsDateScrollPickerMobileDialogComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-mobile-dialog/date-scroll-picker-mobile-dialog.component';
-import { FsDesktopCalendarDialogComponent } from '../../dialog/modules/desktop-dialog-container/components/desktop-dialog/desktop-dialog.component';
-
 import { FsDatePickerDialogRef } from '../classes/dialog-ref';
 import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
 
-const MOBILE_BREAKPOINT = '(max-width: 737px)';
+const mobileBreakpoint = '(max-width: 737px)';
 
 
 @Injectable()
@@ -47,20 +45,18 @@ export class FsDatePickerDialogFactory {
   constructor(
     private _overlay: Overlay,
     private _breakpointObserver: BreakpointObserver,
-    private _bottomSheet: MatBottomSheet,
-    @Inject(DOCUMENT)
-    private _document,
+    @Optional() private _bottomSheet: MatBottomSheet,
+    @Inject(DOCUMENT) private _document,
   ) {}
 
-  private get _ESCKeyPressed$(): Observable<any> {
+  private get _escapeKeyPressed$(): Observable<any> {
     return fromEvent(this._document, 'keydown')
       .pipe(
         filter((event: any) => {
           return event.code === 'Escape';
-        })
-      )
+        }),
+      );
   }
-
 
   public openDatePicker(
     el: ElementRef,
@@ -97,11 +93,11 @@ export class FsDatePickerDialogFactory {
   ): void {
     const layoutChanges = this._breakpointObserver
       .observe([
-        MOBILE_BREAKPOINT,
+        mobileBreakpoint,
       ])
       .pipe(
         map((result) => {
-          return result.breakpoints[MOBILE_BREAKPOINT];
+          return result.breakpoints[mobileBreakpoint];
         }),
       );
 
@@ -123,7 +119,7 @@ export class FsDatePickerDialogFactory {
           return layoutChanges
             .pipe(
               skip(1),
-            )
+            );
         }),
         debounceTime(100),
         distinctUntilChanged(),
@@ -157,7 +153,7 @@ export class FsDatePickerDialogFactory {
             ),
         ),
         takeUntil(dialogRef.close$),
-        takeUntil(this._ESCKeyPressed$),
+        takeUntil(this._escapeKeyPressed$),
       )
       .subscribe();
   }
@@ -171,16 +167,18 @@ export class FsDatePickerDialogFactory {
     if (mobile) {
       if (type === 'date') {
         return this._openDatePickerMobile(dialogRef);
-      } else {
-        return this._openDateScrollPickerMobile(dialogRef);
       }
-    } else {
-      if (type === 'date') {
-        return this._openDatePickerDesktop(injector, dialogRef);
-      } else {
-        return this._openDateScrollPickerDesktop(injector, dialogRef);
-      }
+
+      return this._openDateScrollPickerMobile(dialogRef);
+
     }
+    if (type === 'date') {
+      return this._openDatePickerDesktop(injector, dialogRef);
+    }
+
+    return this._openDateScrollPickerDesktop(injector, dialogRef);
+
+
   }
 
   private _createOverlay(el: ElementRef, config: OverlayConfig = {}) {
@@ -218,7 +216,7 @@ export class FsDatePickerDialogFactory {
           overlayX: 'start',
           overlayY: 'top',
           offsetY: 10,
-          offsetX: -29
+          offsetX: -29,
         },
         {
           originX: 'end',
@@ -257,8 +255,8 @@ export class FsDatePickerDialogFactory {
           originX: 'start',
           originY: 'top',
           overlayX: 'start',
-          overlayY: 'bottom'
-        }
+          overlayY: 'bottom',
+        },
       ]);
   }
 
@@ -267,7 +265,7 @@ export class FsDatePickerDialogFactory {
       .flexibleConnectedTo(el)
       .withGrowAfterOpen(false)
       .withFlexibleDimensions(false)
-      .withPush(false)
+      .withPush(false);
   }
 
   private _openDatePickerDesktop (
@@ -278,7 +276,7 @@ export class FsDatePickerDialogFactory {
       this._targetElRef,
       {
         positionStrategy: this._createBasePopupPositionStrategy(this._targetElRef),
-      }
+      },
     );
     const injector = this._createInjector(parentInjector, previewRef);
     const containerPortal = new ComponentPortal(FsDesktopCalendarDialogComponent, undefined, injector);
@@ -303,7 +301,7 @@ export class FsDatePickerDialogFactory {
   ): OverlayRef {
     const overlayRef = this._createOverlay(
       this._targetElRef,
-      { scrollStrategy: this._overlay.scrollStrategies.block() }
+      { scrollStrategy: this._overlay.scrollStrategies.block() },
     );
     const injector = this._createInjector(parentInjector, previewRef);
     const containerPortal = new ComponentPortal(FsDateScrollPickerDesktopComponent, undefined, injector);
@@ -312,12 +310,11 @@ export class FsDatePickerDialogFactory {
     return overlayRef;
   }
 
-
   private _openDateScrollPickerMobile(dialogRef: FsDatePickerDialogRef): MatBottomSheetRef {
     return this._bottomSheet.open(FsDateScrollPickerMobileDialogComponent, {
       data: {
         dateDialogRef: dialogRef,
-      }
+      },
     });
   }
 
