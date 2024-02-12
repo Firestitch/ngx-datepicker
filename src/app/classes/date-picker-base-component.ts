@@ -199,7 +199,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
         this._dateDialogRef = null;
         this._focusAfterClose = true;
 
-        this._doFocus();
         this._renderer.removeClass(document.body, 'fs-date-picker-open');
 
         this.closed$.emit();

@@ -1,10 +1,11 @@
 import {
   ChangeDetectorRef, Directive, ElementRef, HostBinding,
-  Injector, Input, OnChanges, OnInit, Renderer2, SimpleChanges
+  Injector, Input, OnChanges, OnInit, Renderer2, SimpleChanges,
 } from '@angular/core';
-import { MatInput } from '@angular/material/input';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { MatInput } from '@angular/material/input';
+
 import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
 
 
@@ -28,7 +29,7 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
   protected _cdRef: ChangeDetectorRef;
   protected _focusAfterClose = false;
 
-  public constructor(
+  constructor(
     protected _injector: Injector,
     protected _fm: FocusMonitor,
   ) {

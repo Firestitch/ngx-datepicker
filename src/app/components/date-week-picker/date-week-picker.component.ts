@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   forwardRef,
-  HostListener,
   Injector,
   Input,
   Output,
@@ -12,15 +11,15 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
+import { endOfDay, startOfDay } from 'date-fns';
+
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
-import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interface';
 import { formatPeriodObject } from '../../../libs/common/helpers/format-period-object';
+import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interface';
+import { WeekDays } from '../../../libs/common/types/week-days.type';
+import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
-import { endOfDay, startOfDay } from 'date-fns';
-import { WeekDays } from '../../../libs/common/types/week-days.type';
-import { WeekDay } from '../../../libs/common/enums/week-day.enum';
 
 
 @Component({
@@ -29,7 +28,7 @@ import { WeekDay } from '../../../libs/common/enums/week-day.enum';
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsDateWeekPickerComponent),
-    multi: true
+    multi: true,
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -57,21 +56,6 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
     super(_injector, fm);
     this.editable = false;
   }
-
-  // @HostListener('click')
-  // @HostListener('focus')
-  // public inputClick() {
-  //   debugger;
-  //   if (this._focusAfterClose) {
-  //     this._focusAfterClose = false;
-  //
-  //     return;
-  //   }
-  //
-  //   if (!this.disabled && !this.readonly) {
-  //     this.open();
-  //   }
-  // }
 
   public writeValue(value: IDatePickerPeriod): void {
     this._value = value;
@@ -104,7 +88,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
         seedDate: this.seedDate,
         periodWeeks: this.period,
         weekStartsOn: this.weekStartsOn,
-      }
+      },
     );
 
     super.open();
@@ -129,8 +113,9 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
   private _getDefaultComponents() {
     if (this.view === 'time') {
       return { timeStart: true };
-    } else {
-      return { calendarStart: true };
     }
+
+    return { calendarStart: true };
+
   }
 }

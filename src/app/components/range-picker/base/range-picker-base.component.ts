@@ -5,9 +5,10 @@ import {
   Injector,
   Input,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
-import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
+import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { fromEvent, Observable, Subject } from 'rxjs';
@@ -16,16 +17,15 @@ import { filter, map, pairwise, skip, take, takeUntil, tap } from 'rxjs/operator
 import { isDate, isEqual, isValid, subDays } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
-import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { isSameDate } from '../../../../libs/common/helpers/is-same-date';
+import { WeekDays } from '../../../../libs/common/types/week-days.type';
+import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { FsPickerBaseComponent } from '../../../classes/picker-base-component';
 import { RangePickerRef } from '../../../classes/range-picker-ref';
-import { formatDateTime } from '../../../helpers/format-date-time';
 import { createDateFromValue } from '../../../helpers/create-date-from-value';
+import { formatDateTime } from '../../../helpers/format-date-time';
 import { parseDate } from '../../../helpers/parse-date';
-import { WeekDays } from '../../../../libs/common/types/week-days.type';
-import { WeekDay } from '../../../../libs/common/enums/week-day.enum';
 
 
 @Directive()
@@ -49,7 +49,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   @Input()
   public clear = true;
-  
+
   @Input()
   public icon = true;
 
@@ -72,11 +72,19 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     this._tzChanged(this._originValue);
   }
 
+  public get timezone(): string {
+    return this._timezone;
+  }
+
   @Output('closed')
   public closed$ = new EventEmitter<void>();
 
-  public onChange: any;
-  public onTouch: any = () => {};
+  public onChange: (value) => void;
+  public onTouch: (value) => void;
+
+  public get name() {
+    return this._name;
+  }
 
   protected _pickerRef: RangePickerRef;
   protected _destroy$ = new Subject();
@@ -99,14 +107,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     this.editable = false;
   }
 
-  public get name() {
-    return this._name;
-  }
-
-  public get timezone(): string {
-    return this._timezone;
-  }
-
   public set value(value) {
     if (this._value !== value) {
       this._value = value;
@@ -116,6 +116,10 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     }
   }
 
+  public get value() {
+    return this._value;
+  }
+
   public ngOnInit(): void {
     super.ngOnInit();
     this._listenActivePicker();
@@ -123,15 +127,11 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
     const control = this._ngControl.control;
     const validators = control.validator
-      ? [ control.validator, this._parseValidator]
+      ? [control.validator, this._parseValidator]
       : this._parseValidator;
 
     control.setValidators(validators);
     control.updateValueAndValidity();
-  }
-
-  public get value() {
-    return this._value;
   }
 
   public get dateDialogRef() {
@@ -163,7 +163,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   @HostListener('focus')
   public open() {
     if (this._dateDialogRef || this.disabled || this.readonly) {
-      return
+      return;
     }
 
     if (this._focusAfterClose) {
@@ -187,7 +187,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         pickerRef: this._pickerRef,
         rangeType: this._type,
         weekStartsOn: this.weekStartsOn,
-      }
+      },
     );
 
     this._doFocus();
@@ -213,6 +213,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   /**
    * Set value which was selected in dialog
+   *
    * @param value
    */
   public updateValueFromDialog(value: Date) {
@@ -280,8 +281,12 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     this.updateInput(this.value);
   }
 
-  public registerOnChange(fn) { this.onChange = fn;  }
-  public registerOnTouched(fn) { this.onTouch = fn; }
+  public registerOnChange(fn) {
+    this.onChange = fn;
+  }
+  public registerOnTouched(fn) {
+    this.onTouch = fn;
+  }
 
   public triggerClick(): void {
     this._elementRef.nativeElement.focus();
@@ -301,9 +306,10 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   protected _getDefaultComponents() {
     if (this.view === 'time') {
       return { timeStart: true };
-    } else {
-      return { calendarStart: true, calendarEnd: true };
     }
+
+    return { calendarStart: true, calendarEnd: true };
+
   }
 
   protected _enableInput() {
@@ -361,7 +367,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     return this._lastValueValid
       ? null
       : { fsDatepickerParse: 'Invalid Date' };
-  }
+  };
 
   protected validateDate(date: Date | unknown) {
     this._lastValueValid = !date || isValid(date);
