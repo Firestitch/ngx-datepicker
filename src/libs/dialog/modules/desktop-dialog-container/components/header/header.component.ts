@@ -35,6 +35,9 @@ export class FsDatePickerHeaderComponent implements AfterViewInit {
   public viewMode: string;
 
   @Input()
+  public layout: 'center' | 'left' = 'left';
+
+  @Input()
   public minYear: number;
 
   @Input()

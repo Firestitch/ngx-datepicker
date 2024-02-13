@@ -5,6 +5,7 @@
     [maxYear]="datePickerModel.maxYear"
     [viewMode]="datePickerModel.calendarMode$ | async"
     [monthYearConfigurable]="false"
+    [layout]="headerLayout"
     (goNextMonth)="nextMonth()"
     (goPrevMonth)="prevMonth()">
   </fs-date-picker-header>

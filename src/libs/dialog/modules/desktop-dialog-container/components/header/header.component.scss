@@ -25,6 +25,21 @@
   }
 }
 
+.heading-container.layout-center {
+  .month-year-name {
+    text-align: center;
+    order: 2
+  }
+
+  .prev {
+    order: 1;
+  }
+
+  .next {
+    order: 3;
+  }
+}
+
 .day-name {
   padding: 0px 4px;
 }

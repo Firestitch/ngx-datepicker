@@ -38,6 +38,9 @@ export class FsDateCalendarPickerComponent implements ControlValueAccessor {
   @Input()
   public daySize;
 
+  @Input()
+  public headerLayout: 'center' | 'left' = 'center';
+
   @Output()
   public monthChange = new EventEmitter<Date>();
 
