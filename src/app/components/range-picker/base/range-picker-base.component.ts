@@ -171,6 +171,8 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
       return;
     }
+    const modelValue = this.value
+      || (this._type === 'to' ? this._pickerRef.startDate : this._pickerRef.endDate);
 
     this._dateDialogRef = this._datepickerFactory.openDatePicker(
       this._elementRef,
@@ -183,7 +185,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         maxDate: this.maxDate,
         rangeStart: this._getPickerStartDate() || null,
         components: this._getDefaultComponents(),
-        modelValue: this.value,
+        modelValue: modelValue,
         pickerRef: this._pickerRef,
         rangeType: this._type,
         weekStartsOn: this.weekStartsOn,
