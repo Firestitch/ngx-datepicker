@@ -16,7 +16,7 @@ import {
 
 import { ScrollPickerComponent } from '@firestitch/scroll-picker';
 
-import { getDaysInMonth, isValid } from 'date-fns';
+import { getDaysInMonth, isValid, startOfDay } from 'date-fns';
 
 import { MONTHS } from '../../consts/months';
 
@@ -47,11 +47,18 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
   @Input()
   public maxYear: number;
 
-  @Input()
-  public maxDate: Date;
+  private _maxDate: Date;
+  private _minDate: Date;
 
   @Input()
-  public minDate: Date;
+  public set maxDate(value: Date) {
+    this._maxDate = value && startOfDay(value);
+  }
+
+  @Input()
+  public set minDate(value: Date) {
+    this._minDate = value && startOfDay(value);
+  }
 
   @Output()
   public changed = new EventEmitter<Date>();
@@ -93,6 +100,14 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT)
     private _document,
   ) {}
+
+  public get maxDate(): Date {
+    return this._maxDate;
+  }
+
+  public get minDate(): Date {
+    return this._minDate;
+  }
 
   public ngOnInit(): void {
     const modelValue: Date = this.model;
