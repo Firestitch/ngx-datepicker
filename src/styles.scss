@@ -1,5 +1,5 @@
-@use 'node_modules/@angular/material' as mat;
-@import 'node_modules/@firestitch/style/styles';
+@use '@angular/material' as mat;
+@import '@firestitch/style/styles';
 @import './variables';
 
 
@@ -73,7 +73,7 @@
       }
     }
   }
-    
+
   .week {
     &.hover {
       td {
@@ -185,9 +185,9 @@
       cursor: initial;
       pointer-events: none;
     }
-      
+
     &.selected,
-    &.range-from, 
+    &.range-from,
     &.range-to {
       background-color: mat.get-color-from-palette($selected-color);
       font-weight: bold;
