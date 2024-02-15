@@ -211,9 +211,9 @@ export class FsDatePickerDialogFactory {
     return this._createBasePopupPositionStrategy(el)
       .withPositions([
         {
-          originX: 'start',
+          originX: 'center',
           originY: 'bottom',
-          overlayX: 'start',
+          overlayX: 'center',
           overlayY: 'top',
           offsetY: 10,
           offsetX: -29,
@@ -225,8 +225,8 @@ export class FsDatePickerDialogFactory {
           overlayY: 'bottom',
         },
         {
-          originX: 'end',
-          originY: 'top',
+          originX: 'start',
+          originY: 'center',
           overlayX: 'start',
           overlayY: 'center',
         },
