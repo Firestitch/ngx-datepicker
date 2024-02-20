@@ -5,18 +5,19 @@ import {
   ElementRef,
   EventEmitter,
   Input, Optional,
-  Output
+  Output,
 } from '@angular/core';
 
 import { MatFormField } from '@angular/material/form-field';
-import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
+
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
+import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
 
 
 @Component({
   selector: 'fs-datepicker-trigger',
   templateUrl: 'date-picker-trigger.component.html',
-  styleUrls: [ 'date-picker-trigger.component.scss' ],
+  styleUrls: ['date-picker-trigger.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatePickerTriggerComponent implements AfterViewInit {
