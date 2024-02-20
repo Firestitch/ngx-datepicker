@@ -4,11 +4,11 @@
   "lib": {
     "entryFile": "public_api.ts"
   },
-  "whitelistedNonPeerDependencies": [
-    "."
-  ],
   "assets": [
     "./styles.scss",
     "./_variables.scss"
+  ],
+  "allowedNonPeerDependencies": [
+    "."
   ]
 }
