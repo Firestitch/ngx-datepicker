@@ -7,6 +7,7 @@ import {
   isSameWeek,
 } from 'date-fns';
 import { WeekDays } from '../../common/types/week-days.type';
+import { WeekDay } from '../enums/week-day.enum';
 
 /**
  * Calculate period ID based on week date start and seed date
@@ -36,7 +37,9 @@ export function getPeriodId(
     );
 
     if (sameWeek) {
-      seedDate.setFullYear(seedDate.getFullYear() + (diffInYears || -1));
+      // fixed now only for seedDate 1 Jan
+      // seedDate.setFullYear(seedDate.getFullYear() + (diffInYears || -1));
+      seedDate.setFullYear(seedDate.getFullYear() + diffInYears);
     } else {
       seedDate.setFullYear(seedDate.getFullYear() + (diffInCalendarYears || -1));
     }
@@ -78,7 +81,12 @@ export function getPeriodId(
     }
 
     // Calculate full weeks to nearest Thursday
-    const weekNumber = Math.ceil(( ( (dateStart.getTime() - seedDate.getTime()) / 86400000) + 1) / 7);
+    let weekNumber = Math.ceil(( ( (dateStart.getTime() - seedDate.getTime()) / 86400000) + 1) / 7);
+
+    // Only for case when week starts on Sunday
+    if (weekStartsOn === WeekDay.Sunday) {
+      weekNumber += 1;
+    }
 
     return Math.ceil(weekNumber / periodWeeks);
   }
