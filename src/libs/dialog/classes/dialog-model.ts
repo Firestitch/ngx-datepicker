@@ -341,10 +341,18 @@ export class FsDatePickerDialogModel {
 
     if (this._pickerOptions.rangeType) {
       if (this._pickerOptions.rangeType === 'to') {
-        this.disabledTimes = getDisabledTimes(this.model, this._pickerOptions.pickerRef);
+        this.disabledTimes = getDisabledTimes(
+          this.model,
+          this._pickerOptions.pickerRef.startDate,
+          pickerView,
+        );
       }
     } else {
-      this.disabledTimes = getDisabledTimes(this.model, this._pickerOptions.pickerRef);
+      this.disabledTimes = getDisabledTimes(
+        this.model,
+        this.minDate,
+        pickerView,
+      );
     }
   }
 

@@ -1,16 +1,14 @@
 import { isSameDay } from 'date-fns';
-import { RangePickerRef } from '../../../app/classes/range-picker-ref';
+import { PickerViewType } from '../../common/enums/picker-view-type.enum';
 
 
-export function getDisabledTimes(model: Date | null, ref: RangePickerRef): [Date, Date][] {
-  if (!ref) { return }
-
+export function getDisabledTimes(model: Date | null, minDate: Date, view: PickerViewType): [Date, Date][] {
   const arr = [];
   if (
-    (ref.view === 'time' && ref.startDate) ||
-    (ref.view === 'datetime' && ref.startDate && model && isSameDay(ref.startDate, model))
+    (view === PickerViewType.Time && minDate) ||
+    (view === PickerViewType.DateTime && minDate && model && isSameDay(minDate, model))
   ) {
-    const from = (ref.startDate.getMinutes()) + ((ref.startDate.getHours()) * 60);
+    const from = (minDate.getMinutes()) + ((minDate.getHours()) * 60);
     arr.push([0, from]);
   }
 
