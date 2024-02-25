@@ -314,7 +314,7 @@ export class FsDatePickerDialogModel {
   }
 
   private _updateDisabledDays() {
-    this.disabledDays = getDisabledDays(this.minDate, this.maxDate, this.minYear, this.maxYear);
+    this.disabledDays = getDisabledDays(this.minDate, this.maxDate, this.minYear, this.maxYear, this.view as PickerViewType);
   }
 
   private _updateCalendarDate() {
