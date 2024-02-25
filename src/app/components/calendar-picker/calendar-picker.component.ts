@@ -1,5 +1,13 @@
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -7,6 +15,9 @@ import { setDate, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
+import { WeekDays } from '../../../libs/common/types/week-days.type';
+import { FS_DATEPICKER_CONFIG } from '../../providers/datepicker-config.provider';
+import { IFsDatePickerConfig } from '../../interfaces/datepicker-config.interface';
 
 
 @Component({
@@ -24,7 +35,7 @@ import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-mod
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateCalendarPickerComponent implements ControlValueAccessor {
+export class FsDateCalendarPickerComponent implements OnInit, ControlValueAccessor {
 
   @Input()
   public today = true;
@@ -41,6 +52,9 @@ export class FsDateCalendarPickerComponent implements ControlValueAccessor {
   @Input()
   public headerLayout: 'center' | 'left' = 'center';
 
+  @Input()
+  public weekStartsOn: WeekDays;
+
   @Output()
   public monthChange = new EventEmitter<Date>();
 
@@ -49,6 +63,16 @@ export class FsDateCalendarPickerComponent implements ControlValueAccessor {
 
   private _onChange: (value: Date | null) => void;
   private _onTouch: () => void;
+
+  constructor(
+    @Optional()
+    @Inject(FS_DATEPICKER_CONFIG)
+    private _globalConfig: IFsDatePickerConfig,
+  ) {}
+
+  public ngOnInit(): void {
+    this._init();
+  }
 
   public writeValue(date: Date | null) {
     this._datePickerModel.model = date;
@@ -79,5 +103,10 @@ export class FsDateCalendarPickerComponent implements ControlValueAccessor {
   public prevMonth(): void {
     this.datePickerModel.prevMonth();
     this.monthChange.emit(setDate(startOfDay(this.datePickerModel.calendarDate),1));
+  }
+
+  private _init(): void {
+    this._datePickerModel.weekStartsOn =
+      this.weekStartsOn ?? this._globalConfig.weekStartsOn;
   }
 }

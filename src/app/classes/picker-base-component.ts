@@ -7,6 +7,9 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatInput } from '@angular/material/input';
 
 import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
+import { IFsDatePickerConfig } from '../interfaces/datepicker-config.interface';
+import { FS_DATEPICKER_CONFIG } from '../providers/datepicker-config.provider';
+import { WeekDays } from '../../libs/common/types/week-days.type';
 
 
 @Directive()
@@ -23,8 +26,11 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
   @Input()
   public editable = true;
 
+  public weekStartsOn: WeekDays;
+
   protected _renderer: Renderer2;
   protected _elementRef: ElementRef;
+  protected readonly _globalConfig: IFsDatePickerConfig;
   protected _dateDialogRef: FsDatePickerDialogRef;
   protected _cdRef: ChangeDetectorRef;
   protected _focusAfterClose = false;
@@ -36,6 +42,7 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
     this._renderer = _injector.get(Renderer2);
     this._cdRef = _injector.get(ChangeDetectorRef);
     this._elementRef = _injector.get(ElementRef);
+    this._globalConfig = _injector.get(FS_DATEPICKER_CONFIG);
     this._elementRef.nativeElement.setAttribute('autocomplete', 'off');
   }
 
@@ -57,6 +64,8 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
     if (!this.editable) {
       this.matInput.readonly = true;
     }
+
+    this._init();
   }
 
   protected _doFocus(): void {
@@ -69,4 +78,7 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
     }
   }
 
+  protected _init(): void {
+    this.weekStartsOn = this.weekStartsOn ?? this._globalConfig.weekStartsOn;
+  }
 }

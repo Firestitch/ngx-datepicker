@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -37,6 +37,8 @@ import { MonthRangePickerToComponent } from './components/range-picker/to/month-
 import { TimeRangePickerToComponent } from './components/range-picker/to/time-range-picker-to.component';
 import { FsTimePickerComponent } from './components/time-picker/time-picker.component';
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
+import { IFsDatePickerConfig } from './interfaces/datepicker-config.interface';
+import { FS_DATEPICKER_CONFIG } from './providers/datepicker-config.provider';
 
 
 @NgModule({
@@ -96,12 +98,24 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
   ],
 })
 export class FsDatePickerModule {
-  public static forRoot(): ModuleWithProviders<FsDatePickerModule> {
+  public static forRoot(config?: IFsDatePickerConfig): ModuleWithProviders<FsDatePickerModule> {
+    const providers: Provider[] = [];
+
+    if (!!config) {
+      providers.push(
+        {
+          provide: FS_DATEPICKER_CONFIG,
+          useValue: config,
+        },
+      )
+    }
+
     return {
       ngModule: FsDatePickerModule,
       providers: [
         [...FsDatePickerDialogModule.forRoot().providers],
         FsRangePickerStoreService,
+        ...providers,
       ],
     };
   }
