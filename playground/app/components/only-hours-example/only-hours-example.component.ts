@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class OnlyHoursExampleComponent {
   public model = new Date('2015-10-10 15:45');
+  public min = new Date('2015-10-10 13:45');
 
   public pickerClosed(): void {
     console.log('picker closed');

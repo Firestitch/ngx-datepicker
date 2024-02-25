@@ -6,6 +6,7 @@
       fsFormRequired
       (selected)="selected($event)"
       [(ngModel)]="model"
+      [minDate]="min"
       name="timepicker"
       placeholder="Time"
       (closed)="pickerClosed()">

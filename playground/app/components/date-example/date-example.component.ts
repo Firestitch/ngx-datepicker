@@ -11,6 +11,7 @@ import { addDays } from 'date-fns';
 export class DateExampleComponent {
 
   public model = addDays(new Date(),2);
+  public min = new Date();
 
   public selected(e) {
     console.log('selected', e);
