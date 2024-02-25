@@ -210,52 +210,107 @@ export class FsDatePickerDialogFactory {
   private _createPopupPositionStrategy(el: ElementRef): PositionStrategy {
     return this._createBasePopupPositionStrategy(el)
       .withPositions([
+        // /**
+        //  * case when input has Y position top/center & is close to the right edge
+        //  * |              []|
+        //  * |                |
+        //  * |                |
+        //  */
         {
           originX: 'center',
+          originY: 'bottom',
+          overlayX: 'end',
+          overlayY: 'top',
+          offsetY: 10,
+        },
+        // /**
+        //  * case when input has Y position top/center & is close to the left edge or 100% width
+        //  * |[]              |
+        //  * |[              ]|
+        //  * |                |
+        //  */
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'top',
+          offsetY: 10,
+        },
+        // /**
+        //  * case when input has Y position top/center & somewhere in the middle of page
+        //  * |     []         |
+        //  * |                |
+        //  * |                |
+        //  */
+        {
+          originX: 'end',
           originY: 'bottom',
           overlayX: 'center',
           overlayY: 'top',
           offsetY: 10,
-          offsetX: -29,
         },
+        // /**
+        //  * case when input has Y position bottom & is close to the left edge
+        //  * |                |
+        //  * |                |
+        //  * |[]              |
+        //  */
         {
-          originX: 'end',
+          originX: 'start',
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
+          offsetY: -20,
         },
+        // /**
+        //  * case when input has Y position bottom & is somewhere in the middle of X
+        //  * |                |
+        //  * |                |
+        //  * |      []        |
+        //  */
         {
           originX: 'start',
+          originY: 'top',
+          overlayX: 'center',
+          overlayY: 'bottom',
+          offsetY: -20,
+        },
+        // /**
+        //  * case when input has Y position bottom & is close to the right edge of the page
+        //  * |                |
+        //  * |                |
+        //  * |           []   |
+        //  */
+        {
+          originX: 'center',
+          originY: 'top',
+          overlayX: 'end',
+          overlayY: 'bottom',
+          offsetY: -20,
+        },
+        // /**
+        //  * case when input has Y position bottom & almost off the page on the right edge
+        //  * |                |
+        //  * |                |
+        //  * |               [|]
+        //  */
+        {
+          originX: 'start',
+          originY: 'top',
+          overlayX: 'end',
+          overlayY: 'bottom',
+          offsetY: -20,
+        },
+
+        // /**
+        //  * case when input has Y position top/center & there is not enough height to go top/bottom
+        //  * |     []         |
+        //  */
+        {
+          originX: 'end',
           originY: 'center',
-          overlayX: 'start',
+          overlayX: 'center',
           overlayY: 'center',
-        },
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'bottom',
-        },
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-          offsetX: -29,
-        },
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'center',
-          offsetX: -29,
-        },
-        // for case described in TU-T5142, works when input has 100% width
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'start',
-          overlayY: 'bottom',
         },
       ]);
   }
