@@ -210,12 +210,25 @@ export class FsDatePickerDialogFactory {
   private _createPopupPositionStrategy(el: ElementRef): PositionStrategy {
     return this._createBasePopupPositionStrategy(el)
       .withPositions([
-        // /**
-        //  * case when input has Y position top/center & is close to the right edge
-        //  * |              []|
-        //  * |                |
-        //  * |                |
-        //  */
+        /**
+         * case when input has Y position top/center & is close to the right edge
+         * |           []   |
+         * |                |
+         * |                |
+         */
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'center',
+          overlayY: 'top',
+          offsetY: 10,
+        },
+        /**
+         * case when input has Y position top/center & is close to the right edge
+         * |              []|
+         * |                |
+         * |                |
+         */
         {
           originX: 'center',
           originY: 'bottom',
@@ -223,12 +236,12 @@ export class FsDatePickerDialogFactory {
           overlayY: 'top',
           offsetY: 10,
         },
-        // /**
-        //  * case when input has Y position top/center & is close to the left edge or 100% width
-        //  * |[]              |
-        //  * |[              ]|
-        //  * |                |
-        //  */
+        /**
+         * case when input has Y position top/center & is close to the left edge or 100% width
+         * |[]              |
+         * |[              ]|
+         * |                |
+         */
         {
           originX: 'start',
           originY: 'bottom',
@@ -236,12 +249,12 @@ export class FsDatePickerDialogFactory {
           overlayY: 'top',
           offsetY: 10,
         },
-        // /**
-        //  * case when input has Y position top/center & somewhere in the middle of page
-        //  * |     []         |
-        //  * |                |
-        //  * |                |
-        //  */
+        /**
+         * case when input has Y position top/center & somewhere in the middle of page
+         * |     []         |
+         * |                |
+         * |                |
+         */
         {
           originX: 'end',
           originY: 'bottom',
@@ -249,12 +262,12 @@ export class FsDatePickerDialogFactory {
           overlayY: 'top',
           offsetY: 10,
         },
-        // /**
-        //  * case when input has Y position bottom & is close to the left edge
-        //  * |                |
-        //  * |                |
-        //  * |[]              |
-        //  */
+        /**
+         * case when input has Y position bottom & is close to the left edge
+         * |                |
+         * |                |
+         * |[]              |
+         */
         {
           originX: 'start',
           originY: 'top',
@@ -262,12 +275,12 @@ export class FsDatePickerDialogFactory {
           overlayY: 'bottom',
           offsetY: -20,
         },
-        // /**
-        //  * case when input has Y position bottom & is somewhere in the middle of X
-        //  * |                |
-        //  * |                |
-        //  * |      []        |
-        //  */
+        /**
+         * case when input has Y position bottom & is somewhere in the middle of X
+         * |                |
+         * |                |
+         * |      []        |
+         */
         {
           originX: 'start',
           originY: 'top',
@@ -275,12 +288,12 @@ export class FsDatePickerDialogFactory {
           overlayY: 'bottom',
           offsetY: -20,
         },
-        // /**
-        //  * case when input has Y position bottom & is close to the right edge of the page
-        //  * |                |
-        //  * |                |
-        //  * |           []   |
-        //  */
+        /**
+         * case when input has Y position bottom & is close to the right edge of the page
+         * |                |
+         * |                |
+         * |           []   |
+         */
         {
           originX: 'center',
           originY: 'top',
@@ -288,12 +301,12 @@ export class FsDatePickerDialogFactory {
           overlayY: 'bottom',
           offsetY: -20,
         },
-        // /**
-        //  * case when input has Y position bottom & almost off the page on the right edge
-        //  * |                |
-        //  * |                |
-        //  * |               [|]
-        //  */
+        /**
+         * case when input has Y position bottom & almost off the page on the right edge
+         * |                |
+         * |                |
+         * |               [|]
+         */
         {
           originX: 'start',
           originY: 'top',
@@ -302,10 +315,10 @@ export class FsDatePickerDialogFactory {
           offsetY: -20,
         },
 
-        // /**
-        //  * case when input has Y position top/center & there is not enough height to go top/bottom
-        //  * |     []         |
-        //  */
+        /**
+         * case when input has Y position top/center & there is not enough height to go top/bottom
+         * |     []         |
+         */
         {
           originX: 'end',
           originY: 'center',
