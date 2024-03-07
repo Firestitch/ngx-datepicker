@@ -223,6 +223,15 @@ export class FsDatePickerDialogFactory {
           overlayY: 'top',
           offsetY: 10,
         },
+        // case for TA-T4183
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'center',
+          overlayY: 'top',
+          offsetX: -100,
+          offsetY: 10,
+        },
         /**
          * case when input has Y position top/center & is close to the right edge
          * |              []|
