@@ -1,4 +1,4 @@
-import * as parseMessyDate from 'parse-messy-time';
+import parseMessyDate from 'parse-messy-time';
 import { isValid } from 'date-fns';
 
 export function parseDate(value: string): Date | null {
