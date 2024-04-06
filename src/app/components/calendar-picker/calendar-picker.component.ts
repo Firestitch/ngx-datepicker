@@ -5,13 +5,15 @@ import {
   forwardRef,
   Inject,
   Input,
+  OnChanges,
   OnInit,
   Optional,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { setDate, startOfDay } from 'date-fns';
+import { isDate, isValid, setDate, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
@@ -35,7 +37,7 @@ import { IFsDatePickerConfig } from '../../interfaces/datepicker-config.interfac
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateCalendarPickerComponent implements OnInit, ControlValueAccessor {
+export class FsDateCalendarPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
 
   @Input()
   public today = true;
@@ -55,6 +57,9 @@ export class FsDateCalendarPickerComponent implements OnInit, ControlValueAccess
   @Input()
   public weekStartsOn: WeekDays;
 
+  @Input()
+  public focusDate: Date;
+
   @Output()
   public monthChange = new EventEmitter<Date>();
 
@@ -72,6 +77,12 @@ export class FsDateCalendarPickerComponent implements OnInit, ControlValueAccess
 
   public ngOnInit(): void {
     this._init();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.focusDate.currentValue !== changes.focusDate.previousValue) {
+      this._goToFocusDate();
+    }
   }
 
   public writeValue(date: Date | null) {
@@ -108,5 +119,12 @@ export class FsDateCalendarPickerComponent implements OnInit, ControlValueAccess
   private _init(): void {
     this._datePickerModel.weekStartsOn =
       this.weekStartsOn ?? this._globalConfig.weekStartsOn;
+  }
+
+  private _goToFocusDate(): void {
+    if (isDate(this.focusDate) && isValid(this.focusDate)) {
+      this._datePickerModel.goToMongth(this.focusDate.getMonth());
+      this._datePickerModel.goToYear(this.focusDate.getFullYear());
+    }
   }
 }

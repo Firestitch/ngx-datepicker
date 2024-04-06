@@ -237,15 +237,23 @@ export class FsDatePickerDialogModel {
   }
 
   public setCalendarMonth(month: number) {
-    this.calendarDate = setMonth(this.calendarDate, month);
+    this.goToMongth(month);
     this.model = this.calendarDate;
   }
 
   public setCalendarYear(year: number) {
-    this.calendarDate = setYear(this.calendarDate, year);
+    this.goToYear(year);
     this.model = this.calendarDate;
 
     this._updateDisabled();
+  }
+
+  public goToMongth(month: number): void {
+    this.calendarDate = setMonth(this.calendarDate, month);
+  }
+
+  public goToYear(year: number): void {
+    this.calendarDate = setYear(this.calendarDate, year);
   }
 
   public nextMonth() {
