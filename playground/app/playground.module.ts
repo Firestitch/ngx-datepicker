@@ -33,16 +33,16 @@ import { AppMaterialModule } from './material.module';
   bootstrap: [AppComponent],
   imports: [
     RouterModule.forRoot([]),
-    BrowserModule,
     FsDatePickerModule.forRoot(),
-    BrowserAnimationsModule,
-    AppMaterialModule,
-    FormsModule,
     FsScrollbarModule.forRoot(),
     FsExampleModule.forRoot(),
+    FsMessageModule.forRoot(),
+    BrowserAnimationsModule,
+    BrowserModule,
+    AppMaterialModule,
+    FormsModule,
     FsFormModule,
     FsLabelModule,
-    FsMessageModule.forRoot(),
     FsDateModule,
   ],
   declarations: [
@@ -66,7 +66,7 @@ import { AppMaterialModule } from './material.module';
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'legacy' },
+      useValue: { floatLabel: 'auto', appearance: 'outline' },
     },
   ],
 })

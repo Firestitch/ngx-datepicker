@@ -1,39 +1,40 @@
 <form>
   <div fxLayout="row wrap" fxLayoutGap="10px">
     <mat-form-field>
+      <mat-label>Standard Scroll Picker</mat-label>
       <input
         matInput
         fsDateScrollPicker
         [maxYear]="null"
         [(ngModel)]="standard"
         (closed)="pickerClosed()"
-        name="standard"
-        placeholder="Standard Scroll Picker">
+        name="standard">
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Month & Day Scroll Picker</mat-label>
       <input
         matInput
         fsDateScrollPicker
         [showYear]="false"
         [(ngModel)]="monthDay"
         (closed)="pickerClosed()"
-        name="monthDay"
-        placeholder="Month & Day Scroll Picker">
+        name="monthDay">
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Month & Year Scroll Picker</mat-label>
       <input
         matInput
         fsDateScrollPicker
         [showDay]="false"
         [(ngModel)]="monthYear"
         (closed)="pickerClosed()"
-        name="monthYear"
-        placeholder="Month & Year Scroll Picker">
+        name="monthYear">
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Month Scroll Picker</mat-label>
       <input
         matInput
         fsDateScrollPicker
@@ -41,11 +42,11 @@
         [showYear]="false"
         [(ngModel)]="month"
         (closed)="pickerClosed()"
-        name="month"
-        placeholder="Month Scroll Picker">
+        name="month">
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Year Scroll Picker</mat-label>
       <input
         matInput
         fsDateScrollPicker
@@ -53,8 +54,7 @@
         [showMonth]="false"
         [(ngModel)]="year"
         (closed)="pickerClosed()"
-        name="year"
-        placeholder="Year Scroll Picker">
+        name="year">
     </mat-form-field>
   </div>
 </form>

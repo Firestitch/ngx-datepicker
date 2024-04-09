@@ -1,7 +1,8 @@
 <form fsForm>
   <div>
     <mat-form-field>
-      <input 
+      <mat-label>Seed Date</mat-label>
+        <input 
           matInput
           fsDatePicker
           [(ngModel)]="seedDate"
@@ -9,24 +10,26 @@
           (change)="change($event)"
           (closed)="pickerClosed()"
           name="seedDate"
-          placeholder="Seed Date">
+          >
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field>
-      <input 
+      <mat-label>Period Weeks</mat-label>
+        <input 
         matInput
         [(ngModel)]="periodWeeks"
         (change)="change($event)"
         name="periodweeks"
-        placeholder="Period Weeks">
+        >
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field>
-      <input 
+      <mat-label>Weeks Picker</mat-label>
+        <input 
         matInput
         fsDateWeekPicker
         [(ngModel)]="model"
@@ -35,7 +38,7 @@
         [period]="periodWeeks"
         (closed)="pickerClosed()"
         name="weekpicker"
-        placeholder="Weeks Picker">
+        >
     </mat-form-field>
   </div>
 </form>

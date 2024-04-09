@@ -1,11 +1,11 @@
 <form fsForm>
   <mat-form-field>
+    <mat-label>Date Range From</mat-label>
     <input
       matInput
       fsDateRangeFromPicker="daterangepicker"
       [(ngModel)]="startDate"
       name="date_from"
-      placeholder="Date Range From"
       fsFormRequired
       (closed)="pickerClosed()">
   </mat-form-field>
@@ -13,12 +13,12 @@
   <fs-date-range-separator></fs-date-range-separator>
 
   <mat-form-field>
+    <mat-label>Date Range To</mat-label>
     <input
       matInput
       fsDateRangeToPicker="daterangepicker"
       [(ngModel)]="endDate"
       name="date_to"
-      placeholder="Date Range To"
       fsFormRequired
       (closed)="pickerClosed()">
   </mat-form-field>

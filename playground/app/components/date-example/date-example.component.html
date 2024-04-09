@@ -1,5 +1,6 @@
 <form fsForm>
   <mat-form-field>
+    <mat-label>Date</mat-label>
     <input
       matInput
       fsDatePicker
@@ -9,7 +10,6 @@
       (selected)="selected($event)"
       (blured)="blured($event)"
       name="datepicker"
-      placeholder="Date"
       (closed)="pickerClosed()">
   </mat-form-field>
 </form>

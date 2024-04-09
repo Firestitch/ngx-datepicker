@@ -4,7 +4,8 @@
 
   <div fxLayout="row wrap" fxLayoutGap="10px">
     <mat-form-field>
-      <input 
+      <mat-label>Date</mat-label>
+        <input 
         matInput
         fsDatePicker
         [(ngModel)]="data.datePicker"
@@ -12,22 +13,24 @@
         name="datePicker"
         [minDate]="minDate"
         [maxDate]="maxDate"
-        placeholder="Date">
+        >
     </mat-form-field>
 
     <mat-form-field>
-      <input
+      <mat-label>Full Date</mat-label>
+        <input
         matInput
         fsDateScrollPicker
         [(ngModel)]="data.scrollPicker"
         name="year"
         [maxDate]="maxDate"
         [minDate]="minDate"
-        placeholder="Full Date">
+        >
     </mat-form-field>
 
     <mat-form-field>
-      <input
+      <mat-label>Without day</mat-label>
+        <input
         matInput
         fsDateScrollPicker
         [(ngModel)]="data.scrollPicker"
@@ -35,11 +38,12 @@
         [showDay]="false"
         [maxDate]="maxDate"
         [minDate]="minDate"
-        placeholder="Without day">
+        >
     </mat-form-field>
 
     <mat-form-field>
-      <input
+      <mat-label>Only Year</mat-label>
+        <input
         matInput
         fsDateScrollPicker
         [(ngModel)]="data.scrollPicker"
@@ -48,7 +52,7 @@
         [showMonth]="false"
         [maxDate]="maxDate"
         [minDate]="minDate"
-        placeholder="Only Year">
+        >
     </mat-form-field>
   </div>
 </form>
