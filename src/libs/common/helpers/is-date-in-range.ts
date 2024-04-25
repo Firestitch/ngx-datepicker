@@ -1,4 +1,4 @@
-import { endOfDay, isEqual, isWithinInterval, startOfDay } from 'date-fns';
+import { isEqual, isWithinInterval } from 'date-fns';
 
 export function isDateInRange(dates: Date[][], start: Date, end: Date) {
   if (!dates || !dates.length) {
@@ -6,18 +6,18 @@ export function isDateInRange(dates: Date[][], start: Date, end: Date) {
   }
 
   for (let i = 0; i < dates.length; i++) {
-    const value = dates[i];
+    const startDate = dates[i][0];
+    const endDate = dates[i][1];
 
-    const startDay = startOfDay(value[0]);
-    const endDay = endOfDay(value[1]);
-
-    const startDayIntersectWithDisabled =
-      isWithinInterval(start, { start: startDay, end: endDay }) && !isEqual(start, value[0]);
-
-    const endDayIntersectWithDisabled =
-      isWithinInterval(end, { start: startDay, end: endDay }) && !isEqual(end, value[1]);
-
-    if(startDayIntersectWithDisabled && endDayIntersectWithDisabled) {
+    if(
+      (
+        (
+          isWithinInterval(start, { start: startDate, end: endDate }) || isEqual(start, startDate)
+        ) && (
+          isWithinInterval(end, { start: startDate, end: endDate }) || isEqual(end, endDate)
+        )
+      )
+    ) {
       return true;
     }
   }

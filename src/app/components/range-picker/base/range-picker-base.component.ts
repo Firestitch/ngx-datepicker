@@ -14,7 +14,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { filter, map, pairwise, skip, take, takeUntil, tap } from 'rxjs/operators';
 
-import { isDate, isEqual, isValid, subDays } from 'date-fns';
+import { isDate, isEqual, isValid } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
@@ -356,7 +356,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
       && isDate(this._pickerRef.startDate)
       && isValid(this._pickerRef.startDate)
     ) {
-      return subDays(this._pickerRef.startDate, 1);
+      return this._pickerRef.startDate;
     }
 
     return false;

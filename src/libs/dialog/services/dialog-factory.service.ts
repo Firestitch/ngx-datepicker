@@ -177,8 +177,6 @@ export class FsDatePickerDialogFactory {
     }
 
     return this._openDateScrollPickerDesktop(injector, dialogRef);
-
-
   }
 
   private _createOverlay(el: ElementRef, config: OverlayConfig = {}) {
@@ -361,7 +359,6 @@ export class FsDatePickerDialogFactory {
 
     return overlayRef;
   }
-
 
   private _openDatePickerMobile(dialogRef: FsDatePickerDialogRef): MatBottomSheetRef {
     return this._bottomSheet.open(FsMobileCalendarDialogComponent, {

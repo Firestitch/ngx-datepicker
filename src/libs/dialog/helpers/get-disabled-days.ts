@@ -1,6 +1,4 @@
-import { addYears, subYears } from 'date-fns';
-
-import { PickerViewType } from '../../common/enums/picker-view-type.enum';
+import { addDays, addYears, subDays, subYears } from 'date-fns';
 
 
 export function getDisabledDays(
@@ -8,21 +6,18 @@ export function getDisabledDays(
   maxDate: Date,
   minYear: number,
   maxYear: number,
-  view: PickerViewType
 ): [Date, Date][] {
   const result = [];
 
   if (minDate) {
     const from = subYears(new Date(), minYear);
-    const to = view === PickerViewType.DateTime
-      ? new Date(minDate).setDate(minDate.getDate() - 1)
-      : new Date(minDate);
+    const to = subDays(minDate, 1);
 
     result.push([from, to]);
   }
 
   if (maxDate) {
-    result.push([new Date(maxDate), addYears(new Date(), maxYear)]);
+    result.push([addDays(maxDate, 1), addYears(new Date(), maxYear)]);
   }
 
   return result;

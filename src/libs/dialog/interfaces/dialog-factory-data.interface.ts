@@ -4,8 +4,8 @@ import { PickerViewType } from '../../common/enums/picker-view-type.enum';
 import { ScrollPickerViewType } from '../../common/enums/scroll-picker-view-type.enum';
 import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 
-import { IFsDatePickerDialogComponents } from './dialog-components.interface';
 import { WeekDays } from '../../../libs/common/types/week-days.type';
+import { IFsDatePickerDialogComponents } from './dialog-components.interface';
 
 
 export interface IDialogFactoryOptions {

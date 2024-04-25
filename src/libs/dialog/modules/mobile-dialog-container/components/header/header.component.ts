@@ -1,11 +1,11 @@
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    Output,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
 } from '@angular/core';
 
 
@@ -122,44 +122,21 @@ export class FsDatePickerMobileHeaderComponent implements AfterViewInit {
     this.yearsList = [];
 
     for (let y: number = this.minYear; y < this.maxYear; y++) {
-      // const year = new Date().setFullYear(y);
-      this.yearsList.push({ value: y /*disabled: this._isYearDisabled(year)*/ });
+      this.yearsList.push({ value: y });
     }
   }
 
   private _createMonthsList(): void {
-    // const year = this.calendarMonth ? this.calendarYear : this.now.getFullYear();
-
-    /*
-    const checkIfMonthDisabled = (monthNumber: number, disabledDays) => {
-      const month = new Date();
-      month.setFullYear(year);
-      month.setMonth(monthNumber);
-
-      return isMonthDisabled(month, disabledDays)
-    }
-*/
-
     this.monthList = [];
 
     for (const item of MONTHS) {
       const monthItem = {
         ...item,
-        // disabled: checkIfMonthDisabled(item.value, this.disabledDays),
       };
 
       this.monthList.push(monthItem);
     }
   }
-
-  /*
-  private _isYearDisabled(date): boolean {
-    const startYear = startOfYear(date);
-    const endYear = endOfYear(date);
-
-    return isDateInRange(this.disabledDays, startYear, endYear);
-  }
-*/
 
   private _scrollToSelectedYear(): void {
     setTimeout(() => {

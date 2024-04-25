@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { addMonths, startOfDay } from 'date-fns/esm';
+import { addMonths } from 'date-fns/esm';
 
 
 @Component({
@@ -10,6 +10,7 @@ import { addMonths, startOfDay } from 'date-fns/esm';
 export class MinMaxComponent {
 
   public data: any = {};
-  public minDate = startOfDay(new Date());
+  public minDate = new Date();
   public maxDate = addMonths(new Date(), 3);
+  
 }
