@@ -4,7 +4,7 @@ import { ThemePalette } from '@angular/material/core';
 
 import { fromEvent, Subject } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
-import { FsDatePickerCalendarComponent } from 'src/libs/calendar/components/calendar/calendar.component';
+import { FsDatePickerCalendarComponent } from '../../../../../../libs/calendar/components';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 
