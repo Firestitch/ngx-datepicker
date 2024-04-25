@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, O
 import { ThemePalette } from '@angular/material/core';
 
 import { fromEvent, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { FsDatePickerCalendarComponent } from 'src/libs/calendar/components/calendar/calendar.component';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
@@ -29,6 +29,7 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
   public timePickerExpanded = false;
 
   private _destroy$ = new Subject();
+  private _wheelDelta = 0;
 
   public get doneBtnClass(): ThemePalette {
     if (this.datePickerModel.isPickerRangeFrom) {
@@ -109,9 +110,14 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
           event.preventDefault();
           event.stopPropagation(); 
         }),
+        filter((event: any) => {
+          this._wheelDelta += Math.abs(event.wheelDeltaY);
+          return this._wheelDelta > 13;
+        }), 
         takeUntil(this._destroy$),
       )
       .subscribe((event) => {
+        this._wheelDelta = 0;
         if(event.deltaY > 0) {
           this.nextMonth();
         } else {
