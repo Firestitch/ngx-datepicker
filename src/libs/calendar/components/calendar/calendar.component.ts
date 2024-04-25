@@ -118,15 +118,11 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   public highlightedRangeDays = null;
 
-  // date | datetime | week
-  private _calendarMode = 'date';
-
   constructor(
     public element: ElementRef,
   ) {}
 
   public ngOnInit() {
-    this._calendarMode = this.dateMode;
     this.daySize = this.daySize ?? 43;
 
     if (this.dateMode === 'week') {
@@ -255,7 +251,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     if (!this.date) {
       this.createModel();
     }
-
 
     const date = new Date(
       day.year,

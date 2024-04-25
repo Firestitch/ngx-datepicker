@@ -16,10 +16,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isDate, isValid, setDate, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
-import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
 import { WeekDays } from '../../../libs/common/types/week-days.type';
-import { FS_DATEPICKER_CONFIG } from '../../providers/datepicker-config.provider';
+import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
 import { IFsDatePickerConfig } from '../../interfaces/datepicker-config.interface';
+import { FS_DATEPICKER_CONFIG } from '../../providers/datepicker-config.provider';
 
 
 @Component({
@@ -80,7 +80,7 @@ export class FsDateCalendarPickerComponent implements OnInit, OnChanges, Control
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.focusDate.currentValue !== changes.focusDate.previousValue) {
+    if (changes.focusDate && changes.focusDate.currentValue !== changes.focusDate.previousValue) {
       this._goToFocusDate();
     }
   }

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 
 @Component({
   selector: 'birthday-example',
   templateUrl: './birthday-example.component.html',
-  styleUrls: [ './birthday-example.component.css' ]
+  styleUrls: [ './birthday-example.component.css' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BirthdayExampleComponent {
 

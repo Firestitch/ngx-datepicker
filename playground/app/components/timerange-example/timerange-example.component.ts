@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 
 @Component({
   selector: 'timerange-example',
   templateUrl: './timerange-example.component.html',
-  styleUrls: [ './timerange-example.component.css' ]
+  styleUrls: [ './timerange-example.component.css' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimeRangeExampleComponent {
 

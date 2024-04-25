@@ -1,5 +1,5 @@
 import { isSameDay } from 'date-fns';
-import { PickerViewType } from '../../common/enums/picker-view-type.enum';
+import { PickerViewType } from '../../common/enums';
 
 
 export function getDisabledTimes(model: Date | null, minDate: Date, view: PickerViewType): [Date, Date][] {

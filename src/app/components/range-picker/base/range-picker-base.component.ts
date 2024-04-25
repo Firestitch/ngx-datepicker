@@ -311,7 +311,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     }
 
     return { calendarStart: true, calendarEnd: true };
-
   }
 
   protected _enableInput() {
@@ -320,7 +319,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   protected _disableInput() {
     this.disabled = true;
-
   }
 
   protected _tzChanged(originDate: Date | null) {

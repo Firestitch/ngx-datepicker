@@ -1,4 +1,4 @@
-import { endOfDay, isWithinInterval, lightFormat, startOfDay } from 'date-fns';
+import { endOfDay, isSameDay, isWithinInterval, startOfDay } from 'date-fns';
 
 export function isRangeDisabled(disabledDays, start, end) {
   if (!disabledDays || !disabledDays.length) {
@@ -12,14 +12,12 @@ export function isRangeDisabled(disabledDays, start, end) {
     const endDay = endOfDay(value[1]);
 
     const startDayIntersectWithDisabled =
-      isWithinInterval(start, { start: startDay, end: endDay })
-      || lightFormat(start, 'yyyy-MM-dd') === lightFormat(value[0], 'yyyy-MM-dd');
+      isWithinInterval(start, { start: startDay, end: endDay }) && !isSameDay(start, value[0]);
 
     const endDayIntersectWithDisabled =
-      isWithinInterval(end, { start: startDay, end: endDay })
-      || lightFormat(end, 'yyyy-MM-dd') === lightFormat(value[1], 'yyyy-MM-dd');
+      isWithinInterval(end, { start: startDay, end: endDay }) && !isSameDay(end, value[1]);
 
-    if (startDayIntersectWithDisabled && endDayIntersectWithDisabled) {
+    if(startDayIntersectWithDisabled && endDayIntersectWithDisabled) {
       return true;
     }
   }

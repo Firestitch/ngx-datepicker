@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 
 import { FsScrollPickerModule } from '@firestitch/scroll-picker';
 
-import { FsDateScrollPickerMobileDialogComponent } from './components/date-scroll-picker-mobile-dialog/date-scroll-picker-mobile-dialog.component';
-import { FsDateScrollPickerDesktopComponent } from './components/date-scroll-picker-desktop/date-scroll-picker-desktop.component';
-import { FsDateScrollPickerDialogComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 import { MatListModule } from '@angular/material/list';
+import { FsDateScrollPickerDesktopComponent } from './components/date-scroll-picker-desktop/date-scroll-picker-desktop.component';
+import { FsDateScrollPickerMobileComponent } from './components/date-scroll-picker-mobile/date-scroll-picker-mobile.component';
+import { FsDateScrollPickerDialogComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 
 
 @NgModule({
@@ -24,12 +24,12 @@ import { MatListModule } from '@angular/material/list';
   ],
   declarations: [
     FsDateScrollPickerDesktopComponent,
-    FsDateScrollPickerMobileDialogComponent,
+    FsDateScrollPickerMobileComponent,
     FsDateScrollPickerDialogComponent,
   ],
   exports: [
     FsDateScrollPickerDesktopComponent,
-    FsDateScrollPickerMobileDialogComponent,
+    FsDateScrollPickerMobileComponent,
   ],
 })
 export class FsDatePickerScrollPickerDialogContainerModule {}

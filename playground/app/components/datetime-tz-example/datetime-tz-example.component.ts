@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { tzList } from './tz-list';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { getTimeZones } from '@vvo/tzdb';
+import { tzList } from './tz-list';
 
 @Component({
   selector: 'datetime-tz-example',
   templateUrl: './datetime-tz-example.component.html',
-  styleUrls: ['./datetime-tz-example.component.scss' ]
+  styleUrls: ['./datetime-tz-example.component.scss' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatetimeTzExampleComponent {
   

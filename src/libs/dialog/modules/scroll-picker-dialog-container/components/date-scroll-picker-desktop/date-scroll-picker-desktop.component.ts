@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  ViewChild,
+  Component
 } from '@angular/core';
 
 import { FsDatePickerDialogRef } from '../../../../../dialog/classes/dialog-ref';
-import { FsDateScrollPickerDialogComponent } from '../date-scroll-picker/date-scroll-picker.component';
+import { FsDateScrollPickerBaseComponent } from '../date-scroll-picker-base';
 
 
 @Component({
@@ -13,32 +12,16 @@ import { FsDateScrollPickerDialogComponent } from '../date-scroll-picker/date-sc
   styleUrls: ['./date-scroll-picker-desktop.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDateScrollPickerDesktopComponent {
-  public disabledSubmit = false;
-
-  @ViewChild('scrollPickerRef')
-  public scrollPickerRef: FsDateScrollPickerDialogComponent;
-
-  private _date: Date | null;
+export class FsDateScrollPickerDesktopComponent extends FsDateScrollPickerBaseComponent {
 
   constructor(
     protected _dialogRef: FsDatePickerDialogRef,
-  ) {}
+  ) {
+    super();
+  }
 
   public get dialogRef(): FsDatePickerDialogRef {
     return this._dialogRef;
-  }
-
-  public change(date: Date | null) {
-    this._date = date;
-
-    if (this.scrollPickerRef?.maxDate && date > this.scrollPickerRef?.maxDate) {
-      this.disabledSubmit = true;
-    } else if (this.scrollPickerRef?.minDate && date < this.scrollPickerRef?.minDate) {
-      this.disabledSubmit = true;
-    } else {
-      this.disabledSubmit = false;
-    }
   }
 
   public close(save = false) {

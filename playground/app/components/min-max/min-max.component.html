@@ -1,8 +1,10 @@
 <form>
-  <h3>Min Date: {{ minDate | date }}</h3>
-  <h3>Max Date: {{ maxDate | date }}</h3>
+  <div>Min Date: {{ minDate | date }}</div>
+  <div>Max Date: {{ maxDate | date }}</div>
 
-  <div fxLayout="row wrap" fxLayoutGap="10px">
+  <br><br>
+
+  <div class="fs-row.wrap.gap-sm">
     <mat-form-field>
       <mat-label>Date</mat-label>
         <input 

@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 
 import { ThemePalette } from '@angular/material/core';
 
+import { fromEvent, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { FsDatePickerCalendarComponent } from 'src/libs/calendar/components/calendar/calendar.component';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 
@@ -12,7 +15,10 @@ import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
   styleUrls: ['./date-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDesktopDatePickerComponent {
+export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
+
+  @ViewChild(FsDatePickerCalendarComponent, { read: ElementRef })
+  public datePickerCalendar: ElementRef;
 
   @Input()
   public dialogRef: FsDatePickerDialogRef;
@@ -22,7 +28,7 @@ export class FsDesktopDatePickerComponent {
 
   public timePickerExpanded = false;
 
-  constructor() {}
+  private _destroy$ = new Subject();
 
   public get doneBtnClass(): ThemePalette {
     if (this.datePickerModel.isPickerRangeFrom) {
@@ -30,7 +36,6 @@ export class FsDesktopDatePickerComponent {
     }
 
     return 'primary';
-
   }
 
   public viewModeChanged(mode: string) {
@@ -89,5 +94,30 @@ export class FsDesktopDatePickerComponent {
 
   public close(): void {
     this.dialogRef.close();
+  }
+
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  public ngAfterViewInit(): void {
+    if(this.datePickerCalendar) {
+      fromEvent(this.datePickerCalendar.nativeElement, 'wheel')
+      .pipe(
+        tap((event: any) => {
+          event.preventDefault();
+          event.stopPropagation(); 
+        }),
+        takeUntil(this._destroy$),
+      )
+      .subscribe((event) => {
+        if(event.deltaY > 0) {
+          this.nextMonth();
+        } else {
+          this.prevMonth();
+        }
+      });
+    }
   }
 }

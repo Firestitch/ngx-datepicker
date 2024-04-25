@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'only-hours-example',
   templateUrl: 'only-hours-example.component.html',
-  styleUrls: [ 'only-hours-example.component.css' ]
+  styleUrls: [ 'only-hours-example.component.css' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OnlyHoursExampleComponent {
   public model = new Date('2015-10-10 15:45');

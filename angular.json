@@ -30,7 +30,10 @@
             "allowedCommonJsDependencies": [
               "highlight.js",
               "date-fns-tz"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules"]
+            }
           },
           "configurations": {
             "production": {

@@ -6,7 +6,6 @@ import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 
 
 @Component({
-  selector: 'fs-d',
   templateUrl: './desktop-dialog.component.html',
   styleUrls: ['./desktop-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -28,10 +28,10 @@ import {
 
 import { FsDesktopCalendarDialogComponent } from '../../dialog/modules/desktop-dialog-container/components/desktop-dialog/desktop-dialog.component';
 import { FsMobileCalendarDialogComponent } from '../../dialog/modules/mobile-dialog-container/components/mobile-dialog/mobile-dialog.component';
-import { FsDateScrollPickerDesktopComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-desktop/date-scroll-picker-desktop.component';
-import { FsDateScrollPickerMobileDialogComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-mobile-dialog/date-scroll-picker-mobile-dialog.component';
+import { FsDateScrollPickerDesktopComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-desktop';
 import { FsDatePickerDialogRef } from '../classes/dialog-ref';
 import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
+import { FsDateScrollPickerMobileComponent } from "../modules/scroll-picker-dialog-container/components/date-scroll-picker-mobile";
 
 const mobileBreakpoint = '(max-width: 737px)';
 
@@ -388,7 +388,7 @@ export class FsDatePickerDialogFactory {
   }
 
   private _openDateScrollPickerMobile(dialogRef: FsDatePickerDialogRef): MatBottomSheetRef {
-    return this._bottomSheet.open(FsDateScrollPickerMobileDialogComponent, {
+    return this._bottomSheet.open(FsDateScrollPickerMobileComponent, {
       data: {
         dateDialogRef: dialogRef,
       },
