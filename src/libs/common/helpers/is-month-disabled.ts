@@ -1,11 +1,11 @@
 import { endOfMonth, startOfMonth } from 'date-fns';
 
-import { isRangeDisabled } from './is-range-disabled';
+import { isDateInRange } from './is-date-in-range';
 
 
 export function isMonthDisabled(date: Date, disabledDays: [Date, Date][]): boolean {
   const startMonth = startOfMonth(date);
   const endMonth = endOfMonth(date);
 
-  return isRangeDisabled(disabledDays, startMonth, endMonth);
+  return isDateInRange(disabledDays, startMonth, endMonth);
 }

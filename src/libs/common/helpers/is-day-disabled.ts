@@ -1,10 +1,10 @@
 import { endOfDay, startOfDay } from 'date-fns';
 
-import { isRangeDisabled } from './is-range-disabled';
+import { isDateInRange } from './is-date-in-range';
 
-export function isDayDisabled(disabledDays, date) {
+export function isDayInRange(dates: Date[][], date) {
   const startDay = startOfDay(date);
   const endDay = endOfDay(date);
 
-  return isRangeDisabled(disabledDays, startDay, endDay);
+  return isDateInRange(dates, startDay, endDay);
 }

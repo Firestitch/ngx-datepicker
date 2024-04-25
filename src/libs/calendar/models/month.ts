@@ -7,7 +7,7 @@ import {
   subDays,
 } from 'date-fns';
 
-import { isDayDisabled } from '../../common/helpers/is-day-disabled';
+import { isDayInRange } from '../../common/helpers/is-day-disabled';
 import { WeekDays } from '../../common/types/week-days.type';
 
 import { Period } from './period';
@@ -72,8 +72,8 @@ export class Month {
       const dayMuted = d - this._prevMonthDaysCount < 0
         || d >= this._daysInMonth + this._prevMonthDaysCount;
 
-      const enabled = !!this._enabledDays ? isDayDisabled(this._enabledDays, currentDate) : false;
-      const disabled = !!this._enabledDays && !enabled ? true : isDayDisabled(this._disabledDays, currentDate);
+      const enabled = !!this._enabledDays ? isDayInRange(this._enabledDays, currentDate) : false;
+      const disabled = !!this._enabledDays && !enabled ? true : isDayInRange(this._disabledDays, currentDate);
 
       week.addDay({
         surrounding: dayMuted,

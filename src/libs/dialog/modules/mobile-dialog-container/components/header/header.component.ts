@@ -1,11 +1,11 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
 } from '@angular/core';
 
 
@@ -157,7 +157,7 @@ export class FsDatePickerMobileHeaderComponent implements AfterViewInit {
     const startYear = startOfYear(date);
     const endYear = endOfYear(date);
 
-    return isRangeDisabled(this.disabledDays, startYear, endYear);
+    return isDateInRange(this.disabledDays, startYear, endYear);
   }
 */
 

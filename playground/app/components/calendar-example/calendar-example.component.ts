@@ -30,7 +30,6 @@ export class CalendarExampleComponent implements OnInit {
 
   public monthChange(date): void {
     this.monthDate = date;
-    this.updateEnabledDates();
   }
 
   public updateEnabledDates() {
