@@ -1,7 +1,8 @@
-<mat-form-field>
+<mat-form-field [class]="fieldClass">
   <mat-label>{{label}}</mat-label>
   <mat-select
       [required]="required"
+      [placeholder]="placeholder"
       (ngModelChange)="change($event)"
       [(ngModel)]="time"
       [name]="name">
