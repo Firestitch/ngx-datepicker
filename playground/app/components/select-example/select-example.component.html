@@ -1,0 +1,22 @@
+<div class="fs-row.gap-lg">
+  <div>
+    <form fsForm>
+      <fs-weekday-select 
+        [(ngModel)]="weekday" 
+        name="weekday">
+      </fs-weekday-select>
+    </form> 
+    Weekday: {{weekday}}
+  </div>
+
+  <div>
+    <form fsForm>
+      <fs-time-select 
+        [(ngModel)]="time" 
+        name="time">
+      </fs-time-select>
+    </form> 
+    Time: {{time}}
+  </div>
+  
+</div>

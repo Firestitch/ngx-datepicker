@@ -19,6 +19,7 @@ import {
   FsDatePickerDesktopDialogContainerModule,
 } from '../libs/dialog/modules/desktop-dialog-container/desktop-dialog-container.module';
 
+import { FsWeekdaySelectComponent } from './components';
 import { FsDateCalendarPickerComponent } from './components/calendar-picker/calendar-picker.component';
 import { FsDatePickerBirthdayComponent } from './components/date-picker-birthday/date-picker-birthday.component';
 import { FsDatePickerTriggerComponent } from './components/date-picker-trigger/date-picker-trigger.component';
@@ -36,9 +37,10 @@ import { DateTimeRangePickerToComponent } from './components/range-picker/to/dat
 import { MonthRangePickerToComponent } from './components/range-picker/to/month-range-picker-to.component';
 import { TimeRangePickerToComponent } from './components/range-picker/to/time-range-picker-to.component';
 import { FsTimePickerComponent } from './components/time-picker/time-picker.component';
-import { FsRangePickerStoreService } from './services/range-picker-store.service';
+import { FsTimeSelectComponent } from './components/time-select';
 import { IFsDatePickerConfig } from './interfaces/datepicker-config.interface';
 import { FS_DATEPICKER_CONFIG } from './providers/datepicker-config.provider';
+import { FsRangePickerStoreService } from './services/range-picker-store.service';
 
 
 @NgModule({
@@ -77,6 +79,8 @@ import { FS_DATEPICKER_CONFIG } from './providers/datepicker-config.provider';
     MonthRangePickerFromComponent,
     MonthRangePickerToComponent,
     FsDateCalendarPickerComponent,
+    FsWeekdaySelectComponent,
+    FsTimeSelectComponent,
   ],
   exports: [
     FsDatePickerComponent,
@@ -95,6 +99,8 @@ import { FS_DATEPICKER_CONFIG } from './providers/datepicker-config.provider';
     MonthRangePickerFromComponent,
     MonthRangePickerToComponent,
     FsDateCalendarPickerComponent,
+    FsWeekdaySelectComponent,
+    FsTimeSelectComponent,
   ],
 })
 export class FsDatePickerModule {

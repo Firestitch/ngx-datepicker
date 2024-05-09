@@ -1,0 +1,14 @@
+<mat-form-field>
+  <mat-label>{{label}}</mat-label>
+  <mat-select
+      [required]="required"
+      (ngModelChange)="change($event)"
+      [(ngModel)]="time"
+      [name]="name">
+    <mat-option
+        *ngFor="let item of times"
+        [value]="item.value">
+      {{item.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "13.1.4",
+  "version": "13.2.0",
   "title": "Date/Time Picker",
   "repository": {
     "type": "git",
@@ -48,7 +48,7 @@
     "@firestitch/autocomplete-chips": "^12.4.1",
     "@firestitch/clear": "^12.3.10",
     "@firestitch/common": "^12.5.1",
-    "@firestitch/component-tools": "^13.0.2",
+    "@firestitch/component-tools": "^13.0.6",
     "@firestitch/core": "^12.0.3",
     "@firestitch/date": "^12.4.1",
     "@firestitch/datepicker": "^12.9.2",

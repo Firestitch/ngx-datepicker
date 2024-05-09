@@ -22,6 +22,7 @@ import {
   DateRangeExampleComponent, DateScrollPickerComponent, DateTimeExampleComponent,
   DateTimeRangeExampleComponent, DatetimeTzExampleComponent,
   MinMaxComponent, MonthExampleComponent, OnlyHoursExampleComponent,
+  SelectExampleComponent,
   TimeExampleComponent, TimeRangeExampleComponent,
   WeekPickerComponent,
 } from './components';
@@ -58,6 +59,7 @@ import { AppMaterialModule } from './material.module';
     OnlyHoursExampleComponent,
     WeekPickerComponent,
     MonthExampleComponent,
+    SelectExampleComponent,
     DatetimeTzExampleComponent,
     TzOffsetPipe,
     CalendarExampleComponent,

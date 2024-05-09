@@ -9,6 +9,7 @@ export * from './datetime-tz-example';
 export * from './min-max';
 export * from './month-example';
 export * from './only-hours-example';
+export * from './select-example';
 export * from './time-example';
 export * from './timerange-example';
 export * from './week-example';
