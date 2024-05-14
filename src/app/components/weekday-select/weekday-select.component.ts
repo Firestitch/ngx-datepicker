@@ -21,7 +21,6 @@ export class FsWeekdaySelectComponent implements ControlValueAccessor {
   @Input() public label;
   @Input() public required = false;
   @Input() public fieldClass;
-  @Input() public placeholder;
 
   public onChange: (value) => void;
   public onTouch: (value) => void;

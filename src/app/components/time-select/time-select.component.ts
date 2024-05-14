@@ -21,16 +21,16 @@ export class FsTimeSelectComponent implements OnInit, ControlValueAccessor {
   @Input() public label;
   @Input() public required = false;
   @Input() public fieldClass;
-  @Input() public placeholder;
+  @Input() public initialHour;
 
   public onChange: (value) => void;
   public onTouch: (value) => void;
   public name = `times${guid()}`;
-  public time;
+  public time = null;
   public times = [];
   
   public writeValue(value: any): void {
-    this.time = value;
+    this.time = value === undefined ? null : value;
   }
 
   public change(value): void {
@@ -48,11 +48,21 @@ export class FsTimeSelectComponent implements OnInit, ControlValueAccessor {
   public setDisabledState?(isDisabled: boolean): void {
     
   }  
+
+  public openedChange(value) {
+    if(value && this.initialHour && (this.time === null)) {
+      const el = document.querySelector('.time-select-option-' + (this.initialHour * 60 * 60));
+      el?.scrollIntoView();
+    }
+  }
   
   public ngOnInit(): void {
     for (let i=0; i < 24; i++) {
+
+      const meridiem = i >= 12 ? 'PM' : 'AM';
+      const hour = i > 12 ? i - 12 : (i ? i : 12);
       this.times.push({
-        name: i ? `${i}:00` : '12:00',
+        name: `${hour}:00 ${meridiem}`,
         value: i * 60 * 60
       });
     }

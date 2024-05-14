@@ -2,6 +2,7 @@
   <div>
     <form fsForm>
       <fs-weekday-select 
+        [label]="'Weekday'"
         [(ngModel)]="weekday" 
         name="weekday">
       </fs-weekday-select>
@@ -12,7 +13,9 @@
   <div>
     <form fsForm>
       <fs-time-select 
+        [label]="'Time'"
         [(ngModel)]="time" 
+        [initialHour]="12"
         name="time">
       </fs-time-select>
     </form> 
