@@ -34,7 +34,7 @@ export class Month {
     public date: Date,
     public seedDate: Date,
     public periodWeeks: number,
-    private _enabledDays: [Date, Date][],
+    private _enabledDates: [Date, Date][],
     private _disabledDates: [Date, Date][],
     private _hideExtraDays: boolean,
     private _weekStartsOn: WeekDays,
@@ -74,8 +74,8 @@ export class Month {
       const dayMuted = d - this._prevMonthDaysCount < 0
         || d >= this._daysInMonth + this._prevMonthDaysCount;
 
-      const enabled = this._enabledDays ? isDayInRange(this._enabledDays, currentDate) : false;
-      const disabled = !!this._enabledDays && !enabled ? true : isDayInRange(this._disabledDates, currentDate);
+      const enabled = this._enabledDates ? isDayInRange(this._enabledDates, currentDate) : false;
+      const disabled = !!this._enabledDates && !enabled ? true : isDayInRange(this._disabledDates, currentDate);
 
       week.addDay({
         surrounding: dayMuted,
@@ -140,14 +140,15 @@ export class Month {
     this.monthAndYear = `${this.date.getFullYear()}-${this.date.getMonth()}`;
     this.months = [{ name: format(this.date, 'MMMM'), value: this.date.getMonth() }];
     this.years = [this.date.getFullYear()];
-    this._disabledDates = this._disabledDates || [];
 
     if(this._minDate) {
+      this._disabledDates = this._disabledDates || [];
       this._disabledDates
         .push([new Date(0),this._minDate]);
     } 
 
     if(this._maxDate) {
+      this._disabledDates = this._disabledDates || [];
       this._disabledDates
         .push([this._maxDate, new Date(9999,0,1)]);
     }

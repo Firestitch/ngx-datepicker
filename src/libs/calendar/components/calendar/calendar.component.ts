@@ -156,7 +156,7 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
         this.updateDaysHighlighted();
       }
 
-      if (changes.calendarDate || changes.enabledDays) {
+      if (changes.calendarDate || changes.enabledDates) {
         this.drawMonths();
       }
 

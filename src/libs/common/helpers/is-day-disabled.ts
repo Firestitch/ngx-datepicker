@@ -7,10 +7,10 @@ export function isDayInRange(dates: Date[][], date) {
   const endDay = endOfDay(date);
 
   dates = (dates || [])
-    .map((date) => (
+    .map((item) => (
       [
-        startOfDay(date[0]),
-        endOfDay(date[1]),
+        startOfDay(item[0]),
+        endOfDay(item[1]),
       ]
     ));
 
