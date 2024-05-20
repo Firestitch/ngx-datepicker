@@ -5,7 +5,7 @@
       [minYear]="datePickerModel.minYear"
       [maxYear]="datePickerModel.maxYear"
       [viewMode]="datePickerModel.calendarMode$ | async"
-      [disabledDays]="datePickerModel.disabledDays$ | async">
+      [disabledDates]="datePickerModel.disabledDates$ | async">
     </fs-date-picker-mobile-header>
   </ng-container>
 
@@ -30,7 +30,7 @@
       [highlightStartDate]="modelFrom$ | async"
       [highlightEndDate]="modelTo$ | async"
       [dateMode]="datePickerModel.calendarMode$ | async"
-      [disabledDays]="datePickerModel.disabledDays$ | async"
+      [disabledDates]="datePickerModel.disabledDates$ | async"
       [hideExtraDays]="true"
       [period]="datePickerModel.period"
       [seedDate]="datePickerModel.seedDate"

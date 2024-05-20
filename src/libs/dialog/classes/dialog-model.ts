@@ -15,14 +15,13 @@ import {
 
 
 import { RangePickerRef } from '../../../app/classes/range-picker-ref';
-import { WeekDay } from '../../../libs/common/enums/week-day.enum';
-import { PickerViewType } from '../../common/enums/picker-view-type.enum';
+import { WeekDay } from '../../../libs/common/enums';
+import { PickerViewType } from '../../common/enums';
 import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 import { WeekDays } from '../../common/types/week-days.type';
-import { getDisabledDays } from '../../dialog/helpers/get-disabled-days';
-import { getDisabledTimes } from '../../dialog/helpers/get-disabled-times';
-import { IDialogFactoryOptions } from '../../dialog/interfaces/dialog-factory-data.interface';
-import { getFirstDayOfFirstYearWeek } from '../helpers/get-first-day-of-first-year-week';
+import { getDisabledTimes } from '../../dialog/helpers';
+import { IDialogFactoryOptions } from '../../dialog/interfaces';
+import { getDisabledDates, getFirstDayOfFirstYearWeek } from '../helpers';
 
 
 export class FsDatePickerDialogModel {
@@ -52,7 +51,7 @@ export class FsDatePickerDialogModel {
 
   private _now$ = new BehaviorSubject<Date>(new Date());
 
-  private _disabledDays$ = new BehaviorSubject<[Date, Date][]>([]);
+  private _disabledDates$ = new BehaviorSubject<[Date, Date][]>([]);
   private _disabledTimes$ = new BehaviorSubject<[Date, Date][]>([]);
   private _calendarDate$ = new BehaviorSubject<Date>(this.now);
   private _calendarMode$ = new BehaviorSubject<string>('date');
@@ -184,12 +183,12 @@ export class FsDatePickerDialogModel {
     return this._period$;
   }
 
-  public set disabledDays(value: [Date, Date][]) {
-    this._disabledDays$.next(value);
+  public set disabledDates(value: [Date, Date][]) {
+    this._disabledDates$.next(value);
   }
 
-  public get disabledDays$(): Observable<[Date, Date][]> {
-    return this._disabledDays$;
+  public get disabledDates$(): Observable<[Date, Date][]> {
+    return this._disabledDates$;
   }
 
   public set disabledTimes(value: [Date, Date][]) {
@@ -294,7 +293,7 @@ export class FsDatePickerDialogModel {
     this.periodWeeks = options.periodWeeks;
 
     this._initCalendarDate(options);
-    this._updateDisabledDays();
+    this._updateDisabledDates();
     this._updateCalendarDate();
   }
 
@@ -317,12 +316,12 @@ export class FsDatePickerDialogModel {
   }
 
   private _updateDisabled() {
-    this._updateDisabledDays();
+    this._updateDisabledDates();
     this._updateDisabledTimes();
   }
 
-  private _updateDisabledDays() {
-    this.disabledDays = getDisabledDays(this.minDate, this.maxDate, this.minYear, this.maxYear);
+  private _updateDisabledDates() {
+    this.disabledDates = getDisabledDates(this.minDate, this.maxDate, this.minYear, this.maxYear);
   }
 
   private _updateCalendarDate() {

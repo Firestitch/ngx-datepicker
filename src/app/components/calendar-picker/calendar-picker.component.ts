@@ -43,7 +43,7 @@ export class FsDateCalendarPickerComponent implements OnInit, OnChanges, Control
   public today = true;
 
   @Input()
-  public disabledDays: [Date, Date][];
+  public disabledDates: [Date, Date][];
 
   @Input()
   public enabledDates: [Date, Date][];
@@ -59,6 +59,12 @@ export class FsDateCalendarPickerComponent implements OnInit, OnChanges, Control
 
   @Input()
   public focusDate: Date;
+
+  @Input() 
+  public minDate = null;
+
+  @Input() 
+  public maxDate = null;
 
   @Output()
   public monthChange = new EventEmitter<Date>();

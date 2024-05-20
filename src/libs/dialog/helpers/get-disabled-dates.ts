@@ -1,7 +1,7 @@
 import { addDays, addYears, subDays, subYears } from 'date-fns';
 
 
-export function getDisabledDays(
+export function getDisabledDates(
   minDate: Date,
   maxDate: Date,
   minYear: number,

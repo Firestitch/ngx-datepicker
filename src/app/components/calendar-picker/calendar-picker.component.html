@@ -18,9 +18,11 @@
     [weekStartsOn]="datePickerModel.weekStartsOn"
     [periodWeeks]="datePickerModel.periodWeeks"
     [showToday]="today"
+    [minDate]="minDate"
+    [maxDate]="maxDate"
     [daySize]="daySize"
-    [enabledDays]="enabledDates"
-    [disabledDays]="disabledDays"
+    [enabledDates]="enabledDates"
+    [disabledDates]="disabledDates"
     (change)="dateChanged($event)">
   </fs-date-picker-calendar>
 </div>

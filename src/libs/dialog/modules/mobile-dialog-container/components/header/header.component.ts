@@ -1,11 +1,11 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
 } from '@angular/core';
 
 
@@ -42,7 +42,7 @@ export class FsDatePickerMobileHeaderComponent implements AfterViewInit {
   public maxYear: number;
 
   @Input()
-  public disabledDays: [Date, Date][];
+  public disabledDates: [Date, Date][];
 
   @Input()
   public calendarDate: Date;

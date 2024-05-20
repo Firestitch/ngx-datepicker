@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { addDays, setDate } from 'date-fns';
+import { addDays, endOfMonth, setDate, startOfMonth } from 'date-fns';
 
 @Component({
   selector: 'app-calendar-example',
@@ -11,6 +11,8 @@ import { addDays, setDate } from 'date-fns';
 export class CalendarExampleComponent implements OnInit {
 
   public monthDate;
+  public minDate = startOfMonth(new Date());
+  public maxDate = endOfMonth(new Date());
 
   public enabledDates: [Date, Date][];
 

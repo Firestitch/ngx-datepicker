@@ -16,7 +16,7 @@
           [dateMode]="datePickerModel.calendarMode$ | async"
           [highlightStartDate]="modelFrom$ | async"
           [highlightEndDate]="modelTo$ | async"
-          [disabledDays]="datePickerModel.disabledDays$ | async"
+          [disabledDates]="datePickerModel.disabledDates$ | async"
           [weekStartsOn]="datePickerModel.weekStartsOn"
           [hideExtraDays]="true"
           (change)="dateChanged($event)">
@@ -29,7 +29,7 @@
           [highlightEndDate]="modelTo$ | async"
           [calendarDate]="rightCalendarDate$ | async"
           [dateMode]="datePickerModel.calendarMode$ | async"
-          [disabledDays]="datePickerModel.disabledDays$ | async"
+          [disabledDates]="datePickerModel.disabledDates$ | async"
           [weekStartsOn]="datePickerModel.weekStartsOn"
           [hideExtraDays]="true"
           (change)="dateChanged($event)">

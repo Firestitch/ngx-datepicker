@@ -61,10 +61,10 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   public dateMode: string = null;
 
   @Input()
-  public enabledDays: [Date, Date][] = null;
+  public enabledDates: [Date, Date][] = null;
 
   @Input()
-  public disabledDays: [Date, Date][] = null;
+  public disabledDates: [Date, Date][] = null;
 
   @Input()
   public calendarDate: Date = null;
@@ -89,6 +89,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
   @Input()
   public daySize;
+
+  @Input()
+  public maxDate;
+
+  @Input()
+  public minDate;
 
   @Output()
   public change = new EventEmitter<Date>();
@@ -311,10 +317,12 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
       date,
       this.seedDate,
       this.periodWeeks,
-      this.enabledDays,
-      this.disabledDays,
+      this.enabledDates,
+      this.disabledDates,
       this.hideExtraDays,
       this.weekStartsOn,
+      this.minDate,
+      this.maxDate,
     );
 
     this.weekDaysList = this.weekStartsOn !== undefined ? WEEKDAYS.map((_, i, arr) => {
