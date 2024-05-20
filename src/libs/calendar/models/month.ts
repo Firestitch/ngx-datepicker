@@ -74,7 +74,7 @@ export class Month {
       const dayMuted = d - this._prevMonthDaysCount < 0
         || d >= this._daysInMonth + this._prevMonthDaysCount;
 
-      const enabled = !!this._enabledDays ? isDayInRange(this._enabledDays, currentDate) : false;
+      const enabled = this._enabledDays ? isDayInRange(this._enabledDays, currentDate) : false;
       const disabled = !!this._enabledDays && !enabled ? true : isDayInRange(this._disabledDates, currentDate);
 
       week.addDay({
@@ -142,12 +142,14 @@ export class Month {
     this.years = [this.date.getFullYear()];
     this._disabledDates = this._disabledDates || [];
 
-    if(this._minDate || this._maxDate) {
+    if(this._minDate) {
       this._disabledDates
-        .push([
-          this._minDate || new Date(0),  
-          this._maxDate || new Date(9999,0,1)
-        ]);
+        .push([new Date(0),this._minDate]);
+    } 
+
+    if(this._maxDate) {
+      this._disabledDates
+        .push([this._maxDate, new Date(9999,0,1)]);
     }
   }
 
