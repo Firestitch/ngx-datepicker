@@ -10,14 +10,13 @@ import {
 
 import { MatFormField } from '@angular/material/form-field';
 
-import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
-import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
+import { PickerViewType, ScrollPickerViewType } from '../../../libs/common/enums';
 
 
 @Component({
   selector: 'fs-datepicker-trigger',
-  templateUrl: 'date-picker-trigger.component.html',
-  styleUrls: ['date-picker-trigger.component.scss'],
+  templateUrl: './date-picker-trigger.component.html',
+  styleUrls: ['./date-picker-trigger.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDatePickerTriggerComponent implements AfterViewInit {
@@ -33,7 +32,7 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
 
   constructor(
     @Optional() public matFormField: MatFormField,
-    private el: ElementRef,
+    private _el: ElementRef,
   ) {}
 
   public get isTimeView(): boolean {
@@ -46,7 +45,11 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
 
     matElementRef
       .querySelector('.mat-form-field-flex')
-      ?.insertBefore(this.el.nativeElement.firstChild, infixEl);
+      ?.insertBefore(this._el.nativeElement.firstChild, infixEl);
+
+    setTimeout(() => {
+      this.matFormField.updateOutlineGap();
+    }, 1000);
   }
 
   public triggerClick(event: UIEvent) {
