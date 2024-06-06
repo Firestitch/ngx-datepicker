@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { addMonths } from 'date-fns/esm';
+
+import { addMonths } from 'date-fns';
 
 
 @Component({
