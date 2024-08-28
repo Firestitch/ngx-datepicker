@@ -26,14 +26,14 @@
         </ng-container>
 
         <ng-container *ngFor="let day of week.days">
-          <td 
+          <td
               class="tile day"
               [class.highlight]="!day.disabled && !day.surrounding && !!highlightedRangeDays.data[day.date]"
               [class.highlight-from]="day.date === selectedRange.from && !day.surrounding && selectedRange.from !== selectedRange.to"
               [class.highlight-to]="day.date === selectedRange.to && !day.surrounding && selectedRange.from !== selectedRange.to">
-            <ng-container *ngIf="!day.surrounding || (showSurroundingDays && day.surrounding)">
-              <div 
-                  class="tile-content" 
+            <ng-container *ngIf="!day.surrounding || (showSurroundingDays && day.surrounding) else emptyTile">
+              <div
+                  class="tile-content"
                   [style.width]="daySize + 'px'"
                   [style.height]="daySize + 'px'"
                   [class.hidden-day]="hideExtraDays && day.surrounding"
@@ -51,6 +51,13 @@
                 {{ day.number }}
               </div>
             </ng-container>
+            <ng-template #emptyTile>
+              <div
+                class="empty-tile"
+                [style.width]="daySize + 'px'"
+                [style.height]="daySize + 'px'">
+              </div>
+            </ng-template>
           </td>
         </ng-container>
       </tr>
