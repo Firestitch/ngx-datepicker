@@ -12,9 +12,9 @@ export const START_CYCLE_YEAR = 1900;
 const RENDER_BUFFER = 500;
 
 // height of month label and week days line
-const MONTH_LABEL_HEIGHT = 78;
+const MONTH_LABEL_HEIGHT = 50;
 // height of week row
-const WEEK_HEIGHT = 50;
+const WEEK_HEIGHT = 45;
 
 export interface FsCalendarMobileScrollStrategy extends VirtualScrollStrategy {
   setInitialDate(date: Date): void;
