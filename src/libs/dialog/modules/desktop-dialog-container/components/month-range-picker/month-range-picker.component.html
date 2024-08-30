@@ -18,7 +18,6 @@
           [highlightEndDate]="modelTo$ | async"
           [disabledDates]="datePickerModel.disabledDates$ | async"
           [weekStartsOn]="datePickerModel.weekStartsOn"
-          [hideExtraDays]="true"
           (change)="dateChanged($event)">
         </fs-date-picker-calendar>
 
@@ -31,7 +30,6 @@
           [dateMode]="datePickerModel.calendarMode$ | async"
           [disabledDates]="datePickerModel.disabledDates$ | async"
           [weekStartsOn]="datePickerModel.weekStartsOn"
-          [hideExtraDays]="true"
           (change)="dateChanged($event)">
         </fs-date-picker-calendar>
       </div>
