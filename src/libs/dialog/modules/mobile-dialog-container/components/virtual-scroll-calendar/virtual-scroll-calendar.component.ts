@@ -94,7 +94,7 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
 
   public ngOnInit() {
     this._scrollStrategy.setInitialDate(this.datePickerModel.model || new Date());
-    this._scrollToClosestMonth();
+    // this._scrollToClosestMonth();
 
     if (this.parentTabGroup) {
       this._listenTabIndexChange();
@@ -153,6 +153,8 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
     this._activeScrollIndex = activeIndex;
   }
 
+/*
+  // Best feature ever :( but it was decided to disable it...
   private _scrollToClosestMonth(): void {
     const touchstart$ = fromEvent(
       this.virtualScroll.elementRef.nativeElement,
@@ -185,6 +187,7 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
         this.virtualScroll.scrollToIndex(this._activeScrollIndex, 'smooth');
       });
   }
+*/
 
   private _initMonthRangeModels(): void {
     this.modelFrom$ = this.datePickerModel

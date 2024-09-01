@@ -14,7 +14,8 @@ const RENDER_BUFFER = 500;
 // height of month label and week days line
 const MONTH_LABEL_HEIGHT = 50;
 // height of week row
-const WEEK_HEIGHT = 45;
+// current week height increased to fix centering
+const WEEK_HEIGHT = 49;
 
 export interface FsCalendarMobileScrollStrategy extends VirtualScrollStrategy {
   setInitialDate(date: Date): void;
