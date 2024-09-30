@@ -46,7 +46,7 @@
     "@firestitch/autocomplete-chips": "^12.4.1",
     "@firestitch/clear": "^12.3.10",
     "@firestitch/common": "^12.5.1",
-    "@firestitch/component-tools": "^13.1.1",
+    "@firestitch/component-tools": "^14.0.0",
     "@firestitch/core": "^12.0.3",
     "@firestitch/date": "^13.0.0",
     "@firestitch/datepicker": "^13.4.2",
