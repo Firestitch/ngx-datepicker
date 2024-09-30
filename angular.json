@@ -155,6 +155,5 @@
         }
       }
     }
-  },
-  "defaultProject": "fs-package-app"
+  }
 }
