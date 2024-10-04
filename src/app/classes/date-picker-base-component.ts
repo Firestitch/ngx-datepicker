@@ -1,6 +1,5 @@
 import {
   Directive,
-  ElementRef,
   EventEmitter,
   HostListener,
   Input,
@@ -79,8 +78,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   protected _timezone: string;
   protected _originValue: Date | null; // before timezone
   protected _value;
-  protected _elementRef: ElementRef;
-  protected _renderer;
   protected _onChange: (value: any) => void;
   protected _onTouch: () => void;
   protected _validator: ValidatorFn | null;
@@ -270,7 +267,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   protected inputChange(value: string): void {
-    if (!!value) {
+    if (value) {
       const lastValueWasValid = this._lastValueValid;
       const date = parseDate(value);
 

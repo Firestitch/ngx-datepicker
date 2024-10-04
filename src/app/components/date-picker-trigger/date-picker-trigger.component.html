@@ -1,4 +1,4 @@
-<div class="mat-form-field-prefix fs-date-picker-trigger" [ngClass]="{ disabled: disabled }">
+<div class="fs-date-picker-trigger" [ngClass]="{ disabled: disabled, hide: !value }">
   <mat-icon (click)="triggerClick($event)" >
     <ng-container *ngIf="isTimeView; else calendarIcon">
       schedule

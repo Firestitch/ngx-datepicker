@@ -16,7 +16,6 @@ import { endOfDay, startOfDay } from 'date-fns';
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { formatPeriodObject } from '../../../libs/common/helpers/format-period-object';
 import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interface';
-import { WeekDays } from '../../../libs/common/types/week-days.type';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
@@ -41,9 +40,6 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
   @Input() public seedDate = null;
   @Input() public period = 1;
   @Input() public view = PickerViewType.Week;
-
-  @Input()
-  public weekStartsOn: WeekDays;
 
   @Output('change')
   public change$ = new EventEmitter<any>();
@@ -95,7 +91,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
   }
 
   protected updateValue(period): void {
-    if (!!period) {
+    if (period) {
       period.from = startOfDay(period.from);
       period.to = endOfDay(period.to);
     }

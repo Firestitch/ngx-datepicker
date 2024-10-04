@@ -19,7 +19,6 @@ import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { isSameDate } from '../../../../libs/common/helpers/is-same-date';
-import { WeekDays } from '../../../../libs/common/types/week-days.type';
 import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { FsPickerBaseComponent } from '../../../classes/picker-base-component';
 import { RangePickerRef } from '../../../classes/range-picker-ref';
@@ -55,9 +54,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   @Input()
   public format: string;
-
-  @Input()
-  public weekStartsOn: WeekDays;
 
   @Input() public ngModelOptions: {
     name?: string;

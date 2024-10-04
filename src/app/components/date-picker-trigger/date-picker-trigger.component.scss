@@ -2,6 +2,10 @@
   margin-right: 5px;
   user-select: none;
 
+  &.hide {
+    display: none;
+  }
+
   mat-icon {
     cursor: pointer;
     font-size: 21px !important;

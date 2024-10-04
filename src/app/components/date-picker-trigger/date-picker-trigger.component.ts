@@ -25,6 +25,9 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
   public disabled: boolean;
 
   @Input()
+  public value;
+
+  @Input()
   public view: PickerViewType | ScrollPickerViewType;
 
   @Output()
@@ -38,24 +41,30 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
   public get isTimeView(): boolean {
     return this.view === PickerViewType.Time;
   }
-
+  
   public ngAfterViewInit() {
-    const matElementRef = this.matFormField._elementRef.nativeElement;
-    const infixEl = matElementRef.querySelector('.mat-form-field-infix');
+    const el = this._getFormFieldFlex(this._el.nativeElement);
 
-    matElementRef
-      .querySelector('.mat-form-field-flex')
-      ?.insertBefore(this._el.nativeElement.firstChild, infixEl);
+    const suffix = document.createElement('div');
+    suffix.classList.add('mat-mdc-form-field-icon-suffix');
 
-    setTimeout(() => {
-      this.matFormField.updateOutlineGap();
-    }, 1000);
+    el.prepend(suffix);
+
+    suffix.appendChild(this._el.nativeElement);
   }
 
   public triggerClick(event: UIEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.click.emit();
+  }
+
+  private _getFormFieldFlex(el: Element) {
+    if (el.classList.contains('mat-mdc-form-field-flex')) {
+      return el;
+    }
+
+    return el.parentElement ? this._getFormFieldFlex(el.parentElement) : null;
   }
 
 }

@@ -6,10 +6,10 @@ import {
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatInput } from '@angular/material/input';
 
+import { WeekDays } from '../../libs/common/types/week-days.type';
 import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
 import { IFsDatePickerConfig } from '../interfaces/datepicker-config.interface';
 import { FS_DATEPICKER_CONFIG } from '../providers/datepicker-config.provider';
-import { WeekDays } from '../../libs/common/types/week-days.type';
 
 
 @Directive()
@@ -26,6 +26,7 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
   @Input()
   public editable = true;
 
+  @Input()
   public weekStartsOn: WeekDays;
 
   protected _renderer: Renderer2;

@@ -14,7 +14,6 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { isValid, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
-import { WeekDays } from '../../../libs/common/types/week-days.type';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
@@ -43,7 +42,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   public static template = `
     <fs-clear [show]="!disabled && !readonly && clear" (clear)="cleared($event)" [visible]="value"></fs-clear>
     <ng-container *ngIf="icon">
-      <fs-datepicker-trigger (click)="triggerClick()" [disabled]="disabled || readonly" [view]="view"></fs-datepicker-trigger>
+      <fs-datepicker-trigger (click)="triggerClick()" [disabled]="disabled || readonly" [view]="view" [value]="value"></fs-datepicker-trigger>
     </ng-container>
   `;
 
@@ -55,9 +54,6 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   @Input() public view = PickerViewType.Date;
   @Input() public format: string;
   @Input() public minutes = true;
-
-  @Input()
-  public weekStartsOn: WeekDays;
 
   @Output('change')
   public change$ = new EventEmitter<any>();
