@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "15.0.1",
+  "version": "16.0.0",
   "title": "Date/Time Picker",
   "repository": {
     "type": "git",
@@ -29,26 +29,26 @@
     "npm-update": "npx npm-check-updates -u \"/@firestitch/\" --target semver"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.11",
-    "@angular/animations": "^15.2.10",
-    "@angular/cdk": "^15.2.9",
-    "@angular/cli": "^15.2.11",
-    "@angular/common": "^15.2.10",
-    "@angular/compiler": "^15.2.10",
-    "@angular/compiler-cli": "^15.2.10",
-    "@angular/core": "^15.2.10",
-    "@angular/forms": "^15.2.10",
-    "@angular/material": "^15.2.9",
-    "@angular/platform-browser": "^15.2.10",
-    "@angular/platform-browser-dynamic": "^15.2.10",
-    "@angular/router": "^15.2.10",
+    "@angular-devkit/build-angular": "^16.2.16",
+    "@angular/animations": "^16.2.12",
+    "@angular/cdk": "^16.2.14",
+    "@angular/cli": "^16.2.16",
+    "@angular/common": "^16.2.12",
+    "@angular/compiler": "^16.2.12",
+    "@angular/compiler-cli": "^16.2.12",
+    "@angular/core": "^16.2.12",
+    "@angular/forms": "^16.2.12",
+    "@angular/material": "^16.2.14",
+    "@angular/platform-browser": "^16.2.12",
+    "@angular/platform-browser-dynamic": "^16.2.12",
+    "@angular/router": "^16.2.12",
     "@firestitch/api": "^15.0.1",
     "@firestitch/autocomplete": "^15.0.0",
     "@firestitch/autocomplete-chips": "^15.0.1",
     "@firestitch/chip": "^15.0.0",
     "@firestitch/clear": "^15.0.1",
     "@firestitch/common": "^15.0.0",
-    "@firestitch/component-tools": "^15.0.5",
+    "@firestitch/component-tools": "^16.0.0",
     "@firestitch/core": "^15.0.0",
     "@firestitch/date": "^15.0.1",
     "@firestitch/datepicker": "^15.0.0",
@@ -76,7 +76,7 @@
     "lodash-es": "^4.17.15",
     "rxjs": "^6.5.3",
     "typescript": "~4.9.5",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.13.3"
   },
   "engines": {
     "node": ">=6.0.0"
