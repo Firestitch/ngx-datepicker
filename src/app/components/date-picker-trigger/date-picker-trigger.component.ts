@@ -45,12 +45,14 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
   public ngAfterViewInit() {
     const el = this._getFormFieldFlex(this._el.nativeElement);
 
-    const suffix = document.createElement('div');
-    suffix.classList.add('mat-mdc-form-field-icon-suffix');
+    if(el) {
+      const suffix = document.createElement('div');
+      suffix.classList.add('mat-mdc-form-field-icon-suffix');
 
-    el.prepend(suffix);
+      el.prepend(suffix);
 
-    suffix.appendChild(this._el.nativeElement);
+      suffix.appendChild(this._el.nativeElement);
+    }
   }
 
   public triggerClick(event: UIEvent) {
