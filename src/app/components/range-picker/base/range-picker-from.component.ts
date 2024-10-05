@@ -40,7 +40,7 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
   public ngOnDestroy() {
     this._rangePickerStore.destroyStartDatePicker(this.name);
 
-    this._destroy$.next();
+    this._destroy$.next(null);
     this._destroy$.complete();
   }
 

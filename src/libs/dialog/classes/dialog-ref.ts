@@ -66,7 +66,7 @@ export class FsDatePickerDialogRef {
 
   public close(): void {
     this.pickerOverlayRef.close();
-    this._close$.next();
+    this._close$.next(null);
     this._close$.complete();
   }
 
