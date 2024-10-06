@@ -56,7 +56,7 @@
     "@firestitch/drawer": "^18.0.0",
     "@firestitch/example": "^17.0.0",
     "@firestitch/file": "^17.0.0",
-    "@firestitch/form": "^17.0.0",
+    "@firestitch/form": "^18.0.0",
     "@firestitch/html": "^17.0.0",
     "@firestitch/iframe": "^17.0.0",
     "@firestitch/label": "^17.0.0",
