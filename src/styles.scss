@@ -189,7 +189,7 @@
     &.selected,
     &.range-from,
     &.range-to {
-      background-color: mat.get-color-from-palette($selected-color);
+      background-color: mat.m2-get-color-from-palette($selected-color);
       font-weight: bold;
       color: #fff;
     }
@@ -243,13 +243,13 @@
   .has-view-time {
     .summary .date.active,
     .summary .time.active {
-      color: mat.get-color-from-palette($palette);
+      color: mat.m2-get-color-from-palette($palette);
     }
   }
 }
 
 .time-container .minutes .button-expand {
-  color: mat.get-color-from-palette($palette);
+  color: mat.m2-get-color-from-palette($palette);
 }
 
 .mat-form-field.fs-date-picker-datetime-range-field {
