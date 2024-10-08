@@ -1,5 +1,5 @@
 import { isDate, isValid } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import { toZonedTime } from 'date-fns-tz';
 
 
 export function createDateFromValue(value, timezone: string) {
@@ -14,7 +14,7 @@ export function createDateFromValue(value, timezone: string) {
   }
 
   if (value && timezone) {
-    return utcToZonedTime(value, timezone);
+    return toZonedTime(value, timezone);
   }
 
   return value;

@@ -15,7 +15,7 @@ import { fromEvent, Observable, Subject } from 'rxjs';
 import { filter, map, pairwise, skip, take, takeUntil, tap } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { fromZonedTime } from 'date-fns-tz';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { isSameDate } from '../../../../libs/common/helpers/is-same-date';
@@ -232,7 +232,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     this.updateInput(this._value);
 
     if (value && this.timezone) {
-      value = zonedTimeToUtc(value, this.timezone);
+      value = fromZonedTime(value, this.timezone);
     }
 
     this.onChange(value);

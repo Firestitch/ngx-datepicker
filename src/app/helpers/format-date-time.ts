@@ -1,9 +1,7 @@
-import { isNumber } from 'lodash-es';
-import { format, isValid } from 'date-fns';
-
 import { format as fsFormat } from '@firestitch/date';
 
-import { utcToZonedTime } from 'date-fns-tz';
+import { format, isValid } from 'date-fns';
+import { isNumber } from 'lodash-es';
 
 import { PickerViewType } from '../../libs/common/enums/picker-view-type.enum';
 import { ScrollPickerViewType } from '../../libs/common/enums/scroll-picker-view-type.enum';
@@ -30,33 +28,47 @@ export function formatDateTime(
 
     if (customDateFormat) {
       return fsFormat(value, customDateFormat, { timezone });
-    } else {
+    } 
 
-      if (([
-        PickerViewType.Date,
-        PickerViewType.MonthRange,
-        PickerViewType.DateTime,
-      ] as unknown[]).indexOf(dateFormat) != -1) {
-        formats.push('MMM d, yyyy');
-      }
+    if (([
+      PickerViewType.Date,
+      PickerViewType.MonthRange,
+      PickerViewType.DateTime,
+    ] as unknown[]).indexOf(dateFormat) != -1) {
+      formats.push('MMM d, yyyy');
+    }
 
-      if (([PickerViewType.Time, PickerViewType.DateTime] as unknown[]).indexOf(dateFormat) != -1) {
-        formats.push('h:mm aa');
-      }
+    if (([PickerViewType.Time, PickerViewType.DateTime] as unknown[]).indexOf(dateFormat) != -1) {
+      formats.push('h:mm aa');
+    }
 
-      if (dateFormat === ScrollPickerViewType.MonthDay) {
+    switch (dateFormat) {
+      case ScrollPickerViewType.MonthDay: {
         formats.push('MMMM d');
 
-      } else if (dateFormat === ScrollPickerViewType.MonthYear) {
+    
+        break;
+      }
+      case ScrollPickerViewType.MonthYear: {
         formats.push('MMMM yyyy');
 
-      } else if (dateFormat === ScrollPickerViewType.Year) {
+    
+        break;
+      }
+      case ScrollPickerViewType.Year: {
         formats.push('yyyy');
 
-      } else if (dateFormat === ScrollPickerViewType.Month) {
-        formats.push('MMMM');
+    
+        break;
       }
+      case ScrollPickerViewType.Month: {
+        formats.push('MMMM');
+    
+        break;
+      }
+    // No default
     }
+    
 
     return format(value, formats.join(' '));
   }

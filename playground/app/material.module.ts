@@ -1,5 +1,6 @@
-import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
+
+import { CdkTableModule } from '@angular/cdk/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -65,6 +66,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       MatTabsModule,
       MatToolbarModule,
       MatTooltipModule,
-    ]
+    ],
   })
-  export class AppMaterialModule {}
+export class AppMaterialModule {}

@@ -21,7 +21,7 @@ import { filter, take, takeUntil, tap } from 'rxjs/operators';
 
 
 import { isEqual, isValid } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { fromZonedTime } from 'date-fns-tz';
 
 import { parseDate } from '../helpers/parse-date';
 
@@ -241,7 +241,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
 
   protected updateValue(date): void {
     if (date && this.timezone) {
-      date = zonedTimeToUtc(date, this.timezone);
+      date = fromZonedTime(date, this.timezone);
     }
 
     this._value = date;

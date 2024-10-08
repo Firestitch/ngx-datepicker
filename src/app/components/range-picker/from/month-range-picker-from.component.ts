@@ -8,10 +8,9 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { startOfDay } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import { fromZonedTime } from 'date-fns-tz';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
-
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerFromComponent } from '../base/range-picker-from.component';
 
@@ -23,11 +22,11 @@ import { RangePickerFromComponent } from '../base/range-picker-from.component';
 })
 export class MonthRangePickerFromComponent extends RangePickerFromComponent implements OnInit {
 
-  @Input() set fsMonthRangeFrom(value) {
+  @Input() public set fsMonthRangeFrom(value) {
     this._name = value;
   }
 
-  @Input() set fsMonthRangeFromPicker(value) {
+  @Input() public set fsMonthRangeFromPicker(value) {
     this._name = value;
   }
 
@@ -54,7 +53,7 @@ export class MonthRangePickerFromComponent extends RangePickerFromComponent impl
     this.updateInput(this._value);
 
     if (value && this.timezone) {
-      value = zonedTimeToUtc(value, this.timezone);
+      value = fromZonedTime(value, this.timezone);
     }
 
     this.onChange(value);
@@ -92,6 +91,7 @@ export class MonthRangePickerFromComponent extends RangePickerFromComponent impl
       .subscribe((newValue: Date | null) => {
         if (this._skipUpdateValue) {
           this._skipUpdateValue = false;
+
           return;
         }
 
