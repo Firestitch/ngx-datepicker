@@ -86,7 +86,7 @@ export class MonthRangePickerFromComponent extends RangePickerFromComponent impl
   protected _subscribeToPickerRefUpdates() {
     this._pickerRefUpdates$(this._pickerRef.startDate$)
       .pipe(
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe((newValue: Date | null) => {
         if (this._skipUpdateValue) {

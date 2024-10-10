@@ -1,4 +1,3 @@
-import parseMessyDate from 'parse-messy-time';
 import { isValid } from 'date-fns';
 
 export function parseDate(value: string): Date | null {
@@ -8,7 +7,7 @@ export function parseDate(value: string): Date | null {
     return parsedDate;
   }
 
-  parsedDate = parseMessyDate(value);
+  parsedDate = new Date(Date.parse(value));
 
   if (isValid(parsedDate)) {
     return parsedDate;

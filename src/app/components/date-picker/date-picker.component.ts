@@ -109,7 +109,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
     super.open();
   }
 
-  protected updateValue(value) {
+  public updateValue(value) {
     if (this.view === PickerViewType.Time && isValid(this._value) && isValid(value)) {
       this._value.setHours(value.getHours());
       this._value.setMinutes(value.getMinutes());

@@ -4,6 +4,7 @@ import { ThemePalette } from '@angular/material/core';
 
 import { fromEvent, Subject } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
+
 import { FsDatePickerCalendarComponent } from '../../../../../../libs/calendar/components';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
@@ -105,25 +106,26 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     if(this.datePickerCalendar) {
       fromEvent(this.datePickerCalendar.nativeElement, 'wheel')
-      .pipe(
-        tap((event: any) => {
-          event.preventDefault();
-          event.stopPropagation(); 
-        }),
-        filter((event: any) => {
-          this._wheelDelta += Math.abs(event.wheelDeltaY);
-          return this._wheelDelta > 13;
-        }), 
-        takeUntil(this._destroy$),
-      )
-      .subscribe((event) => {
-        this._wheelDelta = 0;
-        if(event.deltaY > 0) {
-          this.nextMonth();
-        } else {
-          this.prevMonth();
-        }
-      });
+        .pipe(
+          tap((event: any) => {
+            event.preventDefault();
+            event.stopPropagation(); 
+          }),
+          filter((event: any) => {
+            this._wheelDelta += Math.abs(event.wheelDeltaY);
+
+            return this._wheelDelta > 13;
+          }), 
+          takeUntil(this._destroy$),
+        )
+        .subscribe((event) => {
+          this._wheelDelta = 0;
+          if(event.deltaY > 0) {
+            this.nextMonth();
+          } else {
+            this.prevMonth();
+          }
+        });
     }
   }
 }

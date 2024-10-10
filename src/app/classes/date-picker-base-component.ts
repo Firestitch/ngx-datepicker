@@ -16,7 +16,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { filter, take, takeUntil, tap } from 'rxjs/operators';
 
 
@@ -82,11 +82,9 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   protected _onTouch: () => void;
   protected _validator: ValidatorFn | null;
 
-
   private _validatorOnChange: () => void;
   private _clear = true;
   private _lastValueValid = false;
-  private _destroy$ = new Subject();
 
   public registerOnChange(fn: (value: any) => any): void {
     this._onChange = fn;
@@ -101,14 +99,18 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   public ngOnInit(): void {
-    this._validator = Validators.compose([this._parseValidator]);
     super.ngOnInit();
+    this._validator = Validators.compose([this._parseValidator]);
     fromEvent(this.el, 'focus')
       .pipe(
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        if (this._focusAfterClose) {
+        if(!this.value) {
+          this.open();
+        } 
+
+        if (!this.value && this._focusAfterClose) {
           this._focusAfterClose = false;
 
           return;
@@ -123,7 +125,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
         filter(() => this.editable),
         tap(() => this.close()),
         filter((event: KeyboardEvent) => ['Tab', 'Enter', 'Escape'].includes(event.key)),
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.key === 'Enter') {
@@ -148,7 +150,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   public cleared(event) {
-    // super.cleared(event);
     event.stopPropagation();
     event.preventDefault();
 
@@ -158,10 +159,8 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   }
 
   public ngOnDestroy() {
+    super.ngOnDestroy();
     this.close();
-
-    this._destroy$.next(null);
-    this._destroy$.complete();
   }
 
   public setDisabledState(isDisabled: boolean) {
@@ -180,7 +179,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this._dateDialogRef.value$
       .pipe(
         takeUntil(this._dateDialogRef.close$),
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe((value: Date) => {
         this.updateValue(value);
@@ -190,7 +189,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this._dateDialogRef.close$
       .pipe(
         take(1),
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
         this._dateDialogRef = null;
@@ -214,32 +213,31 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this.open();
   }
 
-  @HostListener('keyup', ['$event', '$event.target.value'])
-  public _inputKeyup(event: KeyboardEvent, value: string): void {
-    if(event.key === 'Enter') {
-      this.inputChange(value);
-    }
-  }
-
-  @HostListener('input', ['$event.target.value', '$event.target'])
-  public _inputChange(value: string, target): void {
-    if (this.ngModelOptions?.updateOn !== 'blur')  {
-      this.inputChange(value);
-    }
-  }
-
   @HostListener('blur', ['$event.target.value'])
   public _inputBlur(value: string): void {
-    if (this.ngModelOptions?.updateOn === 'blur')  {
-      this.inputChange(value);
-    }
-
-    // this.updateInput(this.value);
-
+    this.inputChange(value);
+    this.updateInput(this.value);
     this.blured$.emit(this.value);
   }
 
-  protected updateValue(date): void {
+  public inputChange(value: string): void {
+    if (value) {
+      const lastValueWasValid = this._lastValueValid;
+      const date = parseDate(value);
+
+      this.validateDate(date);
+
+      if (!isEqual(date, this._value)) {
+        this.updateValue(date);
+      } else if (lastValueWasValid !== this._lastValueValid) {
+        this._validatorOnChange();
+      }
+    } else {
+      this.updateValue(null);
+    }
+  }
+
+  public updateValue(date): void {
     if (date && this.timezone) {
       date = fromZonedTime(date, this.timezone);
     }
@@ -262,27 +260,10 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       : { fsDatepickerParse: 'Invalid Date' };
   };
 
-  protected validateDate(date: Date | unknown) {
+  protected validateDate(date: Date | undefined) {
     this._lastValueValid = !date || isValid(date);
   }
 
-  protected inputChange(value: string): void {
-    if (value) {
-      const lastValueWasValid = this._lastValueValid;
-      const date = parseDate(value);
-
-      this.validateDate(date);
-
-      if (!isEqual(date, this._value)) {
-        this.updateValue(date);
-      } else if (lastValueWasValid !== this._lastValueValid) {
-        this._validatorOnChange();
-      }
-    } else {
-      this.updateValue(null);
-    }
-  }
-
-  abstract updateInput(value: Date): void;
+  public abstract updateInput(value: Date): void;
 
 }

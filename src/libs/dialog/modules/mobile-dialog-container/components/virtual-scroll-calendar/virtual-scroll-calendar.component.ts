@@ -18,14 +18,11 @@ import {
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatTabGroup } from '@angular/material/tabs';
 
-import { Observable, Subject, fromEvent, race, timer } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
-  debounceTime,
   delay,
   filter,
   shareReplay,
-  switchMap,
-  take,
   takeUntil,
 } from 'rxjs/operators';
 
@@ -153,7 +150,7 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
     this._activeScrollIndex = activeIndex;
   }
 
-/*
+  /*
   // Best feature ever :( but it was decided to disable it...
   private _scrollToClosestMonth(): void {
     const touchstart$ = fromEvent(

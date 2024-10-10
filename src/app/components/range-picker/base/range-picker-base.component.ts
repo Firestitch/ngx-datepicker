@@ -11,7 +11,7 @@ import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn } from '
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
 import { filter, map, pairwise, skip, take, takeUntil, tap } from 'rxjs/operators';
 
 import { isDate, isEqual, isValid } from 'date-fns';
@@ -83,12 +83,11 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   }
 
   protected _pickerRef: RangePickerRef;
-  protected _destroy$ = new Subject();
   protected _value;
   protected _originValue: Date | null; // before timezone
   protected _name;
   protected _timezone: string;
-
+  
   private _lastValueValid = false;
 
   protected constructor(
@@ -195,7 +194,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     this._dateDialogRef.close$
       .pipe(
         take(1),
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
         this.closed$.emit();
@@ -251,7 +250,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   }
 
   @HostListener('input', ['$event.target.value', '$event.target'])
-  public _inputChange(value: string, target): void {
+  public _inputChange(value: string): void {
     if (this.ngModelOptions?.updateOn !== 'blur')  {
       this.inputChange(value);
     }
@@ -328,7 +327,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     this._dateDialogRef.value$
       .pipe(
         takeUntil(this._dateDialogRef.close$),
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe((value: Date) => {
         this.updateValueFromDialog(value);
@@ -391,7 +390,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         filter((pickerType) => {
           return pickerType === this._type;
         }),
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
         setTimeout(() => {
@@ -405,7 +404,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
       .pipe(
         tap(() => this.close()),
         filter((event: KeyboardEvent) => ['Tab', 'Enter', 'Escape'].includes(event.key)),
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.key === 'Enter') {

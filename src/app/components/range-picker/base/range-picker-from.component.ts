@@ -12,17 +12,16 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { startOfDay } from 'date-fns';
 
-import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
-
-import { RangePickerComponent } from '../base/range-picker-base.component';
+import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
+import { RangePickerComponent } from '../base/range-picker-base.component';
 
 
 @Directive()
 export abstract class RangePickerFromComponent extends RangePickerComponent implements OnInit, OnDestroy {
 
-  public constructor(
+  constructor(
     @Optional() @Self() protected _ngControl: NgControl,
     protected _injector: Injector,
     protected _datepickerFactory: FsDatePickerDialogFactory,
@@ -38,10 +37,8 @@ export abstract class RangePickerFromComponent extends RangePickerComponent impl
   }
 
   public ngOnDestroy() {
+    super.ngOnDestroy();
     this._rangePickerStore.destroyStartDatePicker(this.name);
-
-    this._destroy$.next(null);
-    this._destroy$.complete();
   }
 
   public registerPicker() {

@@ -1,10 +1,12 @@
 import {
   ChangeDetectorRef, Directive, ElementRef, HostBinding,
-  Injector, Input, OnChanges, OnInit, Renderer2, SimpleChanges,
+  Injector, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges,
 } from '@angular/core';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatInput } from '@angular/material/input';
+
+import { Observable, Subject } from 'rxjs';
 
 import { WeekDays } from '../../libs/common/types/week-days.type';
 import { FsDatePickerDialogRef } from '../../libs/dialog/classes/dialog-ref';
@@ -13,7 +15,7 @@ import { FS_DATEPICKER_CONFIG } from '../providers/datepicker-config.provider';
 
 
 @Directive()
-export class FsPickerBaseComponent implements OnInit, OnChanges {
+export class FsPickerBaseComponent implements OnInit, OnChanges, OnDestroy {
 
   @HostBinding('class.fs-input-disabled')
   public disabled = false;
@@ -36,6 +38,8 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
   protected _cdRef: ChangeDetectorRef;
   protected _focusAfterClose = false;
 
+  private _destroy$ = new Subject<void>();
+
   constructor(
     protected _injector: Injector,
     protected _fm: FocusMonitor,
@@ -45,6 +49,10 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
     this._elementRef = _injector.get(ElementRef);
     this._globalConfig = _injector.get(FS_DATEPICKER_CONFIG);
     this._elementRef.nativeElement.setAttribute('autocomplete', 'off');
+  }
+
+  public get destroy$(): Observable<void> {
+    return this._destroy$.asObservable();
   }
 
   public get matInput(): MatInput {
@@ -67,6 +75,11 @@ export class FsPickerBaseComponent implements OnInit, OnChanges {
     }
 
     this._init();
+  }
+
+  public ngOnDestroy() {
+    this._destroy$.next(null);
+    this._destroy$.complete();
   }
 
   protected _doFocus(): void {

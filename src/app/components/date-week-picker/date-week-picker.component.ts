@@ -90,7 +90,7 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
     super.open();
   }
 
-  protected updateValue(period): void {
+  public updateValue(period): void {
     if (period) {
       period.from = startOfDay(period.from);
       period.to = endOfDay(period.to);

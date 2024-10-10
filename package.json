@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/datepicker",
-  "version": "18.0.1",
+  "version": "18.0.2",
   "title": "Date/Time Picker",
   "repository": {
     "type": "git",
@@ -84,8 +84,5 @@
     "@firestitch/date": ">=7.1.0",
     "@firestitch/scroll-picker": ">=7.0.2",
     "@firestitch/style": ">=8.2.0"
-  },
-  "dependencies": {
-    "parse-messy-time": "^2.1.0"
   }
 }
