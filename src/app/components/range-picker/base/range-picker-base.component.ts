@@ -207,7 +207,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         this._enableInput();
 
         this._focusAfterClose = true;
-        this._doFocus();
 
         this._cdRef.markForCheck();
       });
