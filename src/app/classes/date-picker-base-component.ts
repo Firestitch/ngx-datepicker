@@ -108,7 +108,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       .subscribe(() => {
         if(!this.value) {
           this.open();
-        } 
+        }
 
         if (!this.value && this._focusAfterClose) {
           this._focusAfterClose = false;
@@ -232,7 +232,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       } else if (lastValueWasValid !== this._lastValueValid) {
         this._validatorOnChange();
       }
-    } else {
+    } else if (this.value != null) {
       this.updateValue(null);
     }
   }
