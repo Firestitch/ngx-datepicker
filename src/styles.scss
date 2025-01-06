@@ -98,6 +98,8 @@
 .fs-date-picker-dialog {
   display: flex;
   justify-content: center;
+  overflow: hidden;
+  border-radius: var(--mdc-dialog-container-shape, var(--mat-app-corner-extra-large, 4px));
 }
 
 .fs-date-picker-container {
