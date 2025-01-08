@@ -1,14 +1,15 @@
 <form fsForm>
   <mat-form-field>
-    <mat-label>Time</mat-label>
-        <input
+    <mat-label>
+      Time
+    </mat-label>
+    <input
       matInput
       fsTimePicker
       fsFormRequired
-      (selected)="selected($event)"
+      (ngModelChange)="selected($event)"
       [(ngModel)]="model"
       name="timepicker"
-      
       (closed)="pickerClosed()">
   </mat-form-field>
 </form>

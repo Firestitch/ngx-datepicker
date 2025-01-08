@@ -43,14 +43,10 @@ export class FsDatePickerDialogModel {
 
   private _minYear = null;
   private _maxYear = null;
-
   private _pickerOptions: IDialogFactoryOptions;
-
   private _model$ = new BehaviorSubject<Date | null>(null);
   private _period$ = new BehaviorSubject<IDatePickerPeriod | null>(null);
-
   private _now$ = new BehaviorSubject<Date>(new Date());
-
   private _disabledDates$ = new BehaviorSubject<[Date, Date][]>([]);
   private _disabledTimes$ = new BehaviorSubject<[Date, Date][]>([]);
   private _calendarDate$ = new BehaviorSubject<Date>(this.now);

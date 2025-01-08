@@ -1,17 +1,19 @@
 import { Observable, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { isEqual, forEach } from 'lodash-es';
+import { forEach, isEqual } from 'lodash-es';
 
 import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
+import { IFsDatePickerDialogComponents } from '../interfaces/dialog-components.interface';
+import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
 
 import { FsDatePickerDialogModel } from './dialog-model';
 import { FsDatePickerOverlayRef } from './overlay-ref';
-import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
-import { IFsDatePickerDialogComponents } from '../interfaces/dialog-components.interface';
 
 
 export class FsDatePickerDialogRef {
+
+  public opened = true;
 
   private _overlayRef = new FsDatePickerOverlayRef();
   private _dialogModel: FsDatePickerDialogModel;
@@ -25,7 +27,7 @@ export class FsDatePickerDialogRef {
     calendarStart: false,
     calendarEnd: false,
     timeStart: false,
-    timeEnd: false
+    timeEnd: false,
   };
 
   private _components: IFsDatePickerDialogComponents = null;
@@ -56,7 +58,7 @@ export class FsDatePickerDialogRef {
     return this._close$.asObservable();
   }
 
-  get components() {
+  public get components() {
     return this._components;
   }
 
@@ -68,6 +70,7 @@ export class FsDatePickerDialogRef {
     this.pickerOverlayRef.close();
     this._close$.next(null);
     this._close$.complete();
+    this.opened = false;
   }
 
   private _init(): void {
@@ -84,17 +87,13 @@ export class FsDatePickerDialogRef {
   }
 
   private _initValue(): void {
-    if (this.options.view === 'week') {
-      this._value$ = this._dialogModel.period$
-        .pipe(
-          skip(1),
-        );
-    } else {
-      this._value$ = this._dialogModel.model$
-        .pipe(
-          skip(1),
-        );
-    }
+    this._value$ = String(this.options.view) === 'week' ? this._dialogModel.period$
+      .pipe(
+        skip(1),
+      ) : this._dialogModel.model$
+      .pipe(
+        skip(1),
+      );
   }
 
   private _initComponents(): void {

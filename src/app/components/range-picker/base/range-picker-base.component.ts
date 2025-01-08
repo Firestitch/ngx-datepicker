@@ -166,6 +166,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
       return;
     }
+
     const modelValue = this.value
       || (this._type === 'to' ? this._pickerRef.startDate : this._pickerRef.endDate);
 
@@ -239,7 +240,12 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   }
 
   public updateInput(value) {
-    this._elementRef.nativeElement.value = formatDateTime(value, this.view, this.format, this.timezone);
+    this._elementRef.nativeElement.value = formatDateTime(
+      value,
+      this.view,
+      this.format,
+      this.timezone,
+    );
   }
 
   @HostListener('keyup', ['$event', '$event.target.value'])
@@ -271,11 +277,15 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   @HostListener('blur', ['$event.target.value'])
   public _inputBlur(value: string): void {
-    if (this.ngModelOptions?.updateOn === 'blur')  {
-      this.inputChange(value);
-    }
 
-    this.updateInput(this.value);
+    if(!this._dateDialogRef.opened) {
+
+      if (this.ngModelOptions?.updateOn === 'blur')  {
+        this.inputChange(value);
+      }
+
+      this.updateInput(this.value);
+    }
   }
 
   public registerOnChange(fn) {

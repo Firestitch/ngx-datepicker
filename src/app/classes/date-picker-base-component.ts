@@ -215,9 +215,11 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
 
   @HostListener('blur', ['$event.target.value'])
   public _inputBlur(value: string): void {
-    this.inputChange(value);
-    this.updateInput(this.value);
-    this.blured$.emit(this.value);
+    if(!this.opened) {
+      this.inputChange(value);
+      this.updateInput(this.value);
+      this.blured$.emit(this.value);
+    }
   }
 
   public inputChange(value: string): void {

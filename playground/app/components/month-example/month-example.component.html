@@ -1,25 +1,25 @@
 <form fsForm>
   <mat-form-field>
-    <mat-label>Date Range From</mat-label>
-        <input
+    <mat-label>
+      Date Range From
+    </mat-label>
+    <input
       matInput
       fsMonthRangeFromPicker="datemonthpicker"
       [(ngModel)]="startDate"
       name="date_from"
-      
       fsFormRequired>
   </mat-form-field>
-
   <fs-date-range-separator></fs-date-range-separator>
-
   <mat-form-field>
-    <mat-label>Date Range To</mat-label>
-        <input
+    <mat-label>
+      Date Range To
+    </mat-label>
+    <input
       matInput
       fsMonthRangeToPicker="datemonthpicker"
       [(ngModel)]="endDate"
       name="date_to"
-      
       fsFormRequired>
   </mat-form-field>
 </form>
