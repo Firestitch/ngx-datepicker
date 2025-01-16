@@ -278,7 +278,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   @HostListener('blur', ['$event.target.value'])
   public _inputBlur(value: string): void {
 
-    if(!this._dateDialogRef.opened) {
+    if(!this._dateDialogRef?.opened) {
 
       if (this.ngModelOptions?.updateOn === 'blur')  {
         this.inputChange(value);
