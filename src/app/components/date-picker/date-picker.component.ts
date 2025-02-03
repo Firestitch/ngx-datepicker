@@ -3,13 +3,17 @@ import {
   Component,
   EventEmitter,
   forwardRef,
+  inject,
   Injector,
   Input,
+  OnInit,
   Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { MatFormField } from '@angular/material/form-field';
 
 import { isValid, startOfDay } from 'date-fns';
 
@@ -23,6 +27,7 @@ import { formatDateTime } from '../../helpers/format-date-time';
 @Component({
   selector: '[fsDatePicker]',
   template: FsDatePickerComponent.template,
+  styleUrl: './date-picker.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -36,8 +41,9 @@ import { formatDateTime } from '../../helpers/format-date-time';
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class FsDatePickerComponent extends FsDatePickerBaseComponent {
+export class FsDatePickerComponent extends FsDatePickerBaseComponent implements OnInit {
 
   public static template = `
     <fs-clear [show]="!disabled && !readonly && clear" (clear)="cleared($event)" [visible]="value"></fs-clear>
@@ -58,12 +64,21 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   @Output('change')
   public change$ = new EventEmitter<any>();
 
+  private _formField = inject(MatFormField);  
+
   constructor(
     protected _injector: Injector,
     protected _fsDatepickerFactory: FsDatePickerDialogFactory,
     fm: FocusMonitor,
   ) {
     super(_injector, fm);
+  }
+
+  public ngOnInit(): void {
+    super.ngOnInit();
+
+    const el = this._formField.getConnectedOverlayOrigin().nativeElement;
+    el.classList.add(`fs-date-picker-view-${this.view}`);
   }
 
   public writeValue(value: any): void {
@@ -118,7 +133,11 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
       value = new Date(this._value.getTime());
     }
 
-    if (this.view !== PickerViewType.Time && this.view !== PickerViewType.DateTime && isValid(value)) {
+    if (
+      this.view !== PickerViewType.Time && 
+      this.view !== PickerViewType.DateTime && 
+      isValid(value)
+    ) {
       value = startOfDay(value);
     }
 
@@ -126,7 +145,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent {
   }
 
   private _getDefaultComponents() {
-    if (this.view === 'time') {
+    if (this.view === PickerViewType.Time) {
       return { timeStart: true };
     }
 

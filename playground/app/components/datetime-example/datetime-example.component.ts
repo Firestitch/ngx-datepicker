@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'datetime-example',
   templateUrl: './datetime-example.component.html',
-  styleUrls: [ './datetime-example.component.css' ],
+  styleUrls: ['./datetime-example.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateTimeExampleComponent {
