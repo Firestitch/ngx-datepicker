@@ -233,12 +233,10 @@ export class FsDatePickerDialogModel {
 
   public setCalendarMonth(month: number) {
     this.goToMongth(month);
-    this.model = this.calendarDate;
   }
 
   public setCalendarYear(year: number) {
     this.goToYear(year);
-    this.model = this.calendarDate;
 
     this._updateDisabled();
   }
@@ -345,14 +343,14 @@ export class FsDatePickerDialogModel {
     if (this._pickerOptions.rangeType) {
       if (this._pickerOptions.rangeType === 'to') {
         this.disabledTimes = getDisabledTimes(
-          this.model,
+          this.calendarDate,
           this._pickerOptions.pickerRef.startDate,
           pickerView,
         );
       }
     } else {
       this.disabledTimes = getDisabledTimes(
-        this.model,
+        this.calendarDate,
         this.minDate,
         pickerView,
       );
