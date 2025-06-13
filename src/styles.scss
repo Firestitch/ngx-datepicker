@@ -69,6 +69,7 @@
           border-left-color: color-rgb($selected-color);
           border-bottom-color: color-rgb($selected-color);
           transform: rotateZ(45deg);
+          box-sizing: content-box;
         }
       }
     }
