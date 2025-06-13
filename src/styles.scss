@@ -109,17 +109,6 @@
     }
   }
 
-  .buttons {
-    background: #fff;
-    display: flex;
-    position: relative;
-
-    button {
-      margin: 5px;
-      width: 100%;
-    }
-  }
-
   * {
     user-select: none;
   }
@@ -237,6 +226,12 @@
   table {
     border-spacing: 0;
     margin: auto;
+    border: 0;
+
+    td, th {
+      border-width: 0;
+      border-color: transparent;
+    }
   }
 }
 

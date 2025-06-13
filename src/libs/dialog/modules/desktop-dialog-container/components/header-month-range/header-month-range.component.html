@@ -1,25 +1,30 @@
 <div class="current-month-header heading-container">
   <div class="actions">
-    <a 
+    <a
         mat-icon-button
-        (click)="prevMonth()" class="nav-action">
-      <mat-icon>navigate_before</mat-icon>
+        (click)="prevMonth()"
+        class="nav-action">
+      <mat-icon>
+        navigate_before
+      </mat-icon>
     </a>
   </div>
   <span class="month-name">
     {{ calendarDate | fsDateFormat: 'full-date-dayless' }}
   </span>
 </div>
-
 <div class="next-month-header heading-container">
   <span class="month-name">
     {{ nextCalendarDate | fsDateFormat: 'full-date-dayless' }}
   </span>
   <div class="actions">
-    <a 
+    <a
         mat-icon-button
-        (click)="nextMonth()" class="nav-action">
-      <mat-icon>navigate_next</mat-icon>
+        (click)="nextMonth()"
+        class="nav-action">
+      <mat-icon>
+        navigate_next
+      </mat-icon>
     </a>
   </div>
 </div>

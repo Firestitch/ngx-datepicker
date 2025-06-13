@@ -24,7 +24,7 @@ export class FsMobileCalendarDialogComponent {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA)
     private _data: any,
-    private _bottomSheetRef: MatBottomSheetRef<any>,
+    private _bottomSheetRef: MatBottomSheetRef,
   ) {
     this._dialogRef = this._data.dateDialogRef;
   }

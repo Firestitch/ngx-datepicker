@@ -2,31 +2,19 @@
   <div class="calendar-container">
     <ng-container [ngSwitch]="datePickerModel.view">
       <ng-template [ngSwitchCase]="'date'">
-        <fs-datepicker-mobile-scroll-calendar 
-          [datePickerModel]="datePickerModel">
-        </fs-datepicker-mobile-scroll-calendar>
+        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel"></fs-datepicker-mobile-scroll-calendar>
       </ng-template>
-
       <ng-template [ngSwitchCase]="'week'">
-        <fs-datepicker-mobile-scroll-calendar 
-          [datePickerModel]="datePickerModel">
-        </fs-datepicker-mobile-scroll-calendar>
+        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel"></fs-datepicker-mobile-scroll-calendar>
       </ng-template>
-
       <ng-template [ngSwitchCase]="'monthrange'">
-        <fs-datepicker-mobile-scroll-calendar 
-          [datePickerModel]="datePickerModel">
-        </fs-datepicker-mobile-scroll-calendar>
+        <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel"></fs-datepicker-mobile-scroll-calendar>
       </ng-template>
-
       <ng-template [ngSwitchCase]="'time'">
-        <fs-datepicker-mobile-timepicker
-          [datePickerModel]="datePickerModel">
-        </fs-datepicker-mobile-timepicker>
+        <fs-datepicker-mobile-timepicker [datePickerModel]="datePickerModel"></fs-datepicker-mobile-timepicker>
       </ng-template>
-
       <ng-template [ngSwitchCase]="'datetime'">
-        <fs-datepicker-mobile-datetime-picker 
+        <fs-datepicker-mobile-datetime-picker
           [datePickerModel]="datePickerModel"
           (tabChange)="datetimeTabChanged($event)">
         </fs-datepicker-mobile-datetime-picker>
@@ -34,32 +22,22 @@
     </ng-container>
   </div>
 </div>
-
-<mat-nav-list class="actions">
-  <ng-container
-      *ngIf="datePickerModel.minutes &&
+<app-action-buttons>
+  <a
+      mat-button
+      (click)="close()"
+      color="primary">
+    Done
+  </a>
+  <ng-container *ngIf="datePickerModel.minutes &&
           ((datePickerModel.isDateTimeView && selectedDateTimeTab !== 0) ||
           datePickerModel.isTimeView
       )">
-    <mat-list-item (click)="toggleTimeExpand()">
-      <button
-          type="button"
-          mat-button
-          class="button-more">
-        <ng-container *ngIf="!(datePickerModel.timeExpanded$ | async); else lessMinutes">
-          More
-        </ng-container>
-        <ng-template #lessMinutes>
-          Less
-        </ng-template>
-      </button>
-    </mat-list-item>
-
+    <a
+        (click)="toggleTimeExpand()"
+        mat-button
+        class="button-more">
+      {{ (datePickerModel.timeExpanded$ | async) ? 'Less' : 'More' }}
+    </a>
   </ng-container>
-
-  <mat-list-item (click)="close()">
-    <button mat-icon-button color="primary">
-      Done
-    </button>
-  </mat-list-item>
-</mat-nav-list>
+</app-action-buttons>

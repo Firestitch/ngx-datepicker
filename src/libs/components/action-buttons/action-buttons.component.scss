@@ -1,0 +1,10 @@
+.button-actions {
+  background: #fff;
+  display: flex;
+  padding: 5px;
+
+  ::ng-deep a {
+    gap: 5px;
+    width: 100%;
+  }
+}

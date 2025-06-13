@@ -12,7 +12,6 @@
         (goNextMonth)="nextMonth()"
         (goPrevMonth)="prevMonth()">
       </fs-date-picker-header>
-
       <ng-container *ngIf="dialogRef.components.calendarStart">
         <fs-date-picker-calendar
           [date]="datePickerModel.model$ | async"
@@ -28,9 +27,7 @@
         </fs-date-picker-calendar>
       </ng-container>
     </div>
-
-    <ng-container
-      *ngIf="datePickerModel.dateMode !== 'year' && datePickerModel.dateMode !== 'month'">
+    <ng-container *ngIf="datePickerModel.dateMode !== 'year' && datePickerModel.dateMode !== 'month'">
       <fs-date-picker-time
         *ngIf="datePickerModel.view === 'datetime' || datePickerModel.view === 'time'"
         [date]="datePickerModel.model$ | async"
@@ -42,41 +39,38 @@
       </fs-date-picker-time>
     </ng-container>
   </div>
-
-  <div class="buttons">
+  <app-action-buttons>
     <ng-container *ngIf="!datePickerModel.rangePickerRef">
       <ng-container [ngTemplateOutlet]="done"></ng-container>
     </ng-container>
-
     <ng-container *ngIf="datePickerModel.rangePickerRef">
       <ng-container *ngIf="datePickerModel.isPickerRangeFrom">
-        <button type="button" mat-button color="primary" (click)="nextCalendar()">
+        <a
+            mat-button
+            color="primary"
+            (click)="nextCalendar()">
           Continue
-        </button>
+        </a>
       </ng-container>
-
       <ng-container [ngTemplateOutlet]="done"></ng-container>
-
       <ng-container *ngIf="datePickerModel.isPickerRangeTo">
-        <button type="button" mat-button (click)="prevCalendar()">
+        <a
+            mat-button
+            (click)="prevCalendar()">
           Back
-        </button>
+        </a>
       </ng-container>
     </ng-container>
-
     <ng-template #done>
-      <button 
-          class="button-done" 
-          type="button" 
-          mat-button 
-          [color]="doneBtnClass" 
+      <a
+          class="button-done"
+          mat-button
+          [color]="doneBtnClass"
           (click)="close()">
         Done
-      </button>
+      </a>
     </ng-template>
-
-    <button 
-        type="button"
+    <a
         mat-button
         class="button-more"
         *ngIf="datePickerModel.minutes
@@ -89,6 +83,6 @@
       <ng-template #lessMinutes>
         Less
       </ng-template>
-    </button>
-  </div>
+    </a>
+  </app-action-buttons>
 </div>

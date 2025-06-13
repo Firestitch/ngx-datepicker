@@ -1,4 +1,6 @@
-<div class="fs-date-picker-dialog fs-date-picker-container fs-date-picker-dialog-shadow fs-date-picker-range" tabindex="0">
+<div
+    class="fs-date-picker-dialog fs-date-picker-container fs-date-picker-dialog-shadow fs-date-picker-range"
+    tabindex="0">
   <div class="wrap">
     <fs-date-scroll-picker
       #scrollPickerRef
@@ -12,22 +14,19 @@
       [showYear]="dialogRef.options.showYear"
       (changed)="change($event)">
     </fs-date-scroll-picker>
-
-    <div class="buttons">
-      <button
-          type="button"
+    <app-action-buttons>
+      <a
           mat-button
           color="primary"
           [disabled]="disabledSubmit"
           (click)="close(true)">
         Select
-      </button>
-      <button
-          type="button"
+      </a>
+      <a
           mat-button
           (click)="close(false)">
         Cancel
-      </button>
-    </div>
+      </a>
+    </app-action-buttons>
   </div>
 </div>
