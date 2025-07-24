@@ -1,35 +1,38 @@
-<mat-tab-group mat-stretch-tabs
-               dynamicHeight
-               (selectedIndexChange)="selectedDateTimeTabChange($event)"
-               #tabGroup>
+<mat-tab-group
+    mat-stretch-tabs
+    dynamicHeight
+    (selectedIndexChange)="selectedDateTimeTabChange($event)"
+    #tabGroup>
   <mat-tab>
     <ng-template mat-tab-label>
       <ng-container *ngIf="datePickerModel.model$ | async as model; else noDate">
-        {{ model | date: 'MMM d, yyyy'}}
+        {{ model | date: 'MMM d, yyyy' }}
       </ng-container>
-      <ng-template #noDate>Date</ng-template>
+      <ng-template #noDate>
+        Date
+      </ng-template>
     </ng-template>
-
-    <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel"
-                                          [autoClose]="false"
-                                          [parentTabGroup]="tabGroup"
-                                          [parentTabIndex]="0">
+    <fs-datepicker-mobile-scroll-calendar
+      [datePickerModel]="datePickerModel"
+      [autoClose]="false"
+      [parentTabGroup]="tabGroup"
+      [parentTabIndex]="0">
     </fs-datepicker-mobile-scroll-calendar>
-
   </mat-tab>
-
   <mat-tab>
     <ng-template mat-tab-label>
       <ng-container *ngIf="datePickerModel.model$ | async as model; else noTime">
-        {{ model | date: 'h:mm'}}
-        {{ model | date: 'aaa' | lowercase}}
+        {{ model | date: 'h:mm' }}
+        {{ model | date: 'aaa' | lowercase }}
       </ng-container>
-      <ng-template #noTime>Time</ng-template>
+      <ng-template #noTime>
+        Time
+      </ng-template>
     </ng-template>
-
-    <fs-datepicker-mobile-timepicker [datePickerModel]="datePickerModel"
-                                     [autoClose]="false"
-                                     [showNotSelected]="false">
+    <fs-datepicker-mobile-timepicker
+      [datePickerModel]="datePickerModel"
+      [autoClose]="false"
+      [showNotSelected]="false">
     </fs-datepicker-mobile-timepicker>
   </mat-tab>
 </mat-tab-group>
