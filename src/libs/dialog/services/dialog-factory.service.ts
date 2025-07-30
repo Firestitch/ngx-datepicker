@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ElementRef, Inject, Injectable, Injector, Optional } from '@angular/core';
+import { createEnvironmentInjector, ElementRef, EnvironmentInjector, Inject, Injectable, Injector, Optional } from '@angular/core';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import {
@@ -9,7 +9,7 @@ import {
   OverlayRef,
   PositionStrategy,
 } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 import { fromEvent, Observable } from 'rxjs';
@@ -31,7 +31,7 @@ import { FsMobileCalendarDialogComponent } from '../../dialog/modules/mobile-dia
 import { FsDateScrollPickerDesktopComponent } from '../../dialog/modules/scroll-picker-dialog-container/components/date-scroll-picker-desktop';
 import { FsDatePickerDialogRef } from '../classes/dialog-ref';
 import { IDialogFactoryOptions } from '../interfaces/dialog-factory-data.interface';
-import { FsDateScrollPickerMobileComponent } from "../modules/scroll-picker-dialog-container/components/date-scroll-picker-mobile";
+import { FsDateScrollPickerMobileComponent } from '../modules/scroll-picker-dialog-container/components/date-scroll-picker-mobile';
 
 const mobileBreakpoint = '(max-width: 737px)';
 
@@ -197,12 +197,12 @@ export class FsDatePickerDialogFactory {
   private _createInjector(
     parentInjector: Injector,
     previewRef: FsDatePickerDialogRef,
-  ): PortalInjector {
-    const injectionTokens = new WeakMap<any, any>([
-      [FsDatePickerDialogRef, previewRef],
-    ]);
+  ): Injector {
+    const providers = [
+      { provide: FsDatePickerDialogRef, useValue: previewRef },
+    ];
 
-    return new PortalInjector(parentInjector, injectionTokens);
+    return createEnvironmentInjector(providers, parentInjector as EnvironmentInjector);
   }
 
   private _createPopupPositionStrategy(el: ElementRef): PositionStrategy {
