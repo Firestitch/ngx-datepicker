@@ -11,6 +11,9 @@
 
 @mixin navAction {
   .nav-action {    
+    display: flex;
+    align-items: center;
+
     &.mat-icon-button,
     .mat-icon {
       width: 30px;
