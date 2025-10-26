@@ -1,20 +1,33 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { guid } from '@firestitch/common';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { NgClass } from '@angular/common';
 
 
 @Component({
-  selector: 'fs-time-select',
-  templateUrl: './time-select.component.html',
-  styleUrls: ['./time-select.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FsTimeSelectComponent),
-      multi: true,
-    },
-  ],
+    selector: 'fs-time-select',
+    templateUrl: './time-select.component.html',
+    styleUrls: ['./time-select.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsTimeSelectComponent),
+            multi: true,
+        },
+    ],
+    standalone: true,
+    imports: [
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        FormsModule,
+        MatOption,
+        NgClass,
+    ],
 })
 export class FsTimeSelectComponent implements OnInit, ControlValueAccessor {
 

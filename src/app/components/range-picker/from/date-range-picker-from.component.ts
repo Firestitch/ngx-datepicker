@@ -6,12 +6,21 @@ import {
 
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerFromComponent } from '../base/range-picker-from.component';
+import { FsClearModule } from '@firestitch/clear';
+import { NgIf } from '@angular/common';
+import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-  selector: '[fsDateRangeFrom],[fsDateRangeFromPicker]',
-  template: FsDatePickerComponent.template,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: '[fsDateRangeFrom],[fsDateRangeFromPicker]',
+    template: FsDatePickerComponent.template,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsClearModule,
+        NgIf,
+        FsDatePickerTriggerComponent,
+    ],
 })
 export class DateRangePickerFromComponent extends RangePickerFromComponent {
 

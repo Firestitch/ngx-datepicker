@@ -22,26 +22,35 @@ import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
+import { FsClearModule } from '@firestitch/clear';
+import { NgIf } from '@angular/common';
+import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-  selector: '[fsDatePicker]',
-  template: FsDatePickerComponent.template,
-  styleUrl: './date-picker.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FsDatePickerComponent),
-      multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => FsDatePickerComponent),
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: '[fsDatePicker]',
+    template: FsDatePickerComponent.template,
+    styleUrl: './date-picker.component.scss',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsDatePickerComponent),
+            multi: true,
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => FsDatePickerComponent),
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        FsClearModule,
+        NgIf,
+        FsDatePickerTriggerComponent,
+    ],
 })
 export class FsDatePickerComponent extends FsDatePickerBaseComponent implements OnInit {
 

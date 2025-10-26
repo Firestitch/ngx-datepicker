@@ -9,6 +9,10 @@ import {
 } from '@angular/core';
 
 import { MONTHS } from '../../../../../calendar/consts/months';
+import { NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconAnchor } from '@angular/material/button';
+import { FsDateModule } from '@firestitch/date';
 
 interface IYearListItem {
   value: number;
@@ -22,12 +26,19 @@ interface IMonthListItem {
 
 
 @Component({
-  selector: 'fs-date-picker-header',
-  templateUrl: './header.component.html',
-  styleUrls: [
-    './header.component.scss',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-date-picker-header',
+    templateUrl: './header.component.html',
+    styleUrls: [
+        './header.component.scss',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgClass,
+        MatIcon,
+        MatIconAnchor,
+        FsDateModule,
+    ],
 })
 export class FsDatePickerHeaderComponent implements AfterViewInit {
 

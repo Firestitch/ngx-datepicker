@@ -8,12 +8,27 @@ import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bott
 
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
+import { FsDatePickerVirtualScrollCalendarComponent } from '../virtual-scroll-calendar/virtual-scroll-calendar.component';
+import { FsMobileTimePickerComponent } from '../time-picker/time-picker.component';
+import { FDatePickerMobileDatetimePickerComponent } from '../date-time-picker/date-time-picker.component';
+import { ActionButtonsComponent } from '../../../../../components/action-buttons/action-buttons.component';
+import { MatAnchor } from '@angular/material/button';
+import { AsyncPipe } from '@angular/common';
 
 
 @Component({
-  templateUrl: './mobile-dialog.component.html',
-  styleUrls: ['./mobile-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './mobile-dialog.component.html',
+    styleUrls: ['./mobile-dialog.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsDatePickerVirtualScrollCalendarComponent,
+        FsMobileTimePickerComponent,
+        FDatePickerMobileDatetimePickerComponent,
+        ActionButtonsComponent,
+        MatAnchor,
+        AsyncPipe,
+    ],
 })
 export class FsMobileCalendarDialogComponent {
 

@@ -19,17 +19,26 @@ import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interf
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
+import { FsClearModule } from '@firestitch/clear';
+import { NgIf } from '@angular/common';
+import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-  selector: '[fsDateWeekPicker]',
-  template: FsDatePickerComponent.template,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsDateWeekPickerComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: '[fsDateWeekPicker]',
+    template: FsDatePickerComponent.template,
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsDateWeekPickerComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsClearModule,
+        NgIf,
+        FsDatePickerTriggerComponent,
+    ],
 })
 export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
 

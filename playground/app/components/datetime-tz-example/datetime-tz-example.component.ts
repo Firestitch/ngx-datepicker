@@ -1,12 +1,37 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { getTimeZones } from '@vvo/tzdb';
 import { tzList } from './tz-list';
+import { FormsModule } from '@angular/forms';
+import { MatFormField, MatLabel, MatHint } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { FsFormModule } from '@firestitch/form';
+import { MatOption } from '@angular/material/core';
+import { MatInput } from '@angular/material/input';
+import { FsDateTimePickerComponent } from '../../../../src/app/components/date-time-picker/date-time-picker.component';
+import { DateTimeRangePickerFromComponent } from '../../../../src/app/components/range-picker/from/date-time-range-picker-from.component';
+import { DateRangeSeparatorComponent } from '../../../../src/app/components/date-range-separator/date-range-separator.component';
+import { DateTimeRangePickerToComponent } from '../../../../src/app/components/range-picker/to/date-time-range-picker-to.component';
 
 @Component({
-  selector: 'datetime-tz-example',
-  templateUrl: './datetime-tz-example.component.html',
-  styleUrls: ['./datetime-tz-example.component.scss' ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'datetime-tz-example',
+    templateUrl: './datetime-tz-example.component.html',
+    styleUrls: ['./datetime-tz-example.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormsModule,
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        FsFormModule,
+        MatOption,
+        MatInput,
+        FsDateTimePickerComponent,
+        MatHint,
+        DateTimeRangePickerFromComponent,
+        DateRangeSeparatorComponent,
+        DateTimeRangePickerToComponent,
+    ],
 })
 export class DatetimeTzExampleComponent {
   

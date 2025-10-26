@@ -18,16 +18,25 @@ import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-compon
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
+import { FsClearModule } from '@firestitch/clear';
+import { NgIf } from '@angular/common';
+import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 
 @Component({
-  selector: '[fsDateScrollPicker]',
-  template: FsDatePickerComponent.template,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsDateScrollPickerComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: '[fsDateScrollPicker]',
+    template: FsDatePickerComponent.template,
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsDateScrollPickerComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsClearModule,
+        NgIf,
+        FsDatePickerTriggerComponent,
+    ],
 })
 export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   implements ControlValueAccessor, OnInit {

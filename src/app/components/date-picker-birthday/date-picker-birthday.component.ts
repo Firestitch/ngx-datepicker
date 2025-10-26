@@ -12,17 +12,26 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 import { FsDateScrollPickerComponent } from '../date-scroll-picker/date-scroll-picker.component';
+import { FsClearModule } from '@firestitch/clear';
+import { NgIf } from '@angular/common';
+import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-  selector: '[fsDatePickerBirthday]',
-  template: FsDatePickerComponent.template,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsDatePickerBirthdayComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: '[fsDatePickerBirthday]',
+    template: FsDatePickerComponent.template,
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsDatePickerBirthdayComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsClearModule,
+        NgIf,
+        FsDatePickerTriggerComponent,
+    ],
 })
 export  class FsDatePickerBirthdayComponent extends FsDateScrollPickerComponent {
 

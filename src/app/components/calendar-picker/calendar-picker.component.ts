@@ -20,22 +20,31 @@ import { WeekDays } from '../../../libs/common/types/week-days.type';
 import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
 import { IFsDatePickerConfig } from '../../interfaces/datepicker-config.interface';
 import { FS_DATEPICKER_CONFIG } from '../../providers/datepicker-config.provider';
+import { FsDatePickerHeaderComponent } from '../../../libs/dialog/modules/desktop-dialog-container/components/header/header.component';
+import { FsDatePickerCalendarComponent } from '../../../libs/calendar/components/calendar/calendar.component';
+import { AsyncPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'fs-date-calendar-picker',
-  templateUrl: './calendar-picker.component.html',
-  styleUrls: [
-    './calendar-picker.component.scss',
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FsDateCalendarPickerComponent),
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-date-calendar-picker',
+    templateUrl: './calendar-picker.component.html',
+    styleUrls: [
+        './calendar-picker.component.scss',
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsDateCalendarPickerComponent),
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsDatePickerHeaderComponent,
+        FsDatePickerCalendarComponent,
+        AsyncPipe,
+    ],
 })
 export class FsDateCalendarPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
 

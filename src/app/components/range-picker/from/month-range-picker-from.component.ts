@@ -13,12 +13,21 @@ import { fromZonedTime } from 'date-fns-tz';
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerFromComponent } from '../base/range-picker-from.component';
+import { FsClearModule } from '@firestitch/clear';
+import { NgIf } from '@angular/common';
+import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-  selector: '[fsMonthRangeFrom],[fsMonthRangeFromPicker]',
-  template: FsDatePickerComponent.template,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: '[fsMonthRangeFrom],[fsMonthRangeFromPicker]',
+    template: FsDatePickerComponent.template,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsClearModule,
+        NgIf,
+        FsDatePickerTriggerComponent,
+    ],
 })
 export class MonthRangePickerFromComponent extends RangePickerFromComponent implements OnInit {
 

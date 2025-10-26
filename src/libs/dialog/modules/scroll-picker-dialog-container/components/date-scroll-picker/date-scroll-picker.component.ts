@@ -14,18 +14,21 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { ScrollPickerComponent } from '@firestitch/scroll-picker';
+import { ScrollPickerComponent, FsScrollPickerModule } from '@firestitch/scroll-picker';
 
 import { getDaysInMonth, isValid, startOfDay } from 'date-fns';
 
 import { MONTHS } from '../../consts/months';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'fs-date-scroll-picker',
-  templateUrl: './date-scroll-picker.component.html',
-  styleUrls: ['./date-scroll-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-date-scroll-picker',
+    templateUrl: './date-scroll-picker.component.html',
+    styleUrls: ['./date-scroll-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FsScrollPickerModule, FormsModule],
 })
 export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
 

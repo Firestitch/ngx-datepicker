@@ -10,6 +10,7 @@ import {
 
 
 import { MONTHS } from '../../../../../calendar/consts/months';
+import { NgClass } from '@angular/common';
 
 interface IYearListItem {
   value: number;
@@ -23,12 +24,14 @@ interface IMonthListItem {
 
 
 @Component({
-  selector: 'fs-date-picker-mobile-header',
-  templateUrl: './header.component.html',
-  styleUrls: [
-    './header.component.scss',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-date-picker-mobile-header',
+    templateUrl: './header.component.html',
+    styleUrls: [
+        './header.component.scss',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgClass],
 })
 export class FsDatePickerMobileHeaderComponent implements AfterViewInit {
 

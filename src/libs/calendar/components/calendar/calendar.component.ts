@@ -29,13 +29,14 @@ import { Week } from '../../models/week';
 
 
 @Component({
-  selector: 'fs-date-picker-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'fs-date-picker-calendar',
-  },
+    selector: 'fs-date-picker-calendar',
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fs-date-picker-calendar',
+    },
+    standalone: true,
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 

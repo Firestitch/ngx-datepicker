@@ -8,13 +8,29 @@ import { filter, takeUntil, tap } from 'rxjs/operators';
 import { FsDatePickerCalendarComponent } from '../../../../../../libs/calendar/components';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
+import { FsDatePickerHeaderComponent } from '../header/header.component';
+import { FsDatePickerCalendarComponent as FsDatePickerCalendarComponent_1 } from '../../../../../calendar/components/calendar/calendar.component';
+import { FsDatePickerTimeComponent } from '../../../../../calendar/components/time/time.component';
+import { ActionButtonsComponent } from '../../../../../components/action-buttons/action-buttons.component';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { MatAnchor } from '@angular/material/button';
 
 
 @Component({
-  selector: 'fs-datepicker-desktop-datepicker',
-  templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-datepicker-desktop-datepicker',
+    templateUrl: './date-picker.component.html',
+    styleUrls: ['./date-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsDatePickerHeaderComponent,
+        FsDatePickerCalendarComponent_1,
+        FsDatePickerTimeComponent,
+        ActionButtonsComponent,
+        NgTemplateOutlet,
+        MatAnchor,
+        AsyncPipe,
+    ],
 })
 export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
 

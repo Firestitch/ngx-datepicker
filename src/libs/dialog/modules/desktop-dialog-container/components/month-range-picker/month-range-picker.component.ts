@@ -10,13 +10,28 @@ import { addMonths, isBefore } from 'date-fns';
 
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
+import { FsDatePickerHeaderMonthRangeComponent } from '../header-month-range/header-month-range.component';
+import { FsDatePickerCalendarComponent } from '../../../../../calendar/components/calendar/calendar.component';
+import { FsDatePickerTimeComponent } from '../../../../../calendar/components/time/time.component';
+import { ActionButtonsComponent } from '../../../../../components/action-buttons/action-buttons.component';
+import { MatAnchor } from '@angular/material/button';
+import { AsyncPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'fs-datepicker-month-range-picker',
-  templateUrl: './month-range-picker.component.html',
-  styleUrls: ['./month-range-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-datepicker-month-range-picker',
+    templateUrl: './month-range-picker.component.html',
+    styleUrls: ['./month-range-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsDatePickerHeaderMonthRangeComponent,
+        FsDatePickerCalendarComponent,
+        FsDatePickerTimeComponent,
+        ActionButtonsComponent,
+        MatAnchor,
+        AsyncPipe,
+    ],
 })
 export class FsMonthRangePickerComponent implements OnChanges {
 

@@ -13,13 +13,16 @@ import {
 
 import { getStartDayDate } from '../../../common/helpers/get-start-day-date';
 import { splitDateByComponents } from '../../../common/helpers/split-date-by-components';
+import { NgClass, DatePipe } from '@angular/common';
 
 
 @Component({
-  selector: 'fs-date-picker-time',
-  templateUrl: './time.component.html',
-  styleUrls: ['./time.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-date-picker-time',
+    templateUrl: './time.component.html',
+    styleUrls: ['./time.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgClass, DatePipe],
 })
 export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
 

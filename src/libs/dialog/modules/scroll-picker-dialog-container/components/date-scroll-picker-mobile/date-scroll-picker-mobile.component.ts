@@ -8,12 +8,16 @@ import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bott
 
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 import { FsDateScrollPickerBaseComponent } from '../date-scroll-picker-base';
+import { FsDateScrollPickerDialogComponent } from '../date-scroll-picker/date-scroll-picker.component';
+import { MatAnchor } from '@angular/material/button';
 
 
 @Component({
-  templateUrl: './date-scroll-picker-mobile.component.html',
-  styleUrls: ['./date-scroll-picker-mobile.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './date-scroll-picker-mobile.component.html',
+    styleUrls: ['./date-scroll-picker-mobile.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FsDateScrollPickerDialogComponent, MatAnchor],
 })
 export class FsDateScrollPickerMobileComponent extends FsDateScrollPickerBaseComponent {
   

@@ -11,13 +11,17 @@ import {
 import { MatFormField } from '@angular/material/form-field';
 
 import { PickerViewType, ScrollPickerViewType } from '../../../libs/common/enums';
+import { NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
-  selector: 'fs-datepicker-trigger',
-  templateUrl: './date-picker-trigger.component.html',
-  styleUrls: ['./date-picker-trigger.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-datepicker-trigger',
+    templateUrl: './date-picker-trigger.component.html',
+    styleUrls: ['./date-picker-trigger.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgClass, MatIcon],
 })
 export class FsDatePickerTriggerComponent implements AfterViewInit {
 

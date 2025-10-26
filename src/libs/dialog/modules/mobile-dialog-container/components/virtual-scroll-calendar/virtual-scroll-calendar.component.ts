@@ -11,10 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import {
-  CdkVirtualScrollViewport,
-  VIRTUAL_SCROLL_STRATEGY,
-} from '@angular/cdk/scrolling';
+import { CdkVirtualScrollViewport, VIRTUAL_SCROLL_STRATEGY, CdkVirtualForOf } from '@angular/cdk/scrolling';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatTabGroup } from '@angular/material/tabs';
 
@@ -34,19 +31,34 @@ import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 
 import { FsCalendarDataSource } from './calendar-data-source';
 import { CalendarScrollStrategy, FsCalendarMobileScrollStrategy } from './calendar-scroll-strategy';
+import { FsDatePickerMobileHeaderComponent } from '../header/header.component';
+import { FsDatePickerMobileHeaderMonthRangeComponent } from '../header-month-range/header-month-range.component';
+import { FsDatePickerCalendarComponent } from '../../../../../calendar/components/calendar/calendar.component';
+import { AsyncPipe } from '@angular/common';
+import { FsDateModule } from '@firestitch/date';
 
 
 @Component({
-  selector: 'fs-datepicker-mobile-scroll-calendar',
-  templateUrl: './virtual-scroll-calendar.component.html',
-  styleUrls: ['./virtual-scroll-calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: VIRTUAL_SCROLL_STRATEGY,
-      useClass: CalendarScrollStrategy,
-    },
-  ],
+    selector: 'fs-datepicker-mobile-scroll-calendar',
+    templateUrl: './virtual-scroll-calendar.component.html',
+    styleUrls: ['./virtual-scroll-calendar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: VIRTUAL_SCROLL_STRATEGY,
+            useClass: CalendarScrollStrategy,
+        },
+    ],
+    standalone: true,
+    imports: [
+        FsDatePickerMobileHeaderComponent,
+        FsDatePickerMobileHeaderMonthRangeComponent,
+        CdkVirtualScrollViewport,
+        CdkVirtualForOf,
+        FsDatePickerCalendarComponent,
+        AsyncPipe,
+        FsDateModule,
+    ],
 })
 export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnChanges, OnDestroy {
 

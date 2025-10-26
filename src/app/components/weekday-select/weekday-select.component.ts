@@ -1,21 +1,32 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 
 import { guid } from '@firestitch/common';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
 
 
 @Component({
-  selector: 'fs-weekday-select',
-  templateUrl: './weekday-select.component.html',
-  styleUrls: ['./weekday-select.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FsWeekdaySelectComponent),
-      multi: true,
-    },
-  ],
+    selector: 'fs-weekday-select',
+    templateUrl: './weekday-select.component.html',
+    styleUrls: ['./weekday-select.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsWeekdaySelectComponent),
+            multi: true,
+        },
+    ],
+    standalone: true,
+    imports: [
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        FormsModule,
+        MatOption,
+    ],
 })
 export class FsWeekdaySelectComponent implements ControlValueAccessor {
 

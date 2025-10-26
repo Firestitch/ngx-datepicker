@@ -4,7 +4,8 @@ import { getTimezoneOffset } from 'date-fns-tz'
 
 
 @Pipe({
-  name: 'tzOffset',
+    name: 'tzOffset',
+    standalone: true,
 })
 export class TzOffsetPipe implements PipeTransform {
   public transform(value: string, date: Date): string {

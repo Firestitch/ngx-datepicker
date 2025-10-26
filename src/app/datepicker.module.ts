@@ -13,11 +13,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FsClearModule } from '@firestitch/clear';
 import { FsScrollPickerModule } from '@firestitch/scroll-picker';
 
-import { FsDatePickerCalendarModule } from '../libs/calendar/calendar.module';
+
 import { FsDatePickerDialogModule } from '../libs/dialog/dialog.module';
-import {
-  FsDatePickerDesktopDialogContainerModule,
-} from '../libs/dialog/modules/desktop-dialog-container/desktop-dialog-container.module';
+
 
 import { FsWeekdaySelectComponent } from './components';
 import { FsDateCalendarPickerComponent } from './components/calendar-picker/calendar-picker.component';
@@ -44,10 +42,9 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
 
 
 @NgModule({
-  imports: [
+    imports: [
     CommonModule,
     FormsModule,
-
     MatButtonModule,
     MatTabsModule,
     MatIconModule,
@@ -55,13 +52,8 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     MatBottomSheetModule,
     MatSelectModule,
     LayoutModule,
-
     FsClearModule,
     FsScrollPickerModule,
-    FsDatePickerCalendarModule,
-    FsDatePickerDesktopDialogContainerModule,
-  ],
-  declarations: [
     FsDatePickerComponent,
     DateRangeSeparatorComponent,
     DateRangePickerFromComponent,
@@ -81,27 +73,27 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     FsDateCalendarPickerComponent,
     FsWeekdaySelectComponent,
     FsTimeSelectComponent,
-  ],
-  exports: [
-    FsDatePickerComponent,
-    DateRangeSeparatorComponent,
-    DateRangePickerFromComponent,
-    DateRangePickerToComponent,
-    FsDateScrollPickerComponent,
-    FsDatePickerBirthdayComponent,
-    FsDateWeekPickerComponent,
-    FsTimePickerComponent,
-    DateTimeRangePickerFromComponent,
-    DateTimeRangePickerToComponent,
-    FsDateTimePickerComponent,
-    TimeRangePickerFromComponent,
-    TimeRangePickerToComponent,
-    MonthRangePickerFromComponent,
-    MonthRangePickerToComponent,
-    FsDateCalendarPickerComponent,
-    FsWeekdaySelectComponent,
-    FsTimeSelectComponent,
-  ],
+],
+    exports: [
+        FsDatePickerComponent,
+        DateRangeSeparatorComponent,
+        DateRangePickerFromComponent,
+        DateRangePickerToComponent,
+        FsDateScrollPickerComponent,
+        FsDatePickerBirthdayComponent,
+        FsDateWeekPickerComponent,
+        FsTimePickerComponent,
+        DateTimeRangePickerFromComponent,
+        DateTimeRangePickerToComponent,
+        FsDateTimePickerComponent,
+        TimeRangePickerFromComponent,
+        TimeRangePickerToComponent,
+        MonthRangePickerFromComponent,
+        MonthRangePickerToComponent,
+        FsDateCalendarPickerComponent,
+        FsWeekdaySelectComponent,
+        FsTimeSelectComponent,
+    ],
 })
 export class FsDatePickerModule {
   public static forRoot(config?: IFsDatePickerConfig): ModuleWithProviders<FsDatePickerModule> {
