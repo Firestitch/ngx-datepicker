@@ -1,17 +1,18 @@
 <mat-form-field [class]="fieldClass">
   <mat-label>{{label}}</mat-label>
   <mat-select
-      [required]="required"
-      (ngModelChange)="change($event)"
-      (openedChange)="openedChange($event)"
-      [(ngModel)]="time"
-      [name]="name">
-    <mat-option
+    [required]="required"
+    (ngModelChange)="change($event)"
+    (openedChange)="openedChange($event)"
+    [(ngModel)]="time"
+    [name]="name">
+    @for (item of times; track item) {
+      <mat-option
         [ngClass]="['time-select-option','time-select-option-' + item.value]"
         [attr.data-hour]="item"
-        *ngFor="let item of times"
         [value]="item.value">
-      {{item.name}}
-    </mat-option>
+        {{item.name}}
+      </mat-option>
+    }
   </mat-select>
 </mat-form-field>

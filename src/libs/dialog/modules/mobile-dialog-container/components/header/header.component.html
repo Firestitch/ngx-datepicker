@@ -1,30 +1,36 @@
-<div class="months" *ngIf="viewMode === 'month'">
-  <div *ngFor="let month of monthList">
-    <div 
-        class="tile-content"
-        (click)="selectMonth(month.value)"
-        class="month"
+@if (viewMode === 'month') {
+  <div class="months">
+    @for (month of monthList; track month) {
+      <div>
+        <div
+          class="tile-content"
+          (click)="selectMonth(month.value)"
+          class="month"
         [ngClass]="{
             now: monthNow === month.value,
             selected: calendarMonth === month.value
           }">
-        {{ month.abr }}
+          {{ month.abr }}
+        </div>
       </div>
+    }
   </div>
-</div>
+}
 
-<div class="years" *ngIf="viewMode === 'year'">
-  <ng-container *ngFor="let year of yearsList;">
-    <div
+@if (viewMode === 'year') {
+  <div class="years">
+    @for (year of yearsList; track year) {
+      <div
         class="year data-year-{{ year.value }}">
-      <div 
+        <div
           class="tile-content"
           (click)="selectYear(year.value)"
           [class.now]="yearNow === year.value"
           [class.selected]="calendarYear === year.value">
-        {{ year.value }}
+          {{ year.value }}
+        </div>
       </div>
-    </div>
-  </ng-container>
-  <div class="clear"></div>
-</div>
+    }
+    <div class="clear"></div>
+  </div>
+}

@@ -1,16 +1,15 @@
 <mat-tab-group
-    mat-stretch-tabs
-    dynamicHeight
-    (selectedIndexChange)="selectedDateTimeTabChange($event)"
-    #tabGroup>
+  mat-stretch-tabs
+  dynamicHeight
+  (selectedIndexChange)="selectedDateTimeTabChange($event)"
+  #tabGroup>
   <mat-tab>
     <ng-template mat-tab-label>
-      <ng-container *ngIf="datePickerModel.model$ | async as model; else noDate">
+      @if (datePickerModel.model$ | async; as model) {
         {{ model | date: 'MMM d, yyyy' }}
-      </ng-container>
-      <ng-template #noDate>
+      } @else {
         Date
-      </ng-template>
+      }
     </ng-template>
     <fs-datepicker-mobile-scroll-calendar
       [datePickerModel]="datePickerModel"
@@ -21,13 +20,12 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      <ng-container *ngIf="datePickerModel.model$ | async as model; else noTime">
+      @if (datePickerModel.model$ | async; as model) {
         {{ model | date: 'h:mm' }}
         {{ model | date: 'aaa' | lowercase }}
-      </ng-container>
-      <ng-template #noTime>
+      } @else {
         Time
-      </ng-template>
+      }
     </ng-template>
     <fs-datepicker-mobile-timepicker
       [datePickerModel]="datePickerModel"

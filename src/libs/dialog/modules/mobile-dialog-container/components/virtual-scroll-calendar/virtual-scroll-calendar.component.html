@@ -1,5 +1,5 @@
 <div class="header">
-  <ng-container *ngIf="datePickerModel.view !== 'monthrange' else monthRangeHeader">
+  @if (datePickerModel.view !== 'monthrange') {
     <fs-date-picker-mobile-header
       [calendarDate]="datePickerModel.model$ | async"
       [minYear]="datePickerModel.minYear"
@@ -7,14 +7,13 @@
       [viewMode]="datePickerModel.calendarMode$ | async"
       [disabledDates]="datePickerModel.disabledDates$ | async">
     </fs-date-picker-mobile-header>
-  </ng-container>
-
-  <ng-template #monthRangeHeader>
+  } @else {
     <fs-date-picker-mobile-header-month-range
       [rangeFrom]="modelFrom$ | async"
       [rangeTo]="modelTo$ | async">
     </fs-date-picker-mobile-header-month-range>
-  </ng-template>
+  }
+
 </div>
 
 <cdk-virtual-scroll-viewport class="view-port" (scrolledIndexChange)="scollIndexChange($event)">

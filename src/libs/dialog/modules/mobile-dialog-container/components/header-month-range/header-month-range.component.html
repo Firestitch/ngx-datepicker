@@ -1,16 +1,17 @@
-<ng-container *ngIf="rangeFrom || rangeTo else notSelected">
-  <ng-container *ngIf="rangeFrom else notSelected">
+@if (rangeFrom || rangeTo) {
+  @if (rangeFrom) {
     {{ rangeFrom | fsDateFormat: 'day-date' }}
-  </ng-container>
+  } @else {
+    Not Selected
+  }
   &nbsp;
-  <ng-container *ngIf="rangeTo">
+  @if (rangeTo) {
     <mat-icon>
       arrow_forward
     </mat-icon>
     &nbsp;
     {{ rangeTo | fsDateFormat: 'day-date' }}
-  </ng-container>
-</ng-container>
-<ng-template #notSelected>
+  }
+} @else {
   Not Selected
-</ng-template>
+}

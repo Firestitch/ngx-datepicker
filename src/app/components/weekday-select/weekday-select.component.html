@@ -1,14 +1,15 @@
 <mat-form-field [class]="fieldClass">
   <mat-label>{{label}}</mat-label>
   <mat-select
-      [required]="required"
-      (ngModelChange)="change($event)"
-      [(ngModel)]="weekday"
-      [name]="name">
-    <mat-option
-        *ngFor="let item of weekdays; let index = index"
+    [required]="required"
+    (ngModelChange)="change($event)"
+    [(ngModel)]="weekday"
+    [name]="name">
+    @for (item of weekdays; track item; let index = $index) {
+      <mat-option
         [value]="index">
-      {{item}}
-    </mat-option>
+        {{item}}
+      </mat-option>
+    }
   </mat-select>
 </mat-form-field>

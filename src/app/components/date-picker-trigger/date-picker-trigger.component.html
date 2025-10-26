@@ -1,10 +1,9 @@
 <div class="fs-date-picker-trigger" [ngClass]="{ disabled: disabled, hide: !value }">
   <mat-icon (click)="triggerClick($event)" >
-    <ng-container *ngIf="isTimeView; else calendarIcon">
+    @if (isTimeView) {
       schedule
-    </ng-container>
-    <ng-template #calendarIcon>
+    } @else {
       calendar_today
-    </ng-template>
+    }
   </mat-icon>
 </div>

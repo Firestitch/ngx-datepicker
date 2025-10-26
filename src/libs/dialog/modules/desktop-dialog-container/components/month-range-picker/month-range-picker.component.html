@@ -32,23 +32,24 @@
         </fs-date-picker-calendar>
       </div>
     </div>
-    <ng-container *ngIf="datePickerModel.dateMode !== 'year' && datePickerModel.dateMode !== 'month'">
-      <fs-date-picker-time
-        *ngIf="datePickerModel.view === 'datetime' || datePickerModel.view === 'time'"
-        [date]="datePickerModel.model$ | async"
-        [minutes]="datePickerModel.minutes"
-        [showHeading]="true"
-        [disabledTimes]="datePickerModel.disabledTimes$ | async"
-        (onChange)="dateChanged($event)">
-      </fs-date-picker-time>
-    </ng-container>
+    @if (datePickerModel.dateMode !== 'year' && datePickerModel.dateMode !== 'month') {
+      @if (datePickerModel.view === 'datetime' || datePickerModel.view === 'time') {
+        <fs-date-picker-time
+          [date]="datePickerModel.model$ | async"
+          [minutes]="datePickerModel.minutes"
+          [showHeading]="true"
+          [disabledTimes]="datePickerModel.disabledTimes$ | async"
+          (onChange)="dateChanged($event)">
+        </fs-date-picker-time>
+      }
+    }
   </div>
   <app-action-buttons>
     <a
-        class="button-done"
-        mat-button
-        color="primary"
-        (click)="close()">
+      class="button-done"
+      mat-button
+      color="primary"
+      (click)="close()">
       Done
     </a>
   </app-action-buttons>

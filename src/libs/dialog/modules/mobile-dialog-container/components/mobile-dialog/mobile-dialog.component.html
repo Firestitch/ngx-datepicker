@@ -1,43 +1,43 @@
 <div class="fs-date-picker-dialog fs-date-picker-container">
   <div class="calendar-container">
-    <ng-container [ngSwitch]="datePickerModel.view">
-      <ng-template [ngSwitchCase]="'date'">
+    @switch (datePickerModel.view) {
+      @case ('date') {
         <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel"></fs-datepicker-mobile-scroll-calendar>
-      </ng-template>
-      <ng-template [ngSwitchCase]="'week'">
+      }
+      @case ('week') {
         <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel"></fs-datepicker-mobile-scroll-calendar>
-      </ng-template>
-      <ng-template [ngSwitchCase]="'monthrange'">
+      }
+      @case ('monthrange') {
         <fs-datepicker-mobile-scroll-calendar [datePickerModel]="datePickerModel"></fs-datepicker-mobile-scroll-calendar>
-      </ng-template>
-      <ng-template [ngSwitchCase]="'time'">
+      }
+      @case ('time') {
         <fs-datepicker-mobile-timepicker [datePickerModel]="datePickerModel"></fs-datepicker-mobile-timepicker>
-      </ng-template>
-      <ng-template [ngSwitchCase]="'datetime'">
+      }
+      @case ('datetime') {
         <fs-datepicker-mobile-datetime-picker
           [datePickerModel]="datePickerModel"
           (tabChange)="datetimeTabChanged($event)">
         </fs-datepicker-mobile-datetime-picker>
-      </ng-template>
-    </ng-container>
+      }
+    }
   </div>
 </div>
 <app-action-buttons>
   <a
-      mat-button
-      (click)="close()"
-      color="primary">
+    mat-button
+    (click)="close()"
+    color="primary">
     Done
   </a>
-  <ng-container *ngIf="datePickerModel.minutes &&
-          ((datePickerModel.isDateTimeView && selectedDateTimeTab !== 0) ||
-          datePickerModel.isTimeView
-      )">
+  @if (datePickerModel.minutes &&
+    ((datePickerModel.isDateTimeView && selectedDateTimeTab !== 0) ||
+    datePickerModel.isTimeView
+    )) {
     <a
-        (click)="toggleTimeExpand()"
-        mat-button
-        class="button-more">
+      (click)="toggleTimeExpand()"
+      mat-button
+      class="button-more">
       {{ (datePickerModel.timeExpanded$ | async) ? 'Less' : 'More' }}
     </a>
-  </ng-container>
+  }
 </app-action-buttons>
