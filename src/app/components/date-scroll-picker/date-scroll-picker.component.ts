@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -34,9 +34,8 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
   standalone: true,
   imports: [
     FsClearModule,
-    NgIf,
-    FsDatePickerTriggerComponent,
-  ],
+    FsDatePickerTriggerComponent
+],
 })
 export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   implements ControlValueAccessor, OnInit {

@@ -9,7 +9,7 @@ import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 import { FsClearModule } from '@firestitch/clear';
-import { NgIf } from '@angular/common';
+
 import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 
 
@@ -31,10 +31,9 @@ import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        FsClearModule,
-        NgIf,
-        FsDatePickerTriggerComponent,
-    ],
+    FsClearModule,
+    FsDatePickerTriggerComponent
+],
 })
 export class FsTimePickerComponent extends FsDatePickerComponent {
 

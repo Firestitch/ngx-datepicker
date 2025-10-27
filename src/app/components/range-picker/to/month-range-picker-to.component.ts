@@ -13,7 +13,7 @@ import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.e
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerToComponent } from '../base/range-picker-to.component';
 import { FsClearModule } from '@firestitch/clear';
-import { NgIf } from '@angular/common';
+
 import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
 
 
@@ -23,10 +23,9 @@ import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-pic
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        FsClearModule,
-        NgIf,
-        FsDatePickerTriggerComponent,
-    ],
+    FsClearModule,
+    FsDatePickerTriggerComponent
+],
 })
 export class MonthRangePickerToComponent extends RangePickerToComponent {
 
