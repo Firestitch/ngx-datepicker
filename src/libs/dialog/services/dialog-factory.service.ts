@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { createEnvironmentInjector, ElementRef, EnvironmentInjector, Inject, Injectable, Injector, Optional } from '@angular/core';
+import { createEnvironmentInjector, ElementRef, EnvironmentInjector, Injectable, Injector, inject } from '@angular/core';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import {
@@ -38,16 +38,14 @@ const mobileBreakpoint = '(max-width: 737px)';
 
 @Injectable()
 export class FsDatePickerDialogFactory {
+  private _overlay = inject(Overlay);
+  private _breakpointObserver = inject(BreakpointObserver);
+  private _bottomSheet = inject(MatBottomSheet, { optional: true });
+  private _document = inject(DOCUMENT);
+
 
   private _targetElRef: ElementRef;
   private _resolutionChanged = false;
-
-  constructor(
-    private _overlay: Overlay,
-    private _breakpointObserver: BreakpointObserver,
-    @Optional() private _bottomSheet: MatBottomSheet,
-    @Inject(DOCUMENT) private _document,
-  ) {}
 
   private get _escapeKeyPressed$(): Observable<any> {
     return fromEvent(this._document, 'keydown')

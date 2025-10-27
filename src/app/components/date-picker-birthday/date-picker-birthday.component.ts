@@ -1,37 +1,35 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   forwardRef,
-  Injector,
   Input,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FocusMonitor } from '@angular/cdk/a11y';
 
-import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
+import { FsClearModule } from '@firestitch/clear';
+
+import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 import { FsDateScrollPickerComponent } from '../date-scroll-picker/date-scroll-picker.component';
-import { FsClearModule } from '@firestitch/clear';
-import { NgIf } from '@angular/common';
-import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-    selector: '[fsDatePickerBirthday]',
-    template: FsDatePickerComponent.template,
-    providers: [{
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FsDatePickerBirthdayComponent),
-            multi: true,
-        }],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        FsClearModule,
-        NgIf,
-        FsDatePickerTriggerComponent,
-    ],
+  selector: '[fsDatePickerBirthday]',
+  template: FsDatePickerComponent.template,
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => FsDatePickerBirthdayComponent),
+    multi: true,
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    FsClearModule,
+    NgIf,
+    FsDatePickerTriggerComponent,
+  ],
 })
 export  class FsDatePickerBirthdayComponent extends FsDateScrollPickerComponent {
 
@@ -41,11 +39,4 @@ export  class FsDatePickerBirthdayComponent extends FsDateScrollPickerComponent 
   @Input()
   public maxYear = (new Date()).getFullYear();
 
-  constructor(
-    protected _injector: Injector,
-    protected _datepickerFactory: FsDatePickerDialogFactory,
-    fm: FocusMonitor,
-  ) {
-    super(_injector, _datepickerFactory, fm);
-  }
 }

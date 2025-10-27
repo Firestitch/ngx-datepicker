@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DoCheck,
-  ElementRef,
-  EventEmitter,
-  Input,
-  IterableDiffers,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, DoCheck, ElementRef, EventEmitter, Input, IterableDiffers, OnChanges, OnInit, Output, inject } from '@angular/core';
 
 import { getStartDayDate } from '../../../common/helpers/get-start-day-date';
 import { splitDateByComponents } from '../../../common/helpers/split-date-by-components';
@@ -25,6 +14,9 @@ import { NgClass, DatePipe } from '@angular/common';
     imports: [NgClass, DatePipe],
 })
 export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
+  element = inject(ElementRef);
+  private _iterableDiffers = inject(IterableDiffers);
+
 
   @Input() public date = null;
   @Input() public disabledMinutes = [];
@@ -99,10 +91,7 @@ export class FsDatePickerTimeComponent implements OnInit, OnChanges, DoCheck {
   private disabledHoursDiffer = null;
   private disabledTimesDiffer = null;
 
-  constructor(
-    public element: ElementRef,
-    private _iterableDiffers: IterableDiffers,
-  ) {
+  constructor() {
     this.disabledHoursDiffer = this._iterableDiffers.find([]).create(null);
     this.disabledMinutesDiffer = this._iterableDiffers.find([]).create(null);
     this.disabledTimesDiffer = this._iterableDiffers.find([]).create(null);

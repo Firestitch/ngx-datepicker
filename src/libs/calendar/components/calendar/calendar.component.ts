@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, inject } from '@angular/core';
 
 import {
   eachDayOfInterval,
@@ -39,6 +30,8 @@ import { Week } from '../../models/week';
     standalone: true,
 })
 export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
+  element = inject(ElementRef);
+
 
   @Input()
   public date: Date = null;
@@ -124,10 +117,6 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   };
 
   public highlightedRangeDays = null;
-
-  constructor(
-    public element: ElementRef,
-  ) {}
 
   public ngOnInit() {
     this.daySize = this.daySize ?? 43;

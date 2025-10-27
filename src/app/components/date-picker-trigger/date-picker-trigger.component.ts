@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input, Optional,
-  Output,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 
 import { MatFormField } from '@angular/material/form-field';
 
@@ -24,6 +16,9 @@ import { MatIcon } from '@angular/material/icon';
     imports: [NgClass, MatIcon],
 })
 export class FsDatePickerTriggerComponent implements AfterViewInit {
+  matFormField = inject(MatFormField, { optional: true });
+  private _el = inject(ElementRef);
+
 
   @Input()
   public disabled: boolean;
@@ -36,11 +31,6 @@ export class FsDatePickerTriggerComponent implements AfterViewInit {
 
   @Output()
   public click = new EventEmitter<void>();
-
-  constructor(
-    @Optional() public matFormField: MatFormField,
-    private _el: ElementRef,
-  ) {}
 
   public get isTimeView(): boolean {
     return this.view === PickerViewType.Time;

@@ -1,21 +1,17 @@
 import {
   Directive,
-  Injector,
   OnDestroy,
   OnInit,
-  Optional,
-  Self,
+  inject,
 } from '@angular/core';
-import { NgControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { ValidationErrors, ValidatorFn } from '@angular/forms';
 
-import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { takeUntil } from 'rxjs/operators';
 
 import { endOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
-import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { FsRangePickerStoreService } from '../../../services/range-picker-store.service';
 import { RangePickerComponent } from '../base/range-picker-base.component';
 
@@ -23,14 +19,12 @@ import { RangePickerComponent } from '../base/range-picker-base.component';
 @Directive()
 export abstract class RangePickerToComponent extends RangePickerComponent implements OnInit, OnDestroy {
 
-  constructor(
-    @Optional() @Self() protected _ngControl: NgControl,
-    protected _injector: Injector,
-    protected _datepickerFactory: FsDatePickerDialogFactory,
-    private _rangePickerStore: FsRangePickerStoreService,
-    fm: FocusMonitor,
-  ) {
-    super(_injector, _datepickerFactory, 'to', _ngControl, fm);
+  
+  private _rangePickerStore = inject(FsRangePickerStoreService);
+
+  constructor() {
+    super();
+    this._type = 'to';
   }
 
   public ngOnInit() {

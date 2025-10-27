@@ -1,15 +1,17 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
-  Injector,
+  inject,
   Input,
   Output,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FocusMonitor } from '@angular/cdk/a11y';
+
+import { FsClearModule } from '@firestitch/clear';
 
 import { endOfDay, startOfDay } from 'date-fns';
 
@@ -18,27 +20,25 @@ import { formatPeriodObject } from '../../../libs/common/helpers/format-period-o
 import { IDatePickerPeriod } from '../../../libs/common/interfaces/period.interface';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
-import { FsDatePickerComponent } from '../date-picker/date-picker.component';
-import { FsClearModule } from '@firestitch/clear';
-import { NgIf } from '@angular/common';
 import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
+import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 
 @Component({
-    selector: '[fsDateWeekPicker]',
-    template: FsDatePickerComponent.template,
-    providers: [{
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FsDateWeekPickerComponent),
-            multi: true,
-        }],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        FsClearModule,
-        NgIf,
-        FsDatePickerTriggerComponent,
-    ],
+  selector: '[fsDateWeekPicker]',
+  template: FsDatePickerComponent.template,
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => FsDateWeekPickerComponent),
+    multi: true,
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    FsClearModule,
+    NgIf,
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
 
@@ -53,12 +53,10 @@ export class FsDateWeekPickerComponent extends FsDatePickerBaseComponent {
   @Output('change')
   public change$ = new EventEmitter<any>();
 
-  constructor(
-    protected _injector: Injector,
-    protected _fsDatepickerFactory: FsDatePickerDialogFactory,
-    fm: FocusMonitor,
-  ) {
-    super(_injector, fm);
+  protected _fsDatepickerFactory = inject(FsDatePickerDialogFactory);
+
+  constructor( ) {
+    super();
     this.editable = false;
   }
 

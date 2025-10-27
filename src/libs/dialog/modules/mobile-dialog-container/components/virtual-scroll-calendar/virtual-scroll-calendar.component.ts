@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, inject } from '@angular/core';
 
 import { CdkVirtualScrollViewport, VIRTUAL_SCROLL_STRATEGY, CdkVirtualForOf } from '@angular/cdk/scrolling';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
@@ -61,6 +50,10 @@ import { FsDateModule } from '@firestitch/date';
     ],
 })
 export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnChanges, OnDestroy {
+  private _el = inject(ElementRef);
+  private _bottomSheetRef = inject(MatBottomSheetRef);
+  private _scrollStrategy = inject<FsCalendarMobileScrollStrategy>(VIRTUAL_SCROLL_STRATEGY);
+
 
   @Input()
   public datePickerModel: FsDatePickerDialogModel;
@@ -85,13 +78,6 @@ export class FsDatePickerVirtualScrollCalendarComponent implements OnInit, OnCha
   private _dialogRef: FsDatePickerDialogRef;
   private _activeScrollIndex: number;
   private _destroy$ = new Subject<void>();
-
-  constructor(
-    private _el: ElementRef,
-    private _bottomSheetRef: MatBottomSheetRef,
-    @Inject(VIRTUAL_SCROLL_STRATEGY)
-    private _scrollStrategy: FsCalendarMobileScrollStrategy,
-  ) {}
 
   public get dialogRef(): FsDatePickerDialogRef {
     return this._dialogRef;

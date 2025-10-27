@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 
 import { MONTHS } from '../../../../../calendar/consts/months';
 import { NgClass } from '@angular/common';
@@ -41,6 +33,8 @@ interface IMonthListItem {
     ],
 })
 export class FsDatePickerHeaderComponent implements AfterViewInit {
+  private _elRef = inject(ElementRef);
+
 
   @Input()
   public viewMode: string;
@@ -86,10 +80,6 @@ export class FsDatePickerHeaderComponent implements AfterViewInit {
   // this logic MUST be moved out of this component to the DialogModel in case when such functionality
   // will be not only in this component
   private _mainViewMode: string;
-
-  constructor(
-    private _elRef: ElementRef,
-  ) {}
 
   public get calendarMonth(): number {
     return this.calendarDate?.getMonth();

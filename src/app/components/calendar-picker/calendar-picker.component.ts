@@ -1,16 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  forwardRef,
-  Inject,
-  Input,
-  OnChanges,
-  OnInit,
-  Optional,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isDate, isValid, setDate, startOfDay } from 'date-fns';
@@ -47,6 +35,8 @@ import { AsyncPipe } from '@angular/common';
     ],
 })
 export class FsDateCalendarPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
+  private _globalConfig = inject<IFsDatePickerConfig>(FS_DATEPICKER_CONFIG, { optional: true });
+
 
   @Input()
   public today = true;
@@ -83,12 +73,6 @@ export class FsDateCalendarPickerComponent implements OnInit, OnChanges, Control
 
   private _onChange: (value: Date | null) => void;
   private _onTouch: () => void;
-
-  constructor(
-    @Optional()
-    @Inject(FS_DATEPICKER_CONFIG)
-    private _globalConfig: IFsDatePickerConfig,
-  ) {}
 
   public ngOnInit(): void {
     this._init();

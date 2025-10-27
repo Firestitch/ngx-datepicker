@@ -1,12 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    Output,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 
 
 import { MONTHS } from '../../../../../calendar/consts/months';
@@ -34,6 +26,8 @@ interface IMonthListItem {
     imports: [NgClass],
 })
 export class FsDatePickerMobileHeaderComponent implements AfterViewInit {
+  private _elRef = inject(ElementRef);
+
 
   @Input()
   public viewMode: string;
@@ -71,10 +65,6 @@ export class FsDatePickerMobileHeaderComponent implements AfterViewInit {
 
   public yearsList: IYearListItem[] = [];
   public monthList: IMonthListItem[] = [];
-
-  constructor(
-    private _elRef: ElementRef,
-  ) {}
 
   public get calendarMonth(): number {
     return this.calendarDate?.getMonth();

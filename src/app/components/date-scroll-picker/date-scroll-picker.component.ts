@@ -1,14 +1,16 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   forwardRef,
-  Injector,
+  inject,
   Input,
   OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FocusMonitor } from '@angular/cdk/a11y';
+
+import { FsClearModule } from '@firestitch/clear';
 
 import { isValid, startOfDay } from 'date-fns';
 
@@ -17,26 +19,24 @@ import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
-import { FsDatePickerComponent } from '../date-picker/date-picker.component';
-import { FsClearModule } from '@firestitch/clear';
-import { NgIf } from '@angular/common';
 import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
+import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 
 @Component({
-    selector: '[fsDateScrollPicker]',
-    template: FsDatePickerComponent.template,
-    providers: [{
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FsDateScrollPickerComponent),
-            multi: true,
-        }],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        FsClearModule,
-        NgIf,
-        FsDatePickerTriggerComponent,
-    ],
+  selector: '[fsDateScrollPicker]',
+  template: FsDatePickerComponent.template,
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => FsDateScrollPickerComponent),
+    multi: true,
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    FsClearModule,
+    NgIf,
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   implements ControlValueAccessor, OnInit {
@@ -51,13 +51,7 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
   public view = ScrollPickerViewType.Date;
 
-  constructor(
-    protected _injector: Injector,
-    protected _datepickerFactory: FsDatePickerDialogFactory,
-    fm: FocusMonitor,
-  ) {
-    super(_injector, fm);
-  }
+  private _datepickerFactory = inject(FsDatePickerDialogFactory);
 
   public ngOnInit(): void {
     super.ngOnInit();

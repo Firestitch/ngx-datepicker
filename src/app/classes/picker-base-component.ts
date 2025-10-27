@@ -1,10 +1,11 @@
 import {
-  ChangeDetectorRef, Directive, ElementRef, HostBinding,
+  ChangeDetectorRef, Directive, ElementRef, HostBinding, inject,
   Injector, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges,
 } from '@angular/core';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatInput } from '@angular/material/input';
+  
 
 import { Observable, Subject } from 'rxjs';
 
@@ -37,17 +38,17 @@ export class FsPickerBaseComponent implements OnInit, OnChanges, OnDestroy {
   protected _dateDialogRef: FsDatePickerDialogRef;
   protected _cdRef: ChangeDetectorRef;
   protected _focusAfterClose = false;
+  protected _fm = inject(FocusMonitor);
+  protected _injector = inject(Injector);
 
   private _destroy$ = new Subject<void>();
 
   constructor(
-    protected _injector: Injector,
-    protected _fm: FocusMonitor,
   ) {
-    this._renderer = _injector.get(Renderer2);
-    this._cdRef = _injector.get(ChangeDetectorRef);
-    this._elementRef = _injector.get(ElementRef);
-    this._globalConfig = _injector.get(FS_DATEPICKER_CONFIG);
+    this._renderer = this._injector.get(Renderer2);
+    this._cdRef = this._injector.get(ChangeDetectorRef);
+    this._elementRef = this. _injector.get(ElementRef);
+    this._globalConfig = this._injector.get(FS_DATEPICKER_CONFIG);
     this._elementRef.nativeElement.setAttribute('autocomplete', 'off');
   }
 

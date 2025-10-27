@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  ElementRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ElementRef, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { FsDateModule } from '@firestitch/date';
 
@@ -19,16 +14,13 @@ import { FsDateModule } from '@firestitch/date';
     imports: [MatIcon, FsDateModule],
 })
 export class FsDatePickerMobileHeaderMonthRangeComponent {
+  private _elRef = inject(ElementRef);
+
 
   @Input()
   public rangeFrom: Date;
 
   @Input()
   public rangeTo: Date;
-
-
-  constructor(
-    private _elRef: ElementRef,
-  ) {}
 
 }

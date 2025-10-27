@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 
@@ -21,10 +21,8 @@ import { FsDesktopDatePickerComponent } from '../date-picker/date-picker.compone
     ],
 })
 export class FsDesktopCalendarDialogComponent {
+  protected _dialogRef = inject(FsDatePickerDialogRef);
 
-  constructor(
-    protected _dialogRef: FsDatePickerDialogRef,
-  ) {}
 
   public get datePickerModel(): FsDatePickerDialogModel {
     return this._dialogRef.pickerModel;

@@ -1,18 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, inject } from '@angular/core';
 
 import { ScrollPickerComponent, FsScrollPickerModule } from '@firestitch/scroll-picker';
 
@@ -31,6 +18,11 @@ import { FormsModule } from '@angular/forms';
     imports: [FsScrollPickerModule, FormsModule],
 })
 export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
+  element = inject(ElementRef);
+  private _cdRef = inject(ChangeDetectorRef);
+  private _renderer = inject(Renderer2);
+  private _document = inject(DOCUMENT);
+
 
   @Input()
   public model: Date | null;
@@ -95,14 +87,6 @@ export class FsDateScrollPickerDialogComponent implements OnInit, OnDestroy {
         || this.yearRef?.valueDisabled
         || this.dayRef?.valueDisabled;
   }
-
-  constructor(
-    public element: ElementRef,
-    private _cdRef: ChangeDetectorRef,
-    private _renderer: Renderer2,
-    @Inject(DOCUMENT)
-    private _document,
-  ) {}
 
   public get maxDate(): Date {
     return this._maxDate;

@@ -2,14 +2,13 @@ import {
   Directive,
   EventEmitter,
   HostListener,
-  Injector,
+  inject,
   Input,
   OnInit,
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { fromEvent, Observable } from 'rxjs';
 import { filter, map, pairwise, skip, take, takeUntil, tap } from 'rxjs/operators';
@@ -86,18 +85,16 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   protected _value;
   protected _originValue: Date | null; // before timezone
   protected _name;
+  protected _type;
   protected _timezone: string;
+  protected _datepickerFactory = inject(FsDatePickerDialogFactory);
+  protected _ngControl = inject(NgControl);
+
   
   private _lastValueValid = false;
 
-  protected constructor(
-    protected _injector: Injector,
-    protected _datepickerFactory: FsDatePickerDialogFactory,
-    protected _type,
-    protected _ngControl: NgControl,
-    fm: FocusMonitor,
-  ) {
-    super(_injector, fm);
+  protected constructor() {
+    super();
     this._ngControl.valueAccessor = this;
     this.editable = false;
   }

@@ -1,10 +1,10 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
   inject,
-  Injector,
   Input,
   OnInit,
   Output,
@@ -12,8 +12,9 @@ import {
 } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatFormField } from '@angular/material/form-field';
+
+import { FsClearModule } from '@firestitch/clear';
 
 import { isValid, startOfDay } from 'date-fns';
 
@@ -22,35 +23,33 @@ import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-
 import { FsDatePickerBaseComponent } from '../../classes/date-picker-base-component';
 import { createDateFromValue } from '../../helpers/create-date-from-value';
 import { formatDateTime } from '../../helpers/format-date-time';
-import { FsClearModule } from '@firestitch/clear';
-import { NgIf } from '@angular/common';
 import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-    selector: '[fsDatePicker]',
-    template: FsDatePickerComponent.template,
-    styleUrl: './date-picker.component.scss',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FsDatePickerComponent),
-            multi: true,
-        },
-        {
-            provide: NG_VALIDATORS,
-            useExisting: forwardRef(() => FsDatePickerComponent),
-            multi: true,
-        },
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [
-        FsClearModule,
-        NgIf,
-        FsDatePickerTriggerComponent,
-    ],
+  selector: '[fsDatePicker]',
+  template: FsDatePickerComponent.template,
+  styleUrl: './date-picker.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FsDatePickerComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => FsDatePickerComponent),
+      multi: true,
+    },
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    FsClearModule,
+    NgIf,
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class FsDatePickerComponent extends FsDatePickerBaseComponent implements OnInit {
 
@@ -74,14 +73,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   public change$ = new EventEmitter<any>();
 
   private _formField = inject(MatFormField);  
-
-  constructor(
-    protected _injector: Injector,
-    protected _fsDatepickerFactory: FsDatePickerDialogFactory,
-    fm: FocusMonitor,
-  ) {
-    super(_injector, fm);
-  }
+  private _fsDatepickerFactory = inject(FsDatePickerDialogFactory);
 
   public ngOnInit(): void {
     super.ngOnInit();

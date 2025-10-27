@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
@@ -20,6 +16,8 @@ import { AsyncPipe } from '@angular/common';
     imports: [FsDatePickerTimeComponent, AsyncPipe],
 })
 export class FsMobileTimePickerComponent {
+  private _bottomSheet = inject(MatBottomSheetRef);
+
 
   @Input()
   public datePickerModel: FsDatePickerDialogModel;
@@ -29,11 +27,6 @@ export class FsMobileTimePickerComponent {
 
   @Input()
   public showNotSelected = true;
-
-  constructor(
-    private _bottomSheet: MatBottomSheetRef,
-  ) {
-  }
 
   public dateChanged(date): void {
     this.datePickerModel.model = date;
