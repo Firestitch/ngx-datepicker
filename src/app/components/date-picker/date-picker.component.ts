@@ -47,16 +47,16 @@ import { FsDatePickerTriggerComponent } from '../date-picker-trigger/date-picker
   standalone: true,
   imports: [
     FsClearModule,
-    FsDatePickerTriggerComponent
-],
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class FsDatePickerComponent extends FsDatePickerBaseComponent implements OnInit {
 
   public static template = `
     <fs-clear [show]="!disabled && !readonly && clear" (clear)="cleared($event)" [visible]="value"></fs-clear>
-    <ng-container *ngIf="icon">
+    @if (icon) {
       <fs-datepicker-trigger (click)="triggerClick()" [disabled]="disabled || readonly" [view]="view" [value]="value"></fs-datepicker-trigger>
-    </ng-container>
+    }
   `;
 
   @Input() public minYear = null;

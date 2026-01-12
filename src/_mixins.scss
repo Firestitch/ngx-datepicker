@@ -13,22 +13,6 @@
   .nav-action {    
     display: flex;
     align-items: center;
-
-    &.mat-icon-button,
-    .mat-icon {
-      width: 30px;
-      height: 30px;
-      line-height: 30px !important;
-      text-decoration: none;
-      cursor: pointer;
-      color: inherit;
-    }
-
-    .mat-ripple {
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-    }
   }
 }
 
