@@ -74,6 +74,9 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   @Output('closed')
   public closed$ = new EventEmitter<void>();
 
+  @Output('blured')
+  public blured$ = new EventEmitter<Date>();
+
   public onChange: (value) => void;
   public onTouch: (value) => void;
 
@@ -199,9 +202,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         this._dateDialogRef = null;
         this._enableInput();
 
-        this._focusAfterClose = true;
-        this._doFocus();
-
         this._cdRef.markForCheck();
       });
   }
@@ -282,6 +282,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
       }
 
       this.updateInput(this.value);
+      this.blured$.emit(this.value);
     }
   }
 

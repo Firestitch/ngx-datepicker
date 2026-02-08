@@ -5,7 +5,7 @@ import {
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatInput } from '@angular/material/input';
-  
+
 
 import { Observable, Subject } from 'rxjs';
 
@@ -60,7 +60,7 @@ export class FsPickerBaseComponent implements OnInit, OnChanges, OnDestroy {
     return this._injector.get(MatInput);
   }
 
-  public get el(): any {
+  public get el(): HTMLInputElement {
     return this._elementRef.nativeElement;
   }
 
