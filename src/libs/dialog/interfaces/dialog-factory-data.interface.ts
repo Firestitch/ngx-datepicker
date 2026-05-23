@@ -23,6 +23,7 @@ export interface IDialogFactoryOptions {
   pickerRef?: RangePickerRef;
   rangeType?: 'from' | 'to';
   weekStartsOn?: WeekDays
+  showNow?:     boolean;
 
   //
   showMonth?: boolean;

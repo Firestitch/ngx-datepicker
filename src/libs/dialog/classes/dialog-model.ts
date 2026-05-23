@@ -39,6 +39,7 @@ export class FsDatePickerDialogModel {
   public seedDate = null;
   public periodWeeks = null;
   public minutes = true;
+  public showNow = true;
   public weekStartsOn: WeekDays;
 
   private _minYear = null;
@@ -280,6 +281,9 @@ export class FsDatePickerDialogModel {
     this.minutes = options.minutes === undefined
       ? true
       : options.minutes;
+    this.showNow = options.showNow === undefined
+      ? true
+      : options.showNow;
 
     this.seedDate = !isDate(options.seedDate) || !isValid(options.seedDate) ?
       getFirstDayOfFirstYearWeek(new Date()) :

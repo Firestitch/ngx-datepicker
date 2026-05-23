@@ -30,6 +30,11 @@ export class FsMobileTimePickerComponent {
 
   public dateChanged(date): void {
     this.datePickerModel.model = date;
+
+    // Hours-only time view is complete after a single hour selection, so close.
+    if (!this.datePickerModel.minutes) {
+      this.close();
+    }
   }
 
   public close(): void {

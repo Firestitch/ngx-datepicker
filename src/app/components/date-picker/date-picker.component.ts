@@ -119,6 +119,7 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
         startOfDay: this.startOfDay,
         components: this._getDefaultComponents(),
         weekStartsOn: this.weekStartsOn,
+        showNow: this.showNow,
       });
 
     super.open();

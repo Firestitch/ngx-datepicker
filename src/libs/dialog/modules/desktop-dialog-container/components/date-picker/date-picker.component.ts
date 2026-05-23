@@ -91,7 +91,13 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
   public dateChanged(date): void {
     this.datePickerModel.model = date;
 
-    if (!this.datePickerModel.isDateTimeView && !this.datePickerModel.isTimeView) {
+    // Keep the dialog open while the user still has time components to pick:
+    // any datetime view, or a time view that includes minutes. An hours-only
+    // time view is complete after a single hour selection, so close it.
+    const keepOpen = this.datePickerModel.isDateTimeView
+      || (this.datePickerModel.isTimeView && this.datePickerModel.minutes);
+
+    if (!keepOpen) {
       this.close();
     }
   }

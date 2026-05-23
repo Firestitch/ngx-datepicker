@@ -22,6 +22,7 @@
           [seedDate]="datePickerModel.seedDate"
           [weekStartsOn]="datePickerModel.weekStartsOn"
           [periodWeeks]="datePickerModel.periodWeeks"
+          [showToday]="datePickerModel.showNow"
           (change)="dateChanged($event)"
           (periodChange)="periodChanged($event)">
         </fs-date-picker-calendar>
@@ -35,6 +36,7 @@
           [disabledTimes]="datePickerModel.disabledTimes$ | async"
           [expanded]="timePickerExpanded"
           [showHeading]="datePickerModel.view !== 'time'"
+          [showNow]="datePickerModel.showNow"
           (onChange)="dateChanged($event)">
         </fs-date-picker-time>
       }

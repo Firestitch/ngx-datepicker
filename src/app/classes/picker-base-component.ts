@@ -32,6 +32,13 @@ export class FsPickerBaseComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   public weekStartsOn: WeekDays;
 
+  /**
+   * Show the "now" indicator (the dot marking today's date and the current
+   * hour/minute). Inherited by every picker so it works across all scenarios.
+   */
+  @Input()
+  public showNow = true;
+
   protected _renderer: Renderer2;
   protected _elementRef: ElementRef;
   protected readonly _globalConfig: IFsDatePickerConfig;

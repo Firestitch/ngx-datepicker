@@ -17,6 +17,7 @@
           [highlightEndDate]="modelTo$ | async"
           [disabledDates]="datePickerModel.disabledDates$ | async"
           [weekStartsOn]="datePickerModel.weekStartsOn"
+          [showToday]="datePickerModel.showNow"
           (change)="dateChanged($event)">
         </fs-date-picker-calendar>
         <fs-date-picker-calendar
@@ -28,6 +29,7 @@
           [dateMode]="datePickerModel.calendarMode$ | async"
           [disabledDates]="datePickerModel.disabledDates$ | async"
           [weekStartsOn]="datePickerModel.weekStartsOn"
+          [showToday]="datePickerModel.showNow"
           (change)="dateChanged($event)">
         </fs-date-picker-calendar>
       </div>
@@ -39,6 +41,7 @@
           [minutes]="datePickerModel.minutes"
           [showHeading]="true"
           [disabledTimes]="datePickerModel.disabledTimes$ | async"
+          [showNow]="datePickerModel.showNow"
           (onChange)="dateChanged($event)">
         </fs-date-picker-time>
       }

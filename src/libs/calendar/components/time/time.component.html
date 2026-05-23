@@ -26,7 +26,7 @@
                     (click)="hourClick(hour)"
                   [ngClass]="{
                     disabled: disabledTimeHours[hour],
-                    now: nowHour === hour,
+                    now: showNow && nowHour === hour,
                     selected: hour === selected.hour
                   }">
                     @if (hour < 12) {
@@ -57,7 +57,7 @@
                     [ngClass]="{
                       disabled: disabledTimeHours[hour],
                       selected: hour === selected.hour,
-                      now: nowHour === hour
+                      now: showNow && nowHour === hour
                     }">
                         @if (hour < 12) {
                           <span>{{ hour ? hour : 12 }}<span class="am-pm">am</span></span>
@@ -92,7 +92,7 @@
                       [ngClass]="{
                         disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]),
                         selected: minute === selected.minute,
-                        now: nowMinute === minute
+                        now: showNow && nowMinute === minute
                       }"
                       (click)="minuteClick(minute)">
                       {{ minute }}
@@ -115,7 +115,7 @@
                     [ngClass]="{
                       disabled: disabledTimeMinutes[minute] || (disabledGroupedMinutes[selected.hour] && disabledGroupedMinutes[selected.hour][minute]),
                       selected: minute === selected.minute,
-                      now: nowMinute === minute
+                      now: showNow && nowMinute === minute
                     }"
                       (click)="minuteClick(minute)">
                       {{ minute }}
