@@ -12,8 +12,6 @@ import {
 } from '@angular/core';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { MatFormField } from '@angular/material/form-field';
-
 import { FsClearModule } from '@firestitch/clear';
 
 import { isValid, startOfDay } from 'date-fns';
@@ -67,11 +65,11 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
   @Input() public view = PickerViewType.Date;
   @Input() public format: string;
   @Input() public minutes = true;
+  @Input() public width = '120px';
 
   @Output('change')
   public change$ = new EventEmitter<any>();
 
-  private _formField = inject(MatFormField);  
   private _fsDatepickerFactory = inject(FsDatePickerDialogFactory);
 
   public ngOnInit(): void {
@@ -105,22 +103,23 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
 
     const modelValue = isValid(this.value) ? this.value : null;
 
-    this._dateDialogRef = this._fsDatepickerFactory.openDatePicker(
-      this._elementRef,
-      this._injector,
-      {
-        modelValue,
-        view: this.view,
-        minutes: this.minutes,
-        minYear: this.minYear,
-        maxYear: this.maxYear,
-        minDate: this.minDate,
-        maxDate: this.maxDate,
-        startOfDay: this.startOfDay,
-        components: this._getDefaultComponents(),
-        weekStartsOn: this.weekStartsOn,
-        showNow: this.showNow,
-      });
+    this._dateDialogRef = this._fsDatepickerFactory
+      .openDatePicker(
+        this._elementRef,
+        this._injector,
+        {
+          modelValue,
+          view: this.view,
+          minutes: this.minutes,
+          minYear: this.minYear,
+          maxYear: this.maxYear,
+          minDate: this.minDate,
+          maxDate: this.maxDate,
+          startOfDay: this.startOfDay,
+          components: this._getDefaultComponents(),
+          weekStartsOn: this.weekStartsOn,
+          showNow: this.showNow,
+        });
 
     super.open();
   }

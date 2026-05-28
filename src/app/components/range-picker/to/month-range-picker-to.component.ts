@@ -4,30 +4,32 @@ import {
   Input,
 } from '@angular/core';
 
+import { FsClearModule } from '@firestitch/clear';
+
 import { takeUntil } from 'rxjs/operators';
 
 import { endOfDay } from 'date-fns';
 import { fromZonedTime } from 'date-fns-tz';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
+import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerToComponent } from '../base/range-picker-to.component';
-import { FsClearModule } from '@firestitch/clear';
-
-import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-    selector: '[fsMonthRangeTo],[fsMonthRangeToPicker]',
-    template: FsDatePickerComponent.template,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
+  selector: '[fsMonthRangeTo],[fsMonthRangeToPicker]',
+  template: FsDatePickerComponent.template,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
     FsClearModule,
-    FsDatePickerTriggerComponent
-],
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class MonthRangePickerToComponent extends RangePickerToComponent {
+
+  @Input() public width = '120px';
 
   @Input() public set fsMonthRangeTo(value) {
     this._name = value;

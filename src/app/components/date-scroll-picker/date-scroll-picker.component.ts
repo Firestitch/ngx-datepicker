@@ -34,8 +34,8 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
   standalone: true,
   imports: [
     FsClearModule,
-    FsDatePickerTriggerComponent
-],
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   implements ControlValueAccessor, OnInit {
@@ -47,6 +47,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
   @Input() public showMonth = true;
   @Input() public showYear = true;
   @Input() public showDay = true;
+
+  @Input() public width = '120px';
 
   public view = ScrollPickerViewType.Date;
 

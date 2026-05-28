@@ -18,7 +18,6 @@ import { RangePickerComponent } from '../base/range-picker-base.component';
 
 @Directive()
 export abstract class RangePickerToComponent extends RangePickerComponent implements OnInit, OnDestroy {
-
   
   private _rangePickerStore = inject(FsRangePickerStoreService);
 

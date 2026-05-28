@@ -4,34 +4,35 @@ import {
   Input,
 } from '@angular/core';
 
-import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
-
-import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
-import { RangePickerFromComponent } from '../base/range-picker-from.component';
 import { FsClearModule } from '@firestitch/clear';
 
+import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
+import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
+import { RangePickerFromComponent } from '../base/range-picker-from.component';
 
 
 @Component({
-    selector: '[fsDateTimeRangeFrom],[fsDateTimeRangeFromPicker]',
-    template: FsDatePickerComponent.template,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
+  selector: '[fsDateTimeRangeFrom],[fsDateTimeRangeFromPicker]',
+  template: FsDatePickerComponent.template,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
     FsClearModule,
-    FsDatePickerTriggerComponent
-],
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class DateTimeRangePickerFromComponent extends RangePickerFromComponent {
 
-  @Input() set fsDateTimeRangeFrom(value) {
+  @Input() public set fsDateTimeRangeFrom(value) {
     this._name = value;
   }
 
-  @Input() set fsDateTimeRangeFromPicker(value) {
+  @Input() public set fsDateTimeRangeFromPicker(value) {
     this._name = value;
   }
+
+  @Input() public width = '180px';
 
   @Input()
   public view = PickerViewType.DateTime;

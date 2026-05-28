@@ -2,6 +2,7 @@ import {
   Directive,
   EventEmitter,
   HostListener,
+  inject,
   Input,
   OnDestroy,
   OnInit,
@@ -23,6 +24,8 @@ import { filter, take, takeUntil, tap } from 'rxjs/operators';
 import { isEqual, isValid } from 'date-fns';
 import { fromZonedTime } from 'date-fns-tz';
 
+import { MatFormField } from '@angular/material/form-field';
+
 import { parseDate } from '../helpers/parse-date';
 
 import { FsPickerBaseComponent } from './picker-base-component';
@@ -40,6 +43,9 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
 
   @Input()
   public icon = true;
+
+  @Input()
+  public width: string;
 
   @Input()
   public set clear(value: boolean) {
@@ -82,6 +88,8 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   protected _onTouch: () => void;
   protected _validator: ValidatorFn | null;
 
+  protected _formField = inject(MatFormField);
+
   private _validatorOnChange: () => void;
   private _clear = true;
   private _lastValueValid = false;
@@ -100,6 +108,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
 
   public ngOnInit(): void {
     super.ngOnInit();
+    this._applyWidth();
     this._validator = Validators.compose([this._parseValidator]);
     fromEvent(this.el, 'focus')
       .pipe(
@@ -265,6 +274,30 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
 
   protected validateDate(date: Date | undefined) {
     this._lastValueValid = !date || isValid(date);
+  }
+
+  protected _applyWidth(): void {
+    if (!this.width) {
+      return;
+    }
+
+    const el = this._formField.getConnectedOverlayOrigin().nativeElement;
+
+    if (this.width.endsWith('%')) {
+      el.style.width = this.width;
+    } else {
+      let width = parseInt(this.width, 10);
+
+      if (this.clear) {
+        width += 32;
+      }
+
+      if (this.icon) {
+        width += 32;
+      }
+
+      el.style.width = `${width}px`;
+    }
   }
 
   public abstract updateInput(value: Date): void;

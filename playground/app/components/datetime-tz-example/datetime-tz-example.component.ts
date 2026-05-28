@@ -1,37 +1,42 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { getTimeZones } from '@vvo/tzdb';
-import { tzList } from './tz-list';
 import { FormsModule } from '@angular/forms';
-import { MatFormField, MatLabel, MatHint } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
-import { FsFormModule } from '@firestitch/form';
+
 import { MatOption } from '@angular/material/core';
+import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+
+import { FsFormModule } from '@firestitch/form';
+
+import { getTimeZones } from '@vvo/tzdb';
+
+import { DateRangeSeparatorComponent } from '../../../../src/app/components/date-range-separator/date-range-separator.component';
 import { FsDateTimePickerComponent } from '../../../../src/app/components/date-time-picker/date-time-picker.component';
 import { DateTimeRangePickerFromComponent } from '../../../../src/app/components/range-picker/from/date-time-range-picker-from.component';
-import { DateRangeSeparatorComponent } from '../../../../src/app/components/date-range-separator/date-range-separator.component';
 import { DateTimeRangePickerToComponent } from '../../../../src/app/components/range-picker/to/date-time-range-picker-to.component';
 
+import { tzList } from './tz-list';
+
 @Component({
-    selector: 'datetime-tz-example',
-    templateUrl: './datetime-tz-example.component.html',
-    styleUrls: ['./datetime-tz-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        FormsModule,
-        MatFormField,
-        MatLabel,
-        MatSelect,
-        FsFormModule,
-        MatOption,
-        MatInput,
-        FsDateTimePickerComponent,
-        MatHint,
-        DateTimeRangePickerFromComponent,
-        DateRangeSeparatorComponent,
-        DateTimeRangePickerToComponent,
-    ],
+  selector: 'datetime-tz-example',
+  templateUrl: './datetime-tz-example.component.html',
+  styleUrls: ['./datetime-tz-example.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FsFormModule,
+    MatOption,
+    MatInput,
+    FsDateTimePickerComponent,
+    MatHint,
+    DateTimeRangePickerFromComponent,
+    DateRangeSeparatorComponent,
+    DateTimeRangePickerToComponent,
+  ],
 })
 export class DatetimeTzExampleComponent {
   
@@ -52,7 +57,7 @@ export class DatetimeTzExampleComponent {
       0,
       0,
       0,
-    )
+    ),
   );
 
   public startDate = new Date(
@@ -64,7 +69,7 @@ export class DatetimeTzExampleComponent {
       0,
       0,
       0,
-    )
+    ),
   );
 
   public endDate = new Date(
@@ -76,7 +81,7 @@ export class DatetimeTzExampleComponent {
       0,
       0,
       0,
-    )
+    ),
   );
 
   public startDateTimeDate = new Date(
@@ -88,7 +93,7 @@ export class DatetimeTzExampleComponent {
       0,
       0,
       0,
-    )
+    ),
   );
 
   public endDateTimeDate = new Date(
@@ -100,7 +105,7 @@ export class DatetimeTzExampleComponent {
       0,
       0,
       0,
-    )
+    ),
   );
 
   public startMonthDate = new Date(
@@ -112,7 +117,7 @@ export class DatetimeTzExampleComponent {
       0,
       0,
       0,
-    )
+    ),
   );
 
   public endMonthDate = new Date(
@@ -124,7 +129,7 @@ export class DatetimeTzExampleComponent {
       0,
       0,
       0,
-    )
+    ),
   );
 
   constructor() {
@@ -139,11 +144,7 @@ export class DatetimeTzExampleComponent {
     const userTZ = this.timezones
       .find((tz) => tz.name === userTZName);
 
-    if (userTZ) {
-      this.selectedTimeZone = userTZ.name;
-    } else {
-      this.selectedTimeZone = tzList[0].name;
-    }
+    this.selectedTimeZone = userTZ ? userTZ.name : tzList[0].name;
   }
 
   public pickerClosed(): void {

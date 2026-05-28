@@ -1,64 +1,76 @@
 <form>
-  <mat-form-field appearance="fill" class="timezones">
-    <mat-label>Calendar Time Zone</mat-label>
-    <mat-select [(ngModel)]="selectedTimeZone" name="tz">
+  <mat-form-field
+      appearance="fill"
+      class="timezones">
+    <mat-label>
+      Calendar Time Zone
+    </mat-label>
+    <mat-select
+        [(ngModel)]="selectedTimeZone"
+        name="tz">
       @for (tz of timezones; track tz) {
         <mat-option [value]="tz.name">
-          {{ tz.currentTimeFormat}}
+          {{ tz.currentTimeFormat }}
         </mat-option>
       }
     </mat-select>
   </mat-form-field>
-
   <br>
-
-    <mat-form-field>
-      <mat-label>Date Time</mat-label>
-      <input
-        matInput
-        fsDateTimePicker
-        fsFormRequired
-        [format]="format"
-        [(ngModel)]="model"
-        [timezone]="selectedTimeZone"
-        name="datetimepicker"
-
-        (closed)="pickerClosed()">
-      <mat-hint>UTC: {{model?.toUTCString()}}</mat-hint>
-    </mat-form-field>
-
-    <br>
-      <br>
-
-        <mat-form-field>
-          <mat-label>Date Range From</mat-label>
-          <input
-            matInput
-            fsDateTimeRangeFromPicker="datetimerangepickertz"
-            [(ngModel)]="startDateTimeDate"
-            [timezone]="selectedTimeZone"
-            [format]="format"
-            name="dateTimeFrom"
-
-            fsFormRequired
-            (closed)="pickerClosed()">
-          <mat-hint>UTC: {{startDateTimeDate?.toUTCString()}}</mat-hint>
-        </mat-form-field>
-
-        <fs-date-range-separator></fs-date-range-separator>
-
-        <mat-form-field>
-          <mat-label>Date Range To</mat-label>
-          <input
-            matInput
-            fsDateTimeRangeToPicker="datetimerangepickertz"
-            [(ngModel)]="endDateTimeDate"
-            [timezone]="selectedTimeZone"
-            [format]="format"
-            name="dateTimeTo"
-
-            fsFormRequired
-            (closed)="pickerClosed()">
-          <mat-hint>UTC: {{endDateTimeDate?.toUTCString()}}</mat-hint>
-        </mat-form-field>
-      </form>
+  <mat-form-field>
+    <mat-label>
+      Date Time
+    </mat-label>
+    <input
+      matInput
+      fsDateTimePicker
+      fsFormRequired
+      [format]="format"
+      [width]="'250px'"
+      [(ngModel)]="model"
+      [timezone]="selectedTimeZone"
+      name="datetimepicker"
+      (closed)="pickerClosed()">
+    <mat-hint>
+      UTC: {{ model?.toUTCString() }}
+    </mat-hint>
+  </mat-form-field>
+  <br>
+  <br>
+  <mat-form-field>
+    <mat-label>
+      Date Range From
+    </mat-label>
+    <input
+      matInput
+      fsDateTimeRangeFromPicker="datetimerangepickertz"
+      [(ngModel)]="startDateTimeDate"
+      [timezone]="selectedTimeZone"
+      [format]="format"
+      [width]="'250px'"
+      name="dateTimeFrom"
+      fsFormRequired
+      (closed)="pickerClosed()">
+    <mat-hint>
+      UTC: {{ startDateTimeDate?.toUTCString() }}
+    </mat-hint>
+  </mat-form-field>
+  <fs-date-range-separator></fs-date-range-separator>
+  <mat-form-field>
+    <mat-label>
+      Date Range To
+    </mat-label>
+    <input
+      matInput
+      fsDateTimeRangeToPicker="datetimerangepickertz"
+      [(ngModel)]="endDateTimeDate"
+      [timezone]="selectedTimeZone"
+      [format]="format"
+      [width]="'250px'"
+      name="dateTimeTo"
+      fsFormRequired
+      (closed)="pickerClosed()">
+    <mat-hint>
+      UTC: {{ endDateTimeDate?.toUTCString() }}
+    </mat-hint>
+  </mat-form-field>
+</form>

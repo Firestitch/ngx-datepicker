@@ -5,28 +5,28 @@ import {
   OnInit,
 } from '@angular/core';
 
+import { FsClearModule } from '@firestitch/clear';
+
 import { takeUntil } from 'rxjs/operators';
 
 import { startOfDay } from 'date-fns';
 import { fromZonedTime } from 'date-fns-tz';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
+import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
 import { FsDatePickerComponent } from '../../date-picker/date-picker.component';
 import { RangePickerFromComponent } from '../base/range-picker-from.component';
-import { FsClearModule } from '@firestitch/clear';
-
-import { FsDatePickerTriggerComponent } from '../../date-picker-trigger/date-picker-trigger.component';
 
 
 @Component({
-    selector: '[fsMonthRangeFrom],[fsMonthRangeFromPicker]',
-    template: FsDatePickerComponent.template,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
+  selector: '[fsMonthRangeFrom],[fsMonthRangeFromPicker]',
+  template: FsDatePickerComponent.template,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
     FsClearModule,
-    FsDatePickerTriggerComponent
-],
+    FsDatePickerTriggerComponent,
+  ],
 })
 export class MonthRangePickerFromComponent extends RangePickerFromComponent implements OnInit {
 
@@ -37,6 +37,8 @@ export class MonthRangePickerFromComponent extends RangePickerFromComponent impl
   @Input() public set fsMonthRangeFromPicker(value) {
     this._name = value;
   }
+
+  @Input() public width = '120px';
 
   public view = PickerViewType.MonthRange;
 
