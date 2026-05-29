@@ -32,7 +32,7 @@ export class TimeRangePickerFromComponent extends RangePickerFromComponent {
     this._name = value;
   }
 
-  @Input() public width = '100px';
+  @Input() public width = '120px';
 
   @Input()
   public view = PickerViewType.Time;

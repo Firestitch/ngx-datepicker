@@ -32,7 +32,7 @@ export class DateTimeRangePickerFromComponent extends RangePickerFromComponent {
     this._name = value;
   }
 
-  @Input() public width = '180px';
+  @Input() public width = '200px';
 
   @Input()
   public view = PickerViewType.DateTime;

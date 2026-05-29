@@ -17,6 +17,8 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { MatFormField } from '@angular/material/form-field';
+
 import { fromEvent } from 'rxjs';
 import { filter, take, takeUntil, tap } from 'rxjs/operators';
 
@@ -24,7 +26,6 @@ import { filter, take, takeUntil, tap } from 'rxjs/operators';
 import { isEqual, isValid } from 'date-fns';
 import { fromZonedTime } from 'date-fns-tz';
 
-import { MatFormField } from '@angular/material/form-field';
 
 import { parseDate } from '../helpers/parse-date';
 
@@ -289,7 +290,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       let width = parseInt(this.width, 10);
 
       if (this.clear) {
-        width += 32;
+        width += 48;
       }
 
       if (this.icon) {

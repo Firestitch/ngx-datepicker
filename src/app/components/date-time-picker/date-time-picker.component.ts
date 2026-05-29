@@ -38,5 +38,5 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 export class FsDateTimePickerComponent extends FsDatePickerComponent {
 
   @Input() public view = PickerViewType.DateTime;
-  @Input() public width = '180px';
+  @Input() public width = '200px';
 }
