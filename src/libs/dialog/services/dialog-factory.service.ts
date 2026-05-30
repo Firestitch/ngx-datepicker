@@ -203,126 +203,110 @@ export class FsDatePickerDialogFactory {
     return createEnvironmentInjector(providers, parentInjector as EnvironmentInjector);
   }
 
+  /**
+   * The `fsDatePicker` directive lives on the `<input>`, which is inset from the
+   * mat-form-field border by the field's padding — and that padding differs between
+   * appearances (`outline` vs `fill`), so anchoring the overlay to the input makes
+   * the visible gap inconsistent.
+   *
+   * We keep the input as the connected origin but measure the distance from each
+   * input edge to the corresponding edge of the field box (`.mat-mdc-text-field-wrapper`),
+   * then offset the overlay by that distance. This aligns the panel with the visible
+   * field border on every side, consistently across appearances.
+   *
+   * Returns zero offsets when there is no form field (e.g. a bare trigger).
+   */
+  private _getFieldOffsets(el: ElementRef): { start: number; end: number; top: number; bottom: number } {
+    const nativeEl = el?.nativeElement as HTMLElement;
+    const wrapper = nativeEl?.closest?.('.mat-mdc-text-field-wrapper');
+
+    if (!wrapper) {
+      return { start: 0, end: 0, top: 0, bottom: 0 };
+    }
+
+    const inputRect = nativeEl.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+
+    return {
+      // negative: shifts a left-aligned overlay out to the field's left border
+      start: wrapperRect.left - inputRect.left,
+      // positive: shifts a right-aligned overlay out to the field's right border
+      end: wrapperRect.right - inputRect.right,
+      // negative: lifts an above-the-field overlay up to the field's top border
+      top: wrapperRect.top - inputRect.top,
+      // positive: drops a below-the-field overlay down to the field's bottom border
+      bottom: wrapperRect.bottom - inputRect.bottom,
+    };
+  }
+
   private _createPopupPositionStrategy(el: ElementRef): PositionStrategy {
+    const field = this._getFieldOffsets(el);
+    // Consistent gap between the field box and the panel, measured from the
+    // visible field border (not the input) so it looks the same on every appearance.
+    const gap = 4;
+
     return this._createBasePopupPositionStrategy(el)
       .withPositions([
         /**
-         * case when input has Y position top/center & is close to the right edge
-         * |           []   |
-         * |                |
-         * |                |
-         */
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'center',
-          overlayY: 'top',
-          offsetY: 10,
-        },
-        // case for TA-T4183
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'center',
-          overlayY: 'top',
-          offsetX: -100,
-          offsetY: 10,
-        },
-        /**
-         * case when input has Y position top/center & is close to the right edge
-         * |              []|
-         * |                |
-         * |                |
-         */
-        {
-          originX: 'center',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-          offsetY: 10,
-        },
-        /**
-         * case when input has Y position top/center & is close to the left edge or 100% width
-         * |[]              |
-         * |[              ]|
-         * |                |
+         * Preferred: drop below the field, left edge aligned with the form-field border.
+         * |[field]         |
+         * |[overlay        |
+         * |        ]       |
          */
         {
           originX: 'start',
           originY: 'bottom',
           overlayX: 'start',
           overlayY: 'top',
-          offsetY: 10,
+          offsetX: field.start,
+          offsetY: field.bottom + gap,
         },
         /**
-         * case when input has Y position top/center & somewhere in the middle of page
-         * |     []         |
-         * |                |
-         * |                |
+         * Below the field, right edge aligned with the form-field border —
+         * used when a left-aligned overlay would run off the right edge.
+         * |         [field]|
+         * |        overlay]|
+         * |       [        |
          */
         {
           originX: 'end',
           originY: 'bottom',
-          overlayX: 'center',
+          overlayX: 'end',
           overlayY: 'top',
-          offsetY: 10,
+          offsetX: field.end,
+          offsetY: field.bottom + gap,
         },
         /**
-         * case when input has Y position bottom & is close to the left edge
-         * |                |
-         * |                |
-         * |[]              |
+         * Above the field, left aligned — used when there is no room below.
+         * |       [        |
+         * |        ]       |
+         * |[field]         |
          */
         {
           originX: 'start',
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
-          offsetY: -20,
+          offsetX: field.start,
+          offsetY: field.top - gap,
         },
         /**
-         * case when input has Y position bottom & is somewhere in the middle of X
-         * |                |
-         * |                |
-         * |      []        |
+         * Above the field, right aligned — no room below and close to the right edge.
+         * |       [        |
+         * |        ]       |
+         * |         [field]|
          */
         {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'center',
-          overlayY: 'bottom',
-          offsetY: -20,
-        },
-        /**
-         * case when input has Y position bottom & is close to the right edge of the page
-         * |                |
-         * |                |
-         * |           []   |
-         */
-        {
-          originX: 'center',
+          originX: 'end',
           originY: 'top',
           overlayX: 'end',
           overlayY: 'bottom',
-          offsetY: -20,
+          offsetX: field.end,
+          offsetY: field.top - gap,
         },
         /**
-         * case when input has Y position bottom & almost off the page on the right edge
-         * |                |
-         * |                |
-         * |               [|]
-         */
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'end',
-          overlayY: 'bottom',
-          offsetY: -20,
-        },
-
-        /**
-         * case when input has Y position top/center & there is not enough height to go top/bottom
-         * |     []         |
+         * Last resort: not enough vertical room either way — center next to the field.
+         * |     [field]    |
          */
         {
           originX: 'end',
