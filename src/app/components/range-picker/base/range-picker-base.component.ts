@@ -9,8 +9,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-import { MatFormField } from '@angular/material/form-field';
-
 
 import { fromEvent, Observable } from 'rxjs';
 import { filter, map, pairwise, skip, take, takeUntil, tap } from 'rxjs/operators';
@@ -48,16 +46,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   public maxDate: Date = null;
 
   @Input()
-  public clear = true;
-
-  @Input()
-  public icon = true;
-
-  @Input()
   public format: string;
-
-  @Input()
-  public width: string;
 
   @Input() public ngModelOptions: {
     name?: string;
@@ -97,8 +86,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
   protected _timezone: string;
   protected _datepickerFactory = inject(FsDatePickerDialogFactory);
   protected _ngControl = inject(NgControl);
-  protected _formField = inject(MatFormField);
-  
+
   private _lastValueValid = false;
 
   protected constructor() {
@@ -314,30 +302,6 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     }
 
     return createDateFromValue(date, this.timezone);
-  }
-
-  protected _applyWidth(): void {
-    if (!this.width) {
-      return;
-    }
-
-    const el = this._formField.getConnectedOverlayOrigin().nativeElement;
-
-    if (this.width.endsWith('%')) {
-      el.style.width = this.width;
-    } else {
-      let width = parseInt(this.width, 10);
-
-      if (this.clear) {
-        width += 32;
-      }
-
-      if (this.icon) {
-        width += 32;
-      }
-
-      el.style.width = `${width}px`;
-    }
   }
 
   protected _getDefaultComponents() {

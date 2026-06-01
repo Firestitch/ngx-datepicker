@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 
 
@@ -39,6 +40,16 @@ export class FsPickerBaseComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   public showNow = true;
 
+  @Input()
+  public width: string;
+
+  @Input()
+  public icon = true;
+
+  @Input()
+  public clear = true;
+
+  protected _formField = inject(MatFormField);
   protected _renderer: Renderer2;
   protected _elementRef: ElementRef;
   protected readonly _globalConfig: IFsDatePickerConfig;
@@ -102,5 +113,29 @@ export class FsPickerBaseComponent implements OnInit, OnChanges, OnDestroy {
 
   protected _init(): void {
     this.weekStartsOn = this.weekStartsOn ?? this._globalConfig.weekStartsOn;
+  }
+
+  protected _applyWidth(): void {
+    if (!this.width) {
+      return;
+    }
+
+    const el = this._formField.getConnectedOverlayOrigin().nativeElement;
+
+    if (this.width.endsWith('%')) {
+      el.style.width = this.width;
+    } else {
+      let width = parseInt(this.width, 10);
+
+      if (this.clear) {
+        width += 48;
+      }
+
+      if (this.icon) {
+        width += 32;
+      }
+
+      el.style.width = `${width}px`;
+    }
   }
 }

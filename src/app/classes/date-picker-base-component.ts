@@ -2,7 +2,6 @@ import {
   Directive,
   EventEmitter,
   HostListener,
-  inject,
   Input,
   OnDestroy,
   OnInit,
@@ -16,8 +15,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-
-import { MatFormField } from '@angular/material/form-field';
 
 import { fromEvent } from 'rxjs';
 import { filter, take, takeUntil, tap } from 'rxjs/operators';
@@ -41,21 +38,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     standalone?: boolean;
     updateOn?: 'change' | 'blur' | 'submit';
   };
-
-  @Input()
-  public icon = true;
-
-  @Input()
-  public width: string;
-
-  @Input()
-  public set clear(value: boolean) {
-    this._clear = value;
-  }
-
-  public get clear(): boolean {
-    return this._clear;
-  }
 
   @Input()
   public set timezone(value: string) {
@@ -89,10 +71,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   protected _onTouch: () => void;
   protected _validator: ValidatorFn | null;
 
-  protected _formField = inject(MatFormField);
-
   private _validatorOnChange: () => void;
-  private _clear = true;
   private _lastValueValid = false;
 
   public registerOnChange(fn: (value: any) => any): void {
@@ -275,30 +254,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
 
   protected validateDate(date: Date | undefined) {
     this._lastValueValid = !date || isValid(date);
-  }
-
-  protected _applyWidth(): void {
-    if (!this.width) {
-      return;
-    }
-
-    const el = this._formField.getConnectedOverlayOrigin().nativeElement;
-
-    if (this.width.endsWith('%')) {
-      el.style.width = this.width;
-    } else {
-      let width = parseInt(this.width, 10);
-
-      if (this.clear) {
-        width += 48;
-      }
-
-      if (this.icon) {
-        width += 32;
-      }
-
-      el.style.width = `${width}px`;
-    }
   }
 
   public abstract updateInput(value: Date): void;
