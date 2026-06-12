@@ -371,6 +371,7 @@ export class FsDatePickerDialogFactory {
       data: {
         dateDialogRef: dialogRef,
       },
+      restoreFocus: false,
     });
   }
 

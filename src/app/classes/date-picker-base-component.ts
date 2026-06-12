@@ -95,16 +95,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        if(!this.value) {
-          this.open();
-        }
-
-        if (!this.value && this._focusAfterClose) {
-          this._focusAfterClose = false;
-
-          return;
-        }
-
         this.open();
         this._doFocus();
       });
@@ -182,7 +172,6 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
       )
       .subscribe(() => {
         this._dateDialogRef = null;
-        this._focusAfterClose = true;
         this.opened = false;
 
         this._renderer.removeClass(document.body, 'fs-date-picker-open');
