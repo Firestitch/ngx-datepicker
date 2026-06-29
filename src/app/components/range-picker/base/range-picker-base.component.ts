@@ -257,7 +257,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
 
   public inputChange(value: string): void {
     const lastValueWasValid = this._lastValueValid;
-    const date = parseDate(value);
+    const date = parseDate(value, this.view);
 
     this._lastValueValid = !date || isValid(date);
 

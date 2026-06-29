@@ -24,6 +24,7 @@ import { isEqual, isValid } from 'date-fns';
 import { fromZonedTime } from 'date-fns-tz';
 
 
+import { PickerViewType } from '../../libs/common/enums/picker-view-type.enum';
 import { parseDate } from '../helpers/parse-date';
 
 import { FsPickerBaseComponent } from './picker-base-component';
@@ -204,7 +205,7 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
   public inputChange(value: string): void {
     if (value) {
       const lastValueWasValid = this._lastValueValid;
-      const date = parseDate(value);
+      const date = parseDate(value, this._parseView);
 
       this.validateDate(date);
 
@@ -232,6 +233,15 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
     this._onTouch();
 
     this.change$.emit(this.value);
+  }
+
+  /**
+   * The view the parser uses to decide whether to try time formats. The base
+   * does not own `view`; the subclass that does (FsDatePickerComponent)
+   * overrides this. Defaults to Date so the base keeps date-only parsing.
+   */
+  protected get _parseView(): PickerViewType {
+    return PickerViewType.Date;
   }
 
   /** The form control validator for whether the input parses. */

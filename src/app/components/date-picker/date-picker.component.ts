@@ -144,6 +144,10 @@ export class FsDatePickerComponent extends FsDatePickerBaseComponent implements 
     super.updateValue(value);
   }
 
+  protected override get _parseView(): PickerViewType {
+    return this.view;
+  }
+
   private _getDefaultComponents() {
     if (this.view === PickerViewType.Time) {
       return { timeStart: true };
