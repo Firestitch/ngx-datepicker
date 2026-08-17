@@ -6,6 +6,7 @@ export * from './date-range-separator';
 export * from './date-scroll-picker';
 export * from './date-time-picker';
 export * from './date-week-picker';
+export * from './preset-chip';
 export * from './range-picker';
 export * from './time-picker';
 export * from './time-select';

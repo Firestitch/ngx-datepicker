@@ -2,16 +2,19 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, O
 
 import { ThemePalette } from '@angular/material/core';
 
-import { fromEvent, Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { FsDatePickerCalendarComponent } from '../../../../../../libs/calendar/components';
+import { DatePreset } from '../../../../../common/enums/date-preset.enum';
+import { monthWheelScroll } from '../../../../../common/helpers/month-wheel-scroll';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
 import { FsDatePickerHeaderComponent } from '../header/header.component';
 import { FsDatePickerCalendarComponent as FsDatePickerCalendarComponent_1 } from '../../../../../calendar/components/calendar/calendar.component';
 import { FsDatePickerTimeComponent } from '../../../../../calendar/components/time/time.component';
 import { ActionButtonsComponent } from '../../../../../components/action-buttons/action-buttons.component';
+import { FsDatePickerPresetsComponent } from '../../../../../components/presets/presets.component';
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 import { MatAnchor } from '@angular/material/button';
 
@@ -27,6 +30,7 @@ import { MatAnchor } from '@angular/material/button';
         FsDatePickerCalendarComponent_1,
         FsDatePickerTimeComponent,
         ActionButtonsComponent,
+        FsDatePickerPresetsComponent,
         NgTemplateOutlet,
         MatAnchor,
         AsyncPipe,
@@ -46,7 +50,6 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
   public timePickerExpanded = false;
 
   private _destroy$ = new Subject();
-  private _wheelDelta = 0;
 
   public get doneBtnClass(): ThemePalette {
     if (this.datePickerModel.isPickerRangeFrom) {
@@ -102,6 +105,12 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  public presetChanged(preset: DatePreset): void {
+    if (this.datePickerModel.applyPreset(preset)) {
+      this.close();
+    }
+  }
+
   public periodChanged(date): void {
     this.datePickerModel.period = date;
 
@@ -127,22 +136,12 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
 
   public ngAfterViewInit(): void {
     if(this.datePickerCalendar) {
-      fromEvent(this.datePickerCalendar.nativeElement, 'wheel')
+      monthWheelScroll(this.datePickerCalendar.nativeElement)
         .pipe(
-          tap((event: any) => {
-            event.preventDefault();
-            event.stopPropagation(); 
-          }),
-          filter((event: any) => {
-            this._wheelDelta += Math.abs(event.wheelDeltaY);
-
-            return this._wheelDelta > 13;
-          }), 
           takeUntil(this._destroy$),
         )
-        .subscribe((event) => {
-          this._wheelDelta = 0;
-          if(event.deltaY > 0) {
+        .subscribe((step) => {
+          if(step > 0) {
             this.nextMonth();
           } else {
             this.prevMonth();

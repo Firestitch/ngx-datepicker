@@ -9,6 +9,7 @@ export const FS_DATEPICKER_CONFIG = new InjectionToken<IFsDatePickerConfig>('fs.
   factory: () => {
     return {
       weekStartsOn: WeekDay.Sunday,
+      preset: false,
     }
   }
 });

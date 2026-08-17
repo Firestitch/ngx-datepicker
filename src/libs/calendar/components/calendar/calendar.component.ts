@@ -51,6 +51,13 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
   @Input()
   public highlightEndDate: Date = null;
 
+  /**
+   * Draw the highlighted band as a preview — dashed rails instead of a fill —
+   * for when its end is the day under the cursor rather than a committed date.
+   */
+  @Input()
+  public highlightPreview = false;
+
   @Input()
   public dateMode: string = null;
 
@@ -116,7 +123,27 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     year: this.currentDate.getFullYear(),
   };
 
-  public highlightedRangeDays = null;
+  public highlightedRangeDays: {
+    data: Record<string, boolean>;
+    min: string;
+    max: string;
+  } = {
+      data: {},
+      min: null,
+      max: null,
+    };
+
+  /**
+   * Which banded days rail their own top edge, and how much of it.
+   *
+   * Every banded day rails its underside, so the seam between two banded rows
+   * is already drawn by the time the lower row is reached and the lower cell
+   * adds nothing — see the note on the rails in styles.scss. The exceptions are
+   * a day with open space above it, which rails the seam in full, and the day
+   * beneath the start of the range, where the cell above railed only the half
+   * facing inwards and left the other half bare.
+   */
+  public railTops: Record<string, 'full' | 'half'> = {};
 
   public ngOnInit() {
     this.daySize = this.daySize ?? 43;
@@ -156,6 +183,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
           to: this.rangeTo && lightFormat(this.rangeTo, 'yyyy-MM-dd') || null,
         };
       }
+
+      // Depends on both the highlighted range and the grid it is laid over.
+      this._updateRailTops();
     }
   }
 
@@ -199,7 +229,9 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
 
       const range = Array.from(eachDayOfInterval({ start, end }));
 
-      if (!range.length) {
+      // A single day is not a band — the circle on that day says all there is
+      // to say, and drawing rails around it just boxes it in.
+      if (range.length < 2) {
         return;
       }
 
@@ -330,6 +362,54 @@ export class FsDatePickerCalendarComponent implements OnInit, OnChanges {
     }
 
     return month;
+  }
+
+  /**
+   * A day belongs to the band only if the grid actually paints it as one — a
+   * day of the range landing on a surrounding or disabled cell carries no
+   * highlight, so the day below it still owes the seam between them.
+   */
+  private _highlighted(day: DayItem): boolean {
+    return !!day
+      && !day.disabled
+      && !day.surrounding
+      && !!this.highlightedRangeDays.data[day.date];
+  }
+
+  /**
+   * Walks the grid rather than the dates, because what matters is whether the
+   * cell above was drawn *here*. A range running in from the month before has
+   * banded days a week back, but they live in another calendar entirely, so
+   * this grid's first row still rails its own top edge.
+   */
+  private _updateRailTops(): void {
+    this.railTops = {};
+
+    const weeks = this.month?.weeks;
+
+    if (!weeks) {
+      return;
+    }
+
+    weeks.forEach((week: Week, weekIndex: number) => {
+      week.days.forEach((day: DayItem, dayIndex: number) => {
+        if (!this._highlighted(day)) {
+          return;
+        }
+
+        // The cell directly above, which need not exist: with the extra days
+        // hidden the last week of a month stops at the end of the month.
+        const above = weekIndex > 0
+          ? weeks[weekIndex - 1].days[dayIndex]
+          : null;
+
+        if (!this._highlighted(above)) {
+          this.railTops[day.date] = 'full';
+        } else if (above.date === this.highlightedRangeDays.min) {
+          this.railTops[day.date] = 'half';
+        }
+      });
+    });
   }
 
 }

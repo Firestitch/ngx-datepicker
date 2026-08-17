@@ -4,6 +4,7 @@ import { endOfDay, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../libs/common/enums/picker-view-type.enum';
 import { isDateAfter } from '../../libs/common/helpers/is-date-after';
+import { IDatePresetRange } from '../../libs/common/interfaces/date-preset.interface';
 
 
 export class RangePickerRef {
@@ -14,6 +15,7 @@ export class RangePickerRef {
   private _startDate$ = new BehaviorSubject<Date | null>(null);
   private _endDate$ = new BehaviorSubject<Date | null>(null);
   private _activePicker$ = new Subject<'from' | 'to' | null>();
+  private _range$ = new Subject<IDatePresetRange>();
 
   private _startDate: Date = null;
   private _endDate: Date = null;
@@ -38,6 +40,10 @@ export class RangePickerRef {
 
   public get endDate$(): Observable<Date> {
     return this._endDate$.asObservable();
+  }
+
+  public get range$(): Observable<IDatePresetRange> {
+    return this._range$.asObservable();
   }
 
   public get startDatePickerExists() {
@@ -84,6 +90,20 @@ export class RangePickerRef {
     this._endDatePickerExists = true;
 
     this._endDate$.next(this._endDate);
+  }
+
+  /**
+   * Set both ends of the range in one go — what picking a preset does.
+   *
+   * The end date is applied before the start date is published so that the "to"
+   * picker, which clears itself whenever a new start date leaves the range
+   * invalid, never sees the half-applied range.
+   */
+  public updateRange(from: Date, to: Date): void {
+    this.updateEndDate(to);
+    this.updateStartDate(from);
+
+    this._range$.next({ from: this._startDate, to: this._endDate });
   }
 
   public sameAsStartDate(value: Date): boolean {

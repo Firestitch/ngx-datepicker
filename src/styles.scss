@@ -4,7 +4,12 @@
 
 
 .fs-date-picker-calendar {
-  .highlight {
+  /**
+   * A committed range is a filled band. The two end cells fill only the half
+   * facing inwards, so the band starts and stops at the middle of the circle
+   * sitting on top of them.
+   */
+  table:not(.range-preview) .highlight {
     &:not(.highlight-from):not(.highlight-to) {
       background-color: color-rgb($selected-color, $selected-color-opacity);
     }
@@ -48,30 +53,96 @@
     }
   }
 
-  .month-range {
-    &:not(.range-selected) {
-      .tile-content.range-from {
-        background-color: #fff;
-        color: #000;
-        font-weight: normal;
-        position: relative;
-        justify-content: center;
-        align-items: center;
-        border: 8px solid transparent;
+  /**
+   * While the end of a range is still being picked, the band that follows the
+   * cursor gets dashed rails and no fill — so "where the range would land"
+   * never reads the same as "where the range is". The two rulesets are kept
+   * mutually exclusive rather than one overriding the other, because the
+   * committed selectors above are the more specific pair.
+   *
+   * Both endpoints keep the same solid circle either way; only the band
+   * between them changes.
+   */
+  table.range-preview .highlight {
+    /**
+     * The rails are drawn as pseudo elements, not borders. A border joins the
+     * cell box, so the calendar shoved itself a pixel in every direction each
+     * time the preview moved; and a border spans a whole cell edge, where the
+     * band has to stop dead at the middle of its end circles.
+     *
+     * The lower rail hangs one pixel *below* its own cell — onto the very row
+     * of pixels the cell underneath sits on. That matters wherever a range ends
+     * mid week: the seam there is drawn partly by the row below (which is
+     * banded) and partly by the row above (which overhangs it), and without the
+     * offset those two halves land a pixel apart.
+     *
+     * Every banded cell rails its own underside, so the seam between two banded
+     * rows is already painted by the time the lower row is reached: it takes an
+     * upper rail only where `rail-top` says nothing above it painted that seam.
+     * Laying both down is not free even though they occupy the same pixel row —
+     * the rails are translucent, so the seam composites darker than its
+     * neighbours, and on a display (or zoom level) where a row height does not
+     * land on a whole device pixel the doubled paint rounds out to two pixels
+     * and reads as one border thicker than all the rest.
+     */
+    position: relative;
 
-        &:before {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border: 8px solid transparent;
-          border-radius: 100%;
-          border-left-color: color-rgb($selected-color);
-          border-bottom-color: color-rgb($selected-color);
-          transform: rotateZ(45deg);
-          box-sizing: content-box;
-        }
-      }
+    --rail-top-left: 0;
+    --rail-top-width: 100%;
+    --rail-bottom-left: 0;
+    --rail-bottom-width: 100%;
+
+    &.rail-top::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      pointer-events: none;
+      background-image: repeating-linear-gradient(
+        to right,
+        #{color-rgb($selected-color, 0.6)} 0 3px,
+        transparent 3px 6px
+      );
+    }
+
+    &.rail-top::before {
+      top: 0;
+      left: var(--rail-top-left);
+      width: var(--rail-top-width);
+    }
+
+    &::after {
+      bottom: -1px;
+      left: var(--rail-bottom-left);
+      width: var(--rail-bottom-width);
+    }
+
+    /**
+     * The band opens at the middle of the start circle and closes at the middle
+     * of the end one, so an endpoint cell only rails the half facing inwards.
+     * Where a neighbouring row carries on past that point it paints the rest of
+     * the seam itself, which is why trimming here never leaves a notch.
+     */
+    &.highlight-from {
+      --rail-top-left: 50%;
+      --rail-top-width: 50%;
+      --rail-bottom-left: 50%;
+      --rail-bottom-width: 50%;
+    }
+
+    &.highlight-to {
+      --rail-top-width: 50%;
+      --rail-bottom-width: 50%;
+    }
+
+    /**
+     * The one seam a lower row cannot leave to the cell above: where that cell
+     * is the start of the range it railed only the half facing inwards, so the
+     * half it left bare is picked up here.
+     */
+    &.rail-top-half {
+      --rail-top-left: 0;
+      --rail-top-width: 50%;
     }
   }
 
@@ -89,6 +160,13 @@
         }
       }
     }
+  }
+}
+
+.fs-date-picker-presets {
+  .preset.selected {
+    background: color-rgb($selected-color, $selected-color-opacity);
+    color: color-rgb($selected-color);
   }
 }
 

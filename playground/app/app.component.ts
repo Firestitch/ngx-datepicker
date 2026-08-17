@@ -7,6 +7,7 @@ import { TimeExampleComponent } from './components/time-example/time-example.com
 import { OnlyHoursExampleComponent } from './components/only-hours-example/only-hours-example.component';
 import { DateTimeExampleComponent } from './components/datetime-example/datetime-example.component';
 import { DatetimeTzExampleComponent } from './components/datetime-tz-example/datetime-tz-example.component';
+import { PresetsExampleComponent } from './components/presets-example/presets-example.component';
 import { DateRangeExampleComponent } from './components/date-range-example/date-range-example.component';
 import { DateTimeRangeExampleComponent } from './components/date-time-range-example/date-time-range-example.component';
 import { TimeRangeExampleComponent } from './components/timerange-example/timerange-example.component';
@@ -22,7 +23,7 @@ import { SelectExampleComponent } from './components/select-example/select-examp
     selector: 'app-root',
     templateUrl: 'app.component.html',
     standalone: true,
-    imports: [FsExampleModule, DateExampleComponent, CalendarExampleComponent, TimeExampleComponent, OnlyHoursExampleComponent, DateTimeExampleComponent, DatetimeTzExampleComponent, DateRangeExampleComponent, DateTimeRangeExampleComponent, TimeRangeExampleComponent, MonthExampleComponent, WeekPickerComponent, DateScrollPickerComponent, BirthdayExampleComponent, MinMaxComponent, SelectExampleComponent]
+    imports: [FsExampleModule, DateExampleComponent, CalendarExampleComponent, TimeExampleComponent, OnlyHoursExampleComponent, DateTimeExampleComponent, DatetimeTzExampleComponent, PresetsExampleComponent, DateRangeExampleComponent, DateTimeRangeExampleComponent, TimeRangeExampleComponent, MonthExampleComponent, WeekPickerComponent, DateScrollPickerComponent, BirthdayExampleComponent, MinMaxComponent, SelectExampleComponent]
 })
 export class AppComponent {
   public config = environment;

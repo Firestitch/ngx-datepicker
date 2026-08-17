@@ -1,0 +1,10 @@
+<div class="presets">
+  @for (item of presets; track item.preset) {
+    <a
+      class="preset"
+      [class.selected]="item.preset === preset"
+      (click)="select(item)">
+      {{ item.name }}
+    </a>
+  }
+</div>

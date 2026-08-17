@@ -1,3 +1,16 @@
+.picker-container {
+  display: flex;
+  align-items: stretch;
+
+  // The global `.calendar-container` rule stretches the calendars to the full
+  // panel width, which would squeeze out the presets now that the two sit side
+  // by side. Only relax it when the presets are actually there.
+  &.has-preset .calendar-container {
+    width: auto;
+    flex: 0 0 auto;
+  }
+}
+
 .month-range-container {
   display: grid;
   grid-template-columns: 1fr 1fr;

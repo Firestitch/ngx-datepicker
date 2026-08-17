@@ -1,0 +1,11 @@
+.range-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  // The chip has no subscript wrapper under it the way a form field does, so
+  // without this it sits low against the fields it is lined up with.
+  fs-date-picker-preset-chip {
+    margin-bottom: 20px;
+  }
+}

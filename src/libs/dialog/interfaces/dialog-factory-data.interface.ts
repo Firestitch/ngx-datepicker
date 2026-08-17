@@ -24,6 +24,7 @@ export interface IDialogFactoryOptions {
   rangeType?: 'from' | 'to';
   weekStartsOn?: WeekDays
   showNow?:     boolean;
+  preset?:      boolean;
 
   //
   showMonth?: boolean;

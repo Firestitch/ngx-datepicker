@@ -26,6 +26,7 @@ import { DateRangeSeparatorComponent } from './components/date-range-separator/d
 import { FsDateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 import { FsDateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 import { FsDateWeekPickerComponent } from './components/date-week-picker/date-week-picker.component';
+import { FsDatePickerPresetChipComponent } from './components/preset-chip/preset-chip.component';
 import { DateRangePickerFromComponent } from './components/range-picker/from/date-range-picker-from.component';
 import { DateTimeRangePickerFromComponent } from './components/range-picker/from/date-time-range-picker-from.component';
 import { MonthRangePickerFromComponent } from './components/range-picker/from/month-range-picker-from.component';
@@ -71,6 +72,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     MonthRangePickerFromComponent,
     MonthRangePickerToComponent,
     FsDateCalendarPickerComponent,
+    FsDatePickerPresetChipComponent,
     FsWeekdaySelectComponent,
     FsTimeSelectComponent,
 ],

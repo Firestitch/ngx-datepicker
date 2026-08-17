@@ -1,0 +1,65 @@
+<form fsForm>
+  <div class="range-row">
+    <mat-form-field>
+      <mat-label>
+        Date Range From
+      </mat-label>
+      <input
+        matInput
+        fsDateRangeFromPicker="presetsdaterangepicker"
+        [(ngModel)]="startDate"
+        name="date_from"
+        fsFormRequired>
+    </mat-form-field>
+    <fs-date-range-separator></fs-date-range-separator>
+    <mat-form-field>
+      <mat-label>
+        Date Range To
+      </mat-label>
+      <input
+        matInput
+        fsDateRangeToPicker="presetsdaterangepicker"
+        [(ngModel)]="endDate"
+        name="date_to"
+        fsFormRequired>
+    </mat-form-field>
+    <fs-date-picker-preset-chip
+      [from]="startDate"
+      [to]="endDate">
+    </fs-date-picker-preset-chip>
+  </div>
+</form>
+
+<form fsForm>
+  <div class="range-row">
+    <mat-form-field>
+      <mat-label>
+        Month Range From
+      </mat-label>
+      <input
+        matInput
+        fsMonthRangeFromPicker="presetsmonthrangepicker"
+        [(ngModel)]="monthStartDate"
+        name="month_from"
+        fsFormRequired>
+    </mat-form-field>
+    <fs-date-range-separator></fs-date-range-separator>
+    <mat-form-field>
+      <mat-label>
+        Month Range To
+      </mat-label>
+      <input
+        matInput
+        fsMonthRangeToPicker="presetsmonthrangepicker"
+        [(ngModel)]="monthEndDate"
+        name="month_to"
+        fsFormRequired>
+    </mat-form-field>
+    <fs-date-picker-preset-chip
+      backgroundColor="#e8f0fe"
+      color="#1967d2"
+      [from]="monthStartDate"
+      [to]="monthEndDate">
+    </fs-date-picker-preset-chip>
+  </div>
+</form>

@@ -18,6 +18,7 @@ import { fromZonedTime } from 'date-fns-tz';
 
 import { PickerViewType } from '../../../../libs/common/enums/picker-view-type.enum';
 import { isSameDate } from '../../../../libs/common/helpers/is-same-date';
+import { IDatePresetRange } from '../../../../libs/common/interfaces/date-preset.interface';
 import { FsDatePickerDialogFactory } from '../../../../libs/dialog/services/dialog-factory.service';
 import { FsPickerBaseComponent } from '../../../classes/picker-base-component';
 import { RangePickerRef } from '../../../classes/range-picker-ref';
@@ -112,6 +113,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
     super.ngOnInit();
     this._listenActivePicker();
     this._listenKeydown();
+    this._listenRange();
 
     const control = this._ngControl.control;
     const validators = control.validator
@@ -181,6 +183,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         rangeType: this._type,
         weekStartsOn: this.weekStartsOn,
         showNow: this.showNow,
+        preset: this._globalConfig.preset,
       },
     );
 
@@ -386,6 +389,29 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         }),
         map((changes) => changes[1]),
       );
+  }
+
+  /**
+   * A preset sets both ends of the range at once, so each picker takes the end
+   * it owns. The month range pickers already track the ref directly and will
+   * have applied the value by now, hence the equality check.
+   */
+  private _listenRange(): void {
+    this._pickerRef.range$
+      .pipe(
+        takeUntil(this.destroy$),
+      )
+      .subscribe((range: IDatePresetRange) => {
+        const value = this._type === 'to' ? range.to : range.from;
+
+        if (this.value?.getTime() !== value?.getTime()) {
+          this.updateValue(value);
+        }
+
+        this._ngControl.control.markAsDirty();
+        this._ngControl.control.updateValueAndValidity();
+        this._cdRef.markForCheck();
+      });
   }
 
   private _listenActivePicker(): void {

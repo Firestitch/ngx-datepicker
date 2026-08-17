@@ -1,0 +1,38 @@
+:host {
+  position: relative;
+  display: block;
+  width: 230px;
+  flex: 0 0 auto;
+  align-self: stretch;
+  background: #fff;
+  border-right: 1px solid #e4e4e4;
+  user-select: none;
+}
+
+// Taken out of flow so the list never drives the panel height — the calendar
+// beside it sets that, and a list longer than the calendar scrolls in place.
+.presets {
+  position: absolute;
+  inset: 0;
+  padding: 8px 0;
+  overflow-y: auto;
+  // Keep the wheel to this list: once it hits the top or bottom the scroll
+  // stops here rather than chaining out to the page behind the picker.
+  overscroll-behavior: contain;
+}
+
+.preset {
+  display: block;
+  padding: 8px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.87);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+
+  &:hover:not(.selected) {
+    background: #f5f5f5;
+  }
+}

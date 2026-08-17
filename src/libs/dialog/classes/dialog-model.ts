@@ -16,7 +16,8 @@ import {
 
 import { RangePickerRef } from '../../../app/classes/range-picker-ref';
 import { WeekDay } from '../../../libs/common/enums';
-import { PickerViewType } from '../../common/enums';
+import { DatePreset, PickerViewType } from '../../common/enums';
+import { getPresetRange } from '../../common/helpers/get-preset-range';
 import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 import { WeekDays } from '../../common/types/week-days.type';
 import { getDisabledTimes } from '../../dialog/helpers';
@@ -41,6 +42,7 @@ export class FsDatePickerDialogModel {
   public minutes = true;
   public showNow = true;
   public weekStartsOn: WeekDays;
+  public preset = false;
 
   private _minYear = null;
   private _maxYear = null;
@@ -232,6 +234,22 @@ export class FsDatePickerDialogModel {
     return this._pickerOptions.pickerRef;
   }
 
+  /**
+   * Apply a preset to the range this dialog belongs to. Returns false when
+   * there is no range to apply it to, or the preset resolves to nothing.
+   */
+  public applyPreset(preset: DatePreset): boolean {
+    const range = getPresetRange(preset, this.weekStartsOn, this.now);
+
+    if (!range || !this.rangePickerRef) {
+      return false;
+    }
+
+    this.rangePickerRef.updateRange(range.from, range.to);
+
+    return true;
+  }
+
   public setCalendarMonth(month: number) {
     this.goToMongth(month);
   }
@@ -272,6 +290,16 @@ export class FsDatePickerDialogModel {
     this.maxDate = options.maxDate;
     this.rangeStart = options.rangeStart;
     this.weekStartsOn = options.weekStartsOn ?? WeekDay.Sunday;
+
+    // Every preset resolves to a start and an end date, so presets only make
+    // sense on a range picker — and only where the range is made of dates.
+    this.preset = !!options.preset
+      && !!options.pickerRef
+      && [
+        PickerViewType.Date,
+        PickerViewType.DateTime,
+        PickerViewType.MonthRange,
+      ].includes(this.view as PickerViewType);
 
     if (this._pickerOptions.rangeType === 'to' && this.minDate < this.rangeStart) {
       this.minDate = this.rangeStart;
