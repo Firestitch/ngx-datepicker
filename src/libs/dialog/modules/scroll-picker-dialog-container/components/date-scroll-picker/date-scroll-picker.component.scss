@@ -1,8 +1,9 @@
+// The mobile scroll picker's wheel area. Fallback is the legacy #fff.
 .scroll-pickers {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background: #fff;
+  background: var(--fs-color-surface-raised, #fff);
 
   fs-scroll-picker {
 

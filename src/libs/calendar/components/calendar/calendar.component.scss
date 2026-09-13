@@ -14,12 +14,14 @@
   }
 }
 
+// Week-mode period rules. The hairline takes its tone from the surface it sits
+// on; the legacy #e4e4e4 stays as the fallback.
 .week {
   &.first-period-week {
-    border-top: 1px solid #e4e4e4;
+    border-top: 1px solid var(--fs-hairline, #e4e4e4);
   }
 
   &.last-period-week {
-    border-bottom: 1px solid #e4e4e4;
+    border-bottom: 1px solid var(--fs-hairline, #e4e4e4);
   }
 }

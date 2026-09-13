@@ -5,7 +5,9 @@
 }
 
 
+// A near-black glyph disappears into a dark panel. Fallback is the legacy
+// #4c4c4c, so an app that defines no token renders exactly as before.
 mat-icon {
   transform: scale(0.65);
-  color: #4c4c4c;
+  color: var(--fs-color-text-muted, #4c4c4c);
 }

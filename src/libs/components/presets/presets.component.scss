@@ -1,11 +1,13 @@
+// The presets sidebar. Every colour here is tokenised with its own legacy value
+// as the fallback, so an app defining no --fs-* token is pixel-identical.
 :host {
   position: relative;
   display: block;
   width: 230px;
   flex: 0 0 auto;
   align-self: stretch;
-  background: #fff;
-  border-right: 1px solid #e4e4e4;
+  background: var(--fs-color-surface-raised, #fff);
+  border-right: 1px solid var(--fs-hairline, #e4e4e4);
   user-select: none;
 }
 
@@ -26,13 +28,13 @@
   padding: 8px 20px;
   font-size: 14px;
   line-height: 20px;
-  color: rgba(0, 0, 0, 0.87);
+  color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
 
   &:hover:not(.selected) {
-    background: #f5f5f5;
+    background: var(--fs-color-hover, #f5f5f5);
   }
 }

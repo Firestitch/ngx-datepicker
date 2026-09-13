@@ -18,8 +18,11 @@
     align-items: center;
     display: inline-flex;
 
+    // The hover wash on the month/year link. A fixed light grey reads as a pale
+    // slab on a dark panel; the token takes its tone from whatever is behind
+    // it. Fallback is the legacy grey, so an untokenised app is unchanged.
     &:not(.not-configurable):hover {
-      background-color: rgb(234, 234, 234);
+      background-color: var(--fs-color-hover, rgb(234, 234, 234));
       border-radius: 3px;
     }
   }

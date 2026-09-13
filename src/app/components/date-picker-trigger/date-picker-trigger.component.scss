@@ -13,8 +13,9 @@
   }
 }
 
+// Disabled trigger ink. Fallback is the legacy 38% black.
 .disabled {
-  color: rgba(0, 0, 0, 0.38);
+  color: var(--fs-color-text-faint, rgba(0, 0, 0, 0.38));
   pointer-events: none;
 }
 

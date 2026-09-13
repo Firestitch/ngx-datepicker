@@ -1,5 +1,8 @@
+// The footer bar carrying Continue / Done. Hardcoded white, it read as a solid
+// white strip under a dark calendar. Fallback is the legacy #fff, so an app
+// that defines no token is unchanged.
 .button-actions {
-  background: #fff;
+  background: var(--fs-color-surface-raised, #fff);
   display: flex;
   padding: 5px;
 
