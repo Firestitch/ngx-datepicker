@@ -193,14 +193,34 @@
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
+/*
+  THE DEFAULT INK, AND WHY IT HAS TO LIVE HERE.
+
+  Every other colour rule in this file styles a STATE — .enabled, .surrounding,
+  .disabled, .selected, .now. A plain selectable day, the "September 2026"
+  link, its dropdown caret and the desktop month/year tiles match none of them,
+  so they had no colour of their own and inherited whatever the host cascade
+  gave them: Material's near-black, which is invisible on a dark panel.
+
+  Giving the panel a background token without a matching foreground is only
+  half a surface. These two declarations are the other half — everything inside
+  inherits from here, which is also what finally gives
+  `.month-year-name a { color: inherit }` something real to inherit.
+
+  Fallback is Material's own 87% black, i.e. what these glyphs already resolved
+  to on a light page, so an app that defines no token is unchanged.
+*/
 .fs-date-picker-dialog {
   display: flex;
   justify-content: center;
   overflow: hidden;
+  color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
   border-radius: var(--mdc-dialog-container-shape, var(--mat-app-corner-extra-large, 4px));
 }
 
 .fs-date-picker-container {
+  color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
+
   &.date-mode-year, &.date-mode-month {
     .calendar-view {
       height: 350px;
