@@ -158,7 +158,12 @@ export class Month {
    * Depends on week day start it counts total number of days in month
    */
   private _countTotalDaysInMonth() {
-    this._prevMonthDaysCount = this._monthStartDay >= this._weekStartsOn ? this._monthStartDay - this._weekStartsOn : 7 - (this._weekStartsOn - this._monthStartDay);
+    // Falls back to 0 (Sunday) rather than trusting the input. An undefined
+    // week start made the else branch evaluate to NaN, which subDays() turned
+    // into an Invalid Date and date-fns threw on — killing the whole calendar.
+    const weekStartsOn = this._weekStartsOn ?? 0;
+
+    this._prevMonthDaysCount = this._monthStartDay >= weekStartsOn ? this._monthStartDay - weekStartsOn : 7 - (weekStartsOn - this._monthStartDay);
   }
 
   /**

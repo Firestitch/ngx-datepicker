@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isDate, isValid, setDate, startOfDay } from 'date-fns';
 
 import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum';
+import { WeekDay } from '../../../libs/common/enums/week-day.enum';
 import { WeekDays } from '../../../libs/common/types/week-days.type';
 import { FsDatePickerDialogModel } from '../../../libs/dialog/classes/dialog-model';
 import { IFsDatePickerConfig } from '../../interfaces/datepicker-config.interface';
@@ -116,8 +117,10 @@ export class FsDateCalendarPickerComponent implements OnInit, OnChanges, Control
   }
 
   private _init(): void {
+    // The model already defaults to Sunday, so this must never write undefined
+    // over it. The global config is optional and a partial one may omit the key.
     this._datePickerModel.weekStartsOn =
-      this.weekStartsOn ?? this._globalConfig.weekStartsOn;
+      this.weekStartsOn ?? this._globalConfig?.weekStartsOn ?? WeekDay.Sunday;
   }
 
   private _goToFocusDate(): void {

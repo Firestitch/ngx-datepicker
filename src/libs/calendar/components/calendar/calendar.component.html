@@ -13,6 +13,7 @@
     </tr>
   </thead>
 
+  @if (month) {
   <tbody class="calendar calendar-{{ month.monthAndYear }}" >
     @for (week of month.weeks; track week) {
       <tr class="week"
@@ -68,4 +69,5 @@
       </tr>
     }
   </tbody>
+  }
 </table>

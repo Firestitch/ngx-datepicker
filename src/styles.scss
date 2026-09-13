@@ -14,19 +14,32 @@
       background-color: color-rgb($selected-color, $selected-color-opacity);
     }
 
+    /*
+      THE UNFILLED HALF IS THE PANEL, NOT WHITE. Each end cell fills only the
+      half facing inwards; the other half has to match the calendar behind it,
+      so a hardcoded #fff cut a white notch out of a dark panel at both ends of
+      every committed range.
+
+      --fs-color-surface-raised is the shared contract from @firestitch/style
+      (styles/_tokens.scss). THE FALLBACK IS THE LEGACY VALUE, NOT THE
+      PACKAGE DEFAULT: an app that does not define the token — every existing
+      Material 2 consumer — must render exactly as it did before, so the
+      fallback is the #fff this line used to hardcode. Only an app that opts in
+      by defining the token sees anything change.
+    */
     &.highlight-from {
       background: linear-gradient(
         90deg,
-        #fff 0%,
-        #fff 49%,
+        var(--fs-color-surface-raised, #fff) 0%,
+        var(--fs-color-surface-raised, #fff) 49%,
         color-rgb($selected-color, $selected-color-opacity) 51%);
     }
 
     &.highlight-to {
       background: linear-gradient(
           -90deg,
-          #fff 0%,
-          #fff 49%,
+          var(--fs-color-surface-raised, #fff) 0%,
+          var(--fs-color-surface-raised, #fff) 49%,
           color-rgb($selected-color, $selected-color-opacity) 51%);
     }
   }
@@ -38,18 +51,24 @@
     background: none;
   }
 
+  /*
+    The year/month period cells. Each fallback is the exact colour this block
+    used to hardcode, so a consumer that defines no token is unchanged; an app
+    that defines the tokens gets cells that follow its own surface instead of
+    a fixed light-page palette.
+  */
   .period {
     width: 48px;
     padding: 14px 0;
     font-size: 14px;
     text-align: center;
     vertical-align: top;
-    background: #e4e4e4;
-    color: #858585;
+    background: var(--fs-color-selected, #e4e4e4);
+    color: var(--fs-color-text-muted, #858585);
     cursor: pointer;
 
     &:hover {
-      background: #effaff;
+      background: var(--fs-color-hover, #effaff);
     }
   }
 
@@ -203,7 +222,15 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    /*
+      THE PANEL ITSELF. This is the one that made the whole picker read as a
+      white sheet on a dark app. It renders in a CDK overlay attached to
+      <body>, so no host-app rule scoped to its own shell can reach it — the
+      package has to read the shared token for it to follow the app's mode.
+      Fallback is the legacy #fff, so an app that defines no token is
+      pixel-identical to before.
+    */
+    background: var(--fs-color-surface-raised, #fff);
     padding: 0 !important;
     overflow: hidden;
 
@@ -245,13 +272,19 @@
       color: color-rgb($enabled-color);
     }
 
+    /* A day from the previous or next month — present, but quiet. */
     &.surrounding {
-      color: #b2b2b2;
+      color: var(--fs-color-text-faint, #b2b2b2);
     }
 
+    /*
+      A day that cannot be picked. #f9f9f9 is a near-white tint that reads as
+      correct on a white page and as a light slab on a dark one — so it becomes
+      a token, with the old value kept as the fallback.
+    */
     &.disabled {
-      background: #f9f9f9;
-      color: #ccc;
+      background: var(--fs-color-hover, #f9f9f9);
+      color: var(--fs-color-text-faint, #ccc);
       cursor: initial;
       pointer-events: none;
     }

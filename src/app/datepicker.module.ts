@@ -38,7 +38,7 @@ import { TimeRangePickerToComponent } from './components/range-picker/to/time-ra
 import { FsTimePickerComponent } from './components/time-picker/time-picker.component';
 import { FsTimeSelectComponent } from './components/time-select';
 import { IFsDatePickerConfig } from './interfaces/datepicker-config.interface';
-import { FS_DATEPICKER_CONFIG } from './providers/datepicker-config.provider';
+import { FS_DATEPICKER_CONFIG, FS_DATEPICKER_CONFIG_DEFAULT } from './providers/datepicker-config.provider';
 import { FsRangePickerStoreService } from './services/range-picker-store.service';
 
 
@@ -105,7 +105,10 @@ export class FsDatePickerModule {
       providers.push(
         {
           provide: FS_DATEPICKER_CONFIG,
-          useValue: config,
+          // Merged over the defaults rather than replacing them. useValue: config
+          // alone meant forRoot({ preset: true }) left weekStartsOn undefined,
+          // which reaches the month arithmetic as NaN and throws.
+          useValue: { ...FS_DATEPICKER_CONFIG_DEFAULT, ...config },
         },
       )
     }
