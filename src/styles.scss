@@ -20,7 +20,7 @@
       so a hardcoded #fff cut a white notch out of a dark panel at both ends of
       every committed range.
 
-      --fs-color-surface-raised is the shared contract from @firestitch/style
+      --fs-surface-background is the shared contract from @firestitch/style
       (styles/_tokens.scss). THE FALLBACK IS THE LEGACY VALUE, NOT THE
       PACKAGE DEFAULT: an app that does not define the token — every existing
       Material 2 consumer — must render exactly as it did before, so the
@@ -30,16 +30,16 @@
     &.highlight-from {
       background: linear-gradient(
         90deg,
-        var(--fs-color-surface-raised, #fff) 0%,
-        var(--fs-color-surface-raised, #fff) 49%,
+        var(--fs-surface-background, #fff) 0%,
+        var(--fs-surface-background, #fff) 49%,
         color-rgb($selected-color, $selected-color-opacity) 51%);
     }
 
     &.highlight-to {
       background: linear-gradient(
           -90deg,
-          var(--fs-color-surface-raised, #fff) 0%,
-          var(--fs-color-surface-raised, #fff) 49%,
+          var(--fs-surface-background, #fff) 0%,
+          var(--fs-surface-background, #fff) 49%,
           color-rgb($selected-color, $selected-color-opacity) 51%);
     }
   }
@@ -250,7 +250,7 @@
       Fallback is the legacy #fff, so an app that defines no token is
       pixel-identical to before.
     */
-    background: var(--fs-color-surface-raised, #fff);
+    background: var(--fs-surface-background, #fff);
     padding: 0 !important;
     overflow: hidden;
 

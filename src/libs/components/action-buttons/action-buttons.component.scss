@@ -2,7 +2,7 @@
 // white strip under a dark calendar. Fallback is the legacy #fff, so an app
 // that defines no token is unchanged.
 .button-actions {
-  background: var(--fs-color-surface-raised, #fff);
+  background: var(--fs-surface-background, #fff);
   display: flex;
   padding: 5px;
 

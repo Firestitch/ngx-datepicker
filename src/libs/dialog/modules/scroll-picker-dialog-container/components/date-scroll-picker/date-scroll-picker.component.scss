@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background: var(--fs-color-surface-raised, #fff);
+  background: var(--fs-surface-background, #fff);
 
   fs-scroll-picker {
 

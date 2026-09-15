@@ -6,7 +6,7 @@
   width: 230px;
   flex: 0 0 auto;
   align-self: stretch;
-  background: var(--fs-color-surface-raised, #fff);
+  background: var(--fs-surface-background, #fff);
   border-right: 1px solid var(--fs-hairline, #e4e4e4);
   user-select: none;
 }
