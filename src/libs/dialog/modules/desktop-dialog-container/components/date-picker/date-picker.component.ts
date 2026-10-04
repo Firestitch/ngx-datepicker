@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FsDatePickerCalendarComponent } from '../../../../../../libs/calendar/components';
-import { DatePreset } from '../../../../../common/enums/date-preset.enum';
 import { monthWheelScroll } from '../../../../../common/helpers/month-wheel-scroll';
 import { FsDatePickerDialogModel } from '../../../../../dialog/classes/dialog-model';
 import { FsDatePickerDialogRef } from '../../../../classes/dialog-ref';
@@ -105,8 +104,8 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  public presetChanged(preset: DatePreset): void {
-    if (this.datePickerModel.applyPreset(preset)) {
+  public presetChanged(key: string): void {
+    if (this.datePickerModel.applyPreset(key)) {
       this.close();
     }
   }

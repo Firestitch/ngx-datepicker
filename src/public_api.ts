@@ -9,6 +9,10 @@ export {
   FsDateTimePickerComponent, FsDateWeekPickerComponent, FsTimePickerComponent, FsTimeSelectComponent, FsWeekdaySelectComponent, MonthRangePickerFromComponent, MonthRangePickerToComponent, TimeRangePickerFromComponent, TimeRangePickerToComponent
 } from './app/components';
 
+export { IFsDatePickerConfig } from './app/interfaces/datepicker-config.interface';
+export { IFsDatePickerPreset } from './app/interfaces/datepicker-preset.interface';
+export { FS_DATEPICKER_CONFIG, FS_DATEPICKER_CONFIG_DEFAULT } from './app/providers/datepicker-config.provider';
+
 export { DatePreset } from './libs/common/enums/date-preset.enum';
 export { IDatePresetItem, IDatePresetRange } from './libs/common/interfaces/date-preset.interface';
 

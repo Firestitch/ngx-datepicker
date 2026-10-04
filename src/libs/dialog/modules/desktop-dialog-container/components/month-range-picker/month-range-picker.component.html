@@ -4,6 +4,7 @@
   @if (datePickerModel.preset) {
     <fs-date-picker-presets
       [weekStartsOn]="datePickerModel.weekStartsOn"
+      [presets]="datePickerModel.presets"
       (presetChange)="presetChanged($event)">
     </fs-date-picker-presets>
   }

@@ -6,6 +6,8 @@ import { MatInput } from '@angular/material/input';
 
 import { FsFormModule } from '@firestitch/form';
 
+import { endOfDay, startOfDay, subDays } from 'date-fns';
+
 import { WeekDay } from '../../../../src/libs/common/enums/week-day.enum';
 import { FS_DATEPICKER_CONFIG } from '../../../../src/app/providers/datepicker-config.provider';
 import { DateRangeSeparatorComponent } from '../../../../src/app/components/date-range-separator/date-range-separator.component';
@@ -22,13 +24,29 @@ import { MonthRangePickerToComponent } from '../../../../src/app/components/rang
   styleUrls: ['./presets-example.component.scss'],
   standalone: true,
   // Presets are off by default. Provided here rather than in main.ts so only
-  // this example turns them on.
+  // this example turns them on. Two presets of its own are merged into the
+  // built-in list: 'Last 14 days' sorts in by its span, and 'thisYear' takes
+  // the built-in 'This year' slot's key, so it replaces that one.
   providers: [
     {
       provide: FS_DATEPICKER_CONFIG,
       useValue: {
         weekStartsOn: WeekDay.Sunday,
         preset: true,
+        presets: [
+          {
+            key: 'last14Days',
+            name: 'Last 14 days',
+            from: () => startOfDay(subDays(new Date(), 14)),
+            to: () => endOfDay(subDays(new Date(), 1)),
+          },
+          {
+            key: 'thisYear',
+            name: 'Year to date',
+            from: () => new Date(new Date().getFullYear(), 0, 1),
+            to: () => endOfDay(new Date()),
+          },
+        ],
       },
     },
   ],

@@ -1,4 +1,5 @@
 import { RangePickerRef } from '../../../app/classes/range-picker-ref';
+import { IFsDatePickerPreset } from '../../../app/interfaces/datepicker-preset.interface';
 import { WeekDays } from '../../../libs/common/types/week-days.type';
 import { PickerViewType } from '../../common/enums/picker-view-type.enum';
 import { ScrollPickerViewType } from '../../common/enums/scroll-picker-view-type.enum';
@@ -25,6 +26,7 @@ export interface IDialogFactoryOptions {
   weekStartsOn?: WeekDays
   showNow?:     boolean;
   preset?:      boolean;
+  presets?:     IFsDatePickerPreset[];
 
   //
   showMonth?: boolean;

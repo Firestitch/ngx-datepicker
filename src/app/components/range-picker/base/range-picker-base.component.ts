@@ -184,6 +184,7 @@ export abstract class RangePickerComponent<D = any> extends FsPickerBaseComponen
         weekStartsOn: this.weekStartsOn,
         showNow: this.showNow,
         preset: this._globalConfig.preset,
+        presets: this._globalConfig.presets,
       },
     );
 

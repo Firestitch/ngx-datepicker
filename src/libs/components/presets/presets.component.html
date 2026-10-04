@@ -1,9 +1,9 @@
 <div class="presets">
-  @for (item of presets; track item.preset) {
+  @for (item of items(); track item.key) {
     <a
       class="preset"
-      [class.selected]="item.preset === preset"
-      (click)="select(item)">
+      [class.selected]="item.key === selected()"
+      (click)="select(item.key)">
       {{ item.name }}
     </a>
   }

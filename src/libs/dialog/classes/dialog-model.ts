@@ -15,11 +15,13 @@ import {
 
 
 import { RangePickerRef } from '../../../app/classes/range-picker-ref';
+import { IFsDatePickerPreset } from '../../../app/interfaces/datepicker-preset.interface';
 import { WeekDay } from '../../../libs/common/enums';
-import { DatePreset, PickerViewType } from '../../common/enums';
-import { getPresetRange } from '../../common/helpers/get-preset-range';
+import { PickerViewType } from '../../common/enums';
 import { IDatePickerPeriod } from '../../common/interfaces/period.interface';
 import { WeekDays } from '../../common/types/week-days.type';
+import { getPresetDates } from '../../components/presets/helpers/get-preset-dates';
+import { getPresetList } from '../../components/presets/helpers/get-preset-list';
 import { getDisabledTimes } from '../../dialog/helpers';
 import { IDialogFactoryOptions } from '../../dialog/interfaces';
 import { getDisabledDates, getFirstDayOfFirstYearWeek } from '../helpers';
@@ -43,6 +45,7 @@ export class FsDatePickerDialogModel {
   public showNow = true;
   public weekStartsOn: WeekDays;
   public preset = false;
+  public presets: IFsDatePickerPreset[] | null = null;
 
   private _minYear = null;
   private _maxYear = null;
@@ -237,9 +240,12 @@ export class FsDatePickerDialogModel {
   /**
    * Apply a preset to the range this dialog belongs to. Returns false when
    * there is no range to apply it to, or the preset resolves to nothing.
+   * A host's own preset is resolved now, at the pick.
    */
-  public applyPreset(preset: DatePreset): boolean {
-    const range = getPresetRange(preset, this.weekStartsOn, this.now);
+  public applyPreset(key: string): boolean {
+    const preset = getPresetList(this.presets, this.weekStartsOn, this.now)
+      .find((item: IFsDatePickerPreset) => item.key === key);
+    const range = preset ? getPresetDates(preset) : null;
 
     if (!range || !this.rangePickerRef) {
       return false;
@@ -290,10 +296,12 @@ export class FsDatePickerDialogModel {
     this.maxDate = options.maxDate;
     this.rangeStart = options.rangeStart;
     this.weekStartsOn = options.weekStartsOn ?? WeekDay.Sunday;
+    this.presets = Array.isArray(options.presets) ? options.presets : null;
 
     // Every preset resolves to a start and an end date, so presets only make
     // sense on a range picker — and only where the range is made of dates.
-    this.preset = !!options.preset
+    // A host that gives presets of its own shows the list without the flag.
+    this.preset = (!!options.preset || !!this.presets?.length)
       && !!options.pickerRef
       && [
         PickerViewType.Date,

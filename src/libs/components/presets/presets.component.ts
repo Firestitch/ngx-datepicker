@@ -1,18 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
+  computed,
+  input,
+  output,
+  signal,
 } from '@angular/core';
 
-import { DatePreset } from '../../common/enums/date-preset.enum';
-import { IDatePresetItem } from '../../common/interfaces/date-preset.interface';
+import { IFsDatePickerPreset } from '../../../app/interfaces/datepicker-preset.interface';
 import { WeekDays } from '../../common/types/week-days.type';
 
-import { getDatePresets } from './helpers/get-date-presets';
+import { getPresetList } from './helpers/get-preset-list';
 
 
 @Component({
@@ -25,29 +23,26 @@ import { getDatePresets } from './helpers/get-date-presets';
   },
   standalone: true,
 })
-export class FsDatePickerPresetsComponent implements OnChanges {
+export class FsDatePickerPresetsComponent {
 
-  @Input()
-  public weekStartsOn: WeekDays;
+  public weekStartsOn = input<WeekDays>();
 
-  @Input()
-  public preset: DatePreset;
+  /**
+   * A host's own presets, merged into the built-in list (getPresetList).
+   */
+  public presets = input<IFsDatePickerPreset[] | null>(null);
 
-  @Output()
-  public presetChange = new EventEmitter<DatePreset>();
+  public presetChange = output<string>();
 
-  public presets: IDatePresetItem[] = getDatePresets();
+  public items = computed(() => getPresetList(this.presets(), this.weekStartsOn()));
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.weekStartsOn) {
-      this.presets = getDatePresets(this.weekStartsOn);
-    }
-  }
+  // The preset just clicked, marked while the list is open.
+  public selected = signal<string | null>(null);
 
-  public select(item: IDatePresetItem): void {
-    this.preset = item.preset;
+  public select(key: string): void {
+    this.selected.set(key);
 
-    this.presetChange.emit(this.preset);
+    this.presetChange.emit(key);
   }
 
 }
