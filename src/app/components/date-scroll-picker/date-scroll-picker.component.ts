@@ -7,12 +7,19 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 
 import { FsClearModule } from '@firestitch/clear';
 
-import { isValid, startOfDay } from 'date-fns';
+import { isAfter, isBefore, isToday, isValid, startOfDay } from 'date-fns';
 
 import { ScrollPickerViewType } from '../../../libs/common/enums/scroll-picker-view-type.enum';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
@@ -25,11 +32,18 @@ import { FsDatePickerComponent } from '../date-picker/date-picker.component';
 @Component({
   selector: '[fsDateScrollPicker]',
   template: FsDatePickerComponent.template,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsDateScrollPickerComponent),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FsDateScrollPickerComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => FsDateScrollPickerComponent),
+      multi: true,
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
@@ -64,6 +78,8 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
     if(!this.maxYear) {
       this.maxYear = (new Date()).getFullYear() + 50;
     }
+
+    this._validator = Validators.compose([this._parseValidator, this._rangeValidator]);
   }
 
   public writeValue(value: any): void {
@@ -125,4 +141,32 @@ export class FsDateScrollPickerComponent extends FsDatePickerBaseComponent
 
     super.updateValue(date);
   }
+
+  /**
+   * The wheel never offers a day outside minDate / maxDate, but a typed date skips the wheel,
+   * so the form control holds it to the same bounds.
+   */
+  protected _rangeValidator: ValidatorFn = (): ValidationErrors | null => {
+    if (!isValid(this.value)) {
+      return null;
+    }
+
+    if (this.maxDate && isAfter(this.value, startOfDay(this.maxDate))) {
+      return {
+        fsDatepickerMax: isToday(this.maxDate)
+          ? 'Cannot be in the future'
+          : `Must be on or before ${formatDateTime(this.maxDate)}`,
+      };
+    }
+
+    if (this.minDate && isBefore(this.value, startOfDay(this.minDate))) {
+      return {
+        fsDatepickerMin: isToday(this.minDate)
+          ? 'Cannot be in the past'
+          : `Must be on or after ${formatDateTime(this.minDate)}`,
+      };
+    }
+
+    return null;
+  };
 }
