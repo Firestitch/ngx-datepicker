@@ -28,6 +28,12 @@ export class FsDateScrollPickerDesktopComponent extends FsDateScrollPickerBaseCo
   }
 
   public close(save = false) {
+    // Select is greyed while the wheel sits past min/max. pointer-events stop a mouse, but a
+    // scripted click still reaches this handler before MatAnchor's disabled guard runs.
+    if (save && this.disabledSubmit) {
+      return;
+    }
+
     if (save) {
       this._dialogRef.updateValue(this._date);
     }
