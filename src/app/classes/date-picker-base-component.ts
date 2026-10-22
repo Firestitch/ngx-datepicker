@@ -195,8 +195,15 @@ export abstract class FsDatePickerBaseComponent<D = any> extends FsPickerBaseCom
 
   @HostListener('blur', ['$event.target.value'])
   public _inputBlur(value: string): void {
-    if(!this.opened) {
-      this.inputChange(value);
+    if (!this.opened) {
+      // Only an editable input can hold text the user typed. A readonly picker's
+      // text is the component's own formatting of the model, so re-parsing it
+      // cannot add anything and can only lose the value (on mobile the field is
+      // refocused after the bottom sheet closes, and the next tap blurs it).
+      if (this.editable) {
+        this.inputChange(value);
+      }
+
       this.updateInput(this.value);
       this.blured$.emit(this.value);
     }

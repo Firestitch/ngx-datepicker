@@ -24,17 +24,49 @@ const TIME_FORMATS = [
   'H', // 3 (24-hour)
 ];
 
-export function parseDate(value: string, view?: PickerViewType): Date | null {
-  if (view === PickerViewType.Time || view === PickerViewType.DateTime) {
-    // Time-only inputs carry no date component, so seed the parse with today's
-    // local date — mirroring how the popup seeds a time onto the current day.
-    const referenceDate = new Date();
+/**
+ * Ordered date formats tried (first valid parse wins) before falling back to
+ * the engine's own `Date.parse()`. They are the shapes the pickers themselves
+ * write into the input (see formatDateTime), so text the component rendered
+ * always parses back to the same date on every engine. `Date.parse()` is not
+ * portable for these: JavaScriptCore (Safari, every iOS browser) rejects
+ * `October 2026`, and both engines read a bare `2026` as UTC midnight, which
+ * is the previous day anywhere west of UTC.
+ *
+ * Formats without a year or a day are seeded from today, the same way the
+ * time formats are. Order matters: month + day is tried before month + year
+ * so `November 1` reads as a day, not as the year 1.
+ */
+const DATE_FORMATS = [
+  'MMM d, yyyy h:mm aa', // Nov 1, 2026 3:30 PM (datetime view)
+  'MMM d, yyyy', // Nov 1, 2026 (date view)
+  'MMMM d', // November 1 (scroll picker: month + day)
+  'MMMM yyyy', // November 2026 (scroll picker: month + year)
+  'MMMM', // November (scroll picker: month only)
+  'yyyy', // 2026 (scroll picker: year only)
+];
 
+export function parseDate(value: string, view?: PickerViewType): Date | null {
+  // A typed value with no date component is seeded onto today's local date,
+  // mirroring how the popup seeds a time onto the current day.
+  const referenceDate = new Date();
+
+  if (view === PickerViewType.Time || view === PickerViewType.DateTime) {
     for (const format of TIME_FORMATS) {
       const parsedTime = parse(value, format, referenceDate);
 
       if (isValid(parsedTime)) {
         return parsedTime;
+      }
+    }
+  }
+
+  if (view !== PickerViewType.Time) {
+    for (const format of DATE_FORMATS) {
+      const parsedDate = parse(value, format, referenceDate);
+
+      if (isValid(parsedDate)) {
+        return parsedDate;
       }
     }
   }
