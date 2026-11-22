@@ -9,7 +9,7 @@ import { FsFormModule } from '@firestitch/form';
 import { of } from 'rxjs';
 
 
-import { FsDateRangeComponent } from '../../../../src/app/components/date-range/date-range.component';
+import { FsDateRangeFieldComponent } from '../../../../src/app/components/date-range-field/date-range-field.component';
 import {
   FS_DATEPICKER_CONFIG,
   FS_DATEPICKER_CONFIG_DEFAULT,
@@ -36,7 +36,7 @@ import { WeekDay } from '../../../../src/libs/common/enums/week-day.enum';
     FormsModule,
     MatButton,
     FsFormModule,
-    FsDateRangeComponent,
+    FsDateRangeFieldComponent,
   ],
 })
 export class DateRangeFieldExampleComponent {

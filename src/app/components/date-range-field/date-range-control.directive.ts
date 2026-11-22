@@ -18,7 +18,7 @@ import { IDatePresetRange } from '../../../libs/common/interfaces/date-preset.in
 let nextId = 0;
 
 /**
- * The control inside `<fs-date-range>`: what mat-form-field draws its focus and
+ * The control inside `<fs-date-range-field>`: what mat-form-field draws its focus and
  * error outline around, and the one control the page's form sees.
  *
  * Its value is the range once both ends are set and null until then, so the

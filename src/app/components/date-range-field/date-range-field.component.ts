@@ -60,9 +60,9 @@ let nextId = 0;
  * Required means both ends.
  */
 @Component({
-  selector: 'fs-date-range',
-  templateUrl: './date-range.component.html',
-  styleUrl: './date-range.component.scss',
+  selector: 'fs-date-range-field',
+  templateUrl: './date-range-field.component.html',
+  styleUrl: './date-range-field.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
@@ -91,7 +91,7 @@ let nextId = 0;
     '[class.fs-date-range-empty]': '!from() && !to() && !opened()',
   },
 })
-export class FsDateRangeComponent implements DoCheck {
+export class FsDateRangeFieldComponent implements DoCheck {
 
   public readonly from = model<Date | null>(null);
   public readonly to = model<Date | null>(null);

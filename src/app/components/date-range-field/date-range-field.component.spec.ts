@@ -12,7 +12,7 @@ import { PickerViewType } from '../../../libs/common/enums/picker-view-type.enum
 import { IDialogFactoryOptions } from '../../../libs/dialog/interfaces/dialog-factory-data.interface';
 import { FsDatePickerDialogFactory } from '../../../libs/dialog/services/dialog-factory.service';
 
-import { FsDateRangeComponent } from './date-range.component';
+import { FsDateRangeFieldComponent } from './date-range-field.component';
 
 
 interface FakeDialog {
@@ -58,9 +58,9 @@ function fakeDialogFactory() {
   standalone: true,
   imports: [
     FormsModule,
-    FsDateRangeComponent,
+    FsDateRangeFieldComponent,
   ],
-  template: `<form><fs-date-range [(from)]="from" [(to)]="to" [name]="'period'"
+  template: `<form><fs-date-range-field [(from)]="from" [(to)]="to" [name]="'period'"
     [required]="required()" [view]="view()" /></form>`,
 })
 class HostComponent {
@@ -72,11 +72,11 @@ class HostComponent {
 }
 
 
-describe('FsDateRangeComponent', () => {
+describe('FsDateRangeFieldComponent', () => {
 
   let fixture: ComponentFixture<HostComponent>;
   let host: HostComponent;
-  let range: FsDateRangeComponent;
+  let range: FsDateRangeFieldComponent;
   let dialogs: ReturnType<typeof fakeDialogFactory>;
 
   beforeEach(fakeAsync(() => {
@@ -94,7 +94,7 @@ describe('FsDateRangeComponent', () => {
     host = fixture.componentInstance;
     render();
 
-    range = fixture.debugElement.query(By.directive(FsDateRangeComponent)).componentInstance;
+    range = fixture.debugElement.query(By.directive(FsDateRangeFieldComponent)).componentInstance;
   }));
 
   function render(): void {

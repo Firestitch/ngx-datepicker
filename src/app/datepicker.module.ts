@@ -22,7 +22,7 @@ import { FsDateCalendarPickerComponent } from './components/calendar-picker/cale
 import { FsDatePickerBirthdayComponent } from './components/date-picker-birthday/date-picker-birthday.component';
 import { FsDatePickerTriggerComponent } from './components/date-picker-trigger/date-picker-trigger.component';
 import { FsDatePickerComponent } from './components/date-picker/date-picker.component';
-import { FsDateRangeComponent } from './components/date-range/date-range.component';
+import { FsDateRangeFieldComponent } from './components/date-range-field/date-range-field.component';
 import { DateRangeSeparatorComponent } from './components/date-range-separator/date-range-separator.component';
 import { FsDateScrollPickerComponent } from './components/date-scroll-picker/date-scroll-picker.component';
 import { FsDateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
@@ -57,7 +57,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
     FsClearModule,
     FsScrollPickerModule,
     FsDatePickerComponent,
-    FsDateRangeComponent,
+    FsDateRangeFieldComponent,
     DateRangeSeparatorComponent,
     DateRangePickerFromComponent,
     DateRangePickerToComponent,
@@ -80,7 +80,7 @@ import { FsRangePickerStoreService } from './services/range-picker-store.service
 ],
     exports: [
         FsDatePickerComponent,
-        FsDateRangeComponent,
+        FsDateRangeFieldComponent,
         DateRangeSeparatorComponent,
         DateRangePickerFromComponent,
         DateRangePickerToComponent,
