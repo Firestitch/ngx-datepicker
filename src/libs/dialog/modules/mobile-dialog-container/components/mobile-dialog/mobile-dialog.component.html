@@ -29,6 +29,14 @@
     color="primary">
     Done
   </a>
+  @if (datePickerModel.showClear) {
+    <a
+      class="button-clear"
+      mat-button
+      (click)="clear()">
+      Clear
+    </a>
+  }
   @if (datePickerModel.minutes &&
     ((datePickerModel.isDateTimeView && selectedDateTimeTab !== 0) ||
     datePickerModel.isTimeView

@@ -116,6 +116,13 @@ export class FsDesktopDatePickerComponent implements AfterViewInit, OnDestroy {
     this.close();
   }
 
+  /** Empties this picker's date; the host reads the null from the dialog's value. */
+  public clear(): void {
+    this.datePickerModel.model = null;
+
+    this.close();
+  }
+
   public toggleTimeExpand() {
     this.timePickerExpanded = !this.timePickerExpanded;
   }

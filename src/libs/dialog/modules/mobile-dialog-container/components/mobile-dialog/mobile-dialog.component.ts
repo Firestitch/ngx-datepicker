@@ -59,6 +59,13 @@ export class FsMobileCalendarDialogComponent {
     this._bottomSheetRef.dismiss();
   }
 
+  /** Empties this picker's date; the host reads the null from the dialog's value. */
+  public clear(): void {
+    this.datePickerModel.model = null;
+
+    this.close();
+  }
+
   public datetimeTabChanged(index: number) {
     this.selectedDateTimeTab = index;
   }

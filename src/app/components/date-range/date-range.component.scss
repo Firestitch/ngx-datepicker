@@ -1,0 +1,152 @@
+// Unencapsulated so it can reach into the mat-form-field it owns; every rule is
+// scoped under the host class. Colours read the shared --fs-* tokens with the
+// legacy value as the fallback, as the rest of the package does.
+.fs-date-range {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+
+  .fs-date-range-field {
+    width: 100%;
+    // The two ends stack a label over a date, which needs the room the
+    // field's own vertical padding would otherwise take.
+    --mat-form-field-container-vertical-padding: 4px;
+  }
+
+  // The infix defaults to a fixed 180px; the two ends set the width instead.
+  .mat-mdc-form-field-infix {
+    width: auto;
+  }
+
+  // The subscript area keeps Material's standard inset, so fs-form's messages
+  // sit where they do under every other field. Only the preset chip moves out
+  // to the field's left border, by the hint wrapper's 16px padding.
+  .fs-date-range-hint {
+    margin-left: -16px;
+
+    &:has(fs-chip) {
+      padding-top: 4px;
+    }
+  }
+
+  // With the preset chip on, the area under the field is always one chip tall,
+  // whether it holds the chip, fs-form's message or nothing, so picking,
+  // clearing or an error never moves the page below. 28px is the chip and the
+  // gap above it; 22px is the spacer @firestitch/style puts under every hint.
+  &.fs-date-range-has-chip .mat-mdc-form-field-hint-wrapper {
+    min-height: calc(28px + 22px);
+  }
+
+  // Same size and place as the other pickers' calendar icon (fs-datepicker-trigger):
+  // a 21px glyph 20px in from the border, instead of Material's 24px prefix icon
+  // with 12px padding either side.
+  .mat-mdc-form-field-icon-prefix > .fs-date-range-icon {
+    font-size: 21px;
+    padding: 0 0 0 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .fs-date-range-icon-disabled {
+    color: var(--fs-color-text-faint, rgba(0, 0, 0, 0.38));
+    pointer-events: none;
+  }
+
+  // Tall enough for a label over a date, so an empty field keeps its height
+  // and its labels can centre in it.
+  .fs-date-range-control {
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+    min-height: 46px;
+  }
+
+  .fs-date-range-end {
+    appearance: none;
+    border: 0;
+    margin: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-width: 120px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: var(--fs-color-hover, rgba(0, 0, 0, 0.04));
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--mdc-outlined-text-field-focus-outline-color, currentColor);
+      outline-offset: 1px;
+    }
+
+    &:disabled {
+      cursor: default;
+      color: var(--fs-color-text-faint, rgba(0, 0, 0, 0.38));
+    }
+  }
+
+  .fs-date-range-end-active {
+    background: var(--fs-color-selected, rgba(0, 0, 0, 0.06));
+
+    .fs-date-range-label {
+      color: var(--mdc-outlined-text-field-focus-label-text-color, inherit);
+    }
+  }
+
+  .fs-date-range-label {
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+    color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
+  }
+
+  .fs-date-range-required-marker {
+    margin-left: 1px;
+  }
+
+  .fs-date-range-value {
+    min-height: 22px;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  .fs-date-range-arrow {
+    align-self: flex-end;
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    margin-bottom: 7px;
+    color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
+  }
+
+  .mat-form-field-invalid .fs-date-range-label {
+    color: var(--mat-form-field-error-text-color, #f44336);
+  }
+
+  // Nothing picked and nothing open: the labels sit where the dates go, the
+  // way a lone mat-label sits in an empty field.
+  &.fs-date-range-empty {
+    .fs-date-range-value {
+      display: none;
+    }
+
+    .fs-date-range-label {
+      font-size: inherit;
+      line-height: 22px;
+    }
+
+    .fs-date-range-arrow {
+      align-self: center;
+      margin-bottom: 0;
+    }
+  }
+}

@@ -27,6 +27,15 @@ export interface IDialogFactoryOptions {
   showNow?:     boolean;
   preset?:      boolean;
   presets?:     IFsDatePickerPreset[];
+  /**
+   * Elements a click may land on without closing the calendar, such as the
+   * other end of a range field, which then handles the click itself. When set,
+   * the desktop calendar has no backdrop, so the page stays hoverable and a
+   * click anywhere else closes it.
+   */
+  ignoreOutsideClicksOn?: HTMLElement[];
+  /** Shows a Clear button in the footer that empties this picker's date and closes it. */
+  showClear?:   boolean;
 
   //
   showMonth?: boolean;

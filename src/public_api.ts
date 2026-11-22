@@ -5,7 +5,7 @@
 export { FsDatePickerModule } from './app/datepicker.module';
 
 export {
-  DateRangePickerFromComponent, DateRangePickerToComponent, DateRangeSeparatorComponent, DateTimeRangePickerFromComponent, DateTimeRangePickerToComponent, FsDateCalendarPickerComponent, FsDatePickerBirthdayComponent, FsDatePickerComponent, FsDatePickerPresetChipComponent, FsDateScrollPickerComponent,
+  DateRangePickerFromComponent, DateRangePickerToComponent, DateRangeSeparatorComponent, DateTimeRangePickerFromComponent, DateTimeRangePickerToComponent, FsDateCalendarPickerComponent, FsDatePickerBirthdayComponent, FsDatePickerComponent, FsDatePickerPresetChipComponent, FsDateRangeComponent, FsDateScrollPickerComponent,
   FsDateTimePickerComponent, FsDateWeekPickerComponent, FsTimePickerComponent, FsTimeSelectComponent, FsWeekdaySelectComponent, MonthRangePickerFromComponent, MonthRangePickerToComponent, TimeRangePickerFromComponent, TimeRangePickerToComponent
 } from './app/components';
 

@@ -52,20 +52,22 @@
         }
       }
     </div>
+    <!-- The primary action always comes first, Clear right after it. -->
     <app-action-buttons>
-      @if (!datePickerModel.rangePickerRef) {
+      @if (datePickerModel.rangePickerRef && datePickerModel.isPickerRangeFrom) {
+        <a
+          mat-button
+          color="primary"
+          (click)="nextCalendar()">
+          Continue
+        </a>
+        <ng-container [ngTemplateOutlet]="clearButton"></ng-container>
         <ng-container [ngTemplateOutlet]="done"></ng-container>
+      } @else {
+        <ng-container [ngTemplateOutlet]="done"></ng-container>
+        <ng-container [ngTemplateOutlet]="clearButton"></ng-container>
       }
       @if (datePickerModel.rangePickerRef) {
-        @if (datePickerModel.isPickerRangeFrom) {
-          <a
-            mat-button
-            color="primary"
-            (click)="nextCalendar()">
-            Continue
-          </a>
-        }
-        <ng-container [ngTemplateOutlet]="done"></ng-container>
         @if (datePickerModel.isPickerRangeTo) {
           <a
             mat-button
@@ -74,6 +76,16 @@
           </a>
         }
       }
+      <ng-template #clearButton>
+        @if (datePickerModel.showClear) {
+          <a
+            class="button-clear"
+            mat-button
+            (click)="clear()">
+            Clear
+          </a>
+        }
+      </ng-template>
       <ng-template #done>
         <a
           class="button-done"

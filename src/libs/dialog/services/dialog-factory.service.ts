@@ -182,7 +182,7 @@ export class FsDatePickerDialogFactory {
       ...config,
       positionStrategy: this._createPopupPositionStrategy(el),
       scrollStrategy: this._overlay.scrollStrategies.reposition(),
-      hasBackdrop: true,
+      hasBackdrop: config.hasBackdrop ?? true,
       backdropClass: [],
       panelClass: 'fs-datepicker-overlay-pane',
     };
@@ -329,17 +329,44 @@ export class FsDatePickerDialogFactory {
     parentInjector: Injector,
     previewRef: FsDatePickerDialogRef,
   ): OverlayRef {
+    const ignored = previewRef.options.ignoreOutsideClicksOn;
     const overlayRef = this._createOverlay(
       this._targetElRef,
       {
         positionStrategy: this._createBasePopupPositionStrategy(this._targetElRef),
+        hasBackdrop: !ignored,
       },
     );
     const injector = this._createInjector(parentInjector, previewRef);
     const containerPortal = new ComponentPortal(FsDesktopCalendarDialogComponent, undefined, injector);
     overlayRef.attach(containerPortal);
 
+    if (ignored) {
+      this._closeOnOutsideClick(overlayRef, previewRef, ignored);
+    }
+
     return overlayRef;
+  }
+
+  /**
+   * Stands in for the backdrop: a click outside the calendar closes it, unless
+   * it lands on one of the elements the caller listed. Completes when the
+   * overlay is disposed.
+   */
+  private _closeOnOutsideClick(
+    overlayRef: OverlayRef,
+    dialogRef: FsDatePickerDialogRef,
+    ignored: HTMLElement[],
+  ): void {
+    overlayRef.outsidePointerEvents()
+      .pipe(
+        filter((event: MouseEvent) => {
+          return !ignored.some((el: HTMLElement) => el.contains(event.target as Node));
+        }),
+        take(1),
+        tap(() => dialogRef.close()),
+      )
+      .subscribe();
   }
 
   private _openDatePickerMobile(dialogRef: FsDatePickerDialogRef): MatBottomSheetRef {

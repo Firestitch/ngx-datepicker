@@ -2,6 +2,7 @@ export * from './calendar-picker';
 export * from './date-picker';
 export * from './date-picker-birthday';
 export * from './date-picker-trigger';
+export * from './date-range';
 export * from './date-range-separator';
 export * from './date-scroll-picker';
 export * from './date-time-picker';

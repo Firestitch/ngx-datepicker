@@ -1,0 +1,34 @@
+<form fsForm [submit]="save">
+  <div class="example-fields">
+    <div class="example-field">
+      <fs-date-range
+        [(from)]="from"
+        [(to)]="to"
+        [name]="'period'"
+        [required]="true">
+      </fs-date-range>
+      <div class="example-values">
+        from: {{ from() | date: 'medium' }} · to: {{ to() | date: 'medium' }}
+      </div>
+    </div>
+    <div class="example-field">
+      <fs-date-range
+        [(from)]="dateTimeFrom"
+        [(to)]="dateTimeTo"
+        [name]="'dateTimePeriod'"
+        [view]="PickerViewType.DateTime"
+        [fromLabel]="'Starts'"
+        [toLabel]="'Ends'">
+      </fs-date-range>
+      <div class="example-values">
+        from: {{ dateTimeFrom() | date: 'medium' }} · to: {{ dateTimeTo() | date: 'medium' }}
+      </div>
+    </div>
+  </div>
+  <button
+      mat-button
+      color="primary"
+      type="submit">
+    Save
+  </button>
+</form>

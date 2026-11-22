@@ -2,6 +2,7 @@ export * from './birthday-example';
 export * from './calendar-example';
 export * from './date-example';
 export * from './date-range-example';
+export * from './date-range-field-example';
 export * from './date-scroll-picker';
 export * from './date-time-range-example';
 export * from './datetime-example';

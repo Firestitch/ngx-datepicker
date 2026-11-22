@@ -128,6 +128,10 @@ export class FsDatePickerDialogModel {
     return this._calendarMode$.value;
   }
 
+  public get showClear(): boolean {
+    return !!this._pickerOptions.showClear;
+  }
+
   public get isPickerRangeFrom(): boolean {
     return this._pickerOptions.rangeType === 'from';
   }

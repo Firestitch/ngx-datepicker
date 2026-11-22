@@ -1,0 +1,69 @@
+<mat-form-field
+    class="fs-date-range-field"
+    [appearance]="appearance()">
+  <mat-icon
+      matIconPrefix
+      class="fs-date-range-icon"
+      [class.fs-date-range-icon-disabled]="control.disabled"
+      (click)="open('from', $event)">
+    calendar_today
+  </mat-icon>
+  <div
+      class="fs-date-range-control"
+      fsDateRangeControl
+      #control="fsDateRangeControl"
+      [ngModel]="range()"
+      [name]="name()"
+      [required]="required()"
+      [disabled]="disabled()"
+      [empty]="!from() && !to()"
+      [focused]="!!opened()">
+    <button
+        #fromEnd
+        type="button"
+        class="fs-date-range-end"
+        [class.fs-date-range-end-active]="opened() === 'from'"
+        [disabled]="control.disabled"
+        (click)="open('from', $event)">
+      <span class="fs-date-range-label">
+        {{ fromLabel() }}
+        @if (required()) {
+          <span class="fs-date-range-required-marker">*</span>
+        }
+      </span>
+      <span class="fs-date-range-value">{{ fromText() }}</span>
+    </button>
+    <mat-icon class="fs-date-range-arrow">
+      arrow_forward
+    </mat-icon>
+    <button
+        #toEnd
+        type="button"
+        class="fs-date-range-end"
+        [class.fs-date-range-end-active]="opened() === 'to'"
+        [disabled]="control.disabled"
+        (click)="open('to', $event)">
+      <span class="fs-date-range-label">
+        {{ toLabel() }}
+        @if (required()) {
+          <span class="fs-date-range-required-marker">*</span>
+        }
+      </span>
+      <span class="fs-date-range-value">{{ toText() }}</span>
+    </button>
+  </div>
+  <fs-clear
+    [show]="clear() && !control.disabled"
+    [visible]="!control.empty"
+    (clear)="cleared()">
+  </fs-clear>
+  @if (presetChip) {
+    <mat-hint class="fs-date-range-hint">
+      <fs-date-picker-preset-chip
+        [from]="fromDisplay()"
+        [to]="toDisplay()"
+        [weekStartsOn]="weekStartsOn()">
+      </fs-date-picker-preset-chip>
+    </mat-hint>
+  }
+</mat-form-field>
