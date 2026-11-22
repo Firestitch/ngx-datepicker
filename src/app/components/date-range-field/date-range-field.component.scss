@@ -21,7 +21,11 @@
   // The subscript area keeps Material's standard inset, so fs-form's messages
   // sit where they do under every other field. Only the preset chip moves out
   // to the field's left border, by the hint wrapper's 16px padding.
+  // A block, because mat-hint is inline: the chip inside it is a block, which
+  // breaks out of an inline hint, so the margin never moved it and the hint's
+  // padding pushed an empty line in above it.
   .fs-date-range-hint {
+    display: block;
     margin-left: -16px;
 
     &:has(fs-chip) {
@@ -118,6 +122,8 @@
     white-space: nowrap;
   }
 
+  // On the date line in every state, so opening, picking or clearing an end
+  // never moves it.
   .fs-date-range-arrow {
     align-self: flex-end;
     flex: 0 0 auto;
@@ -132,9 +138,13 @@
     color: var(--mat-form-field-error-text-color, #f44336);
   }
 
-  // Nothing picked and nothing open: the labels sit where the dates go, the
-  // way a lone mat-label sits in an empty field.
-  &.fs-date-range-empty {
+  // An end with no date and no open calendar shows its label where the date
+  // goes, the way a lone mat-label sits in an empty field, on the same line as
+  // the arrow and the other end's date. With both ends empty, both labels and
+  // the arrow share that line, so nothing but the opened end's label moves.
+  .fs-date-range-end-empty {
+    justify-content: flex-end;
+
     .fs-date-range-value {
       display: none;
     }
@@ -142,11 +152,6 @@
     .fs-date-range-label {
       font-size: inherit;
       line-height: 22px;
-    }
-
-    .fs-date-range-arrow {
-      align-self: center;
-      margin-bottom: 0;
     }
   }
 }

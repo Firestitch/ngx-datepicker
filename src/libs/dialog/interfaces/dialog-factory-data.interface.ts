@@ -34,7 +34,10 @@ export interface IDialogFactoryOptions {
    * click anywhere else closes it.
    */
   ignoreOutsideClicksOn?: HTMLElement[];
-  /** Shows a Clear button in the footer that empties this picker's date and closes it. */
+  /**
+   * Shows a Clear button in the footer, while there is a date, that empties
+   * this picker's date and leaves the calendar open for another.
+   */
   showClear?:   boolean;
 
   //

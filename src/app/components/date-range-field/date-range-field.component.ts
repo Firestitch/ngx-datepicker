@@ -88,7 +88,6 @@ let nextId = 0;
   host: {
     class: 'fs-date-range',
     '[class.fs-date-range-has-chip]': 'presetChip',
-    '[class.fs-date-range-empty]': '!from() && !to() && !opened()',
   },
 })
 export class FsDateRangeFieldComponent implements DoCheck {
@@ -110,6 +109,10 @@ export class FsDateRangeFieldComponent implements DoCheck {
   public readonly appearance = input<MatFormFieldAppearance>();
 
   public readonly opened = signal<'from' | 'to' | null>(null);
+  // An end's label floats above its date only once it has a date or its
+  // calendar is open, as a mat-label does; until then it sits where the date goes.
+  public readonly fromEmpty = computed(() => !this.from() && this.opened() !== 'from');
+  public readonly toEmpty = computed(() => !this.to() && this.opened() !== 'to');
   public readonly fromDisplay = computed(() => createDateFromValue(this.from(), this.timezone()));
   public readonly toDisplay = computed(() => createDateFromValue(this.to(), this.timezone()));
   public readonly fromText = computed(() => formatDateTime(this.fromDisplay(), this.view()));

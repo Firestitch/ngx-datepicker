@@ -128,8 +128,9 @@ export class FsDatePickerDialogModel {
     return this._calendarMode$.value;
   }
 
+  /** Clear is offered while there is a date to clear; once cleared, the button goes */
   public get showClear(): boolean {
-    return !!this._pickerOptions.showClear;
+    return !!this._pickerOptions.showClear && !!this.model;
   }
 
   public get isPickerRangeFrom(): boolean {

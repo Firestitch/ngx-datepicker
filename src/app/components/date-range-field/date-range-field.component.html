@@ -23,6 +23,7 @@
         type="button"
         class="fs-date-range-end"
         [class.fs-date-range-end-active]="opened() === 'from'"
+        [class.fs-date-range-end-empty]="fromEmpty()"
         [disabled]="control.disabled"
         (click)="open('from', $event)">
       <span class="fs-date-range-label">
@@ -41,6 +42,7 @@
         type="button"
         class="fs-date-range-end"
         [class.fs-date-range-end-active]="opened() === 'to'"
+        [class.fs-date-range-end-empty]="toEmpty()"
         [disabled]="control.disabled"
         (click)="open('to', $event)">
       <span class="fs-date-range-label">

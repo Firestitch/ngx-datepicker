@@ -22,7 +22,8 @@ interface FakeDialog {
 
 /**
  * Stands in for the calendar: a pick emits the date, then a date view closes,
- * while a date-time view stays open for the time.
+ * while a date-time view stays open for the time. Clear (a null pick) leaves
+ * either open for another date.
  */
 function fakeDialogFactory() {
   const opened: FakeDialog[] = [];
@@ -42,7 +43,7 @@ function fakeDialogFactory() {
         pick: (date: Date | null) => {
           value$.next(date);
 
-          if (options.view !== PickerViewType.DateTime) {
+          if (date && options.view !== PickerViewType.DateTime) {
             close();
           }
         },
@@ -222,7 +223,7 @@ describe('FsDateRangeFieldComponent', () => {
       expect(control().dirty).toBeTrue();
     }));
 
-    it('clears just the start from the calendar and opens nothing after', fakeAsync(() => {
+    it('clears just the start and keeps its calendar open for another', fakeAsync(() => {
       host.required.set(false);
       render();
 
@@ -233,11 +234,11 @@ describe('FsDateRangeFieldComponent', () => {
       expect(host.from()).toBeNull();
       expect(host.to()).toEqual(endOfDay(new Date(2026, 10, 8)));
       expect(dialogs.opened.length).toBe(1);
-      expect(range.opened()).toBeNull();
+      expect(range.opened()).toBe('from');
       expect(host.form().valid).toBeTrue();
     }));
 
-    it('clears just the end from the calendar', fakeAsync(() => {
+    it('clears just the end and keeps its calendar open for another', fakeAsync(() => {
       host.required.set(false);
       render();
 
@@ -247,7 +248,18 @@ describe('FsDateRangeFieldComponent', () => {
 
       expect(host.from()).toEqual(new Date(2026, 10, 2));
       expect(host.to()).toBeNull();
-      expect(range.opened()).toBeNull();
+      expect(range.opened()).toBe('to');
+    }));
+
+    it('carries on to the end once a cleared start is picked again', fakeAsync(() => {
+      range.open('from');
+      dialogs.opened[0].pick(null);
+      dialogs.opened[0].pick(new Date(2026, 10, 3));
+      tick();
+
+      expect(host.from()).toEqual(startOfDay(new Date(2026, 10, 3)));
+      expect(dialogs.opened.length).toBe(2);
+      expect(range.opened()).toBe('to');
     }));
 
   });
