@@ -139,7 +139,7 @@ describe('FsDateRangeFieldComponent', () => {
     expect(host.from()).toEqual(startOfDay(new Date(2026, 10, 4)));
     expect(dialogs.opened.length).toBe(2);
     expect(dialogs.opened[1].options.rangeType).toBe('to');
-    expect(dialogs.opened[1].options.rangeStart).toEqual(startOfDay(new Date(2026, 10, 4)));
+    expect(dialogs.opened[1].options.rangeStart).toBeUndefined();
     expect(host.form().dirty).toBeTrue();
 
     dialogs.opened[1].pick(new Date(2026, 10, 20));
@@ -273,6 +273,63 @@ describe('FsDateRangeFieldComponent', () => {
     expect(host.to()).toBeNull();
     expect(control().hasError('required')).toBeTrue();
   }));
+
+  describe('an end picked before the start', () => {
+
+    it('drops the start when the new end is before it, and opens the start next', fakeAsync(() => {
+      range.open('to');
+      dialogs.opened[0].pick(new Date(2026, 9, 28));
+      tick();
+      fixture.detectChanges();
+
+      expect(host.from()).toBeNull();
+      expect(host.to()).toEqual(endOfDay(new Date(2026, 9, 28)));
+      expect(dialogs.opened.length).toBe(2);
+      expect(dialogs.opened[1].options.rangeType).toBe('from');
+      expect(range.opened()).toBe('from');
+      expect(control().hasError('required')).toBeTrue();
+    }));
+
+    it('keeps the start when the new end is on its day', fakeAsync(() => {
+      range.open('to');
+      dialogs.opened[0].pick(new Date(2026, 10, 2));
+      tick();
+
+      expect(host.from()).toEqual(new Date(2026, 10, 2));
+      expect(host.to()).toEqual(endOfDay(new Date(2026, 10, 2)));
+      expect(dialogs.opened.length).toBe(1);
+      expect(range.opened()).toBeNull();
+    }));
+
+    it('drops a date-time start when the end is on an earlier day', fakeAsync(() => {
+      host.view.set(PickerViewType.DateTime);
+      host.from.set(new Date(2026, 10, 2, 10, 0));
+      render();
+
+      range.open('to');
+      dialogs.opened[0].pick(new Date(2026, 10, 1, 15, 30));
+      tick();
+
+      expect(host.from()).toBeNull();
+      expect(host.to()).toEqual(new Date(2026, 10, 1, 15, 30));
+      expect(dialogs.opened.length).toBe(2);
+      expect(range.opened()).toBe('from');
+    }));
+
+    it('keeps a date-time start when the end is on its day', fakeAsync(() => {
+      host.view.set(PickerViewType.DateTime);
+      host.from.set(new Date(2026, 10, 2, 10, 0));
+      render();
+
+      range.open('to');
+      dialogs.opened[0].pick(new Date(2026, 10, 2, 9, 0));
+      tick();
+
+      expect(host.from()).toEqual(new Date(2026, 10, 2, 10, 0));
+      expect(range.opened()).toBe('to');
+    }));
+
+  });
 
   it('clears both ends at once', fakeAsync(() => {
     range.cleared();

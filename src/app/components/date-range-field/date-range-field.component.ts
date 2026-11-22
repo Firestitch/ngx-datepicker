@@ -58,6 +58,10 @@ let nextId = 0;
  * still sees the field: the control inside registers with the form around this
  * component under `name`, so required, dirty and submit work as on any field.
  * Required means both ends.
+ *
+ * Neither end's calendar holds back a day for the other: a start past the end
+ * clears the end, and an end before the start clears the start, each opening
+ * the cleared end's calendar next. Only `minDate` and `maxDate` hold days back.
  */
 @Component({
   selector: 'fs-date-range-field',
@@ -190,7 +194,8 @@ export class FsDateRangeFieldComponent implements DoCheck {
       view: this.view(),
       minDate: this.minDate(),
       maxDate: this.maxDate(),
-      rangeStart: from,
+      // No rangeStart: it would hold back the days before the start on the
+      // end's calendar. An end picked before the start clears the start instead.
       // An empty end opens on the other end's date, as the two-field picker does.
       modelValue: end === 'from' ? (from ?? to) : (to ?? from),
       components: { calendarStart: true, calendarEnd: true },
@@ -295,8 +300,24 @@ export class FsDateRangeFieldComponent implements DoCheck {
 
   private _pickTo(value: Date | null): void {
     const to = this._isDateView() && value ? endOfDay(value) : value;
+    const from = this.fromDisplay();
 
     this.to.set(this._toModel(to));
+
+    // An end on a day before the start's leaves no range, so the start goes and
+    // its calendar opens next. On the start's own day the date-time calendar
+    // still holds back the times before the start's.
+    if (!to || !from || !isAfter(startOfDay(from), to)) {
+      return;
+    }
+
+    this.from.set(null);
+    this._next = 'from';
+
+    // A date pick closes the calendar by itself; a date-time one stays open for the time.
+    if (!this._isDateView()) {
+      this._dialogRef?.close();
+    }
   }
 
   /** Presets set both ends at once, through the range ref the dialog was given. */
