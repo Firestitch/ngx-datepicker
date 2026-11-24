@@ -374,6 +374,7 @@ export class FsDatePickerDialogFactory {
       data: {
         dateDialogRef: dialogRef,
       },
+      panelClass: 'fs-date-picker-bottom-sheet',
       restoreFocus: false,
     });
   }
@@ -398,6 +399,7 @@ export class FsDatePickerDialogFactory {
       data: {
         dateDialogRef: dialogRef,
       },
+      panelClass: 'fs-date-picker-bottom-sheet',
       restoreFocus: false,
     });
   }

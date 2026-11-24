@@ -7,3 +7,33 @@
 
 @include fs-style.core();
 @include fs-form($app-theme);
+
+// Dark mode for the whole playground, so every picker and the panel it opens
+// can be checked on a dark page the way a host app shows it. The theme switch
+// in the header puts .theme-dark on <html>; @firestitch/style's --fs-* tokens
+// flip on that marker, and Material's own colors flip with them here.
+$dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $primary-palette,
+    warn: $app-warn,
+  ),
+));
+
+mat.$theme-ignore-duplication-warnings: true;
+
+:root.theme-dark {
+  color-scheme: dark;
+
+  @include mat.all-component-colors($dark-theme);
+
+  // @firestitch/example inks its card headers in a light page's grey
+  fs-example mat-toolbar {
+    color: var(--fs-color-text-muted);
+  }
+}
+
+body {
+  background: var(--fs-surface-background);
+  color: var(--fs-color-text);
+}

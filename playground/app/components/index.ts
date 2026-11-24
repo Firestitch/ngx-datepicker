@@ -12,6 +12,7 @@ export * from './month-example';
 export * from './only-hours-example';
 export * from './presets-example';
 export * from './select-example';
+export * from './theme-switch';
 export * from './time-example';
 export * from './timerange-example';
 export * from './week-example';

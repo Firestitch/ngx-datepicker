@@ -1,0 +1,11 @@
+<mat-button-toggle-group
+    aria-label="Theme"
+    [value]="theme()"
+    (change)="theme.set($event.value)">
+  <mat-button-toggle [value]="'light'">
+    Light
+  </mat-button-toggle>
+  <mat-button-toggle [value]="'dark'">
+    Dark
+  </mat-button-toggle>
+</mat-button-toggle-group>

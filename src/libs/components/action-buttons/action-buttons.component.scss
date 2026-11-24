@@ -1,10 +1,26 @@
-// The footer bar carrying Continue / Done. Hardcoded white, it read as a solid
-// white strip under a dark calendar. Fallback is the legacy #fff, so an app
-// that defines no token is unchanged.
+// The footer bar carrying Done / Clear / Back. Hardcoded white, it read as a
+// solid white strip under a dark calendar. Fallback is the legacy #fff, so an
+// app that defines no token is unchanged.
 .button-actions {
   background: var(--fs-surface-background, #fff);
   display: flex;
   padding: 5px;
+
+  // Clear, Back and More have no color of their own, so Material inks them
+  // from the host's theme, which need not match the panel: a light theme's
+  // black on a dark panel and the button vanishes. They take the panel's ink
+  // instead. Done and Continue are color="primary", which sets these names on
+  // the button itself, so they keep the primary color.
+  //
+  // Both spellings: --mdc-text-button-* / --mat-text-button-* up to Angular
+  // Material 18, --mat-button-text-* from 19. Each fallback is Material's own
+  // light-theme value, so an app that defines no token is unchanged.
+  --mdc-text-button-label-text-color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
+  --mdc-text-button-disabled-label-text-color: var(--fs-color-text-faint, rgba(0, 0, 0, 0.38));
+  --mat-text-button-state-layer-color: var(--fs-color-text, #000);
+  --mat-button-text-label-text-color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
+  --mat-button-text-disabled-label-text-color: var(--fs-color-text-faint, rgba(0, 0, 0, 0.38));
+  --mat-button-text-state-layer-color: var(--fs-color-text, #000);
 
   ::ng-deep a {
     gap: 5px;

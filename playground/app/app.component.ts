@@ -18,13 +18,14 @@ import { DateScrollPickerComponent } from './components/date-scroll-picker/date-
 import { BirthdayExampleComponent } from './components/birthday-example/birthday-example.component';
 import { MinMaxComponent } from './components/min-max/min-max.component';
 import { SelectExampleComponent } from './components/select-example/select-example.component';
+import { ThemeSwitchComponent } from './components/theme-switch/theme-switch.component';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
     standalone: true,
-    imports: [FsExampleModule, DateExampleComponent, CalendarExampleComponent, TimeExampleComponent, OnlyHoursExampleComponent, DateTimeExampleComponent, DatetimeTzExampleComponent, DateRangeFieldExampleComponent, PresetsExampleComponent, DateRangeExampleComponent, DateTimeRangeExampleComponent, TimeRangeExampleComponent, MonthExampleComponent, WeekPickerComponent, DateScrollPickerComponent, BirthdayExampleComponent, MinMaxComponent, SelectExampleComponent]
+    imports: [FsExampleModule, DateExampleComponent, CalendarExampleComponent, TimeExampleComponent, OnlyHoursExampleComponent, DateTimeExampleComponent, DatetimeTzExampleComponent, DateRangeFieldExampleComponent, PresetsExampleComponent, DateRangeExampleComponent, DateTimeRangeExampleComponent, TimeRangeExampleComponent, MonthExampleComponent, WeekPickerComponent, DateScrollPickerComponent, BirthdayExampleComponent, MinMaxComponent, SelectExampleComponent, ThemeSwitchComponent]
 })
 export class AppComponent {
   public config = environment;

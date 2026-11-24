@@ -189,8 +189,27 @@
   }
 }
 
+/*
+  A black shadow disappears into a dark page, and the panel's edge goes with
+  it. The hairline ring keeps the panel reading as floating in either mode;
+  its fallback is transparent, so an app that defines no token is unchanged.
+*/
 .fs-date-picker-dialog-shadow {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 0 0 1px var(--fs-hairline, transparent),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+/*
+  The mobile pickers open in a Material bottom sheet, whose container takes
+  the host theme's surface, not the picker's. Fallbacks are Material's
+  light-theme values, so an app that defines no token is unchanged.
+*/
+.fs-date-picker-bottom-sheet {
+  --mat-bottom-sheet-container-background-color: var(--fs-surface-background, #fff);
+  --mat-bottom-sheet-container-text-color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
 }
 
 /*
@@ -220,6 +239,19 @@
 
 .fs-date-picker-container {
   color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
+
+  /*
+    The mobile date/time tabs. An unselected tab is inked from the host's
+    Material theme, which on a dark panel under a light theme is dark on dark.
+    Both spellings: --mat-tab-header-* up to Angular Material 18,
+    --mat-tab-* from 19. Fallback is Material's light-theme value.
+  */
+  --mat-tab-header-inactive-label-text-color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
+  --mat-tab-header-inactive-focus-label-text-color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
+  --mat-tab-header-inactive-hover-label-text-color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
+  --mat-tab-inactive-label-text-color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
+  --mat-tab-inactive-focus-label-text-color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
+  --mat-tab-inactive-hover-label-text-color: var(--fs-color-text-muted, rgba(0, 0, 0, 0.6));
 
   &.date-mode-year, &.date-mode-month {
     .calendar-view {
@@ -309,12 +341,18 @@
       pointer-events: none;
     }
 
+    /*
+      White on the brand only reads when the brand is dark: a light-grey brand,
+      or a neutral one that flips to near-white on a dark page, made the
+      selected day white on white. The app pairs its brand with an ink in
+      --fs-color-on-primary; the fallback is the white this hardcoded before.
+    */
     &.selected,
     &.range-from,
     &.range-to {
       background-color: mat.m2-get-color-from-palette($selected-color);
       font-weight: bold;
-      color: #fff;
+      color: var(--fs-color-on-primary, #fff);
     }
 
     &:hover:not(.disabled):not(.selected):not(.range-from):not(.range-to) {
