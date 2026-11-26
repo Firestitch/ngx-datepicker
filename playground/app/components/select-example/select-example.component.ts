@@ -22,5 +22,6 @@ export class SelectExampleComponent {
 
   public weekday;
   public time;
+  public halfHourTime;
 
 }

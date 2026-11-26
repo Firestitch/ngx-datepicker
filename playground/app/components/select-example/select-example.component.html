@@ -21,5 +21,18 @@
     </form> 
     Time: {{time}}
   </div>
-  
+
+  <div>
+    <form fsForm>
+      <fs-time-select
+        [label]="'Time every 30 minutes'"
+        [(ngModel)]="halfHourTime"
+        [initialHour]="12"
+        [interval]="30"
+        name="halfHourTime">
+      </fs-time-select>
+    </form>
+    Time: {{halfHourTime}}
+  </div>
+
 </div>
