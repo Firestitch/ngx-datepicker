@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { guid } from '@firestitch/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -36,12 +36,23 @@ export class FsTimeSelectComponent implements OnInit, ControlValueAccessor {
   @Input() public fieldClass;
   @Input() public initialHour;
 
+  /** Minutes between the listed times: 60 lists every hour (the default), 30 every half-hour. */
+  @Input() public interval = 60;
+
   public onChange: (value) => void;
   public onTouch: (value) => void;
   public name = `times${guid()}`;
   public time = null;
   public times = [];
-  
+
+  @ViewChild(MatSelect, { static: true })
+  private _select: MatSelect;
+
+  /** Opens the list, as a click on the field does: for a form that moves on to this field. */
+  public open(): void {
+    this._select.open();
+  }
+
   public writeValue(value: any): void {
     this.time = value === undefined ? null : value;
   }
@@ -70,13 +81,15 @@ export class FsTimeSelectComponent implements OnInit, ControlValueAccessor {
   }
   
   public ngOnInit(): void {
-    for (let i=0; i < 24; i++) {
-
-      const meridiem = i >= 12 ? 'PM' : 'AM';
-      const hour = i > 12 ? i - 12 : (i ? i : 12);
+    // An interval that is not a positive number of minutes lists every hour, as before.
+    const interval = this.interval > 0 ? this.interval : 60;
+    for (let minuteOfDay = 0; minuteOfDay < 24 * 60; minuteOfDay += interval) {
+      const hour = Math.floor(minuteOfDay / 60);
+      const minute = String(minuteOfDay % 60).padStart(2, '0');
+      const meridiem = hour >= 12 ? 'PM' : 'AM';
       this.times.push({
-        name: `${hour}:00 ${meridiem}`,
-        value: i * 60 * 60
+        name: `${hour % 12 || 12}:${minute} ${meridiem}`,
+        value: minuteOfDay * 60,
       });
     }
   }
